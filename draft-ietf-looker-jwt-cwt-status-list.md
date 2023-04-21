@@ -19,11 +19,10 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "JWT and CWT Status List"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-ietf-looker-jwt-cwt-status-list-latest
 submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
 number:
 date:
@@ -45,9 +44,9 @@ venue:
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: your.email@example.com
+    fullname: Tobias Looker
+    organization: MATTR
+    email: tobias.looker@mattr.global
 
 normative:
 
