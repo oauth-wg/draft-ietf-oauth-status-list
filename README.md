@@ -1,6 +1,6 @@
 # JWT and CWT Status List
 
-This is the working area for the IETF [LOOKER Working Group](https://datatracker.ietf.org/wg/looker/documents/) Internet-Draft, "JWT and CWT Status List".
+This is the working area for the Internet-Draft, "JWT and CWT Status List".
 
 * [Editor's Copy](https://tplooker.github.io/draft-ietf-looker-jwt-cwt-status-list/#go.draft-ietf-looker-jwt-cwt-status-list.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-looker-jwt-cwt-status-list)

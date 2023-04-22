@@ -3,22 +3,12 @@ title: "JWT and CWT Status List"
 category: info
 
 docname: draft-ietf-looker-jwt-cwt-status-list-latest
-submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
+submissiontype: independent  # also: "IETF", "IAB", or "IRTF"
 number:
 date:
 consensus: true
 v: 3
-# area: AREA
-# workgroup: WG Working Group
-keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
 venue:
-#  group: WG
-#  type: Working Group
-#  mail: WG@example.com
-#  arch: https://example.com/WG
   github: "tplooker/draft-ietf-looker-jwt-cwt-status-list"
   latest: "https://tplooker.github.io/draft-ietf-looker-jwt-cwt-status-list/draft-ietf-looker-jwt-cwt-status-list.html"
 
