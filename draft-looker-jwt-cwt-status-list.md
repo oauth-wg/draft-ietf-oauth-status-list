@@ -2,15 +2,15 @@
 title: "JWT and CWT Status List"
 category: info
 
-docname: draft-ietf-looker-jwt-cwt-status-list-latest
+docname: draft-looker-jwt-cwt-status-list-latest
 submissiontype: independent  # also: "IETF", "IAB", or "IRTF"
 number:
 date:
 consensus: true
 v: 3
 venue:
-  github: "tplooker/draft-ietf-looker-jwt-cwt-status-list"
-  latest: "https://tplooker.github.io/draft-ietf-looker-jwt-cwt-status-list/draft-ietf-looker-jwt-cwt-status-list.html"
+  github: "tplooker/draft-looker-jwt-cwt-status-list"
+  latest: "https://tplooker.github.io/draft-looker-jwt-cwt-status-list/draft-looker-jwt-cwt-status-list.html"
 
 author:
  -
