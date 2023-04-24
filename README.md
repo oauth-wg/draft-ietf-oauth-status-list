@@ -1,11 +1,11 @@
 # JWT and CWT Status List
 
-This is the working area for the Internet-Draft, "JWT and CWT Status List".
+This is the working area for the individual Internet-Draft, "JWT and CWT Status List".
 
 * [Editor's Copy](https://tplooker.github.io/draft-looker-jwt-cwt-status-list/#go.draft-looker-jwt-cwt-status-list.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-looker-jwt-cwt-status-list)
-* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-looker-jwt-cwt-status-list)
-* [Compare Editor's Copy to Working Group Draft](https://tplooker.github.io/draft-looker-jwt-cwt-status-list/#go.draft-looker-jwt-cwt-status-list.diff)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-looker-jwt-cwt-status-list)
+* [Compare Editor's Copy to Individual Draft](https://tplooker.github.io/draft-looker-jwt-cwt-status-list/#go.draft-looker-jwt-cwt-status-list.diff)
 
 
 ## Contributing
