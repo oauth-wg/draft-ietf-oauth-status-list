@@ -6,7 +6,6 @@ docname: draft-looker-jwt-cwt-status-list-latest
 submissiontype: independent  # also: "IETF", "IAB", or "IRTF"
 number:
 date:
-consensus: true
 v: 3
 venue:
   github: "tplooker/draft-looker-jwt-cwt-status-list"
