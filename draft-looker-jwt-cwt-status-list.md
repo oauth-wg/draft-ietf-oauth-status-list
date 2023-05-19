@@ -8,8 +8,8 @@ number:
 date:
 v: 3
 venue:
-  github: "tplooker/draft-looker-jwt-cwt-status-list"
-  latest: "https://tplooker.github.io/draft-looker-jwt-cwt-status-list/draft-looker-jwt-cwt-status-list.html"
+  github: "vcstuff/draft-looker-jwt-cwt-status-list"
+  latest: "https://vcstuff.github.io/draft-looker-jwt-cwt-status-list/draft-looker-jwt-cwt-status-list.html"
 
 author:
  -
