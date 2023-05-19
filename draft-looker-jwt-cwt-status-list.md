@@ -154,11 +154,35 @@ TODO add more
 
 # Security Considerations
 
-TODO Security
+## Correct decoding and parsing of the encoded status list
+TODO elaborate on risks of incorrect parsing/decoding leading to erroneuos status data
+
+## Cached and Stale status lists
+TODO consumers/Verifiers of the status list should be aware if they fetch the up-to-date data
+
+## Authorized access to the Status List
+TODO elaborate on authorization mechanisms preventing misuse and profiling as described in privacy section
+
+## History
+TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
 
 # Privacy Considerations
 
-TODO elaborate on heard privacy
+## Herd Privacy 
+TODO elaborate on herd privacy, size of the status list
+
+## Profiling
+TODO elaborate on Verifiers regularly fetching the status list to create a profile, possible countermeasures with authorized access to the status list
+
+## Correlation Risks and Tracking
+TODO elaborate on Issuer-Verifier correlation and Verifier-Verifier correlation as the status list introduces unique,trackable data
+TODO elaborate on issuers avoiding sequential usage of indices and status lists 
+
+## Malicious Issuers
+TODO elaborate on issuers generating unique status lists per JWT token that do not offer herd privacy
+
+## Hosting Service (what's a better name here?)
+TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possiblities
 
 # IANA Considerations
 
