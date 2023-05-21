@@ -168,7 +168,7 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 
 # Privacy Considerations
 
-## Herd Privacy 
+## Herd Privacy
 TODO elaborate on herd privacy, size of the status list
 
 ## Profiling
