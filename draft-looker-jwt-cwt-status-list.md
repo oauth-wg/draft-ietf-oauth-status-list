@@ -176,7 +176,7 @@ TODO elaborate on Verifiers regularly fetching the status list to create a profi
 
 ## Correlation Risks and Tracking
 TODO elaborate on Issuer-Verifier correlation and Verifier-Verifier correlation as the status list introduces unique,trackable data
-TODO elaborate on issuers avoiding sequential usage of indices and status lists 
+TODO elaborate on issuers avoiding sequential usage of indices and status lists
 
 ## Malicious Issuers
 TODO elaborate on issuers generating unique status lists per JWT token that do not offer herd privacy
