@@ -140,17 +140,93 @@ The following rules apply to validating the "sts_lst" (status list) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain a "typ" (type) attribute with a string based value that represents the type of status list referenced. The value MUST be equal to that of the "typ" attribute in the "sts" claim for the token who's status is being validated.
+2. The claim value object MUST either contain a "typ" (type) attribute with a string based value that represents a well-known, pre-defined type of status list or a "typ_def" (type definition) attribute with a valid JSON object defining a new, custom type of status list as referenced in [](#status-list-definitions). The value MUST be equal to that of the "typ" attribute in the "sts" claim for the token who's status is being validated.
 
 3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the tokens it conveys statuses for. The value MUST be a base64 encoded string using RFCXXX containing a GZIP compressed octet string {{RFC1952}}.
 
-## Revocation Status List Definition
+# Status List Definitions {#status-list-definitions}
 
-This document formally defines the "revocation-list" status list type which applies the following additional validation rules beyond those described in [](#jwt-format-and-processing) and [](#jwt-status-list-format-and-processing).
+Status List Types are definitions build on top of pre-defined, common status types. This specification defines the status types contained in the the well-known, pre-defined status list types
 
-The "uri" attribute contained within a JWT using the "sts" claim MUST be an HTTPS based URL that when resolved via an HTTPS GET request returns a content type "application/jwt" containing the status list.
+## Status Types
 
-TODO add more
+A status describes the state, mode, condition or stage of an entity that is described by the status list. Status Types MUST be string based values.
+Status types described by this specifiction comprise:
+- "VALID" - The status of the Token is valid, correct or legal.
+- "REVOKED" - The status of the Token is permanently not valid, annuled, taken back, recalled or cancelled. This state is irreversible.
+- "SUSPENDED" - The status of the Token is temporarily unvalid, hanging, debared from privilege. This state is reversible.
+
+## Status List Types
+
+A status list describes the possible statuses that an entity can encompass.
+The following rules apply to validating a status list type:
+
+1. The claim value MUST be a valid JSON object.
+
+2. The claim value object MUST contain a "bit_size" attribute with an Integer that represents the number of bits per entity in the status list ("lst") of the Status List JWT. This number MUST be a postive power of 2. It is NOT RECOMMENDED to be greater than 8.
+
+3. The claim value object MUST contain a "status_types" attribute that describes the possible Status Types that the entity may reflect. "status_types MUST be a valid JSON Object that defines up to "bit_size" Status Type encodings. The claim names MUST be the string based representation of the bit encoding and the claim values MUST describe the matching Status Type String values.
+
+## Well-known Status List Types
+
+This specification describes two well-known, pre-defined Status List Types. To use these, the name of the status list MUST be used for the "typ" attribute within the "status_list".
+
+### Revocation List
+The Status List Type "revocation-list" is defined as follows:
+
+~~~ ascii-art
+
+{
+   "bit_size": 1,
+   "status_types": {
+      "0" : "NOT REVOKED",
+      "1" : "REVOKED",
+   }
+}
+
+~~~
+
+Furthermore, the "uri" attribute contained within a JWT using the "status" claim MUST be an HTTPS based URL that when resolved via an HTTPS GET request returns a content type "application/jwt" containing the status list.
+
+### Suspension-Revocation List
+The Status List Type "suspension-revocation-list" is defined as follows:
+
+~~~ ascii-art
+
+{
+   "bit_size": 2,
+   "status_types": {
+      "0" : "VALID",
+      "1" : "SUSPENDED",
+      "2" : "REVOKED",
+      "3" : "UNDEFINED", //or absent
+   }
+}
+
+~~~
+
+## Defining Custom Status List Types
+
+Issuers of Tokens MAY extend the status types and define new status list types to their needs. To use these, the definition of the status list type MUST be used for the "typ_def" attribute within the "status_list".
+
+The following is a non-normative example for a "status_list" :
+
+~~~ ascii-art
+
+"sts_lst": {
+    "typ_def" : {
+       "bit_size": 2,
+       "status_types": {
+          "0" : "NOT_ISSUED",
+          "1" : "WAITING_FOR_APPROVAL",
+          "2" : "UNICORN_42",
+          "3" : "FOOBAR"
+       }
+    },
+    "list": "H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA"
+  }
+
+~~~
 
 # Security Considerations
 
