@@ -63,7 +63,7 @@ The following rules apply to validating a JWT which references a status list. Ap
 
 1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string based identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the referenced status list JWT.
 
-2. The JWT MUST contain an "sts" (status) claim conforming to the rules outlined in [](#jwt-status-claim-format)
+2. The JWT MUST contain an "status" (status) claim conforming to the rules outlined in [](#jwt-status-claim-format)
 
 The following example is the decoded header and payload of a JWT meeting the processing rules as defined above.
 
@@ -76,7 +76,7 @@ The following example is the decoded header and payload of a JWT meeting the pro
 .
 {
   "iss": "https://example.com",
-  "sts": {
+  "status": {
     "typ": "revocation-list",
     "idx": 0,
     "uri": "https://example.com/statuslists/1"
@@ -87,11 +87,11 @@ The following example is the decoded header and payload of a JWT meeting the pro
 
 ### Status Claim Format {#jwt-status-claim-format}
 
-The following rules apply to validating the "sts" (status) claim
+The following rules apply to validating the "status" (status) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain a "typ" (type) attribute with a string based value that represents the type of status list referenced. The value MUST be equal to that of the "typ" attribute in the "sts_lst" claim for the referenced status list.
+2. The claim value object MUST contain a "typ" (type) attribute with a string based value that represents the type of status list referenced. The value MUST be equal to that of the "typ" attribute in the "status_list" claim for the referenced status list.
 
 3. The claim value object MUST contain an "idx" (index) attribute with a numberic based value that represents the index to check for status information in the status list for the current JWT. The value of this attribute MUST be a non-negative number, containing a value of zero or greater. Refer to xx for details on the validation procedure.
 
@@ -105,7 +105,7 @@ The following rules apply to validating a JWT based status list. Application of 
 
 2. The JWT MUST contain an "iat" (issued at) claim that identifies the time at which it was issued.
 
-2. The JWT MUST contain an "sts_lst" (status list) claim conforming to the rules outlined in [](#jwt-status-list-claim-format).
+2. The JWT MUST contain an "status_list" (status list) claim conforming to the rules outlined in [](#jwt-status-list-claim-format).
 
 3. The JWT MAY contain an "exp" (expiration time) claim that convey's when it is considered expired by its issuer.
 
@@ -126,7 +126,7 @@ The following rules apply to validating a JWT based status list. Application of 
   "iss": "https://example.com",
   "iat": 1683560915,
   "exp": 1686232115,
-  "sts_lst": {
+  "status_list": {
     "typ": "revocation-list",
     "lst": "H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA"
   }
@@ -136,7 +136,7 @@ The following rules apply to validating a JWT based status list. Application of 
 
 ### Status List Claim Format {#jwt-status-list-claim-format}
 
-The following rules apply to validating the "sts_lst" (status list) claim
+The following rules apply to validating the "status_list" (status list) claim
 
 1. The claim value MUST be a valid JSON object.
 
@@ -253,6 +253,7 @@ TODO elaborate on Verifiers regularly fetching the status list to create a profi
 ## Correlation Risks and Tracking
 TODO elaborate on Issuer-Verifier correlation and Verifier-Verifier correlation as the status list introduces unique,trackable data
 TODO elaborate on issuers avoiding sequential usage of indices and status lists
+TODO elaborate that a status list only gives information about the maximum number of possible statuses that a list conveys, issuers are recommended to pre-allocate lists, use dead entries that are never assigned or other obfuscation mechanisms
 
 ## Malicious Issuers
 TODO elaborate on issuers generating unique status lists per JWT token that do not offer herd privacy
