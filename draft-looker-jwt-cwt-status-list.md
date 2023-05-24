@@ -179,7 +179,7 @@ The Status List Type "revocation-list" is defined as follows:
 {
    "bit_size": 1,
    "status_types": {
-      "0" : "NOT REVOKED",
+      "0" : "VALID",
       "1" : "REVOKED",
    }
 }
@@ -198,8 +198,8 @@ The Status List Type "suspension-revocation-list" is defined as follows:
    "status_types": {
       "0" : "VALID",
       "1" : "SUSPENDED",
-      "2" : "REVOKED",
-      "3" : "UNDEFINED", //or absent
+      "2" : "UNDEFINED", //or absent
+      "3" : "REVOKED",
    }
 }
 
@@ -220,13 +220,15 @@ The following is a non-normative example for a "status_list" :
           "0" : "NOT_ISSUED",
           "1" : "WAITING_FOR_APPROVAL",
           "2" : "UNICORN_42",
-          "3" : "FOOBAR"
+          "3" : "REVOKED"
        }
     },
     "list": "H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA"
   }
 
 ~~~
+
+It is recommended to use the least signifcant bit for a "REVOKED" status.
 
 # Security Considerations
 
