@@ -22,6 +22,7 @@ normative:
   RFC8392: RFC8392
   RFC3986: RFC3986
   RFC1952: RFC1952
+  RFC7515: RFC7515
 informative:
 
 --- abstract
@@ -142,7 +143,54 @@ The following rules apply to validating the "status_list" (status list) claim
 
 2. The claim value object MUST contain a "typ" (type) attribute with a string based value that represents the type of status list referenced. The value MUST be equal to that of the "typ" attribute in the "status" claim for the token who's status is being validated.
 
-3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the tokens it conveys statuses for. The value MUST be a base64 encoded string using RFCXXX containing a GZIP compressed octet string {{RFC1952}}.
+3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the tokens it conveys statuses for. The value MUST be computed using the algorithm described in [](#jwt-status-list-claim-encoding).
+
+### Status List Encoding {#jwt-status-list-claim-encoding}
+
+Each status of a credential must be representable by a bit-size of 1,2,4, or 8. This means 2,4,16, or 256 possible statuses for a credential depending on the bit-size of choice. This limitation was introduced to reduce the amount of bit manipulation necessary to one byte for every operation and thus keeping implementations simpler and less error prone.
+
+1. The overall status list is encoded as a byte array. where each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). Each status is identified using an index that maps to a specific byte in the array and within that byte to specific bits. The index starts counting at 0 and, with the maximum value being (#(entries of status list) -1). If a byte represents multiple statuses, then the bits are chosen from least significant bit to highest significant bit for lower index to higher index.
+
+2. The complete byte array is compressed using gZIP {{RFC1952}}.
+
+3. The result of the gZIP compression is then encoded as URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} and stored as a string.
+
+
+Example of a byte representing 4 statuses with indices 0,1,2,3:
+
+~~~ ascii-art
+
+status[0] = 1
+status[1] = 2
+status[2] = 0
+status[3] = 3
+
+results in a total value of the byte of 0b11001001 or 0xC9.
+~~~
+
+
+
+Example of a status list of length 12 using 2 bit statuses (-> 3 bytes):
+
+~~~ ascii-art
+
+status[0] = 1
+status[1] = 2
+status[2] = 0
+status[3] = 3
+status[4] = 0
+status[5] = 1
+status[6] = 0
+status[7] = 1
+status[8] = 1
+status[9] = 2
+status[10] = 3
+status[11] = 3
+
+byte array = [0xC9, 0x44, 0xF9]
+lst = "H4sIAOkxb2QC_zvp8hMAZLRLMQMAAAA"
+~~~
+
 
 ## Revocation Status List Definition
 
