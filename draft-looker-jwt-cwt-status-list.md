@@ -153,7 +153,7 @@ Status List Types are definitions build on top of pre-defined, common status typ
 A status describes the state, mode, condition or stage of an entity that is described by the status list. Status Types MUST be string based values.
 Status types described by this specifiction comprise:
 - "VALID" - The status of the Token is valid, correct or legal.
-- "REVOKED" - The status of the Token is permanently not valid, annuled, taken back, recalled or cancelled. This state is irreversible.
+- "INVALID" - The status of the Token is revoked, annuled, taken back, recalled or cancelled. This state is irreversible.
 - "SUSPENDED" - The status of the Token is temporarily unvalid, hanging, debared from privilege. This state is reversible.
 
 ## Status List Types
@@ -180,7 +180,7 @@ The Status List Type "revocation-list" is defined as follows:
    "bit_size": 1,
    "status_types": {
       "0" : "VALID",
-      "1" : "REVOKED",
+      "1" : "INVALID"
    }
 }
 
@@ -197,9 +197,9 @@ The Status List Type "suspension-revocation-list" is defined as follows:
    "bit_size": 2,
    "status_types": {
       "0" : "VALID",
-      "1" : "SUSPENDED",
-      "2" : "UNDEFINED", //or absent
-      "3" : "REVOKED",
+      "1" : "INVALID",
+      "2" : "SUSPENDED",
+      "3" : "UNDEFINED" //ob absent
    }
 }
 
@@ -218,9 +218,9 @@ The following is a non-normative example for a "status_list" :
        "bit_size": 2,
        "status_types": {
           "0" : "NOT_ISSUED",
-          "1" : "WAITING_FOR_APPROVAL",
+          "1" : "REVOKED",
           "2" : "UNICORN_42",
-          "3" : "REVOKED"
+          "3" : "WAITING_FOR_APPROVAL"
        }
     },
     "list": "H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA"
