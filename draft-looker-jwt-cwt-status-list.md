@@ -163,7 +163,7 @@ The following rules apply to validating a status list type:
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain a "bit_size" attribute with an Integer that represents the number of bits per entity in the status list ("lst") of the Status List JWT. This number MUST be a postive power of 2. It is NOT RECOMMENDED to be greater than 8.
+2. The claim value object MUST contain a "bit_size" attribute with an Integer that represents the number of bits per entity in the status list ("lst") of the Status List JWT. The allowed values for `bit_size` are 1,2,4 and 8.
 
 3. The claim value object MUST contain a "status_types" attribute that describes the possible Status Types that the entity may reflect. "status_types MUST be a valid JSON Object that defines up to "bit_size" Status Type encodings. The claim names MUST be the string based representation of the bit encoding and the claim values MUST describe the matching Status Type String values.
 
