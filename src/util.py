@@ -2,12 +2,12 @@ from jwcrypto import jwk, jwt
 import json
 
 example = {
-    "y": "Xv5zWwuoaTgdS6hV43yI6gBwTnjukmFQQnJ_kCxzqk8",
-    "x": "b28d4MwZMjw8-00CG4xfnn9SLMVMM19SlqZpVb_uNtQ",
-    "d": "Ur2bNKuBPOrAaxsRnbSH6hIhmNTxSGXshDSUD1a1y7g",
-    "crv": "P-256",
     "kty": "EC",
-    "kid": "12",
+    "d": "xzUEdsyLosZF0acZGRAjTKImb0lQvAvssDK5XIZELd0",
+    "use": "sig",
+    "crv": "P-256",
+    "x": "I3HWm_0Ds1dPMI-IWmf4mBmH-YaeAVbPVu7vB27CxXo",
+    "y": "6N_d5Elj9bs1htgV3okJKIdbHEpkgTmAluYKJemzn1M",
 }
 EXAMPLE_KEY = jwk.JWK(**example)
 

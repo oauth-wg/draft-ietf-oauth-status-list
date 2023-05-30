@@ -6,6 +6,7 @@ class StatusList:
     list: bytearray
     bits: int
     size: int
+    divisor: int
 
     def __init__(self, size: int, bits: int):
         self.divisor = 8 // bits
@@ -14,7 +15,7 @@ class StatusList:
         self.size = size
 
     @classmethod
-    def fromEncoded(cls, bits: int, encoded: str):
+    def fromEncoded(cls, encoded: str, bits: int = 1):
         new = cls(0, bits)
         new.decode(encoded)
         return new
@@ -26,6 +27,7 @@ class StatusList:
     def decode(self, input: str):
         zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
         self.list = bytearray(gzip.decompress(zipped))
+        self.size = len(self.list) * self.divisor
 
     def set(self, pos: int, value: int):
         assert value < 2**self.bits

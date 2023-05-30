@@ -2,6 +2,7 @@ from status_list import StatusList
 from status_jwt import StatusListJWT
 from datetime import datetime, timedelta
 import util
+import random
 
 
 test = StatusList(12, 2)
@@ -31,7 +32,9 @@ print(hex(test.list[0]), hex(test.list[1]), hex(test.list[2]))
 encoded = test.encode()
 
 key = util.EXAMPLE_KEY
-jwt = StatusListJWT(issuer="example.com", list=test, key=key)
+jwt = StatusListJWT(
+    issuer="example.com", list=test, key=key, typ="suspension-revocation-list"
+)
 exp = datetime.utcnow() + timedelta(7)
 status_jwt = jwt.buildJWT(
     exp=exp,
@@ -42,3 +45,29 @@ print("-----------")
 print(status_jwt)
 print("-----------")
 print(util.formatToken(status_jwt, key))
+print("-----------")
+
+status_jwt = jwt.buildJWT()
+print(status_jwt)
+print("-----------")
+print(util.formatToken(status_jwt, key))
+decoded_list = StatusListJWT.fromJWT(status_jwt, key)
+print(decoded_list.list)
+
+
+# somewhat realistic usage
+# 95% valid 4% revoked, 1% suspended
+
+random.seed(a=123)
+size = 2**19
+test = StatusList(size, 2)
+for x in range(0, size):
+    input = random.randint(1, 100)
+    if input >= 96 and input < 100:
+        test.set(x, 1)
+    elif input == 100:
+        test.set(x, 2)
+encoded = test.encode()
+print(encoded)
+print("size of status list: ", size)
+print("encoded size: ", len(encoded.encode("utf-8")))
