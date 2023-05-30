@@ -32,38 +32,57 @@ This specification defines a status list representation and processing rules for
 
 # Introduction
 
-JSON Web Tokens (JWTs) {{RFC7519}} and CBOR Web Tokens (CWTs) {{RFC8392}} as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered revoked by its issuer.
+JSON Web Tokens (JWTs) {{RFC7519}} and CBOR Web Tokens (CWTs) {{RFC8392}} as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered suspended or revoked by its issuer.
 
-This document defines a status list using JWT and CWT for representation that is capable of communicating the individual statuses of multiple tokens. The document also defines how an issuer of a token references a status list in a JWT or CWT which has a status to convey.
+This document defines a Status List in JWT and CWT representation that describes the individual statuses of multiple Subject Tokens. The Status List contains binary data, where each Subject Token corresponds with a certain position within a bit array(also known as bit vector, string or list). The document also defines how an issuer of a Subject Token in JWT or CTW representation references a Status List to convey status data like suspension or revocation of the Subject Token and related information. Status Lists may be composed for a range of various Status Types with one or more bits, the document defines two configurations for the most common use cases as well as an extensibility mechanism for custom Status List Types. The Status List may be used by a Status List Provider in the Issuer-Holder-Verifier model, as described in {{RFC-XXXX}} to express the status of verifiable credentials (Subject Tokens) issued by an issuer.
 
 The following diagram depicts the basic conceptual relationship.
 
 ~~~ ascii-art
 
 +---------------+                     +---------------+
-|               |                     |               |
-|               |                     |               |
-|     Token     |    References       |  Status List  |
-|(JWT/CWT Based)|-------------------->|(JWT/CWT Based)|
-|               |                     |               |
-|               |                     |               |
+|               |      References     |               |
+|               |-------------------->|               |
+| Subject Token |                     |  Status List  |
+|(JWT/CWT Based)|                     |(JWT/CWT Based)|
+|               |  Describes Status   |               |
+|               |<--------------------|               |
 +---------------+                     +---------------+
 
 ~~~
+
+## Rationale
+
+Revocation mechanisms are an essential part for most identity ecoosystems. In the past, revocation of X.509 TLS certificates has been proven difficult as traditional certificate revocation lists (CRLs) have limited scalability and the Online Certificate Status Protocol (OCSP) has additional privacy risks as the client is leaking the requested website to a third party. OSCP stapling is adressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accomodate for this privacy gap but face scalability issues again.
+
+The approach of this specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits and compressing the resulting binary data. Thereby a Status List may contain statuses of 100.000 or more Subject Tokens, but still remain relatively small. Placing large amounts of Subject Tokens into the same list also enables a herd privacy towards the Issuer or Status List Provider.
+
 
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
 
+# Terminology
+
+Status List
+ A token in JWT or CWT representation that expresses the statuses of many Subject Tokens.
+
+Subject Token
+ A token in JWT or CWT representation which contains a reference to a Status List. The information from the Stataus List may give a verifier additional information about up-to-date status of the Subject Token.
+
+Status List Provider
+ An entity that hosts the Status List as a resource for potential verifiers. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.
+
+
 # JSON Web Token Representation
 
-## JWT Format and Processing Requirements {#jwt-format-and-processing}
+## Subject Token Format and Processing Requirements {#jwt-subject-token}
 
-The following rules apply to validating a JWT which references a status list. Application of additional restrictions and policy are at the discretion of the verifying party.
+The following rules apply to validating a Subject Token in JWT representation which references a Status List. Application of additional restrictions and policy are at the discretion of the verifying party.
 
 1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string based identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the referenced status list JWT.
 
-2. The JWT MUST contain an "status" (status) claim conforming to the rules outlined in [](#jwt-status-claim-format)
+2. The JWT MUST contain an "status" (status) claim conforming to the rules outlined in [](#jwt-subject-token-status)
 
 The following example is the decoded header and payload of a JWT meeting the processing rules as defined above.
 
@@ -85,7 +104,7 @@ The following example is the decoded header and payload of a JWT meeting the pro
 
 ~~~
 
-### Status Claim Format {#jwt-status-claim-format}
+### Status Claim Format {#jwt-subject-token-status}
 
 The following rules apply to validating the "status" (status) claim
 
@@ -140,13 +159,13 @@ The following rules apply to validating the "status_list" (status list) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain a "typ" (type) attribute with a string based value that represents the type of status list referenced. The value MUST be equal to that of the "typ" attribute in the "status" claim for the token who's status is being validated.
+2. The claim value object MUST contain a "typ" (type) attribute with a string based value that represents the type of status list referenced. The value MUST be equal to that of the "typ" attribute in the "status" claim for the Subject Token who's status is being validated.
 
-3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the tokens it conveys statuses for. The value MUST be a base64 encoded string using RFCXXX containing a GZIP compressed octet string {{RFC1952}}.
+3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the Subject Tokens it conveys statuses for. The value MUST be a base64 encoded string using RFCXXX containing a GZIP compressed octet string {{RFC1952}}.
 
 ## Revocation Status List Definition
 
-This document formally defines the "revocation-list" status list type which applies the following additional validation rules beyond those described in [](#jwt-format-and-processing) and [](#jwt-status-list-format-and-processing).
+This document formally defines the "revocation-list" status list type which applies the following additional validation rules beyond those described in [](#jwt-subject-token) and [](#jwt-status-list-format-and-processing).
 
 The "uri" attribute contained within a JWT using the "status" claim MUST be an HTTPS based URL that when resolved via an HTTPS GET request returns a content type "application/jwt" containing the status list.
 
@@ -180,7 +199,7 @@ TODO elaborate on issuers avoiding sequential usage of indices and status lists
 TODO elaborate that a status list only gives information about the maximum number of possible statuses that a list conveys, issuers are recommended to pre-allocate lists, use dead entries that are never assigned or other obfuscation mechanisms
 
 ## Malicious Issuers
-TODO elaborate on issuers generating unique status lists per JWT token that do not offer herd privacy
+TODO elaborate on issuers generating unique status lists per Subject Token that do not offer herd privacy
 
 ## Hosting Service (what's a better name here?)
 TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possiblities
