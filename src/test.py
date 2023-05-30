@@ -38,5 +38,7 @@ status_jwt = jwt.buildJWT(
     optional_claims={"custom": "value"},
     optional_header={"x5c": ["here_be_dragons"]},
 )
+print("-----------")
 print(status_jwt)
+print("-----------")
 print(util.formatToken(status_jwt, key))

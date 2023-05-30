@@ -48,7 +48,7 @@ class StatusListJWT:
         optional_claims: Dict = None,
         optional_header: Dict = None,
         compact=True,
-    ) -> jws.JWS:
+    ) -> str:
         # build claims
         if optional_claims is not None:
             claims = optional_claims
