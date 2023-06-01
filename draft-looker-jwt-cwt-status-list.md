@@ -147,7 +147,7 @@ The following rules apply to validating the "status_list" (status list) claim
 
 ### Status List Encoding {#jwt-status-list-claim-encoding}
 
-Each status of a credential must be representable by a bit-size of 1,2,4, or 8. This means 2,4,16, or 256 possible statuses for a credential depending on the bit-size of choice. This limitation was introduced to reduce the amount of bit manipulation necessary to one byte for every operation and thus keeping implementations simpler and less error prone.
+Each status of a credential MUST be represented with a bit size of 1,2,4, or 8. Therefore up to 2,4,16, or 256 statuses for a credential depending on the bit-size are possible. This limitation was introduced to reduce the amount of bit manipulation necessary to one byte for every operation and thus keeping implementations simpler and less error prone.
 
 1. The overall status list is encoded as a byte array. where each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). Each status is identified using an index that maps to a specific byte in the array and within that byte to specific bits. The index starts counting at 0 and, with the maximum value being (#(entries of status list) -1). If a byte represents multiple statuses, then the bits are chosen from least significant bit to highest significant bit for lower index to higher index.
 
