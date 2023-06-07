@@ -205,9 +205,11 @@ The Status List Type "suspension-revocation-list" is defined as follows:
 
 ~~~
 
-## Defining Custom Status List Types
+## Extended Status List Types
 
 Issuers of Tokens MAY extend the status types and define new status list types to their needs. To use these, the definition of the status list type MUST be used for the "typ_def" attribute within the "status_list".
+
+Extended Status List Types MUST inherit the default Status Types "VALID" with value "0" and "INVALID" with value "1". Implementations according to this document MUST support the pre-defined Status List Types "reovcation-list" and "suspension-reocation-list". Implementations MAY support Extended Status List Types. In case that implementaitons that do not support Extended Status List Types or do not recognize the "typ_def" of an Extended Status List Type, they MUST result in an error and abort.
 
 The following is a non-normative example for a "status_list" :
 
@@ -217,9 +219,9 @@ The following is a non-normative example for a "status_list" :
     "typ_def" : {
        "bit_size": 2,
        "status_types": {
-          "0" : "NOT_ISSUED",
-          "1" : "REVOKED",
-          "2" : "UNICORN_42",
+          "0" : "VALID",
+          "1" : "INVALID",
+          "2" : "WAITING_FOR_UNICORNS",
           "3" : "WAITING_FOR_APPROVAL"
        }
     },
