@@ -77,7 +77,7 @@ The following example is the decoded header and payload of a JWT meeting the pro
 {
   "iss": "https://example.com",
   "status": {
-    "typ": "revocation-list",
+    "bits": 1,
     "idx": 0,
     "uri": "https://example.com/statuslists/1"
   }
@@ -91,11 +91,9 @@ The following rules apply to validating the "status" (status) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain a "typ" (type) attribute with a string based value that represents the type of status list referenced. The value MUST be equal to that of the "typ" attribute in the "status_list" claim for the referenced status list.
+2. The claim value object MUST contain an "idx" (index) attribute with a numberic based value that represents the index to check for status information in the status list for the current JWT. The value of this attribute MUST be a non-negative number, containing a value of zero or greater. Refer to xx for details on the validation procedure.
 
-3. The claim value object MUST contain an "idx" (index) attribute with a numberic based value that represents the index to check for status information in the status list for the current JWT. The value of this attribute MUST be a non-negative number, containing a value of zero or greater. Refer to xx for details on the validation procedure.
-
-4. The claim value object MUST contain a "uri" attribute with a string based value that identifies the status list containing the status information for the JWT. The value of this attribute MUST be a uri conforming to {{RFC3986}}
+3. The claim value object MUST contain a "uri" attribute with a string based value that identifies the status list containing the status information for the JWT. The value of this attribute MUST be a uri conforming to {{RFC3986}}
 
 ## Status List JWT Format and Processing Requirements {#jwt-status-list-format-and-processing}
 
@@ -105,15 +103,15 @@ The following rules apply to validating a JWT based status list. Application of 
 
 2. The JWT MUST contain an "iat" (issued at) claim that identifies the time at which it was issued.
 
-2. The JWT MUST contain an "status_list" (status list) claim conforming to the rules outlined in [](#jwt-status-list-claim-format).
+3. The JWT MUST contain an "status_list" (status list) claim conforming to the rules outlined in [](#jwt-status-list-claim-format).
 
-3. The JWT MAY contain an "exp" (expiration time) claim that convey's when it is considered expired by its issuer.
+4. The JWT MAY contain an "exp" (expiration time) claim that convey's when it is considered expired by its issuer.
 
-4. The JWT MAY contain other claims.
+5. The JWT MAY contain other claims.
 
-5. The JWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the JWT if it is using a Message Authentication Code (MAC) based algorithm. Relying parties MUST reject JWTs with an invalid signature.
+6. The JWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the JWT if it is using a Message Authentication Code (MAC) based algorithm. Relying parties MUST reject JWTs with an invalid signature.
 
-6. Relying parties MUST reject a JWT that is not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
+7. Relying parties MUST reject a JWT that is not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
 
 ~~~ ascii-art
 
@@ -127,7 +125,7 @@ The following rules apply to validating a JWT based status list. Application of 
   "iat": 1683560915,
   "exp": 1686232115,
   "status_list": {
-    "typ": "revocation-list",
+    "bits": 1,
     "lst": "H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA"
   }
 }
@@ -140,97 +138,33 @@ The following rules apply to validating the "status_list" (status list) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST either contain a "typ" (type) attribute with a string based value that represents a well-known, pre-defined type of status list or a "typ_def" (type definition) attribute with a valid JSON object defining a new, custom type of status list as referenced in [](#status-list-definitions). The value MUST be equal to that of the "typ" attribute in the "sts" claim for the token who's status is being validated.
+2. The claim value object MUST contain a "bit_size" attribute with an numeric based value that represents the number of bits per Referenced Token in the Status List ("lst") of the Status List JWT. The allowed values for "bit_size" are 1,2,4 and 8.
 
-3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the tokens it conveys statuses for. The value MUST be a base64 encoded string using RFCXXX containing a GZIP compressed octet string {{RFC1952}}.
+3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the bit array containing the Status Type values for all the Referenced Tokens it conveys statuses for. The value MUST be a base64 encoded string using RFCXXX containing a GZIP compressed octet string {{RFC1952}}.
 
-# Status List Definitions {#status-list-definitions}
+# Status Types {#status-types}
 
-Status List Types are definitions build on top of pre-defined, common status types. This specification defines the status types contained in the the well-known, pre-defined status list types
+This document defines the possible statuses of Referenced Tokens as Status Type values. If the Status List contains more than one bit per token (as defined by "bits" in the Status List) then the whole value of bits MUST describe one value. A Status List can not encompass multiple statuses per individual bits for a Reference Token.
 
-## Status Types
+The registry in this document describes the basic Status Type values required for the most common use cases. The registry may be extended as describes in XXX.
 
-A status describes the state, mode, condition or stage of an entity that is described by the status list. Status Types MUST be string based values.
+## Status Types Values
+
+A status describes the state, mode, condition or stage of an entity that is described by the status list. Status Types MUST be numeric based values between 0 and 255.
 Status types described by this specifiction comprise:
-- "VALID" - The status of the Token is valid, correct or legal.
-- "INVALID" - The status of the Token is revoked, annuled, taken back, recalled or cancelled. This state is irreversible.
-- "SUSPENDED" - The status of the Token is temporarily unvalid, hanging, debared from privilege. This state is reversible.
+0x00 - "VALID" - The status of the Token is valid, correct or legal.
+0x01 - "INVALID" - The status of the Token is revoked, annuled, taken back, recalled or cancelled. This state is irreversible.
+0x02 - "SUSPENDED" - The status of the Token is temporarily unvalid, hanging, debared from privilege. This state is reversible.
 
-## Status List Types
+The issuer of the Status List Token MUST choose an adequate "bit_size" to be able to describe the required Status Types.ST be used for the "typ" attribute within the "status_list".
 
-A status list describes the possible statuses that an entity can encompass.
-The following rules apply to validating a status list type:
+### Examples
+In the first example the Status List shall be used as a revocation list. It only requires the Status Types "VALID" and "INVALID", therefore a "bit_size" of 1 is sufficient.
 
-1. The claim value MUST be a valid JSON object.
-
-2. The claim value object MUST contain a "bit_size" attribute with an Integer that represents the number of bits per entity in the status list ("lst") of the Status List JWT. The allowed values for `bit_size` are 1,2,4 and 8.
-
-3. The claim value object MUST contain a "status_types" attribute that describes the possible Status Types that the entity may reflect. "status_types MUST be a valid JSON Object that defines up to "bit_size" Status Type encodings. The claim names MUST be the string based representation of the bit encoding and the claim values MUST describe the matching Status Type String values.
-
-## Well-known Status List Types
-
-This specification describes two well-known, pre-defined Status List Types. To use these, the name of the status list MUST be used for the "typ" attribute within the "status_list".
-
-### Revocation List
-The Status List Type "revocation-list" is defined as follows:
-
-~~~ ascii-art
-
-{
-   "bit_size": 1,
-   "status_types": {
-      "0" : "VALID",
-      "1" : "INVALID"
-   }
-}
-
-~~~
-
-Furthermore, the "uri" attribute contained within a JWT using the "status" claim MUST be an HTTPS based URL that when resolved via an HTTPS GET request returns a content type "application/jwt" containing the status list.
-
-### Suspension-Revocation List
-The Status List Type "suspension-revocation-list" is defined as follows:
-
-~~~ ascii-art
-
-{
-   "bit_size": 2,
-   "status_types": {
-      "0" : "VALID",
-      "1" : "INVALID",
-      "2" : "SUSPENDED",
-      "3" : "UNDEFINED" //ob absent
-   }
-}
-
-~~~
+In the second example the Status List shall additionally include the Status Type "SUSPENDED. As the Status Type value for "SUSPENDED" is 0x02 and doe snot fit into 1 bit, the "bit_size" is required to be 2.
 
 ## Extended Status List Types
 
-Issuers of Tokens MAY extend the status types and define new status list types to their needs. To use these, the definition of the status list type MUST be used for the "typ_def" attribute within the "status_list".
-
-Extended Status List Types MUST inherit the default Status Types "VALID" with value "0" and "INVALID" with value "1". Implementations according to this document MUST support the pre-defined Status List Types "reovcation-list" and "suspension-reocation-list". Implementations MAY support Extended Status List Types. In case that implementaitons that do not support Extended Status List Types or do not recognize the "typ_def" of an Extended Status List Type, they MUST result in an error and abort.
-
-The following is a non-normative example for a "status_list" :
-
-~~~ ascii-art
-
-"sts_lst": {
-    "typ_def" : {
-       "bit_size": 2,
-       "status_types": {
-          "0" : "VALID",
-          "1" : "INVALID",
-          "2" : "WAITING_FOR_UNICORNS",
-          "3" : "WAITING_FOR_APPROVAL"
-       }
-    },
-    "list": "H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA"
-  }
-
-~~~
-
-It is recommended to use the least signifcant bit for a "REVOKED" status.
 
 # Security Considerations
 
