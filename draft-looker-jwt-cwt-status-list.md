@@ -116,6 +116,7 @@ The following rules apply to validating a JWT based status list. Application of 
 ~~~ ascii-art
 
 {
+  "typ": "statuslist+jwt",
   "alg": "ES256",
   "kid": "11"
 }
