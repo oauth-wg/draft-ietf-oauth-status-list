@@ -169,7 +169,7 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 # Privacy Considerations
 
 ## Issuer tracking and Herd Privacy {#privacy-issuer}
-The main privacy consideration for a status list, especially in the context of the Issuer-Holder-Verifier model {{XXX}}, is to prevent the Issuer/Status List Provider from tracking the usage of the Token when the status is being checked. If an issuer offers status information by referencing a specific Token, this would enable him to create a profile for the issued Token by correlating the date and identity of Verifiers, that are requesting the status.
+The main privacy consideration for a status list, especially in the context of the Issuer-Holder-Verifier model RFCXXX, is to prevent the Issuer/Status List Provider from tracking the usage of the Token when the status is being checked. If an issuer offers status information by referencing a specific Token, this would enable him to create a profile for the issued Token by correlating the date and identity of Verifiers, that are requesting the status.
 
 The Status List approaches these privacy implications by integrating the status information of many Tokens into the same list. Therefore, the Status List Provider does not learn for which Token the Verifier is requesting the Status List. The privacy of the Token Holder is achieved by the anonymity within the set of Tokens in the Status List, also called herd privacy. This limits the risks of tracking by the Issuer.
 
