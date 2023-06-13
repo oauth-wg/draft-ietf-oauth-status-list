@@ -91,7 +91,7 @@ The following rules apply to validating the "status" (status) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain an "idx" (index) attribute with a numberic based value that represents the index to check for status information in the status list for the current JWT. The value of this attribute MUST be a non-negative number, containing a value of zero or greater. Refer to xx for details on the validation procedure.
+2. The claim value object MUST contain an "idx" (index) attribute with a numeric based value that represents the index to check for status information in the status list for the current JWT. The value of this attribute MUST be a non-negative number, containing a value of zero or greater. Refer to xx for details on the validation procedure.
 
 3. The claim value object MUST contain a "uri" attribute with a string based value that identifies the status list containing the status information for the JWT. The value of this attribute MUST be a uri conforming to {{RFC3986}}
 
