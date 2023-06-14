@@ -5,13 +5,20 @@ import util
 import random
 
 
-test = StatusList(12, 2)
+test = StatusList(8, 1)
 test.set(0, 1)
-test.set(1, 2)
+test.set(1, 0)
 test.set(2, 0)
-test.set(3, 3)
+test.set(3, 1)
+test.set(4, 1)
+test.set(5, 1)
+test.set(6, 0)
+test.set(7, 1)
 print(test)
 print(bin(test.list[0]))
+print(hex(test.list[0]))
+encoded = test.encode()
+print(encoded)
 
 
 test = StatusList(12, 2)
@@ -30,6 +37,7 @@ test.set(11, 3)
 print(test)
 print(hex(test.list[0]), hex(test.list[1]), hex(test.list[2]))
 encoded = test.encode()
+print(encoded)
 
 key = util.EXAMPLE_KEY
 jwt = StatusListJWT(

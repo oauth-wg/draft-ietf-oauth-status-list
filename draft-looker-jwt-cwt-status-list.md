@@ -22,7 +22,7 @@ normative:
   RFC8392: RFC8392
   RFC3986: RFC3986
   RFC1952: RFC1952
-  RFC7515: RFC7515
+  RFC4648: RFC4648
 informative:
 
 --- abstract
@@ -153,19 +153,24 @@ Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, 
 
 2. The complete byte array is compressed using gZIP {{RFC1952}}.
 
-3. The result of the gZIP compression is then encoded as URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} and stored as a string.
+3. The result of the gZIP compression is then encoded as base64 encoding as defined in Section ^4 of {{RFC4648}} and stored as a string.
 
 
-Example of a byte representing 4 statuses with indices 0,1,2,3:
+Example of a byte representing 8 statuses (1-bit status list) with indices 0,1,2,3,4,5,6,7:
 
 ~~~ ascii-art
 
 status[0] = 1
-status[1] = 2
+status[1] = 0
 status[2] = 0
-status[3] = 3
+status[3] = 1
+status[4] = 1
+status[5] = 1
+status[6] = 0
+status[7] = 1
 
-results in a total value of the byte of 0b11001001 or 0xC9.
+
+results in a total value of the byte of 0b10111001 or 0xB9.
 ~~~
 
 
@@ -188,7 +193,7 @@ status[10] = 3
 status[11] = 3
 
 byte array = [0xC9, 0x44, 0xF9]
-lst = "H4sIAOkxb2QC_zvp8hMAZLRLMQMAAAA"
+lst = "H4sIAIElimQC/zvp8hMAZLRLMQMAAAA="
 ~~~
 
 

@@ -1,4 +1,4 @@
-from base64 import urlsafe_b64decode, urlsafe_b64encode
+from base64 import b64decode, b64encode
 import gzip
 
 
@@ -22,10 +22,10 @@ class StatusList:
 
     def encode(self) -> str:
         zipped = gzip.compress(self.list)
-        return urlsafe_b64encode(zipped).decode().strip("=")
+        return b64encode(zipped).decode()
 
     def decode(self, input: str):
-        zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
+        zipped = b64decode(input)
         self.list = bytearray(gzip.decompress(zipped))
         self.size = len(self.list) * self.divisor
 
@@ -33,18 +33,15 @@ class StatusList:
         assert value < 2**self.bits
         rest = pos % self.divisor
         floored = pos // self.divisor
-        shift = self._shift(rest)
+        shift = rest * self.bits
         mask = 0xFF ^ (((1 << self.bits) - 1) << shift)
         self.list[floored] = (self.list[floored] & mask) + (value << shift)
 
     def get(self, pos: int) -> int:
         rest = pos % self.divisor
         floored = pos // self.divisor
-        shift = self._shift(rest)
+        shift = rest * self.bits
         return (self.list[floored] & (((1 << self.bits) - 1) << shift)) >> shift
-
-    def _shift(self, rest: int) -> int:
-        return self.bits * rest
 
     def __str__(self):
         val = ""
