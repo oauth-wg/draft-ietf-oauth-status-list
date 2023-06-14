@@ -149,14 +149,14 @@ The following rules apply to validating the "status_list" (status list) claim
 
 Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, or 8. Therefore up to 2,4,16, or 256 statuses for a Referenced Token, depending on the bit-size, are possible. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error prone.
 
-1. The overall status list is encoded as a byte array. Depending on the "bit-size" each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using an index that maps to a specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1(being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
+1. The overall status list is encoded as a byte array. Depending on the "bit-size" each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using an index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1(being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
 
 2. The complete byte array is compressed using gZIP {{RFC1952}}.
 
-3. The result of the gZIP compression is then encoded as base64 encoding as defined in Section ^4 of {{RFC4648}} and stored as a string.
+3. The result of the gZIP compression is then encoded as base64 encoding as defined in Section 4 of {{RFC4648}} and stored as a string.
 
 
-Example of a byte representing 8 statuses (1-bit status list) with indices 0,1,2,3,4,5,6,7:
+Example of a byte representing 8 statuses (1-bit status list) with indices 0,1,2,3,4,5,6,7 (1 byte):
 
 ~~~ ascii-art
 
@@ -170,12 +170,12 @@ status[6] = 0
 status[7] = 1
 
 
-results in a total value of the byte of 0b10111001 or 0xB9.
+resulting byte =  0b10111001 or 0xB9.
 ~~~
 
 
 
-Example of a status list of length 12 using 2 bit statuses (-> 3 bytes):
+Example of a more complex status list of length 12 using 2 bit statuses (3 bytes):
 
 ~~~ ascii-art
 
