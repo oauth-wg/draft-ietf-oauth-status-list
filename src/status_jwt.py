@@ -2,7 +2,6 @@ from jwcrypto import jwk, jwt
 from status_list import StatusList
 from datetime import datetime
 from typing import Dict
-import status_types
 import json
 
 DEFAULT_ALG = "ES256"
@@ -11,7 +10,6 @@ DEFAULT_ALG = "ES256"
 class StatusListJWT:
     list: StatusList
     issuer: str
-    typ: str
     _key: jwk.JWK
     _alg: str
 
@@ -19,23 +17,17 @@ class StatusListJWT:
         self,
         issuer: str,
         key: jwk.JWK,
-        typ: str = None,
         list: StatusList = None,
         size: int = 2**20,
         bits: int = 1,
         alg: str = None,
     ):
-        if typ in status_types.BIT_SIZES:
-            bits = status_types.BIT_SIZES[typ]
-        elif typ is None:
-            typ = "revocation-list"
         if list is not None:
             self.list = list
         else:
             self.list = StatusList(size, bits)
         self.issuer = issuer
         self._key = key
-        self.typ = typ
         if alg is not None:
             self._alg = alg
         else:
@@ -46,17 +38,15 @@ class StatusListJWT:
         decoded = jwt.JWT(jwt=input, key=key, expected_type="JWS")
         claims = json.loads(decoded.claims)
         status_list = claims["status_list"]
-        typ = status_list["typ"]
         lst = status_list["lst"]
+        bits = status_list["bits"]
         issuer = claims["iss"]
-        bits = status_types.BIT_SIZES[typ]
         list = StatusList.fromEncoded(encoded=lst, bits=bits)
         header = json.loads(decoded.header)
         alg = header["alg"]
         return cls(
             issuer=issuer,
             key=key,
-            typ=typ,
             list=list,
             size=list.size,
             bits=list.bits,
@@ -88,7 +78,7 @@ class StatusListJWT:
             claims["exp"] = int(exp.timestamp())
         encoded_list = self.list.encode()
         claims["status_list"] = {
-            "typ": self.typ,
+            "bits": self.list.bits,
             "lst": encoded_list,
         }
 

@@ -41,7 +41,7 @@ print(encoded)
 
 key = util.EXAMPLE_KEY
 jwt = StatusListJWT(
-    issuer="example.com", list=test, key=key, typ="suspension-revocation-list"
+    issuer="example.com", list=test, key=key, bits=2
 )
 exp = datetime.utcnow() + timedelta(7)
 status_jwt = jwt.buildJWT(
