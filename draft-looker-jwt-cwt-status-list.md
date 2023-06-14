@@ -149,7 +149,7 @@ The following rules apply to validating the "status_list" (status list) claim
 
 Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, or 8. Therefore up to 2,4,16, or 256 statuses for a Referenced Token, depending on the bit-size, are possible. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error prone.
 
-1. The overall status list is encoded as a byte array. where each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). Each status is identified using an index that maps to a specific byte in the array and within that byte to specific bits. The index starts counting at 0 and, with the maximum value being (#(entries of status list) -1). If a byte represents multiple statuses, then the bits are chosen from least significant bit to highest significant bit for lower index to higher index.
+1. The overall status list is encoded as a byte array. Depending on the "bit-size" each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using an index that maps to a specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1(being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
 
 2. The complete byte array is compressed using gZIP {{RFC1952}}.
 
