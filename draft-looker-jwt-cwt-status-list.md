@@ -22,6 +22,7 @@ normative:
   RFC8392: RFC8392
   RFC3986: RFC3986
   RFC1952: RFC1952
+  RFC7515: RFC7515
 informative:
 
 --- abstract
@@ -160,7 +161,69 @@ The following rules apply to validating the "status_list" (status list) claim
 
 2. The claim value object MUST contain a "bit_size" attribute with an numeric based value that represents the number of bits per Referenced Token in the Status List ("lst") of the Status List JWT. The allowed values for "bit_size" are 1,2,4 and 8.
 
-3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the bit array containing the Status Type values for all the Referenced Tokens it conveys statuses for. The value MUST be a base64 encoded string using RFCXXX containing a GZIP compressed octet string {{RFC1952}}.
+3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the tokens it conveys statuses for. The value MUST be computed using the algorithm described in [](#jwt-status-list-claim-encoding).
+
+### Status List Encoding {#jwt-status-list-claim-encoding}
+
+Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, or 8. Therefore up to 2,4,16, or 256 statuses for a Referenced Token, depending on the bit-size, are possible. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error prone.
+
+1. The overall status list is encoded as a byte array. Depending on the "bit-size" each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using an index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1(being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
+
+2. The complete byte array is compressed using gZIP {{RFC1952}}.
+
+3. The result of the gZIP compression is then encoded as URL-safe base64 encoding without padding encoding as defined in Section 2 of {{RFC7515}} and stored as a string.
+
+
+Example of a two byte status list representing 16 statuses (1-bit status list) with indices 0 to 16 (2 bytes):
+
+~~~ ascii-art
+
+status[0] = 1
+status[1] = 0
+status[2] = 0
+status[3] = 1
+status[4] = 1
+status[5] = 1
+status[6] = 0
+status[7] = 1
+status[8] = 1
+status[9] = 1
+status[10] = 0
+status[11] = 0
+status[12] = 0
+status[13] = 1
+status[14] = 0
+status[15] = 1
+
+results in:
+byte_array[0] = 0b10111001 or 0xB9
+byte_array[1] = 0b10100011 or 0xA3
+lst = "H4sIABUJi2QC_9u5GABc9QE7AgAAAA"
+~~~
+
+
+
+Example of a more complex status list of length 12 using 2 bit statuses (3 bytes):
+
+~~~ ascii-art
+
+status[0] = 1
+status[1] = 2
+status[2] = 0
+status[3] = 3
+status[4] = 0
+status[5] = 1
+status[6] = 0
+status[7] = 1
+status[8] = 1
+status[9] = 2
+status[10] = 3
+status[11] = 3
+
+results in:
+byte_array = [0xC9, 0x44, 0xF9]
+lst = "H4sIAErsimQC_zvp8hMAZLRLMQMAAAA"
+~~~
 
 # Status Types {#status-types}
 
