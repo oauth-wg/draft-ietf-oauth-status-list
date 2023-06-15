@@ -1,4 +1,4 @@
-from base64 import b64decode, b64encode
+from base64 import urlsafe_b64decode, urlsafe_b64encode
 import gzip
 
 
@@ -22,10 +22,10 @@ class StatusList:
 
     def encode(self) -> str:
         zipped = gzip.compress(self.list)
-        return b64encode(zipped).decode()
+        return urlsafe_b64encode(zipped).decode().strip("=")
 
     def decode(self, input: str):
-        zipped = b64decode(input)
+        zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
         self.list = bytearray(gzip.decompress(zipped))
         self.size = len(self.list) * self.divisor
 
