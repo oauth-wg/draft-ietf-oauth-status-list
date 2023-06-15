@@ -156,7 +156,7 @@ Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, 
 3. The result of the gZIP compression is then encoded as URL-safe base64 encoding without padding encoding as defined in Section 2 of {{RFC7515}} and stored as a string.
 
 
-Example of a byte representing 8 statuses (1-bit status list) with indices 0,1,2,3,4,5,6,7 (1 byte):
+Example of a two byte status list representing 16 statuses (1-bit status list) with indices 0 to 16 (2 bytes):
 
 ~~~ ascii-art
 
@@ -168,10 +168,19 @@ status[4] = 1
 status[5] = 1
 status[6] = 0
 status[7] = 1
+status[8] = 1
+status[9] = 1
+status[10] = 0
+status[11] = 0
+status[12] = 0
+status[13] = 1
+status[14] = 0
+status[15] = 1
 
-
-resulting byte =  0b10111001 or 0xB9.
-lst = "H4sIAErsimQC_9sJAKXkv2ABAAAA"
+results in:
+byte_array[0] = 0b10111001 or 0xB9
+byte_array[1] = 0b10100011 or 0xA3
+lst = "H4sIABUJi2QC_9u5GABc9QE7AgAAAA"
 ~~~
 
 
@@ -193,7 +202,8 @@ status[9] = 2
 status[10] = 3
 status[11] = 3
 
-byte array = [0xC9, 0x44, 0xF9]
+results in:
+byte_array = [0xC9, 0x44, 0xF9]
 lst = "H4sIAErsimQC_zvp8hMAZLRLMQMAAAA"
 ~~~
 
