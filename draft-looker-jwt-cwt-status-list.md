@@ -278,7 +278,7 @@ After compression and Base64URL encoding the generated Status List is:
 ~~~ ascii-art
 
 "status_list": {
-   "bits": 1,
+   "bits": 2,
    "lst": "H4sIAErsimQC_zvp8hMAZLRLMQMAAAA"
 }
 
