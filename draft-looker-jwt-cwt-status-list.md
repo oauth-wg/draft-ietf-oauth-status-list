@@ -159,7 +159,7 @@ The following rules apply to validating the "status_list" (status list) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain a "bits" (bit_size) attribute with an numeric based value that represents the number of bits per Referenced Token in the Status List ("lst") of the Status List JWT. The allowed values for "bits" are 1,2,4 and 8.
+2. The claim value object MUST contain a "bits" (bit size) attribute with an numeric based value that represents the number of bits per Referenced Token in the Status List ("lst") of the Status List JWT. The allowed values for "bits" are 1,2,4 and 8.
 
 3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the tokens it conveys statuses for. The value MUST be computed using the algorithm described in [](#jwt-status-list-claim-encoding).
 
