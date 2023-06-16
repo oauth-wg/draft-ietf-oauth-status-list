@@ -54,7 +54,7 @@ The following diagram depicts the basic conceptual relationship.
 
 ## Rationale
 
-Revocation mechanisms are an essential part for most identity ecoosystems. In the past, revocation of X.509 TLS certificates has been proven difficult as traditional certificate revocation lists (CRLs) have limited scalability and the Online Certificate Status Protocol (OCSP) has additional privacy risks as the client is leaking the requested website to a third party. OSCP stapling is adressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accomodate for this privacy gap but face scalability issues again.
+Revocation mechanisms are an essential part for most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult as traditional certificate revocation lists (CRLs) have limited scalability and the Online Certificate Status Protocol (OCSP) has additional privacy risks as the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap but face scalability issues again.
 
 The approach of this specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits and compressing the resulting binary data. Thereby a Status List may contain statuses of 100.000 or more Referenced Tokens, but still remain relatively small. Placing large amounts of Referenced Tokens into the same list also enables a herd privacy towards the Issuer.
 
@@ -111,7 +111,7 @@ The following rules apply to validating the "status" (status) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain an "idx" (index) attribute with a numberic based value that represents the index to check for status information in the Status List for the current JWT. The value of this attribute MUST be a non-negative number, containing a value of zero or greater. Refer to xx for details on the validation procedure.
+2. The claim value object MUST contain an "idx" (index) attribute with a numeric based value that represents the index to check for status information in the Status List for the current JWT. The value of this attribute MUST be a non-negative number, containing a value of zero or greater. Refer to xx for details on the validation procedure.
 
 3. The claim value object MUST contain a "uri" attribute with a string based value that identifies the Status List containing the status information for the JWT. The value of this attribute MUST be a uri conforming to {{RFC3986}}
 
@@ -234,10 +234,10 @@ The registry in this document describes the basic Status Type values required fo
 ## Status Types Values
 
 A status describes the state, mode, condition or stage of an entity that is described by the status list. Status Types MUST be numeric based values between 0 and 255.
-Status types described by this specifiction comprise:
+Status types described by this specification comprise:
 0x00 - "VALID" - The status of the Token is valid, correct or legal.
-0x01 - "INVALID" - The status of the Token is revoked, annuled, taken back, recalled or cancelled. This state is irreversible.
-0x02 - "SUSPENDED" - The status of the Token is temporarily unvalid, hanging, debared from privilege. This state is reversible.
+0x01 - "INVALID" - The status of the Token is revoked, annulled, taken back, recalled or cancelled. This state is irreversible.
+0x02 - "SUSPENDED" - The status of the Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
 
 The issuer of the Status List Token MUST choose an adequate "bit_size" to be able to describe the required Status Types.ST be used for the "typ" attribute within the "status_list".
 
@@ -252,7 +252,7 @@ In the second example the Status List shall additionally include the Status Type
 # Security Considerations
 
 ## Correct decoding and parsing of the encoded status list
-TODO elaborate on risks of incorrect parsing/decoding leading to erroneuos status data
+TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data
 
 ## Cached and Stale status lists
 TODO consumers/Verifiers of the status list should be aware if they fetch the up-to-date data
