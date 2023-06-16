@@ -121,7 +121,7 @@ The following rules apply to validating a JWT based Status List Token. Applicati
 
 1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string based identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the Referenced Token.
 
-2. The JWT MUST contain an "sub" (subject) claim that contains a unique string based identifier for that Referenced Token. The value MUST be equal to that of the "uri" claim contained in the "status" claim" of the Referenced Token.
+2. The JWT MUST contain a "sub" (subject) claim that contains an unique string based identifier for that Referenced Token. The value MUST be equal to that of the "uri" claim contained in the "status" claim of the Referenced Token.
 
 3. The JWT MUST contain an "iat" (issued at) claim that identifies the time at which it was issued.
 
