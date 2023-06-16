@@ -16,6 +16,9 @@ author:
     fullname: Tobias Looker
     organization: MATTR
     email: tobias.looker@mattr.global
+ -
+    fullname: Paul Bastian
+    email: paul.bastian@posteo.de
 
 normative:
   RFC7519: RFC7519
