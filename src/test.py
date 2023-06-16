@@ -3,6 +3,11 @@ from status_jwt import StatusListJWT
 from datetime import datetime, timedelta
 import util
 
+# demo key, constant timestamp
+key = util.EXAMPLE_KEY
+iat = datetime.utcfromtimestamp(1686920170)
+gzip_time = iat.timestamp()
+
 
 test = StatusList(16, 1)
 test.set(0, 1)
@@ -24,7 +29,7 @@ test.set(15, 1)
 print(test)
 print(bin(test.list[0]), bin(test.list[1]))
 print(hex(test.list[0]), hex(test.list[1]))
-encoded = test.encode()
+encoded = test.encode(mtime=gzip_time)
 print(encoded)
 
 
@@ -43,18 +48,23 @@ test.set(10, 3)
 test.set(11, 3)
 print(test)
 print(hex(test.list[0]), hex(test.list[1]), hex(test.list[2]))
-encoded = test.encode()
+encoded = test.encode(mtime=gzip_time)
 print(encoded)
 
-key = util.EXAMPLE_KEY
 jwt = StatusListJWT(
-    issuer="example.com", list=test, key=key, bits=2
+    issuer="https://example.com",
+    subject="https://example.com/statuslists/1",
+    list=test,
+    key=key,
+    bits=2,
 )
-exp = datetime.utcnow() + timedelta(7)
+exp = iat + timedelta(7)
 status_jwt = jwt.buildJWT(
     exp=exp,
+    iat=iat,
     optional_claims={"custom": "value"},
     optional_header={"x5c": ["here_be_dragons"]},
+    mtime=gzip_time,
 )
 print("-----------")
 print(status_jwt)
@@ -62,7 +72,7 @@ print("-----------")
 print(util.formatToken(status_jwt, key))
 print("-----------")
 
-status_jwt = jwt.buildJWT()
+status_jwt = jwt.buildJWT(iat=iat, exp=exp, mtime=gzip_time)
 print(status_jwt)
 print("-----------")
 print(util.formatToken(status_jwt, key))
