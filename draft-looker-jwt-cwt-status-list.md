@@ -162,7 +162,7 @@ The following rules apply to validating the "status_list" (status list) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain a "bit_size" attribute with an numeric based value that represents the number of bits per Referenced Token in the Status List ("lst") of the Status List JWT. The allowed values for "bit_size" are 1,2,4 and 8.
+2. The claim value object MUST contain a "bits" (bit size) attribute with an numeric based value that represents the number of bits per Referenced Token in the Status List ("lst") of the Status List JWT. The allowed values for "bits" are 1,2,4 and 8.
 
 3. The claim value object MUST contain a "lst" (list) attribute with a string based value that represents the status values for all the tokens it conveys statuses for. The value MUST be computed using the algorithm described in [](#jwt-status-list-claim-encoding).
 
@@ -242,12 +242,12 @@ Status types described by this specification comprise:
 0x01 - "INVALID" - The status of the Token is revoked, annulled, taken back, recalled or cancelled. This state is irreversible.
 0x02 - "SUSPENDED" - The status of the Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
 
-The issuer of the Status List Token MUST choose an adequate "bit_size" to be able to describe the required Status Types.ST be used for the "typ" attribute within the "status_list".
+The issuer of the Status List Token MUST choose an adequate "bits" (bit size) to be able to describe the required Status Types.ST be used for the "typ" attribute within the "status_list".
 
 ### Examples
-In the first example the Status List shall be used as a revocation list. It only requires the Status Types "VALID" and "INVALID", therefore a "bit_size" of 1 is sufficient.
+In the first example the Status List shall be used as a revocation list. It only requires the Status Types "VALID" and "INVALID", therefore a "bits" of 1 is sufficient.
 
-In the second example the Status List shall additionally include the Status Type "SUSPENDED. As the Status Type value for "SUSPENDED" is 0x02 and doe snot fit into 1 bit, the "bit_size" is required to be 2.
+In the second example the Status List shall additionally include the Status Type "SUSPENDED. As the Status Type value for "SUSPENDED" is 0x02 and doe snot fit into 1 bit, the "bits" is required to be 2.
 
 ## Extended Status List Types
 
