@@ -173,14 +173,14 @@ The following rules apply to validating the "status_list" (status list) claim
 
 Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, or 8. Therefore up to 2,4,16, or 256 statuses for a Referenced Token, depending on the bit-size, are possible. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error prone.
 
-1. The overall status list is encoded as a byte array. Depending on the "bit-size" each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using an index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1(being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
+1. The overall Status List is encoded as a byte array. Depending on the "bit-size" each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using the "index" that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1(being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
 
 2. The complete byte array is compressed using gZIP {{RFC1952}}.
 
 3. The result of the gZIP compression is then encoded as URL-safe base64 encoding without padding encoding as defined in Section 2 of {{RFC7515}} and stored as a string.
 
 
-Example of a two byte status list representing 16 statuses (1-bit status list) with indices 0 to 16 (2 bytes):
+Example of a Status List representing the statuses of 16 Referenced Tokens (1-bit status type) with indices 0 to 15 (2 bytes):
 
 ~~~ ascii-art
 
@@ -201,13 +201,41 @@ status[13] = 1
 status[14] = 0
 status[15] = 1
 
-results in:
-byte_array[0] = 0b10111001 or 0xB9
-byte_array[1] = 0b10100011 or 0xA3
-lst = "H4sIABUJi2QC_9u5GABc9QE7AgAAAA"
 ~~~
 
+These bits are concatenated:
 
+~~~ ascii-art
+
+byte             0                  1               2
+bit       7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7
+         +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
+values   |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|  |0|...
+         +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
+index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
+         \_______________/  \_______________/
+                0xB9               0xA3
+~~~
+~~~
+
+This results in the byte array:
+
+~~~ ascii-art
+
+byte_array = [0xB9, 0xA3]
+
+~~~
+
+After compression and Base64URL encoding the generated Status List is:
+
+~~~ ascii-art
+
+"status_list": {
+   "bits": 1,
+   "lst": "H4sIABUJi2QC_9u5GABc9QE7AgAAAA"
+}
+
+~~~
 
 Example of a more complex status list of length 12 using 2 bit statuses (3 bytes):
 
@@ -226,9 +254,38 @@ status[9] = 2
 status[10] = 3
 status[11] = 3
 
-results in:
+~~~
+
+These bits are concatenated:
+
+byte             0                  1                  2
+bit       7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
+         +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+values   |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
+         +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+          \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
+status     3   0   2   1      1   0   1   0      3   3   2   1
+index      3   2   1   0      7   6   5   4      11  10  9   8
+           \___________/      \___________/      \___________/
+                0xC9               0x44               0xF9
+
+This results in the byte array:
+
+~~~ ascii-art
+
 byte_array = [0xC9, 0x44, 0xF9]
-lst = "H4sIAErsimQC_zvp8hMAZLRLMQMAAAA"
+
+~~~
+
+After compression and Base64URL encoding the generated Status List is:
+
+~~~ ascii-art
+
+"status_list": {
+   "bits": 2,
+   "lst": "H4sIAErsimQC_zvp8hMAZLRLMQMAAAA"
+}
+
 ~~~
 
 # Status Types {#status-types}
