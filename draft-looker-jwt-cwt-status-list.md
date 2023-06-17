@@ -122,19 +122,21 @@ The following rules apply to validating the "status" (status) claim
 
 The following rules apply to validating a JWT based Status List Token. Application of additional restrictions and policy are at the discretion of the verifying party.
 
-1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string based identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the JWT who's status is being verified.
+1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string based identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the Referenced Token.
 
-2. The JWT MUST contain an "iat" (issued at) claim that identifies the time at which it was issued.
+2. The JWT MUST contain a "sub" (subject) claim that contains an unique string based identifier for that Referenced Token. The value MUST be equal to that of the "uri" claim contained in the "status" claim of the Referenced Token.
 
-3. The JWT MUST contain an "status_list" (status list) claim conforming to the rules outlined in [](#jwt-status-list-claim-format).
+3. The JWT MUST contain an "iat" (issued at) claim that identifies the time at which it was issued.
 
-4. The JWT MAY contain an "exp" (expiration time) claim that convey's when it is considered expired by its issuer.
+4. The JWT MUST contain an "status_list" (status list) claim conforming to the rules outlined in [](#jwt-status-list-claim-format).
 
-5. The JWT MAY contain other claims.
+5. The JWT MAY contain an "exp" (expiration time) claim that convey's when it is considered expired by its issuer.
 
-6. The JWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the JWT if it is using a Message Authentication Code (MAC) based algorithm. Relying parties MUST reject JWTs with an invalid signature.
+6. The JWT MAY contain other claims.
 
-7. Relying parties MUST reject a JWT that is not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
+7. The JWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the JWT if it is using a Message Authentication Code (MAC) based algorithm. Relying parties MUST reject JWTs with an invalid signature.
+
+8. Relying parties MUST reject a JWT that is not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
 
 ~~~ ascii-art
 
@@ -146,6 +148,7 @@ The following rules apply to validating a JWT based Status List Token. Applicati
 .
 {
   "iss": "https://example.com",
+  "sub": "https://example.com/statuslists/1",
   "iat": 1683560915,
   "exp": 1686232115,
   "status_list": {
