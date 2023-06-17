@@ -52,7 +52,6 @@ The following diagram depicts the basic conceptual relationship.
 |                  |  Describes Status  |                   |
 |                  |<-------------------|                   |
 +------------------+                    +-------------------+
-
 ~~~
 
 ## Rationale
@@ -105,7 +104,6 @@ The following example is the decoded header and payload of a JWT meeting the pro
     "uri": "https://example.com/statuslists/1"
   }
 }
-
 ~~~
 
 ### Status Claim Format {#jwt-referenced-token-status}
@@ -153,10 +151,9 @@ The following rules apply to validating a JWT based Status List Token. Applicati
   "exp": 1686232115,
   "status_list": {
     "bits": 1,
-    "lst": "H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA"
+    "lst": "H4sIAMo_jGQC_zvp..MAZLRLMQMAAAA"
   }
 }
-
 ~~~
 
 ### Status List Claim Format {#jwt-status-list-claim-format}
@@ -200,7 +197,6 @@ status[12] = 0
 status[13] = 1
 status[14] = 0
 status[15] = 1
-
 ~~~
 
 These bits are concatenated:
@@ -215,15 +211,14 @@ values   |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|  |0|...
 index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
          \_______________/  \_______________/
                 0xB9               0xA3
-~~~
+
 ~~~
 
-This results in the byte array:
+Resulting in the byte array:
 
 ~~~ ascii-art
 
 byte_array = [0xB9, 0xA3]
-
 ~~~
 
 After compression and Base64URL encoding the generated Status List is:
@@ -232,9 +227,8 @@ After compression and Base64URL encoding the generated Status List is:
 
 "status_list": {
    "bits": 1,
-   "lst": "H4sIABUJi2QC_9u5GABc9QE7AgAAAA"
+   "lst": "H4sIAMo_jGQC_9u5GABc9QE7AgAAAA"
 }
-
 ~~~
 
 Example of a more complex status list of length 12 using 2 bit statuses (3 bytes):
@@ -253,10 +247,11 @@ status[8] = 1
 status[9] = 2
 status[10] = 3
 status[11] = 3
-
 ~~~
 
 These bits are concatenated:
+
+~~~ ascii-art
 
 byte             0                  1                  2
 bit       7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
@@ -269,12 +264,13 @@ index      3   2   1   0      7   6   5   4      11  10  9   8
            \___________/      \___________/      \___________/
                 0xC9               0x44               0xF9
 
-This results in the byte array:
+~~~
+
+Resulting in the byte array:
 
 ~~~ ascii-art
 
 byte_array = [0xC9, 0x44, 0xF9]
-
 ~~~
 
 After compression and Base64URL encoding the generated Status List is:
@@ -283,9 +279,8 @@ After compression and Base64URL encoding the generated Status List is:
 
 "status_list": {
    "bits": 2,
-   "lst": "H4sIAErsimQC_zvp8hMAZLRLMQMAAAA"
+   "lst": "H4sIAMo_jGQC_zvp8hMAZLRLMQMAAAA"
 }
-
 ~~~
 
 # Status Types {#status-types}
