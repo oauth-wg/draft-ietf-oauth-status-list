@@ -5,17 +5,19 @@ from typing import Dict
 import json
 
 DEFAULT_ALG = "ES256"
-
+STATUS_LIST_TYP = "statuslist+jwt"
 
 class StatusListJWT:
     list: StatusList
     issuer: str
+    subject: str
     _key: jwk.JWK
     _alg: str
 
     def __init__(
         self,
         issuer: str,
+        subject: str,
         key: jwk.JWK,
         list: StatusList = None,
         size: int = 2**20,
@@ -27,6 +29,7 @@ class StatusListJWT:
         else:
             self.list = StatusList(size, bits)
         self.issuer = issuer
+        self.subject = subject
         self._key = key
         if alg is not None:
             self._alg = alg
@@ -36,16 +39,21 @@ class StatusListJWT:
     @classmethod
     def fromJWT(cls, input: str, key: jwk.JWK):
         decoded = jwt.JWT(jwt=input, key=key, expected_type="JWS")
+        header = json.loads(decoded.header)
+        alg = header["alg"]
+        typ = header["typ"]
+        assert typ == STATUS_LIST_TYP
         claims = json.loads(decoded.claims)
         status_list = claims["status_list"]
         lst = status_list["lst"]
         bits = status_list["bits"]
         issuer = claims["iss"]
+        subject = claims["sub"]
         list = StatusList.fromEncoded(encoded=lst, bits=bits)
-        header = json.loads(decoded.header)
-        alg = header["alg"]
+
         return cls(
             issuer=issuer,
+            subject=subject,
             key=key,
             list=list,
             size=list.size,
@@ -66,17 +74,19 @@ class StatusListJWT:
         optional_claims: Dict = None,
         optional_header: Dict = None,
         compact=True,
+        mtime=None
     ) -> str:
         # build claims
         if optional_claims is not None:
             claims = optional_claims
         else:
             claims = {}
+        claims["sub"] = self.subject
         claims["iss"] = self.issuer
         claims["iat"] = int(iat.timestamp())
         if exp is not None:
             claims["exp"] = int(exp.timestamp())
-        encoded_list = self.list.encode()
+        encoded_list = self.list.encode(mtime=mtime)
         claims["status_list"] = {
             "bits": self.list.bits,
             "lst": encoded_list,
@@ -90,6 +100,7 @@ class StatusListJWT:
         if self._key.key_id:
             header["kid"] = self._key.key_id
         header["alg"] = self._alg
+        header["typ"] = STATUS_LIST_TYP
 
         token = jwt.JWT(header=header, claims=claims)
         token.make_signed_token(self._key)

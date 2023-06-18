@@ -8,6 +8,7 @@ example = {
     "crv": "P-256",
     "x": "I3HWm_0Ds1dPMI-IWmf4mBmH-YaeAVbPVu7vB27CxXo",
     "y": "6N_d5Elj9bs1htgV3okJKIdbHEpkgTmAluYKJemzn1M",
+    "kid": "12",
 }
 EXAMPLE_KEY = jwk.JWK(**example)
 
@@ -22,4 +23,4 @@ def formatToken(input: str, key: jwk.JWK) -> str:
 
 
 def printJson(input: str) -> str:
-    return json.dumps(json.loads(input), sort_keys=True, indent=4)
+    return json.dumps(json.loads(input), sort_keys=True, indent=2)

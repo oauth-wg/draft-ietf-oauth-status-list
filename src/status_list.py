@@ -20,8 +20,8 @@ class StatusList:
         new.decode(encoded)
         return new
 
-    def encode(self) -> str:
-        zipped = gzip.compress(self.list)
+    def encode(self, mtime=None) -> str:
+        zipped = gzip.compress(self.list, mtime=mtime)
         return urlsafe_b64encode(zipped).decode().strip("=")
 
     def decode(self, input: str):
