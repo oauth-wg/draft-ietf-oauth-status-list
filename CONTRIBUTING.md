@@ -17,10 +17,10 @@ BCP 78, 79, the TLP, and the TLP rules regarding code components (e.g. being
 subject to a Simplified BSD License) in Contributions.
 ## Working Group Information
 
-Discussion of this work occurs on the [JSON Web Proofs
-Working Group mailing list](mailto:)
-([archive](),
-[subscribe]()).
+Discussion of this work occurs on the [Web Authorization Protocol
+Working Group mailing list](mailto:oauth@ietf.org)
+([archive](https://mailarchive.ietf.org/arch/browse/oauth/),
+[subscribe](https://www.ietf.org/mailman/listinfo/oauth)).
 In addition to contributions in GitHub, you are encouraged to participate in
 discussions there.
 
@@ -28,4 +28,4 @@ discussions there.
 technical issues needs to occur on the mailing list.
 
 You might also like to familiarize yourself with other
-[Working Group documents](https://datatracker.ietf.org/wg/jwt/documents/).
+[Working Group documents](https://datatracker.ietf.org/wg/oauth/documents/).
