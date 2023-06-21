@@ -99,7 +99,6 @@ The following example is the decoded header and payload of a JWT meeting the pro
 {
   "iss": "https://example.com",
   "status": {
-    "bits": 1,
     "idx": 0,
     "uri": "https://example.com/statuslists/1"
   }
