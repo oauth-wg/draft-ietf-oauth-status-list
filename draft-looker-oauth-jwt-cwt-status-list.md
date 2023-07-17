@@ -78,42 +78,6 @@ Referenced Token:
 
 # JSON Web Token Representation
 
-## Referenced Token Format and Processing Requirements {#jwt-referenced-token}
-
-The following rules apply to validating a Referenced Token in JWT representation, which references a Status List Token. Application of additional restrictions and policy are at the discretion of the verifying party.
-
-1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the referenced Status List Token.
-
-2. The JWT MUST contain an "status" (status) claim conforming to the rules outlined in [](#jwt-referenced-token-status)
-
-The following example is the decoded header and payload of a JWT meeting the processing rules as defined above.
-
-~~~ ascii-art
-
-{
-  "alg": "ES256",
-  "kid": "11"
-}
-.
-{
-  "iss": "https://example.com",
-  "status": {
-    "idx": 0,
-    "uri": "https://example.com/statuslists/1"
-  }
-}
-~~~
-
-### Status Claim Format {#jwt-referenced-token-status}
-
-The following rules apply to validating the "status" (status) claim
-
-1. The claim value MUST be a valid JSON object.
-
-2. The claim value object MUST contain an "idx" (index) member with a numeric value that represents the index to check for status information in the Status List for the current JWT. The value of this member MUST be a non-negative number, containing a value of zero or greater.
-
-3. The claim value object MUST contain a "uri" member with a string value that identifies the Status List containing the status information for the JWT. The value of this member MUST be a uri conforming to {{RFC3986}}.
-
 ## Status List JWT Format and Processing Requirements {#jwt-status-list-format-and-processing}
 
 The following rules apply to validating a JWT-based Status List Token. Application of additional restrictions and policy are at the discretion of the verifying party.
@@ -173,6 +137,42 @@ Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, 
 2. The complete byte array is compressed using gZIP {{RFC1952}}.
 
 3. The result of the gZIP compression is then base64url-encoded, as defined in Section 2 of {{RFC7515}}.
+
+## Referenced Token Format and Processing Requirements {#jwt-referenced-token}
+
+The following rules apply to validating a Referenced Token in JWT representation, which references a Status List Token. Application of additional restrictions and policy are at the discretion of the verifying party.
+
+1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the referenced Status List Token.
+
+2. The JWT MUST contain an "status" (status) claim conforming to the rules outlined in [](#jwt-referenced-token-status)
+
+The following example is the decoded header and payload of a JWT meeting the processing rules as defined above.
+
+~~~ ascii-art
+
+{
+  "alg": "ES256",
+  "kid": "11"
+}
+.
+{
+  "iss": "https://example.com",
+  "status": {
+    "idx": 0,
+    "uri": "https://example.com/statuslists/1"
+  }
+}
+~~~
+
+### Status Claim Format {#jwt-referenced-token-status}
+
+The following rules apply to validating the "status" (status) claim
+
+1. The claim value MUST be a valid JSON object.
+
+2. The claim value object MUST contain an "idx" (index) member with a numeric value that represents the index to check for status information in the Status List for the current JWT. The value of this member MUST be a non-negative number, containing a value of zero or greater.
+
+3. The claim value object MUST contain a "uri" member with a string value that identifies the Status List containing the status information for the JWT. The value of this member MUST be a uri conforming to {{RFC3986}}.
 
 # Status Types {#status-types}
 
