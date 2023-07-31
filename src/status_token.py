@@ -7,7 +7,8 @@ import json
 DEFAULT_ALG = "ES256"
 STATUS_LIST_TYP = "statuslist+jwt"
 
-class StatusListJWT:
+
+class StatusListToken:
     list: StatusList
     issuer: str
     subject: str
@@ -26,6 +27,7 @@ class StatusListJWT:
     ):
         if list is not None:
             self.list = list
+            self.bits = list.bits
         else:
             self.list = StatusList(size, bits)
         self.issuer = issuer
@@ -74,7 +76,7 @@ class StatusListJWT:
         optional_claims: Dict = None,
         optional_header: Dict = None,
         compact=True,
-        mtime=None
+        mtime=None,
     ) -> str:
         # build claims
         if optional_claims is not None:

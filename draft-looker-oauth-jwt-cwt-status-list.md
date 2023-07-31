@@ -98,25 +98,9 @@ The following rules apply to validating a JWT-based Status List Token. Applicati
 
 8. Relying parties MUST reject JWTs that are not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
 
-~~~ ascii-art
-
-{
-  "typ": "statuslist+jwt",
-  "alg": "ES256",
-  "kid": "11"
-}
-.
-{
-  "iss": "https://example.com",
-  "sub": "https://example.com/statuslists/1",
-  "iat": 1683560915,
-  "exp": 1686232115,
-  "status_list": {
-    "bits": 1,
-    "lst": "H4sIAMo_jGQC_9u5GABc9QE7AgAAAA"
-  }
-}
-~~~
+~~~~~~~~~~
+{::include ./examples/status_list_jwt}
+~~~~~~~~~~
 
 ### Status List Claim Format {#jwt-status-list-claim-format}
 
@@ -234,22 +218,11 @@ index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
 
 ~~~
 
-Resulting in the byte array:
+Resulting in the byte array and compressed/base64url encoded status list:
 
-~~~ ascii-art
-
-byte_array = [0xB9, 0xA3]
-~~~
-
-After compression and base64url encoding, the generated Status List is:
-
-~~~ ascii-art
-
-"status_list": {
-   "bits": 1,
-   "lst": "H4sIAMo_jGQC_9u5GABc9QE7AgAAAA"
-}
-~~~
+~~~~~~~~~~
+{::include ./examples/status_list_encoding}
+~~~~~~~~~~
 
 ## Example Status List with 2-Bit Status Values
 
@@ -290,22 +263,11 @@ index      3   2   1   0      7   6   5   4      11  10  9   8
 
 ~~~
 
-Resulting in the byte array:
+Resulting in the byte array and compressed/base64url encoded status list:
 
-~~~ ascii-art
-
-byte_array = [0xC9, 0x44, 0xF9]
-~~~
-
-After compression and base64url encoding, the generated Status List is:
-
-~~~ ascii-art
-
-"status_list": {
-   "bits": 2,
-   "lst": "H4sIAMo_jGQC_zvp8hMAZLRLMQMAAAA"
-}
-~~~
+~~~~~~~~~~
+{::include ./examples/status_list_encoding2}
+~~~~~~~~~~
 
 # CWT Representations
 
