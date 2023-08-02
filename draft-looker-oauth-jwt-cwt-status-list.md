@@ -92,11 +92,13 @@ The following rules apply to validating a JWT-based Status List Token. Applicati
 
 5. The JWT MAY contain an "exp" (expiration time) claim that conveys when it is considered expired by its issuer.
 
-6. The JWT MAY contain other claims.
+6. The JWT MAY contain a "ttl" (time to live) claim that conveys the maximum amount of time that the JWT may be cached by a client before a fresh copy is retrieved
 
-7. The JWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the JWT if it is using a Message Authentication Code (MAC) algorithm. Relying parties MUST reject JWTs with an invalid signature.
+7. The JWT MAY contain other claims.
 
-8. Relying parties MUST reject JWTs that are not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
+8. The JWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the JWT if it is using a Message Authentication Code (MAC) algorithm. Relying parties MUST reject JWTs with an invalid signature.
+
+9. Relying parties MUST reject JWTs that are not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
 
 ~~~ ascii-art
 
@@ -319,7 +321,13 @@ TBD Declare whether JWT and CWT representations can be used interchangeably by t
 TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data
 
 ## Cached and Stale status lists
-TODO consumers/Verifiers of the status list should be aware if they fetch the up-to-date data
+When consumers or verifiers of the status list fetch the data, they need
+to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
+provides an essential mechanism for setting an maximum cache time for the
+fetched data. This property permits distribution of a status list to a CDN
+or other distribution mechanism while giving guidance to consumers of the
+status list on how often they need to fetch a fresh copy of the status list
+even if that status list is not expired. 
 
 ## Authorized access to the Status List
 TODO elaborate on authorization mechanisms preventing misuse and profiling as described in privacy section
@@ -350,7 +358,26 @@ TODO evaluate deifnition of Status List Provider?
 
 # IANA Considerations
 
-This document specifies no IANA actions.
+## Claims Registered by This Document
+
+This specification adds the following values to the "JSON Web Token
+Claims" registry established by [RFC7519] and the "CBOR Web Token
+Claims Registry" established by [RFC8392].  Each entry below is an
+addition to both registries.
+
+The "Claim Description", "Change Controller" and "Specification
+Documents" are common and equivalent for the JWT and CWT registries.
+The "Claim Key" and "Claim Value Types(s)" are for the CWT registry
+only.  The "Claim Name" is as defined for the CWT registry, not the
+JWT registry.  The "JWT Claim Name" is equivalent to the "Claim Name"
+in the JWT registry.
+
+ - Claim Name: ttt
+ - Claim Description: Time to Live
+ - JWT Claim Name: "ttl"
+ - Claim Key: TBD
+ - Change Controller: IESG
+ - Specification Document(s): *this document*
 
 --- back
 
