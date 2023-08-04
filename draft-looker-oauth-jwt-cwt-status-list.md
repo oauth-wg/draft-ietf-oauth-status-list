@@ -372,7 +372,7 @@ only.  The "Claim Name" is as defined for the CWT registry, not the
 JWT registry.  The "JWT Claim Name" is equivalent to the "Claim Name"
 in the JWT registry.
 
- - Claim Name: ttt
+ - Claim Name: ttl
  - Claim Description: Time to Live
  - JWT Claim Name: "ttl"
  - Claim Key: TBD
