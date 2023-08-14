@@ -41,7 +41,9 @@ class StatusList:
         rest = pos % self.divisor
         floored = pos // self.divisor
         shift = rest * self.bits
-        return (self.list[floored] & (((1 << self.bits) - 1) << shift)) >> shift
+        return (
+            self.list[floored] & (((1 << self.bits) - 1) << shift)
+        ) >> shift
 
     def __str__(self):
         val = ""

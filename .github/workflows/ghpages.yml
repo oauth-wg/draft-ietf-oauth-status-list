@@ -26,6 +26,12 @@ jobs:
       id: setup
       run: date -u "+date=%FT%T" >>"$GITHUB_OUTPUT"
 
+    - name: "Generate examples"
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r src/requirements.txt
+        python3 src/main.py
+
     - name: "Caching"
       uses: actions/cache@v3
       with:
