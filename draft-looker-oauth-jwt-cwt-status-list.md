@@ -222,7 +222,7 @@ The following rules apply to validating a JWT-based Status List Token. Applicati
 
 # Status Reference
 
-## Status Reference in JSON Format{#status-reference-json}
+## Status Reference in JSON Format {#status-reference-json}
 
 The following rules apply to validating the "status" (status) claim that references a Status List:
 
