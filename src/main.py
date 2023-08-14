@@ -29,9 +29,11 @@ def statusListEncoding1Bit():
     status_list.set(13, 1)
     status_list.set(14, 0)
     status_list.set(15, 1)
-    encoded = status_list.encode(mtime=gzip_time)
-    text = 'byte_array = [{}, {}] \nencoded = "{}"'.format(
-        hex(status_list.list[0]), hex(status_list.list[1]), encoded
+    encoded = status_list.encodeObject(mtime=gzip_time)
+    text = "byte_array = [{}, {}] \nencoded:\n{}".format(
+        hex(status_list.list[0]),
+        hex(status_list.list[1]),
+        util.printObject(encoded)
     )
     util.outputFile(folder + "status_list_encoding", text)
 
@@ -55,12 +57,12 @@ def exampleStatusList() -> StatusList:
 
 def statusListEncoding2Bit():
     status_list = exampleStatusList()
-    encoded = status_list.encode(mtime=gzip_time)
-    text = 'byte_array = [{}, {}, {}] \nencoded = "{}"'.format(
+    encoded = status_list.encodeObject(mtime=gzip_time)
+    text = "byte_array = [{}, {}, {}] \nencoded:\n{}".format(
         hex(status_list.list[0]),
         hex(status_list.list[1]),
         hex(status_list.list[2]),
-        encoded,
+        util.printObject(encoded),
     )
     util.outputFile(folder + "status_list_encoding2", text)
 

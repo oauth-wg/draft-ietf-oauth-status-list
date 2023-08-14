@@ -26,6 +26,9 @@ normative:
   RFC3986: RFC3986
   RFC1952: RFC1952
   RFC7515: RFC7515
+  RFC6125: RFC6125
+  RFC9111: RFC9111
+  RFC9110: RFC9110
 informative:
 
 --- abstract
@@ -271,7 +274,7 @@ The following example is the decoded header and payload of a JWT meeting the pro
 
 ## Status List Request
 
-To obtain the Status List or Status List Token, the Verifier MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS.
+To obtain the Status List or Status List Token, the Verifier MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check MUST be performed as defined in Section 5 and 6 of {{RFC6125}}.
 
 The Verifier SHOULD send the following Accept-Header to indicate the requested response type:
 - "application/statuslist+json" for Status Lists
@@ -285,9 +288,15 @@ In the successful response, the Status List Provider MUST use the following cont
 - "application/statuslist+json" for Status Lists
 - "application/statuslist+jwt" for Status List JWTs
 
+In the case of "application/statuslist+json", the response MUST be of type JSON and follow the rules of [](#jwt-status-list-claim-format).
+
+In the case of "application/statuslist+jwt", the response MUST be of type JWT and follow the rules of [](#jwt-status-list-format-and-processing).
+
+The response SHOULD use gzip Contente-Encoding as defined in {{RFC9110}}.
+
 ## Caching
 
-TDB use HTTP chaching mechanisms
+If caching is required (e.g., to enable the use of alternative mechanisms for hosting, like Content Delivery Networks), the control of the caching mechanism SHOULD be implemented using the standard HTTP Cache-Control as defined in {{RFC9111}}.
 
 ## Validation Rules
 

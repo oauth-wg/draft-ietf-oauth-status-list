@@ -1,4 +1,5 @@
 from base64 import urlsafe_b64decode, urlsafe_b64encode
+from typing import Dict
 import gzip
 
 
@@ -44,6 +45,15 @@ class StatusList:
         return (
             self.list[floored] & (((1 << self.bits) - 1) << shift)
         ) >> shift
+    
+    def encodeObject(self, mtime=None) -> Dict:
+        claims = {}
+        encoded_list = self.encode(mtime=mtime)
+        claims["status_list"] = {
+            "bits": self.bits,
+            "lst": encoded_list,
+        }
+        return claims
 
     def __str__(self):
         val = ""
