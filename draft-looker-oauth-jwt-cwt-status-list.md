@@ -285,6 +285,9 @@ In the successful response, the Status List Provider MUST use the following cont
 - "application/statuslist+json" for Status Lists
 - "application/statuslist+jwt" for Status List JWTs
 
+## Caching
+
+TDB use HTTP chaching mechanisms
 
 ## Validation Rules
 
