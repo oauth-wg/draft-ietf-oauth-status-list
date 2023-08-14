@@ -61,6 +61,10 @@ Revocation mechanisms are an essential part for most identity ecosystems. In the
 
 This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of 100,000 or more Referenced Tokens, but still remain relatively small. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Issuer.
 
+## Design Considerations
+
+TBD
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
@@ -216,15 +220,34 @@ The following rules apply to validating a JWT-based Status List Token. Applicati
 {::include ./examples/status_list_jwt}
 ~~~~~~~~~~
 
-# Referenced Token
+# Status Reference
 
-## Referenced Token in JWT Format and Processing Requirements {#jwt-referenced-token}
+## Status Reference in JSON Format{#status-reference-json}
+
+The following rules apply to validating the "status" (status) claim that references a Status List:
+
+1. The claim value MUST be a valid JSON object.
+
+2. The claim value object MUST contain an "idx" (index) member with a numeric value that represents the index to check for status information in the Status List for the current JWT. The value of this member MUST be a non-negative number, containing a value of zero or greater.
+
+3. The claim value object MUST contain a "uri" member with a string value that identifies the Status List containing the status information for the JWT. The value of this member MUST be a uri conforming to {{RFC3986}}.
+
+~~~ ascii-art
+{
+  "idx": 0,
+  "uri": "https://example.com/statuslists/1"
+}
+~~~
+
+# Status Referencing Token
+
+## Status Referencing Token in JWT Format and Processing Requirements {#status-referencing-token-jwt}
 
 The following rules apply to validating a Referenced Token in JWT representation, which references a Status List Token. Application of additional restrictions and policy are at the discretion of the verifying party.
 
 1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the referenced Status List Token.
 
-2. The JWT MUST contain an "status" (status) claim conforming to the rules outlined in [](#jwt-referenced-token-status)
+2. The JWT MUST contain an "status" (status) claim conforming to the rules outlined in [](#status-reference-json)
 
 The following example is the decoded header and payload of a JWT meeting the processing rules as defined above.
 
@@ -244,15 +267,26 @@ The following example is the decoded header and payload of a JWT meeting the pro
 }
 ~~~
 
-### Status Claim Format {#jwt-referenced-token-status}
+# Verification and Processing
 
-The following rules apply to validating the "status" (status) claim
+## Status List Request
 
-1. The claim value MUST be a valid JSON object.
+To obtain the Status List or Status List Token, the Verifier MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS.
 
-2. The claim value object MUST contain an "idx" (index) member with a numeric value that represents the index to check for status information in the Status List for the current JWT. The value of this member MUST be a non-negative number, containing a value of zero or greater.
+The Verifier SHOULD send the following Accept-Header to indicate the requested response type:
+- "application/statuslist+json" for Status Lists
+- "application/statuslist+jwt" for Status List JWTs
 
-3. The claim value object MUST contain a "uri" member with a string value that identifies the Status List containing the status information for the JWT. The value of this member MUST be a uri conforming to {{RFC3986}}.
+If the Verifier does not send an Accept Header, the reponse type is assumed to be known implicit or out-of-band.
+
+## Status List Response
+
+In the successful response, the Status List Provider MUST use the following content-type:
+- "application/statuslist+json" for Status Lists
+- "application/statuslist+jwt" for Status List JWTs
+
+
+## Validation Rules
 
 # Status Types {#status-types}
 
