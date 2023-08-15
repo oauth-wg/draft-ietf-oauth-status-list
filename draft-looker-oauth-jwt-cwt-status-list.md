@@ -48,14 +48,22 @@ The following diagram depicts the basic conceptual relationship.
 
 ~~~ ascii-art
 
-+------------------+                    +-------------------+
-|                  |     References     |                   |
-|                  |------------------->|                   |
-| Referenced Token |                    | Status List Token |
-|   (JWT or CWT)   |                    |    (JWT or CWT)   |
-|                  |  Describes Status  |                   |
-|                  |<-------------------|                   |
-+------------------+                    +-------------------+
++-------------------+                  +------------------+
+|                   | describes status |                  |
+|    Status List    +------------------> Status Reference |
+|   (JSON or CBOR)  <------------------+  (JSON or CBOR)  |
+|                   |   references     |                  |
++-------+-----------+                  +--------+---------+
+        |                                       |
+        |embedded                               | embedded
+        v                                       v
++-------------------+               +--------------------------+
+|                   |               |                          |
+| Status List Token |               | Status Referencing Token |
+|  (JWT or CWT)     |               |       (JWT or CWT)       |
+|                   |               |                          |
++-------------------+               +--------------------------+
+
 ~~~
 
 ## Rationale
