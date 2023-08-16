@@ -54,15 +54,15 @@ The following diagram depicts the basic conceptual relationship.
 |   (JSON or CBOR)  <------------------+     (JWT or CWT)       |
 |                   |   references     |                        |
 +-------+-----------+                  +--------+---------------+
-        |                                       
-        |embedded                               
-        v                                       
-+-------------------+               
-|                   |               
-| Status List Token |               
-|  (JWT or CWT)     |               
-|                   |               
-+-------------------+               
+        |
+        |embedded
+        v
++-------------------+
+|                   |
+| Status List Token |
+|  (JWT or CWT)     |
+|                   |
++-------------------+
 
 ~~~
 
