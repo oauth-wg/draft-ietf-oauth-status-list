@@ -48,21 +48,21 @@ The following diagram depicts the basic conceptual relationship.
 
 ~~~ ascii-art
 
-+-------------------+                  +------------------+
-|                   | describes status |                  |
-|    Status List    +------------------> Status Reference |
-|   (JSON or CBOR)  <------------------+  (JSON or CBOR)  |
-|                   |   references     |                  |
-+-------+-----------+                  +--------+---------+
-        |                                       |
-        |embedded                               | embedded
-        v                                       v
-+-------------------+               +--------------------------+
-|                   |               |                          |
-| Status List Token |               | Status Referencing Token |
-|  (JWT or CWT)     |               |       (JWT or CWT)       |
-|                   |               |                          |
-+-------------------+               +--------------------------+
++-------------------+                  +------------------------+
+|                   | describes status |                        |
+|    Status List    +------------------> Status Reference Token |
+|   (JSON or CBOR)  <------------------+     (JWT or CWT)       |
+|                   |   references     |                        |
++-------+-----------+                  +--------+---------------+
+        |                                       
+        |embedded                               
+        v                                       
++-------------------+               
+|                   |               
+| Status List Token |               
+|  (JWT or CWT)     |               
+|                   |               
++-------------------+               
 
 ~~~
 
@@ -103,17 +103,9 @@ Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, 
 
 2. The complete byte array is compressed using gZIP {{RFC1952}}.
 
-## Status List in JSON Format and Processing Requirements {#jwt-status-list-claim-format}
+3. The result of the gZIP compression is then base64url-encoded, as defined in Section 2 of {{RFC7515}}.
 
-The following rules apply to validating the "status_list" (status list) claim
-
-1. The claim value MUST be a valid JSON object.
-
-2. The claim value object MUST contain a "bits" (bit size) member with an numeric value that represents the number of bits per Referenced Token in the Status List ("lst") of the Status List JWT. The allowed values for "bits" are 1,2,4 and 8.
-
-3. The claim value object MUST contain a "lst" (list) member with a string value that represents the status values for all the tokens it conveys statuses for. The value MUST be computed as the base64url-encoded result of the algorithm described in [](#status-list-base-encoding).
-
-## Example Status List with 1-Bit Status Values
+### Example Status List with 1-Bit Status Values
 
 In this example, the Status List is used as a revocation list. It only requires the Status Types "VALID" and "INVALID"; therefore a "bits" of 1 is sufficient.
 
@@ -156,13 +148,15 @@ index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
 
 Resulting in the byte array and compressed/base64url encoded status list:
 
-~~~~~~~~~~
-{::include ./examples/status_list_encoding}
-~~~~~~~~~~
+~~~ ascii-art
 
-## Example Status List with 2-Bit Status Values
+H4sIAOpbjGQC_9u5GABc9QE7AgAAAA
 
-In thisexample, the Status List additionally includes the Status Type "SUSPENDED. As the Status Type value for "SUSPENDED" is 0x02 and does not fit into 1 bit, the "bits" is required to be 2.
+~~~
+
+### Example Status List with 2-Bit Status Values
+
+In this example, the Status List additionally includes the Status Type "SUSPENDED. As the Status Type value for "SUSPENDED" is 0x02 and does not fit into 1 bit, the "bits" is required to be 2.
 
 This example Status List represents the status of 12 Referenced Tokens, requiring 24 bits (3 bytes) of status.
 
@@ -201,11 +195,31 @@ index      3   2   1   0      7   6   5   4      11  10  9   8
 
 Resulting in the byte array and compressed/base64url encoded status list:
 
+~~~ ascii-art
+
+H4sIAOpbjGQC_zvp8hMAZLRLMQMAAAA
+
+~~~
+
+## Status List in JSON Format and Processing Requirements {#jwt-status-list-claim-format}
+
+The following rules apply to validating the "status_list" (status list) claim
+
+1. The claim value MUST be a valid JSON object.
+
+2. The claim value object MUST contain a "bits" (bit size) member with an numeric value that represents the number of bits per Referenced Token in the Status List ("lst") of the Status List JWT. The allowed values for "bits" are 1,2,4 and 8.
+
+3. The claim value object MUST contain a "lst" (list) member with a string value that represents the status values for all the tokens it conveys statuses for. The value MUST be computed as the base64url-encoded result of the algorithm described in [](#status-list-base-encoding).
+
+The examples from [](#status-list-base-encoding) represented in a Status List JSON format result in:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding}
+~~~~~~~~~~
+
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding2}
 ~~~~~~~~~~
-
-# Status List Token
 
 ## Status List Token in JWT Format and Processing Requirements {#jwt-status-list-format-and-processing}
 
@@ -249,8 +263,6 @@ The following rules apply to validating the "status" (status) claim that referen
   "uri": "https://example.com/statuslists/1"
 }
 ~~~
-
-# Status Referencing Token
 
 ## Status Referencing Token in JWT Format and Processing Requirements {#status-referencing-token-jwt}
 
