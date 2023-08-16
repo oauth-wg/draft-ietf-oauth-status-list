@@ -285,6 +285,7 @@ The following example is the decoded header and payload of a JWT meeting the pro
 To obtain the Status List or Status List Token, the Verifier MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check MUST be performed as defined in Section 5 and 6 of {{RFC6125}}.
 
 The Verifier SHOULD send the following Accept-Header to indicate the requested response type:
+
 - "application/statuslist+json" for Status Lists
 - "application/statuslist+jwt" for Status List JWTs
 
@@ -293,6 +294,7 @@ If the Verifier does not send an Accept Header, the reponse type is assumed to b
 ## Status List Response
 
 In the successful response, the Status List Provider MUST use the following content-type:
+
 - "application/statuslist+json" for Status Lists
 - "application/statuslist+jwt" for Status List JWTs
 
@@ -319,9 +321,10 @@ Additional values may defined for particular use cases.
 
 A status describes the state, mode, condition or stage of an entity that is described by the status list. Status Types MUST be numeric values between 0 and 255.
 Status types described by this specification comprise:
-- 0x00 - "VALID" - The status of the Token is valid, correct or legal.
-- 0x01 - "INVALID" - The status of the Token is revoked, annulled, taken back, recalled or cancelled. This state is irreversible.
-- 0x02 - "SUSPENDED" - The status of the Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
+
+- 0x00: "VALID" - The status of the Token is valid, correct or legal.
+- 0x01: "INVALID" - The status of the Token is revoked, annulled, taken back, recalled or cancelled. This state is irreversible.
+- 0x02: "SUSPENDED" - The status of the Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
 
 The issuer of the Status List Token MUST choose an adequate "bits" (bit size) to be able to describe the required Status Types for the application.
 

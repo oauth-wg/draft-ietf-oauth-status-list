@@ -45,15 +45,14 @@ class StatusList:
         return (
             self.list[floored] & (((1 << self.bits) - 1) << shift)
         ) >> shift
-    
+
     def encodeObject(self, mtime=None) -> Dict:
-        claims = {}
         encoded_list = self.encode(mtime=mtime)
-        claims["status_list"] = {
+        object = {
             "bits": self.bits,
             "lst": encoded_list,
         }
-        return claims
+        return object
 
     def __str__(self):
         val = ""
