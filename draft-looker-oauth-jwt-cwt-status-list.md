@@ -19,6 +19,9 @@ author:
  -
     fullname: Paul Bastian
     email: paul.bastian@posteo.de
+ -
+    fullname: Christian Bormann
+    email: chris.bormann@gmx.de
 
 normative:
   RFC7519: RFC7519
@@ -320,7 +323,6 @@ This document specifies no IANA actions.
 {:numbered="false"}
 
 We would like to thank
-Christian Bormann,
 Michael B. Jones,
 Torsten Lodderstedt,
 and
