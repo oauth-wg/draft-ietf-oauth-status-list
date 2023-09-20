@@ -303,13 +303,6 @@ If caching is required (e.g., to enable the use of alternative mechanisms for ho
 
 ## Validation Rules
 
-# Status Types {#status-types}
-
-This document defines potential statuses of Referenced Tokens as Status Type values. If the Status List contains more than one bit per token (as defined by "bits" in the Status List), then the whole value of bits MUST describe one value. A Status List can not represent multiple statuses per Referenced Token.
-
-The registry in this document describes the basic Status Type values required for the most common use cases.
-Additional values may defined for particular use cases.
-
 # CWT Representations {#cwt-status-list-format}
 
 TBD Define parallel CWT representations for Status Lists and Referenced Tokens.
