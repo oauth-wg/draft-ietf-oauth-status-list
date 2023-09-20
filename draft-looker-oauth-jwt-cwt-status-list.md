@@ -272,7 +272,45 @@ Resulting in the byte array and compressed/base64url encoded status list:
 {::include ./examples/status_list_encoding2}
 ~~~~~~~~~~
 
-# CWT Representations
+# Verification and Processing
+
+## Status List Request
+
+To obtain the Status List or Status List Token, the Verifier MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check MUST be performed as defined in Section 5 and 6 of {{RFC6125}}.
+
+The Verifier SHOULD send the following Accept-Header to indicate the requested response type:
+
+- "application/statuslist+jwt" for Status List JWTs
+- "application/statuslist+cwt" for Status List CWTs
+
+If the Verifier does not send an Accept Header, the reponse type is assumed to be known implicit or out-of-band.
+
+## Status List Response
+
+In the successful response, the Status List Provider MUST use the following content-type:
+
+- "application/statuslist+jwt" for Status List JWTs
+- "application/statuslist+cwt" for Status List CWTs
+
+In the case of "application/statuslist+jwt", the response MUST be of type JWT and follow the rules of [](#jwt-status-list-format-and-processing).
+In the case of "application/statuslist+cwt", the response MUST be of type JWT and follow the rules of [](#cwt-status-list-format).
+
+The response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
+
+## Caching
+
+If caching is required (e.g., to enable the use of alternative mechanisms for hosting, like Content Delivery Networks), the control of the caching mechanism SHOULD be implemented using the standard HTTP Cache-Control as defined in {{RFC9111}}.
+
+## Validation Rules
+
+# Status Types {#status-types}
+
+This document defines potential statuses of Referenced Tokens as Status Type values. If the Status List contains more than one bit per token (as defined by "bits" in the Status List), then the whole value of bits MUST describe one value. A Status List can not represent multiple statuses per Referenced Token.
+
+The registry in this document describes the basic Status Type values required for the most common use cases.
+Additional values may defined for particular use cases.
+
+# CWT Representations {#cwt-status-list-format}
 
 TBD Define parallel CWT representations for Status Lists and Referenced Tokens.
 
