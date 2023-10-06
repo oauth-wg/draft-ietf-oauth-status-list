@@ -29,6 +29,9 @@ normative:
   RFC3986: RFC3986
   RFC1952: RFC1952
   RFC7515: RFC7515
+  RFC6125: RFC6125
+  RFC9110: RFC9110
+  RFC9111: RFC9111
 informative:
 
 --- abstract
@@ -272,7 +275,38 @@ Resulting in the byte array and compressed/base64url encoded status list:
 {::include ./examples/status_list_encoding2}
 ~~~~~~~~~~
 
-# CWT Representations
+# Verification and Processing
+
+## Status List Request
+
+To obtain the Status List or Status List Token, the Verifier MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check MUST be performed as defined in Section 5 and 6 of {{RFC6125}}.
+
+The Verifier SHOULD send the following Accept-Header to indicate the requested response type:
+
+- "application/statuslist+jwt" for Status List JWTs
+- "application/statuslist+cwt" for Status List CWTs
+
+If the Verifier does not send an Accept Header, the reponse type is assumed to be known implicit or out-of-band.
+
+## Status List Response
+
+In the successful response, the Status List Provider MUST use the following content-type:
+
+- "application/statuslist+jwt" for Status List JWTs
+- "application/statuslist+cwt" for Status List CWTs
+
+In the case of "application/statuslist+jwt", the response MUST be of type JWT and follow the rules of [](#jwt-status-list-format-and-processing).
+In the case of "application/statuslist+cwt", the response MUST be of type JWT and follow the rules of [](#cwt-status-list-format).
+
+The response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
+
+## Caching
+
+If caching is required (e.g., to enable the use of alternative mechanisms for hosting, like Content Delivery Networks), the control of the caching mechanism SHOULD be implemented using the standard HTTP Cache-Control as defined in {{RFC9111}}.
+
+## Validation Rules
+
+# CWT Representations {#cwt-status-list-format}
 
 TBD Define parallel CWT representations for Status Lists and Referenced Tokens.
 
