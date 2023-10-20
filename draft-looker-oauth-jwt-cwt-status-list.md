@@ -50,7 +50,7 @@ The following diagram depicts the basic conceptual relationship.
 
 +-------------------+                  +------------------------+
 |                   | describes status |                        |
-|    Status List    +------------------>      Referenced Token     |
+|    Status List    +------------------>|    Referenced Token    |
 |   (JSON or CBOR)  <------------------+     (JWT or CWT)       |
 |                   |   references     |                        |
 +-------+-----------+                  +--------+---------------+
