@@ -397,7 +397,7 @@ in [@RFC6838].
 
 To indicate that the content is an JWT-based Status List:
 
-Type name: application
+  * Type name: application
   * Subtype name: statuslist+jwt
   * Required parameters: n/a
   * Optional parameters: n/a
@@ -419,7 +419,7 @@ Type name: application
 
 To indicate that the content is an CWT-based Status List:
 
-Type name: application
+  * Type name: application
   * Subtype name: statuslist+cwt
   * Required parameters: n/a
   * Optional parameters: n/a
