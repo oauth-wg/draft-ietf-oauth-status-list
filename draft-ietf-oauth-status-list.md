@@ -1,15 +1,15 @@
 ---
-title: "JWT and CWT Status List"
+title: "OAuth Status List"
 category: info
 
-docname: draft-looker-oauth-jwt-cwt-status-list-latest
+docname: draft-ietf-oauth-status-list-latest
 submissiontype: independent  # also: "IETF", "IAB", or "IRTF"
 number:
 date:
 v: 3
 venue:
-  github: "vcstuff/draft-looker-oauth-jwt-cwt-status-list"
-  latest: "https://vcstuff.github.io/draft-looker-oauth-jwt-cwt-status-list/draft-looker-oauth-jwt-cwt-status-list.html"
+  github: "vcstuff/draft-ietf-oauth-status-list"
+  latest: "https://vcstuff.github.io/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html"
 
 author:
  -
