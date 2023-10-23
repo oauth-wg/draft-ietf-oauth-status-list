@@ -374,11 +374,18 @@ This document specifies no IANA actions.
 {:numbered="false"}
 
 We would like to thank
+Brian Campbell,
+Francesco Marino,
+Guiseppe De Marco,
+Kristina Yasuda,
 Michael B. Jones,
-Torsten Lodderstedt,
+Mike Prorock,
+Orie Steele,
+Timo Glastra
 and
-Kristina Yasuda
-for their valuable contributions to this specification.
+Torsten Lodderstedt
+
+for their valuable contributions, discussions and feedback to this specification.
 
 # Document History
 {:numbered="false"}
