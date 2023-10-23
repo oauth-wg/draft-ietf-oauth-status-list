@@ -73,14 +73,20 @@ This specification seeks to find a balance between scalability, security, and pr
 
 # Terminology
 
+Issuer:
+: An entity that issues the Referenced Token and provides the status information of the Referenced Token by serving a Status List Token on a public endpoint.
+
+Relying Party:
+: An entity that relies on the Status List to validate the status of the Referenced Token. Also known as Verifier.
+
 Status List:
 : A bit array that lists the statuses of many Referenced Tokens.
 
 Status List Token:
-: A token in JWT or CWT representation that contains a Status List.
+: A token in JWT or CWT representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A token in JWT or CWT representation which contains a reference to a Status List Token. The information from the contained Status List may give a verifier additional information about up-to-date status of the Referenced Token.
+: A token in JWT or CWT representation which contains a reference to a Status List Token. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
 
 # JSON Web Token Representation
 
@@ -279,14 +285,14 @@ Resulting in the byte array and compressed/base64url encoded status list:
 
 ## Status List Request
 
-To obtain the Status List or Status List Token, the Verifier MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check MUST be performed as defined in Section 5 and 6 of {{RFC6125}}.
+To obtain the Status List or Status List Token, the Relying Party MUST send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint MUST utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check MUST be performed as defined in Section 5 and 6 of {{RFC6125}}.
 
-The Verifier SHOULD send the following Accept-Header to indicate the requested response type:
+The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:
 
 - "application/statuslist+jwt" for Status List JWTs
 - "application/statuslist+cwt" for Status List CWTs
 
-If the Verifier does not send an Accept Header, the reponse type is assumed to be known implicit or out-of-band.
+If the Relying Party does not send an Accept Header, the reponse type is assumed to be known implicit or out-of-band.
 
 ## Status List Response
 
@@ -318,7 +324,7 @@ TBD Declare whether JWT and CWT representations can be used interchangeably by t
 TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data
 
 ## Cached and Stale status lists
-TODO consumers/Verifiers of the status list should be aware if they fetch the up-to-date data
+TODO consumers/Relying Party of the status list should be aware if they fetch the up-to-date data
 
 ## Authorized access to the Status List {#security-authorization}
 TODO elaborate on authorization mechanisms preventing misuse and profiling as described in privacy section
@@ -330,25 +336,25 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 
 ## Issuer tracking and Herd Privacy {#privacy-issuer}
 
-The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Verifiers, that are requesting the status.
+The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
-The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Verifier is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.
+The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.
 
 The herd privacy is depending on the number of entities within the Status List called its size. A larger size results in better privacy but also impacts the performance as more data has to be transferred to read the Status List.
 
 ## Malicious Issuers
 
-A malicious Issuer could bypass the privacy benefits of the herd privacy by generating a unique Status List for every Referenced Token. By these means, he could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. This malicious behaviour could be detected by Verifiers that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes.
+A malicious Issuer could bypass the privacy benefits of the herd privacy by generating a unique Status List for every Referenced Token. By these means, he could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. This malicious behaviour could be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes.
 
-## Verifier tracking {#privacy-verifier}
+## Relying Party tracking {#privacy-relying-party}
 
-Once the Verifier gets the Referenced Token, this enables him to request the Status List to validate the status of the Token through the provided "uri" property and look up the corresponding "index". However, the Verifier may persistently store the "uri" and "index" of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Verifier may create a profile of the Referenced Token's validity status. This behaviour may be inteded as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential. This behaviour could be constrained by adding authorization rules to the Status List, see [](#security-authorization).
+Once the Relying Party gets the Referenced Token, this enables him to request the Status List to validate the status of the Token through the provided "uri" property and look up the corresponding "index". However, the Relying Party may persistently store the "uri" and "index" of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be inteded as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential. This behaviour could be constrained by adding authorization rules to the Status List, see [](#security-authorization).
 
 ## Correlation Risks and Tracking
 
-Colluding Issuers and Verifiers have the possibility to identify the usage of credentials of a particular Holder, as the Referenced Token contains unique, trackable data.
+Colluding Issuers and Relying Parties have the possibility to identify the usage of credentials of a particular Holder, as the Referenced Token contains unique, trackable data.
 
-To avoid privacy risks for colluding Verifiers, it is recommended that Issuers use batch issuance to issue multiple tokens, such that Holders can use individual tokens for specific Verifiers. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation lateron.
+To avoid privacy risks for colluding Relying Parties, it is recommended that Issuers use batch issuance to issue multiple tokens, such that Holders can use individual tokens for specific Relying Parties. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation lateron.
 
 To avoid information leakage by the values of "uri" and "index", Issuers are RECOMMENDED to:
 
@@ -360,7 +366,7 @@ To avoid information leakage by the values of "uri" and "index", Issuers are REC
 
 TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possiblities
 TODO evaluate deifnition of Status List Provider?
- An entity that hosts the Status List as a resource for potential verifiers. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.
+ An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.
 
 # Implementation Considerations {#implementation}
 
