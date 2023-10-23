@@ -3,7 +3,7 @@ title: "OAuth Status List"
 category: info
 
 docname: draft-ietf-oauth-status-list-latest
-submissiontype: independent  # also: "IETF", "IAB", or "IRTF"
+submissiontype: IETF  # also: "IETF", "IAB", or "IRTF"
 number:
 date:
 v: 3
