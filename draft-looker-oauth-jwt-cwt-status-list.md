@@ -318,7 +318,7 @@ TBD Define parallel CWT representations for Status Lists and Referenced Tokens.
 
 TBD Declare whether JWT and CWT representations can be used interchangeably by the same issuer.  For instance, declare whether a status list can reference both JWT and CWT tokens.
 
-# Security Considerations
+# Security Considerations {#Security}
 
 ## Correct decoding and parsing of the encoded status list
 TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data
@@ -372,7 +372,72 @@ TODO evaluate deifnition of Status List Provider?
 
 # IANA Considerations
 
-This document specifies no IANA actions.
+## JSON Web Token Claims Registration
+
+This specification requests registration of the following Claims in the
+IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [@!RFC7519].
+
+*  Claim Name: `status`
+*  Claim Description: Reference to a status list containing up-to-date status information on the JWT.
+*  Change Controller: IETF
+*  Specification Document(s):  [[ (#jwt-referenced-token) of this specification ]]
+
+<br/>
+
+*  Claim Name: `status_list`
+*  Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+*  Change Controller: IETF
+*  Specification Document(s):  [[ (#jwt-status-list-claim-format) of this specification ]]
+
+## Media Type Registration
+
+This section requests registration of the following media types [@RFC2046] in
+the "Media Types" registry [@IANA.MediaTypes] in the manner described
+in [@RFC6838].
+
+To indicate that the content is an JWT-based Status List:
+
+Type name: application
+  * Subtype name: statuslist+jwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary; A JWT-based Status List is a JWT; JWT values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') characters.
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Paul Bastian, paul.bastian@posteo.de
+  * Change controller: IETF
+  * Provisional registration? No
+
+To indicate that the content is an CWT-based Status List:
+
+Type name: application
+  * Subtype name: statuslist+cwt
+  * Required parameters: n/a
+  * Optional parameters: n/a
+  * Encoding considerations: binary
+  * Security considerations: See (#Security) of [[ this specification ]]
+  * Interoperability considerations: n/a
+  * Published specification: [[ this specification ]]
+  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Fragment identifier considerations: n/a
+  * Additional information:
+    * File extension(s): n/a
+    * Macintosh file type code(s): n/a
+  * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
+  * Intended usage: COMMON
+  * Restrictions on usage: none
+  * Author: Paul Bastian, paul.bastian@posteo.de
+  * Change controller: IETF
+  * Provisional registration? No
 
 --- back
 
