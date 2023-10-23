@@ -461,6 +461,15 @@ for their valuable contributions, discussions and feedback to this specification
 # Document History
 {:numbered="false"}
 
+-00
+
+* Initial draft after working group adoption
+* update acknowledgments
+* renamed Verifier to Relying Party
+* added IANA consideration
+
+[draft-ietf-oauth-status-list ]
+
 -01
 
 * Applied editorial improvements suggested by Michael Jones.
