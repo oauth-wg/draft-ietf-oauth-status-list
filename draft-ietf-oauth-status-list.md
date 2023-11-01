@@ -131,7 +131,7 @@ Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, 
 
 1. The overall Status List is encoded as a byte array. Depending on the bitsize, each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using the index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1 (being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
 
-2. The complete byte array is compressed using the "DEFLATE" {{RFC1951}} compression method and stored using the "ZLIB" {{RFC1950}} data format. Implementations SHOULD use the highest compression level available.
+2. The complete byte array is compressed using the "DEFLATE" {{RFC1951}} compression method and stored using the "ZLIB" {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.
 
 3. The result of the compression is then base64url-encoded, as defined in Section 2 of {{RFC7515}}.
 
