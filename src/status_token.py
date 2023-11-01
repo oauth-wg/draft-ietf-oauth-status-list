@@ -75,8 +75,7 @@ class StatusListToken:
         exp: datetime = None,
         optional_claims: Dict = None,
         optional_header: Dict = None,
-        compact=True,
-        mtime=None,
+        compact=True
     ) -> str:
         # build claims
         if optional_claims is not None:
@@ -88,7 +87,7 @@ class StatusListToken:
         claims["iat"] = int(iat.timestamp())
         if exp is not None:
             claims["exp"] = int(exp.timestamp())
-        encoded_list = self.list.encode(mtime=mtime)
+        encoded_list = self.list.encode()
         claims["status_list"] = {
             "bits": self.list.bits,
             "lst": encoded_list,
