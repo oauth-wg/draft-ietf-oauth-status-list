@@ -462,6 +462,11 @@ for their valuable contributions, discussions and feedback to this specification
 # Document History
 {:numbered="false"}
 
+-01
+
+* Changing compression from gzip to zlib
+* Change typo in Status List Token sub claim description
+
 -00
 
 * Initial draft after working group adoption
