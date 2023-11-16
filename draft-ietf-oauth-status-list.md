@@ -78,6 +78,7 @@ The decisions taken in this specification aim to achieve the following design go
 * the Status List shall scale up to millions of tokens to support large scale government or enterprise use cases
 * the Status List shall enable caching policies and offline support
 * the specification shall support JSON and CBOR based tokens
+* the specification shall not specify key resolution or trust frameworks
 
 # Conventions and Definitions
 
