@@ -187,7 +187,7 @@ Status types described by this specification comprise:
 
 The issuer of the Status List Token MUST choose an adequate "bits" (bit size) to be able to describe the required Status Types for the application.
 
-A Referenced Token for which the issuer is not tracking an explicit state like revoked, annulled, taken back, recalled, cancelled, or suspended may still be listed as 0x00 ("VALID") despite its JWT or CWT processing rules. The 0x00 ("VALID") status does not precede the Referenced Token's validity described by its JWT or CWT processing rules for claims such as "exp" (Expiration Time) or "nbf" (Not Before).
+The processing rules for JWT or CWT precede any evaluation of a referenced tokens status. For example if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
 
 # Example JWT Status Lists
 
