@@ -188,6 +188,8 @@ Status types described by this specification comprise:
 
 The issuer of the Status List Token MUST choose an adequate "bits" (bit size) to be able to describe the required Status Types for the application.
 
+The processing rules for JWT or CWT precede any evaluation of a referenced tokens status. For example if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
+
 # Example JWT Status Lists
 
 ## Example Status List with 1-Bit Status Values
@@ -447,6 +449,7 @@ To indicate that the content is an CWT-based Status List:
 
 We would like to thank
 Brian Campbell,
+Filip Skokan,
 Francesco Marino,
 Guiseppe De Marco,
 Kristina Yasuda,
