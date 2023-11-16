@@ -27,7 +27,8 @@ normative:
   RFC7519: RFC7519
   RFC8392: RFC8392
   RFC3986: RFC3986
-  RFC1952: RFC1952
+  RFC1950: RFC1950
+  RFC1951: RFC1951
   RFC7515: RFC7515
   RFC6125: RFC6125
   RFC9110: RFC9110
@@ -130,9 +131,9 @@ Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, 
 
 1. The overall Status List is encoded as a byte array. Depending on the bitsize, each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using the index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1 (being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
 
-2. The complete byte array is compressed using gZIP {{RFC1952}}.
+2. The complete byte array is compressed using the "DEFLATE" {{RFC1951}} compression method and stored using the "ZLIB" {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.
 
-3. The result of the gZIP compression is then base64url-encoded, as defined in Section 2 of {{RFC7515}}.
+3. The result of the compression is then base64url-encoded, as defined in Section 2 of {{RFC7515}}.
 
 ## Referenced Token Format and Processing Requirements {#jwt-referenced-token}
 
@@ -460,6 +461,11 @@ for their valuable contributions, discussions and feedback to this specification
 
 # Document History
 {:numbered="false"}
+
+-01
+
+* Changing compression from gzip to zlib
+* Change typo in Status List Token sub claim description
 
 -00
 

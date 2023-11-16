@@ -1,5 +1,5 @@
 from base64 import urlsafe_b64decode, urlsafe_b64encode
-import gzip
+import zlib
 
 
 class StatusList:
@@ -20,13 +20,13 @@ class StatusList:
         new.decode(encoded)
         return new
 
-    def encode(self, mtime=None) -> str:
-        zipped = gzip.compress(self.list, mtime=mtime)
+    def encode(self) -> str:
+        zipped = zlib.compress(self.list, level=9)
         return urlsafe_b64encode(zipped).decode().strip("=")
 
     def decode(self, input: str):
         zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
-        self.list = bytearray(gzip.decompress(zipped))
+        self.list = bytearray(zlib.decompress(zipped))
         self.size = len(self.list) * self.divisor
 
     def set(self, pos: int, value: int):

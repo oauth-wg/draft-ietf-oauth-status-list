@@ -7,7 +7,6 @@ import util
 key = util.EXAMPLE_KEY
 iat = datetime.utcfromtimestamp(1686920170)
 exp = iat + timedelta(days=7000)
-gzip_time = iat.timestamp()
 folder = "./examples/"
 
 
@@ -29,7 +28,7 @@ def statusListEncoding1Bit():
     status_list.set(13, 1)
     status_list.set(14, 0)
     status_list.set(15, 1)
-    encoded = status_list.encode(mtime=gzip_time)
+    encoded = status_list.encode()
     text = 'byte_array = [{}, {}] \nencoded = "{}"'.format(
         hex(status_list.list[0]), hex(status_list.list[1]), encoded
     )
@@ -55,7 +54,7 @@ def exampleStatusList() -> StatusList:
 
 def statusListEncoding2Bit():
     status_list = exampleStatusList()
-    encoded = status_list.encode(mtime=gzip_time)
+    encoded = status_list.encode()
     text = 'byte_array = [{}, {}, {}] \nencoded = "{}"'.format(
         hex(status_list.list[0]),
         hex(status_list.list[1]),
@@ -74,7 +73,7 @@ def statusListJWT():
         key=key,
         bits=2,
     )
-    status_jwt = jwt.buildJWT(iat=iat, exp=exp, mtime=gzip_time)
+    status_jwt = jwt.buildJWT(iat=iat, exp=exp)
     text = util.formatToken(status_jwt, key)
     util.outputFile(folder + "status_list_jwt", text)
 
