@@ -182,6 +182,7 @@ Additional values may defined for particular use cases.
 
 A status describes the state, mode, condition or stage of an entity that is described by the status list. Status Types MUST be numeric values between 0 and 255.
 Status types described by this specification comprise:
+
  - 0x00 - "VALID" - The status of the Token is valid, correct or legal.
  - 0x01 - "INVALID" - The status of the Token is revoked, annulled, taken back, recalled or cancelled. This state is irreversible.
  - 0x02 - "SUSPENDED" - The status of the Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
