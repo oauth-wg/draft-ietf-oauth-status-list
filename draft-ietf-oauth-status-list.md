@@ -29,7 +29,9 @@ normative:
   RFC3986: RFC3986
   RFC1950: RFC1950
   RFC1951: RFC1951
+  RFC6749: RFC6749
   RFC7515: RFC7515
+  RFC7662: RFC7662
   RFC6125: RFC6125
   RFC9110: RFC9110
   RFC9111: RFC9111
@@ -44,7 +46,7 @@ The status list data structures themselves are also represented as JWTs or CWTs.
 
 # Introduction
 
-JSON Web Tokens (JWTs) {{RFC7519}} and CBOR Web Tokens (CWTs) {{RFC8392}} as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.
+JSON Web Tokens (JWTs) {{RFC7519}} and CBOR Web Tokens (CWTs) {{RFC8392}} as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer. A good example of such a case would be an "access token" as defined in section 1.4 of {{RFC6749}} where validity (after issuance, before expiration) is important meta information. A mechanism to gather this kind of information exists in the form of Token Introspection {{RFC7662}}, but requires direct interaction with the issuer, whereas this specification defines a mechanism using static information in the form of a status list.
 
 This document defines Status List representations in JWT and CWT formats that describe the individual statuses of multiple Referenced Tokens, which themselves are also JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this position correspond to the Referenced Token's status. The document also defines how an issuer of a Referenced Token references a Status List Token. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The Status List Token may be used by an issuer in the Issuer-Holder-Verifier model to express the status of verifiable credentials (Referenced Tokens) issued by an issuer.
 
@@ -469,6 +471,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 * Changing compression from gzip to zlib
 * Change typo in Status List Token sub claim description
+* Add access token as an example use-case
 
 -00
 
