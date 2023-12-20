@@ -97,7 +97,7 @@ The following rules apply to validating a JWT-based Status List Token. Applicati
 
 1. The JWT MUST contain an "iss" (issuer) claim that contains a unique string identifier for the entity that issued the JWT. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the "iss" claim contained within the Referenced Token.
 
-2. The JWT MUST contain a "sub" (subject) claim that contains an unique string identifier for that Status List Token. The value MUST be equal to that of the "uri" claim contained in the "status" claim of the Referenced Token.
+2. The JWT MUST contain a "sub" (subject) claim that contains an unique string identifier for that Status List Token. The value MUST be equal to that of the "uri" claim contained in the "status_list" claim of the Referenced Token as defined in [](#jwt-referenced-token-status).
 
 3. The JWT MUST contain an "iat" (issued at) claim that identifies the time at which it was issued.
 
@@ -155,8 +155,10 @@ The following example is the decoded header and payload of a JWT meeting the pro
 {
   "iss": "https://example.com",
   "status": {
-    "idx": 0,
-    "uri": "https://example.com/statuslists/1"
+    "status_list": {
+      "idx": 0,
+      "uri": "https://example.com/statuslists/1"
+    }
   }
 }
 ~~~
@@ -167,9 +169,13 @@ The following rules apply to validating the "status" (status) claim
 
 1. The claim value MUST be a valid JSON object.
 
-2. The claim value object MUST contain an "idx" (index) member with a numeric value that represents the index to check for status information in the Status List for the current JWT. The value of this member MUST be a non-negative number, containing a value of zero or greater.
+2. The claim value object MUST contain a member called "status_list" that signals that status checks for this token can be done using the status list mechanism defined in this document. For the "status_list" object, the following rules apply:
 
-3. The claim value object MUST contain a "uri" member with a string value that identifies the Status List containing the status information for the JWT. The value of this member MUST be a uri conforming to {{RFC3986}}.
+    1. The claim value MUST be a valid JSON object.
+
+    2. The claim value object MUST contain an "idx" (index) member with a numeric value that represents the index to check for status information in the Status List for the current JWT. The value of this member MUST be a non-negative number, containing a value of zero or greater.
+
+    3. The claim value object MUST contain a "uri" member with a string value that identifies the Status List containing the status information for the JWT. The value of this member MUST be a uri conforming to {{RFC3986}}.
 
 # Status Types {#status-types}
 
@@ -467,6 +473,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -01
 
+* Change status claim to in referenced token to allow re-use for other mechanisms
 * Changing compression from gzip to zlib
 * Change typo in Status List Token sub claim description
 
