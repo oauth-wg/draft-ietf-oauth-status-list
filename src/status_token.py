@@ -30,6 +30,7 @@ class StatusListToken:
             self.bits = list.bits
         else:
             self.list = StatusList(size, bits)
+            self.bits = bits
         self.issuer = issuer
         self.subject = subject
         self._key = key
@@ -87,11 +88,7 @@ class StatusListToken:
         claims["iat"] = int(iat.timestamp())
         if exp is not None:
             claims["exp"] = int(exp.timestamp())
-        encoded_list = self.list.encode()
-        claims["status_list"] = {
-            "bits": self.list.bits,
-            "lst": encoded_list,
-        }
+        claims["status_list"] = self.list.encodeObject()
 
         # build header
         if optional_header is not None:

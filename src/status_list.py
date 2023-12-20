@@ -1,4 +1,5 @@
 from base64 import urlsafe_b64decode, urlsafe_b64encode
+from typing import Dict
 import zlib
 
 
@@ -23,6 +24,14 @@ class StatusList:
     def encode(self) -> str:
         zipped = zlib.compress(self.list, level=9)
         return urlsafe_b64encode(zipped).decode().strip("=")
+    
+    def encodeObject(self) -> Dict:
+        encoded_list = self.encode()
+        object = {
+            "bits": self.bits,
+            "lst": encoded_list,
+        }
+        return object
 
     def decode(self, input: str):
         zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
