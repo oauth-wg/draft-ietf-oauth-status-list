@@ -1,5 +1,5 @@
 ---
-title: "OAuth Status List"
+title: "Token Status List"
 category: info
 
 docname: draft-ietf-oauth-status-list-latest
