@@ -164,7 +164,7 @@ TBD
 
 # Status List Token {#status-list-token}
 
-A Status List Token embeds the Status List into a token that is cryptographically signed and integrity protected. Therefore. the Status List Token may be hosted by third parties or be transferred for offline use cases.
+A Status List Token embeds the Status List into a token that is cryptographically signed and protects the integrity of the Status List. This allows for the Status List Token to be hosted by third parties or be transferred for offline use cases.
 
 This section specifies Status List Tokens in Json Web Token (JWT) and Cbor Web Token (CWT) format.
 
