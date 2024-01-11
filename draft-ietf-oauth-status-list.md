@@ -189,7 +189,7 @@ The following content applies to the JWT Claims Set:
 * `exp`: OPTIONAL. The `exp` (expiration time) claim MAY convey the time at which it is considered expired by its issuer.
 * `status_list`: REQUIRED. The `status_list` (status list) claim MUST specify the Status List conforming to the rules outlined in [](#status-list-json).
 
-Further rules apply:
+The following additional rules apply:
 
 1. The JWT MAY contain other claims.
 
