@@ -475,7 +475,7 @@ for their valuable contributions, discussions and feedback to this specification
 {:numbered="false"}
 
 -01
-
+* add design consideration to the introduction
 * Changing compression from gzip to zlib
 * Change typo in Status List Token sub claim description
 
