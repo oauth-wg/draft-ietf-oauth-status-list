@@ -1,5 +1,6 @@
 from jwcrypto import jwk, jwt
 from textwrap import fill
+from typing import Dict
 import json
 
 example = {
@@ -27,10 +28,12 @@ def formatToken(input: str, key: jwk.JWK) -> str:
 
 
 def printJson(input: str) -> str:
-    text = json.dumps(
-        json.loads(input), sort_keys=True, indent=2, ensure_ascii=False
-    )
+    text = json.dumps(json.loads(input), sort_keys=True, indent=2, ensure_ascii=False)
     return text
+
+
+def printObject(input: Dict) -> str:
+    return printJson(json.dumps(input))
 
 
 def printText(input: str) -> str:
