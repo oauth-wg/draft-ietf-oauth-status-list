@@ -127,7 +127,7 @@ A Status List is a byte array that contains the statuses of many Referenced Toke
 
 2. The overall Status List is encoded as a byte array. Depending on the bit-size, each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using the index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1 (being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
 
-3. The complete byte array is compressed using the "DEFLATE" {{RFC1951}} compression method and stored using the "ZLIB" {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.
+3. The byte array is compressed using DEFLATE {{RFC1951}} with the ZLIB {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.
 
 The following example illustrates a Status List that represents the statuses of 16 Referenced Tokens, requiring 16 bits (2 bytes) for the uncompressed byte array:
 
@@ -589,6 +589,10 @@ for their valuable contributions, discussions and feedback to this specification
 
 # Document History
 {:numbered="false"}
+
+-02
+
+* clarify Deflate / zlib compression
 
 -01
 
