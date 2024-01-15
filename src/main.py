@@ -10,7 +10,7 @@ exp = iat + timedelta(days=7000)
 folder = "./examples/"
 
 
-def statusListEncoding1Bit():
+def exampleStatusList1Bit() -> StatusList:
     status_list = StatusList(16, 1)
     status_list.set(0, 1)
     status_list.set(1, 0)
@@ -28,14 +28,10 @@ def statusListEncoding1Bit():
     status_list.set(13, 1)
     status_list.set(14, 0)
     status_list.set(15, 1)
-    encoded = status_list.encode()
-    text = 'byte_array = [{}, {}] \nencoded = "{}"'.format(
-        hex(status_list.list[0]), hex(status_list.list[1]), encoded
-    )
-    util.outputFile(folder + "status_list_encoding", text)
+    return status_list
 
 
-def exampleStatusList() -> StatusList:
+def exampleStatusList2Bit() -> StatusList:
     status_list = StatusList(12, 2)
     status_list.set(0, 1)
     status_list.set(1, 2)
@@ -52,26 +48,36 @@ def exampleStatusList() -> StatusList:
     return status_list
 
 
+def statusListEncoding1Bit():
+    status_list = exampleStatusList1Bit()
+    encoded = status_list.encodeObject()
+    text = "byte_array = [{}, {}] \nencoded:\n{}".format(
+        hex(status_list.list[0]),
+        hex(status_list.list[1]),
+        util.printObject(encoded)
+    )
+    util.outputFile(folder + "status_list_encoding", text)
+
+
 def statusListEncoding2Bit():
-    status_list = exampleStatusList()
-    encoded = status_list.encode()
-    text = 'byte_array = [{}, {}, {}] \nencoded = "{}"'.format(
+    status_list = exampleStatusList2Bit()
+    encoded = status_list.encodeObject()
+    text = "byte_array = [{}, {}, {}] \nencoded:\n{}".format(
         hex(status_list.list[0]),
         hex(status_list.list[1]),
         hex(status_list.list[2]),
-        encoded,
+        util.printObject(encoded),
     )
     util.outputFile(folder + "status_list_encoding2", text)
 
 
 def statusListJWT():
-    status_list = exampleStatusList()
+    status_list = exampleStatusList1Bit()
     jwt = StatusListToken(
         issuer="https://example.com",
         subject="https://example.com/statuslists/1",
         list=status_list,
         key=key,
-        bits=2,
     )
     status_jwt = jwt.buildJWT(iat=iat, exp=exp)
     text = util.formatToken(status_jwt, key)
