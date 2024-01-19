@@ -79,7 +79,19 @@ The following diagram depicts the basic conceptual relationship.
 
 Revocation mechanisms are an essential part for most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again.
 
-This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of 100,000 or more Referenced Tokens, but still remain relatively small. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Issuer.
+This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Issuer.
+
+## Design Considerations
+
+The decisions taken in this specification aim to achieve the following design goals:
+
+* the specification shall favor a simple and easy to understand concept
+* the specification shall be easy, fast and secure to implement in all major programming languages
+* the specification shall be optimized to support the most common use cases and avoid unneccessary complexity of corner cases
+* the Status List shall scale up to millions of tokens to support large scale government or enterprise use cases
+* the Status List shall enable caching policies and offline support
+* the specification shall support JSON and CBOR based tokens
+* the specification shall not specify key resolution or trust frameworks
 
 # Conventions and Definitions
 
@@ -540,7 +552,7 @@ for their valuable contributions, discussions and feedback to this specification
 {:numbered="false"}
 
 -01
-
+* add design consideration to the introduction
 * Change status claim to in referenced token to allow re-use for other mechanisms
 * restructure the sections of this document
 * add option to return an unsigned Status List
