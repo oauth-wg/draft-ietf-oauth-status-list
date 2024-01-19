@@ -245,21 +245,6 @@ The following is a non-normative example for a decoded header and payload of a R
 }
 ~~~
 
-### Status Claim Format {#jwt-referenced-token-status}
-
-The following rules apply to validating the "status" (status) claim
-
-1. The claim value MUST be a valid JSON object.
-
-2. The claim value object MUST contain a member called "status_list" that signals that status checks for this token can be done using the status list mechanism defined in this document. For the "status_list" object, the following rules apply:
-
-    1. The claim value MUST be a valid JSON object.
-
-    2. The claim value object MUST contain an "idx" (index) member with a numeric value that represents the index to check for status information in the Status List for the current JWT. The value of this member MUST be a non-negative number, containing a value of zero or greater.
-
-    3. The claim value object MUST contain a "uri" member with a string value that identifies the Status List containing the status information for the JWT. The value of this member MUST be a uri conforming to {{RFC3986}}.
-
-
 # Status Types {#status-types}
 
 This document defines potential statuses of Referenced Tokens as Status Type values. If the Status List contains more than one bit per token (as defined by "bits" in the Status List), then the whole value of bits MUST describe one value. A Status List can not represent multiple statuses per Referenced Token.
