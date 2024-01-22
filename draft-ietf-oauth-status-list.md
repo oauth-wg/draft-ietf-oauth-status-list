@@ -81,6 +81,8 @@ Revocation mechanisms are an essential part for most identity ecosystems. In the
 
 This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Issuer.
 
+There will likely be different mechanisms to convey token/credential status information in the foreseeable future depending on specific use-cases and their requirements. The way this information is transported in the token is defined with possible re-use or extension in mind.
+
 ## Design Considerations
 
 The decisions taken in this specification aim to achieve the following design goals:
@@ -92,6 +94,7 @@ The decisions taken in this specification aim to achieve the following design go
 * the Status List shall enable caching policies and offline support
 * the specification shall support JSON and CBOR based tokens
 * the specification shall not specify key resolution or trust frameworks
+* the specification shall design a mechanism to convey information about the validity status of a token/credential that can be re-used/expanded upon
 
 # Conventions and Definitions
 
@@ -230,7 +233,7 @@ The Referenced Token MUST be encoded as a "JSON Web Token (JWT)" according to {{
 The following content applies to the JWT Claims Set:
 
 * `iss`: REQUIRED. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.
-* `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains a reference to a status mechanism.
+* `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains at least one reference to a status mechanism.
   * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. The object contains exactly two claims:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
     * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Status List or Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
@@ -423,7 +426,7 @@ This specification requests registration of the following Claims in the
 IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [@!RFC7519].
 
 *  Claim Name: `status`
-*  Claim Description: Reference to a status list containing up-to-date status information on the JWT.
+*  Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the JWT.
 *  Change Controller: IETF
 *  Specification Document(s):  [[ (#referenced-token-jwt) of this specification ]]
 
