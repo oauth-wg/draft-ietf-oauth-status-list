@@ -36,6 +36,7 @@ normative:
 informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
+  RFC7800: RFC7800
 
 --- abstract
 
@@ -81,7 +82,7 @@ Revocation mechanisms are an essential part for most identity ecosystems. In the
 
 This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Issuer.
 
-There will likely be different mechanisms to convey token/credential status information in the foreseeable future depending on specific use-cases and their requirements. The way this information is transported in the token is defined with possible re-use or extension in mind.
+This specification establishes the IANA "Status Mechanism Methods" registry for status mechanism in  and registers the members defined by this specification. Other specifications can register other members used for confirmation, including other members for conveying proof-of-possession keys using different key representations.
 
 ## Design Considerations
 
@@ -225,6 +226,10 @@ The following is a non-normative example for a Status List Token in JWT format:
 TBD
 
 # Referenced Token {#referenced-token}
+
+## Status Claim {#status-claim}
+
+By including a "status" claim in a JWT, the issuer of the JWT declares that the credential is referencing a mechanism to retrieve status information about this credential. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined because status list means to check the status of a credential. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
 ## Referenced Token in JWT Format {#referenced-token-jwt}
 
@@ -428,14 +433,18 @@ IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [@!RFC7519].
 *  Claim Name: `status`
 *  Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the JWT.
 *  Change Controller: IETF
-*  Specification Document(s):  [[ (#referenced-token-jwt) of this specification ]]
+*  Specification Document(s):  [](#status-claim) of this specification
 
 <br/>
 
 *  Claim Name: `status_list`
 *  Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
 *  Change Controller: IETF
-*  Specification Document(s):  [[ (#status-list-json) of this specification ]]
+*  Specification Document(s):  [](#status-list-json) of this specification
+
+## JWT Confirmation Methods Registry {#iana-registry}
+
+This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
 ## Media Type Registration
 
