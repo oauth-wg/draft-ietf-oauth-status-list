@@ -266,6 +266,10 @@ The following is a non-normative example for a decoded header and payload of a R
 }
 ~~~
 
+## Referenced Token in CWT/CBOR Format {#referenced-token-cwt}
+
+TBD
+
 # Status Types {#status-types}
 
 This document defines potential statuses of Referenced Tokens as Status Type values. If the Status List contains more than one bit per token (as defined by "bits" in the Status List), then the whole value of bits MUST describe one value. A Status List can not represent multiple statuses per Referenced Token.
@@ -585,6 +589,7 @@ for their valuable contributions, discussions and feedback to this specification
 {:numbered="false"}
 
 -01
+
 * add design consideration to the introduction
 * Change status claim to in referenced token to allow re-use for other mechanisms
 * restructure the sections of this document
