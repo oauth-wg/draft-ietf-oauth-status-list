@@ -33,6 +33,7 @@ normative:
   RFC6125: RFC6125
   RFC9110: RFC9110
   RFC9111: RFC9111
+  IANA.JWT: IANA.JWT
 informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
@@ -428,7 +429,7 @@ TBD Declare whether JWT and CWT representations can be used interchangeably by t
 ## JSON Web Token Claims Registration
 
 This specification requests registration of the following Claims in the
-IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [@!RFC7519].
+IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 ### Registry Contents
 
@@ -599,7 +600,7 @@ for their valuable contributions, discussions and feedback to this specification
 * renamed Verifier to Relying Party
 * added IANA consideration
 
-[draft-ietf-oauth-status-list ]
+\[ draft-ietf-oauth-status-list \]
 
 -01
 
