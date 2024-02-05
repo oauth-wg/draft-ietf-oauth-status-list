@@ -430,21 +430,41 @@ TBD Declare whether JWT and CWT representations can be used interchangeably by t
 This specification requests registration of the following Claims in the
 IANA "JSON Web Token Claims" registry [@IANA.JWT] established by [@!RFC7519].
 
+### Registry Contents
+
 *  Claim Name: `status`
 *  Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the JWT.
 *  Change Controller: IETF
 *  Specification Document(s):  [](#status-claim) of this specification
 
-<br/>
-
-*  Claim Name: `status_list`
-*  Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
-*  Change Controller: IETF
-*  Specification Document(s):  [](#status-list-json) of this specification
-
-## JWT Confirmation Methods Registry {#iana-registry}
+## JWT Status Mechanism Methods Registry {#iana-registry}
 
 This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
+
+### Registration Template
+
+Status Method Value:
+
+  > The name requested (e.g., "status_list"). The name is case sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.
+
+Status Method Description:
+
+  > Brief description of the status mechanism method.
+
+Change Controller:
+
+  > For Standards Track RFCs, list the "IESG".  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+
+Specification Document(s):
+
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+
+### Initial Registry Contents
+
+*  Status Method Value: `status_list`
+*  Status Method Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+*  Change Controller: IETF
+*  Specification Document(s):  [](#referenced-token-jwt) of this specification
 
 ## Media Type Registration
 
