@@ -229,7 +229,7 @@ TBD
 
 ## Status Claim {#status-claim}
 
-By including a "status" claim in a JWT, the issuer of the JWT declares that the credential is referencing a mechanism to retrieve status information about this credential. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined because status list means to check the status of a credential. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
+By including a "status" claim in a Referenced Token, the issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
 ## Referenced Token in JWT Format {#referenced-token-jwt}
 
