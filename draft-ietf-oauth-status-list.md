@@ -82,7 +82,7 @@ Revocation mechanisms are an essential part for most identity ecosystems. In the
 
 This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Issuer.
 
-This specification establishes the IANA "Status Mechanism Methods" registry for status mechanism in  and registers the members defined by this specification. Other specifications can register other members used for confirmation, including other members for conveying proof-of-possession keys using different key representations.
+This specification establishes the IANA "Status Mechanism Methods" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
 
 ## Design Considerations
 
@@ -95,7 +95,7 @@ The decisions taken in this specification aim to achieve the following design go
 * the Status List shall enable caching policies and offline support
 * the specification shall support JSON and CBOR based tokens
 * the specification shall not specify key resolution or trust frameworks
-* the specification shall design a mechanism to convey information about the validity status of a token/credential that can be re-used/expanded upon
+* the specification shall design an extension point to convey information about the status of a token that can be re-used by other mechanisms
 
 # Conventions and Definitions
 
