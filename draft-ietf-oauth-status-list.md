@@ -91,7 +91,7 @@ The decisions taken in this specification aim to achieve the following design go
 
 * the specification shall favor a simple and easy to understand concept
 * the specification shall be easy, fast and secure to implement in all major programming languages
-* the specification shall be optimized to support the most common use cases and avoid unneccessary complexity of corner cases
+* the specification shall be optimized to support the most common use cases and avoid unnecessary complexity of corner cases
 * the Status List shall scale up to millions of tokens to support large scale government or enterprise use cases
 * the Status List shall enable caching policies and offline support
 * the specification shall support JSON and CBOR based tokens
@@ -327,6 +327,8 @@ If caching is required (e.g., to enable the use of alternative mechanisms for ho
 
 ## Validation Rules
 
+TBD
+
 # Further Examples
 
 ## Status List Token with 2-Bit Status Values in JWT format
@@ -404,24 +406,24 @@ A malicious Issuer could bypass the privacy benefits of the herd privacy by gene
 
 ## Relying Party tracking {#privacy-relying-party}
 
-Once the Relying Party gets the Referenced Token, this enables him to request the Status List to validate the status of the Token through the provided "uri" property and look up the corresponding "index". However, the Relying Party may persistently store the "uri" and "index" of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be inteded as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential. This behaviour could be constrained by adding authorization rules to the Status List, see [](#security-authorization).
+Once the Relying Party gets the Referenced Token, this enables him to request the Status List to validate the status of the Token through the provided "uri" property and look up the corresponding "index". However, the Relying Party may persistently store the "uri" and "index" of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential. This behaviour could be constrained by adding authorization rules to the Status List, see [](#security-authorization).
 
 ## Correlation Risks and Tracking
 
 Colluding Issuers and Relying Parties have the possibility to identify the usage of credentials of a particular Holder, as the Referenced Token contains unique, trackable data.
 
-To avoid privacy risks for colluding Relying Parties, it is recommended that Issuers use batch issuance to issue multiple tokens, such that Holders can use individual tokens for specific Relying Parties. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation lateron.
+To avoid privacy risks for colluding Relying Parties, it is recommended that Issuers use batch issuance to issue multiple tokens, such that Holders can use individual tokens for specific Relying Parties. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.
 
 To avoid information leakage by the values of "uri" and "index", Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy or dead entries to obfuscate the real number of Referenced Tokens within a Status List
-- choose to deploy and utilize multiple Status Lists simulantaniously
+- choose to deploy and utilize multiple Status Lists simultaneously
 
 ## Third Party Hosting
 
-TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possiblities
-TODO evaluate deifnition of Status List Provider?
+TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
+TODO evaluate definition of Status List Provider?
  An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.
 
 # Implementation Considerations {#implementation}
@@ -590,8 +592,10 @@ for their valuable contributions, discussions and feedback to this specification
 
 -01
 
+* Rename title of the draft
 * add design consideration to the introduction
 * Change status claim to in referenced token to allow re-use for other mechanisms
+* Add IANA Registry for status mechanisms
 * restructure the sections of this document
 * add option to return an unsigned Status List
 * Changing compression from gzip to zlib
