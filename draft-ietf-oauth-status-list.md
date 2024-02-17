@@ -593,6 +593,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -02
 
+* relax requirements on referenced token
 * clarify Deflate / zlib compression
 
 -01
