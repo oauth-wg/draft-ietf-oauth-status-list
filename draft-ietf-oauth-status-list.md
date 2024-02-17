@@ -201,9 +201,10 @@ The following content applies to the JWT Header:
 The following content applies to the JWT Claims Set:
 
 * `iss`: REQUIRED. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the Referenced Token.
-* `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for that Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
+* `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `iat`: REQUIRED. The `iat` (issued at) claim MUST specify the time at which the Status List Token was issued.
-* `exp`: OPTIONAL. The `exp` (expiration time) claim MAY convey the time at which it is considered expired by its issuer.
+* `exp`: OPTIONAL. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer.
+* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token may be cached by a consumer before a fresh copy is retrieved. The value of the claim MUST be a positive number. 
 * `status_list`: REQUIRED. The `status_list` (status list) claim MUST specify the Status List conforming to the rules outlined in [](#status-list-json).
 
 The following additional rules apply:
@@ -382,7 +383,11 @@ Resulting in the byte array and compressed/base64url encoded status list:
 TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data
 
 ## Cached and Stale status lists
-TODO consumers/Relying Party of the status list should be aware if they fetch the up-to-date data
+
+When consumers or verifiers of the Status List fetch the data, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
+in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of 
+a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch 
+a fresh copy of the status list even if that status list is not expired.
 
 ## Authorized access to the Status List {#security-authorization}
 TODO elaborate on authorization mechanisms preventing misuse and profiling as described in privacy section
@@ -566,6 +571,21 @@ To indicate that the content is an CWT-based Status List:
   * Author: Paul Bastian, paul.bastian@posteo.de
   * Change controller: IETF
   * Provisional registration? No
+
+## Claims Registered by This Document
+
+This specification adds the following values to the "JSON Web Token Claims" registry established by [RFC7519] and the "CBOR Web Token
+Claims Registry" established by [RFC8392].  Each entry below is an addition to both registries.
+
+The "Claim Description", "Change Controller" and "Specification Documents" are common and equivalent for the JWT and CWT registries.
+The "Claim Key" and "Claim Value Types(s)" are for the CWT registry only.  The "Claim Name" is as defined for the CWT registry, not the
+JWT registry.  The "JWT Claim Name" is equivalent to the "Claim Name" in the JWT registry.
+
+ - Claim Name: ttl
+ - Claim Description: Time to Live
+ - JWT Claim Name: "ttl"
+ - Change Controller: IESG
+ - Specification Document(s): *this document*
 
 --- back
 
