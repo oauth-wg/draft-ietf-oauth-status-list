@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 18 July 2024                                                   
+Expires: 20 August 2024                                                 
                                                               C. Bormann
-                                                         15 January 2024
+                                                        17 February 2024
 
 
                            Token Status List
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 July 2024.
+   This Internet-Draft will expire on 20 August 2024.
 
 Copyright Notice
 
@@ -78,7 +78,9 @@ Table of Contents
      5.1.  Status List Token in JWT Format
      5.2.  Status List Token in CWT Format
    6.  Referenced Token
-     6.1.  Referenced Token in JWT Format
+     6.1.  Status Claim
+     6.2.  Referenced Token in JWT Format
+     6.3.  Referenced Token in CWT/CBOR Format
    7.  Status Types
      7.1.  Status Types Values
    8.  Verification and Processing
@@ -102,7 +104,12 @@ Table of Contents
    12. Implementation Considerations
    13. IANA Considerations
      13.1.  JSON Web Token Claims Registration
-     13.2.  Media Type Registration
+       13.1.1.  Registry Contents
+     13.2.  JWT Status Mechanism Methods Registry
+       13.2.1.  Registration Template
+       13.2.2.  Initial Registry Contents
+     13.3.  Media Type Registration
+     13.4.  Claims Registered by This Document
    14. References
      14.1.  Normative References
      14.2.  Informative References
@@ -186,6 +193,11 @@ Table of Contents
    Placing large amounts of Referenced Tokens into the same list also
    enables herd privacy relative to the Issuer.
 
+   This specification establishes the IANA "Status Mechanism Methods"
+   registry for status mechanism and registers the members defined by
+   this specification.  Other specifications can register other members
+   used for status retrieval.
+
 1.2.  Design Considerations
 
    The decisions taken in this specification aim to achieve the
@@ -198,7 +210,7 @@ Table of Contents
       all major programming languages
 
    *  the specification shall be optimized to support the most common
-      use cases and avoid unneccessary complexity of corner cases
+      use cases and avoid unnecessary complexity of corner cases
 
    *  the Status List shall scale up to millions of tokens to support
       large scale government or enterprise use cases
@@ -209,6 +221,10 @@ Table of Contents
 
    *  the specification shall not specify key resolution or trust
       frameworks
+
+   *  the specification shall design an extension point to convey
+      information about the status of a token that can be re-used by
+      other mechanisms
 
 2.  Conventions and Definitions
 
@@ -263,10 +279,9 @@ Table of Contents
        bit ("7").  All bits of the byte array at a particular index are
        set to a status value.
 
-   3.  The complete byte array is compressed using the "DEFLATE"
-       [RFC1951] compression method and stored using the "ZLIB"
-       [RFC1950] data format.  Implementations are RECOMMENDED to use
-       the highest compression level available.
+   3.  The byte array is compressed using DEFLATE [RFC1951] with the
+       ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to
+       use the highest compression level available.
 
    The following example illustrates a Status List that represents the
    statuses of 16 Referenced Tokens, requiring 16 bits (2 bytes) for the
@@ -360,15 +375,21 @@ Table of Contents
       contained within the Referenced Token.
 
    *  sub: REQUIRED.  The sub (subject) claim MUST specify a unique
-      string identifier for that Status List Token.  The value MUST be
-      equal to that of the uri claim contained in the status claim of
-      the Referenced Token.
+      string identifier for the Status List Token.  The value MUST be
+      equal to that of the uri claim contained in the status_list claim
+      of the Referenced Token.
 
    *  iat: REQUIRED.  The iat (issued at) claim MUST specify the time at
       which the Status List Token was issued.
 
-   *  exp: OPTIONAL.  The exp (expiration time) claim MAY convey the
-      time at which it is considered expired by its issuer.
+   *  exp: OPTIONAL.  The exp (expiration time) claim, if present, MUST
+      specify the time at which the Status List Token is considered
+      expired by its issuer.
+
+   *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST
+      specify the maximum amount of time, in seconds, that the Status
+      List Token may be cached by a consumer before a fresh copy is
+      retrieved.  The value of the claim MUST be a positive number.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the rules outlined in
@@ -415,7 +436,17 @@ Table of Contents
 
 6.  Referenced Token
 
-6.1.  Referenced Token in JWT Format
+6.1.  Status Claim
+
+   By including a "status" claim in a Referenced Token, the issuer is
+   referencing a mechanism to retrieve status information about this
+   Referenced Token.  The claim contains members used to reference to a
+   status list as defined in this specification.  Other members of the
+   "status" object may be defined by other specifications.  This is
+   analogous to "cnf" claim in Section 3.1 of [RFC7800] in which
+   different authenticity confirmation methods can be included.
+
+6.2.  Referenced Token in JWT Format
 
    The Referenced Token MUST be encoded as a "JSON Web Token (JWT)"
    according to [RFC7519].
@@ -431,19 +462,23 @@ Table of Contents
       the referenced Status List Token.
 
    *  status: REQUIRED.  The status (status) claim MUST specify a JSON
-      Object that contains a reference to a status of a Status List or
-      Status List Token.  The object contains exactly two claims:
+      Object that contains at least one reference to a status mechanism.
 
-      -  idx: REQUIRED.  The idx (index) claim MUST specify an Integer
-         that represents the index to check for status information in
-         the Status List for the current Referenced Token.  The value of
-         idx MUST be a non-negative number, containing a value of zero
-         or greater.
+      -  status_list: REQUIRED when the status list mechanism defined in
+         this specification is used.  It contains a reference to a
+         Status List or Status List Token.  The object contains exactly
+         two claims:
 
-      -  uri: REQUIRED.  The uri (URI) claim MUST specify a String value
-         that identifies the Status List or Status List Token containing
-         the status information for the Referenced Token.  The value of
-         uri MUST be a URI conforming to [RFC3986].
+         o  idx: REQUIRED.  The idx (index) claim MUST specify an
+            Integer that represents the index to check for status
+            information in the Status List for the current Referenced
+            Token.  The value of idx MUST be a non-negative number,
+            containing a value of zero or greater.
+
+         o  uri: REQUIRED.  The uri (URI) claim MUST specify a String
+            value that identifies the Status List or Status List Token
+            containing the status information for the Referenced Token.
+            The value of uri MUST be a URI conforming to [RFC3986].
 
    Application of additional restrictions and policy are at the
    discretion of the verifying party.
@@ -459,10 +494,16 @@ Table of Contents
    {
      "iss": "https://example.com",
      "status": {
-       "idx": 0,
-       "uri": "https://example.com/statuslists/1"
+       "status_list": {
+         "idx": 0,
+         "uri": "https://example.com/statuslists/1"
+       }
      }
    }
+
+6.3.  Referenced Token in CWT/CBOR Format
+
+   TBD
 
 7.  Status Types
 
@@ -559,6 +600,8 @@ Table of Contents
 
 8.4.  Validation Rules
 
+   TBD
+
 9.  Further Examples
 
 9.1.  Status List Token with 2-Bit Status Values in JWT format
@@ -615,8 +658,14 @@ Table of Contents
 
 10.2.  Cached and Stale status lists
 
-   TODO consumers/Relying Party of the status list should be aware if
-   they fetch the up-to-date data
+   When consumers or verifiers of the Status List fetch the data, they
+   need to be aware of its up-to-date status.  The 'ttl' (time-to-live)
+   claim in the Status List Token provides one mechanism for setting a
+   maximum cache time for the fetched data.  This property permits
+   distribution of a status list to a CDN or other distribution
+   mechanism while giving guidance to consumers of the status list on
+   how often they need to fetch a fresh copy of the status list even if
+   that status list is not expired.
 
 10.3.  Authorized access to the Status List
 
@@ -674,7 +723,7 @@ Table of Contents
    "index" of the Referenced Token to request the Status List again at a
    later time.  By doing so regularly, the Relying Party may create a
    profile of the Referenced Token's validity status.  This behaviour
-   may be inteded as a feature, e.g. for a KYC process that requires
+   may be intended as a feature, e.g. for a KYC process that requires
    regular validity checks, but might also be abused in cases where this
    is not intended and unknown to the Holder, e.g. profiling the
    suspension of a driving license or checking the employment status of
@@ -692,7 +741,7 @@ Table of Contents
    such that Holders can use individual tokens for specific Relying
    Parties.  In this case, every Referenced Token MUST have a dedicated
    Status List entry.  Revoking batch issued Referenced Tokens might
-   reveal this correlation lateron.
+   reveal this correlation later on.
 
    To avoid information leakage by the values of "uri" and "index",
    Issuers are RECOMMENDED to:
@@ -702,16 +751,15 @@ Table of Contents
    *  use decoy or dead entries to obfuscate the real number of
       Referenced Tokens within a Status List
 
-   *  choose to deploy and utilize multiple Status Lists
-      simulantaniously
+   *  choose to deploy and utilize multiple Status Lists simultaneously
 
 11.5.  Third Party Hosting
 
    TODO elaborate on increased privacy if the status list is hosted by a
-   third party instead of the issuer reducing tracking possiblities TODO
-   evaluate deifnition of Status List Provider?  An entity that hosts
-   the Status List as a resource for potential Relying Parties.  The
-   Status List Provider may be the issuer of the Status List but may
+   third party instead of the issuer reducing tracking possibilities
+   TODO evaluate definition of Status List Provider?  An entity that
+   hosts the Status List as a resource for potential Relying Parties.
+   The Status List Provider may be the issuer of the Status List but may
    also be outsourced to a trusted third party.
 
 12.  Implementation Considerations
@@ -725,32 +773,65 @@ Table of Contents
 13.1.  JSON Web Token Claims Registration
 
    This specification requests registration of the following Claims in
-   the IANA "JSON Web Token Claims" registry [@IANA.JWT] established by
-   [@!RFC7519].
+   the IANA "JSON Web Token Claims" registry [IANA.JWT] established by
+   [RFC7519].
+
+13.1.1.  Registry Contents
 
    *  Claim Name: status
 
-   *  Claim Description: Reference to a status list containing up-to-
-      date status information on the JWT.
+   *  Claim Description: Reference to a status or validity mechanism
+      containing up-to-date status information on the JWT.
 
    *  Change Controller: IETF
 
-   *  Specification Document(s): [[ (#referenced-token-jwt) of this
-      specification ]]
+   *  Specification Document(s): Section 6.1 of this specification
 
+13.2.  JWT Status Mechanism Methods Registry
 
+   This specification establishes the IANA "Status Mechanism Methods"
+   registry for JWT "status" member values.  The registry records the
+   status mechanism method member and a reference to the specification
+   that defines it.
 
-   *  Claim Name: status_list
+13.2.1.  Registration Template
 
-   *  Claim Description: A status list containing up-to-date status
-      information on multiple other JWTs encoded as a bitarray.
+   Status Method Value:
+
+      The name requested (e.g., "status_list").  The name is case
+      sensitive.  Names may not match other registered names in a case-
+      insensitive manner unless the Designated Experts state that there
+      is a compelling reason to allow an exception.
+
+   Status Method Description:
+
+      Brief description of the status mechanism method.
+
+   Change Controller:
+
+      For Standards Track RFCs, list the "IESG".  For others, give the
+      name of the responsible party.  Other details (e.g., postal
+      address, email address, home page URI) may also be included.
+
+   Specification Document(s):
+
+      Reference to the document or documents that specify the parameter,
+      preferably including URIs that can be used to retrieve copies of
+      the documents.  An indication of the relevant sections may also be
+      included but is not required.
+
+13.2.2.  Initial Registry Contents
+
+   *  Status Method Value: status_list
+
+   *  Status Method Description: A status list containing up-to-date
+      status information on multiple other JWTs encoded as a bitarray.
 
    *  Change Controller: IETF
 
-   *  Specification Document(s): [[ (#status-list-json) of this
-      specification ]]
+   *  Specification Document(s): Section 6.2 of this specification
 
-13.2.  Media Type Registration
+13.3.  Media Type Registration
 
    This section requests registration of the following media types
    [@RFC2046] in the "Media Types" registry [@IANA.MediaTypes] in the
@@ -933,9 +1014,35 @@ Table of Contents
 
    *  Provisional registration?  No
 
+13.4.  Claims Registered by This Document
+
+   This specification adds the following values to the "JSON Web Token
+   Claims" registry established by [RFC7519] and the "CBOR Web Token
+   Claims Registry" established by [RFC8392].  Each entry below is an
+   addition to both registries.
+
+   The "Claim Description", "Change Controller" and "Specification
+   Documents" are common and equivalent for the JWT and CWT registries.
+   The "Claim Key" and "Claim Value Types(s)" are for the CWT registry
+   only.  The "Claim Name" is as defined for the CWT registry, not the
+   JWT registry.  The "JWT Claim Name" is equivalent to the "Claim Name"
+   in the JWT registry.
+
+   *  Claim Name: ttl
+
+   *  Claim Description: Time to Live
+
+   *  JWT Claim Name: "ttl"
+
+   *  Change Controller: IESG
+
+   *  Specification Document(s): _this document_
+
 14.  References
 
 14.1.  Normative References
+
+   [IANA.JWT] "*** BROKEN REFERENCE ***".
 
    [RFC1950]  Deutsch, P. and J. Gailly, "ZLIB Compressed Data Format
               Specification version 3.3", RFC 1950,
@@ -999,6 +1106,11 @@ Table of Contents
               RFC 7662, DOI 10.17487/RFC7662, October 2015,
               <https://www.rfc-editor.org/rfc/rfc7662>.
 
+   [RFC7800]  Jones, M., Bradley, J., and H. Tschofenig, "Proof-of-
+              Possession Key Semantics for JSON Web Tokens (JWTs)",
+              RFC 7800, DOI 10.17487/RFC7800, April 2016,
+              <https://www.rfc-editor.org/rfc/rfc7800>.
+
 Acknowledgments
 
    We would like to thank Brian Campbell, Filip Skokan, Francesco
@@ -1010,11 +1122,30 @@ Acknowledgments
 
 Document History
 
-   -01 * add design consideration to the introduction * restructure the
-   sections of this document * add option to return an unsigned Status
-   List * Changing compression from gzip to zlib * Change typo in Status
-   List Token sub claim description * Add access token as an example
-   use-case
+   -02
+
+   *  clarify Deflate / zlib compression
+
+   -01
+
+   *  Rename title of the draft
+
+   *  add design consideration to the introduction
+
+   *  Change status claim to in referenced token to allow re-use for
+      other mechanisms
+
+   *  Add IANA Registry for status mechanisms
+
+   *  restructure the sections of this document
+
+   *  add option to return an unsigned Status List
+
+   *  Changing compression from gzip to zlib
+
+   *  Change typo in Status List Token sub claim description
+
+   *  Add access token as an example use-case
 
    -00
 
@@ -1026,7 +1157,7 @@ Document History
 
    *  added IANA consideration
 
-   [draft-ietf-oauth-status-list ]
+   [ draft-ietf-oauth-status-list ]
 
    -01
 
