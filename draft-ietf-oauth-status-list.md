@@ -204,7 +204,7 @@ The following content applies to the JWT Claims Set:
 * `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `iat`: REQUIRED. The `iat` (issued at) claim MUST specify the time at which the Status List Token was issued.
 * `exp`: OPTIONAL. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer.
-* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token may be cached by a consumer before a fresh copy is retrieved. The value of the claim MUST be a positive number. 
+* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token may be cached by a consumer before a fresh copy is retrieved. The value of the claim MUST be a positive number.
 * `status_list`: REQUIRED. The `status_list` (status list) claim MUST specify the Status List conforming to the rules outlined in [](#status-list-json).
 
 The following additional rules apply:
@@ -385,8 +385,8 @@ TODO elaborate on risks of incorrect parsing/decoding leading to erroneous statu
 ## Cached and Stale status lists
 
 When consumers or verifiers of the Status List fetch the data, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
-in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of 
-a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch 
+in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
+a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
 a fresh copy of the status list even if that status list is not expired.
 
 ## Authorized access to the Status List {#security-authorization}
