@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-15T00:54:42.413400+00:00",
+  "timestamp": "2024-02-18T00:57:45.976975+00:00",
   "repo": "vcstuff/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -4118,7 +4118,7 @@
       "labels": [],
       "body": "## \ud83d\udcd1 Description\r\nadds support for `ttl` instructions for consumers/verifiers - this is important, especially with signed lists to separate the requirement to sign and reissue from when a client or cdn needs to fetch a fresh copy of the list",
       "createdAt": "2023-08-02T18:46:01Z",
-      "updatedAt": "2024-02-13T08:08:30Z",
+      "updatedAt": "2024-02-16T01:25:14Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "70e860b9cd190741593d92cd0b8e27394137bda9",
@@ -4240,6 +4240,26 @@
           "createdAt": "2024-02-13T08:08:30Z",
           "updatedAt": "2024-02-13T08:08:30Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wTiwJ",
+          "commit": {
+            "abbreviatedOid": "b0947c3"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-16T01:25:13Z",
+          "updatedAt": "2024-02-16T01:25:14Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n6. The JWT MAY contain a \"ttl\" (time to live) claim that conveys the maximum amount of time, in seconds, that the JWT may be cached by a client before a fresh copy is retrieved. The value of the claim MUST be a positive number.\r\n```",
+              "createdAt": "2024-02-16T01:25:13Z",
+              "updatedAt": "2024-02-16T01:25:14Z"
+            }
+          ]
         }
       ]
     },
@@ -6217,6 +6237,152 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 101,
+      "id": "PR_kwDOJZ2aqs5nKF9k",
+      "title": "add initial ttl language",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/101",
+      "state": "OPEN",
+      "author": "tplooker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Alternative to #49 as it had gone stale.",
+      "createdAt": "2024-02-17T09:27:41Z",
+      "updatedAt": "2024-02-17T12:20:54Z",
+      "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
+      "headRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "headRefName": "tl/tll",
+      "headRefOid": "559b37072d816e93a3abc93ee331b35f52f591a3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs5wckKP",
+          "commit": {
+            "abbreviatedOid": "61a4d30"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-17T10:49:59Z",
+          "updatedAt": "2024-02-17T10:49:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wcpDo",
+          "commit": {
+            "abbreviatedOid": "61a4d30"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-02-17T12:13:02Z",
+          "updatedAt": "2024-02-17T12:15:36Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "This section should be moved up to line ~450 where \"status\" is defined for JWT",
+              "createdAt": "2024-02-17T12:13:03Z",
+              "updatedAt": "2024-02-17T12:15:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wcqkj",
+          "commit": {
+            "abbreviatedOid": "61a4d30"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-17T12:18:41Z",
+          "updatedAt": "2024-02-17T12:18:41Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\n* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token may be cached by a consumer before a fresh copy is retrieved. The value of the claim MUST be a positive number.\r\n```",
+              "createdAt": "2024-02-17T12:18:41Z",
+              "updatedAt": "2024-02-17T12:18:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wcqoW",
+          "commit": {
+            "abbreviatedOid": "61a4d30"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-17T12:19:33Z",
+          "updatedAt": "2024-02-17T12:19:33Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nin the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of\r\n```",
+              "createdAt": "2024-02-17T12:19:33Z",
+              "updatedAt": "2024-02-17T12:19:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wcqok",
+          "commit": {
+            "abbreviatedOid": "61a4d30"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-17T12:19:43Z",
+          "updatedAt": "2024-02-17T12:19:43Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\na status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch\r\n```",
+              "createdAt": "2024-02-17T12:19:43Z",
+              "updatedAt": "2024-02-17T12:19:43Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 102,
+      "id": "PR_kwDOJZ2aqs5nKlqR",
+      "title": "relax requirements referenced token",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/102",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes most of #92 \r\n\r\n## \ud83d\udcd1 Description\r\n- Relaxes requirements on referenced token in terminology\r\n- issuer in status list token is only required when also present in referenced token (and matching checked)\r\n- reorder references\r\n\r\n\r\n## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/relax-referenced-token/draft-ietf-oauth-status-list.html)",
+      "createdAt": "2024-02-17T12:52:48Z",
+      "updatedAt": "2024-02-17T12:52:49Z",
+      "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
+      "headRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/relax-referenced-token",
+      "headRefOid": "e90099b893be4b3dedc115133fb93e1c3242a957",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
