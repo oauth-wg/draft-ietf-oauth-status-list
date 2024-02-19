@@ -392,7 +392,7 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 
 # Privacy Considerations
 
-## Issuer tracking and Herd Privacy {#privacy-issuer}
+## Unobservability of Issuers {#privacy-issuer}
 
 The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
@@ -404,17 +404,21 @@ The herd privacy is depending on the number of entities within the Status List c
 
 A malicious Issuer could bypass the privacy benefits of the herd privacy by generating a unique Status List for every Referenced Token. By these means, he could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. This malicious behaviour could be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes.
 
-## Relying Party tracking {#privacy-relying-party}
+## Unobservability of Relying Parties {#privacy-relying-party}
 
-Once the Relying Party gets the Referenced Token, this enables him to request the Status List to validate the status of the Token through the provided "uri" property and look up the corresponding "index". However, the Relying Party may persistently store the "uri" and "index" of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential. This behaviour could be constrained by adding authorization rules to the Status List, see [](#security-authorization).
+Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
-## Correlation Risks and Tracking
+This behaviour could be mitigated by:
+- adding authorization rules to the Status List, see [](#security-authorization).
+- regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
-Colluding Issuers and Relying Parties have the possibility to identify the usage of credentials of a particular Holder, as the Referenced Token contains unique, trackable data.
+## Unlinkability
 
-To avoid privacy risks for colluding Relying Parties, it is recommended that Issuers use batch issuance to issue multiple tokens, such that Holders can use individual tokens for specific Relying Parties. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.
+Colluding Issuers and a Relying Parties have the possibility to link two transactions, as the tuple of `uri` and `index` inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
-To avoid information leakage by the values of "uri" and "index", Issuers are RECOMMENDED to:
+To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers use batch issuance to issue multiple tokens, see [](#implementation-lifecycle).
+
+To avoid further correlatable information by the values of `uri` and `index`, Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy or dead entries to obfuscate the real number of Referenced Tokens within a Status List
@@ -428,7 +432,13 @@ TODO evaluate definition of Status List Provider?
 
 # Implementation Considerations {#implementation}
 
-TBD Declare whether JWT and CWT representations can be used interchangeably by the same issuer.  For instance, declare whether a status list can reference both JWT and CWT tokens.
+## Token Lifecycle {#implementation-lifecycle}
+
+The lifetime of a Status List (and the Status List Token) is depending on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List (and the Status List Token).
+
+Referenced Tokens may be regularly re-issued to increase security or to mitigate linkability and prevent tracking by Relying Parties. In this case, every Referenced Token MUST have a fresh Status List entry.
+
+Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.
 
 # IANA Considerations
 
