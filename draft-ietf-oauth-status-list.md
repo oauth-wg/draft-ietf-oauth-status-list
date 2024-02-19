@@ -24,16 +24,28 @@ author:
     email: chris.bormann@gmx.de
 
 normative:
-  RFC7519: RFC7519
-  RFC8392: RFC8392
-  RFC3986: RFC3986
   RFC1950: RFC1950
   RFC1951: RFC1951
-  RFC7515: RFC7515
+  RFC2046: RFC2046
+  RFC3986: RFC3986
   RFC6125: RFC6125
+  RFC6838: RFC6838
+  RFC7515: RFC7515
+  RFC7519: RFC7519
+  RFC8392: RFC8392
   RFC9110: RFC9110
   RFC9111: RFC9111
-  IANA.JWT: IANA.JWT
+  IANA.JWT:
+    author:
+      org: "IANA"
+    title: "Media Types"
+    target: "https://www.iana.org/assignments/media-types/media-types.xhtml"
+  IANA.MediaTypes:
+    author:
+      org: "IANA"
+    title: "JSON Web Token Claims"
+    target: "https://www.iana.org/assignments/jwt/jwt.xhtml"
+
 informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
@@ -475,9 +487,9 @@ Specification Document(s):
 
 ## Media Type Registration
 
-This section requests registration of the following media types [@RFC2046] in
-the "Media Types" registry [@IANA.MediaTypes] in the manner described
-in [@RFC6838].
+This section requests registration of the following media types {{RFC2046}} in
+the "Media Types" registry{{@IANA.MediaTypes}} in the manner described
+in {{@RFC6838}}.
 
 To indicate that the content is an JSON-based Status List:
 
@@ -486,10 +498,10 @@ To indicate that the content is an JSON-based Status List:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary; A JSON-based Status List is a JSON Object.
-  * Security considerations: See (#Security) of [[ this specification ]]
+  * Security considerations: See (#Security) of \[ this specification \]
   * Interoperability considerations: n/a
-  * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Published specification: \[ this specification \]
+  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
@@ -508,10 +520,10 @@ To indicate that the content is an JWT-based Status List:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary; A JWT-based Status List is a JWT; JWT values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') characters.
-  * Security considerations: See (#Security) of [[ this specification ]]
+  * Security considerations: See (#Security) of \[ this specification \]
   * Interoperability considerations: n/a
-  * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Published specification: \[ this specification \]
+  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
@@ -530,10 +542,10 @@ To indicate that the content is an CBOR-based Status List:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary; A CBOR-based Status List is a CBOR Object.
-  * Security considerations: See (#Security) of [[ this specification ]]
+  * Security considerations: See (#Security) of \[ this specification \]
   * Interoperability considerations: n/a
-  * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Published specification: \[ this specification \]
+  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
@@ -552,10 +564,10 @@ To indicate that the content is an CWT-based Status List:
   * Required parameters: n/a
   * Optional parameters: n/a
   * Encoding considerations: binary;
-  * Security considerations: See (#Security) of [[ this specification ]]
+  * Security considerations: See (#Security) of \[ this specification \]
   * Interoperability considerations: n/a
-  * Published specification: [[ this specification ]]
-  * Applications that use this media type: Applications using [[ this specification ]] for updated status information of tokens
+  * Published specification: \[ this specification \]
+  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
   * Fragment identifier considerations: n/a
   * Additional information:
     * File extension(s): n/a
