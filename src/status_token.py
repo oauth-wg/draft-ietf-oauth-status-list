@@ -6,7 +6,8 @@ from typing import Dict
 import json
 
 DEFAULT_ALG = "ES256"
-STATUS_LIST_TYP = "statuslist+jwt"
+STATUS_LIST_TYP_JWT = "statuslist+jwt"
+STATUS_LIST_TYP_CWT = "statuslist+cwt"
 
 
 class StatusListToken:
@@ -46,7 +47,7 @@ class StatusListToken:
         header = json.loads(decoded.header)
         alg = header["alg"]
         typ = header["typ"]
-        assert typ == STATUS_LIST_TYP
+        assert typ == STATUS_LIST_TYP_JWT
         claims = json.loads(decoded.claims)
         status_list = claims["status_list"]
         lst = status_list["lst"]
@@ -99,7 +100,7 @@ class StatusListToken:
         if self._key.key_id:
             header["kid"] = self._key.key_id
         header["alg"] = self._alg
-        header["typ"] = STATUS_LIST_TYP
+        header["typ"] = STATUS_LIST_TYP_JWT
 
         token = jwt.JWT(header=header, claims=claims)
         token.make_signed_token(self._key)
@@ -110,7 +111,8 @@ class StatusListToken:
         iat: datetime = datetime.utcnow(),
         exp: datetime = None,
         optional_claims: Dict = None,
-        optional_header: Dict = None
+        optional_protected_header: Dict = None,
+        optional_unprotected_header: Dict = None
     ) -> bytes:
         # build claims
         if optional_claims is not None:
@@ -125,13 +127,19 @@ class StatusListToken:
         claims[-65537] = self.list.encodeAsCBOR() # no CWT claim key assigned yet by IANA
 
         # build header
-        if optional_header is not None:
-            header = optional_header
+        if optional_protected_header is not None:
+            protected_header = optional_protected_header
         else:
-            header = {}
+            protected_header = {}
+
+        if optional_unprotected_header is not None:
+            unprotected_header = optional_unprotected_header
+        else:
+            unprotected_header = {}
+
         if self._key.key_id:
-            header["kid"] = self._key.key_id
-        header["alg"] = self._alg
+            unprotected_header["kid"] = self._key.key_id
+        protected_header["alg"] = self._alg
 
         key = COSEKey.from_jwk(self._key)
 
@@ -140,7 +148,8 @@ class StatusListToken:
         encoded = sender.encode(
             claims,
             key,
-            protected=header
+            protected=protected_header,
+            unprotected=unprotected_header
         )
 
         return encoded
