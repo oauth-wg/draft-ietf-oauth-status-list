@@ -192,7 +192,7 @@ This section defines the structure for a JSON-encoded Status List:
 The following example illustrates the JSON representation of the Status List:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding}
+{::include ./examples/status_list_encoding_json}
 ~~~~~~~~~~
 
 ## Status List in CBOR Format {#status-list-cbor}
@@ -206,7 +206,7 @@ The `StatusList` structure is a map (Major Type 5) and defines the following ent
 The following example illustrates the CBOR representation of the Status List:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding}
+{::include ./examples/status_list_encoding_cbor}
 ~~~~~~~~~~
 
 # Status List Token {#status-list-token}
@@ -398,7 +398,7 @@ index      3   2   1   0      7   6   5   4      11  10  9   8
 Resulting in the byte array and compressed/base64url encoded status list:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding2}
+{::include ./examples/status_list_encoding2_json}
 ~~~~~~~~~~
 
 # Security Considerations {#Security}
