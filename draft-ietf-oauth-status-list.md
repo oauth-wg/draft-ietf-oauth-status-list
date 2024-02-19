@@ -197,7 +197,17 @@ The following example illustrates the JSON representation of the Status List:
 
 ## Status List in CBOR Format {#status-list-cbor}
 
-TBD
+This section defines the `StatusList` structure for a CBOR-encoded Status List.
+
+The `StatusList` structure is a map (Major Type 5) and defines the following entries:
+* `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits in the per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
+* `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
+
+The following example illustrates the CBOR representation of the Status List:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding}
+~~~~~~~~~~
 
 # Status List Token {#status-list-token}
 

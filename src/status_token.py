@@ -1,4 +1,5 @@
 from jwcrypto import jwk, jwt
+from cwt import COSE, COSEKey
 from status_list import StatusList
 from datetime import datetime
 from typing import Dict
@@ -33,11 +34,11 @@ class StatusListToken:
             self.bits = bits
         self.issuer = issuer
         self.subject = subject
-        self._key = key
+        self._key = key        
         if alg is not None:
             self._alg = alg
         else:
-            self._alg = DEFAULT_ALG
+            self._alg = DEFAULT_ALG            
 
     @classmethod
     def fromJWT(cls, input: str, key: jwk.JWK):
@@ -88,7 +89,7 @@ class StatusListToken:
         claims["iat"] = int(iat.timestamp())
         if exp is not None:
             claims["exp"] = int(exp.timestamp())
-        claims["status_list"] = self.list.encodeObject()
+        claims["status_list"] = self.list.encodeAsJSON()
 
         # build header
         if optional_header is not None:
@@ -103,3 +104,43 @@ class StatusListToken:
         token = jwt.JWT(header=header, claims=claims)
         token.make_signed_token(self._key)
         return token.serialize(compact=compact)
+    
+    def buildCWT(
+        self,
+        iat: datetime = datetime.utcnow(),
+        exp: datetime = None,
+        optional_claims: Dict = None,
+        optional_header: Dict = None
+    ) -> bytes:
+        # build claims
+        if optional_claims is not None:
+            claims = optional_claims
+        else:
+            claims = {}
+        claims[2] = self.subject
+        claims[1] = self.issuer
+        claims[6] = int(iat.timestamp())
+        if exp is not None:
+            claims[4] = int(exp.timestamp())
+        claims[-65537] = self.list.encodeAsCBOR() # no CWT claim key assigned yet by IANA
+
+        # build header
+        if optional_header is not None:
+            header = optional_header
+        else:
+            header = {}
+        if self._key.key_id:
+            header["kid"] = self._key.key_id
+        header["alg"] = self._alg
+
+        key = COSEKey.from_jwk(self._key)
+
+        # The sender side:
+        sender = COSE.new()
+        encoded = sender.encode(
+            claims,
+            key,
+            protected=header
+        )
+
+        return encoded

@@ -1,6 +1,7 @@
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 from typing import Dict
 import zlib
+from cbor2 import dumps, loads
 
 
 class StatusList:
@@ -21,22 +22,33 @@ class StatusList:
         new.decode(encoded)
         return new
 
-    def encode(self) -> str:
+    def encodeAsString(self) -> str:
         zipped = zlib.compress(self.list, level=9)
         return urlsafe_b64encode(zipped).decode().strip("=")
-    
-    def encodeObject(self) -> Dict:
-        encoded_list = self.encode()
+
+    def encodeAsBytes(self) -> bytes:
+        return zlib.compress(self.list, level=9)
+
+    def encodeAsJSON(self) -> Dict:
+        encoded_list = self.encodeAsString()
         object = {
             "bits": self.bits,
             "lst": encoded_list,
         }
         return object
 
-    def decode(self, input: str):
-        zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
-        self.list = bytearray(zlib.decompress(zipped))
-        self.size = len(self.list) * self.divisor
+    def encodeAsCBOR(self) -> Dict:
+        encoded_list = self.encodeAsBytes()
+        object = {
+            "bits": self.bits,
+            "lst": encoded_list,
+        }
+        return dumps(object)
+
+    #def decode(self, input: str):
+    #    zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
+    #    self.list = bytearray(zlib.decompress(zipped))
+    #    self.size = len(self.list) * self.divisor
 
     def set(self, pos: int, value: int):
         assert value < 2**self.bits

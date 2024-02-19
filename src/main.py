@@ -50,26 +50,45 @@ def exampleStatusList2Bit() -> StatusList:
 
 def statusListEncoding1Bit():
     status_list = exampleStatusList1Bit()
-    encoded = status_list.encodeObject()
+    encoded = status_list.encodeAsJSON()
     text = "byte_array = [{}, {}] \nencoded:\n{}".format(
         hex(status_list.list[0]),
         hex(status_list.list[1]),
         util.printObject(encoded)
     )
-    util.outputFile(folder + "status_list_encoding", text)
+    util.outputFile(folder + "status_list_encoding_json", text)
 
+def statusListEncoding1BitCBOR():
+    status_list = exampleStatusList1Bit()
+    encoded = status_list.encodeAsCBOR()
+    text = "byte_array = [{}, {}] \nencoded:\n{}".format(
+        hex(status_list.list[0]),
+        hex(status_list.list[1]),
+        encoded.hex()
+    )
+    util.outputFile(folder + "status_list_encoding_cbor", text)
 
 def statusListEncoding2Bit():
     status_list = exampleStatusList2Bit()
-    encoded = status_list.encodeObject()
+    encoded = status_list.encodeAsJSON()
     text = "byte_array = [{}, {}, {}] \nencoded:\n{}".format(
         hex(status_list.list[0]),
         hex(status_list.list[1]),
         hex(status_list.list[2]),
         util.printObject(encoded),
     )
-    util.outputFile(folder + "status_list_encoding2", text)
+    util.outputFile(folder + "status_list_encoding2_json", text)
 
+def statusListEncoding2BitCBOR():
+    status_list = exampleStatusList2Bit()
+    encoded = status_list.encodeAsCBOR()
+    text = "byte_array = [{}, {}, {}] \nencoded:\n{}".format(
+        hex(status_list.list[0]),
+        hex(status_list.list[1]),
+        hex(status_list.list[2]),
+        encoded.hex(),
+    )
+    util.outputFile(folder + "status_list_encoding2_cbor", text)
 
 def statusListJWT():
     status_list = exampleStatusList1Bit()
@@ -83,6 +102,16 @@ def statusListJWT():
     text = util.formatToken(status_jwt, key)
     util.outputFile(folder + "status_list_jwt", text)
 
+def statusListCWT():
+    status_list = exampleStatusList1Bit()
+    cwt = StatusListToken(
+        issuer="https://example.com",
+        subject="https://example.com/statuslists/1",
+        list=status_list,
+        key=key,
+    )
+    status_cwt = cwt.buildCWT(iat=iat, exp=exp)
+    util.outputFile(folder + "status_list_cwt", status_cwt.hex())
 
 if __name__ == "__main__":
     if not os.path.exists(folder):
@@ -90,3 +119,6 @@ if __name__ == "__main__":
     statusListEncoding1Bit()
     statusListEncoding2Bit()
     statusListJWT()
+    statusListEncoding1BitCBOR()
+    statusListEncoding2BitCBOR()
+    statusListCWT()
