@@ -34,18 +34,7 @@ normative:
   RFC9110: RFC9110
   RFC9111: RFC9111
   IANA.JWT: IANA.JWT
-  SDJWTVC:
-      title: "SD-JWT-based Verifiable Credentials (SD-JWT VC)"
-      author:
-        -
-          ins: O. Terbu
-          name: Oliver Terbu
-        -
-          ins: D. Fett
-          name: Daniel Fett
-        -
-          ins: B. Campbell
-          name: Brian Campbell
+  SDJWTVC: I-D.ietf-oauth-sd-jwt-vc
 informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
