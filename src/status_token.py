@@ -35,11 +35,11 @@ class StatusListToken:
             self.bits = bits
         self.issuer = issuer
         self.subject = subject
-        self._key = key        
+        self._key = key
         if alg is not None:
             self._alg = alg
         else:
-            self._alg = DEFAULT_ALG            
+            self._alg = DEFAULT_ALG
 
     @classmethod
     def fromJWT(cls, input: str, key: jwk.JWK):

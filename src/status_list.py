@@ -45,10 +45,10 @@ class StatusList:
         }
         return dumps(object)
 
-    #def decode(self, input: str):
-    #    zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
-    #    self.list = bytearray(zlib.decompress(zipped))
-    #    self.size = len(self.list) * self.divisor
+    def decode(self, input: str):
+        zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
+        self.list = bytearray(zlib.decompress(zipped))
+        self.size = len(self.list) * self.divisor
 
     def set(self, pos: int, value: int):
         assert value < 2**self.bits
