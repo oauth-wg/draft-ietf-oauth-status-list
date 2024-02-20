@@ -24,13 +24,16 @@ author:
     email: chris.bormann@gmx.de
 
 normative:
-  RFC7519: RFC7519
-  RFC8392: RFC8392
-  RFC3986: RFC3986
   RFC1950: RFC1950
   RFC1951: RFC1951
-  RFC7515: RFC7515
+  RFC3986: RFC3986
   RFC6125: RFC6125
+  RFC7515: RFC7515
+  RFC7519: RFC7519
+  RFC8152: RFC8152
+  RFC8259: RFC8259
+  RFC8392: RFC8392
+  RFC8949: RFC8949
   RFC9110: RFC9110
   RFC9111: RFC9111
   IANA.JWT: IANA.JWT
@@ -118,7 +121,7 @@ Status List Token:
 : A token in JWT or CWT representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A token in JWT or CWT representation which contains a reference to a Status List or Status List Token. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
+: A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{RFC8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC8152}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
 
 # Status List {#status-list}
 
@@ -201,7 +204,7 @@ The following content applies to the JWT Header:
 
 The following content applies to the JWT Claims Set:
 
-* `iss`: REQUIRED. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the Referenced Token.
+* `iss`: REQUIRED when also present in the Referenced Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the Referenced Token.
 * `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for that Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `iat`: REQUIRED. The `iat` (issued at) claim MUST specify the time at which the Status List Token was issued.
 * `exp`: OPTIONAL. The `exp` (expiration time) claim MAY convey the time at which it is considered expired by its Issuer.
@@ -239,7 +242,7 @@ The Referenced Token MUST be encoded as a "JSON Web Token (JWT)" according to {{
 
 The following content applies to the JWT Claims Set:
 
-* `iss`: REQUIRED. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.
+* `iss`: REQUIRED when also present in the Status List Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.
 * `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains at least one reference to a status mechanism.
   * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. The object contains exactly two claims:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
@@ -593,6 +596,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -02
 
+* relax requirements on referenced token
 * clarify Deflate / zlib compression
 * make a reference to the Issuer-Holder-Verifier model of SD-JWT VC
 
