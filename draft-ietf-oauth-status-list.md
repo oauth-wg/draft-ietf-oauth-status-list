@@ -31,7 +31,9 @@ normative:
   RFC7515: RFC7515
   RFC7519: RFC7519
   RFC8152: RFC8152
+  RFC8259: RFC8259
   RFC8392: RFC8392
+  RFC8949: RFC8949
   RFC9110: RFC9110
   RFC9111: RFC9111
   IANA.JWT: IANA.JWT
@@ -118,7 +120,7 @@ Status List Token:
 : A token in JWT or CWT representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A cryptographically secured container which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use secured containers based on JSON Object Signing as defined in {{RFC7515}} and {{RFC7519}} or CBOR Object Signing and Encryption as defined in {{RFC8152}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
+: A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC8152}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
 
 # Status List {#status-list}
 
