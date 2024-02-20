@@ -68,7 +68,7 @@ def statusListEncoding1BitCBOR():
         hex_encoded
     )
     util.outputFile(folder + "status_list_encoding_cbor", text)
-    os.system("cborg hex2diag " + hex_encoded + " > " + folder + "status_list_encoding1_cbor_diag")
+    os.system("cborg hex2diag " + hex_encoded + " > " + folder + "status_list_encoding_cbor_diag")
 
 def statusListEncoding2Bit():
     status_list = exampleStatusList2Bit()
