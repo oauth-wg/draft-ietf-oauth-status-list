@@ -36,6 +36,7 @@ normative:
   RFC8259: RFC8259
   RFC8392: RFC8392
   RFC8949: RFC8949
+  RFC9052: RFC9052
   RFC9110: RFC9110
   RFC9111: RFC9111
   SDJWTVC: I-D.ietf-oauth-sd-jwt-vc
@@ -691,6 +692,7 @@ for their valuable contributions, discussions and feedback to this specification
 * relax requirements on referenced token
 * clarify Deflate / zlib compression
 * make a reference to the Issuer-Holder-Verifier model of SD-JWT VC
+* add COSE/CWT/BOR encoding
 
 -01
 
