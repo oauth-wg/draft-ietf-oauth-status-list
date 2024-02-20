@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 16 August 2024                                                 
+Expires: 23 August 2024                                                 
                                                               C. Bormann
-                                                        13 February 2024
+                                                        20 February 2024
 
 
                            Token Status List
@@ -48,7 +48,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 August 2024.
+   This Internet-Draft will expire on 23 August 2024.
 
 Copyright Notice
 
@@ -152,8 +152,8 @@ Table of Contents
 
    Another possible use case for the Status List is to express the
    status of verifiable credentials (Referenced Tokens) issued by an
-   issuer in the Issuer-Holder-Verifier model.  The following diagram
-   depicts the basic conceptual relationship.
+   Issuer in the Issuer-Holder-Verifier model [SDJWTVC].  The following
+   diagram depicts the basic conceptual relationship.
 
    +-------------------+                  +------------------------+
    |                   | describes status |                        |
@@ -382,7 +382,7 @@ Table of Contents
       which the Status List Token was issued.
 
    *  exp: OPTIONAL.  The exp (expiration time) claim MAY convey the
-      time at which it is considered expired by its issuer.
+      time at which it is considered expired by its Issuer.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the rules outlined in
@@ -431,7 +431,7 @@ Table of Contents
 
 6.1.  Status Claim
 
-   By including a "status" claim in a Referenced Token, the issuer is
+   By including a "status" claim in a Referenced Token, the Issuer is
    referencing a mechanism to retrieve status information about this
    Referenced Token.  The claim contains members used to reference to a
    status list as defined in this specification.  Other members of the
@@ -670,12 +670,12 @@ Table of Contents
 11.1.  Issuer tracking and Herd Privacy
 
    The main privacy consideration for a Status List, especially in the
-   context of the Issuer-Holder-Verifier model, is to prevent the Issuer
-   from tracking the usage of the Referenced Token when the status is
-   being checked.  If an Issuer offers status information by referencing
-   a specific token, this would enable him to create a profile for the
-   issued token by correlating the date and identity of Relying Parties,
-   that are requesting the status.
+   context of the Issuer-Holder-Verifier model [SDJWTVC], is to prevent
+   the Issuer from tracking the usage of the Referenced Token when the
+   status is being checked.  If an Issuer offers status information by
+   referencing a specific token, this would enable him to create a
+   profile for the issued token by correlating the date and identity of
+   Relying Parties, that are requesting the status.
 
    The Status List approaches these privacy implications by integrating
    the status information of many Referenced Tokens into the same list.
@@ -1059,6 +1059,12 @@ Table of Contents
               DOI 10.17487/RFC9111, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9111>.
 
+   [SDJWTVC]  Terbu, O. and D. Fett, "SD-JWT-based Verifiable
+              Credentials (SD-JWT VC)", Work in Progress, Internet-
+              Draft, draft-ietf-oauth-sd-jwt-vc-01, 23 October 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              sd-jwt-vc-01>.
+
 14.2.  Informative References
 
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
@@ -1088,6 +1094,8 @@ Document History
    -02
 
    *  clarify Deflate / zlib compression
+
+   *  make a reference to the Issuer-Holder-Verifier model of SD-JWT VC
 
    -01
 
