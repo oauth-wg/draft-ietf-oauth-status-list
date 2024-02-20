@@ -32,9 +32,13 @@ normative:
   RFC6838: RFC6838
   RFC7515: RFC7515
   RFC7519: RFC7519
+  RFC8152: RFC8152
+  RFC8259: RFC8259
   RFC8392: RFC8392
+  RFC8949: RFC8949
   RFC9110: RFC9110
   RFC9111: RFC9111
+  SDJWTVC: I-D.ietf-oauth-sd-jwt-vc
   IANA.JWT:
     author:
       org: "IANA"
@@ -45,7 +49,6 @@ normative:
       org: "IANA"
     title: "JSON Web Token Claims"
     target: "https://www.iana.org/assignments/jwt/jwt.xhtml"
-
 informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
@@ -66,7 +69,7 @@ This document defines a Status List and its representations in JSON and CBOR for
 
 An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.
 
-Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an issuer in the Issuer-Holder-Verifier model.
+Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SDJWTVC}}.
 The following diagram depicts the basic conceptual relationship.
 
 ~~~ ascii-art
@@ -129,7 +132,7 @@ Status List Token:
 : A token in JWT or CWT representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A token in JWT or CWT representation which contains a reference to a Status List or Status List Token. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
+: A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{RFC8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC8152}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
 
 # Status List {#status-list}
 
@@ -212,10 +215,10 @@ The following content applies to the JWT Header:
 
 The following content applies to the JWT Claims Set:
 
-* `iss`: REQUIRED. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the Referenced Token.
+* `iss`: REQUIRED when also present in the Referenced Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the Referenced Token.
 * `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for that Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `iat`: REQUIRED. The `iat` (issued at) claim MUST specify the time at which the Status List Token was issued.
-* `exp`: OPTIONAL. The `exp` (expiration time) claim MAY convey the time at which it is considered expired by its issuer.
+* `exp`: OPTIONAL. The `exp` (expiration time) claim MAY convey the time at which it is considered expired by its Issuer.
 * `status_list`: REQUIRED. The `status_list` (status list) claim MUST specify the Status List conforming to the rules outlined in [](#status-list-json).
 
 The following additional rules apply:
@@ -242,7 +245,7 @@ TBD
 
 ## Status Claim {#status-claim}
 
-By including a "status" claim in a Referenced Token, the issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
+By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
 ## Referenced Token in JWT Format {#referenced-token-jwt}
 
@@ -250,7 +253,7 @@ The Referenced Token MUST be encoded as a "JSON Web Token (JWT)" according to {{
 
 The following content applies to the JWT Claims Set:
 
-* `iss`: REQUIRED. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.
+* `iss`: REQUIRED when also present in the Status List Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.
 * `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains at least one reference to a status mechanism.
   * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. The object contains exactly two claims:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
@@ -406,7 +409,7 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 
 ## Issuer tracking and Herd Privacy {#privacy-issuer}
 
-The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
+The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{SDJWTVC}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
 The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.
 
@@ -604,7 +607,9 @@ for their valuable contributions, discussions and feedback to this specification
 
 -02
 
+* relax requirements on referenced token
 * clarify Deflate / zlib compression
+* make a reference to the Issuer-Holder-Verifier model of SD-JWT VC
 
 -01
 
