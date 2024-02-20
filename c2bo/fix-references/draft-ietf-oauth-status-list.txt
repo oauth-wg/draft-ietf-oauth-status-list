@@ -152,8 +152,8 @@ Table of Contents
 
    Another possible use case for the Status List is to express the
    status of verifiable credentials (Referenced Tokens) issued by an
-   issuer in the Issuer-Holder-Verifier model.  The following diagram
-   depicts the basic conceptual relationship.
+   Issuer in the Issuer-Holder-Verifier model [SDJWTVC].  The following
+   diagram depicts the basic conceptual relationship.
 
    +-------------------+                  +------------------------+
    |                   | describes status |                        |
@@ -248,11 +248,14 @@ Table of Contents
    Status List Token:  A token in JWT or CWT representation that
       contains a cryptographically secured Status List.
 
-   Referenced Token:  A token in JWT or CWT representation which
-      contains a reference to a Status List or Status List Token.  The
-      information from the contained Status List may give a Relying
-      Party additional information about up-to-date status of the
-      Referenced Token.
+   Referenced Token:  A cryptographically secured data structure which
+      contains a reference to a Status List or Status List Token.  It is
+      RECOMMENDED to use JSON [RFC8259] or CBOR [RFC8949] for
+      representation of the token and secure it using JSON Object
+      Signing as defined in [RFC7515] or CBOR Object Signing and
+      Encryption as defined in [RFC8152].  The information from the
+      contained Status List may give a Relying Party additional
+      information about up-to-date status of the Referenced Token.
 
 4.  Status List
 
@@ -365,13 +368,14 @@ Table of Contents
 
    The following content applies to the JWT Claims Set:
 
-   *  iss: REQUIRED.  The iss (issuer) claim MUST specify a unique
-      string identifier for the entity that issued the Status List
-      Token.  In the absence of an application profile specifying
-      otherwise, compliant applications MUST compare issuer values using
-      the Simple String Comparison method defined in Section 6.2.1 of
-      [RFC3986].  The value MUST be equal to that of the iss claim
-      contained within the Referenced Token.
+   *  iss: REQUIRED when also present in the Referenced Token.  The iss
+      (issuer) claim MUST specify a unique string identifier for the
+      entity that issued the Status List Token.  In the absence of an
+      application profile specifying otherwise, compliant applications
+      MUST compare issuer values using the Simple String Comparison
+      method defined in Section 6.2.1 of [RFC3986].  The value MUST be
+      equal to that of the iss claim contained within the Referenced
+      Token.
 
    *  sub: REQUIRED.  The sub (subject) claim MUST specify a unique
       string identifier for that Status List Token.  The value MUST be
@@ -382,7 +386,7 @@ Table of Contents
       which the Status List Token was issued.
 
    *  exp: OPTIONAL.  The exp (expiration time) claim MAY convey the
-      time at which it is considered expired by its issuer.
+      time at which it is considered expired by its Issuer.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the rules outlined in
@@ -431,7 +435,7 @@ Table of Contents
 
 6.1.  Status Claim
 
-   By including a "status" claim in a Referenced Token, the issuer is
+   By including a "status" claim in a Referenced Token, the Issuer is
    referencing a mechanism to retrieve status information about this
    Referenced Token.  The claim contains members used to reference to a
    status list as defined in this specification.  Other members of the
@@ -446,13 +450,14 @@ Table of Contents
 
    The following content applies to the JWT Claims Set:
 
-   *  iss: REQUIRED.  The iss (issuer) claim MUST specify a unique
-      string identifier for the entity that issued the Referenced Token.
-      In the absence of an application profile specifying otherwise,
-      compliant applications MUST compare issuer values using the Simple
-      String Comparison method defined in Section 6.2.1 of [RFC3986].
-      The value MUST be equal to that of the iss claim contained within
-      the referenced Status List Token.
+   *  iss: REQUIRED when also present in the Status List Token.  The iss
+      (issuer) claim MUST specify a unique string identifier for the
+      entity that issued the Referenced Token.  In the absence of an
+      application profile specifying otherwise, compliant applications
+      MUST compare issuer values using the Simple String Comparison
+      method defined in Section 6.2.1 of [RFC3986].  The value MUST be
+      equal to that of the iss claim contained within the referenced
+      Status List Token.
 
    *  status: REQUIRED.  The status (status) claim MUST specify a JSON
       Object that contains at least one reference to a status mechanism.
@@ -670,12 +675,12 @@ Table of Contents
 11.1.  Issuer tracking and Herd Privacy
 
    The main privacy consideration for a Status List, especially in the
-   context of the Issuer-Holder-Verifier model, is to prevent the Issuer
-   from tracking the usage of the Referenced Token when the status is
-   being checked.  If an Issuer offers status information by referencing
-   a specific token, this would enable him to create a profile for the
-   issued token by correlating the date and identity of Relying Parties,
-   that are requesting the status.
+   context of the Issuer-Holder-Verifier model [SDJWTVC], is to prevent
+   the Issuer from tracking the usage of the Referenced Token when the
+   status is being checked.  If an Issuer offers status information by
+   referencing a specific token, this would enable him to create a
+   profile for the issued token by correlating the date and identity of
+   Relying Parties, that are requesting the status.
 
    The Status List approaches these privacy implications by integrating
    the status information of many Referenced Tokens into the same list.
@@ -1053,13 +1058,27 @@ Table of Contents
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7519>.
 
+   [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
+              RFC 8152, DOI 10.17487/RFC8152, July 2017,
+              <https://www.rfc-editor.org/rfc/rfc8152>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, December 2017,
+              <https://www.rfc-editor.org/rfc/rfc8259>.
+
    [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
               May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
+
+   [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
+              Representation (CBOR)", STD 94, RFC 8949,
+              DOI 10.17487/RFC8949, December 2020,
+              <https://www.rfc-editor.org/rfc/rfc8949>.
 
    [RFC9110]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
               Ed., "HTTP Semantics", STD 97, RFC 9110,
@@ -1070,6 +1089,12 @@ Table of Contents
               Ed., "HTTP Caching", STD 98, RFC 9111,
               DOI 10.17487/RFC9111, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9111>.
+
+   [SDJWTVC]  Terbu, O. and D. Fett, "SD-JWT-based Verifiable
+              Credentials (SD-JWT VC)", Work in Progress, Internet-
+              Draft, draft-ietf-oauth-sd-jwt-vc-01, 23 October 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              sd-jwt-vc-01>.
 
 14.2.  Informative References
 
@@ -1099,7 +1124,11 @@ Document History
 
    -02
 
+   *  relax requirements on referenced token
+
    *  clarify Deflate / zlib compression
+
+   *  make a reference to the Issuer-Holder-Verifier model of SD-JWT VC
 
    -01
 
