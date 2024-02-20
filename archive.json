@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-18T00:57:45.976975+00:00",
+  "timestamp": "2024-02-20T00:53:26.664146+00:00",
   "repo": "vcstuff/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -4118,7 +4118,7 @@
       "labels": [],
       "body": "## \ud83d\udcd1 Description\r\nadds support for `ttl` instructions for consumers/verifiers - this is important, especially with signed lists to separate the requirement to sign and reissue from when a client or cdn needs to fetch a fresh copy of the list",
       "createdAt": "2023-08-02T18:46:01Z",
-      "updatedAt": "2024-02-16T01:25:14Z",
+      "updatedAt": "2024-02-19T15:52:54Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "70e860b9cd190741593d92cd0b8e27394137bda9",
@@ -4258,6 +4258,126 @@
               "body": "```suggestion\r\n6. The JWT MAY contain a \"ttl\" (time to live) claim that conveys the maximum amount of time, in seconds, that the JWT may be cached by a client before a fresh copy is retrieved. The value of the claim MUST be a positive number.\r\n```",
               "createdAt": "2024-02-16T01:25:13Z",
               "updatedAt": "2024-02-16T01:25:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wkz_e",
+          "commit": {
+            "abbreviatedOid": "b0947c3"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-19T15:29:01Z",
+          "updatedAt": "2024-02-19T15:29:02Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Why are we creating a new claim, that does basically the same thing as `exp` ?",
+              "createdAt": "2024-02-19T15:29:02Z",
+              "updatedAt": "2024-02-19T15:29:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wk0H0",
+          "commit": {
+            "abbreviatedOid": "b0947c3"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-19T15:29:14Z",
+          "updatedAt": "2024-02-19T15:29:15Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-02-19T15:29:15Z",
+              "updatedAt": "2024-02-19T15:29:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wk0Wb",
+          "commit": {
+            "abbreviatedOid": "b0947c3"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-19T15:29:35Z",
+          "updatedAt": "2024-02-19T15:29:35Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "^ remove throwaway sentence",
+              "createdAt": "2024-02-19T15:29:35Z",
+              "updatedAt": "2024-02-19T15:29:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wk0nR",
+          "commit": {
+            "abbreviatedOid": "b0947c3"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-19T15:30:03Z",
+          "updatedAt": "2024-02-19T15:30:03Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "are you sure encrypted JWT are not allowed?",
+              "createdAt": "2024-02-19T15:30:03Z",
+              "updatedAt": "2024-02-19T15:30:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wk0_e",
+          "commit": {
+            "abbreviatedOid": "b0947c3"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-19T15:30:51Z",
+          "updatedAt": "2024-02-19T15:30:52Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "prefer to not register this claim... just make `exp` required.",
+              "createdAt": "2024-02-19T15:30:51Z",
+              "updatedAt": "2024-02-19T15:30:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wlBTQ",
+          "commit": {
+            "abbreviatedOid": "b0947c3"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-19T15:52:54Z",
+          "updatedAt": "2024-02-19T15:52:54Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "you actually approved the same idea half a year ago? The idea is that Issuers/Status List Providers may not want to resign the whole Status List if nothing has changed, therefore `ttl` communicates the update interval of the Issuer, so that RP knows how often to check for updates and `exp` communicates \"do not use this list after this point of time\"",
+              "createdAt": "2024-02-19T15:52:54Z",
+              "updatedAt": "2024-02-19T15:52:55Z"
             }
           ]
         }
@@ -6370,13 +6490,180 @@
       "labels": [],
       "body": "Fixes most of #92 \r\n\r\n## \ud83d\udcd1 Description\r\n- Relaxes requirements on referenced token in terminology\r\n- issuer in status list token is only required when also present in referenced token (and matching checked)\r\n- reorder references\r\n\r\n\r\n## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/relax-referenced-token/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-17T12:52:48Z",
-      "updatedAt": "2024-02-17T12:52:49Z",
+      "updatedAt": "2024-02-18T14:55:27Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
       "headRepository": "vcstuff/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/relax-referenced-token",
       "headRefOid": "e90099b893be4b3dedc115133fb93e1c3242a957",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs5wfT_K",
+          "commit": {
+            "abbreviatedOid": "e90099b"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-18T14:52:53Z",
+          "updatedAt": "2024-02-18T14:55:27Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "I'm unsure about the word container, maybe token is better",
+              "createdAt": "2024-02-18T14:52:53Z",
+              "updatedAt": "2024-02-18T14:55:27Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 103,
+      "id": "PR_kwDOJZ2aqs5nToXW",
+      "title": "add SD-JWT VC as reference to the Issuer-Holder-Verifier model",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/103",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses # <!-- Issue # here -->\r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/paulbastian/sd-jwt-ref#go.draft-ietf-oauth-status-list.html)",
+      "createdAt": "2024-02-19T16:06:51Z",
+      "updatedAt": "2024-02-19T20:56:48Z",
+      "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
+      "headRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "headRefName": "paulbastian/sd-jwt-ref",
+      "headRefOid": "19ab5a5a35ebab6fbfb9ea83365c329408adabee",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs5wl7RY",
+          "commit": {
+            "abbreviatedOid": "f2b03d6"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-19T18:21:04Z",
+          "updatedAt": "2024-02-19T18:21:05Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\n  SDJWTVC: I-D.ietf-oauth-sd-jwt-vc\r\n```",
+              "createdAt": "2024-02-19T18:21:04Z",
+              "updatedAt": "2024-02-19T18:21:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wmjsY",
+          "commit": {
+            "abbreviatedOid": "19ab5a5"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-19T20:56:48Z",
+          "updatedAt": "2024-02-19T20:56:48Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 104,
+      "id": "PR_kwDOJZ2aqs5nUfhH",
+      "title": "fix broken references",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/104",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/fix-references/draft-ietf-oauth-status-list.html)",
+      "createdAt": "2024-02-19T18:45:43Z",
+      "updatedAt": "2024-02-19T18:49:03Z",
+      "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
+      "headRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/fix-references",
+      "headRefOid": "782ffe7a28cf9e80c4e0d3b9190fbdb458af44d2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "waiting for the other PRs to merge",
+          "createdAt": "2024-02-19T18:49:02Z",
+          "updatedAt": "2024-02-19T18:49:02Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 105,
+      "id": "PR_kwDOJZ2aqs5nVTP7",
+      "title": "improve privacy consideration to recommend re-issuance",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/105",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses # <!-- Issue # here -->\r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
+      "createdAt": "2024-02-19T21:56:14Z",
+      "updatedAt": "2024-02-19T21:56:14Z",
+      "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
+      "headRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "headRefName": "60-privacy-considerations",
+      "headRefOid": "949c4cb72366be546cc721f09a5e0f500f15ce29",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 106,
+      "id": "PR_kwDOJZ2aqs5nVlIe",
+      "title": "Add CBOR/CWT encoding",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/106",
+      "state": "OPEN",
+      "author": "awoie",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #3\r\n\r\n## \ud83d\udcd1 Description\r\nThis PR adds:\r\n- CBOR/CWT encoding for status list and status list info\r\n- Example implementation for CBOR/CWT\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/vcstuff/draft-ietf-oauth-status-list/compare/awoie/add-cwt.html)",
+      "createdAt": "2024-02-19T23:31:12Z",
+      "updatedAt": "2024-02-19T23:31:12Z",
+      "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
+      "headRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "headRefName": "awoie/add-cwt",
+      "headRefOid": "6d980528c647fee6deb12be2a5e1c77d155beff0",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
