@@ -248,11 +248,14 @@ Table of Contents
    Status List Token:  A token in JWT or CWT representation that
       contains a cryptographically secured Status List.
 
-   Referenced Token:  A token in JWT or CWT representation which
-      contains a reference to a Status List or Status List Token.  The
-      information from the contained Status List may give a Relying
-      Party additional information about up-to-date status of the
-      Referenced Token.
+   Referenced Token:  A cryptographically secured data structure which
+      contains a reference to a Status List or Status List Token.  It is
+      RECOMMENDED to use JSON [RFC8259] or CBOR [RFC8949] for
+      representation of the token and secure it using JSON Object
+      Signing as defined in [RFC7515] or CBOR Object Signing and
+      Encryption as defined in [RFC8152].  The information from the
+      contained Status List may give a Relying Party additional
+      information about up-to-date status of the Referenced Token.
 
 4.  Status List
 
@@ -365,13 +368,14 @@ Table of Contents
 
    The following content applies to the JWT Claims Set:
 
-   *  iss: REQUIRED.  The iss (issuer) claim MUST specify a unique
-      string identifier for the entity that issued the Status List
-      Token.  In the absence of an application profile specifying
-      otherwise, compliant applications MUST compare issuer values using
-      the Simple String Comparison method defined in Section 6.2.1 of
-      [RFC3986].  The value MUST be equal to that of the iss claim
-      contained within the Referenced Token.
+   *  iss: REQUIRED when also present in the Referenced Token.  The iss
+      (issuer) claim MUST specify a unique string identifier for the
+      entity that issued the Status List Token.  In the absence of an
+      application profile specifying otherwise, compliant applications
+      MUST compare issuer values using the Simple String Comparison
+      method defined in Section 6.2.1 of [RFC3986].  The value MUST be
+      equal to that of the iss claim contained within the Referenced
+      Token.
 
    *  sub: REQUIRED.  The sub (subject) claim MUST specify a unique
       string identifier for that Status List Token.  The value MUST be
@@ -446,13 +450,14 @@ Table of Contents
 
    The following content applies to the JWT Claims Set:
 
-   *  iss: REQUIRED.  The iss (issuer) claim MUST specify a unique
-      string identifier for the entity that issued the Referenced Token.
-      In the absence of an application profile specifying otherwise,
-      compliant applications MUST compare issuer values using the Simple
-      String Comparison method defined in Section 6.2.1 of [RFC3986].
-      The value MUST be equal to that of the iss claim contained within
-      the referenced Status List Token.
+   *  iss: REQUIRED when also present in the Status List Token.  The iss
+      (issuer) claim MUST specify a unique string identifier for the
+      entity that issued the Referenced Token.  In the absence of an
+      application profile specifying otherwise, compliant applications
+      MUST compare issuer values using the Simple String Comparison
+      method defined in Section 6.2.1 of [RFC3986].  The value MUST be
+      equal to that of the iss claim contained within the referenced
+      Status List Token.
 
    *  status: REQUIRED.  The status (status) claim MUST specify a JSON
       Object that contains at least one reference to a status mechanism.
@@ -1041,13 +1046,27 @@ Table of Contents
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7519>.
 
+   [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
+              RFC 8152, DOI 10.17487/RFC8152, July 2017,
+              <https://www.rfc-editor.org/rfc/rfc8152>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
+              Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, December 2017,
+              <https://www.rfc-editor.org/rfc/rfc8259>.
+
    [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
               May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
+
+   [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
+              Representation (CBOR)", STD 94, RFC 8949,
+              DOI 10.17487/RFC8949, December 2020,
+              <https://www.rfc-editor.org/rfc/rfc8949>.
 
    [RFC9110]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
               Ed., "HTTP Semantics", STD 97, RFC 9110,
@@ -1092,6 +1111,8 @@ Acknowledgments
 Document History
 
    -02
+
+   *  relax requirements on referenced token
 
    *  clarify Deflate / zlib compression
 
