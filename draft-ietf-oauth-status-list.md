@@ -209,6 +209,12 @@ The following example illustrates the CBOR representation of the Status List:
 {::include ./examples/status_list_encoding_cbor}
 ~~~~~~~~~~
 
+The following is the CBOR diagnostic output of the example above:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding_cbor_diag}
+~~~~~~~~~~
+
 # Status List Token {#status-list-token}
 
 A Status List Token embeds the Status List into a token that is cryptographically signed and protects the integrity of the Status List. This allows for the Status List Token to be hosted by third parties or be transferred for offline use cases.
@@ -249,7 +255,43 @@ The following is a non-normative example for a Status List Token in JWT format:
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
 
-TBD
+The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}.
+
+Applications MAY use the media type `statuslist+cwt` for a CWT in accordance with the rules outlined in this specification.
+
+The following content applies to the CWT protected header:
+
+* `3` (content type): REQUIRED. The CWT content type MUST be `statuslist+cbor`.
+
+The following content applies to the CWT Claims Set:
+
+* `1` (issuer): REQUIRED. Same definition as `iss` claim in (#status-list-token-jwt).
+* `2` (subject): REQUIRED. Same definition as `sub` claim in (#status-list-token-jwt).
+* `6` (issued at): REQUIRED. Same definition as `iat` claim in (#status-list-token-jwt).
+* `4` (expiration time): OPTIONAL. Same definition as `exp` claim in (#status-list-token-jwt).
+* `TBD` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the rules outlined in [](#status-list-cbor).
+
+The following additional rules apply:
+
+1. The CWT MAY contain other claims.
+
+2. The CWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the JWT if it is using a Message Authentication Code (MAC) algorithm. Relying parties MUST reject CWTs with an invalid signature.
+
+3. Relying parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
+
+4. Application of additional restrictions and policy are at the discretion of the verifying party.
+
+The following is a non-normative example for a Status List Token in CWT format:
+
+~~~~~~~~~~
+{::include ./examples/status_list_cwt}
+~~~~~~~~~~
+
+The following is the CBOR diagnostic output of the example above:
+
+~~~~~~~~~~
+{::include ./examples/status_list_cwt_diag}
+~~~~~~~~~~
 
 # Referenced Token {#referenced-token}
 
@@ -291,9 +333,37 @@ The following is a non-normative example for a decoded header and payload of a R
 }
 ~~~
 
-## Referenced Token in CWT/CBOR Format {#referenced-token-cwt}
+## Referenced Token in CWT Format {#referenced-token-cwt}
 
-TBD
+The Referenced Token MUST be encoded as a "COSE Web Token (CWT)" object according to {{RFC8392}}.
+
+The following content applies to the JWT Claims Set:
+
+* `1` (issuer): REQUIRED. Same definition as `iss` claim in (#referenced-token-jwt).
+* `TBD` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:
+  * `status_list` (status list): REQUIRED when the status list mechanism defined in this specification is used. It has the same definition as the `status_list` claim in (#referenced-token-jwt) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
+    * `idx`: REQUIRED. Same definition as `idx` claim in (#referenced-token-jwt).
+    * `uri`: REQUIRED. Same definition as `uri` claim in (#referenced-token-jwt).
+
+Application of additional restrictions and policy are at the discretion of the verifying party.
+
+The following is a non-normative example for a decoded payload of a Referenced Token:
+
+TBD: example
+
+## Referenced Token in other COSE/CBOR Format {#referenced-token-cose}
+
+The Referenced Token MUST be encoded as a `COSE_Sign1` or `COSE_Sign` CBOR structure as defined in "CBOR Object Signing and Encryption (COSE)" {{RFC9052}}.
+
+It is required to encode the status mechanisms Referenced Tokens refer to using the `Status` CBOR structure defined in (#referenced-token-cwt).
+
+It is RECOMMENDED to use `status` for the label of the field that contains the `Status` CBOR structure.
+
+Application of additional restrictions and policy are at the discretion of the verifying party.
+
+The following is a non-normative example for a decoded payload of a Referenced Token:
+
+TBD: example
 
 # Status Types {#status-types}
 
@@ -605,6 +675,7 @@ Guiseppe De Marco,
 Kristina Yasuda,
 Michael B. Jones,
 Mike Prorock,
+Oliver Terbu,
 Orie Steele,
 Timo Glastra
 and
