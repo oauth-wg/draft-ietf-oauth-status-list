@@ -61,12 +61,14 @@ def statusListEncoding1Bit():
 def statusListEncoding1BitCBOR():
     status_list = exampleStatusList1Bit()
     encoded = status_list.encodeAsCBOR()
+    hex_encoded = encoded.hex()
     text = "byte_array = [{}, {}] \nencoded:\n{}".format(
         hex(status_list.list[0]),
         hex(status_list.list[1]),
-        encoded.hex()
+        hex_encoded
     )
     util.outputFile(folder + "status_list_encoding_cbor", text)
+    os.system("cborg hex2diag " + hex_encoded + " > " + folder + "status_list_encoding1_cbor_diag")
 
 def statusListEncoding2Bit():
     status_list = exampleStatusList2Bit()
@@ -82,13 +84,15 @@ def statusListEncoding2Bit():
 def statusListEncoding2BitCBOR():
     status_list = exampleStatusList2Bit()
     encoded = status_list.encodeAsCBOR()
+    hex_encoded = encoded.hex()
     text = "byte_array = [{}, {}, {}] \nencoded:\n{}".format(
         hex(status_list.list[0]),
         hex(status_list.list[1]),
         hex(status_list.list[2]),
-        encoded.hex(),
+        hex_encoded,
     )
     util.outputFile(folder + "status_list_encoding2_cbor", text)
+    os.system("cborg hex2diag " + hex_encoded + " > " + folder + "status_list_encoding2_cbor_diag")
 
 def statusListJWT():
     status_list = exampleStatusList1Bit()
@@ -111,7 +115,9 @@ def statusListCWT():
         key=key,
     )
     status_cwt = cwt.buildCWT(iat=iat, exp=exp)
-    util.outputFile(folder + "status_list_cwt", status_cwt.hex())
+    hex_encoded = status_cwt.hex()
+    util.outputFile(folder + "status_list_cwt", hex_encoded)
+    os.system("cborg hex2diag " + hex_encoded + " > " + folder + "status_list_cwt_diag")
 
 if __name__ == "__main__":
     if not os.path.exists(folder):
