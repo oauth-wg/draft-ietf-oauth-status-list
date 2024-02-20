@@ -36,7 +36,6 @@ normative:
   RFC8259: RFC8259
   RFC8392: RFC8392
   RFC8949: RFC8949
-  RFC9052: RFC9052
   RFC9110: RFC9110
   RFC9111: RFC9111
   SDJWTVC: I-D.ietf-oauth-sd-jwt-vc
@@ -57,14 +56,14 @@ informative:
 
 --- abstract
 
-This specification defines status list data structures for representing the status of JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}}, and other tokens secured by CBOR Object Signing and Encryption {{9052}}.
+This specification defines status list data structures for representing the status of JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}}, and other tokens secured by CBOR Object Signing and Encryption {{8152}}.
 The status list data structures themselves are also represented as JWTs or CWTs.
 
 --- middle
 
 # Introduction
 
-JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Object Signing and Encryption (COSE) {{9052}} objects, and CBOR Web Tokens (CWTs) {{RFC8392}} as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.
+JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Object Signing and Encryption (COSE) {{8152}} objects, and CBOR Web Tokens (CWTs) {{RFC8392}} as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.
 
 This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided by an endpoint or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).
 
@@ -354,7 +353,7 @@ TBD: example
 
 ## Referenced Token in other COSE/CBOR Format {#referenced-token-cose}
 
-The Referenced Token MUST be encoded as a `COSE_Sign1` or `COSE_Sign` CBOR structure as defined in "CBOR Object Signing and Encryption (COSE)" {{RFC9052}}.
+The Referenced Token MUST be encoded as a `COSE_Sign1` or `COSE_Sign` CBOR structure as defined in "CBOR Object Signing and Encryption (COSE)" {{RFC8152}}.
 
 It is required to encode the status mechanisms Referenced Tokens refer to using the `Status` CBOR structure defined in (#referenced-token-cwt).
 
