@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-20T00:53:26.664146+00:00",
+  "timestamp": "2024-02-22T00:53:43.259355+00:00",
   "repo": "vcstuff/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2129,7 +2129,7 @@
       "id": "I_kwDOJZ2aqs57vvYX",
       "title": "relax definition of Referenced Token",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/92",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2138,8 +2138,8 @@
       "labels": [],
       "body": "Referenced Token may not need to be CWT, to allow fitting this to mdoc. Referenced Token should as well be COSE-signed CBOR",
       "createdAt": "2024-01-11T09:13:02Z",
-      "updatedAt": "2024-02-13T08:06:28Z",
-      "closedAt": null,
+      "updatedAt": "2024-02-20T07:31:54Z",
+      "closedAt": "2024-02-20T07:31:54Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2225,7 +2225,7 @@
       "labels": [],
       "body": "To provide guidance for caching it might make sense to include a next update time in the status list. Or does `exp` provide this guidance?",
       "createdAt": "2024-01-23T16:05:20Z",
-      "updatedAt": "2024-02-13T08:07:14Z",
+      "updatedAt": "2024-02-20T07:27:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -2262,6 +2262,93 @@
           "body": "editors call:\r\n\r\n- after exp token must be refreshed\r\n- after ttl token may be refreshed\r\n- duration vs point of time\r\n- it should be a caching signal (like DNS), i.e. duration -> distribute caching/avoid spikes\r\n- take fetching time as start interval instead of iat?\r\n- information of ttl is informational, Verifiers may still recheck whenever say want",
           "createdAt": "2024-02-13T07:27:46Z",
           "updatedAt": "2024-02-13T07:27:46Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved by #101 ",
+          "createdAt": "2024-02-20T07:27:16Z",
+          "updatedAt": "2024-02-20T07:27:16Z"
+        }
+      ]
+    },
+    {
+      "number": 107,
+      "id": "I_kwDOJZ2aqs5_xnZj",
+      "title": "Add further implementation guidance around when and how to use ttl vs exp claim",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/107",
+      "state": "OPEN",
+      "author": "tplooker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Also consider the application and usage of a mechanism like etag to allow a consuming party to determine whether their copy of a given status list is the latest.",
+      "createdAt": "2024-02-20T07:31:30Z",
+      "updatedAt": "2024-02-20T07:46:33Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Include rationale for why we need both. \r\n- For example having a ttl claim and exp means the issuer of the status list doesn't need to resign it if there is no updates within the expiry window.\r\n- This approach also helps to spread out cache invalidation by downstream parties rather then synchronising them with an expected update time stamp. ",
+          "createdAt": "2024-02-20T07:46:32Z",
+          "updatedAt": "2024-02-20T07:46:32Z"
+        }
+      ]
+    },
+    {
+      "number": 108,
+      "id": "I_kwDOJZ2aqs5_xq69",
+      "title": "do we mandate the issuer of Referenced Token is the same entity issuing the Status List?",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/108",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-02-20T07:41:25Z",
+      "updatedAt": "2024-02-20T07:41:25Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 109,
+      "id": "I_kwDOJZ2aqs5_1J-7",
+      "title": "Use reference to RFC9052 instead of RFC8152",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/109",
+      "state": "OPEN",
+      "author": "awoie",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Use reference to RFC9052 instead of RFC8152",
+      "createdAt": "2024-02-20T15:26:39Z",
+      "updatedAt": "2024-02-20T15:26:40Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 110,
+      "id": "I_kwDOJZ2aqs5_1Lgz",
+      "title": "Rewrite abstract, intro and diagram to use JOSE/COSE centric",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/110",
+      "state": "OPEN",
+      "author": "awoie",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The abstract, intro, diagrams wrt referenced tokens description should refer to COSE and JOSE instead of CWT/JWT. Otherwise, non-CWT COSE objects such as ISO 18013-5 MSO cannot use this spec. Same applies to SD-JWT VC encoded secured using JWS.",
+      "createdAt": "2024-02-20T15:29:21Z",
+      "updatedAt": "2024-02-20T16:18:43Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We adjusted the terminology already, but the text in the introduction is not matching yet. In fact COSE is already mentioned at all places, so the question is whether we should align things and say Referenced Token = JOSE/COSE-based",
+          "createdAt": "2024-02-20T15:47:25Z",
+          "updatedAt": "2024-02-20T16:18:43Z"
         }
       ]
     }
@@ -6370,7 +6457,7 @@
       "labels": [],
       "body": "Alternative to #49 as it had gone stale.",
       "createdAt": "2024-02-17T09:27:41Z",
-      "updatedAt": "2024-02-17T12:20:54Z",
+      "updatedAt": "2024-02-20T07:51:24Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
@@ -6475,6 +6562,26 @@
               "updatedAt": "2024-02-17T12:19:43Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wonWf",
+          "commit": {
+            "abbreviatedOid": "559b370"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T07:51:24Z",
+          "updatedAt": "2024-02-20T07:51:24Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\n* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number.\r\n```",
+              "createdAt": "2024-02-20T07:51:24Z",
+              "updatedAt": "2024-02-20T07:51:24Z"
+            }
+          ]
         }
       ]
     },
@@ -6483,24 +6590,26 @@
       "id": "PR_kwDOJZ2aqs5nKlqR",
       "title": "relax requirements referenced token",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/102",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes most of #92 \r\n\r\n## \ud83d\udcd1 Description\r\n- Relaxes requirements on referenced token in terminology\r\n- issuer in status list token is only required when also present in referenced token (and matching checked)\r\n- reorder references\r\n\r\n\r\n## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/relax-referenced-token/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-17T12:52:48Z",
-      "updatedAt": "2024-02-18T14:55:27Z",
+      "updatedAt": "2024-02-20T07:26:47Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
       "headRepository": "vcstuff/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/relax-referenced-token",
-      "headRefOid": "e90099b893be4b3dedc115133fb93e1c3242a957",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "bf93b7e858c7ccfa6d2f72eb79e59bdcff55daea",
+      "closedAt": "2024-02-20T07:26:33Z",
+      "mergedAt": "2024-02-20T07:26:33Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "ff54acebe619eb51ccdf3f0e14d9d4c3db63ed79"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6522,6 +6631,139 @@
               "updatedAt": "2024-02-18T14:55:27Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5woX2X",
+          "commit": {
+            "abbreviatedOid": "e90099b"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T07:08:07Z",
+          "updatedAt": "2024-02-20T07:08:07Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "I agree I think token is better.",
+              "createdAt": "2024-02-20T07:08:07Z",
+              "updatedAt": "2024-02-20T07:08:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5woYhm",
+          "commit": {
+            "abbreviatedOid": "e90099b"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T07:10:20Z",
+          "updatedAt": "2024-02-20T07:10:20Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Maybe \"A cryptographically secured data structure\"",
+              "createdAt": "2024-02-20T07:10:20Z",
+              "updatedAt": "2024-02-20T07:10:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5woZT1",
+          "commit": {
+            "abbreviatedOid": "e90099b"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T07:12:53Z",
+          "updatedAt": "2024-02-20T07:12:53Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n: A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC8152}} respectively. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.\r\n```",
+              "createdAt": "2024-02-20T07:12:53Z",
+              "updatedAt": "2024-02-20T07:15:33Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5woaFV",
+          "commit": {
+            "abbreviatedOid": "e90099b"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T07:15:23Z",
+          "updatedAt": "2024-02-20T07:15:23Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\n  RFC8152: RFC8152\r\n  RFC8259: RFC8259\r\n  RFC8392: RFC8392\r\n  RFC8949: RFC8949\r\n```",
+              "createdAt": "2024-02-20T07:15:23Z",
+              "updatedAt": "2024-02-20T07:15:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wobJ_",
+          "commit": {
+            "abbreviatedOid": "e90099b"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T07:18:44Z",
+          "updatedAt": "2024-02-20T07:18:44Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\n* `iss`: REQUIRED when also present in the Status List Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.\r\n```",
+              "createdAt": "2024-02-20T07:18:44Z",
+              "updatedAt": "2024-02-20T07:18:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wobPa",
+          "commit": {
+            "abbreviatedOid": "f2921ac"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-20T07:18:59Z",
+          "updatedAt": "2024-02-20T07:18:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wobzh",
+          "commit": {
+            "abbreviatedOid": "a3eb5dc"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T07:20:45Z",
+          "updatedAt": "2024-02-20T07:20:45Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\n: A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{RFC8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC8152}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.\r\n```",
+              "createdAt": "2024-02-20T07:20:45Z",
+              "updatedAt": "2024-02-20T07:20:46Z"
+            }
+          ]
         }
       ]
     },
@@ -6530,24 +6772,26 @@
       "id": "PR_kwDOJZ2aqs5nToXW",
       "title": "add SD-JWT VC as reference to the Issuer-Holder-Verifier model",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/103",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses # <!-- Issue # here -->\r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/paulbastian/sd-jwt-ref#go.draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-19T16:06:51Z",
-      "updatedAt": "2024-02-19T20:56:48Z",
+      "updatedAt": "2024-02-20T07:19:52Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
       "headRepository": "vcstuff/draft-ietf-oauth-status-list",
       "headRefName": "paulbastian/sd-jwt-ref",
       "headRefOid": "19ab5a5a35ebab6fbfb9ea83365c329408adabee",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-02-20T07:19:52Z",
+      "mergedAt": "2024-02-20T07:19:52Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "22bffb592d9ea5fb127b8b66e690edc0b61c04a7"
+      },
       "comments": [],
       "reviews": [
         {
@@ -6582,6 +6826,19 @@
           "createdAt": "2024-02-19T20:56:48Z",
           "updatedAt": "2024-02-19T20:56:48Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5wobb-",
+          "commit": {
+            "abbreviatedOid": "19ab5a5"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-20T07:19:36Z",
+          "updatedAt": "2024-02-20T07:19:36Z",
+          "comments": []
         }
       ]
     },
@@ -6590,24 +6847,26 @@
       "id": "PR_kwDOJZ2aqs5nUfhH",
       "title": "fix broken references",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/104",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/fix-references/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-19T18:45:43Z",
-      "updatedAt": "2024-02-19T18:49:03Z",
+      "updatedAt": "2024-02-20T14:59:41Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
+      "baseRefOid": "ff54acebe619eb51ccdf3f0e14d9d4c3db63ed79",
       "headRepository": "vcstuff/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/fix-references",
-      "headRefOid": "782ffe7a28cf9e80c4e0d3b9190fbdb458af44d2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "c529788f6920110f7e86c18e2e66d6c2fd71ebfe",
+      "closedAt": "2024-02-20T14:59:41Z",
+      "mergedAt": "2024-02-20T14:59:41Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "0b836009d13c807fa5e56177748512332482a5d2"
+      },
       "comments": [
         {
           "author": "c2bo",
@@ -6617,7 +6876,41 @@
           "updatedAt": "2024-02-19T18:49:02Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs5wogwu",
+          "commit": {
+            "abbreviatedOid": "782ffe7"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T07:34:13Z",
+          "updatedAt": "2024-02-20T07:34:14Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "```suggestion\r\nthe \"Media Types\" registry{{IANA.MediaTypes}} in the manner described\r\nin {{RFC6838}}.\r\n```",
+              "createdAt": "2024-02-20T07:34:13Z",
+              "updatedAt": "2024-02-20T07:34:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5woqpH",
+          "commit": {
+            "abbreviatedOid": "c529788"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-02-20T07:59:23Z",
+          "updatedAt": "2024-02-20T07:59:23Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 105,
@@ -6631,7 +6924,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses # <!-- Issue # here -->\r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2024-02-19T21:56:14Z",
-      "updatedAt": "2024-02-19T21:56:14Z",
+      "updatedAt": "2024-02-21T20:01:07Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
@@ -6643,7 +6936,34 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs5w5w3F",
+          "commit": {
+            "abbreviatedOid": "949c4cb"
+          },
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2024-02-21T18:56:53Z",
+          "updatedAt": "2024-02-21T20:01:07Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\nThe lifetime of a Status List (and the Status List Token) depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List (and the Status List Token).\r\n```",
+              "createdAt": "2024-02-21T18:56:53Z",
+              "updatedAt": "2024-02-21T20:01:07Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\nReferenced Tokens may be regularly re-issued to increase security or to mitigate linkability and prevent tracking by Relying Parties. In this case, every Referenced Token SHOULD have a fresh Status List entry.\r\n```\r\nI agree in general, but i do believe this should be a SHOULD?",
+              "createdAt": "2024-02-21T19:58:18Z",
+              "updatedAt": "2024-02-21T20:01:07Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 106,
@@ -6655,21 +6975,85 @@
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
-      "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #3\r\n\r\n## \ud83d\udcd1 Description\r\nThis PR adds:\r\n- CBOR/CWT encoding for status list and status list info\r\n- Example implementation for CBOR/CWT\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/vcstuff/draft-ietf-oauth-status-list/compare/awoie/add-cwt.html)",
+      "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #3\r\n\r\n## \ud83d\udcd1 Description\r\nThis PR adds:\r\n- CBOR/CWT encoding for status list and status list info\r\n- Example implementation for CBOR/CWT\r\n\r\nNot included yet: examples for referenced tokens (COSE, CWT) but that should be trivial to add.\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/awoie/add-cwt/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-19T23:31:12Z",
-      "updatedAt": "2024-02-19T23:31:12Z",
+      "updatedAt": "2024-02-20T17:03:44Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
+      "baseRefOid": "0b836009d13c807fa5e56177748512332482a5d2",
       "headRepository": "vcstuff/draft-ietf-oauth-status-list",
       "headRefName": "awoie/add-cwt",
-      "headRefOid": "6d980528c647fee6deb12be2a5e1c77d155beff0",
+      "headRefOid": "138e7a4b60eddd059de53a7c98b737ebd0a949c9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The decoded cbor is:\r\n`{\"bits\": 1, \"lst\": h'78dadbb918000217015d'}`\r\n\r\nThe list does not seem to be valid zlib.",
+          "createdAt": "2024-02-20T07:26:16Z",
+          "updatedAt": "2024-02-20T07:26:16Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I've tried with cyberchef and it seems to work for me:\r\n`0x78dadbb918000217015d` -> zlib inflate = `b9 a3`",
+          "createdAt": "2024-02-20T10:42:10Z",
+          "updatedAt": "2024-02-20T10:42:10Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "You are right, I probably tried on the hexstring :D",
+          "createdAt": "2024-02-20T11:53:59Z",
+          "updatedAt": "2024-02-20T11:53:59Z"
+        },
+        {
+          "author": "awoie",
+          "authorAssociation": "NONE",
+          "body": "I assume there will be a lot of comments. I had some troubles with the `status` claim language for non-CWTs btw. Please review and give feedback. @paulbastian @c2bo @tplooker ",
+          "createdAt": "2024-02-20T14:26:10Z",
+          "updatedAt": "2024-02-20T14:26:10Z"
+        },
+        {
+          "author": "awoie",
+          "authorAssociation": "NONE",
+          "body": "I was wondering whether it would be better to define a CDDL for Status, StatusList and StatusListInfo. Basically, having a high-level CDDl description of all objects and then having some specific sections for JWT, COSE, CWT that define how they are used in the corresponding objects.",
+          "createdAt": "2024-02-20T14:27:29Z",
+          "updatedAt": "2024-02-20T14:27:29Z"
+        },
+        {
+          "author": "awoie",
+          "authorAssociation": "NONE",
+          "body": "Also keep in mind that `status` claim for CWT will require IANA to assign us an integer number, so we can use it in the CWT.",
+          "createdAt": "2024-02-20T14:28:32Z",
+          "updatedAt": "2024-02-20T14:28:32Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs5wtkC-",
+          "commit": {
+            "abbreviatedOid": "138e7a4"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-20T17:03:44Z",
+          "updatedAt": "2024-02-20T17:03:44Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\r\nThis section defines the structure for a CBOR-encoded Status List:\r\n\r\n* The `StatusList` structure is a map (Major Type 5) and defines the following entries:\r\n  * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits in the per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.\r\n  * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).\r\n```",
+              "createdAt": "2024-02-20T17:03:44Z",
+              "updatedAt": "2024-02-20T17:03:44Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
