@@ -434,7 +434,7 @@ TODO evaluate definition of Status List Provider?
 
 ## Token Lifecycle {#implementation-lifecycle}
 
-The lifetime of a Status List (and the Status List Token) is depending on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List (and the Status List Token).
+The lifetime of a Status List (and the Status List Token) depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List (and the Status List Token).
 
 Referenced Tokens may be regularly re-issued to increase security or to mitigate linkability and prevent tracking by Relying Parties. In this case, every Referenced Token MUST have a fresh Status List entry.
 
