@@ -612,6 +612,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -02
 
+* add ttl claim to Status List Token to convey caching
 * clarify Deflate / zlib compression
 
 -01
