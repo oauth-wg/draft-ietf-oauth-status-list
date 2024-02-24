@@ -1068,7 +1068,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Token Status List</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This specification defines status list data structures for representing the status of JSON Web Tokens (JWTs) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, CBOR Web Tokens (CWTs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>, and other tokens secured by CBOR Object Signing and Encryption <span>[<a href="#RFC8152" class="cite xref">RFC8152</a>]</span>.
+<p id="section-abstract-1">This specification defines status list data structures for representing the status of JSON Web Tokens (JWTs) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, CBOR Web Tokens (CWTs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>, and other tokens secured by CBOR Object Signing and Encryption <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.
 The status list data structures themselves are also represented as JWTs or CWTs.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
@@ -1315,7 +1315,7 @@ The status list data structures themselves are also represented as JWTs or CWTs.
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">JSON Web Tokens (JWTs) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, CBOR Object Signing and Encryption (COSE) <span>[<a href="#RFC8152" class="cite xref">RFC8152</a>]</span> objects, and CBOR Web Tokens (CWTs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">JSON Web Tokens (JWTs) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, CBOR Object Signing and Encryption (COSE) <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span> objects, and CBOR Web Tokens (CWTs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided by an endpoint or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model <span>[<a href="#SDJWTVC" class="cite xref">SDJWTVC</a>]</span>.
@@ -1425,7 +1425,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 <dt id="section-3-1.9">Referenced Token:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.10">
-          <p id="section-3-1.10.1">A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> for representation of the token and secure it using JSON Object Signing as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR Object Signing and Encryption as defined in <span>[<a href="#RFC8152" class="cite xref">RFC8152</a>]</span>. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.<a href="#section-3-1.10.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.10.1">A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> for representation of the token and secure it using JSON Object Signing as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR Object Signing and Encryption as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.<a href="#section-3-1.10.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1676,9 +1676,9 @@ a2                                                # map(2)
 d28443a10126a104423132a502782168747470733a2f2f6578616d706c652e636f6d
 2f7374617475736c697374732f31017368747470733a2f2f6578616d706c652e636f
 6d061a648c5bea041a8898dfea3a0001000056a2646269747301636c73744a78dadb
-b918000217015d58409055427c0c2a826e06a3b24934e5abfe32e5a1f194cb310792
-c7e309be17c0fae5598362e1fff2314580a6bd26754fdeeff1078c78cb2d1efd2d55
-9c50b8ad80
+b918000217015d584097750cce7271cfbc9647d76186c3215e5ea7d8cbe8bfaa81fd
+f766e061761ffc9a821e7d83d13ea69b2d8bd4c78454485c80a768c103aeb9825613
+242df64f18
 </pre><a href="#section-5.2-10" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-11">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-11" class="pilcrow">¶</a></p>
@@ -1709,10 +1709,10 @@ d2                                                # tag(18)
         a2646269747301636c73744a78dadbb918000217  #         "¢dbits\x01clstJxÚÛ¹\x18\x00\x02\x17"
         015d                                      #         "\x01]"
     58 40                                         #     bytes(64)
-      9055427c0c2a826e06a3b24934e5abfe32e5a1f194  #       "\x90UB|\x0c*\x82n\x06£²I4å«þ2å¡ñ\x94"
-      cb310792c7e309be17c0fae5598362e1fff2314580  #       "Ë1\x07\x92Çã\x09¾\x17ÀúåY\x83báÿò1E\x80"
-      a6bd26754fdeeff1078c78cb2d1efd2d559c50b8ad  #       "¦½&amp;uOÞïñ\x07\x8cxË-\x1eý-U\x9cP¸\xad"
-      80                                          #       "\x80"
+      97750cce7271cfbc9647d76186c3215e5ea7d8cbe8  #       "\x97u\x0cÎrqÏ¼\x96G×a\x86Ã!^^§ØËè"
+      bfaa81fdf766e061761ffc9a821e7d83d13ea69b2d  #       "¿ª\x81ý÷fàav\x1fü\x9a\x82\x1e}\x83Ñ&gt;¦\x9b-"
+      8bd4c78454485c80a768c103aeb9825613242df64f  #       "\x8bÔÇ\x84TH\\x80§hÁ\x03®¹\x82V\x13$-öO"
+      18                                          #       "\x18"
 </pre><a href="#section-5.2-12" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1820,7 +1820,7 @@ d2                                                # tag(18)
         <h3 id="name-referenced-token-in-other-c">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-referenced-token-in-other-c" class="section-name selfRef">Referenced Token in other COSE/CBOR Format</a>
         </h3>
-<p id="section-6.4-1">The Referenced Token <span class="bcp14">MUST</span> be encoded as a <code>COSE_Sign1</code> or <code>COSE_Sign</code> CBOR structure as defined in "CBOR Object Signing and Encryption (COSE)" <span>[<a href="#RFC8152" class="cite xref">RFC8152</a>]</span>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">The Referenced Token <span class="bcp14">MUST</span> be encoded as a <code>COSE_Sign1</code> or <code>COSE_Sign</code> CBOR structure as defined in "CBOR Object Signing and Encryption (COSE)" <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2">It is required to encode the status mechanisms Referenced Tokens refer to using the <code>Status</code> CBOR structure defined in (#referenced-token-cwt).<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <p id="section-6.4-3">It is <span class="bcp14">RECOMMENDED</span> to use <code>status</code> for the label of the field that contains the <code>Status</code> CBOR structure.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 <p id="section-6.4-4">Application of additional restrictions and policy are at the discretion of the verifying party.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
@@ -2515,10 +2515,6 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7519">https://www.rfc-editor.org/rfc/rfc7519</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8152">[RFC8152]</dt>
-        <dd>
-<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE)"</span>, <span class="seriesInfo">RFC 8152</span>, <span class="seriesInfo">DOI 10.17487/RFC8152</span>, <time datetime="2017-07" class="refDate">July 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8152">https://www.rfc-editor.org/rfc/rfc8152</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
@@ -2534,6 +2530,10 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <dt id="RFC8949">[RFC8949]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9052">[RFC9052]</dt>
+        <dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9052">https://www.rfc-editor.org/rfc/rfc9052</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9110">[RFC9110]</dt>
         <dd>

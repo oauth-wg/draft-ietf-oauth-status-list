@@ -18,7 +18,7 @@ Abstract
    This specification defines status list data structures for
    representing the status of JSON Web Tokens (JWTs) [RFC7519], CBOR Web
    Tokens (CWTs) [RFC8392], and other tokens secured by CBOR Object
-   Signing and Encryption [RFC8152].  The status list data structures
+   Signing and Encryption [RFC9052].  The status list data structures
    themselves are also represented as JWTs or CWTs.
 
 About This Document
@@ -121,7 +121,7 @@ Table of Contents
 1.  Introduction
 
    JSON Web Tokens (JWTs) [RFC7519], CBOR Object Signing and Encryption
-   (COSE) [RFC8152] objects, and CBOR Web Tokens (CWTs) [RFC8392] as
+   (COSE) [RFC9052] objects, and CBOR Web Tokens (CWTs) [RFC8392] as
    secure token formats, have vast possible applications.  Some of these
    applications can involve issuing a token whereby certain semantics
    about the token can change over time, which are important to be able
@@ -256,7 +256,7 @@ Table of Contents
       RECOMMENDED to use JSON [RFC8259] or CBOR [RFC8949] for
       representation of the token and secure it using JSON Object
       Signing as defined in [RFC7515] or CBOR Object Signing and
-      Encryption as defined in [RFC8152].  The information from the
+      Encryption as defined in [RFC9052].  The information from the
       contained Status List may give a Relying Party additional
       information about up-to-date status of the Referenced Token.
 
@@ -507,9 +507,9 @@ a2                                                # map(2)
    d28443a10126a104423132a502782168747470733a2f2f6578616d706c652e636f6d
    2f7374617475736c697374732f31017368747470733a2f2f6578616d706c652e636f
    6d061a648c5bea041a8898dfea3a0001000056a2646269747301636c73744a78dadb
-   b918000217015d58409055427c0c2a826e06a3b24934e5abfe32e5a1f194cb310792
-   c7e309be17c0fae5598362e1fff2314580a6bd26754fdeeff1078c78cb2d1efd2d55
-   9c50b8ad80
+   b918000217015d584097750cce7271cfbc9647d76186c3215e5ea7d8cbe8bfaa81fd
+   f766e061761ffc9a821e7d83d13ea69b2d8bd4c78454485c80a768c103aeb9825613
+   242df64f18
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -538,10 +538,10 @@ d2                                                # tag(18)
         a2646269747301636c73744a78dadbb918000217  #         "¢dbits\x01clstJxÚÛ¹\x18\x00\x02\x17"
         015d                                      #         "\x01]"
     58 40                                         #     bytes(64)
-      9055427c0c2a826e06a3b24934e5abfe32e5a1f194  #       "\x90UB|\x0c*\x82n\x06£²I4å«þ2å¡ñ\x94"
-      cb310792c7e309be17c0fae5598362e1fff2314580  #       "Ë1\x07\x92Çã\x09¾\x17ÀúåY\x83báÿò1E\x80"
-      a6bd26754fdeeff1078c78cb2d1efd2d559c50b8ad  #       "¦½&uOÞïñ\x07\x8cxË-\x1eý-U\x9cP¸\xad"
-      80                                          #       "\x80"
+      97750cce7271cfbc9647d76186c3215e5ea7d8cbe8  #       "\x97u\x0cÎrqÏ¼\x96G×a\x86Ã!^^§ØËè"
+      bfaa81fdf766e061761ffc9a821e7d83d13ea69b2d  #       "¿ª\x81ý÷fàav\x1fü\x9a\x82\x1e}\x83Ñ>¦\x9b-"
+      8bd4c78454485c80a768c103aeb9825613242df64f  #       "\x8bÔÇ\x84TH\\x80§hÁ\x03®¹\x82V\x13$-öO"
+      18                                          #       "\x18"
 
 6.  Referenced Token
 
@@ -653,7 +653,7 @@ d2                                                # tag(18)
 
    The Referenced Token MUST be encoded as a COSE_Sign1 or COSE_Sign
    CBOR structure as defined in "CBOR Object Signing and Encryption
-   (COSE)" [RFC8152].
+   (COSE)" [RFC9052].
 
    It is required to encode the status mechanisms Referenced Tokens
    refer to using the Status CBOR structure defined in (#referenced-
@@ -1225,10 +1225,6 @@ d2                                                # tag(18)
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7519>.
 
-   [RFC8152]  Schaad, J., "CBOR Object Signing and Encryption (COSE)",
-              RFC 8152, DOI 10.17487/RFC8152, July 2017,
-              <https://www.rfc-editor.org/rfc/rfc8152>.
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
@@ -1246,6 +1242,11 @@ d2                                                # tag(18)
               Representation (CBOR)", STD 94, RFC 8949,
               DOI 10.17487/RFC8949, December 2020,
               <https://www.rfc-editor.org/rfc/rfc8949>.
+
+   [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Structures and Process", STD 96, RFC 9052,
+              DOI 10.17487/RFC9052, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9052>.
 
    [RFC9110]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
               Ed., "HTTP Semantics", STD 97, RFC 9110,
