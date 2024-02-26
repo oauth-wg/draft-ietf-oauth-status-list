@@ -59,7 +59,7 @@ normative:
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
   CWT.typ:
-    author: M. B. Jones, O. Steele
+    author: "M. B. Jones, O. Steele"
     title: "COSE 'typ' (type) Header Parameter"
     target: "https://datatracker.ietf.org/doc/draft-ietf-cose-typ-header-parameter/"
 
