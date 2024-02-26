@@ -124,7 +124,7 @@ class StatusListToken:
         claims[6] = int(iat.timestamp())
         if exp is not None:
             claims[4] = int(exp.timestamp())
-        claims[-65537] = self.list.encodeAsCBOR() # no CWT claim key assigned yet by IANA
+        claims[65534] = self.list.encodeAsCBOR() # no CWT claim key assigned yet by IANA
 
         # build header
         if optional_protected_header is not None:
