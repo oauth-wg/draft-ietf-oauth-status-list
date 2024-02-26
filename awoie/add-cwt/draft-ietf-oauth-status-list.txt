@@ -15,11 +15,12 @@ Expires: 29 August 2024
 
 Abstract
 
-   This specification defines status list data structures for
-   representing the status of JSON Web Tokens (JWTs) [RFC7519], CBOR Web
-   Tokens (CWTs) [RFC8392], and other tokens secured by CBOR Object
-   Signing and Encryption [RFC9052].  The status list data structures
-   themselves are also represented as JWTs or CWTs.
+   This specification defines status list data structures and processing
+   rules for representing the status of tokens secured by JSON Object
+   Signing and Encryption [IANA.JOSE] or CBOR Object Signing and
+   Encryption [RFC9052], such as JSON Web Tokens (JWTs) [RFC7519], CBOR
+   Web Tokens (CWTs) [RFC8392] and ISO mdoc [ISO.mdoc].  The status list
+   data structures themselves are also represented as JWTs or CWTs.
 
 About This Document
 
@@ -120,14 +121,14 @@ Table of Contents
 
 1.  Introduction
 
-   JSON Web Tokens (JWTs) [RFC7519], CBOR Object Signing and Encryption
-   (COSE) [RFC9052] objects, and CBOR Web Tokens (CWTs) [RFC8392] as
-   secure token formats, have vast possible applications.  Some of these
-   applications can involve issuing a token whereby certain semantics
-   about the token can change over time, which are important to be able
-   to communicate to relying parties in an interoperable manner, such as
-   whether the token is considered invalidated or suspended by its
-   issuer.
+   Token formats secured by JOSE [IANA.JOSE] or COSE [RFC9052], such as
+   JSON Web Tokens (JWTs) [RFC7519], CBOR Web Tokens (CWTs) [RFC8392]
+   and ISO mdoc [ISO.mdoc], have vast possible applications.  Some of
+   these applications can involve issuing a token whereby certain
+   semantics about the token can change over time, which are important
+   to be able to communicate to relying parties in an interoperable
+   manner, such as whether the token is considered invalidated or
+   suspended by its issuer.
 
    This document defines a Status List and its representations in JSON
    and CBOR formats that describe the individual statuses of multiple
@@ -155,8 +156,8 @@ Table of Contents
 
    Another possible use case for the Status List is to express the
    status of verifiable credentials (Referenced Tokens) issued by an
-   Issuer in the Issuer-Holder-Verifier model [SDJWTVC].  The following
-   diagram depicts the basic conceptual relationship.
+   Issuer in the Issuer-Holder-Verifier model [SD-JWT.VC].  The
+   following diagram depicts the basic conceptual relationship.
 
    +-------------------+                  +------------------------+
    |                   | describes status |                        |
@@ -506,9 +507,9 @@ a2                                                # map(2)
    d28443a10126a104423132a502782168747470733a2f2f6578616d706c652e636f6d
    2f7374617475736c697374732f31017368747470733a2f2f6578616d706c652e636f
    6d061a648c5bea041a8898dfea3a0001000056a2646269747301636c73744a78dadb
-   b918000217015d584087ab0e5cab0f1558c468515c4b599b367d74f8d24d55f040bb
-   cf8f3d1033e72f4e399e911e5677d6da28523044a8ed557cfe3cce9ee29c6f5d097f
-   6b1bd6aafb
+   b918000217015d584021517f62cb8d045b1530534048f0128f7f9c625f4a4d05d4ff
+   1c0efcaa26aff2d558d8baea167c16a3ebe3b7cef64d3f796b14eadf778b61abe814
+   189bb3d29f
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -537,10 +538,10 @@ d2                                                # tag(18)
         a2646269747301636c73744a78dadbb918000217  #         "¢dbits\x01clstJxÚÛ¹\x18\x00\x02\x17"
         015d                                      #         "\x01]"
     58 40                                         #     bytes(64)
-      87ab0e5cab0f1558c468515c4b599b367d74f8d24d  #       "\x87«\x0e\«\x0f\x15XÄhQ\KY\x9b6}tøÒM"
-      55f040bbcf8f3d1033e72f4e399e911e5677d6da28  #       "Uð@»Ï\x8f=\x103ç/N9\x9e\x91\x1eVwÖÚ("
-      523044a8ed557cfe3cce9ee29c6f5d097f6b1bd6aa  #       "R0D¨íU|þ<Î\x9eâ\x9co]\x09\x7fk\x1bÖª"
-      fb                                          #       "û"
+      21517f62cb8d045b1530534048f0128f7f9c625f4a  #       "!Q\x7fbË\x8d\x04[\x150S@Hð\x12\x8f\x7f\x9cb_J"
+      4d05d4ff1c0efcaa26aff2d558d8baea167c16a3eb  #       "M\x05Ôÿ\x1c\x0eüª&¯òÕXØºê\x16|\x16£ë"
+      e3b7cef64d3f796b14eadf778b61abe814189bb3d2  #       "ã·ÎöM?yk\x14êßw\x8ba«è\x14\x18\x9b³Ò"
+      9f                                          #       "\x9f"
 
 6.  Referenced Token
 
@@ -841,12 +842,12 @@ d2                                                # tag(18)
 11.1.  Issuer tracking and Herd Privacy
 
    The main privacy consideration for a Status List, especially in the
-   context of the Issuer-Holder-Verifier model [SDJWTVC], is to prevent
-   the Issuer from tracking the usage of the Referenced Token when the
-   status is being checked.  If an Issuer offers status information by
-   referencing a specific token, this would enable him to create a
-   profile for the issued token by correlating the date and identity of
-   Relying Parties, that are requesting the status.
+   context of the Issuer-Holder-Verifier model [SD-JWT.VC], is to
+   prevent the Issuer from tracking the usage of the Referenced Token
+   when the status is being checked.  If an Issuer offers status
+   information by referencing a specific token, this would enable him to
+   create a profile for the issued token by correlating the date and
+   identity of Relying Parties, that are requesting the status.
 
    The Status List approaches these privacy implications by integrating
    the status information of many Referenced Tokens into the same list.
@@ -1172,13 +1173,17 @@ d2                                                # tag(18)
 
 14.1.  Normative References
 
-   [IANA.JWT] IANA, "Media Types", n.d.,
-              <https://www.iana.org/assignments/media-types/media-
-              types.xhtml>.
+   [IANA.JOSE]
+              IANA, "JSON Object Signing and Encryption (JOSE)", n.d.,
+              <https://www.iana.org/assignments/jose/jose.xhtml>.
+
+   [IANA.JWT] IANA, "JSON Web Token Claims", n.d.,
+              <https://www.iana.org/assignments/jwt/jwt.xhtml>.
 
    [IANA.MediaTypes]
-              IANA, "JSON Web Token Claims", n.d.,
-              <https://www.iana.org/assignments/jwt/jwt.xhtml>.
+              IANA, "Media Types", n.d.,
+              <https://www.iana.org/assignments/media-types/media-
+              types.xhtml>.
 
    [RFC1950]  Deutsch, P. and J. Gailly, "ZLIB Compressed Data Format
               Specification version 3.3", RFC 1950,
@@ -1257,13 +1262,10 @@ d2                                                # tag(18)
               DOI 10.17487/RFC9111, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9111>.
 
-   [SDJWTVC]  Terbu, O. and D. Fett, "SD-JWT-based Verifiable
-              Credentials (SD-JWT VC)", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-sd-jwt-vc-01, 23 October 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              sd-jwt-vc-01>.
-
 14.2.  Informative References
+
+   [ISO.mdoc] ISO/IEC JTC 1/SC 17, "ISO/IEC 18013-5:2021 ISO-compliant
+              driving licence", n.d..
 
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
@@ -1277,6 +1279,13 @@ d2                                                # tag(18)
               Possession Key Semantics for JSON Web Tokens (JWTs)",
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/rfc/rfc7800>.
+
+   [SD-JWT.VC]
+              Terbu, O. and D. Fett, "SD-JWT-based Verifiable
+              Credentials (SD-JWT VC)", Work in Progress, Internet-
+              Draft, draft-ietf-oauth-sd-jwt-vc-01, 23 October 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              sd-jwt-vc-01>.
 
 Acknowledgments
 
