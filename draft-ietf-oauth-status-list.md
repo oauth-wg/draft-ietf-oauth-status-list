@@ -77,7 +77,7 @@ The following diagram depicts the basic conceptual relationship.
 +-------------------+                  +------------------------+
 |                   | describes status |                        |
 |    Status List    +----------------->|    Referenced Token    |
-|   (JSON or CBOR)  <------------------+    (JWT, CWT, COSE)    |
+|   (JSON or CBOR)  <------------------+      (JOSE, COSE)      |
 |                   |   references     |                        |
 +-------+-----------+                  +--------+---------------+
         |
@@ -197,11 +197,11 @@ The following example illustrates the JSON representation of the Status List:
 
 ## Status List in CBOR Format {#status-list-cbor}
 
-This section defines the `StatusList` structure for a CBOR-encoded Status List.
+This section defines the structure for a CBOR-encoded Status List:
 
-The `StatusList` structure is a map (Major Type 5) and defines the following entries:
-* `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits in the per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
-* `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
+* The `StatusList` structure is a map (Major Type 5) and defines the following entries:
+  * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits in the per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
+  * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
 
 The following example illustrates the CBOR representation of the Status List:
 
@@ -257,7 +257,6 @@ The following is a non-normative example for a Status List Token in JWT format:
 
 The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}.
 
-Applications MAY use the media type `statuslist+cwt` for a CWT in accordance with the rules outlined in this specification.
 
 The following content applies to the CWT protected header:
 
