@@ -38,12 +38,17 @@ normative:
   RFC8949: RFC8949
   RFC9110: RFC9110
   RFC9111: RFC9111
-  IANA.JWT:
+  IANA.MediaTypes:
     author:
       org: "IANA"
     title: "Media Types"
     target: "https://www.iana.org/assignments/media-types/media-types.xhtml"
-  IANA.MediaTypes:
+  IANA.JOSE:
+    author:
+      org: "IANA"
+    title: "JSON Object Signing and Encryption (JOSE)"
+    target: "https://www.iana.org/assignments/jose/jose.xhtml"
+  IANA.JWT:
     author:
       org: "IANA"
     title: "JSON Web Token Claims"
@@ -52,8 +57,8 @@ informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
   RFC7800: RFC7800
-  SDJWTVC: I-D.ietf-oauth-sd-jwt-vc
-  ISOmdoc:
+  SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
+  ISO.mdoc:
     author:
       org: "ISO/IEC JTC 1/SC 17"
     title: "ISO/IEC 18013-5:2021 ISO-compliant driving licence"
@@ -61,20 +66,20 @@ informative:
 
 --- abstract
 
-This specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption {{IANA.JOSE}} or CBOR Object Signing and Encryption {{RFC9052}}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc {{ISOmdoc}}.
+This specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption {{IANA.JOSE}} or CBOR Object Signing and Encryption {{RFC9052}}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc {{ISO.mdoc}}.
 The status list data structures themselves are also represented as JWTs or CWTs.
 
 --- middle
 
 # Introduction
 
-Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc {{ISOmdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.
+Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.
 
 This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided by an endpoint or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).
 
 An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.
 
-Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SDJWTVC}}.
+Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SD-JWT.VC}}.
 The following diagram depicts the basic conceptual relationship.
 
 ~~~ ascii-art
@@ -493,7 +498,7 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 
 ## Issuer tracking and Herd Privacy {#privacy-issuer}
 
-The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{SDJWTVC}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
+The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{SD-JWT.VC}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
 The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.
 
