@@ -17,10 +17,10 @@ Abstract
 
    This specification defines status list data structures and processing
    rules for representing the status of tokens secured by JSON Object
-   Signing and Encryption [IANA.JOSE] or CBOR Object Signing and
-   Encryption [RFC9052], such as JSON Web Tokens (JWTs) [RFC7519], CBOR
-   Web Tokens (CWTs) [RFC8392] and ISO mdoc [ISO.mdoc].  The status list
-   data structures themselves are also represented as JWTs or CWTs.
+   Signing and Encryption (JOSE) or CBOR Object Signing and
+   Encryption(COSE), such as JSON Web Tokens (JWTs), CBOR Web Tokens
+   (CWTs) and ISO mdoc.  The status list token data structures
+   themselves are also represented as JWTs or CWTs.
 
 About This Document
 
@@ -507,9 +507,9 @@ a2                                                # map(2)
    d28443a10126a104423132a502782168747470733a2f2f6578616d706c652e636f6d
    2f7374617475736c697374732f31017368747470733a2f2f6578616d706c652e636f
    6d061a648c5bea041a8898dfea3a0001000056a2646269747301636c73744a78dadb
-   b918000217015d584021517f62cb8d045b1530534048f0128f7f9c625f4a4d05d4ff
-   1c0efcaa26aff2d558d8baea167c16a3ebe3b7cef64d3f796b14eadf778b61abe814
-   189bb3d29f
+   b918000217015d584028c8ac58691aa4f559dbed0ccfaf1824dd04206884020a17ef
+   3d779998ac74c231139475d04309e8d7aa5ce5cb95b4d38d8ea337d5815a76408aa1
+   be58dd29f1
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -538,10 +538,10 @@ d2                                                # tag(18)
         a2646269747301636c73744a78dadbb918000217  #         "¢dbits\x01clstJxÚÛ¹\x18\x00\x02\x17"
         015d                                      #         "\x01]"
     58 40                                         #     bytes(64)
-      21517f62cb8d045b1530534048f0128f7f9c625f4a  #       "!Q\x7fbË\x8d\x04[\x150S@Hð\x12\x8f\x7f\x9cb_J"
-      4d05d4ff1c0efcaa26aff2d558d8baea167c16a3eb  #       "M\x05Ôÿ\x1c\x0eüª&¯òÕXØºê\x16|\x16£ë"
-      e3b7cef64d3f796b14eadf778b61abe814189bb3d2  #       "ã·ÎöM?yk\x14êßw\x8ba«è\x14\x18\x9b³Ò"
-      9f                                          #       "\x9f"
+      28c8ac58691aa4f559dbed0ccfaf1824dd04206884  #       "(È¬Xi\x1a¤õYÛí\x0cÏ¯\x18$Ý\x04 h\x84"
+      020a17ef3d779998ac74c231139475d04309e8d7aa  #       "\x02\x0a\x17ï=w\x99\x98¬tÂ1\x13\x94uÐC\x09è×ª"
+      5ce5cb95b4d38d8ea337d5815a76408aa1be58dd29  #       "\åË\x95´Ó\x8d\x8e£7Õ\x81Zv@\x8a¡¾XÝ)"
+      f1                                          #       "ñ"
 
 6.  Referenced Token
 
