@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 27 August 2024                                                 
+Expires: 29 August 2024                                                 
                                                               C. Bormann
-                                                        24 February 2024
+                                                        26 February 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 August 2024.
+   This Internet-Draft will expire on 29 August 2024.
 
 Copyright Notice
 
@@ -161,7 +161,7 @@ Table of Contents
    +-------------------+                  +------------------------+
    |                   | describes status |                        |
    |    Status List    +----------------->|    Referenced Token    |
-   |   (JSON or CBOR)  <------------------+    (JWT, CWT, COSE)    |
+   |   (JSON or CBOR)  <------------------+      (JOSE, COSE)      |
    |                   |   references     |                        |
    +-------+-----------+                  +--------+---------------+
            |
@@ -348,15 +348,17 @@ Table of Contents
 
 4.2.  Status List in CBOR Format
 
-   This section defines the StatusList structure for a CBOR-encoded
-   Status List.
+   This section defines the structure for a CBOR-encoded Status List:
 
-   The StatusList structure is a map (Major Type 5) and defines the
-   following entries: * bits: REQUIRED.  Unsigned int (Major Type 0)
-   that contains the number of bits in the per Referenced Token in the
-   Status List.  The allowed values for bits are 1, 2, 4 and 8. * lst:
-   REQUIRED.  Byte string (Major Type 2) that contains the Status List
-   as specified in Section 4.1.
+   *  The StatusList structure is a map (Major Type 5) and defines the
+      following entries:
+
+      -  bits: REQUIRED.  Unsigned int (Major Type 0) that contains the
+         number of bits in the per Referenced Token in the Status List.
+         The allowed values for bits are 1, 2, 4 and 8.
+
+      -  lst: REQUIRED.  Byte string (Major Type 2) that contains the
+         Status List as specified in Section 4.1.
 
    The following example illustrates the CBOR representation of the
    Status List:
@@ -461,9 +463,6 @@ a2                                                # map(2)
    The Status List Token MUST be encoded as a "CBOR Web Token (CWT)"
    according to [RFC8392].
 
-   Applications MAY use the media type statuslist+cwt for a CWT in
-   accordance with the rules outlined in this specification.
-
    The following content applies to the CWT protected header:
 
    *  3 (content type): REQUIRED.  The CWT content type MUST be
@@ -507,9 +506,9 @@ a2                                                # map(2)
    d28443a10126a104423132a502782168747470733a2f2f6578616d706c652e636f6d
    2f7374617475736c697374732f31017368747470733a2f2f6578616d706c652e636f
    6d061a648c5bea041a8898dfea3a0001000056a2646269747301636c73744a78dadb
-   b918000217015d584097750cce7271cfbc9647d76186c3215e5ea7d8cbe8bfaa81fd
-   f766e061761ffc9a821e7d83d13ea69b2d8bd4c78454485c80a768c103aeb9825613
-   242df64f18
+   b918000217015d584087ab0e5cab0f1558c468515c4b599b367d74f8d24d55f040bb
+   cf8f3d1033e72f4e399e911e5677d6da28523044a8ed557cfe3cce9ee29c6f5d097f
+   6b1bd6aafb
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -538,10 +537,10 @@ d2                                                # tag(18)
         a2646269747301636c73744a78dadbb918000217  #         "¢dbits\x01clstJxÚÛ¹\x18\x00\x02\x17"
         015d                                      #         "\x01]"
     58 40                                         #     bytes(64)
-      97750cce7271cfbc9647d76186c3215e5ea7d8cbe8  #       "\x97u\x0cÎrqÏ¼\x96G×a\x86Ã!^^§ØËè"
-      bfaa81fdf766e061761ffc9a821e7d83d13ea69b2d  #       "¿ª\x81ý÷fàav\x1fü\x9a\x82\x1e}\x83Ñ>¦\x9b-"
-      8bd4c78454485c80a768c103aeb9825613242df64f  #       "\x8bÔÇ\x84TH\\x80§hÁ\x03®¹\x82V\x13$-öO"
-      18                                          #       "\x18"
+      87ab0e5cab0f1558c468515c4b599b367d74f8d24d  #       "\x87«\x0e\«\x0f\x15XÄhQ\KY\x9b6}tøÒM"
+      55f040bbcf8f3d1033e72f4e399e911e5677d6da28  #       "Uð@»Ï\x8f=\x103ç/N9\x9e\x91\x1eVwÖÚ("
+      523044a8ed557cfe3cce9ee29c6f5d097f6b1bd6aa  #       "R0D¨íU|þ<Î\x9eâ\x9co]\x09\x7fk\x1bÖª"
+      fb                                          #       "û"
 
 6.  Referenced Token
 
