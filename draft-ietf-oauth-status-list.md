@@ -66,8 +66,8 @@ informative:
 
 --- abstract
 
-This specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption {{IANA.JOSE}} or CBOR Object Signing and Encryption {{RFC9052}}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc {{ISO.mdoc}}.
-The status list data structures themselves are also represented as JWTs or CWTs.
+This specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption(COSE), such as JSON Web Tokens (JWTs), CBOR Web Tokens (CWTs) and ISO mdoc.
+The status list token data structures themselves are also represented as JWTs or CWTs.
 
 --- middle
 
