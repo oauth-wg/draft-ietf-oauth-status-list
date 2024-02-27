@@ -1662,7 +1662,7 @@ a2                                                # map(2)
 <p id="section-5.2-2">The following content applies to the CWT protected header:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.1">
-            <p id="section-5.2-3.1.1"><code>14</code> (type): <span class="bcp14">REQUIRED</span>. The type of the CWT <span class="bcp14">MUST</span> be <code>statuslist+cwt</code> as defined in <span>[<a href="#CWT.typ" class="cite xref">CWT.typ</a>]</span>.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-3.1.1"><code>16</code> TBD (type): <span class="bcp14">REQUIRED</span>. The type of the CWT <span class="bcp14">MUST</span> be <code>statuslist+cwt</code> as defined in <span>[<a href="#CWT.typ" class="cite xref">CWT.typ</a>]</span>.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-4">The following content applies to the CWT Claims Set:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
@@ -1704,9 +1704,9 @@ a2                                                # map(2)
 d28443a10126a104423132a502782168747470733a2f2f6578616d706c652e636f6d
 2f7374617475736c697374732f31017368747470733a2f2f6578616d706c652e636f
 6d061a648c5bea041a8898dfea19fffe56a2646269747301636c73744a78dadbb918
-000217015d5840ae0fbc42d41815134786150ad2851080559198a12ea9f74cb55494
-370f8e18327cc4181389ef0c4801acd45d76cb24b00ea58993f58edbb67c09f4b334
-a98e3b
+000217015d5840d42f840c2a827b2e9d5f699079d61ab7ae2ceb91c89f05f0d3ac10
+f66ccd912a584c3943ff4c52fe85c8f8c745bbd01b312c852c3d55f7c013d85af658
+1a294a
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1737,10 +1737,10 @@ d2                                                # tag(18)
         a2646269747301636c73744a78dadbb918000217  #         "¢dbits\x01clstJxÚÛ¹\x18\x00\x02\x17"
         015d                                      #         "\x01]"
     58 40                                         #     bytes(64)
-      ae0fbc42d41815134786150ad2851080559198a12e  #       "®\x0f¼BÔ\x18\x15\x13G\x86\x15\x0aÒ\x85\x10\x80U\x91\x98¡."
-      a9f74cb55494370f8e18327cc4181389ef0c4801ac  #       "©÷LµT\x947\x0f\x8e\x182|Ä\x18\x13\x89ï\x0cH\x01¬"
-      d45d76cb24b00ea58993f58edbb67c09f4b334a98e  #       "Ô]vË$°\x0e¥\x89\x93õ\x8eÛ¶|\x09ô³4©\x8e"
-      3b                                          #       ";"
+      d42f840c2a827b2e9d5f699079d61ab7ae2ceb91c8  #       "Ô/\x84\x0c*\x82{.\x9d_i\x90yÖ\x1a·®,ë\x91È"
+      9f05f0d3ac10f66ccd912a584c3943ff4c52fe85c8  #       "\x9f\x05ðÓ¬\x10ölÍ\x91*XL9CÿLRþ\x85È"
+      f8c745bbd01b312c852c3d55f7c013d85af6581a29  #       "øÇE»Ð\x1b1,\x85,=U÷À\x13ØZöX\x1a)"
+      4a                                          #       "J"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1840,7 +1840,30 @@ d2                                                # tag(18)
         </ul>
 <p id="section-6.3-4">Application of additional restrictions and policy are at the discretion of the verifying party.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 <p id="section-6.3-5">The following is a non-normative example for a decoded payload of a Referenced Token:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
-<p id="section-6.3-6">TBD: example<a href="#section-6.3-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-6.3-6">
+<pre>
+18(
+    [
+      / protected / &lt;&lt; {
+        / alg / 1: -7 / ES256 /
+      } &gt;&gt;,
+      / unprotected / {
+        / kid / 4: h'3132' / '13' /
+      },
+      / payload / &lt;&lt; {
+        / iss    / 1: "https://example.com",
+        / status / 65535: {
+          "status_list": {
+            "idx": "0",
+            "uri": "https://example.com/statuslists/1"
+          }
+        }
+      } &gt;&gt;,
+      / signature / h'...'
+    ]
+  )
+</pre><a href="#section-6.3-6" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="referenced-token-cose">
