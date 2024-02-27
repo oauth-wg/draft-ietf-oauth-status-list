@@ -276,7 +276,7 @@ The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {
 
 The following content applies to the CWT protected header:
 
-* `14` (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{CWT.typ}}.
+* `16` TBD (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{CWT.typ}}.
 
 The following content applies to the CWT Claims Set:
 
@@ -364,7 +364,29 @@ Application of additional restrictions and policy are at the discretion of the v
 
 The following is a non-normative example for a decoded payload of a Referenced Token:
 
-TBD: example
+~~~ ascii-art
+
+18(
+    [
+      / protected / << {
+        / alg / 1: -7 / ES256 /
+      } >>,
+      / unprotected / {
+        / kid / 4: h'3132' / '13' /
+      },
+      / payload / << {
+        / iss    / 1: "https://example.com",
+        / status / 65535: {
+          "status_list": {
+            "idx": "0",
+            "uri": "https://example.com/statuslists/1"
+          }
+        }
+      } >>,
+      / signature / h'...'
+    ]
+  )
+~~~
 
 ## Referenced Token in other COSE/CBOR Format {#referenced-token-cose}
 
