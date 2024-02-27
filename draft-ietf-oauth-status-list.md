@@ -32,10 +32,10 @@ normative:
   RFC6838: RFC6838
   RFC7515: RFC7515
   RFC7519: RFC7519
-  RFC9052: RFC9052
   RFC8259: RFC8259
   RFC8392: RFC8392
   RFC8949: RFC8949
+  RFC9052: RFC9052
   RFC9110: RFC9110
   RFC9111: RFC9111
   IANA.MediaTypes:
@@ -563,7 +563,7 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 *  Change Controller: IETF
 *  Specification Document(s):  [](#status-list-token-jwt) of this specification
 
-## JWT Status Mechanism Methods Registry {#iana-registry}
+## JWT Status Mechanism Methods Registry {#jwt-iana-registry}
 
 This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
@@ -609,7 +609,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 *  Change Controller: IETF
 *  Specification Document(s):  [](#status-list-token-cwt) of this specification
 
-## CWT Status Mechanism Methods Registry {#iana-registry}
+## CWT Status Mechanism Methods Registry {#cwt-iana-registry}
 
 This specification establishes the IANA "Status Mechanism Methods" registry for CWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
