@@ -58,11 +58,7 @@ normative:
       org: "IANA"
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
-  CWT.typ:
-    author:
-      name: "M. B. Jones"
-    title: "COSE 'typ' (type) Header Parameter"
-    target: "https://datatracker.ietf.org/doc/draft-ietf-cose-typ-header-parameter/"
+  CWT.typ: I-D.ietf-cose-typ-header-parameter
 
 informative:
   RFC6749: RFC6749
