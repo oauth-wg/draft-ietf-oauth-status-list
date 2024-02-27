@@ -464,6 +464,11 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 *  Change Controller: IETF
 *  Specification Document(s):  [](#status-claim) of this specification
 
+* Claim Name: `ttl`
+* Claim Description: Time to Live
+* Change Controller: IETF
+* Specification Document(s): [](#status-list-token-jwt) of this specification
+
 ## JWT Status Mechanism Methods Registry {#iana-registry}
 
 This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
@@ -586,21 +591,6 @@ To indicate that the content is an CWT-based Status List:
   * Author: Paul Bastian, paul.bastian@posteo.de
   * Change controller: IETF
   * Provisional registration? No
-
-## Claims Registered by This Document
-
-This specification adds the following values to the "JSON Web Token Claims" registry established by [RFC7519] and the "CBOR Web Token
-Claims Registry" established by [RFC8392].  Each entry below is an addition to both registries.
-
-The "Claim Description", "Change Controller" and "Specification Documents" are common and equivalent for the JWT and CWT registries.
-The "Claim Key" and "Claim Value Types(s)" are for the CWT registry only.  The "Claim Name" is as defined for the CWT registry, not the
-JWT registry.  The "JWT Claim Name" is equivalent to the "Claim Name" in the JWT registry.
-
- - Claim Name: ttl
- - Claim Description: Time to Live
- - JWT Claim Name: "ttl"
- - Change Controller: IESG
- - Specification Document(s): *this document*
 
 --- back
 
