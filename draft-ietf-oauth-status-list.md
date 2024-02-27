@@ -300,7 +300,7 @@ The following additional rules apply:
 
 4. Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a Status List Token in CWT format:
+The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):
 
 ~~~~~~~~~~
 {::include ./examples/status_list_cwt}
