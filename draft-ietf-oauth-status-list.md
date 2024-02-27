@@ -761,7 +761,7 @@ for their valuable contributions, discussions and feedback to this specification
 * relax requirements on referenced token
 * clarify Deflate / zlib compression
 * make a reference to the Issuer-Holder-Verifier model of SD-JWT VC
-* add COSE/CWT/BOR encoding
+* add COSE/CWT/CBOR encoding
 
 -01
 
