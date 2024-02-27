@@ -59,7 +59,7 @@ normative:
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
   CWT.typ:
-    author: 
+    author:
       name: "M. B. Jones"
     title: "COSE 'typ' (type) Header Parameter"
     target: "https://datatracker.ietf.org/doc/draft-ietf-cose-typ-header-parameter/"
@@ -280,7 +280,7 @@ The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {
 
 The following content applies to the CWT protected header:
 
-* `14` (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{CWT.typ}}. 
+* `14` (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{CWT.typ}}.
 
 The following content applies to the CWT Claims Set:
 
