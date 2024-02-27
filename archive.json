@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-25T00:57:45.741029+00:00",
+  "timestamp": "2024-02-27T00:53:23.092584+00:00",
   "repo": "vcstuff/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -1603,7 +1603,7 @@
       "labels": [],
       "body": "https://redis.io/docs/data-types/bitmaps/\r\n\r\nignoring the compression questions for now... is there some reason why we would not support this interface?\r\n\r\n",
       "createdAt": "2023-09-27T21:43:12Z",
-      "updatedAt": "2023-10-04T15:34:18Z",
+      "updatedAt": "2024-02-26T13:28:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -1633,6 +1633,13 @@
           "body": "> It does, you just have to read the string as you normally would ( read key, not read bitmap )... there is also some ordering issues.... I have an experimental implementation here:\r\n> \r\n> https://github.com/transmute-industries/dune\r\n> \r\n> I won't be at iiw\r\n\r\nThat sounds pretty interesting! Sad to hear that you won't be at IIW :/",
           "createdAt": "2023-10-04T15:34:18Z",
           "updatedAt": "2023-10-04T15:34:18Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We have implemented a Status List service using Redis bitmaps, so can confirm, that this is a good choice.\r\n\r\nPending close, any further questions?",
+          "createdAt": "2024-02-26T13:28:08Z",
+          "updatedAt": "2024-02-26T13:28:08Z"
         }
       ]
     },
@@ -7058,15 +7065,15 @@
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
-      "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #3\r\n\r\n## \ud83d\udcd1 Description\r\nThis PR adds:\r\n- CBOR/CWT encoding for status list and status list info\r\n- Example implementation for CBOR/CWT\r\n\r\nNot included yet: examples for referenced tokens (COSE, CWT) but that should be trivial to add.\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/awoie/add-cwt/draft-ietf-oauth-status-list.html)",
+      "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #3\r\nCloses #109 \r\nCloses #110 \r\n\r\n## \ud83d\udcd1 Description\r\nThis PR adds:\r\n- CBOR/CWT encoding for status list and status list info\r\n- Example implementation for CBOR/CWT\r\n\r\nNot included yet: examples for referenced tokens (COSE, CWT) but that should be trivial to add.\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/awoie/add-cwt/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-19T23:31:12Z",
-      "updatedAt": "2024-02-24T18:31:35Z",
+      "updatedAt": "2024-02-26T20:15:01Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "0b836009d13c807fa5e56177748512332482a5d2",
       "headRepository": "vcstuff/draft-ietf-oauth-status-list",
       "headRefName": "awoie/add-cwt",
-      "headRefOid": "9793ffc3db568c9ac56b32d3013e330fb9e0acff",
+      "headRefOid": "37a14918f27bf6e455b90df07c895171c4f9262e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -7120,6 +7127,20 @@
           "body": "There is a problem with the width of the CBOR diagnostic notation examples. The datatracker only allows a width of 72, but cborg defaults to 100 and apparently can't be configured in CLI mode.",
           "createdAt": "2024-02-24T18:31:33Z",
           "updatedAt": "2024-02-24T18:31:33Z"
+        },
+        {
+          "author": "awoie",
+          "authorAssociation": "NONE",
+          "body": "> There is a problem with the width of the CBOR diagnostic notation examples. The datatracker only allows a width of 72, but cborg defaults to 100 and apparently can't be configured in CLI mode.\r\n\r\nI can write a small JS script that uses the cborg library and configures the width to 72. Would this be even possible? I didn't check by myself.",
+          "createdAt": "2024-02-26T08:51:11Z",
+          "updatedAt": "2024-02-26T08:51:11Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yes that would be possible and is the only option I have found so far. I was searching for a pure python solution (which would be cleaner imho) but that seems to be not possible right now.",
+          "createdAt": "2024-02-26T09:00:18Z",
+          "updatedAt": "2024-02-26T09:00:18Z"
         }
       ],
       "reviews": [
@@ -7284,6 +7305,146 @@
               "body": "That sounds like a good idea imho",
               "createdAt": "2024-02-24T18:30:50Z",
               "updatedAt": "2024-02-24T18:30:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5xRcpv",
+          "commit": {
+            "abbreviatedOid": "9793ffc"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-26T09:47:30Z",
+          "updatedAt": "2024-02-26T09:47:30Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "Why not? The StatusList is a separate data structure that may live on its own, dependent from the StatusListToken. Doesn't it make sense in this case or should this be solved by media types alone?",
+              "createdAt": "2024-02-26T09:47:30Z",
+              "updatedAt": "2024-02-26T09:47:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5xRdsa",
+          "commit": {
+            "abbreviatedOid": "138e7a4"
+          },
+          "author": "awoie",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-26T09:49:25Z",
+          "updatedAt": "2024-02-26T09:49:25Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "Tags are usually not needed. In all cases, the structure of the CBOR is pre-defined. That is why CBOR tags are not really needed in most cases. ",
+              "createdAt": "2024-02-26T09:49:25Z",
+              "updatedAt": "2024-02-26T09:49:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5xReHc",
+          "commit": {
+            "abbreviatedOid": "9793ffc"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-26T09:50:10Z",
+          "updatedAt": "2024-02-26T09:50:11Z",
+          "comments": [
+            {
+              "originalPosition": 90,
+              "body": "and then we would use type instead of content type?",
+              "createdAt": "2024-02-26T09:50:10Z",
+              "updatedAt": "2024-02-26T09:50:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5xRe-e",
+          "commit": {
+            "abbreviatedOid": "138e7a4"
+          },
+          "author": "awoie",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-26T09:51:46Z",
+          "updatedAt": "2024-02-26T09:51:47Z",
+          "comments": [
+            {
+              "originalPosition": 90,
+              "body": "Content type is about the secured payload which could be statuslist+cbor. typ could be statulist+cwt. Both can be used.",
+              "createdAt": "2024-02-26T09:51:47Z",
+              "updatedAt": "2024-02-26T09:51:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5xS5uZ",
+          "commit": {
+            "abbreviatedOid": "9793ffc"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-26T12:40:53Z",
+          "updatedAt": "2024-02-26T12:40:54Z",
+          "comments": [
+            {
+              "originalPosition": 86,
+              "body": "Remove this when type is added",
+              "createdAt": "2024-02-26T12:40:53Z",
+              "updatedAt": "2024-02-26T12:40:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5xS7hk",
+          "commit": {
+            "abbreviatedOid": "3d82764"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-26T12:44:46Z",
+          "updatedAt": "2024-02-26T12:44:46Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nThis specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption {{IANA.JOSE}} or CBOR Object Signing and Encryption {{RFC9052}}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc.\r\n```",
+              "createdAt": "2024-02-26T12:44:46Z",
+              "updatedAt": "2024-02-26T12:44:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5xS8rD",
+          "commit": {
+            "abbreviatedOid": "3d82764"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-02-26T12:47:16Z",
+          "updatedAt": "2024-02-26T12:47:17Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\nToken formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.\r\n```",
+              "createdAt": "2024-02-26T12:47:16Z",
+              "updatedAt": "2024-02-26T12:47:17Z"
             }
           ]
         }
