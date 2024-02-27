@@ -356,7 +356,7 @@ The following is a non-normative example for a decoded header and payload of a R
 
 The Referenced Token MUST be encoded as a "COSE Web Token (CWT)" object according to {{RFC8392}}.
 
-The following content applies to the JWT Claims Set:
+The following content applies to the CWT Claims Set:
 
 * `1` (issuer): REQUIRED. Same definition as `iss` claim in [](#referenced-token-jwt).
 * `65535` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:
