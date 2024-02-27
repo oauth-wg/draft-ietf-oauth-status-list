@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 29 August 2024                                                 
+Expires: 30 August 2024                                                 
                                                               C. Bormann
-                                                        26 February 2024
+                                                        27 February 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 August 2024.
+   This Internet-Draft will expire on 30 August 2024.
 
 Copyright Notice
 
@@ -111,7 +111,12 @@ Table of Contents
      13.2.  JWT Status Mechanism Methods Registry
        13.2.1.  Registration Template
        13.2.2.  Initial Registry Contents
-     13.3.  Media Type Registration
+     13.3.  CBOR Web Token Claims Registration
+       13.3.1.  Registry Contents
+     13.4.  CWT Status Mechanism Methods Registry
+       13.4.1.  Registration Template
+       13.4.2.  Initial Registry Contents
+     13.5.  Media Type Registration
    14. References
      14.1.  Normative References
      14.2.  Informative References
@@ -355,8 +360,8 @@ Table of Contents
       following entries:
 
       -  bits: REQUIRED.  Unsigned int (Major Type 0) that contains the
-         number of bits in the per Referenced Token in the Status List.
-         The allowed values for bits are 1, 2, 4 and 8.
+         number of bits per Referenced Token in the Status List.  The
+         allowed values for bits are 1, 2, 4 and 8.
 
       -  lst: REQUIRED.  Byte string (Major Type 2) that contains the
          Status List as specified in Section 4.1.
@@ -386,8 +391,8 @@ a2                                                # map(2)
    List.  This allows for the Status List Token to be hosted by third
    parties or be transferred for offline use cases.
 
-   This section specifies Status List Tokens in Json Web Token (JWT) and
-   Cbor Web Token (CWT) format.
+   This section specifies Status List Tokens in JSON Web Token (JWT) and
+   CBOR Web Token (CWT) format.
 
 5.1.  Status List Token in JWT Format
 
@@ -466,24 +471,24 @@ a2                                                # map(2)
 
    The following content applies to the CWT protected header:
 
-   *  3 (content type): REQUIRED.  The CWT content type MUST be
-      statuslist+cbor.
+   *  14 (type): REQUIRED.  The type of the CWT MUST be statuslist+cwt
+      as defined in [CWT.typ].
 
    The following content applies to the CWT Claims Set:
 
-   *  1 (issuer): REQUIRED.  Same definition as iss claim in (#status-
-      list-token-jwt).
+   *  1 (issuer): REQUIRED.  Same definition as iss claim in
+      Section 5.1.
 
-   *  2 (subject): REQUIRED.  Same definition as sub claim in (#status-
-      list-token-jwt).
+   *  2 (subject): REQUIRED.  Same definition as sub claim in
+      Section 5.1.
 
    *  6 (issued at): REQUIRED.  Same definition as iat claim in
-      (#status-list-token-jwt).
+      Section 5.1.
 
    *  4 (expiration time): OPTIONAL.  Same definition as exp claim in
-      (#status-list-token-jwt).
+      Section 5.1.
 
-   *  TBD (status list): REQUIRED.  The status list claim MUST specify
+   *  65534 (status list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the rules outlined in Section 4.2.
 
    The following additional rules apply:
@@ -491,7 +496,7 @@ a2                                                # map(2)
    1.  The CWT MAY contain other claims.
 
    2.  The CWT MUST be digitally signed using an asymmetric
-       cryptographic algorithm.  Relying parties MUST reject the JWT if
+       cryptographic algorithm.  Relying parties MUST reject the CWT if
        it is using a Message Authentication Code (MAC) algorithm.
        Relying parties MUST reject CWTs with an invalid signature.
 
@@ -502,14 +507,14 @@ a2                                                # map(2)
        discretion of the verifying party.
 
    The following is a non-normative example for a Status List Token in
-   CWT format:
+   CWT format (not including the type header yet):
 
    d28443a10126a104423132a502782168747470733a2f2f6578616d706c652e636f6d
    2f7374617475736c697374732f31017368747470733a2f2f6578616d706c652e636f
-   6d061a648c5bea041a8898dfea3a0001000056a2646269747301636c73744a78dadb
-   b918000217015d584028c8ac58691aa4f559dbed0ccfaf1824dd04206884020a17ef
-   3d779998ac74c231139475d04309e8d7aa5ce5cb95b4d38d8ea337d5815a76408aa1
-   be58dd29f1
+   6d061a648c5bea041a8898dfea19fffe56a2646269747301636c73744a78dadbb918
+   000217015d584084202a582f3c008608449ff12f4573bade664a5944e1f502e64296
+   8594e24c27fada53a61cadde55011f9c682528434820c0d06b0a6c69f07eaeae6345
+   4d50b4
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -533,15 +538,15 @@ d2                                                # tag(18)
       1a 648c5bea                                 #       uint(1686920170)
       04                                          #       uint(4)
       1a 8898dfea                                 #       uint(2291720170)
-      3a 00010000                                 #       negint(-65537)
+      19 fffe                                     #       uint(65534)
       56                                          #       bytes(22)
         a2646269747301636c73744a78dadbb918000217  #         "¢dbits\x01clstJxÚÛ¹\x18\x00\x02\x17"
         015d                                      #         "\x01]"
     58 40                                         #     bytes(64)
-      28c8ac58691aa4f559dbed0ccfaf1824dd04206884  #       "(È¬Xi\x1a¤õYÛí\x0cÏ¯\x18$Ý\x04 h\x84"
-      020a17ef3d779998ac74c231139475d04309e8d7aa  #       "\x02\x0a\x17ï=w\x99\x98¬tÂ1\x13\x94uÐC\x09è×ª"
-      5ce5cb95b4d38d8ea337d5815a76408aa1be58dd29  #       "\åË\x95´Ó\x8d\x8e£7Õ\x81Zv@\x8a¡¾XÝ)"
-      f1                                          #       "ñ"
+      84202a582f3c008608449ff12f4573bade664a5944  #       "\x84 *X/<\x00\x86\x08D\x9fñ/EsºÞfJYD"
+      e1f502e642968594e24c27fada53a61cadde55011f  #       "áõ\x02æB\x96\x85\x94âL'úÚS¦\x1c\xadÞU\x01\x1f"
+      9c682528434820c0d06b0a6c69f07eaeae63454d50  #       "\x9ch%(CH ÀÐk\x0alið~®®cEMP"
+      b4                                          #       "´"
 
 6.  Referenced Token
 
@@ -616,12 +621,12 @@ d2                                                # tag(18)
    The Referenced Token MUST be encoded as a "COSE Web Token (CWT)"
    object according to [RFC8392].
 
-   The following content applies to the JWT Claims Set:
+   The following content applies to the CWT Claims Set:
 
    *  1 (issuer): REQUIRED.  Same definition as iss claim in
-      (#referenced-token-jwt).
+      Section 6.2.
 
-   *  TBD (status): REQUIRED.  The status claim is encoded as a Status
+   *  65535 (status): REQUIRED.  The status claim is encoded as a Status
       CBOR structure and MUST include at least one data item that refers
       to a status mechanism.  Each data item in the Status CBOR
       structure comprises a key-value pair, where the key must be a CBOR
@@ -631,15 +636,13 @@ d2                                                # tag(18)
 
       -  status_list (status list): REQUIRED when the status list
          mechanism defined in this specification is used.  It has the
-         same definition as the status_list claim in (#referenced-token-
-         jwt) but MUST be encoded as a StatusListInfo CBOR structure
-         with the following fields:
+         same definition as the status_list claim in Section 6.2 but
+         MUST be encoded as a StatusListInfo CBOR structure with the
+         following fields:
 
-         o  idx: REQUIRED.  Same definition as idx claim in
-            (#referenced-token-jwt).
+         o  idx: REQUIRED.  Same definition as idx claim in Section 6.2.
 
-         o  uri: REQUIRED.  Same definition as uri claim in
-            (#referenced-token-jwt).
+         o  uri: REQUIRED.  Same definition as uri claim in Section 6.2.
 
    Application of additional restrictions and policy are at the
    discretion of the verifying party.
@@ -655,9 +658,9 @@ d2                                                # tag(18)
    CBOR structure as defined in "CBOR Object Signing and Encryption
    (COSE)" [RFC9052].
 
-   It is required to encode the status mechanisms Referenced Tokens
-   refer to using the Status CBOR structure defined in (#referenced-
-   token-cwt).
+   It is required to encode the status mechanisms referred to in the
+   Referenced Token using the Status CBOR structure defined in
+   Section 6.3.
 
    It is RECOMMENDED to use status for the label of the field that
    contains the Status CBOR structure.
@@ -946,6 +949,15 @@ d2                                                # tag(18)
 
    *  Specification Document(s): Section 6.1 of this specification
 
+   *  Claim Name: status_list
+
+   *  Claim Description: A status list containing up-to-date status
+      information on multiple other JWTs encoded as a bitarray.
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 5.1 of this specification
+
 13.2.  JWT Status Mechanism Methods Registry
 
    This specification establishes the IANA "Status Mechanism Methods"
@@ -990,10 +1002,80 @@ d2                                                # tag(18)
 
    *  Specification Document(s): Section 6.2 of this specification
 
-13.3.  Media Type Registration
+13.3.  CBOR Web Token Claims Registration
+
+   This specification requests registration of the following Claims in
+   the IANA "CBOR Web Token (CWT) Claims" registry [IANA.CWT]
+   established by [RFC8392].
+
+13.3.1.  Registry Contents
+
+   *  Claim Name: status
+
+   *  Claim Description: Reference to a status or validity mechanism
+      containing up-to-date status information on the CWT.
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 6.1 of this specification
+
+   *  Claim Name: status_list
+
+   *  Claim Description: A status list containing up-to-date status
+      information on multiple other CWTs encoded as a bitarray.
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 5.2 of this specification
+
+13.4.  CWT Status Mechanism Methods Registry
+
+   This specification establishes the IANA "Status Mechanism Methods"
+   registry for CWT "status" member values.  The registry records the
+   status mechanism method member and a reference to the specification
+   that defines it.
+
+13.4.1.  Registration Template
+
+   Status Method Value:
+
+      The name requested (e.g., "status_list").  The name is case
+      sensitive.  Names may not match other registered names in a case-
+      insensitive manner unless the Designated Experts state that there
+      is a compelling reason to allow an exception.
+
+   Status Method Description:
+
+      Brief description of the status mechanism method.
+
+   Change Controller:
+
+      For Standards Track RFCs, list the "IESG".  For others, give the
+      name of the responsible party.  Other details (e.g., postal
+      address, email address, home page URI) may also be included.
+
+   Specification Document(s):
+
+      Reference to the document or documents that specify the parameter,
+      preferably including URIs that can be used to retrieve copies of
+      the documents.  An indication of the relevant sections may also be
+      included but is not required.
+
+13.4.2.  Initial Registry Contents
+
+   *  Status Method Value: status_list
+
+   *  Status Method Description: A status list containing up-to-date
+      status information on multiple other CWTs encoded as a bitarray.
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 6.3 of this specification
+
+13.5.  Media Type Registration
 
    This section requests registration of the following media types
-   [RFC2046] in the "Media Types" registry[IANA.MediaTypes] in the
+   [RFC2046] in the "Media Types" registry [IANA.MediaTypes] in the
    manner described in [RFC6838].
 
    To indicate that the content is an JSON-based Status List:
@@ -1173,6 +1255,13 @@ d2                                                # tag(18)
 
 14.1.  Normative References
 
+   [CWT.typ]  Jones, M. B., "COSE 'typ' (type) Header Parameter", n.d.,
+              <https://datatracker.ietf.org/doc/draft-ietf-cose-typ-
+              header-parameter/>.
+
+   [IANA.CWT] IANA, "CBOR Web Token (CWT) Claims", n.d.,
+              <https://www.iana.org/assignments/cwt/cwt.xhtml>.
+
    [IANA.JOSE]
               IANA, "JSON Object Signing and Encryption (JOSE)", n.d.,
               <https://www.iana.org/assignments/jose/jose.xhtml>.
@@ -1307,7 +1396,7 @@ Document History
 
    *  make a reference to the Issuer-Holder-Verifier model of SD-JWT VC
 
-   *  add COSE/CWT/BOR encoding
+   *  add COSE/CWT/CBOR encoding
 
    -01
 
