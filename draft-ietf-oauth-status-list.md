@@ -60,7 +60,7 @@ normative:
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
   CWT.typ:
     author: 
-      fullname: "M. B. Jones"
+      name: "M. B. Jones"
     title: "COSE 'typ' (type) Header Parameter"
     target: "https://datatracker.ietf.org/doc/draft-ietf-cose-typ-header-parameter/"
 
