@@ -1,8 +1,9 @@
 from jwcrypto import jwk, jwt
-from cwt import COSE, COSEKey
+from cwt import COSE, COSEKey, CWTClaims
 from status_list import StatusList
 from datetime import datetime
 from typing import Dict
+from cbor2 import dumps
 import json
 
 DEFAULT_ALG = "ES256"
@@ -119,11 +120,11 @@ class StatusListToken:
             claims = optional_claims
         else:
             claims = {}
-        claims[2] = self.subject
-        claims[1] = self.issuer
-        claims[6] = int(iat.timestamp())
+        claims[CWTClaims.SUB] = self.subject
+        claims[CWTClaims.ISS] = self.issuer
+        claims[CWTClaims.IAT] = int(iat.timestamp())
         if exp is not None:
-            claims[4] = int(exp.timestamp())
+            claims[CWTClaims.EXP] = int(exp.timestamp())
         claims[65534] = self.list.encodeAsCBOR() # no CWT claim key assigned yet by IANA
 
         # build header
@@ -138,15 +139,16 @@ class StatusListToken:
             unprotected_header = {}
 
         if self._key.key_id:
-            unprotected_header["kid"] = self._key.key_id
-        protected_header["alg"] = self._alg
+            unprotected_header[4] = self._key.key_id
+        protected_header[1] = self._alg
+        protected_header[16] = STATUS_LIST_TYP_CWT
 
         key = COSEKey.from_jwk(self._key)
 
         # The sender side:
         sender = COSE.new()
         encoded = sender.encode(
-            claims,
+            dumps(claims),
             key,
             protected=protected_header,
             unprotected=unprotected_header

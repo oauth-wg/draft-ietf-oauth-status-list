@@ -115,6 +115,7 @@ def statusListCWT():
         subject="https://example.com/statuslists/1",
         list=status_list,
         key=key,
+        alg=-7,
     )
     status_cwt = cwt.buildCWT(iat=iat, exp=exp)
     hex_encoded = status_cwt.hex()
