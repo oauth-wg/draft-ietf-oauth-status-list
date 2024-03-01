@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 30 August 2024                                                 
+Expires: 2 September 2024                                               
                                                               C. Bormann
-                                                        27 February 2024
+                                                            1 March 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 August 2024.
+   This Internet-Draft will expire on 2 September 2024.
 
 Copyright Notice
 
@@ -509,44 +509,34 @@ a2                                                # map(2)
    The following is a non-normative example for a Status List Token in
    CWT format (not including the type header yet):
 
-   d28443a10126a104423132a502782168747470733a2f2f6578616d706c652e636f6d
-   2f7374617475736c697374732f31017368747470733a2f2f6578616d706c652e636f
-   6d061a648c5bea041a8898dfea19fffe56a2646269747301636c73744a78dadbb918
-   000217015d5840d42f840c2a827b2e9d5f699079d61ab7ae2ceb91c89f05f0d3ac10
-   f66ccd912a584c3943ff4c52fe85c8f8c745bbd01b312c852c3d55f7c013d85af658
-   1a294a
+   d28453a20126106e7374617475736c6973742b637774a1046231325860a502782168
+   747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
+   68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
+   56a2646269747301636c73744a78dadbb918000217015d5840288b7cabdfb9446300
+   d140fe16990b1600a204f65fc41a34b3a66d27efa9b1b13e08beb1a483df14b29946
+   c82cd2e76ad993d33aa8b1e1ae9056dfb9a20027af
 
    The following is the CBOR diagnostic output of the example above:
 
 d2                                                # tag(18)
   84                                              #   array(4)
-    43                                            #     bytes(3)
-      a10126                                      #       "¡\x01&"
+    53                                            #     bytes(19)
+      a20126106e7374617475736c6973742b637774      #       "¢\x01&\x10nstatuslist+cwt"
     a1                                            #     map(1)
       04                                          #       uint(4)
-      42                                          #       bytes(2)
+      62                                          #       string(2)
         3132                                      #         "12"
-    a5                                            #     map(5)
-      02                                          #       uint(2)
-      78 21                                       #       string(33)
-        68747470733a2f2f6578616d706c652e636f6d2f  #         "https://example.com/"
-        7374617475736c697374732f31                #         "statuslists/1"
-      01                                          #       uint(1)
-      73                                          #       string(19)
-        68747470733a2f2f6578616d706c652e636f6d    #         "https://example.com"
-      06                                          #       uint(6)
-      1a 648c5bea                                 #       uint(1686920170)
-      04                                          #       uint(4)
-      1a 8898dfea                                 #       uint(2291720170)
-      19 fffe                                     #       uint(65534)
-      56                                          #       bytes(22)
-        a2646269747301636c73744a78dadbb918000217  #         "¢dbits\x01clstJxÚÛ¹\x18\x00\x02\x17"
-        015d                                      #         "\x01]"
+    58 60                                         #     bytes(96)
+      a502782168747470733a2f2f6578616d706c652e63  #       "¥\x02x!https://example.c"
+      6f6d2f7374617475736c697374732f310173687474  #       "om/statuslists/1\x01shtt"
+      70733a2f2f6578616d706c652e636f6d061a648c5b  #       "ps://example.com\x06\x1ad\x8c["
+      ea041a8898dfea19fffe56a2646269747301636c73  #       "ê\x04\x1a\x88\x98ßê\x19ÿþV¢dbits\x01cls"
+      744a78dadbb918000217015d                    #       "tJxÚÛ¹\x18\x00\x02\x17\x01]"
     58 40                                         #     bytes(64)
-      d42f840c2a827b2e9d5f699079d61ab7ae2ceb91c8  #       "Ô/\x84\x0c*\x82{.\x9d_i\x90yÖ\x1a·®,ë\x91È"
-      9f05f0d3ac10f66ccd912a584c3943ff4c52fe85c8  #       "\x9f\x05ðÓ¬\x10ölÍ\x91*XL9CÿLRþ\x85È"
-      f8c745bbd01b312c852c3d55f7c013d85af6581a29  #       "øÇE»Ð\x1b1,\x85,=U÷À\x13ØZöX\x1a)"
-      4a                                          #       "J"
+      288b7cabdfb9446300d140fe16990b1600a204f65f  #       "(\x8b|«ß¹Dc\x00Ñ@þ\x16\x99\x0b\x16\x00¢\x04ö_"
+      c41a34b3a66d27efa9b1b13e08beb1a483df14b299  #       "Ä\x1a4³¦m'ï©±±>\x08¾±¤\x83ß\x14²\x99"
+      46c82cd2e76ad993d33aa8b1e1ae9056dfb9a20027  #       "FÈ,ÒçjÙ\x93Ó:¨±á®\x90Vß¹¢\x00'"
+      af                                          #       "¯"
 
 6.  Referenced Token
 
@@ -1391,11 +1381,11 @@ d2                                                # tag(18)
               <https://www.rfc-editor.org/rfc/rfc7800>.
 
    [SD-JWT.VC]
-              Terbu, O. and D. Fett, "SD-JWT-based Verifiable
-              Credentials (SD-JWT VC)", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-sd-jwt-vc-01, 23 October 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              sd-jwt-vc-01>.
+              Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
+              Verifiable Credentials (SD-JWT VC)", Work in Progress,
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-02, 27 February
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-sd-jwt-vc-02>.
 
 Acknowledgments
 
