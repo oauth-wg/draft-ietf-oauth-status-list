@@ -1,5 +1,5 @@
 from jwcrypto import jwk, jwt
-from cwt import COSE, COSEKey, CWTClaims
+from cwt import COSE, COSEKey, CWTClaims, COSEHeaders
 from status_list import StatusList
 from datetime import datetime
 from typing import Dict
@@ -139,8 +139,8 @@ class StatusListToken:
             unprotected_header = {}
 
         if self._key.key_id:
-            unprotected_header[4] = self._key.key_id
-        protected_header[1] = self._alg
+            unprotected_header[COSEHeaders.KID] = self._key.key_id.encode('utf-8')
+        protected_header[COSEHeaders.ALG] = self._alg
         protected_header[16] = STATUS_LIST_TYP_CWT
 
         key = COSEKey.from_jwk(self._key)
