@@ -415,15 +415,21 @@ Table of Contents
       Token.
 
    *  sub: REQUIRED.  The sub (subject) claim MUST specify a unique
-      string identifier for that Status List Token.  The value MUST be
+      string identifier for the Status List Token.  The value MUST be
       equal to that of the uri claim contained in the status_list claim
       of the Referenced Token.
 
    *  iat: REQUIRED.  The iat (issued at) claim MUST specify the time at
       which the Status List Token was issued.
 
-   *  exp: OPTIONAL.  The exp (expiration time) claim MAY convey the
-      time at which it is considered expired by its Issuer.
+   *  exp: OPTIONAL.  The exp (expiration time) claim, if present, MUST
+      specify the time at which the Status List Token is considered
+      expired by its issuer.
+
+   *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST
+      specify the maximum amount of time, in seconds, that the Status
+      List Token can be cached by a consumer before a fresh copy SHOULD
+      be retrieved.  The value of the claim MUST be a positive number.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the rules outlined in
@@ -512,9 +518,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   56a2646269747301636c73744a78dadbb918000217015d58407d0b436a499f060f5f
-   5174fc481bfa50e1c46b0ffe2e4292835c83d036ff2bacc9e4648bcb319b786b09fd
-   15d2be5874a26007e0f098024b1c0828aa540f4122
+   56a2646269747301636c73744a78dadbb918000217015d58401162c21b72c3b80554
+   35e3bd019b9de6d80f75945b0d7ae263258a48ff8ee222af57db2c79d56f826e02aa
+   325c2a12658750d1f578e1a9b2c46bcaf17780e391
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -841,8 +847,14 @@ d2                              # tag(18)
 
 10.2.  Cached and Stale status lists
 
-   TODO consumers/Relying Party of the status list should be aware if
-   they fetch the up-to-date data
+   When consumers or verifiers of the Status List fetch the data, they
+   need to be aware of its up-to-date status.  The 'ttl' (time-to-live)
+   claim in the Status List Token provides one mechanism for setting a
+   maximum cache time for the fetched data.  This property permits
+   distribution of a status list to a CDN or other distribution
+   mechanism while giving guidance to consumers of the status list on
+   how often they need to fetch a fresh copy of the status list even if
+   that status list is not expired.
 
 10.3.  Authorized access to the Status List
 
@@ -968,6 +980,14 @@ d2                              # tag(18)
 
    *  Claim Description: A status list containing up-to-date status
       information on multiple other JWTs encoded as a bitarray.
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 5.1 of this specification
+
+   *  Claim Name: ttl
+
+   *  Claim Description: Time to Live
 
    *  Change Controller: IETF
 
@@ -1406,6 +1426,8 @@ Acknowledgments
 Document History
 
    -02
+
+   *  add ttl claim to Status List Token to convey caching
 
    *  relax requirements on referenced token
 
