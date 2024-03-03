@@ -392,7 +392,7 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 
 # Privacy Considerations
 
-## Unobservability of Issuers {#privacy-issuer}
+## Limiting issuers observability of token verification {#privacy-issuer}
 
 The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
