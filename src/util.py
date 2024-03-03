@@ -1,6 +1,7 @@
 from jwcrypto import jwk, jwt
 from textwrap import fill
 from typing import Dict
+import subprocess
 import json
 
 example = {
@@ -38,6 +39,13 @@ def printObject(input: Dict) -> str:
 
 def printText(input: str) -> str:
     return fill(input, width=MAX_LENGTH, break_on_hyphens=False)
+
+
+# TODO: find a better way to do create CBOR Diagnostics output
+# this is still too wide
+def printCBORDiagnostics(input: bytes) -> str:
+    diag = subprocess.check_output("cborg hex2diag " + input.hex(), shell=True).decode('utf8')
+    return diag
 
 
 def outputFile(file_name: str, input: str):

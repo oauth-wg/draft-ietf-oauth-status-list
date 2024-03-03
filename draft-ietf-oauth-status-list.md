@@ -32,44 +32,61 @@ normative:
   RFC6838: RFC6838
   RFC7515: RFC7515
   RFC7519: RFC7519
-  RFC8152: RFC8152
   RFC8259: RFC8259
   RFC8392: RFC8392
   RFC8949: RFC8949
+  RFC9052: RFC9052
   RFC9110: RFC9110
   RFC9111: RFC9111
-  SDJWTVC: I-D.ietf-oauth-sd-jwt-vc
-  IANA.JWT:
+  IANA.MediaTypes:
     author:
       org: "IANA"
     title: "Media Types"
     target: "https://www.iana.org/assignments/media-types/media-types.xhtml"
-  IANA.MediaTypes:
+  IANA.JOSE:
+    author:
+      org: "IANA"
+    title: "JSON Object Signing and Encryption (JOSE)"
+    target: "https://www.iana.org/assignments/jose/jose.xhtml"
+  IANA.JWT:
     author:
       org: "IANA"
     title: "JSON Web Token Claims"
     target: "https://www.iana.org/assignments/jwt/jwt.xhtml"
+  IANA.CWT:
+    author:
+      org: "IANA"
+    title: "CBOR Web Token (CWT) Claims"
+    target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
+  CWT.typ: I-D.ietf-cose-typ-header-parameter
+
 informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
   RFC7800: RFC7800
+  SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
+  ISO.mdoc:
+    author:
+      org: "ISO/IEC JTC 1/SC 17"
+    title: "ISO/IEC 18013-5:2021 ISO-compliant driving licence"
+
 
 --- abstract
 
-This specification defines status list data structures for representing the status of JSON Web Tokens (JWTs) {{RFC7519}} and CBOR Web Tokens (CWTs) {{RFC8392}}.
-The status list data structures themselves are also represented as JWTs or CWTs.
+This specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption(COSE), such as JSON Web Tokens (JWTs), CBOR Web Tokens (CWTs) and ISO mdoc.
+The status list token data structures themselves are also represented as JWTs or CWTs.
 
 --- middle
 
 # Introduction
 
-JSON Web Tokens (JWTs) {{RFC7519}} and CBOR Web Tokens (CWTs) {{RFC8392}} as secure token formats, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.
+Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.
 
 This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided by an endpoint or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).
 
 An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.
 
-Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SDJWTVC}}.
+Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SD-JWT.VC}}.
 The following diagram depicts the basic conceptual relationship.
 
 ~~~ ascii-art
@@ -77,7 +94,7 @@ The following diagram depicts the basic conceptual relationship.
 +-------------------+                  +------------------------+
 |                   | describes status |                        |
 |    Status List    +----------------->|    Referenced Token    |
-|   (JSON or CBOR)  <------------------+     (JWT or CWT)       |
+|   (JSON or CBOR)  <------------------+      (JOSE, COSE)      |
 |                   |   references     |                        |
 +-------+-----------+                  +--------+---------------+
         |
@@ -132,7 +149,7 @@ Status List Token:
 : A token in JWT or CWT representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{RFC8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC8152}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
+: A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{RFC8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC9052}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
 
 # Status List {#status-list}
 
@@ -192,18 +209,34 @@ This section defines the structure for a JSON-encoded Status List:
 The following example illustrates the JSON representation of the Status List:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding}
+{::include ./examples/status_list_encoding_json}
 ~~~~~~~~~~
 
 ## Status List in CBOR Format {#status-list-cbor}
 
-TBD
+This section defines the structure for a CBOR-encoded Status List:
+
+* The `StatusList` structure is a map (Major Type 5) and defines the following entries:
+  * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
+  * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
+
+The following example illustrates the CBOR representation of the Status List:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding_cbor}
+~~~~~~~~~~
+
+The following is the CBOR diagnostic output of the example above:
+
+~~~~~~~~~~
+{::include ./example/status_list_encoding_cbor_diag}
+~~~~~~~~~~
 
 # Status List Token {#status-list-token}
 
 A Status List Token embeds the Status List into a token that is cryptographically signed and protects the integrity of the Status List. This allows for the Status List Token to be hosted by third parties or be transferred for offline use cases.
 
-This section specifies Status List Tokens in Json Web Token (JWT) and Cbor Web Token (CWT) format.
+This section specifies Status List Tokens in JSON Web Token (JWT) and CBOR Web Token (CWT) format.
 
 ## Status List Token in JWT Format {#status-list-token-jwt}
 
@@ -240,7 +273,41 @@ The following is a non-normative example for a Status List Token in JWT format:
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
 
-TBD
+The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}.
+
+The following content applies to the CWT protected header:
+
+* `16` TBD (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{CWT.typ}}.
+
+The following content applies to the CWT Claims Set:
+
+* `1` (issuer): REQUIRED. Same definition as `iss` claim in [](#status-list-token-jwt).
+* `2` (subject): REQUIRED. Same definition as `sub` claim in [](#status-list-token-jwt).
+* `6` (issued at): REQUIRED. Same definition as `iat` claim in [](#status-list-token-jwt).
+* `4` (expiration time): OPTIONAL. Same definition as `exp` claim in [](#status-list-token-jwt).
+* `65534` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the rules outlined in [](#status-list-cbor).
+
+The following additional rules apply:
+
+1. The CWT MAY contain other claims.
+
+2. The CWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the CWT if it is using a Message Authentication Code (MAC) algorithm. Relying parties MUST reject CWTs with an invalid signature.
+
+3. Relying parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
+
+4. Application of additional restrictions and policy are at the discretion of the verifying party.
+
+The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):
+
+~~~~~~~~~~
+{::include ./examples/status_list_cwt}
+~~~~~~~~~~
+
+The following is the CBOR diagnostic output of the example above:
+
+~~~~~~~~~~
+{::include ./example/status_list_cwt_diag}
+~~~~~~~~~~
 
 # Referenced Token {#referenced-token}
 
@@ -282,9 +349,59 @@ The following is a non-normative example for a decoded header and payload of a R
 }
 ~~~
 
-## Referenced Token in CWT/CBOR Format {#referenced-token-cwt}
+## Referenced Token in CWT Format {#referenced-token-cwt}
 
-TBD
+The Referenced Token MUST be encoded as a "COSE Web Token (CWT)" object according to {{RFC8392}}.
+
+The following content applies to the CWT Claims Set:
+
+* `1` (issuer): REQUIRED. Same definition as `iss` claim in [](#referenced-token-jwt).
+* `65535` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:
+  * `status_list` (status list): REQUIRED when the status list mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jwt) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
+    * `idx`: REQUIRED. Same definition as `idx` claim in [](#referenced-token-jwt).
+    * `uri`: REQUIRED. Same definition as `uri` claim in [](#referenced-token-jwt).
+
+Application of additional restrictions and policy are at the discretion of the verifying party.
+
+The following is a non-normative example for a decoded payload of a Referenced Token:
+
+~~~ ascii-art
+
+18(
+    [
+      / protected / << {
+        / alg / 1: -7 / ES256 /
+      } >>,
+      / unprotected / {
+        / kid / 4: h'3132' / '13' /
+      },
+      / payload / << {
+        / iss    / 1: "https://example.com",
+        / status / 65535: {
+          "status_list": {
+            "idx": "0",
+            "uri": "https://example.com/statuslists/1"
+          }
+        }
+      } >>,
+      / signature / h'...'
+    ]
+  )
+~~~
+
+## Referenced Token in other COSE/CBOR Format {#referenced-token-cose}
+
+The Referenced Token MUST be encoded as a `COSE_Sign1` or `COSE_Sign` CBOR structure as defined in "CBOR Object Signing and Encryption (COSE)" {{RFC9052}}.
+
+It is required to encode the status mechanisms referred to in the Referenced Token using the `Status` CBOR structure defined in [](#referenced-token-cwt).
+
+It is RECOMMENDED to use `status` for the label of the field that contains the `Status` CBOR structure.
+
+Application of additional restrictions and policy are at the discretion of the verifying party.
+
+The following is a non-normative example for a decoded payload of a Referenced Token:
+
+TBD: example
 
 # Status Types {#status-types}
 
@@ -389,7 +506,7 @@ index      3   2   1   0      7   6   5   4      11  10  9   8
 Resulting in the byte array and compressed/base64url encoded status list:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding2}
+{::include ./examples/status_list_encoding2_json}
 ~~~~~~~~~~
 
 # Security Considerations {#Security}
@@ -414,7 +531,7 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 
 ## Issuer tracking and Herd Privacy {#privacy-issuer}
 
-The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{SDJWTVC}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
+The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{SD-JWT.VC}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
 The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.
 
@@ -464,12 +581,18 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 *  Change Controller: IETF
 *  Specification Document(s):  [](#status-claim) of this specification
 
+*  Claim Name: `status_list`
+*  Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+*  Change Controller: IETF
+*  Specification Document(s):  [](#status-list-token-jwt) of this specification
+
 * Claim Name: `ttl`
 * Claim Description: Time to Live
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-jwt) of this specification
 
 ## JWT Status Mechanism Methods Registry {#iana-registry}
+
 
 This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
@@ -498,10 +621,56 @@ Specification Document(s):
 *  Change Controller: IETF
 *  Specification Document(s):  [](#referenced-token-jwt) of this specification
 
+## CBOR Web Token Claims Registration
+
+This specification requests registration of the following Claims in the
+IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC8392}}.
+
+### Registry Contents
+
+*  Claim Name: `status`
+*  Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.
+*  Change Controller: IETF
+*  Specification Document(s):  [](#status-claim) of this specification
+
+*  Claim Name: `status_list`
+*  Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
+*  Change Controller: IETF
+*  Specification Document(s):  [](#status-list-token-cwt) of this specification
+
+## CWT Status Mechanism Methods Registry {#cwt-iana-registry}
+
+This specification establishes the IANA "Status Mechanism Methods" registry for CWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
+
+### Registration Template
+
+Status Method Value:
+
+  > The name requested (e.g., "status_list"). The name is case sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.
+
+Status Method Description:
+
+  > Brief description of the status mechanism method.
+
+Change Controller:
+
+  > For Standards Track RFCs, list the "IESG".  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+
+Specification Document(s):
+
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+
+### Initial Registry Contents
+
+*  Status Method Value: `status_list`
+*  Status Method Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
+*  Change Controller: IETF
+*  Specification Document(s):  [](#referenced-token-cwt) of this specification
+
 ## Media Type Registration
 
 This section requests registration of the following media types {{RFC2046}} in
-the "Media Types" registry{{IANA.MediaTypes}} in the manner described
+the "Media Types" registry {{IANA.MediaTypes}} in the manner described
 in {{RFC6838}}.
 
 To indicate that the content is an JSON-based Status List:
@@ -605,6 +774,7 @@ Guiseppe De Marco,
 Kristina Yasuda,
 Michael B. Jones,
 Mike Prorock,
+Oliver Terbu,
 Orie Steele,
 Timo Glastra
 and
@@ -621,6 +791,7 @@ for their valuable contributions, discussions and feedback to this specification
 * relax requirements on referenced token
 * clarify Deflate / zlib compression
 * make a reference to the Issuer-Holder-Verifier model of SD-JWT VC
+* add COSE/CWT/CBOR encoding
 
 -01
 
