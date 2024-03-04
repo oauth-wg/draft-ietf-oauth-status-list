@@ -1240,16 +1240,16 @@ The status list token data structures themselves are also represented as JWTs or
             <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
-                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-issuer-tracking-and-herd-pr" class="internal xref">Issuer tracking and Herd Privacy</a></p>
+                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-limiting-issuers-observabil" class="internal xref">Limiting issuers observability of token verification</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
                 <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-malicious-issuers" class="internal xref">Malicious Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3">
-                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-relying-party-tracking" class="internal xref">Relying Party tracking</a></p>
+                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-unobservability-of-relying-" class="internal xref">Unobservability of Relying Parties</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.4">
-                <p id="section-toc.1-1.11.2.4.1"><a href="#section-11.4" class="auto internal xref">11.4</a>.  <a href="#name-correlation-risks-and-track" class="internal xref">Correlation Risks and Tracking</a></p>
+                <p id="section-toc.1-1.11.2.4.1"><a href="#section-11.4" class="auto internal xref">11.4</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.5">
                 <p id="section-toc.1-1.11.2.5.1"><a href="#section-11.5" class="auto internal xref">11.5</a>.  <a href="#name-third-party-hosting" class="internal xref">Third Party Hosting</a></p>
@@ -1258,6 +1258,11 @@ The status list token data structures themselves are also represented as JWTs or
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
+                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-token-lifecycle" class="internal xref">Token Lifecycle</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
             <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
@@ -1707,9 +1712,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-56a2646269747301636c73744a78dadbb918000217015d5840e30f8ffd473dcce454
-210dce5e3a3229e06fb7b14b19808f71fd271921ab5e041ba792c92ea590bd74f915
-601b37b7b659410ea3207eb950da9e0d823b887047
+56a2646269747301636c73744a78dadbb918000217015d5840329dfd744a9f2dfa61
+cebd2ca0f22291fb54c82a78af907935d036fd947541c3a6135a30fc405d2ad12a4a
+3c5be7db7d19fed3ebd23ff5d52216097c0b760317
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2094,8 +2099,8 @@ a fresh copy of the status list even if that status list is not expired.<a href=
       </h2>
 <div id="privacy-issuer">
 <section id="section-11.1">
-        <h3 id="name-issuer-tracking-and-herd-pr">
-<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-issuer-tracking-and-herd-pr" class="section-name selfRef">Issuer tracking and Herd Privacy</a>
+        <h3 id="name-limiting-issuers-observabil">
+<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-limiting-issuers-observabil" class="section-name selfRef">Limiting issuers observability of token verification</a>
         </h3>
 <p id="section-11.1-1">The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
 <p id="section-11.1-2">The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.<a href="#section-11.1-2" class="pilcrow">¶</a></p>
@@ -2112,20 +2117,23 @@ a fresh copy of the status list even if that status list is not expired.<a href=
 </div>
 <div id="privacy-relying-party">
 <section id="section-11.3">
-        <h3 id="name-relying-party-tracking">
-<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-relying-party-tracking" class="section-name selfRef">Relying Party tracking</a>
+        <h3 id="name-unobservability-of-relying-">
+<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-unobservability-of-relying-" class="section-name selfRef">Unobservability of Relying Parties</a>
         </h3>
-<p id="section-11.3-1">Once the Relying Party gets the Referenced Token, this enables him to request the Status List to validate the status of the Token through the provided "uri" property and look up the corresponding "index". However, the Relying Party may persistently store the "uri" and "index" of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential. This behaviour could be constrained by adding authorization rules to the Status List, see <a href="#security-authorization" class="auto internal xref">Section 10.3</a>.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
+<p id="section-11.3-1">Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided <code>uri</code> parameter and look up the corresponding <code>index</code>. However, the Relying Party may persistently store the <code>uri</code> and <code>index</code> of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
+<p id="section-11.3-2">This behaviour could be mitigated by:
+- adding authorization rules to the Status List, see <a href="#security-authorization" class="auto internal xref">Section 10.3</a>.
+- regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 12.1</a>.<a href="#section-11.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="correlation-risks-and-tracking">
+<div id="unlinkability">
 <section id="section-11.4">
-        <h3 id="name-correlation-risks-and-track">
-<a href="#section-11.4" class="section-number selfRef">11.4. </a><a href="#name-correlation-risks-and-track" class="section-name selfRef">Correlation Risks and Tracking</a>
+        <h3 id="name-unlinkability">
+<a href="#section-11.4" class="section-number selfRef">11.4. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
         </h3>
-<p id="section-11.4-1">Colluding Issuers and Relying Parties have the possibility to identify the usage of credentials of a particular Holder, as the Referenced Token contains unique, trackable data.<a href="#section-11.4-1" class="pilcrow">¶</a></p>
-<p id="section-11.4-2">To avoid privacy risks for colluding Relying Parties, it is recommended that Issuers use batch issuance to issue multiple tokens, such that Holders can use individual tokens for specific Relying Parties. In this case, every Referenced Token <span class="bcp14">MUST</span> have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.<a href="#section-11.4-2" class="pilcrow">¶</a></p>
-<p id="section-11.4-3">To avoid information leakage by the values of "uri" and "index", Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-11.4-3" class="pilcrow">¶</a></p>
+<p id="section-11.4-1">Colluding Issuers and a Relying Parties have the possibility to link two transactions, as the tuple of <code>uri</code> and <code>index</code> inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-11.4-1" class="pilcrow">¶</a></p>
+<p id="section-11.4-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 12.1</a>.<a href="#section-11.4-2" class="pilcrow">¶</a></p>
+<p id="section-11.4-3">To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-11.4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-11.4-4.1">
             <p id="section-11.4-4.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-11.4-4.1.1" class="pilcrow">¶</a></p>
@@ -2156,7 +2164,16 @@ TODO evaluate definition of Status List Provider?
       <h2 id="name-implementation-consideratio">
 <a href="#section-12" class="section-number selfRef">12. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
       </h2>
-<p id="section-12-1">TBD Declare whether JWT and CWT representations can be used interchangeably by the same issuer.  For instance, declare whether a status list can reference both JWT and CWT tokens.<a href="#section-12-1" class="pilcrow">¶</a></p>
+<div id="implementation-lifecycle">
+<section id="section-12.1">
+        <h3 id="name-token-lifecycle">
+<a href="#section-12.1" class="section-number selfRef">12.1. </a><a href="#name-token-lifecycle" class="section-name selfRef">Token Lifecycle</a>
+        </h3>
+<p id="section-12.1-1">The lifetime of a Status List (and the Status List Token) depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List (and the Status List Token).<a href="#section-12.1-1" class="pilcrow">¶</a></p>
+<p id="section-12.1-2">Referenced Tokens may be regularly re-issued to increase security or to mitigate linkability and prevent tracking by Relying Parties. In this case, every Referenced Token <span class="bcp14">MUST</span> have a fresh Status List entry.<a href="#section-12.1-2" class="pilcrow">¶</a></p>
+<p id="section-12.1-3">Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token <span class="bcp14">MUST</span> have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.<a href="#section-12.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="iana-considerations">
