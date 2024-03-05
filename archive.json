@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-03T00:56:49.226954+00:00",
+  "timestamp": "2024-03-05T00:53:43.932535+00:00",
   "repo": "vcstuff/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -121,7 +121,7 @@
       "id": "I_kwDOJZ2aqs5mOaZC",
       "title": "Document the CWT variation of the status list",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -130,8 +130,8 @@
       "labels": [],
       "body": "As described in the title, detail the CWT representation of the status list which is complementary to the JWT representation.",
       "createdAt": "2023-05-18T06:10:35Z",
-      "updatedAt": "2024-02-13T08:07:29Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-03T21:35:52Z",
+      "closedAt": "2024-03-03T21:35:52Z",
       "comments": [
         {
           "author": "bc-pi",
@@ -1429,7 +1429,7 @@
       "id": "I_kwDOJZ2aqs5vCfm5",
       "title": "Privacy Considerations",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/60",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1438,8 +1438,8 @@
       "labels": [],
       "body": "batch issued credentials might be revealed in an status list update, which might correlate the related referenced tokens/credentials",
       "createdAt": "2023-08-23T09:22:23Z",
-      "updatedAt": "2024-02-06T07:37:50Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-04T06:08:12Z",
+      "closedAt": "2024-03-04T06:08:12Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2072,7 +2072,7 @@
         },
         {
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I'm still not convinced since I think new status methods could register a new claim. \r\n\r\nBut if people want this, then there is another option which is similar to `cnf`:\r\n\r\n```\r\n\"status\": {\r\n  \"status_bitstring\": { \"idx\": ..., \"uri\": ... }, \r\n  \"ocsp\": { ... },\r\n  ...\r\n}\r\n```",
           "createdAt": "2023-12-06T20:10:45Z",
           "updatedAt": "2023-12-07T04:07:37Z"
@@ -2114,7 +2114,7 @@
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/86",
       "state": "OPEN",
       "author": "awoie",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "`status` is not really a claim about a subject and is never selectively disclosed, so it would makes sense to make it a JWT header. It would also work well with the existing `crit` JOSE header that can then mark `status` as critical.\r\n\r\nSee https://github.com/oauth-wg/oauth-sd-jwt-vc/issues/192",
@@ -2232,7 +2232,7 @@
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/96",
       "state": "CLOSED",
       "author": "awoie",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [
         "tplooker"
       ],
@@ -2251,14 +2251,14 @@
         },
         {
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Perhaps we can keep this issue until we have the language in the caching section.",
           "createdAt": "2024-01-24T14:35:14Z",
           "updatedAt": "2024-01-24T14:35:14Z"
         },
         {
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Would it make sense to add this if we assume the verifier is not fetching the status list themselves but only gets the status list from some other component? in that case, the reader would not have the caching info.",
           "createdAt": "2024-02-08T14:08:55Z",
           "updatedAt": "2024-02-08T14:08:55Z"
@@ -2331,15 +2331,15 @@
       "id": "I_kwDOJZ2aqs5_1J-7",
       "title": "Use reference to RFC9052 instead of RFC8152",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/109",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Use reference to RFC9052 instead of RFC8152",
       "createdAt": "2024-02-20T15:26:39Z",
-      "updatedAt": "2024-02-20T15:26:40Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-03T21:35:52Z",
+      "closedAt": "2024-03-03T21:35:52Z",
       "comments": []
     },
     {
@@ -2347,15 +2347,15 @@
       "id": "I_kwDOJZ2aqs5_1Lgz",
       "title": "Rewrite abstract, intro and diagram to use JOSE/COSE centric",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/110",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The abstract, intro, diagrams wrt referenced tokens description should refer to COSE and JOSE instead of CWT/JWT. Otherwise, non-CWT COSE objects such as ISO 18013-5 MSO cannot use this spec. Same applies to SD-JWT VC encoded secured using JWS.",
       "createdAt": "2024-02-20T15:29:21Z",
-      "updatedAt": "2024-02-20T16:18:43Z",
-      "closedAt": null,
+      "updatedAt": "2024-03-03T21:35:53Z",
+      "closedAt": "2024-03-03T21:35:53Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -7073,24 +7073,26 @@
       "id": "PR_kwDOJZ2aqs5nVTP7",
       "title": "improve privacy consideration to recommend re-issuance",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/105",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses # <!-- Issue # here -->\r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2024-02-19T21:56:14Z",
-      "updatedAt": "2024-02-24T18:26:18Z",
+      "updatedAt": "2024-03-04T06:08:22Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
       "headRepository": "vcstuff/draft-ietf-oauth-status-list",
       "headRefName": "60-privacy-considerations",
-      "headRefOid": "b51246adc0c2855c28f8949799ac1ed62237ccd6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "3983ad279f4791f83edc27f57aa3a0621827545b",
+      "closedAt": "2024-03-04T06:08:11Z",
+      "mergedAt": "2024-03-04T06:08:11Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "32f5c8bc2f4bed7ce2853eff73b7e024678e9e10"
+      },
       "comments": [],
       "reviews": [
         {
@@ -7171,6 +7173,39 @@
               "updatedAt": "2024-02-24T18:26:18Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5yBQc5",
+          "commit": {
+            "abbreviatedOid": "b51246a"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-03T09:48:41Z",
+          "updatedAt": "2024-03-03T09:48:41Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n## Limiting issuers observability of token verification {#privacy-issuer}\r\n```",
+              "createdAt": "2024-03-03T09:48:41Z",
+              "updatedAt": "2024-03-03T09:48:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5yDMHd",
+          "commit": {
+            "abbreviatedOid": "3983ad2"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-04T06:07:59Z",
+          "updatedAt": "2024-03-04T06:07:59Z",
+          "comments": []
         }
       ]
     },
@@ -7179,24 +7214,26 @@
       "id": "PR_kwDOJZ2aqs5nVlIe",
       "title": "Add CBOR/CWT encoding",
       "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/106",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "awoie",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #3\r\nCloses #109 \r\nCloses #110 \r\n\r\n## \ud83d\udcd1 Description\r\nThis PR adds:\r\n- CBOR/CWT encoding for status list and status list info\r\n- Example implementation for CBOR/CWT\r\n\r\nNot included yet: examples for referenced tokens (COSE, CWT) but that should be trivial to add.\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/awoie/add-cwt/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-19T23:31:12Z",
-      "updatedAt": "2024-03-01T22:35:42Z",
+      "updatedAt": "2024-03-03T21:35:51Z",
       "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "1b1a63f8fbfbc290c9da395d07c608f77b638ca9",
       "headRepository": "vcstuff/draft-ietf-oauth-status-list",
       "headRefName": "awoie/add-cwt",
       "headRefOid": "2607d3b11a1b9fae7f38461a1bd3b4a3ec164bb4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-03T21:35:51Z",
+      "mergedAt": "2024-03-03T21:35:51Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "0da03a10b348ce2086439b390c1a39cbc05636ee"
+      },
       "comments": [
         {
           "author": "paulbastian",
@@ -7221,21 +7258,21 @@
         },
         {
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I assume there will be a lot of comments. I had some troubles with the `status` claim language for non-CWTs btw. Please review and give feedback. @paulbastian @c2bo @tplooker ",
           "createdAt": "2024-02-20T14:26:10Z",
           "updatedAt": "2024-02-20T14:26:10Z"
         },
         {
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I was wondering whether it would be better to define a CDDL for Status, StatusList and StatusListInfo. Basically, having a high-level CDDl description of all objects and then having some specific sections for JWT, COSE, CWT that define how they are used in the corresponding objects.",
           "createdAt": "2024-02-20T14:27:29Z",
           "updatedAt": "2024-02-20T14:27:29Z"
         },
         {
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Also keep in mind that `status` claim for CWT will require IANA to assign us an integer number, so we can use it in the CWT.",
           "createdAt": "2024-02-20T14:28:32Z",
           "updatedAt": "2024-02-20T14:28:32Z"
@@ -7249,7 +7286,7 @@
         },
         {
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> There is a problem with the width of the CBOR diagnostic notation examples. The datatracker only allows a width of 72, but cborg defaults to 100 and apparently can't be configured in CLI mode.\r\n\r\nI can write a small JS script that uses the cborg library and configures the width to 72. Would this be even possible? I didn't check by myself.",
           "createdAt": "2024-02-26T08:51:11Z",
           "updatedAt": "2024-02-26T08:51:11Z"
@@ -7309,7 +7346,7 @@
             "abbreviatedOid": "138e7a4"
           },
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-22T10:59:47Z",
@@ -7373,7 +7410,7 @@
             "abbreviatedOid": "138e7a4"
           },
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-22T20:19:46Z",
@@ -7393,7 +7430,7 @@
             "abbreviatedOid": "138e7a4"
           },
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-22T20:20:28Z",
@@ -7453,7 +7490,7 @@
             "abbreviatedOid": "138e7a4"
           },
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-26T09:49:25Z",
@@ -7493,7 +7530,7 @@
             "abbreviatedOid": "138e7a4"
           },
           "author": "awoie",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-26T09:51:46Z",
@@ -7692,8 +7729,91 @@
           "createdAt": "2024-03-01T22:35:42Z",
           "updatedAt": "2024-03-01T22:35:42Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5yBQhG",
+          "commit": {
+            "abbreviatedOid": "2607d3b"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-03T09:50:19Z",
+          "updatedAt": "2024-03-03T09:50:19Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 118,
+      "id": "PR_kwDOJZ2aqs5ohcX0",
+      "title": "upgrade python dependencies",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/118",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "upgrade python dependencies",
+      "createdAt": "2024-03-03T21:44:00Z",
+      "updatedAt": "2024-03-04T06:07:36Z",
+      "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "0da03a10b348ce2086439b390c1a39cbc05636ee",
+      "headRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/upgrade-dependencies",
+      "headRefOid": "b917d71f880387e456e534baaa504d96e4f48261",
+      "closedAt": "2024-03-04T06:07:36Z",
+      "mergedAt": "2024-03-04T06:07:36Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "85e42a7f0e91b73d4974678c4c1e4dd6b615246a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs5yDMAr",
+          "commit": {
+            "abbreviatedOid": "b917d71"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-04T06:07:32Z",
+          "updatedAt": "2024-03-04T06:07:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 119,
+      "id": "PR_kwDOJZ2aqs5ojKHN",
+      "title": "add cborg dependency to publish workflow",
+      "url": "https://github.com/vcstuff/draft-ietf-oauth-status-list/pull/119",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "add cborg dependency to publish workflow",
+      "createdAt": "2024-03-04T07:03:43Z",
+      "updatedAt": "2024-03-04T07:08:35Z",
+      "baseRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "32f5c8bc2f4bed7ce2853eff73b7e024678e9e10",
+      "headRepository": "vcstuff/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/fix-cborg-dependency",
+      "headRefOid": "5a57a4a5962b3d9716b093a90cf5b479af770b2a",
+      "closedAt": "2024-03-04T07:08:35Z",
+      "mergedAt": "2024-03-04T07:08:35Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "1198edeff82efca8fc22d90b571d57c73813a338"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
