@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-07T00:44:14.925625+00:00",
+  "timestamp": "2024-03-10T00:57:51.737512+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -79,7 +79,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I do believe we have to give some pre-defined interpretations - parsing the different states doesn't really work well for fully automated flows imho. Biggest question then would be if just mentioning that template via name would be enough or if we still want to have that information served in the status list as well.\r\n\r\nIf we take revocation as an example, then we likely need to define at least 2 default templates similar to these:\r\n- 1bit-revocation:\r\n where 0 equals `VALID` and 1 equals `REVOKED`\r\n- 2bit-revocation: \r\n 0 = `VALID`\r\n 1 = `REVOKED`\r\n 2 = `SUSPENDED`\r\n 3 = ..\r\n\r\nWe could then either have that definition as part of the JWT or just reference via name/uri (which I would prefer - makes implementation a lot easier). ",
           "createdAt": "2023-05-19T12:57:59Z",
           "updatedAt": "2023-05-19T12:57:59Z"
@@ -225,7 +225,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Does it make sense to introduce\r\n`size` = amount of entries \r\n`states` = possible states that an entry can have (e.g., 2 for standard revocation)\r\nas mandatory values to the status list? That would allow for an easy check if interpretation/conversion of the status list worked properly on the verifier side.\r\n\r\n\r\nWould result in something like this:\r\n```\r\n{\r\n  \"iss\": \"https://example.com\",\r\n  \"iat\": 1683560915,\r\n  \"exp\": 1686232115,\r\n  \"status\": {\r\n    \"typ\": \"revocation-list\",\r\n    \"size\": 16384,\r\n    \"states\": 2,\r\n    \"lst\": \"H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA\"\r\n  }\r\n}\r\n```",
           "createdAt": "2023-05-22T08:58:11Z",
           "updatedAt": "2023-05-22T08:58:11Z"
@@ -263,7 +263,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I think it is a good idea to at least desribe the different scenarios of who (verifier/holder) is requesting the status list and how it is protected.",
           "createdAt": "2023-05-19T18:59:54Z",
           "updatedAt": "2023-05-19T18:59:54Z"
@@ -277,14 +277,14 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Either as an entry in the issued credential or we need to provide some form of meta information online prior to requesting the status list?",
           "createdAt": "2023-05-22T08:37:05Z",
           "updatedAt": "2023-05-22T08:37:05Z"
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Main spec should have a short discussion why/where this would make sense.\r\nIn-depth discussion can happen in an appendix.",
           "createdAt": "2023-05-26T12:43:11Z",
           "updatedAt": "2023-05-26T12:43:11Z"
@@ -554,7 +554,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Other schemes could be supported using a different prefix in the `uri` field: the uri could for example be a DID path like did:example:123/status.\r\nI don't think we should worry about that too much for the time being.",
           "createdAt": "2023-05-25T12:00:23Z",
           "updatedAt": "2023-05-25T12:00:23Z"
@@ -806,7 +806,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "That is also missing for the offline case (bring your status list with you) to make sure we have the correct status list. \r\n\r\nImho, we can just use the subject claim and bind it to the URI that is also used in the Referenced Token? \r\nA status list JWT would then look like this:\r\n```\r\n{\r\n  \"sub\": \"https://example.com/statuslists/1\", \r\n  \"iss\": \"https://example.com\",\r\n  \"iat\": 1683560915,\r\n  \"exp\": 1686232115,\r\n  \"status_list\": {\r\n    \"bits\": 1,\r\n    \"lst\": \"H4sIAAAAAAAAA-3BMQEAAADCoPVPbQwfoAA......IC3AYbSVKsAQAAA\"\r\n  }\r\n}\r\n```\r\nWhat do you think?",
           "createdAt": "2023-06-15T11:33:50Z",
           "updatedAt": "2023-06-15T11:33:50Z"
@@ -940,7 +940,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I like the idea to rename `uri` to  `slt`. That makes it even clearer what to expect and we could still require `slt` to be an URI.",
           "createdAt": "2023-07-16T20:04:41Z",
           "updatedAt": "2023-07-16T20:04:41Z"
@@ -1064,7 +1064,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "We should use whatever the referenced token is using for key resolution and put it out of scope for this spec? ",
           "createdAt": "2023-08-23T06:54:43Z",
           "updatedAt": "2023-08-23T06:54:43Z"
@@ -1078,7 +1078,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Should be defined elsewhere - e.g., https://github.com/vcstuff/oid4vc-haip-sd-jwt-vc/issues/65",
           "createdAt": "2023-10-20T09:26:16Z",
           "updatedAt": "2023-10-20T09:26:16Z"
@@ -1092,14 +1092,14 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Good point. It would probably make sense to point that out in the spec itself (remark that it is out of scope). ",
           "createdAt": "2023-11-01T13:18:10Z",
           "updatedAt": "2023-11-01T13:18:10Z"
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I guess we can close this as #75 was merged?",
           "createdAt": "2024-02-24T14:03:23Z",
           "updatedAt": "2024-02-24T14:03:23Z"
@@ -1123,7 +1123,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Imho, this should be part of an interop profile and not part of this spec. We should stick to / allow jose/cose in this work.",
           "createdAt": "2023-08-23T06:47:13Z",
           "updatedAt": "2023-08-23T06:47:23Z"
@@ -1161,7 +1161,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/50",
       "state": "CLOSED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [
         "c2bo"
       ],
@@ -1180,7 +1180,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Yeah, I would see it as an extension point for the future. Initially I do believe, we should start with one option. ",
           "createdAt": "2023-08-04T08:08:34Z",
           "updatedAt": "2023-08-04T08:08:34Z"
@@ -1249,7 +1249,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "This was mainly a choice for simplicity of implementation: by only allowing bit sizes of  1,2,4,8, we only need to manipulate a single byte in an array. ",
           "createdAt": "2023-08-05T07:42:14Z",
           "updatedAt": "2023-08-05T07:42:14Z"
@@ -1380,7 +1380,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/58",
       "state": "OPEN",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [
         "c2bo"
       ],
@@ -1629,7 +1629,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "> It does, you just have to read the string as you normally would ( read key, not read bitmap )... there is also some ordering issues.... I have an experimental implementation here:\r\n> \r\n> https://github.com/transmute-industries/dune\r\n> \r\n> I won't be at iiw\r\n\r\nThat sounds pretty interesting! Sad to hear that you won't be at IIW :/",
           "createdAt": "2023-10-04T15:34:18Z",
           "updatedAt": "2023-10-04T15:34:18Z"
@@ -1662,7 +1662,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Seems to be a difference in the header - from the position I would assume the timestamp (even though you seem be setting it to the fixed value used in the examples in the draft)? There is also a header entry for the operating system - that would also be a very likely candidate for the difference. I will take a look at it when I am back from IIW.\r\n\r\nWe were discussing switching from gzip to zlib (or deflate directly) for that reason - we don't really need these headers and most languages seem to support both gzip and zlib (which was our concern when we initially thought about this).\r\nRelated Issue: #39 ",
           "createdAt": "2023-10-13T12:38:53Z",
           "updatedAt": "2023-10-13T12:38:53Z"
@@ -1676,7 +1676,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I changed the python implementation to use zlib with level 9 and did the same for your typescript implementation --> both resulted in the same:\r\n```\r\neNrbuRgAAhcBXQ\r\neNo76fITAAPfAgc\r\n```\r\nWe should really change that imho (and also add the text to recommend compression level).",
           "createdAt": "2023-10-18T01:23:59Z",
           "updatedAt": "2023-10-18T01:23:59Z"
@@ -1790,7 +1790,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Solved by #89 ",
           "createdAt": "2023-12-21T20:22:07Z",
           "updatedAt": "2023-12-21T20:22:07Z"
@@ -1872,7 +1872,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Happy with `draft-ietf-oauth-status-list` as well.",
           "createdAt": "2023-10-23T03:41:40Z",
           "updatedAt": "2023-10-23T03:41:40Z"
@@ -2211,7 +2211,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Copied over, to have everything in the issue here:\r\nThis is the current text:\r\n> The complete byte array is compressed using the \"DEFLATE\" {{RFC1951}} compression method and stored using the \"ZLIB\" {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.\r\n\r\nThis is the proposal:\r\n>The complete byte array is compressed using DEFLATE {{RFC1951}} inside the ZLIB {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.\r\n\r\nI agree that the current text is a bit weird and I wasn't really sure how to formulate it better when writing it.\r\n\r\n",
           "createdAt": "2024-01-16T13:11:52Z",
           "updatedAt": "2024-01-16T13:11:52Z"
@@ -2244,7 +2244,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "That information should be conveyed using http caching information:\r\n> If caching is required (e.g., to enable the use of alternative mechanisms for hosting, like Content Delivery Networks), the control of the caching mechanism SHOULD be implemented using the standard HTTP Cache-Control as defined in {{RFC9111}}.\r\n\r\nMy understanding would be that `exp` provides the validity of the information (can this information be trusted/used for a verification/validation) and http caching information signals when the system should attempt to retrieve the information again. For this case the `expires` header from RFC9111 (https://datatracker.ietf.org/doc/html/rfc9111#section-5.3) would signal when the system fetching the status list tries to update again.\r\n\r\nWe have a TODO in the text right now to properly explain this mechanism:\r\n> [10.2. ](https://vcstuff.github.io/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#section-10.2)[Cached and Stale status lists](https://vcstuff.github.io/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-cached-and-stale-status-lis)\r\nTODO consumers/Relying Party of the status list should be aware if they fetch the up-to-date data",
           "createdAt": "2024-01-24T04:42:32Z",
           "updatedAt": "2024-01-24T17:47:18Z"
@@ -2298,7 +2298,7 @@
       "labels": [],
       "body": "Also consider the application and usage of a mechanism like etag to allow a consuming party to determine whether their copy of a given status list is the latest.",
       "createdAt": "2024-02-20T07:31:30Z",
-      "updatedAt": "2024-02-20T07:46:33Z",
+      "updatedAt": "2024-03-07T10:24:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -2307,6 +2307,13 @@
           "body": "Include rationale for why we need both. \r\n- For example having a ttl claim and exp means the issuer of the status list doesn't need to resign it if there is no updates within the expiry window.\r\n- This approach also helps to spread out cache invalidation by downstream parties rather then synchronising them with an expected update time stamp. ",
           "createdAt": "2024-02-20T07:46:32Z",
           "updatedAt": "2024-02-20T07:46:32Z"
+        },
+        {
+          "author": "joelposti",
+          "authorAssociation": "NONE",
+          "body": "Since Status List Tokens are distributed via HTTP endpoints it might be beneficial to elaborate on how ttl and exp claims interplay with HTTP headers such as Cache-Control and Expires.\r\n\r\nFor example, if the value of ttl claim is `60` and the value of Cache-Control HTTP header is `max-age=30` which of these takes the precedence? My assumption is that ttl takes precedence since its signed data.\r\n\r\nAnother example: ttl is `60` but Cache-Control HTTP header is `no-store`. Should the consumer cache the Status List Token or not? Issuer says yes, but whatever CDN operator says no.",
+          "createdAt": "2024-03-07T10:24:40Z",
+          "updatedAt": "2024-03-07T10:24:40Z"
         }
       ]
     },
@@ -2469,12 +2476,28 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/117",
       "state": "OPEN",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Register ttl claim for CWT\r\n\r\n_Originally posted by @c2bo in https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/101#issuecomment-1966222774_\r\n            ",
       "createdAt": "2024-02-27T10:21:29Z",
       "updatedAt": "2024-02-27T10:21:29Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 120,
+      "id": "I_kwDOJZ2aqs6BjaE7",
+      "title": "Status List Endpoint is undefined",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/120",
+      "state": "OPEN",
+      "author": "joelposti",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Section [8.1. ](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-02.html#section-8.1)[Status List Request](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-02.html#name-status-list-request) mentions Status List Endpoint. The term is not mentioned elsewhere in the specification nor is it defined.",
+      "createdAt": "2024-03-07T10:37:56Z",
+      "updatedAt": "2024-03-07T10:37:56Z",
       "closedAt": null,
       "comments": []
     }
@@ -2487,7 +2510,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/6",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Fixing links to point to new org",
@@ -2563,7 +2586,7 @@
             "abbreviatedOid": "9b46a5a"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "Need to remove the trailing whitespaces for the markdown tooling to be happy",
           "createdAt": "2023-05-19T19:12:53Z",
@@ -2813,7 +2836,7 @@
             "abbreviatedOid": "d8d7d57"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-05-23T19:33:12Z",
@@ -2888,7 +2911,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/18",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Questions for the encoding:\r\n- base64 vs url-safe base64\r\n- bitwise encoding right now is least significant bit to most significant bit\r\n\r\nThe part describing the bit-encoding still needs be rewritten\r\n\r\nIn general:\r\nI searched a bit for better ways to encode/compress but in terms of simplicity and support for different programming languages, it seems some form of byte array and gZIP seem to be a pretty decent pick.",
@@ -2916,7 +2939,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Imho we need another iteration on the description of the bit encoding, most likely with some form of ASCII art. I would prefer to do that in another PR- what do you think?",
           "createdAt": "2023-06-15T11:48:26Z",
           "updatedAt": "2023-06-15T11:48:26Z"
@@ -3021,7 +3044,7 @@
             "abbreviatedOid": "7bdf31d"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-06-14T19:18:59Z",
@@ -3081,7 +3104,7 @@
             "abbreviatedOid": "453c427"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-06-15T12:17:19Z",
@@ -3101,7 +3124,7 @@
             "abbreviatedOid": "34d588a"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-06-15T12:18:22Z",
@@ -3165,7 +3188,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "`RFC-XXXX` breaks the build\r\nAll RFC references are resolved interally and linked",
           "createdAt": "2023-05-30T18:54:49Z",
           "updatedAt": "2023-05-30T18:54:49Z"
@@ -3207,7 +3230,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "We need clear terminology for:\r\n- the status list token (i think this one fits pretty well)\r\n- the credential / token that is bound to the status list\r\n\r\nI do believe only calling it token will cause confusion with the status list token. We can also call it something else like credential if we do a proper introduction of the term in the beginning?",
           "createdAt": "2023-06-07T13:50:49Z",
           "updatedAt": "2023-06-07T13:50:49Z"
@@ -3382,7 +3405,7 @@
             "abbreviatedOid": "5644ac8"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-06-01T13:56:54Z",
@@ -3494,7 +3517,7 @@
             "abbreviatedOid": "310a60a"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "CHANGES_REQUESTED",
           "body": "",
           "createdAt": "2023-06-09T14:36:24Z",
@@ -3514,7 +3537,7 @@
             "abbreviatedOid": "95bb340"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-06-12T15:07:12Z",
@@ -3628,7 +3651,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/23",
       "state": "CLOSED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "",
@@ -3654,14 +3677,14 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Imho validity credential would be very similar if we only go the route of the holder presenting the status list - the only benefit would be that we would not need to introduce another standard to check and could re-use the already known mechanism.\r\n\r\nThe main benefit for this approach would be that we could use a hybrid mode: the holder can carry the status lust with him (retrieved using holder authentication) and provide it for offline cases if necessary. For other cases, the verifier can get and check the status list themselves (using verifier authentication).",
           "createdAt": "2023-06-13T17:22:03Z",
           "updatedAt": "2023-06-13T17:22:03Z"
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Closing for now, will revisit the topic later",
           "createdAt": "2023-09-01T07:56:25Z",
           "updatedAt": "2023-09-01T07:56:25Z"
@@ -3765,7 +3788,7 @@
             "abbreviatedOid": "4fb63b0"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "CHANGES_REQUESTED",
           "body": "More compact version",
           "createdAt": "2023-06-16T10:59:26Z",
@@ -3791,7 +3814,7 @@
             "abbreviatedOid": "57d18cf"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-06-16T11:44:15Z",
@@ -3854,7 +3877,7 @@
             "abbreviatedOid": "a4c313f"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-06-16T11:17:45Z",
@@ -3874,7 +3897,7 @@
             "abbreviatedOid": "387f015"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-06-16T11:50:35Z",
@@ -3929,7 +3952,7 @@
             "abbreviatedOid": "6f14f56"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-06-16T11:11:18Z",
@@ -3949,7 +3972,7 @@
             "abbreviatedOid": "248135c"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-06-16T11:50:55Z",
@@ -4020,7 +4043,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/33",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Fixing some spelling errors",
@@ -4075,7 +4098,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/34",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "- fixes the examples to use constant timestamps in gzip encoding\r\n- minor changes/fixes to the ascii art / code blocks",
@@ -4156,7 +4179,7 @@
             "abbreviatedOid": "d9c847b"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-06-21T06:19:26Z",
@@ -4253,7 +4276,7 @@
             "abbreviatedOid": "910a9a8"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-07-16T20:08:30Z",
@@ -4282,7 +4305,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/48",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "## \ud83d\udcd1 Description\r\nAuto-generates the encoding / token examples from the included code.",
@@ -4352,7 +4375,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "We definitely need to improve the wording in the draft on this - the intention was to use the default `exp` claim to signal the freshness requirements of the issuer. Advantage of this would be that it basically comes for free if you use a standard JWT library (which should already check for expiration). \r\nDo you see a benefit in having both `exp` and `ttl` or the need for different meanings/usage?",
           "createdAt": "2023-08-02T19:22:27Z",
           "updatedAt": "2023-08-02T19:31:55Z"
@@ -4366,7 +4389,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": " The case that I mainly had in mind was offline-validation or restricted access to the status list for privacy reasons. In these cases the holder could carry the status list and provide status list and credential during presentation.\r\nThere would be no way for `ttl` to be adhered to / verified from the verifier side for these cases but I guess that is fine and `exp` would be the claim that is enforced and `ttl` is a policy that is basically suggested to the verifier / hosting provider of the status list?",
           "createdAt": "2023-08-04T10:44:33Z",
           "updatedAt": "2023-08-04T10:44:33Z"
@@ -4394,7 +4417,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "> If you duplicate the information, the list can be delivered by the holder in an internet denied environment.\r\n> \r\n> Assuming the verifier has network, or had network, might make sense for some use cases... Other use cases might assume burnt in trust roots and no network ever.\r\n\r\nPerhaps I am missing something but in my mind the caching information is not relevant for the verifier, only for the system fetching the updates (if they are separate entities). The verifier has `iat` and `exp` to figure out if status list should be trusted/used. The entity fetching the updates needs the information when to try fetching again for possible updates.\r\n\r\nWould you be up for a short call on this topic so we can better understand your point of view?",
           "createdAt": "2023-11-16T09:25:04Z",
           "updatedAt": "2023-11-16T09:25:04Z"
@@ -4805,7 +4828,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/61",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "adds myself as author",
@@ -4899,7 +4922,7 @@
             "abbreviatedOid": "b773a7b"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-09-28T09:02:24Z",
@@ -4941,7 +4964,7 @@
             "abbreviatedOid": "0c647c8"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-09-29T19:35:50Z",
@@ -4961,7 +4984,7 @@
             "abbreviatedOid": "170ae1a"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-10-06T06:48:50Z",
@@ -5016,7 +5039,7 @@
             "abbreviatedOid": "eddb734"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-10-23T06:10:43Z",
@@ -5111,7 +5134,7 @@
             "abbreviatedOid": "b837e44"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-10-23T06:11:49Z",
@@ -5168,7 +5191,7 @@
             "abbreviatedOid": "1947906"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-11-01T18:36:57Z",
@@ -5208,7 +5231,7 @@
             "abbreviatedOid": "1947906"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2023-11-16T14:58:23Z",
@@ -5332,7 +5355,7 @@
             "abbreviatedOid": "8fb0ca6"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-11-01T10:02:38Z",
@@ -5374,7 +5397,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/80",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #67 and #39.\r\n\r\n## \ud83d\udcd1 Description\r\nSwitches to zlib instead of gzip encoding and adds the recommendation to use the best available compression.\r\n\r\n## Preview Link\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
@@ -5630,7 +5653,7 @@
             "abbreviatedOid": "d79ea7c"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-11-16T14:57:00Z",
@@ -5659,7 +5682,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/87",
       "state": "CLOSED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Adds a new line before the pre-defined status types so it renders properly as a list",
@@ -5678,7 +5701,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Fixed in #89 - closing this one",
           "createdAt": "2023-12-21T20:18:02Z",
           "updatedAt": "2023-12-21T20:18:02Z"
@@ -5707,7 +5730,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/88",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #82 \r\n\r\n## \ud83d\udcd1 Description\r\nAdds access token as an example use-case for status list.\r\n\r\n## Preview Link\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/access-token/draft-ietf-oauth-status-list.html)",
@@ -5855,7 +5878,7 @@
             "abbreviatedOid": "7b3e8ac"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2023-12-22T08:18:57Z",
@@ -6011,7 +6034,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/90",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Establish a mechanism that allows for other revocation means in the Referenced Token as discussed in #85. The only thing i changed was to call the reference \"status_list\" but I am open to change it to \"status_bitstring\" if we think that is a better fit.\r\n\r\nCloses #85 \r\n\r\n## Preview Link\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/status-reference/draft-ietf-oauth-status-list.html)",
@@ -6039,14 +6062,14 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "This changed quite a bit with the recent bigger PR (and had some merge conflicts) -> please check again :/ @paulbastian @tplooker ",
           "createdAt": "2024-01-19T14:13:54Z",
           "updatedAt": "2024-01-19T14:13:54Z"
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I'll add a small section as an introduction / to explain the `status` expansion idea (similar to `cnf` claim) over the weekend",
           "createdAt": "2024-01-19T14:15:50Z",
           "updatedAt": "2024-01-19T14:15:50Z"
@@ -6060,14 +6083,14 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "> I think the text in the introduction is a little weird. I checked what 7800 wrote:\r\n> \r\n> > Other members of the \"cnf\"\r\n> > object may be defined because a proof-of-possession key may not be\r\n> > the only means of confirming the authenticity of the token\r\n> \r\n> > This specification establishes the IANA \"JWT Confirmation Methods\"\r\n> > registry for these members in Section 6.2 and registers the members\r\n> > defined by this specification.  Other specifications can register\r\n> > other members used for confirmation, including other members for\r\n> > conveying proof-of-possession keys using different key representations.\r\n> \r\n> I think the text may be more subtle along this lines. I would omit \"we expect more in the future\" which doesn't age well in a standard and be more neutral, just saying that we establish a registry for other mechanisms?\r\n\r\nSounds reasonable - i will propose a change",
           "createdAt": "2024-02-01T13:37:46Z",
           "updatedAt": "2024-02-01T13:37:46Z"
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I changed the text and realized that the IANA text in general needs some work, could you please re-review the current state? I am not super happy with this version but imho let's go with something like this for the time being and revisit a bit later (and fix all of the IANA related things).",
           "createdAt": "2024-02-02T14:35:35Z",
           "updatedAt": "2024-02-02T15:02:27Z"
@@ -6133,7 +6156,7 @@
             "abbreviatedOid": "5aa3ace"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-01-09T12:19:13Z",
@@ -6206,7 +6229,7 @@
             "abbreviatedOid": "523c053"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-02T09:52:14Z",
@@ -6264,7 +6287,7 @@
             "abbreviatedOid": "066b9ab"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-05T12:06:35Z",
@@ -6339,7 +6362,7 @@
             "abbreviatedOid": "b58d0de"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-01-05T19:45:26Z",
@@ -6404,7 +6427,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/97",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "## \ud83d\udcd1 Description\r\nfixes the rendering of the last history (01)\r\n\r\n## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/history-rendering/draft-ietf-oauth-status-list.html)",
@@ -6472,7 +6495,7 @@
             "abbreviatedOid": "c2807c8"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-02-05T12:07:15Z",
@@ -6488,7 +6511,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/99",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Some spelling fixes\r\nAdd IANA registry to history\r\nadd myself to codeowners\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/minor-edits/draft-ietf-oauth-status-list.html)",
@@ -6556,7 +6579,7 @@
             "abbreviatedOid": "768e84a"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-02-07T19:22:16Z",
@@ -6606,7 +6629,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I moved the claim registration up - we have to do CWT registration after the CBOR/CWT PR has been merged - i'll create an issue for this",
           "createdAt": "2024-02-27T10:18:09Z",
           "updatedAt": "2024-02-27T10:18:09Z"
@@ -6632,7 +6655,7 @@
             "abbreviatedOid": "61a4d30"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "CHANGES_REQUESTED",
           "body": "",
           "createdAt": "2024-02-17T12:13:02Z",
@@ -6652,7 +6675,7 @@
             "abbreviatedOid": "61a4d30"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-17T12:18:41Z",
@@ -6672,7 +6695,7 @@
             "abbreviatedOid": "61a4d30"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-17T12:19:33Z",
@@ -6692,7 +6715,7 @@
             "abbreviatedOid": "61a4d30"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-17T12:19:43Z",
@@ -6732,7 +6755,7 @@
             "abbreviatedOid": "c79efd9"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-02-27T10:22:11Z",
@@ -6748,7 +6771,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/102",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Fixes most of #92 \r\n\r\n## \ud83d\udcd1 Description\r\n- Relaxes requirements on referenced token in terminology\r\n- issuer in status list token is only required when also present in referenced token (and matching checked)\r\n- reorder references\r\n\r\n\r\n## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/relax-referenced-token/draft-ietf-oauth-status-list.html)",
@@ -6854,7 +6877,7 @@
             "abbreviatedOid": "e90099b"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-20T07:15:23Z",
@@ -6956,7 +6979,7 @@
             "abbreviatedOid": "f2b03d6"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-19T18:21:04Z",
@@ -6976,7 +6999,7 @@
             "abbreviatedOid": "19ab5a5"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-02-19T20:56:48Z",
@@ -7005,7 +7028,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/104",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/fix-references/draft-ietf-oauth-status-list.html)",
@@ -7026,7 +7049,7 @@
       "comments": [
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "waiting for the other PRs to merge",
           "createdAt": "2024-02-19T18:49:02Z",
           "updatedAt": "2024-02-19T18:49:02Z"
@@ -7039,7 +7062,7 @@
             "abbreviatedOid": "782ffe7"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-20T07:34:13Z",
@@ -7101,7 +7124,7 @@
             "abbreviatedOid": "949c4cb"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "CHANGES_REQUESTED",
           "body": "",
           "createdAt": "2024-02-21T18:56:53Z",
@@ -7147,7 +7170,7 @@
             "abbreviatedOid": "b51246a"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-02-24T18:25:29Z",
@@ -7160,7 +7183,7 @@
             "abbreviatedOid": "949c4cb"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-24T18:26:18Z",
@@ -7244,7 +7267,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "I've tried with cyberchef and it seems to work for me:\r\n`0x78dadbb918000217015d` -> zlib inflate = `b9 a3`",
           "createdAt": "2024-02-20T10:42:10Z",
           "updatedAt": "2024-02-20T10:42:10Z"
@@ -7279,7 +7302,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "There is a problem with the width of the CBOR diagnostic notation examples. The datatracker only allows a width of 72, but cborg defaults to 100 and apparently can't be configured in CLI mode.",
           "createdAt": "2024-02-24T18:31:33Z",
           "updatedAt": "2024-02-24T18:31:33Z"
@@ -7293,7 +7316,7 @@
         },
         {
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "body": "Yes that would be possible and is the only option I have found so far. I was searching for a pure python solution (which would be cleaner imho) but that seems to be not possible right now.",
           "createdAt": "2024-02-26T09:00:18Z",
           "updatedAt": "2024-02-26T09:00:18Z"
@@ -7450,7 +7473,7 @@
             "abbreviatedOid": "138e7a4"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-02-24T18:30:50Z",
@@ -7723,7 +7746,7 @@
             "abbreviatedOid": "2607d3b"
           },
           "author": "c2bo",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "MEMBER",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2024-03-01T22:35:42Z",
@@ -7752,7 +7775,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/118",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "upgrade python dependencies",
@@ -7794,7 +7817,7 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/119",
       "state": "MERGED",
       "author": "c2bo",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "add cborg dependency to publish workflow",
