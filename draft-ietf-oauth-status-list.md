@@ -8,8 +8,8 @@ number:
 date:
 v: 3
 venue:
-  github: "vcstuff/draft-ietf-oauth-status-list"
-  latest: "https://vcstuff.github.io/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html"
+  github: "oauth-wg/draft-ietf-oauth-status-list"
+  latest: "https://oauth-wg.github.io/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html"
 
 author:
  -

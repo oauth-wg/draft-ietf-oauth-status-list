@@ -2,16 +2,16 @@
 
 This is the working area for the individual Internet-Draft, "OAuth Status List".
 
-* [Editor's Copy](https://vcstuff.github.io/draft-ietf-oauth-status-list/#go.draft-ietf-oauth-status-list.html)
+* [Editor's Copy](https://oauth-wg.github.io/draft-ietf-oauth-status-list/#go.draft-ietf-oauth-status-list.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list)
-* [Compare Editor's Copy to Individual Draft](https://vcstuff.github.io/draft-ietf-oauth-status-list/#go.draft-ietf-oauth-status-list.diff)
+* [Compare Editor's Copy to Individual Draft](https://oauth-wg.github.io/draft-ietf-oauth-status-list/#go.draft-ietf-oauth-status-list.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/vcstuff/draft-ietf-oauth-status-list/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/oauth-wg/draft-ietf-oauth-status-list/blob/main/CONTRIBUTING.md).
 
 Contributions can be made by creating pull requests.
 The GitHub interface supports creating pull requests using the Edit (✏) button.
