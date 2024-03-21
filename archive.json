@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-19T00:13:05.077365+00:00",
+  "timestamp": "2024-03-21T00:13:31.462858+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2329,9 +2329,17 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-02-20T07:41:25Z",
-      "updatedAt": "2024-02-20T07:41:25Z",
+      "updatedAt": "2024-03-20T16:06:28Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "MattiasLass",
+          "authorAssociation": "NONE",
+          "body": "I was about to create a separate related issue, but perhaps this is more suitable as a comment here...\r\n\r\nAs-is I do not understand what is being achieved by requiring the `iss` to be equal in both the Referenced Token and the Status List Token. Yes, the requirement has the disclaimer that it only applies _in the absence of an application profile specifying otherwise_, but still, it creates confusion.\r\n\r\nPerhaps the original intent was to use this claim as a sort of rudimentary integrity check - to validate that the Status List Token has been issued by a trusted party (namely the same party that issued the Referenced Token). If so, it feels out of scope of this specification given that the Design Consideration section states: 'the specification shall not specify key resolution or trust frameworks'. \r\n\r\nIt seems to me that `iss` claim cannot be meaningfully used without specifying more regarding the trust framework and perhaps it should not be included in this specification at all.",
+          "createdAt": "2024-03-20T16:06:26Z",
+          "updatedAt": "2024-03-20T16:06:26Z"
+        }
+      ]
     },
     {
       "number": 109,
@@ -2417,7 +2425,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-02-27T07:25:42Z",
-      "updatedAt": "2024-02-27T07:25:42Z",
+      "updatedAt": "2024-03-20T23:26:51Z",
       "closedAt": null,
       "comments": []
     },
@@ -2433,7 +2441,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-02-27T07:25:54Z",
-      "updatedAt": "2024-02-27T07:25:54Z",
+      "updatedAt": "2024-03-20T23:26:46Z",
       "closedAt": null,
       "comments": []
     },
@@ -2513,7 +2521,7 @@
       "labels": [],
       "body": "The JWT spec has a ttl. The CWT/COSE examples should include that as well.",
       "createdAt": "2024-03-13T19:32:06Z",
-      "updatedAt": "2024-03-13T19:32:06Z",
+      "updatedAt": "2024-03-20T23:25:06Z",
       "closedAt": null,
       "comments": []
     },
@@ -2529,9 +2537,17 @@
       "labels": [],
       "body": "To be more compact, it might be worth thinking about the option to allow integer labels for lst and bits instead of string labels. ",
       "createdAt": "2024-03-13T19:39:49Z",
-      "updatedAt": "2024-03-13T19:39:49Z",
+      "updatedAt": "2024-03-20T23:26:26Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Possible duplicate of #116 ",
+          "createdAt": "2024-03-20T23:26:25Z",
+          "updatedAt": "2024-03-20T23:26:25Z"
+        }
+      ]
     },
     {
       "number": 123,
@@ -2547,6 +2563,86 @@
       "createdAt": "2024-03-18T08:39:24Z",
       "updatedAt": "2024-03-18T10:32:28Z",
       "closedAt": "2024-03-18T10:32:28Z",
+      "comments": []
+    },
+    {
+      "number": 125,
+      "id": "I_kwDOJZ2aqs6DACR2",
+      "title": "Ambiguous/contradictory language in the `sub` (subject) claim description",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/125",
+      "state": "OPEN",
+      "author": "MattiasLass",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.\r\n\r\nThe first and second sentence of this description seem contradictory to me. The first sentence seems to state that (all?) Status List Tokens should have a unique identifier included as their `sub` claim. The second sentence directly contradicts this uniqueness requirement. Perhaps I'm misunderstanding what is meant by 'uniqueness' in the first sentence, but in that case the language is quite ambiguous.\r\n\r\nAs the `sub` claim seems to have been added solely for including the `uri` from the Referenced Token in the Status List Token (as described in #28), perhaps the sentences should simply be reworded to not mention uniqueness. So something like:\r\n\r\n-  `sub`: REQUIRED. The `sub` (subject) claim MUST be equal to the `uri` claim contained in the `status_list` claim of the Referenced Token.\r\n",
+      "createdAt": "2024-03-20T15:24:56Z",
+      "updatedAt": "2024-03-20T23:21:10Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The `sub` is basically the URI by which the Status List Token is retrieved. As Status List Tokens may be downloaded for offline use, further re-transmission or archiving, its important to also store the URI in the Token, such that it can be compared by others to the `uri` of the `status_list` claim of the Referenced Token.\r\n\r\nI see that the text may be confusing, it should be clearer as \"URI\" may be better than \"unique string identifier\" and URI is unique anyway.\r\n\r\nHow about:\r\n\r\n`sub`: REQUIRED. The `sub` (subject) claim MUST specify the URI of the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.",
+          "createdAt": "2024-03-20T23:21:09Z",
+          "updatedAt": "2024-03-20T23:21:09Z"
+        }
+      ]
+    },
+    {
+      "number": 126,
+      "id": "I_kwDOJZ2aqs6DBEzP",
+      "title": "Remove the requirement to use TLS to retrieve Status List Tokens from the Status List Endpoint",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/126",
+      "state": "OPEN",
+      "author": "MattiasLass",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Section '8.1. Status List Request' currently states:\r\n\r\n> Communication with the Status List Endpoint MUST utilize TLS.\r\n\r\nThis seems redundant when the endpoint is used to retrieve a Status List Token, as the Token's integrity is already guaranteed by requiring it to be signed using an asymmetric cryptographic algorithm.\r\n\r\nIf requiring TLS was intended for providing confidentiality of the Token, this seems unnecessary. The endpoint is publicly accessible - there does not seem to be any client authentication mechanisms described for it - thus the Tokens could be retrieved by anybody.",
+      "createdAt": "2024-03-20T17:17:27Z",
+      "updatedAt": "2024-03-20T23:09:15Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hi @MattiasLass , thanks for the feedback!\r\n\r\nI think you are correct that we could relax using TLS when a Status List Token is queried. However, if an unsigned Status List is returned, we need TLS as an integrity mechanism.",
+          "createdAt": "2024-03-20T23:09:14Z",
+          "updatedAt": "2024-03-20T23:09:14Z"
+        }
+      ]
+    },
+    {
+      "number": 127,
+      "id": "I_kwDOJZ2aqs6DD17v",
+      "title": "Fix idx CBOR data type in examples",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/127",
+      "state": "OPEN",
+      "author": "awoie",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It appears the example uses a text string instead of a byte string for the idx value.\r\n```\r\n\"idx\": \"0\",\r\n```",
+      "createdAt": "2024-03-21T00:08:53Z",
+      "updatedAt": "2024-03-21T00:08:53Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 128,
+      "id": "I_kwDOJZ2aqs6DD21L",
+      "title": "Add Security Consideration on signing status list",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/128",
+      "state": "OPEN",
+      "author": "PieterKas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "It may be a good idea to add guidance on the implications of not signing the status list to make the security trade-offs explicit.",
+      "createdAt": "2024-03-21T00:13:11Z",
+      "updatedAt": "2024-03-21T00:13:11Z",
+      "closedAt": null,
       "comments": []
     }
   ],
