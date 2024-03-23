@@ -285,6 +285,7 @@ The following content applies to the CWT Claims Set:
 * `2` (subject): REQUIRED. Same definition as `sub` claim in [](#status-list-token-jwt).
 * `6` (issued at): REQUIRED. Same definition as `iat` claim in [](#status-list-token-jwt).
 * `4` (expiration time): OPTIONAL. Same definition as `exp` claim in [](#status-list-token-jwt).
+* `65533` (time to live): OPTIONAL. Same definition as `ttl` claim in [](#status-list-token-jwt).
 * `65534` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the rules outlined in [](#status-list-cbor).
 
 The following additional rules apply:
@@ -647,6 +648,11 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 *  Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
 *  Change Controller: IETF
 *  Specification Document(s):  [](#status-list-token-cwt) of this specification
+
+* Claim Name: `ttl`
+* Claim Description: Time to Live
+* Change Controller: IETF
+* Specification Document(s): [](#status-list-token-cwt) of this specification
 
 ## CWT Status Mechanism Methods Registry {#cwt-iana-registry}
 
