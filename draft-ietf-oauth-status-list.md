@@ -379,7 +379,7 @@ The following is a non-normative example for a decoded payload of a Referenced T
         / iss    / 1: "https://example.com",
         / status / 65535: {
           "status_list": {
-            "idx": "0",
+            "idx": 0,
             "uri": "https://example.com/statuslists/1"
           }
         }
