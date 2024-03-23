@@ -1,7 +1,7 @@
 from jwcrypto import jwk, jwt
 from cwt import COSE, COSEKey, CWTClaims, COSEHeaders
 from status_list import StatusList
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict
 from cbor2 import dumps
 import json
@@ -77,6 +77,7 @@ class StatusListToken:
         self,
         iat: datetime = datetime.utcnow(),
         exp: datetime = None,
+        ttl: timedelta = None,
         optional_claims: Dict = None,
         optional_header: Dict = None,
         compact=True
@@ -91,6 +92,8 @@ class StatusListToken:
         claims["iat"] = int(iat.timestamp())
         if exp is not None:
             claims["exp"] = int(exp.timestamp())
+        if ttl is not None:
+            claims["ttl"] = int(ttl.total_seconds())
         claims["status_list"] = self.list.encodeAsJSON()
 
         # build header
@@ -111,6 +114,7 @@ class StatusListToken:
         self,
         iat: datetime = datetime.utcnow(),
         exp: datetime = None,
+        ttl: timedelta = None,
         optional_claims: Dict = None,
         optional_protected_header: Dict = None,
         optional_unprotected_header: Dict = None
@@ -125,6 +129,8 @@ class StatusListToken:
         claims[CWTClaims.IAT] = int(iat.timestamp())
         if exp is not None:
             claims[CWTClaims.EXP] = int(exp.timestamp())
+        if ttl is not None:
+            claims[65533] = int(ttl.total_seconds())
         claims[65534] = self.list.encodeAsCBOR() # no CWT claim key assigned yet by IANA
 
         # build header
