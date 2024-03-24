@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-21T00:13:31.462858+00:00",
+  "timestamp": "2024-03-24T00:14:49.178562+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2577,7 +2577,7 @@
       "labels": [],
       "body": "> `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.\r\n\r\nThe first and second sentence of this description seem contradictory to me. The first sentence seems to state that (all?) Status List Tokens should have a unique identifier included as their `sub` claim. The second sentence directly contradicts this uniqueness requirement. Perhaps I'm misunderstanding what is meant by 'uniqueness' in the first sentence, but in that case the language is quite ambiguous.\r\n\r\nAs the `sub` claim seems to have been added solely for including the `uri` from the Referenced Token in the Status List Token (as described in #28), perhaps the sentences should simply be reworded to not mention uniqueness. So something like:\r\n\r\n-  `sub`: REQUIRED. The `sub` (subject) claim MUST be equal to the `uri` claim contained in the `status_list` claim of the Referenced Token.\r\n",
       "createdAt": "2024-03-20T15:24:56Z",
-      "updatedAt": "2024-03-20T23:21:10Z",
+      "updatedAt": "2024-03-21T12:50:44Z",
       "closedAt": null,
       "comments": [
         {
@@ -2586,6 +2586,13 @@
           "body": "The `sub` is basically the URI by which the Status List Token is retrieved. As Status List Tokens may be downloaded for offline use, further re-transmission or archiving, its important to also store the URI in the Token, such that it can be compared by others to the `uri` of the `status_list` claim of the Referenced Token.\r\n\r\nI see that the text may be confusing, it should be clearer as \"URI\" may be better than \"unique string identifier\" and URI is unique anyway.\r\n\r\nHow about:\r\n\r\n`sub`: REQUIRED. The `sub` (subject) claim MUST specify the URI of the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.",
           "createdAt": "2024-03-20T23:21:09Z",
           "updatedAt": "2024-03-20T23:21:09Z"
+        },
+        {
+          "author": "MattiasLass",
+          "authorAssociation": "NONE",
+          "body": "Yes thank you, this wording clears it up.\r\n\r\nIf you wanted to be very precise instead of `URI of the Status List Token` you could write `URI of the Status List Endpoint used to obtain the Status List Token`. But perhaps my suggestion is too verbose, what you've written gets the idea across. ",
+          "createdAt": "2024-03-21T12:50:43Z",
+          "updatedAt": "2024-03-21T12:50:43Z"
         }
       ]
     },
@@ -2601,7 +2608,7 @@
       "labels": [],
       "body": "Section '8.1. Status List Request' currently states:\r\n\r\n> Communication with the Status List Endpoint MUST utilize TLS.\r\n\r\nThis seems redundant when the endpoint is used to retrieve a Status List Token, as the Token's integrity is already guaranteed by requiring it to be signed using an asymmetric cryptographic algorithm.\r\n\r\nIf requiring TLS was intended for providing confidentiality of the Token, this seems unnecessary. The endpoint is publicly accessible - there does not seem to be any client authentication mechanisms described for it - thus the Tokens could be retrieved by anybody.",
       "createdAt": "2024-03-20T17:17:27Z",
-      "updatedAt": "2024-03-20T23:09:15Z",
+      "updatedAt": "2024-03-21T14:01:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -2610,6 +2617,13 @@
           "body": "Hi @MattiasLass , thanks for the feedback!\r\n\r\nI think you are correct that we could relax using TLS when a Status List Token is queried. However, if an unsigned Status List is returned, we need TLS as an integrity mechanism.",
           "createdAt": "2024-03-20T23:09:14Z",
           "updatedAt": "2024-03-20T23:09:14Z"
+        },
+        {
+          "author": "MattiasLass",
+          "authorAssociation": "NONE",
+          "body": "> if an unsigned Status List is returned, we need TLS as an integrity mechanism\r\n\r\nYes I vehemently agree :)\r\n\r\nBtw, perhaps the issue is a bit broader that just permitting plain HTTP when obtaining Status List Tokens. I don't think it's currently explicitly stated in the specification whether a Status List Provider should/must simultaneously provide both plain Status Lists and Status List Tokens. Ie the standard states that an RP should use the Accept-Header to indicate the requested response type, but it does not specify what the Status List Provider should do if it is unable to provide the requested response type.\r\n\r\nI think this is somewhat relevant under this issue as:\r\n- if you were to simply add a sentence to the spec permitting plain HTTP for Status List Tokens\r\n- then an Issuer would have to decide whether to put an HTTP or HTTPS URI in the `status` claim of the Referenced Token\r\n- but this somewhat contradicts with the Accept-Header mechanism which would seem to indicate (to the reader of the spec) that it's up to the RP to choose the response type.\r\n\r\nPerhaps the Issuer should explicitly specify supported response type(s) in the `status` claim of the Referenced Token? Ie there could be an additional attribute in the `status_list` object under the `status` claim specifying the supported formats. Such an attribute could prove beneficial in other regards as well. For example, I don't immediately see an use case where an Issuer/Status List Provider would be providing cbor/cwt Status Lists for JOSE Referenced Tokens. ",
+          "createdAt": "2024-03-21T14:01:50Z",
+          "updatedAt": "2024-03-21T14:01:50Z"
         }
       ]
     },
@@ -2621,13 +2635,23 @@
       "state": "OPEN",
       "author": "awoie",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [],
       "body": "It appears the example uses a text string instead of a byte string for the idx value.\r\n```\r\n\"idx\": \"0\",\r\n```",
       "createdAt": "2024-03-21T00:08:53Z",
-      "updatedAt": "2024-03-21T00:08:53Z",
+      "updatedAt": "2024-03-21T14:01:07Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Good catch, the referenced token example is wrong!",
+          "createdAt": "2024-03-21T14:01:03Z",
+          "updatedAt": "2024-03-21T14:01:03Z"
+        }
+      ]
     },
     {
       "number": 128,
@@ -2641,9 +2665,17 @@
       "labels": [],
       "body": "It may be a good idea to add guidance on the implications of not signing the status list to make the security trade-offs explicit.",
       "createdAt": "2024-03-21T00:13:11Z",
-      "updatedAt": "2024-03-21T00:13:11Z",
+      "updatedAt": "2024-03-21T12:42:23Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks for opening the issue and I agree, we should probably be a lot more explicit for this part.\r\nBiggest question would be where this fits? Perhaps a general introduction at the start of section 5? ",
+          "createdAt": "2024-03-21T12:42:22Z",
+          "updatedAt": "2024-03-21T12:42:22Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -8023,6 +8055,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 129,
+      "id": "PR_kwDOJZ2aqs5qkkIR",
+      "title": "fix examples & adds ttl text for cwt",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/129",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "- fixes #127, #117\r\n- adds ttl to the generated examples\r\n\r\nRendered verison: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/fix-examples/draft-ietf-oauth-status-list.html",
+      "createdAt": "2024-03-23T22:57:46Z",
+      "updatedAt": "2024-03-23T23:01:28Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "7add93a256b5cb56befd2c83d19f5940c90c1141",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/fix-examples",
+      "headRefOid": "32775266daf3ade82e15e1195da4ac7acb12e049",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
