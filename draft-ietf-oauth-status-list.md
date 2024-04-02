@@ -285,8 +285,8 @@ The following content applies to the CWT Claims Set:
 * `2` (subject): REQUIRED. Same definition as `sub` claim in [](#status-list-token-jwt).
 * `6` (issued at): REQUIRED. Same definition as `iat` claim in [](#status-list-token-jwt).
 * `4` (expiration time): OPTIONAL. Same definition as `exp` claim in [](#status-list-token-jwt).
-* `65533` (time to live): OPTIONAL. Same definition as `ttl` claim in [](#status-list-token-jwt).
-* `65534` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the rules outlined in [](#status-list-cbor).
+* `65534` (time to live): OPTIONAL. Same definition as `ttl` claim in [](#status-list-token-jwt).
+* `65535` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the rules outlined in [](#status-list-cbor).
 
 The following additional rules apply:
 
@@ -640,6 +640,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 ### Registry Contents
 
 *  Claim Name: `status`
+*  Claim Key: TBD (requested assignment 65535)
 *  Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.
 *  Change Controller: IETF
 *  Specification Document(s):  [](#status-claim) of this specification
@@ -650,6 +651,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 *  Specification Document(s):  [](#status-list-token-cwt) of this specification
 
 * Claim Name: `ttl`
+*  Claim Key: TBD (requested assignment 65534)
 * Claim Description: Time to Live
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-cwt) of this specification
