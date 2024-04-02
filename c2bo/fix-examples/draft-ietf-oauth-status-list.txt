@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 24 September 2024                                              
+Expires: 4 October 2024                                                 
                                                               C. Bormann
-                                                           23 March 2024
+                                                            2 April 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 September 2024.
+   This Internet-Draft will expire on 4 October 2024.
 
 Copyright Notice
 
@@ -495,10 +495,10 @@ Table of Contents
    *  4 (expiration time): OPTIONAL.  Same definition as exp claim in
       Section 5.1.
 
-   *  65533 (time to live): OPTIONAL.  Same definition as ttl claim in
+   *  65534 (time to live): OPTIONAL.  Same definition as ttl claim in
       Section 5.1.
 
-   *  65534 (status list): REQUIRED.  The status list claim MUST specify
+   *  65535 (status list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the rules outlined in Section 4.2.
 
    The following additional rules apply:
@@ -521,10 +521,10 @@ Table of Contents
 
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
-   68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffd
-   19a8c019fffe56a2646269747301636c73744a78dadbb918000217015d5840dbb359
-   fd90457c46086455ad5717dc4105bd62adcd43fa42ac0db92bb1cf4517794733b406
-   7a14b671c74382cba4469d3138e3b8cc2a0fe1b822afec97d97c8e
+   68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840b08f91
+   78e69ae1870edd226712ae815d34d25145ce5f9f4af62517588f99c7b47da0403714
+   f19ca69cb9b1205548738ea93a0d3c66cc675e6b107639b38d20c0
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -1071,6 +1071,8 @@ d2                              # tag(18)
 
    *  Claim Name: status
 
+   *  Claim Key: TBD (requested assignment 65535)
+
    *  Claim Description: Reference to a status or validity mechanism
       containing up-to-date status information on the CWT.
 
@@ -1088,6 +1090,8 @@ d2                              # tag(18)
    *  Specification Document(s): Section 5.2 of this specification
 
    *  Claim Name: ttl
+
+   *  Claim Key: TBD (requested assignment 65534)
 
    *  Claim Description: Time to Live
 
