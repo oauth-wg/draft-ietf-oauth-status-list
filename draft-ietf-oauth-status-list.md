@@ -587,15 +587,15 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 ### Registry Contents
 
-*  Claim Name: `status`
-*  Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the JWT.
-*  Change Controller: IETF
-*  Specification Document(s):  [](#status-claim) of this specification
+* Claim Name: `status`
+* Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the JWT.
+* Change Controller: IETF
+* Specification Document(s):  [](#status-claim) of this specification
 
-*  Claim Name: `status_list`
-*  Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
-*  Change Controller: IETF
-*  Specification Document(s):  [](#status-list-token-jwt) of this specification
+* Claim Name: `status_list`
+* Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+* Change Controller: IETF
+* Specification Document(s):  [](#status-list-token-jwt) of this specification
 
 * Claim Name: `ttl`
 * Claim Description: Time to Live
@@ -627,10 +627,10 @@ Specification Document(s):
 
 ### Initial Registry Contents
 
-*  Status Method Value: `status_list`
-*  Status Method Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
-*  Change Controller: IETF
-*  Specification Document(s):  [](#referenced-token-jwt) of this specification
+* Status Method Value: `status_list`
+* Status Method Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+* Change Controller: IETF
+* Specification Document(s):  [](#referenced-token-jwt) of this specification
 
 ## CBOR Web Token Claims Registration
 
@@ -639,19 +639,19 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 ### Registry Contents
 
-*  Claim Name: `status`
-*  Claim Key: TBD (requested assignment 65535)
-*  Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.
-*  Change Controller: IETF
-*  Specification Document(s):  [](#status-claim) of this specification
+* Claim Name: `status`
+* Claim Key: TBD (requested assignment 65535)
+* Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.
+* Change Controller: IETF
+* Specification Document(s):  [](#status-claim) of this specification
 
-*  Claim Name: `status_list`
-*  Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
-*  Change Controller: IETF
-*  Specification Document(s):  [](#status-list-token-cwt) of this specification
+* Claim Name: `status_list`
+* Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
+* Change Controller: IETF
+* Specification Document(s):  [](#status-list-token-cwt) of this specification
 
 * Claim Name: `ttl`
-*  Claim Key: TBD (requested assignment 65534)
+* Claim Key: TBD (requested assignment 65534)
 * Claim Description: Time to Live
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-cwt) of this specification
@@ -680,10 +680,10 @@ Specification Document(s):
 
 ### Initial Registry Contents
 
-*  Status Method Value: `status_list`
-*  Status Method Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
-*  Change Controller: IETF
-*  Specification Document(s):  [](#referenced-token-cwt) of this specification
+* Status Method Value: `status_list`
+* Status Method Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
+* Change Controller: IETF
+* Specification Document(s):  [](#referenced-token-cwt) of this specification
 
 ## Media Type Registration
 
