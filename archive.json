@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-04-02T00:12:57.866370+00:00",
+  "timestamp": "2024-04-04T00:13:40.227269+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2473,9 +2473,17 @@
       "labels": [],
       "body": "For CBOR, two possible choices exist:\r\n\r\n1. make status a map of string `uri` and `idx`\r\n2. make status a map of integers 0 and 1",
       "createdAt": "2024-02-27T07:37:03Z",
-      "updatedAt": "2024-02-27T07:37:03Z",
+      "updatedAt": "2024-04-02T06:31:49Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Discussion Editors Call:\r\n- Tobias: mix of string/integer in same spec is not uncommon\r\n- Strings creates similarity to JSON structure\r\n- space benefit may not be big enough, CWT benefit originates from statuslist array\r\n- leaning towards Option 1",
+          "createdAt": "2024-04-02T06:31:16Z",
+          "updatedAt": "2024-04-02T06:31:16Z"
+        }
+      ]
     },
     {
       "number": 117,
@@ -2489,7 +2497,7 @@
       "labels": [],
       "body": "Register ttl claim for CWT\r\n\r\n_Originally posted by @c2bo in https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/101#issuecomment-1966222774_\r\n            ",
       "createdAt": "2024-02-27T10:21:29Z",
-      "updatedAt": "2024-02-27T10:21:29Z",
+      "updatedAt": "2024-04-02T06:27:09Z",
       "closedAt": null,
       "comments": []
     },
@@ -2505,9 +2513,17 @@
       "labels": [],
       "body": "Section [8.1. ](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-02.html#section-8.1)[Status List Request](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-02.html#name-status-list-request) mentions Status List Endpoint. The term is not mentioned elsewhere in the specification nor is it defined.",
       "createdAt": "2024-03-07T10:37:56Z",
-      "updatedAt": "2024-03-07T10:37:56Z",
+      "updatedAt": "2024-04-02T06:26:52Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks for the feedback.\r\n\r\nDiscussion Editors Call:\r\n- connected to the discussion whether Status List Provider is an entity that shall be described in the spec\r\n- intend to clarify the term for next iteration",
+          "createdAt": "2024-04-02T06:26:51Z",
+          "updatedAt": "2024-04-02T06:26:51Z"
+        }
+      ]
     },
     {
       "number": 121,
@@ -2530,15 +2546,15 @@
       "id": "I_kwDOJZ2aqs6COMlP",
       "title": "Consider using integer claim keys and CBOR labels over string claim keys and CBOR labels",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/122",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "To be more compact, it might be worth thinking about the option to allow integer labels for lst and bits instead of string labels. ",
       "createdAt": "2024-03-13T19:39:49Z",
-      "updatedAt": "2024-03-20T23:26:26Z",
-      "closedAt": null,
+      "updatedAt": "2024-04-02T06:19:14Z",
+      "closedAt": "2024-04-02T06:19:13Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2573,11 +2589,13 @@
       "state": "OPEN",
       "author": "MattiasLass",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [],
       "body": "> `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.\r\n\r\nThe first and second sentence of this description seem contradictory to me. The first sentence seems to state that (all?) Status List Tokens should have a unique identifier included as their `sub` claim. The second sentence directly contradicts this uniqueness requirement. Perhaps I'm misunderstanding what is meant by 'uniqueness' in the first sentence, but in that case the language is quite ambiguous.\r\n\r\nAs the `sub` claim seems to have been added solely for including the `uri` from the Referenced Token in the Status List Token (as described in #28), perhaps the sentences should simply be reworded to not mention uniqueness. So something like:\r\n\r\n-  `sub`: REQUIRED. The `sub` (subject) claim MUST be equal to the `uri` claim contained in the `status_list` claim of the Referenced Token.\r\n",
       "createdAt": "2024-03-20T15:24:56Z",
-      "updatedAt": "2024-03-21T12:50:44Z",
+      "updatedAt": "2024-04-02T06:18:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -2608,7 +2626,7 @@
       "labels": [],
       "body": "Section '8.1. Status List Request' currently states:\r\n\r\n> Communication with the Status List Endpoint MUST utilize TLS.\r\n\r\nThis seems redundant when the endpoint is used to retrieve a Status List Token, as the Token's integrity is already guaranteed by requiring it to be signed using an asymmetric cryptographic algorithm.\r\n\r\nIf requiring TLS was intended for providing confidentiality of the Token, this seems unnecessary. The endpoint is publicly accessible - there does not seem to be any client authentication mechanisms described for it - thus the Tokens could be retrieved by anybody.",
       "createdAt": "2024-03-20T17:17:27Z",
-      "updatedAt": "2024-03-21T14:01:52Z",
+      "updatedAt": "2024-04-02T06:17:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -2641,7 +2659,7 @@
       "labels": [],
       "body": "It appears the example uses a text string instead of a byte string for the idx value.\r\n```\r\n\"idx\": \"0\",\r\n```",
       "createdAt": "2024-03-21T00:08:53Z",
-      "updatedAt": "2024-03-21T14:01:07Z",
+      "updatedAt": "2024-04-02T06:13:57Z",
       "closedAt": null,
       "comments": [
         {
@@ -2665,7 +2683,7 @@
       "labels": [],
       "body": "It may be a good idea to add guidance on the implications of not signing the status list to make the security trade-offs explicit.",
       "createdAt": "2024-03-21T00:13:11Z",
-      "updatedAt": "2024-03-21T12:42:23Z",
+      "updatedAt": "2024-04-02T06:13:44Z",
       "closedAt": null,
       "comments": [
         {
@@ -2674,6 +2692,13 @@
           "body": "Thanks for opening the issue and I agree, we should probably be a lot more explicit for this part.\r\nBiggest question would be where this fits? Perhaps a general introduction at the start of section 5? ",
           "createdAt": "2024-03-21T12:42:22Z",
           "updatedAt": "2024-03-21T12:42:22Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call Discussion:\r\n- Add security consideration for now\r\n- Discuss if the unsigned option should stay in or not for the long term (usefulness/security/less options)",
+          "createdAt": "2024-04-02T06:13:43Z",
+          "updatedAt": "2024-04-02T06:13:43Z"
         }
       ]
     }
@@ -8068,18 +8093,26 @@
       "labels": [],
       "body": "- fixes #127, #117\r\n- adds ttl to the generated examples\r\n\r\nRendered verison: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/fix-examples/draft-ietf-oauth-status-list.html",
       "createdAt": "2024-03-23T22:57:46Z",
-      "updatedAt": "2024-03-27T20:04:52Z",
+      "updatedAt": "2024-04-02T07:16:56Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7add93a256b5cb56befd2c83d19f5940c90c1141",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/fix-examples",
-      "headRefOid": "32775266daf3ade82e15e1195da4ac7acb12e049",
+      "headRefOid": "245297a08b893ba050eb139951e7592f5ce597ba",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Should be fine now, with some minor fixes to rendering and adding the proposed values. Can you please check again @tplooker?",
+          "createdAt": "2024-04-02T07:16:55Z",
+          "updatedAt": "2024-04-02T07:16:55Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJZ2aqs50tY9s",
@@ -8093,6 +8126,26 @@
           "createdAt": "2024-03-25T15:22:21Z",
           "updatedAt": "2024-03-25T15:22:21Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs51lNoL",
+          "commit": {
+            "abbreviatedOid": "3277526"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-04-02T06:09:06Z",
+          "updatedAt": "2024-04-02T06:09:06Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "As discussed on the call lets add the Claim Key entry to each IANA registration with the proposed values.",
+              "createdAt": "2024-04-02T06:09:06Z",
+              "updatedAt": "2024-04-02T06:09:06Z"
+            }
+          ]
         }
       ]
     }
