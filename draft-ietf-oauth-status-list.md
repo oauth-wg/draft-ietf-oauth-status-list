@@ -229,7 +229,7 @@ The following example illustrates the CBOR representation of the Status List:
 The following is the CBOR diagnostic output of the example above:
 
 ~~~~~~~~~~
-{::include ./example/status_list_encoding_cbor_diag}
+{::include ./examples/status_list_encoding_cbor_diag}
 ~~~~~~~~~~
 
 # Status List Token {#status-list-token}
@@ -307,7 +307,7 @@ The following is a non-normative example for a Status List Token in CWT format (
 The following is the CBOR diagnostic output of the example above:
 
 ~~~~~~~~~~
-{::include ./example/status_list_cwt_diag}
+{::include ./examples/status_list_cwt_diag}
 ~~~~~~~~~~
 
 # Referenced Token {#referenced-token}
