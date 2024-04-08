@@ -795,6 +795,9 @@ for their valuable contributions, discussions and feedback to this specification
 # Document History
 {:numbered="false"}
 
+-03
+* relax status_list iss requirements for CWT
+
 -02
 
 * add ttl claim to Status List Token to convey caching
