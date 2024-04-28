@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-04-25T00:13:59.114534+00:00",
+  "timestamp": "2024-04-28T00:15:01.252446+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -777,7 +777,7 @@
       "labels": [],
       "body": "If a verifier wants all statuslists for a specific type of Referenced Token, e.g. for offlien caching, then it would be handy, if the issuer provides a API endpoint to get those in one call, e.g. as an array.",
       "createdAt": "2023-06-15T07:39:24Z",
-      "updatedAt": "2024-04-24T17:08:46Z",
+      "updatedAt": "2024-04-26T14:41:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -807,6 +807,13 @@
           "body": "Editors are supportive as well on this feature. Do you have any preferences on how this should be achieved and why?",
           "createdAt": "2024-04-24T17:08:45Z",
           "updatedAt": "2024-04-24T17:08:45Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@c2bo and I gave it some thoughts.\r\n\r\nThis is what group/pool/aggregation (best name tbd) file could look like:\r\n\r\n```json\r\n{\r\n   \"status_lists\" : [\r\n      \"https://example.com/statuslists/1\",\r\n      \"https://example.com/statuslists/2\",\r\n      \"https://example.com/statuslists/3\"\r\n   ]\r\n}\r\n```\r\n\r\nThere would be an equivalent in CBOR, depending on your Status List Token, the group/pool/aggregation must be in the same encoding.\r\n\r\nIs it ok to keep the group/pool/aggregation unsigned? (we think so).\r\n\r\nMost important question is how to find this file. After discussion the 4 variants mentioned above:\r\n\r\n### Option A: predefined \"/status-lists\" in the same path provides the group/pool/aggregation\r\n\r\n- Status List Providers must use a predefined URL path structure\r\n- requires a Referenced Token to find the group/pool/aggregation URL\r\n\r\n### Option B: well-known path\r\n\r\n- well-known may be hard to configure for some, especially when using CDN?\r\n- easier to find group/pool/aggregation, but only if Issuer = Status List Provider\r\n\r\n### Option C: additional URL inside the Referenced Token\r\n\r\n- two URLs\r\n- requires a Referenced Token to find the group/pool/aggregation URL\r\n\r\n### Option D: additional URL inside the Status List Token\r\n- two URLs\r\n- requires a Referenced Token to find the group/pool/aggregation URL\r\n- seems a little better than C as the Referenced Token remains smaller\r\n\r\n### Option E: URL provided by the Issuer metadata\r\n- easy to find the group/pool/aggregation URL\r\n- issuance protocol specific (seems bad)\r\n- this could be OpenID4VCI Issuer metadata and/or VICAL extension\r\n\r\nCurrent proposal is to use both Option E to easily find the URL and Option A/D to have an protocol-agnostic way.\r\n\r\n\r\n",
+          "createdAt": "2024-04-26T14:41:21Z",
+          "updatedAt": "2024-04-26T14:41:21Z"
         }
       ]
     },
@@ -2742,6 +2749,38 @@
       "body": "The spec says:\r\n> 1 (issuer): REQUIRED. Same definition as iss claim in [Section 5.1](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#status-list-token-jwt).\r\n\r\nHowever, JWT defines `iss` as \"REQUIRED if present in the reference token which means, the REQUIRED word is a bit misleading without the if-statement that follows.\r\n\r\nEither use OPTIONAL for `iss`, or also say `REQUIRED if present ...` in the CWT section.",
       "createdAt": "2024-04-05T13:59:52Z",
       "updatedAt": "2024-04-08T11:33:49Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 132,
+      "id": "I_kwDOJZ2aqs6G8kdW",
+      "title": "Privacy Consideration",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/132",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Observability of Issuer's issuance behaviour, i.e. outsiders could observe how many tokens an issuer is issuing, therefore get information on his business.\r\nCountermeasures: Maintain multiple lists in parallel, use decoy entries",
+      "createdAt": "2024-04-25T16:32:52Z",
+      "updatedAt": "2024-04-25T16:32:52Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 133,
+      "id": "I_kwDOJZ2aqs6G8kwH",
+      "title": "Implementation Consideration",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/133",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "initialize new status list with reasonable default value to avoid update on issuance",
+      "createdAt": "2024-04-25T16:33:39Z",
+      "updatedAt": "2024-04-25T16:33:39Z",
       "closedAt": null,
       "comments": []
     }
