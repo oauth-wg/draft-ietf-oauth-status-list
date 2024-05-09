@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-07T00:13:29.017114+00:00",
+  "timestamp": "2024-05-09T00:13:19.846291+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -773,11 +773,13 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [],
       "body": "If a verifier wants all statuslists for a specific type of Referenced Token, e.g. for offlien caching, then it would be handy, if the issuer provides a API endpoint to get those in one call, e.g. as an array.",
       "createdAt": "2023-06-15T07:39:24Z",
-      "updatedAt": "2024-04-26T14:41:22Z",
+      "updatedAt": "2024-05-08T06:34:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -814,6 +816,13 @@
           "body": "@c2bo and I gave it some thoughts.\r\n\r\nThis is what group/pool/aggregation (best name tbd) file could look like:\r\n\r\n```json\r\n{\r\n   \"status_lists\" : [\r\n      \"https://example.com/statuslists/1\",\r\n      \"https://example.com/statuslists/2\",\r\n      \"https://example.com/statuslists/3\"\r\n   ]\r\n}\r\n```\r\n\r\nThere would be an equivalent in CBOR, depending on your Status List Token, the group/pool/aggregation must be in the same encoding.\r\n\r\nIs it ok to keep the group/pool/aggregation unsigned? (we think so).\r\n\r\nMost important question is how to find this file. After discussion the 4 variants mentioned above:\r\n\r\n### Option A: predefined \"/status-lists\" in the same path provides the group/pool/aggregation\r\n\r\n- Status List Providers must use a predefined URL path structure\r\n- requires a Referenced Token to find the group/pool/aggregation URL\r\n\r\n### Option B: well-known path\r\n\r\n- well-known may be hard to configure for some, especially when using CDN?\r\n- easier to find group/pool/aggregation, but only if Issuer = Status List Provider\r\n\r\n### Option C: additional URL inside the Referenced Token\r\n\r\n- two URLs\r\n- requires a Referenced Token to find the group/pool/aggregation URL\r\n\r\n### Option D: additional URL inside the Status List Token\r\n- two URLs\r\n- requires a Referenced Token to find the group/pool/aggregation URL\r\n- seems a little better than C as the Referenced Token remains smaller\r\n\r\n### Option E: URL provided by the Issuer metadata\r\n- easy to find the group/pool/aggregation URL\r\n- issuance protocol specific (seems bad)\r\n- this could be OpenID4VCI Issuer metadata and/or VICAL extension\r\n\r\nCurrent proposal is to use both Option E to easily find the URL and Option A/D to have an protocol-agnostic way.\r\n\r\n\r\n",
           "createdAt": "2024-04-26T14:41:21Z",
           "updatedAt": "2024-04-26T14:41:21Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Paul and I discussed a bit more and will create a draft PR with option D+E for further discussions / feedback.",
+          "createdAt": "2024-05-08T06:13:02Z",
+          "updatedAt": "2024-05-08T06:13:02Z"
         }
       ]
     },
@@ -2449,13 +2458,23 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [],
       "body": "",
       "createdAt": "2024-02-27T07:25:42Z",
-      "updatedAt": "2024-03-20T23:26:51Z",
+      "updatedAt": "2024-05-08T06:18:50Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "We have a CWT in 6.3 in diagnostic notation and decided to add a raw (hex) example to the annex",
+          "createdAt": "2024-05-08T06:18:48Z",
+          "updatedAt": "2024-05-08T06:18:48Z"
+        }
+      ]
     },
     {
       "number": 114,
@@ -2539,11 +2558,13 @@
       "state": "OPEN",
       "author": "joelposti",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [],
       "body": "Section [8.1. ](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-02.html#section-8.1)[Status List Request](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-02.html#name-status-list-request) mentions Status List Endpoint. The term is not mentioned elsewhere in the specification nor is it defined.",
       "createdAt": "2024-03-07T10:37:56Z",
-      "updatedAt": "2024-04-02T06:26:52Z",
+      "updatedAt": "2024-05-08T06:32:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -2654,11 +2675,13 @@
       "state": "OPEN",
       "author": "MattiasLass",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [],
       "body": "Section '8.1. Status List Request' currently states:\r\n\r\n> Communication with the Status List Endpoint MUST utilize TLS.\r\n\r\nThis seems redundant when the endpoint is used to retrieve a Status List Token, as the Token's integrity is already guaranteed by requiring it to be signed using an asymmetric cryptographic algorithm.\r\n\r\nIf requiring TLS was intended for providing confidentiality of the Token, this seems unnecessary. The endpoint is publicly accessible - there does not seem to be any client authentication mechanisms described for it - thus the Tokens could be retrieved by anybody.",
       "createdAt": "2024-03-20T17:17:27Z",
-      "updatedAt": "2024-04-02T06:17:22Z",
+      "updatedAt": "2024-05-08T06:24:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -2711,11 +2734,13 @@
       "state": "OPEN",
       "author": "PieterKas",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [],
       "body": "It may be a good idea to add guidance on the implications of not signing the status list to make the security trade-offs explicit.",
       "createdAt": "2024-03-21T00:13:11Z",
-      "updatedAt": "2024-04-02T06:13:44Z",
+      "updatedAt": "2024-05-08T06:22:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -2781,6 +2806,70 @@
       "body": "initialize new status list with reasonable default value to avoid update on issuance",
       "createdAt": "2024-04-25T16:33:39Z",
       "updatedAt": "2024-04-25T16:33:39Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 134,
+      "id": "I_kwDOJZ2aqs6IL0M4",
+      "title": "Finish Validation Rules",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/134",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-validation-rules",
+      "createdAt": "2024-05-08T06:37:17Z",
+      "updatedAt": "2024-05-08T06:37:21Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 135,
+      "id": "I_kwDOJZ2aqs6IL0hg",
+      "title": "Remove HTTP Caching as ttl is defined",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/135",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-08T06:38:11Z",
+      "updatedAt": "2024-05-08T06:38:17Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 136,
+      "id": "I_kwDOJZ2aqs6IM8_5",
+      "title": "Fix links to Github repo in About this document",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/136",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-08T09:10:39Z",
+      "updatedAt": "2024-05-08T09:10:51Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 137,
+      "id": "I_kwDOJZ2aqs6INCwr",
+      "title": "Set content type to optional than must",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/137",
+      "state": "OPEN",
+      "author": "cre8",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Some CDNs like github repos/pages only provide static hosting and therefore no way to set the content-type to another value.\r\n\r\nFor the JOSE case I could publish a txt or json file.\r\nSo when it's a json file, it should be equal to `application/statuslist+json`, in case of a JWT it is `application/statuslist+jwt`.",
+      "createdAt": "2024-05-08T09:22:15Z",
+      "updatedAt": "2024-05-08T09:22:15Z",
       "closedAt": null,
       "comments": []
     }
@@ -8243,19 +8332,53 @@
       "labels": [],
       "body": "Closes #130 \r\nPretty straightforward fix for an oversight when relaxing the `iss` requirements for status list\r\n\r\n[Rendered Version](https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/fix-cwt-iss/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-04-08T11:16:26Z",
-      "updatedAt": "2024-04-08T11:18:28Z",
+      "updatedAt": "2024-05-08T06:08:11Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7add93a256b5cb56befd2c83d19f5940c90c1141",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/fix-cwt-iss",
-      "headRefOid": "7e889a0430ec3ae64c42e7f9d8da7d39e16ad74a",
+      "headRefOid": "54e0ac0ed09e252368dd56c11f33a09f24083e57",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs5537mC",
+          "commit": {
+            "abbreviatedOid": "7e889a0"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-08T06:07:48Z",
+          "updatedAt": "2024-05-08T06:07:48Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n* `1` (issuer): REQUIRED when also present in the Referenced Token. Same definition as `iss` claim in [](#referenced-token-jwt).\r\n```",
+              "createdAt": "2024-05-08T06:07:48Z",
+              "updatedAt": "2024-05-08T06:07:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs5537sy",
+          "commit": {
+            "abbreviatedOid": "54e0ac0"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-08T06:08:10Z",
+          "updatedAt": "2024-05-08T06:08:10Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
