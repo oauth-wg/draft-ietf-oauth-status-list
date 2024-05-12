@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-09T00:13:19.846291+00:00",
+  "timestamp": "2024-05-12T00:14:39.426697+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2872,6 +2872,44 @@
       "updatedAt": "2024-05-08T09:22:15Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 138,
+      "id": "I_kwDOJZ2aqs6IaERt",
+      "title": "Support an optional feature for historical resolution",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/138",
+      "state": "OPEN",
+      "author": "decentralgabe",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "We have a use case, in the financial field, to determine the time when the status of a given credential has changed. This requirement comes from US financial compliance regulation and is non negotiable.\r\n\r\nThe spec already supports an optional TTL which helps, but does not directly solve this issue. With a validity window (TTL), and consistent fetching (at the windows expiry) of status lists one could determine that a bit had flipped within a given window, and be able to approximate a timestamp of a given status change. Of course, this approach is noisy and inefficient.\r\n\r\nTo build off this section -- https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-history -- we can make this type of query simpler. I would like to see language added to the spec that speaks to the (optional) capability of a status list server to support historical queries, or revisions of the document from a given time period. I believe this would maintain the privacy preserving characteristics of the specification while adding the ability for verifiers to approximate status change time, which is useful in a number of circumstances, especially as an optional-to-implement feature.\r\n\r\nI am also open to other solutions that are similarly privacy preserving that support either directly or indirectly discerning 'time of status change', to date I have only seen solutions that would be far less privacy preserving, such as requesting specific instances (losing herd privacy).",
+      "createdAt": "2024-05-09T22:05:17Z",
+      "updatedAt": "2024-05-10T18:45:55Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm supportive of the idea in general. I imagine an optional feature that would add a specific point of time to the HTTP GET query asking the Status List Provider to return a historic Status List Token. \n\nI see two scenarios for a RP/Verifier: \n- RP wants to know status at a given point of time, then this would fit very easy\n- RP wants to know the point of time of a status change but has no good indicators, then this is quite inefficient\n\nI imagine most usecase would be the first scenario, so that would be fine?",
+          "createdAt": "2024-05-10T09:09:35Z",
+          "updatedAt": "2024-05-10T09:09:35Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "I do believe it makes sense to support scenario 1 as an optional feature for use-cases that require it.\r\nFor scenario 2, I do believe status list in its current form is not a good fit (and we are working on an alternative mechanism that would fit better for this requirement imho).",
+          "createdAt": "2024-05-10T09:14:55Z",
+          "updatedAt": "2024-05-10T09:14:55Z"
+        },
+        {
+          "author": "decentralgabe",
+          "authorAssociation": "NONE",
+          "body": "1 is a good fit - yes\r\n2 is inefficient, but at least the capability will exist\r\n\r\n> we are working on an alternative mechanism that would fit better for this requirement imho\r\n\r\ncould you provide additional detail?",
+          "createdAt": "2024-05-10T18:45:53Z",
+          "updatedAt": "2024-05-10T18:45:53Z"
+        }
+      ]
     }
   ],
   "pulls": [
