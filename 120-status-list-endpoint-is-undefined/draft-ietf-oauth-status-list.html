@@ -1608,7 +1608,7 @@ a2                              # map(2)
             <p id="section-5.1-5.1.1"><code>iss</code>: <span class="bcp14">REQUIRED</span> when also present in the Referenced Token. The <code>iss</code> (issuer) claim <span class="bcp14">MUST</span> specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications <span class="bcp14">MUST</span> compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. The value <span class="bcp14">MUST</span> be equal to that of the <code>iss</code> claim contained within the Referenced Token.<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.2">
-            <p id="section-5.1-5.2.1"><code>sub</code>: <span class="bcp14">REQUIRED</span>. The <code>sub</code> (subject) claim <span class="bcp14">MUST</span> specify a unique string identifier for the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.2.1"><code>sub</code>: <span class="bcp14">REQUIRED</span>. The <code>sub</code> (subject) claim <span class="bcp14">MUST</span> specify the URI of the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.3">
             <p id="section-5.1-5.3.1"><code>iat</code>: <span class="bcp14">REQUIRED</span>. The <code>iat</code> (issued at) claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
@@ -1655,7 +1655,8 @@ a2                              # map(2)
     "bits": 1,
     "lst": "eNrbuRgAAhcBXQ"
   },
-  "sub": "https://example.com/statuslists/1"
+  "sub": "https://example.com/statuslists/1",
+  "ttl": 43200
 }
 </pre><a href="#section-5.1-9" class="pilcrow">¶</a>
 </div>
@@ -1688,7 +1689,10 @@ a2                              # map(2)
             <p id="section-5.2-5.4.1"><code>4</code> (expiration time): <span class="bcp14">OPTIONAL</span>. Same definition as <code>exp</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.5">
-            <p id="section-5.2-5.5.1"><code>65534</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.5.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. Same definition as <code>ttl</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-5.6">
+            <p id="section-5.2-5.6.1"><code>65535</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-5.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-6">The following additional rules apply:<a href="#section-5.2-6" class="pilcrow">¶</a></p>
@@ -1709,12 +1713,12 @@ a2                              # map(2)
 <p id="section-5.2-8">The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-9">
 <pre>
-d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
+d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-56a2646269747301636c73744a78dadbb918000217015d5840bc35944c9e9d5b6048
-3dc9b48b801abe5ecc340854d9a771894377e5fbcc252900b9af6d40c17c0d2656b4
-6f9bb3b1b321037288759c4a9a1f2f0fe4f4ab4ff8
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840b5333c
+5222703b61ce61aedf6ac3bd639007ee235f64b86954a9744e52a3a9a68454d8d6e5
+d4e45ec4f91a5699d6323dbb52ee27e93774db473e495165c599af
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1729,22 +1733,23 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 60                       #     bytes(96)
-      a502782168747470733a2f2f  #       "¥\x02x!https://"
+    58 66                       #     bytes(102)
+      a602782168747470733a2f2f  #       "¦\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
       31017368747470733a2f2f65  #       "1\x01shttps://e"
       78616d706c652e636f6d061a  #       "xample.com\x06\x1a"
-      648c3fca041a8898c3ca19ff  #       "d\x8c?Ê\x04\x1a\x88\x98ÃÊ\x19ÿ"
-      fe56a2646269747301636c73  #       "þV¢dbits\x01cls"
-      744a78dadbb918000217015d  #       "tJxÚÛ¹\x18\x00\x02\x17\x01]"
+      648c5bea041a8898dfea19ff  #       "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿ"
+      fe19a8c019ffff56a2646269  #       "þ\x19¨À\x19ÿÿV¢dbi"
+      747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
+      18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3fd60a6d10eb4b4131f1f6c1  #       "?Ö\x0am\x10ëKA1ñöÁ"
-      2fb365ae27b969e8e8df0b4f  #       "/³e®'¹ièèß\x0bO"
-      4029815b679cb1051c1c9eb3  #       "@)\x81[g\x9c±\x05\x1c\x1c\x9e³"
-      6aa72f6f17bcfdb5ed443bdf  #       "j§/o\x17¼ýµíD;ß"
-      c2339568ab42949169b413e7  #       "Â3\x95h«B\x94\x91i´\x13ç"
-      02ae1e6a                  #       "\x02®\x1ej"
+      b5333c5222703b61ce61aedf  #       "µ3&lt;R"p;aÎa®ß"
+      6ac3bd639007ee235f64b869  #       "jÃ½c\x90\x07î#_d¸i"
+      54a9744e52a3a9a68454d8d6  #       "T©tNR£©¦\x84TØÖ"
+      e5d4e45ec4f91a5699d6323d  #       "åÔä^Äù\x1aV\x99Ö2="
+      bb52ee27e93774db473e4951  #       "»Rî'é7tÛG&gt;IQ"
+      65c599af                  #       "eÅ\x99¯"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1823,7 +1828,7 @@ d2                              # tag(18)
 <p id="section-6.3-2">The following content applies to the CWT Claims Set:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1">
-            <p id="section-6.3-3.1.1"><code>1</code> (issuer): <span class="bcp14">REQUIRED</span>. Same definition as <code>iss</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.3-3.1.1"><code>1</code> (issuer): <span class="bcp14">REQUIRED</span> when also present in the Referenced Token. Same definition as <code>iss</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.3-3.2">
             <p id="section-6.3-3.2.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim is encoded as a <code>Status</code> CBOR structure and <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:<a href="#section-6.3-3.2.1" class="pilcrow">¶</a></p>
@@ -1858,7 +1863,7 @@ d2                              # tag(18)
         / iss    / 1: "https://example.com",
         / status / 65535: {
           "status_list": {
-            "idx": "0",
+            "idx": 0,
             "uri": "https://example.com/statuslists/1"
           }
         }
@@ -2207,29 +2212,35 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
             <li class="normal" id="section-13.1.1-1.4">
               <p id="section-13.1.1-1.4.1">Specification Document(s):  <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-13.1.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.5">
-              <p id="section-13.1.1-1.5.1">Claim Name: <code>status_list</code><a href="#section-13.1.1-1.5.1" class="pilcrow">¶</a></p>
+          </ul>
+<p id="section-13.1.1-2"><br></p>
+<ul class="normal">
+<li class="normal" id="section-13.1.1-3.1">
+              <p id="section-13.1.1-3.1.1">Claim Name: <code>status_list</code><a href="#section-13.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.6">
-              <p id="section-13.1.1-1.6.1">Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.<a href="#section-13.1.1-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-3.2">
+              <p id="section-13.1.1-3.2.1">Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.<a href="#section-13.1.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.7">
-              <p id="section-13.1.1-1.7.1">Change Controller: IETF<a href="#section-13.1.1-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-3.3">
+              <p id="section-13.1.1-3.3.1">Change Controller: IETF<a href="#section-13.1.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.8">
-              <p id="section-13.1.1-1.8.1">Specification Document(s):  <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-13.1.1-1.8.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-3.4">
+              <p id="section-13.1.1-3.4.1">Specification Document(s):  <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-13.1.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.9">
-              <p id="section-13.1.1-1.9.1">Claim Name: <code>ttl</code><a href="#section-13.1.1-1.9.1" class="pilcrow">¶</a></p>
+          </ul>
+<p id="section-13.1.1-4"><br></p>
+<ul class="normal">
+<li class="normal" id="section-13.1.1-5.1">
+              <p id="section-13.1.1-5.1.1">Claim Name: <code>ttl</code><a href="#section-13.1.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.10">
-              <p id="section-13.1.1-1.10.1">Claim Description: Time to Live<a href="#section-13.1.1-1.10.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-5.2">
+              <p id="section-13.1.1-5.2.1">Claim Description: Time to Live<a href="#section-13.1.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.11">
-              <p id="section-13.1.1-1.11.1">Change Controller: IETF<a href="#section-13.1.1-1.11.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-5.3">
+              <p id="section-13.1.1-5.3.1">Change Controller: IETF<a href="#section-13.1.1-5.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.12">
-              <p id="section-13.1.1-1.12.1">Specification Document(s): <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-13.1.1-1.12.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-5.4">
+              <p id="section-13.1.1-5.4.1">Specification Document(s): <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-13.1.1-5.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2308,30 +2319,55 @@ IANA "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA.CWT" class="ci
           <h4 id="name-registry-contents-2">
 <a href="#section-13.3.1" class="section-number selfRef">13.3.1. </a><a href="#name-registry-contents-2" class="section-name selfRef">Registry Contents</a>
           </h4>
+<p id="section-13.3.1-1"><br></p>
 <ul class="normal">
-<li class="normal" id="section-13.3.1-1.1">
-              <p id="section-13.3.1-1.1.1">Claim Name: <code>status</code><a href="#section-13.3.1-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-13.3.1-2.1">
+              <p id="section-13.3.1-2.1.1">Claim Name: <code>status</code><a href="#section-13.3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.2">
-              <p id="section-13.3.1-1.2.1">Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.<a href="#section-13.3.1-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-2.2">
+              <p id="section-13.3.1-2.2.1">Claim Key: TBD (requested assignment 65535)<a href="#section-13.3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.3">
-              <p id="section-13.3.1-1.3.1">Change Controller: IETF<a href="#section-13.3.1-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-2.3">
+              <p id="section-13.3.1-2.3.1">Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.<a href="#section-13.3.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.4">
-              <p id="section-13.3.1-1.4.1">Specification Document(s):  <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-13.3.1-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-2.4">
+              <p id="section-13.3.1-2.4.1">Change Controller: IETF<a href="#section-13.3.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.5">
-              <p id="section-13.3.1-1.5.1">Claim Name: <code>status_list</code><a href="#section-13.3.1-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-2.5">
+              <p id="section-13.3.1-2.5.1">Specification Document(s):  <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-13.3.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.6">
-              <p id="section-13.3.1-1.6.1">Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.<a href="#section-13.3.1-1.6.1" class="pilcrow">¶</a></p>
+          </ul>
+<p id="section-13.3.1-3"><br></p>
+<ul class="normal">
+<li class="normal" id="section-13.3.1-4.1">
+              <p id="section-13.3.1-4.1.1">Claim Name: <code>status_list</code><a href="#section-13.3.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.7">
-              <p id="section-13.3.1-1.7.1">Change Controller: IETF<a href="#section-13.3.1-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-4.2">
+              <p id="section-13.3.1-4.2.1">Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.<a href="#section-13.3.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.8">
-              <p id="section-13.3.1-1.8.1">Specification Document(s):  <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-13.3.1-1.8.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-4.3">
+              <p id="section-13.3.1-4.3.1">Change Controller: IETF<a href="#section-13.3.1-4.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-4.4">
+              <p id="section-13.3.1-4.4.1">Specification Document(s):  <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-13.3.1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-13.3.1-5"><br></p>
+<ul class="normal">
+<li class="normal" id="section-13.3.1-6.1">
+              <p id="section-13.3.1-6.1.1">Claim Name: <code>ttl</code><a href="#section-13.3.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-6.2">
+              <p id="section-13.3.1-6.2.1">Claim Key: TBD (requested assignment 65534)<a href="#section-13.3.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-6.3">
+              <p id="section-13.3.1-6.3.1">Claim Description: Time to Live<a href="#section-13.3.1-6.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-6.4">
+              <p id="section-13.3.1-6.4.1">Change Controller: IETF<a href="#section-13.3.1-6.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-6.5">
+              <p id="section-13.3.1-6.5.1">Specification Document(s): <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-13.3.1-6.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2818,6 +2854,15 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
           <p id="appendix-B-2.2.1">remove the undefined phrase Status List endpoint<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.3">
+          <p id="appendix-B-2.3.1">clarify the sub claim of Status List Token<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.4">
+          <p id="appendix-B-2.4.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.5">
+          <p id="appendix-B-2.5.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
