@@ -205,6 +205,7 @@ This section defines the structure for a JSON-encoded Status List:
 * `status_list`: REQUIRED. JSON Object that contains a Status List. The object contains exactly two claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded (as defined in Section 2 of {{RFC7515}}) Status List as specified in [](#status-list).
+   * `aggregation_uri`: OPTIONAL. An URI to retrieve a the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the JSON representation of the Status List:
 
@@ -219,6 +220,7 @@ This section defines the structure for a CBOR-encoded Status List:
 * The `StatusList` structure is a map (Major Type 5) and defines the following entries:
   * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
+  * `aggregation_uri`: OPTIONAL. Byte string (Major Type2) that contains an URI to retrieve the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the CBOR representation of the Status List:
 
@@ -461,6 +463,50 @@ If caching is required (e.g., to enable the use of alternative mechanisms for ho
 ## Validation Rules
 
 TBD
+
+# Batch Fetching {#batch-fetching}
+
+To allow a Relying Party to fetch all status lists for a specific type of credential or a specific issuer, an optional mechanism is provided to retrieve an Object containing a list of Status Lists called Status List Aggregation. This mechanism is intended to optimize fetching and caching mechanisms and allow offline validation of the status.
+
+There are two options that a Relying Party can use to discover the relevant Status List Aggregation URI.
+An issuer MAY support any of these mechanisms:
+
+- Issuer metadata: The issuer publishes an URI which links to Status List Aggregation
+- Status List Parameter: The issuer can choose to add an additional claim to the Status List (Token) that links to the Status List Aggregation.
+
+## Status List Aggregation in JSON Format
+
+This section defines the structure for a JSON-encoded Status List Aggregation:
+
+* `status_lists`: REQUIRED. Contains an array of strings, each containing an URI to a Status List (Token)
+
+The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return SHOULD be `application/json`.
+
+The following is a non-normative example for media type `application/json`:
+
+~~~ json
+
+{
+   "status_lists" : [
+      "https://example.com/statuslists/1",
+      "https://example.com/statuslists/2",
+      "https://example.com/statuslists/3"
+   ]
+}
+~~~
+
+
+## Issuer Metadata
+
+The issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.
+
+> OpenID4VCI Example
+
+> VICAL example
+
+## Status List Parameter
+
+The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party can choose to follow this link and retrieve an up-to-date list of the relevant Status Lists.
 
 # Further Examples
 
