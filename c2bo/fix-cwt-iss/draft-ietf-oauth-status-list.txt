@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 9 November 2024                                                
+Expires: 16 November 2024                                               
                                                               C. Bormann
-                                                              8 May 2024
+                                                             15 May 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 November 2024.
+   This Internet-Draft will expire on 16 November 2024.
 
 Copyright Notice
 
@@ -467,7 +467,8 @@ Table of Contents
        "bits": 1,
        "lst": "eNrbuRgAAhcBXQ"
      },
-     "sub": "https://example.com/statuslists/1"
+     "sub": "https://example.com/statuslists/1",
+     "ttl": 43200
    }
 
 5.2.  Status List Token in CWT Format
@@ -494,7 +495,10 @@ Table of Contents
    *  4 (expiration time): OPTIONAL.  Same definition as exp claim in
       Section 5.1.
 
-   *  65534 (status list): REQUIRED.  The status list claim MUST specify
+   *  65534 (time to live): OPTIONAL.  Same definition as ttl claim in
+      Section 5.1.
+
+   *  65535 (status list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the rules outlined in Section 4.2.
 
    The following additional rules apply:
@@ -515,12 +519,12 @@ Table of Contents
    The following is a non-normative example for a Status List Token in
    CWT format (not including the type header yet):
 
-   d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
+   d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   56a2646269747301636c73744a78dadbb918000217015d5840471da23c365e1ba70e
-   12020e328afeb042ea5d17743d35c4ce31d0ced2d2dedc01266852a44847941a0d18
-   f14656a50f1daff2fbd83c19eb70f738f29bf1c21f
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840d7f74f
+   ec4ce199b8766186e6d40cbe469231633d3c681d5ef6cf3db0e04669cc417aa59012
+   0faf532adc2404c6014615dd143539d395962e0ba2606baf38ea0a
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -533,22 +537,23 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 60                       #     bytes(96)
-      a502782168747470733a2f2f  #       "¥\x02x!https://"
+    58 66                       #     bytes(102)
+      a602782168747470733a2f2f  #       "¦\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
       31017368747470733a2f2f65  #       "1\x01shttps://e"
       78616d706c652e636f6d061a  #       "xample.com\x06\x1a"
-      648c3fca041a8898c3ca19ff  #       "d\x8c?Ê\x04\x1a\x88\x98ÃÊ\x19ÿ"
-      fe56a2646269747301636c73  #       "þV¢dbits\x01cls"
-      744a78dadbb918000217015d  #       "tJxÚÛ¹\x18\x00\x02\x17\x01]"
+      648c5bea041a8898dfea19ff  #       "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿ"
+      fe19a8c019ffff56a2646269  #       "þ\x19¨À\x19ÿÿV¢dbi"
+      747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
+      18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3fd60a6d10eb4b4131f1f6c1  #       "?Ö\x0am\x10ëKA1ñöÁ"
-      2fb365ae27b969e8e8df0b4f  #       "/³e®'¹ièèß\x0bO"
-      4029815b679cb1051c1c9eb3  #       "@)\x81[g\x9c±\x05\x1c\x1c\x9e³"
-      6aa72f6f17bcfdb5ed443bdf  #       "j§/o\x17¼ýµíD;ß"
-      c2339568ab42949169b413e7  #       "Â3\x95h«B\x94\x91i´\x13ç"
-      02ae1e6a                  #       "\x02®\x1ej"
+      d7f74fec4ce199b8766186e6  #       "×÷OìLá\x99¸va\x86æ"
+      d40cbe469231633d3c681d5e  #       "Ô\x0c¾F\x921c=<h\x1d^"
+      f6cf3db0e04669cc417aa590  #       "öÏ=°àFiÌAz¥\x90"
+      120faf532adc2404c6014615  #       "\x12\x0f¯S*Ü$\x04Æ\x01F\x15"
+      dd143539d395962e0ba2606b  #       "Ý\x1459Ó\x95\x96.\x0b¢`k"
+      af38ea0a                  #       "¯8ê\x0a"
 
 6.  Referenced Token
 
@@ -664,7 +669,7 @@ d2                              # tag(18)
            / iss    / 1: "https://example.com",
            / status / 65535: {
              "status_list": {
-               "idx": "0",
+               "idx": 0,
                "uri": "https://example.com/statuslists/1"
              }
            }
@@ -995,6 +1000,8 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 6.1 of this specification
 
+
+
    *  Claim Name: status_list
 
    *  Claim Description: A status list containing up-to-date status
@@ -1003,6 +1010,8 @@ d2                              # tag(18)
    *  Change Controller: IETF
 
    *  Specification Document(s): Section 5.1 of this specification
+
+
 
    *  Claim Name: ttl
 
@@ -1064,7 +1073,11 @@ d2                              # tag(18)
 
 13.3.1.  Registry Contents
 
+
+
    *  Claim Name: status
+
+   *  Claim Key: TBD (requested assignment 65535)
 
    *  Claim Description: Reference to a status or validity mechanism
       containing up-to-date status information on the CWT.
@@ -1073,10 +1086,24 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 6.1 of this specification
 
+
+
    *  Claim Name: status_list
 
    *  Claim Description: A status list containing up-to-date status
       information on multiple other CWTs encoded as a bitarray.
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 5.2 of this specification
+
+
+
+   *  Claim Name: ttl
+
+   *  Claim Key: TBD (requested assignment 65534)
+
+   *  Claim Description: Time to Live
 
    *  Change Controller: IETF
 
@@ -1444,7 +1471,11 @@ Acknowledgments
 
 Document History
 
-   -03 * relax status_list iss requirements for CWT
+   -03
+
+   *  relax status_list iss requirements for CWT
+
+   *  Fixes missing parts & iana ttl registration in CWT examples
 
    -02
 
