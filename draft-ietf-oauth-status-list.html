@@ -1608,7 +1608,7 @@ a2                              # map(2)
             <p id="section-5.1-5.1.1"><code>iss</code>: <span class="bcp14">REQUIRED</span> when also present in the Referenced Token. The <code>iss</code> (issuer) claim <span class="bcp14">MUST</span> specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications <span class="bcp14">MUST</span> compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. The value <span class="bcp14">MUST</span> be equal to that of the <code>iss</code> claim contained within the Referenced Token.<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.2">
-            <p id="section-5.1-5.2.1"><code>sub</code>: <span class="bcp14">REQUIRED</span>. The <code>sub</code> (subject) claim <span class="bcp14">MUST</span> specify a unique string identifier for the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.2.1"><code>sub</code>: <span class="bcp14">REQUIRED</span>. The <code>sub</code> (subject) claim <span class="bcp14">MUST</span> specify the URI of the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.3">
             <p id="section-5.1-5.3.1"><code>iat</code>: <span class="bcp14">REQUIRED</span>. The <code>iat</code> (issued at) claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
@@ -1716,9 +1716,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ac89c4
-a06d4c90e4227fcaf444ef4a18a4150a9fc095fe44dda6a22b92bf948883bac8e64a
-4fd6ff6b81ebc9c2902deda9b69de6da8b06c1c708dd5f2c669458
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58405a0157
+26cf3d4faa24778233e1697aae384737e613f40022b3e74ce3af76382b3438d844fa
+4a15b20bf517955f59824a3f73c33c61a2261f0a24b949b6d1e943
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1744,12 +1744,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ac89c4a06d4c90e4227fcaf4  #       "¬\x89Ä\xa0mL\x90ä"\x7fÊô"
-      44ef4a18a4150a9fc095fe44  #       "DïJ\x18¤\x15\x0a\x9fÀ\x95þD"
-      dda6a22b92bf948883bac8e6  #       "Ý¦¢+\x92¿\x94\x88\x83ºÈæ"
-      4a4fd6ff6b81ebc9c2902ded  #       "JOÖÿk\x81ëÉÂ\x90-í"
-      a9b69de6da8b06c1c708dd5f  #       "©¶\x9dæÚ\x8b\x06ÁÇ\x08Ý_"
-      2c669458                  #       ",f\x94X"
+      5a015726cf3d4faa24778233  #       "Z\x01W&amp;Ï=Oª$w\x823"
+      e1697aae384737e613f40022  #       "áiz®8G7æ\x13ô\x00""
+      b3e74ce3af76382b3438d844  #       "³çLã¯v8+48ØD"
+      fa4a15b20bf517955f59824a  #       "úJ\x15²\x0bõ\x17\x95_Y\x82J"
+      3f73c33c61a2261f0a24b949  #       "?sÃ&lt;a¢&amp;\x1f\x0a$¹I"
+      b6d1e943                  #       "¶ÑéC"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2849,10 +2849,13 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-03<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">clarify the sub claim of Status List Token<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.3">
+          <p id="appendix-B-2.3.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>

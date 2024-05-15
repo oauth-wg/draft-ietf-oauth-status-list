@@ -414,10 +414,9 @@ Table of Contents
       equal to that of the iss claim contained within the Referenced
       Token.
 
-   *  sub: REQUIRED.  The sub (subject) claim MUST specify a unique
-      string identifier for the Status List Token.  The value MUST be
-      equal to that of the uri claim contained in the status_list claim
-      of the Referenced Token.
+   *  sub: REQUIRED.  The sub (subject) claim MUST specify the URI of
+      the Status List Token.  The value MUST be equal to that of the uri
+      claim contained in the status_list claim of the Referenced Token.
 
    *  iat: REQUIRED.  The iat (issued at) claim MUST specify the time at
       which the Status List Token was issued.
@@ -522,9 +521,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ac89c4
-   a06d4c90e4227fcaf444ef4a18a4150a9fc095fe44dda6a22b92bf948883bac8e64a
-   4fd6ff6b81ebc9c2902deda9b69de6da8b06c1c708dd5f2c669458
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58405a0157
+   26cf3d4faa24778233e1697aae384737e613f40022b3e74ce3af76382b3438d844fa
+   4a15b20bf517955f59824a3f73c33c61a2261f0a24b949b6d1e943
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -548,12 +547,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ac89c4a06d4c90e4227fcaf4  #       "¬\x89Ä\xa0mL\x90ä"\x7fÊô"
-      44ef4a18a4150a9fc095fe44  #       "DïJ\x18¤\x15\x0a\x9fÀ\x95þD"
-      dda6a22b92bf948883bac8e6  #       "Ý¦¢+\x92¿\x94\x88\x83ºÈæ"
-      4a4fd6ff6b81ebc9c2902ded  #       "JOÖÿk\x81ëÉÂ\x90-í"
-      a9b69de6da8b06c1c708dd5f  #       "©¶\x9dæÚ\x8b\x06ÁÇ\x08Ý_"
-      2c669458                  #       ",f\x94X"
+      5a015726cf3d4faa24778233  #       "Z\x01W&Ï=Oª$w\x823"
+      e1697aae384737e613f40022  #       "áiz®8G7æ\x13ô\x00""
+      b3e74ce3af76382b3438d844  #       "³çLã¯v8+48ØD"
+      fa4a15b20bf517955f59824a  #       "úJ\x15²\x0bõ\x17\x95_Y\x82J"
+      3f73c33c61a2261f0a24b949  #       "?sÃ<a¢&\x1f\x0a$¹I"
+      b6d1e943                  #       "¶ÑéC"
 
 6.  Referenced Token
 
@@ -1472,6 +1471,8 @@ Acknowledgments
 Document History
 
    -03
+
+   *  clarify the sub claim of Status List Token
 
    *  relax status_list iss requirements for CWT
 
