@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 15 November 2024                                               
+Expires: 16 November 2024                                               
                                                               C. Bormann
-                                                             14 May 2024
+                                                             15 May 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 November 2024.
+   This Internet-Draft will expire on 16 November 2024.
 
 Copyright Notice
 
@@ -142,9 +142,9 @@ Table of Contents
    List.  Each Referenced Token is allocated an index during issuance
    that represents its position within this bit array.  The value of the
    bit(s) at this index correspond to the Referenced Token's status.  A
-   Status List may either be provided by an HTTPS endpoint or be signed
-   and embedded into a Status List Token, whereas this document defines
-   its representations in JWT and CWT.  Status Lists may be composed for
+   Status List may either be provided via HTTPS or be signed and
+   embedded into a Status List Token, whereas this document defines its
+   representations in JWT and CWT.  Status Lists may be composed for
    expressing a range of Status Types.  This document defines basic
    Status Types for the most common use cases as well as an
    extensibility mechanism for custom Status Types.  The document also
@@ -518,9 +518,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   56a2646269747301636c73744a78dadbb918000217015d5840cf0c7e3f47c3566f46
-   b1e4201e7e4434a965619dee044d6097de1965526ec860e52f0811c59ec3ce110b2d
-   cb66fb8d14ccd46da277dc7acc3cdcf71c518587f3
+   56a2646269747301636c73744a78dadbb918000217015d5840bc35944c9e9d5b6048
+   3dc9b48b801abe5ecc340854d9a771894377e5fbcc252900b9af6d40c17c0d2656b4
+   6f9bb3b1b321037288759c4a9a1f2f0fe4f4ab4ff8
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -736,7 +736,7 @@ d2                              # tag(18)
 8.1.  Status List Request
 
    To obtain the Status List or Status List Token, the Relying Party
-   MUST send a HTTP GET request to the URI provided in the Referenced
+   MUST send an HTTP GET request to the URI provided in the Referenced
    Token.
 
    If the Status List is provided by an HTTP endpoint (and not as a
@@ -1449,7 +1449,7 @@ Document History
 
    -03
 
-   *  require TLS for fetching only for Status List, not for Status List
+   *  require TLS only for fetching Status List, not for Status List
       Token
 
    *  remove the undefined phrase Status List endpoint
