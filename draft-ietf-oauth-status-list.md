@@ -249,7 +249,7 @@ The following content applies to the JWT Header:
 The following content applies to the JWT Claims Set:
 
 * `iss`: REQUIRED when also present in the Referenced Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the Referenced Token.
-* `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
+* `sub`: REQUIRED. The `sub` (subject) claim MUST specify the URI of the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `iat`: REQUIRED. The `iat` (issued at) claim MUST specify the time at which the Status List Token was issued.
 * `exp`: OPTIONAL. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer.
 * `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number.
@@ -815,6 +815,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -03
 
+* clarify the sub claim of Status List Token
 * relax status_list iss requirements for CWT
 * Fixes missing parts & iana ttl registration in CWT examples
 
