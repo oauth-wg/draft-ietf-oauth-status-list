@@ -1716,9 +1716,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58404a9138
-5bbcb7cc33cbfb38268b27d9069e0c208d16b82570b72e8be71c4c48926cf990d776
-aa9a84ac503fb5ea6e4510167bf14476acc9970d16b3d2c6cae021
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ac89c4
+a06d4c90e4227fcaf444ef4a18a4150a9fc095fe44dda6a22b92bf948883bac8e64a
+4fd6ff6b81ebc9c2902deda9b69de6da8b06c1c708dd5f2c669458
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1744,12 +1744,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      4a91385bbcb7cc33cbfb3826  #       "J\x918[¼·Ì3Ëû8&amp;"
-      8b27d9069e0c208d16b82570  #       "\x8b'Ù\x06\x9e\x0c \x8d\x16¸%p"
-      b72e8be71c4c48926cf990d7  #       "·.\x8bç\x1cLH\x92lù\x90×"
-      76aa9a84ac503fb5ea6e4510  #       "vª\x9a\x84¬P?µênE\x10"
-      167bf14476acc9970d16b3d2  #       "\x16{ñDv¬É\x97\x0d\x16³Ò"
-      c6cae021                  #       "ÆÊà!"
+      ac89c4a06d4c90e4227fcaf4  #       "¬\x89Ä\xa0mL\x90ä"\x7fÊô"
+      44ef4a18a4150a9fc095fe44  #       "DïJ\x18¤\x15\x0a\x9fÀ\x95þD"
+      dda6a22b92bf948883bac8e6  #       "Ý¦¢+\x92¿\x94\x88\x83ºÈæ"
+      4a4fd6ff6b81ebc9c2902ded  #       "JOÖÿk\x81ëÉÂ\x90-í"
+      a9b69de6da8b06c1c708dd5f  #       "©¶\x9dæÚ\x8b\x06ÁÇ\x08Ý_"
+      2c669458                  #       ",f\x94X"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1828,7 +1828,7 @@ d2                              # tag(18)
 <p id="section-6.3-2">The following content applies to the CWT Claims Set:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1">
-            <p id="section-6.3-3.1.1"><code>1</code> (issuer): <span class="bcp14">REQUIRED</span>. Same definition as <code>iss</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.3-3.1.1"><code>1</code> (issuer): <span class="bcp14">REQUIRED</span> when also present in the Referenced Token. Same definition as <code>iss</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.3-3.2">
             <p id="section-6.3-3.2.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim is encoded as a <code>Status</code> CBOR structure and <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:<a href="#section-6.3-3.2.1" class="pilcrow">¶</a></p>
@@ -2849,7 +2849,10 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-03<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.2">
+          <p id="appendix-B-2.2.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
