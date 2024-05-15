@@ -7,6 +7,7 @@ import util
 key = util.EXAMPLE_KEY
 iat = datetime.utcfromtimestamp(1686920170)
 exp = iat + timedelta(days=7000)
+ttl = timedelta(hours=12)
 folder = "./examples/"
 
 
@@ -104,7 +105,7 @@ def statusListJWT():
         list=status_list,
         key=key,
     )
-    status_jwt = jwt.buildJWT(iat=iat, exp=exp)
+    status_jwt = jwt.buildJWT(iat=iat, exp=exp, ttl=ttl)
     text = util.formatToken(status_jwt, key)
     util.outputFile(folder + "status_list_jwt", text)
 
@@ -117,7 +118,7 @@ def statusListCWT():
         key=key,
         alg=-7,
     )
-    status_cwt = cwt.buildCWT(iat=iat, exp=exp)
+    status_cwt = cwt.buildCWT(iat=iat, exp=exp, ttl=ttl)
     hex_encoded = status_cwt.hex()
     util.outputFile(folder + "status_list_cwt", util.printText(hex_encoded))
     util.outputFile(folder + "status_list_cwt_diag", util.printCBORDiagnostics(status_cwt))
