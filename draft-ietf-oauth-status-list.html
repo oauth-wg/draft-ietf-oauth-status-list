@@ -12,17 +12,17 @@
        This specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption(COSE), such as JSON Web Tokens (JWTs), CBOR Web Tokens (CWTs) and ISO mdoc.
 The status list token data structures themselves are also represented as JWTs or CWTs. 
     " name="description">
-<meta content="xml2rfc 3.20.1" name="generator">
+<meta content="xml2rfc 3.21.0" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.20.1
-    Python 3.11.8
+  xml2rfc 3.21.0
+    Python 3.11.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 4.2.0
+    platformdirs 4.2.1
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
@@ -1027,11 +1027,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Token Status List</td>
-<td class="right">March 2024</td>
+<td class="right">May 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 19 September 2024</td>
+<td class="center">Expires 16 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-03-18" class="published">18 March 2024</time>
+<time datetime="2024-05-15" class="published">15 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-09-19">19 September 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-16">16 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,7 +1101,7 @@ The status list token data structures themselves are also represented as JWTs or
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1655,7 +1655,8 @@ a2                              # map(2)
     "bits": 1,
     "lst": "eNrbuRgAAhcBXQ"
   },
-  "sub": "https://example.com/statuslists/1"
+  "sub": "https://example.com/statuslists/1",
+  "ttl": 43200
 }
 </pre><a href="#section-5.1-9" class="pilcrow">¶</a>
 </div>
@@ -1688,7 +1689,10 @@ a2                              # map(2)
             <p id="section-5.2-5.4.1"><code>4</code> (expiration time): <span class="bcp14">OPTIONAL</span>. Same definition as <code>exp</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.5">
-            <p id="section-5.2-5.5.1"><code>65534</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.5.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. Same definition as <code>ttl</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-5.6">
+            <p id="section-5.2-5.6.1"><code>65535</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-5.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-6">The following additional rules apply:<a href="#section-5.2-6" class="pilcrow">¶</a></p>
@@ -1709,12 +1713,12 @@ a2                              # map(2)
 <p id="section-5.2-8">The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-9">
 <pre>
-d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
+d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-56a2646269747301636c73744a78dadbb918000217015d5840f4927f37ee5bcfe473
-691b73f3c3a457a0ecfdeb88903748178d3c8cdd683ef40d2518f386ac3fe350581e
-7fec578d8a483d2f00f1e7150b998b44fabe202aa8
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58404a9138
+5bbcb7cc33cbfb38268b27d9069e0c208d16b82570b72e8be71c4c48926cf990d776
+aa9a84ac503fb5ea6e4510167bf14476acc9970d16b3d2c6cae021
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1729,22 +1733,23 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 60                       #     bytes(96)
-      a502782168747470733a2f2f  #       "¥\x02x!https://"
+    58 66                       #     bytes(102)
+      a602782168747470733a2f2f  #       "¦\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
       31017368747470733a2f2f65  #       "1\x01shttps://e"
       78616d706c652e636f6d061a  #       "xample.com\x06\x1a"
-      648c3fca041a8898c3ca19ff  #       "d\x8c?Ê\x04\x1a\x88\x98ÃÊ\x19ÿ"
-      fe56a2646269747301636c73  #       "þV¢dbits\x01cls"
-      744a78dadbb918000217015d  #       "tJxÚÛ¹\x18\x00\x02\x17\x01]"
+      648c5bea041a8898dfea19ff  #       "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿ"
+      fe19a8c019ffff56a2646269  #       "þ\x19¨À\x19ÿÿV¢dbi"
+      747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
+      18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3fd60a6d10eb4b4131f1f6c1  #       "?Ö\x0am\x10ëKA1ñöÁ"
-      2fb365ae27b969e8e8df0b4f  #       "/³e®'¹ièèß\x0bO"
-      4029815b679cb1051c1c9eb3  #       "@)\x81[g\x9c±\x05\x1c\x1c\x9e³"
-      6aa72f6f17bcfdb5ed443bdf  #       "j§/o\x17¼ýµíD;ß"
-      c2339568ab42949169b413e7  #       "Â3\x95h«B\x94\x91i´\x13ç"
-      02ae1e6a                  #       "\x02®\x1ej"
+      4a91385bbcb7cc33cbfb3826  #       "J\x918[¼·Ì3Ëû8&amp;"
+      8b27d9069e0c208d16b82570  #       "\x8b'Ù\x06\x9e\x0c \x8d\x16¸%p"
+      b72e8be71c4c48926cf990d7  #       "·.\x8bç\x1cLH\x92lù\x90×"
+      76aa9a84ac503fb5ea6e4510  #       "vª\x9a\x84¬P?µênE\x10"
+      167bf14476acc9970d16b3d2  #       "\x16{ñDv¬É\x97\x0d\x16³Ò"
+      c6cae021                  #       "ÆÊà!"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1858,7 +1863,7 @@ d2                              # tag(18)
         / iss    / 1: "https://example.com",
         / status / 65535: {
           "status_list": {
-            "idx": "0",
+            "idx": 0,
             "uri": "https://example.com/statuslists/1"
           }
         }
@@ -2206,29 +2211,35 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
             <li class="normal" id="section-13.1.1-1.4">
               <p id="section-13.1.1-1.4.1">Specification Document(s):  <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-13.1.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.5">
-              <p id="section-13.1.1-1.5.1">Claim Name: <code>status_list</code><a href="#section-13.1.1-1.5.1" class="pilcrow">¶</a></p>
+          </ul>
+<p id="section-13.1.1-2"><br></p>
+<ul class="normal">
+<li class="normal" id="section-13.1.1-3.1">
+              <p id="section-13.1.1-3.1.1">Claim Name: <code>status_list</code><a href="#section-13.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.6">
-              <p id="section-13.1.1-1.6.1">Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.<a href="#section-13.1.1-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-3.2">
+              <p id="section-13.1.1-3.2.1">Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.<a href="#section-13.1.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.7">
-              <p id="section-13.1.1-1.7.1">Change Controller: IETF<a href="#section-13.1.1-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-3.3">
+              <p id="section-13.1.1-3.3.1">Change Controller: IETF<a href="#section-13.1.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.8">
-              <p id="section-13.1.1-1.8.1">Specification Document(s):  <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-13.1.1-1.8.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-3.4">
+              <p id="section-13.1.1-3.4.1">Specification Document(s):  <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-13.1.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.9">
-              <p id="section-13.1.1-1.9.1">Claim Name: <code>ttl</code><a href="#section-13.1.1-1.9.1" class="pilcrow">¶</a></p>
+          </ul>
+<p id="section-13.1.1-4"><br></p>
+<ul class="normal">
+<li class="normal" id="section-13.1.1-5.1">
+              <p id="section-13.1.1-5.1.1">Claim Name: <code>ttl</code><a href="#section-13.1.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.10">
-              <p id="section-13.1.1-1.10.1">Claim Description: Time to Live<a href="#section-13.1.1-1.10.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-5.2">
+              <p id="section-13.1.1-5.2.1">Claim Description: Time to Live<a href="#section-13.1.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.11">
-              <p id="section-13.1.1-1.11.1">Change Controller: IETF<a href="#section-13.1.1-1.11.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-5.3">
+              <p id="section-13.1.1-5.3.1">Change Controller: IETF<a href="#section-13.1.1-5.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.1.1-1.12">
-              <p id="section-13.1.1-1.12.1">Specification Document(s): <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-13.1.1-1.12.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.1.1-5.4">
+              <p id="section-13.1.1-5.4.1">Specification Document(s): <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-13.1.1-5.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2307,30 +2318,55 @@ IANA "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA.CWT" class="ci
           <h4 id="name-registry-contents-2">
 <a href="#section-13.3.1" class="section-number selfRef">13.3.1. </a><a href="#name-registry-contents-2" class="section-name selfRef">Registry Contents</a>
           </h4>
+<p id="section-13.3.1-1"><br></p>
 <ul class="normal">
-<li class="normal" id="section-13.3.1-1.1">
-              <p id="section-13.3.1-1.1.1">Claim Name: <code>status</code><a href="#section-13.3.1-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-13.3.1-2.1">
+              <p id="section-13.3.1-2.1.1">Claim Name: <code>status</code><a href="#section-13.3.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.2">
-              <p id="section-13.3.1-1.2.1">Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.<a href="#section-13.3.1-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-2.2">
+              <p id="section-13.3.1-2.2.1">Claim Key: TBD (requested assignment 65535)<a href="#section-13.3.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.3">
-              <p id="section-13.3.1-1.3.1">Change Controller: IETF<a href="#section-13.3.1-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-2.3">
+              <p id="section-13.3.1-2.3.1">Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.<a href="#section-13.3.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.4">
-              <p id="section-13.3.1-1.4.1">Specification Document(s):  <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-13.3.1-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-2.4">
+              <p id="section-13.3.1-2.4.1">Change Controller: IETF<a href="#section-13.3.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.5">
-              <p id="section-13.3.1-1.5.1">Claim Name: <code>status_list</code><a href="#section-13.3.1-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-2.5">
+              <p id="section-13.3.1-2.5.1">Specification Document(s):  <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-13.3.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.6">
-              <p id="section-13.3.1-1.6.1">Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.<a href="#section-13.3.1-1.6.1" class="pilcrow">¶</a></p>
+          </ul>
+<p id="section-13.3.1-3"><br></p>
+<ul class="normal">
+<li class="normal" id="section-13.3.1-4.1">
+              <p id="section-13.3.1-4.1.1">Claim Name: <code>status_list</code><a href="#section-13.3.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.7">
-              <p id="section-13.3.1-1.7.1">Change Controller: IETF<a href="#section-13.3.1-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-4.2">
+              <p id="section-13.3.1-4.2.1">Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.<a href="#section-13.3.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-13.3.1-1.8">
-              <p id="section-13.3.1-1.8.1">Specification Document(s):  <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-13.3.1-1.8.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-13.3.1-4.3">
+              <p id="section-13.3.1-4.3.1">Change Controller: IETF<a href="#section-13.3.1-4.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-4.4">
+              <p id="section-13.3.1-4.4.1">Specification Document(s):  <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-13.3.1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-13.3.1-5"><br></p>
+<ul class="normal">
+<li class="normal" id="section-13.3.1-6.1">
+              <p id="section-13.3.1-6.1.1">Claim Name: <code>ttl</code><a href="#section-13.3.1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-6.2">
+              <p id="section-13.3.1-6.2.1">Claim Key: TBD (requested assignment 65534)<a href="#section-13.3.1-6.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-6.3">
+              <p id="section-13.3.1-6.3.1">Claim Description: Time to Live<a href="#section-13.3.1-6.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-6.4">
+              <p id="section-13.3.1-6.4.1">Change Controller: IETF<a href="#section-13.3.1-6.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-13.3.1-6.5">
+              <p id="section-13.3.1-6.5.1">Specification Document(s): <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-13.3.1-6.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2669,7 +2705,7 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <dl class="references">
 <dt id="CWT.typ">[CWT.typ]</dt>
         <dd>
-<span class="refAuthor">Jones, M. B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"COSE "typ" (type) Header Parameter"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-typ-header-parameter-04</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-04">https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Jones, M. B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"COSE "typ" (type) Header Parameter"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-typ-header-parameter-05</span>, <time datetime="2024-04-03" class="refDate">3 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-05">https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.CWT">[IANA.CWT]</dt>
         <dd>
@@ -2810,80 +2846,86 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
       <h2 id="name-document-history">
 <a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
-<p id="appendix-B-1">-02<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">-03<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">add ttl claim to Status List Token to convey caching<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">relax requirements on referenced token<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">clarify Deflate / zlib compression<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">make a reference to the Issuer-Holder-Verifier model of SD-JWT VC<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">add COSE/CWT/CBOR encoding<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-B-3">-01<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-4.1">
-          <p id="appendix-B-4.1.1">Rename title of the draft<a href="#appendix-B-4.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-4.1.1">add ttl claim to Status List Token to convey caching<a href="#appendix-B-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-4.2">
-          <p id="appendix-B-4.2.1">add design consideration to the introduction<a href="#appendix-B-4.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-4.2.1">relax requirements on referenced token<a href="#appendix-B-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-4.3">
-          <p id="appendix-B-4.3.1">Change status claim to in referenced token to allow re-use for other mechanisms<a href="#appendix-B-4.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-4.3.1">clarify Deflate / zlib compression<a href="#appendix-B-4.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-4.4">
-          <p id="appendix-B-4.4.1">Add IANA Registry for status mechanisms<a href="#appendix-B-4.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-4.4.1">make a reference to the Issuer-Holder-Verifier model of SD-JWT VC<a href="#appendix-B-4.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-4.5">
-          <p id="appendix-B-4.5.1">restructure the sections of this document<a href="#appendix-B-4.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-4.6">
-          <p id="appendix-B-4.6.1">add option to return an unsigned Status List<a href="#appendix-B-4.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-4.7">
-          <p id="appendix-B-4.7.1">Changing compression from gzip to zlib<a href="#appendix-B-4.7.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-4.8">
-          <p id="appendix-B-4.8.1">Change typo in Status List Token sub claim description<a href="#appendix-B-4.8.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-B-4.9">
-          <p id="appendix-B-4.9.1">Add access token as an example use-case<a href="#appendix-B-4.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-4.5.1">add COSE/CWT/CBOR encoding<a href="#appendix-B-4.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-B-5">-00<a href="#appendix-B-5" class="pilcrow">¶</a></p>
+<p id="appendix-B-5">-01<a href="#appendix-B-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-6.1">
-          <p id="appendix-B-6.1.1">Initial draft after working group adoption<a href="#appendix-B-6.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-6.1.1">Rename title of the draft<a href="#appendix-B-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-6.2">
-          <p id="appendix-B-6.2.1">update acknowledgments<a href="#appendix-B-6.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-6.2.1">add design consideration to the introduction<a href="#appendix-B-6.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-6.3">
-          <p id="appendix-B-6.3.1">renamed Verifier to Relying Party<a href="#appendix-B-6.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-6.3.1">Change status claim to in referenced token to allow re-use for other mechanisms<a href="#appendix-B-6.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-6.4">
-          <p id="appendix-B-6.4.1">added IANA consideration<a href="#appendix-B-6.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-6.4.1">Add IANA Registry for status mechanisms<a href="#appendix-B-6.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.5">
+          <p id="appendix-B-6.5.1">restructure the sections of this document<a href="#appendix-B-6.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.6">
+          <p id="appendix-B-6.6.1">add option to return an unsigned Status List<a href="#appendix-B-6.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.7">
+          <p id="appendix-B-6.7.1">Changing compression from gzip to zlib<a href="#appendix-B-6.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.8">
+          <p id="appendix-B-6.8.1">Change typo in Status List Token sub claim description<a href="#appendix-B-6.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-6.9">
+          <p id="appendix-B-6.9.1">Add access token as an example use-case<a href="#appendix-B-6.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-B-7">[ draft-ietf-oauth-status-list ]<a href="#appendix-B-7" class="pilcrow">¶</a></p>
-<p id="appendix-B-8">-01<a href="#appendix-B-8" class="pilcrow">¶</a></p>
+<p id="appendix-B-7">-00<a href="#appendix-B-7" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B-9.1">
-          <p id="appendix-B-9.1.1">Applied editorial improvements suggested by Michael Jones.<a href="#appendix-B-9.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B-8.1">
+          <p id="appendix-B-8.1.1">Initial draft after working group adoption<a href="#appendix-B-8.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-8.2">
+          <p id="appendix-B-8.2.1">update acknowledgments<a href="#appendix-B-8.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-8.3">
+          <p id="appendix-B-8.3.1">renamed Verifier to Relying Party<a href="#appendix-B-8.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-8.4">
+          <p id="appendix-B-8.4.1">added IANA consideration<a href="#appendix-B-8.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-B-10">-00<a href="#appendix-B-10" class="pilcrow">¶</a></p>
+<p id="appendix-B-9">[ draft-ietf-oauth-status-list ]<a href="#appendix-B-9" class="pilcrow">¶</a></p>
+<p id="appendix-B-10">-01<a href="#appendix-B-10" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-11.1">
-          <p id="appendix-B-11.1.1">Initial draft<a href="#appendix-B-11.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-11.1.1">Applied editorial improvements suggested by Michael Jones.<a href="#appendix-B-11.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-B-12">-00<a href="#appendix-B-12" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-B-13.1">
+          <p id="appendix-B-13.1.1">Initial draft<a href="#appendix-B-13.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
