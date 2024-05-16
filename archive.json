@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-14T00:13:35.006171+00:00",
+  "timestamp": "2024-05-16T00:13:15.307390+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -779,7 +779,7 @@
       "labels": [],
       "body": "If a verifier wants all statuslists for a specific type of Referenced Token, e.g. for offlien caching, then it would be handy, if the issuer provides a API endpoint to get those in one call, e.g. as an array.",
       "createdAt": "2023-06-15T07:39:24Z",
-      "updatedAt": "2024-05-08T06:34:26Z",
+      "updatedAt": "2024-05-15T06:28:44Z",
       "closedAt": null,
       "comments": [
         {
@@ -823,6 +823,20 @@
           "body": "Paul and I discussed a bit more and will create a draft PR with option D+E for further discussions / feedback.",
           "createdAt": "2024-05-08T06:13:02Z",
           "updatedAt": "2024-05-08T06:13:02Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call: Agreement that D+E seem the best options",
+          "createdAt": "2024-05-15T06:24:41Z",
+          "updatedAt": "2024-05-15T06:24:41Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Bikeshedding:\r\nDistribution as in CRL Distribution isn't quiet the same\r\nURLAggregationList?",
+          "createdAt": "2024-05-15T06:28:43Z",
+          "updatedAt": "2024-05-15T06:28:43Z"
         }
       ]
     },
@@ -2513,15 +2527,15 @@
       "id": "I_kwDOJZ2aqs6AgBUm",
       "title": "CBOR status/statusList object map of string or map of integers",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/116",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "For CBOR, two possible choices exist:\r\n\r\n1. make status a map of string `uri` and `idx`\r\n2. make status a map of integers 0 and 1",
       "createdAt": "2024-02-27T07:37:03Z",
-      "updatedAt": "2024-04-02T06:31:49Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-15T06:07:10Z",
+      "closedAt": "2024-05-15T06:07:10Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2529,6 +2543,13 @@
           "body": "Discussion Editors Call:\r\n- Tobias: mix of string/integer in same spec is not uncommon\r\n- Strings creates similarity to JSON structure\r\n- space benefit may not be big enough, CWT benefit originates from statuslist array\r\n- leaning towards Option 1",
           "createdAt": "2024-04-02T06:31:16Z",
           "updatedAt": "2024-04-02T06:31:16Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call: nobody has strong opinions, but everybody leans towards option 1",
+          "createdAt": "2024-05-15T06:06:52Z",
+          "updatedAt": "2024-05-15T06:06:52Z"
         }
       ]
     },
@@ -2537,7 +2558,7 @@
       "id": "I_kwDOJZ2aqs6AhT9u",
       "title": "Register CWT ttl claim after CBOR/CWT PR is done",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/117",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -2546,8 +2567,8 @@
       "labels": [],
       "body": "Register ttl claim for CWT\r\n\r\n_Originally posted by @c2bo in https://github.com/vcstuff/draft-ietf-oauth-status-list/issues/101#issuecomment-1966222774_\r\n            ",
       "createdAt": "2024-02-27T10:21:29Z",
-      "updatedAt": "2024-04-08T11:34:08Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-15T07:49:45Z",
+      "closedAt": "2024-05-15T07:49:45Z",
       "comments": []
     },
     {
@@ -2581,7 +2602,7 @@
       "id": "I_kwDOJZ2aqs6COJje",
       "title": "TTL is missing for CWT/COSE examples",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/121",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2590,8 +2611,8 @@
       "labels": [],
       "body": "The JWT spec has a ttl. The CWT/COSE examples should include that as well.",
       "createdAt": "2024-03-13T19:32:06Z",
-      "updatedAt": "2024-04-08T11:34:00Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-15T07:50:03Z",
+      "closedAt": "2024-05-15T07:50:03Z",
       "comments": []
     },
     {
@@ -2639,7 +2660,7 @@
       "id": "I_kwDOJZ2aqs6DACR2",
       "title": "Ambiguous/contradictory language in the `sub` (subject) claim description",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/125",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "MattiasLass",
       "authorAssociation": "NONE",
       "assignees": [
@@ -2648,8 +2669,8 @@
       "labels": [],
       "body": "> `sub`: REQUIRED. The `sub` (subject) claim MUST specify a unique string identifier for the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.\r\n\r\nThe first and second sentence of this description seem contradictory to me. The first sentence seems to state that (all?) Status List Tokens should have a unique identifier included as their `sub` claim. The second sentence directly contradicts this uniqueness requirement. Perhaps I'm misunderstanding what is meant by 'uniqueness' in the first sentence, but in that case the language is quite ambiguous.\r\n\r\nAs the `sub` claim seems to have been added solely for including the `uri` from the Referenced Token in the Status List Token (as described in #28), perhaps the sentences should simply be reworded to not mention uniqueness. So something like:\r\n\r\n-  `sub`: REQUIRED. The `sub` (subject) claim MUST be equal to the `uri` claim contained in the `status_list` claim of the Referenced Token.\r\n",
       "createdAt": "2024-03-20T15:24:56Z",
-      "updatedAt": "2024-04-02T06:18:46Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-15T07:12:13Z",
+      "closedAt": "2024-05-15T07:12:12Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2705,7 +2726,7 @@
       "id": "I_kwDOJZ2aqs6DD17v",
       "title": "Fix idx CBOR data type in examples",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/127",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2714,8 +2735,8 @@
       "labels": [],
       "body": "It appears the example uses a text string instead of a byte string for the idx value.\r\n```\r\n\"idx\": \"0\",\r\n```",
       "createdAt": "2024-03-21T00:08:53Z",
-      "updatedAt": "2024-04-02T06:13:57Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-15T07:09:19Z",
+      "closedAt": "2024-05-15T07:09:18Z",
       "comments": [
         {
           "author": "c2bo",
@@ -2764,7 +2785,7 @@
       "id": "I_kwDOJZ2aqs6EzkxD",
       "title": "Clarify optionality of iss (1) in CWT status list token",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/130",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2773,8 +2794,8 @@
       "labels": [],
       "body": "The spec says:\r\n> 1 (issuer): REQUIRED. Same definition as iss claim in [Section 5.1](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#status-list-token-jwt).\r\n\r\nHowever, JWT defines `iss` as \"REQUIRED if present in the reference token which means, the REQUIRED word is a bit misleading without the if-statement that follows.\r\n\r\nEither use OPTIONAL for `iss`, or also say `REQUIRED if present ...` in the CWT section.",
       "createdAt": "2024-04-05T13:59:52Z",
-      "updatedAt": "2024-04-08T11:33:49Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-15T07:10:55Z",
+      "closedAt": "2024-05-15T07:10:55Z",
       "comments": []
     },
     {
@@ -2846,15 +2867,15 @@
       "id": "I_kwDOJZ2aqs6IM8_5",
       "title": "Fix links to Github repo in About this document",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/136",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-05-08T09:10:39Z",
-      "updatedAt": "2024-05-13T11:53:42Z",
-      "closedAt": null,
+      "updatedAt": "2024-05-14T16:42:22Z",
+      "closedAt": "2024-05-14T16:42:22Z",
       "comments": [
         {
           "author": "c2bo",
@@ -2862,6 +2883,41 @@
           "body": "I am probably blind, but what needs fixing?",
           "createdAt": "2024-05-13T11:53:42Z",
           "updatedAt": "2024-05-13T11:53:42Z"
+        },
+        {
+          "author": "cre8",
+          "authorAssociation": "NONE",
+          "body": "@c2bo right now `https://github.com/vcstuff/draft-ietf-oauth-status-list` is referenced, but `https://github.com/oauth-wg/draft-ietf-oauth-status-list/` is the correct one.\r\n\r\nSince github is redirecting by itself, this is not a critical bug",
+          "createdAt": "2024-05-14T09:39:07Z",
+          "updatedAt": "2024-05-14T09:39:07Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Are you looking at the datatracker or at the latest draft (https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html)? ",
+          "createdAt": "2024-05-14T09:49:58Z",
+          "updatedAt": "2024-05-14T09:49:58Z"
+        },
+        {
+          "author": "cre8",
+          "authorAssociation": "NONE",
+          "body": "Nope, I was looking at this one that got referenced in the `sd-jwt-vc`spec: https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/",
+          "createdAt": "2024-05-14T09:54:40Z",
+          "updatedAt": "2024-05-14T09:54:40Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "This was fixed in the current editors draft (after moving to the new gh org) -> imho this can be closed?",
+          "createdAt": "2024-05-14T16:32:08Z",
+          "updatedAt": "2024-05-14T16:32:08Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "you are correct",
+          "createdAt": "2024-05-14T16:42:22Z",
+          "updatedAt": "2024-05-14T16:42:22Z"
         }
       ]
     },
@@ -2918,6 +2974,22 @@
           "updatedAt": "2024-05-10T18:45:53Z"
         }
       ]
+    },
+    {
+      "number": 142,
+      "id": "I_kwDOJZ2aqs6I6VqZ",
+      "title": "Add extensibility to Referenced Token status_list object",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/142",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Remove the restriction that object cointains \"exactly two claims\"",
+      "createdAt": "2024-05-15T06:39:57Z",
+      "updatedAt": "2024-05-15T06:40:41Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -8303,24 +8375,26 @@
       "id": "PR_kwDOJZ2aqs5qkkIR",
       "title": "fix examples & adds ttl text for cwt",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/129",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "- fixes #127, #117\r\n- adds ttl to the generated examples: #121 \r\n\r\nRendered verison: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/fix-examples/draft-ietf-oauth-status-list.html",
       "createdAt": "2024-03-23T22:57:46Z",
-      "updatedAt": "2024-04-08T11:30:31Z",
+      "updatedAt": "2024-05-15T07:09:23Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7add93a256b5cb56befd2c83d19f5940c90c1141",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/fix-examples",
       "headRefOid": "6858f471bceebc7304ddb5efd91f06e073dad1aa",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-05-15T07:09:17Z",
+      "mergedAt": "2024-05-15T07:09:17Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "f9aabf617fe478ac07c7a7b747f019767be01c93"
+      },
       "comments": [
         {
           "author": "c2bo",
@@ -8363,6 +8437,19 @@
               "updatedAt": "2024-04-02T06:09:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs56nGfx",
+          "commit": {
+            "abbreviatedOid": "6858f47"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-15T07:01:11Z",
+          "updatedAt": "2024-05-15T07:01:11Z",
+          "comments": []
         }
       ]
     },
@@ -8371,24 +8458,26 @@
       "id": "PR_kwDOJZ2aqs5r_tOG",
       "title": "Fix issuer requirements for CWT status list",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/131",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #130 \r\nPretty straightforward fix for an oversight when relaxing the `iss` requirements for status list\r\n\r\n[Rendered Version](https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/fix-cwt-iss/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-04-08T11:16:26Z",
-      "updatedAt": "2024-05-08T06:08:11Z",
+      "updatedAt": "2024-05-15T07:10:57Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "7add93a256b5cb56befd2c83d19f5940c90c1141",
+      "baseRefOid": "f9aabf617fe478ac07c7a7b747f019767be01c93",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/fix-cwt-iss",
-      "headRefOid": "54e0ac0ed09e252368dd56c11f33a09f24083e57",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "b10394b00d8ccf28b49564f17bce52ad734eb479",
+      "closedAt": "2024-05-15T07:10:54Z",
+      "mergedAt": "2024-05-15T07:10:54Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "50687101aeee5251de830daa44acf78f17f3b0f2"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8423,8 +8512,167 @@
           "createdAt": "2024-05-08T06:08:10Z",
           "updatedAt": "2024-05-08T06:08:10Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs56nHMu",
+          "commit": {
+            "abbreviatedOid": "54e0ac0"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-15T07:01:52Z",
+          "updatedAt": "2024-05-15T07:01:52Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 139,
+      "id": "PR_kwDOJZ2aqs5vavZY",
+      "title": "clarify the sub claim of Status List Token",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/139",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-05-14T15:18:27Z",
+      "updatedAt": "2024-05-15T07:12:15Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "50687101aeee5251de830daa44acf78f17f3b0f2",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "125-ambiguouscontradictory-language-in-the-sub-subject-claim-description",
+      "headRefOid": "11ebfb5252cf048c83703d5f80469cd16aee48c0",
+      "closedAt": "2024-05-15T07:12:12Z",
+      "mergedAt": "2024-05-15T07:12:11Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "007bcfe068407895edc7012752a525aa8879ba7b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs56jwbP",
+          "commit": {
+            "abbreviatedOid": "2cfb30c"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-14T19:05:07Z",
+          "updatedAt": "2024-05-14T19:05:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs56nHkQ",
+          "commit": {
+            "abbreviatedOid": "2cfb30c"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-15T07:02:13Z",
+          "updatedAt": "2024-05-15T07:02:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 140,
+      "id": "PR_kwDOJZ2aqs5vbpVE",
+      "title": "clarifications on TLS usage, remove Status List Endpoint",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/140",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\"endpoint\" is still mentioned in there, unsure we we completely want to get rid of it\r\n\r\nCloses #120 \r\nCloses #126 ",
+      "createdAt": "2024-05-14T17:44:25Z",
+      "updatedAt": "2024-05-15T07:13:15Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "007bcfe068407895edc7012752a525aa8879ba7b",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "120-status-list-endpoint-is-undefined",
+      "headRefOid": "3979c05cd297048b9587189ee7eb728ead16ff13",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs56kBFa",
+          "commit": {
+            "abbreviatedOid": "069499e"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-05-14T19:44:01Z",
+          "updatedAt": "2024-05-14T19:49:49Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nThis document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided via HTTPS or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).\r\n```",
+              "createdAt": "2024-05-14T19:44:02Z",
+              "updatedAt": "2024-05-14T19:49:49Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "not sure about \"HTTPS endpoint\"",
+              "createdAt": "2024-05-14T19:47:32Z",
+              "updatedAt": "2024-05-14T19:49:49Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nTo obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.\r\n```",
+              "createdAt": "2024-05-14T19:49:09Z",
+              "updatedAt": "2024-05-14T19:49:49Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\n* require TLS only for fetching Status List, not for Status List Token\r\n```",
+              "createdAt": "2024-05-14T19:49:39Z",
+              "updatedAt": "2024-05-14T19:49:49Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 141,
+      "id": "PR_kwDOJZ2aqs5vevnb",
+      "title": "batch fetching status lists",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/141",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "closes #27\r\n\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/batch-fetching/draft-ietf-oauth-status-list.html \r\n",
+      "createdAt": "2024-05-15T06:04:00Z",
+      "updatedAt": "2024-05-15T06:04:00Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "7add93a256b5cb56befd2c83d19f5940c90c1141",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/batch-fetching",
+      "headRefOid": "ce20ff92f66a1bf60c70d1765730dbc0fd4f74d1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
