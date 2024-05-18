@@ -1,11 +1,11 @@
 from status_list import StatusList
 from status_token import StatusListToken
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 import util
 
 key = util.EXAMPLE_KEY
-iat = datetime.utcfromtimestamp(1686920170)
+iat = datetime.fromtimestamp(1686920170, timezone.utc)
 exp = iat + timedelta(days=7000)
 ttl = timedelta(hours=12)
 folder = "./examples/"
