@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-23T00:13:29.136833+00:00",
+  "timestamp": "2024-05-26T00:14:51.000085+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -3003,9 +3003,17 @@
       "labels": [],
       "body": "If an OP wanted to publish the Token Status List JWT on an endpoint, perhaps something like `token_status_list_jwt` with `Content-Type: application/jwt` ... it would be nice to specify that in the spec.",
       "createdAt": "2024-05-21T19:33:46Z",
-      "updatedAt": "2024-05-21T19:33:46Z",
+      "updatedAt": "2024-05-23T17:58:41Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm not sure what you are suggesting. Are you suggesting that AS or RS has a link to a status list token in his metadata or are you suggesting media types? The latter is already defined in the draft.",
+          "createdAt": "2024-05-23T17:58:16Z",
+          "updatedAt": "2024-05-23T17:58:41Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -8676,7 +8684,7 @@
       "labels": [],
       "body": "closes #27\r\n\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/batch-fetching/draft-ietf-oauth-status-list.html \r\n",
       "createdAt": "2024-05-15T06:04:00Z",
-      "updatedAt": "2024-05-15T06:04:00Z",
+      "updatedAt": "2024-05-24T13:32:02Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7add93a256b5cb56befd2c83d19f5940c90c1141",
@@ -8688,7 +8696,201 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs57ye9h",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T12:47:14Z",
+          "updatedAt": "2024-05-24T12:47:14Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "Why are we repeating the definitions for CBOR Status List? In the CWT Status List Token we just reference to the JWT.Should we do the same here?",
+              "createdAt": "2024-05-24T12:47:14Z",
+              "updatedAt": "2024-05-24T12:47:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57ygZo",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T12:50:00Z",
+          "updatedAt": "2024-05-24T12:50:00Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\nTo allow a Relying Party to fetch all Status Lists for a specific Referenced Token or issuer, an optional mechanism is provided to retrieve a list of URIs to all Status List Tokens called Status List Aggregation. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status.\r\n```",
+              "createdAt": "2024-05-24T12:50:00Z",
+              "updatedAt": "2024-05-24T12:50:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57yhJY",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T12:51:20Z",
+          "updatedAt": "2024-05-24T12:51:20Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\nThere are two options for a Relying Party to retrieve the Status List Aggregation.\r\n```",
+              "createdAt": "2024-05-24T12:51:20Z",
+              "updatedAt": "2024-05-24T12:51:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57yiXt",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T12:53:04Z",
+          "updatedAt": "2024-05-24T12:53:04Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\n- Issuer metadata: The issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol\r\n```",
+              "createdAt": "2024-05-24T12:53:04Z",
+              "updatedAt": "2024-05-24T12:53:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57yjMo",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T12:54:06Z",
+          "updatedAt": "2024-05-24T12:54:06Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n- Status List Parameter: The issuer of the Referenced Token includes an additional claim to the Status List (Token) that links to the Status List Aggregation.\r\n```",
+              "createdAt": "2024-05-24T12:54:06Z",
+              "updatedAt": "2024-05-24T12:54:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57yjou",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T12:55:00Z",
+          "updatedAt": "2024-05-24T12:55:00Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "maybe turn these chapters around? Now that we mentioned the two mechanisms, giving the details on those fits better",
+              "createdAt": "2024-05-24T12:55:00Z",
+              "updatedAt": "2024-05-24T12:55:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57y4au",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T13:27:35Z",
+          "updatedAt": "2024-05-24T13:27:36Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\r\n* `status_lists`: REQUIRED. The `status_lists` claim MUST be an array of strings, each containing an URI to a Status List (Token).\r\n```",
+              "createdAt": "2024-05-24T13:27:35Z",
+              "updatedAt": "2024-05-24T13:27:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57y5-E",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T13:29:49Z",
+          "updatedAt": "2024-05-24T13:29:50Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "maybe explain the fetching logic and move the the media type to the Section 8?",
+              "createdAt": "2024-05-24T13:29:49Z",
+              "updatedAt": "2024-05-24T13:29:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57y6vk",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-24T13:31:21Z",
+          "updatedAt": "2024-05-24T13:31:21Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\r\nThe URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this link to retrieve an up-to-date list of relevant Status Lists.\r\n```",
+              "createdAt": "2024-05-24T13:31:21Z",
+              "updatedAt": "2024-05-24T13:31:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs57y7Gk",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "Looks already solid. Let's move the fetching and media type to Section 8",
+          "createdAt": "2024-05-24T13:32:02Z",
+          "updatedAt": "2024-05-24T13:32:02Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
