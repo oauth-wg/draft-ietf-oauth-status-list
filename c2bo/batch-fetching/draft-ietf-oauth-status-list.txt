@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 16 November 2024                                               
+Expires: 28 November 2024                                               
                                                               C. Bormann
-                                                             15 May 2024
+                                                             27 May 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 November 2024.
+   This Internet-Draft will expire on 28 November 2024.
 
 Copyright Notice
 
@@ -531,9 +531,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   56a2646269747301636c73744a78dadbb918000217015d584056563ed9f171f1cdce
-   63e809b80999814d7bcd6aac7e2269c0bd15eb09e4497ef2e553838f3871a37a42b6
-   d62166305dd303ca99c272df13aa6eca8b5d693740
+   56a2646269747301636c73744a78dadbb918000217015d5840456aeb311b9e05fdcf
+   c206f1006bc86ef90c98a91b2c1153a123f0909a42195d0a7ea3b9d98a492de5f471
+   49cba94a49c0dfe5ec3ff740e7c3adb3ebd49b6529
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -806,31 +806,31 @@ d2                              # tag(18)
 
 9.  Batch Fetching
 
-   To allow a Relying Party to fetch all status lists for a specific
-   type of credential or a specific issuer, an optional mechanism is
-   provided to retrieve an Object containing a list of Status Lists
-   called Status List Aggregation.  This mechanism is intended to
-   optimize fetching and caching mechanisms and allow offline validation
-   of the status.
+   To allow a Relying Party to fetch all Status Lists for a specific
+   Referenced Token or issuer, an optional mechanism is provided to
+   retrieve a list of URIs to all Status List Tokens called Status List
+   Aggregation.  This mechanism is intended to support fetching and
+   caching mechanisms and allow offline validation of the status.
 
    There are two options that a Relying Party can use to discover the
    relevant Status List Aggregation URI.  An issuer MAY support any of
    these mechanisms:
 
-   *  Issuer metadata: The issuer publishes an URI which links to Status
-      List Aggregation
+   *  Issuer metadata: The issuer of the Referenced Token publishes an
+      URI which links to Status List Aggregation, e.g. in publicly
+      available metadata of an issuance protocol
 
-   *  Status List Parameter: The issuer can choose to add an additional
-      claim to the Status List (Token) that links to the Status List
-      Aggregation.
+   *  Status List Parameter: The issuer of the Referenced Token includes
+      an additional claim to the Status List (Token) that links to the
+      Status List Aggregation.
 
 9.1.  Status List Aggregation in JSON Format
 
    This section defines the structure for a JSON-encoded Status List
    Aggregation:
 
-   *  status_lists: REQUIRED.  Contains an array of strings, each
-      containing an URI to a Status List (Token)
+   *  status_lists: REQUIRED.  The status_lists claim MUST be an array
+      of strings, each containing an URI to a Status List (Token).
 
    The Status List Aggregation URI provides a list of Status List URIs.
    This aggregation in JSON and the media type return SHOULD be
@@ -863,8 +863,8 @@ d2                              # tag(18)
    The URI to the Status List Aggregation MAY be provided as the
    optional parameter aggregation_uri in the Status List itself as
    explained inSection 4.2 and Section 4.1 respectively.  A Relying
-   Party can choose to follow this link and retrieve an up-to-date list
-   of the relevant Status Lists.
+   Party may use this link to retrieve an up-to-date list of relevant
+   Status Lists.
 
 10.  Further Examples
 
