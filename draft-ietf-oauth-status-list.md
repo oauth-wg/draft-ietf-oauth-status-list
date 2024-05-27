@@ -466,19 +466,19 @@ TBD
 
 # Batch Fetching {#batch-fetching}
 
-To allow a Relying Party to fetch all status lists for a specific type of credential or a specific issuer, an optional mechanism is provided to retrieve an Object containing a list of Status Lists called Status List Aggregation. This mechanism is intended to optimize fetching and caching mechanisms and allow offline validation of the status.
+To allow a Relying Party to fetch all Status Lists for a specific Referenced Token or issuer, an optional mechanism is provided to retrieve a list of URIs to all Status List Tokens called Status List Aggregation. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status.
 
 There are two options that a Relying Party can use to discover the relevant Status List Aggregation URI.
 An issuer MAY support any of these mechanisms:
 
-- Issuer metadata: The issuer publishes an URI which links to Status List Aggregation
-- Status List Parameter: The issuer can choose to add an additional claim to the Status List (Token) that links to the Status List Aggregation.
+- Issuer metadata: The issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
+- Status List Parameter: The issuer of the Referenced Token includes an additional claim to the Status List (Token) that links to the Status List Aggregation.
 
 ## Status List Aggregation in JSON Format
 
 This section defines the structure for a JSON-encoded Status List Aggregation:
 
-* `status_lists`: REQUIRED. Contains an array of strings, each containing an URI to a Status List (Token)
+* `status_lists`: REQUIRED. The `status_lists` claim MUST be an array of strings, each containing an URI to a Status List (Token).
 
 The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return SHOULD be `application/json`.
 
@@ -506,7 +506,7 @@ The issuer MAY link to the Status List Aggregation URI in metadata that can be p
 
 ## Status List Parameter
 
-The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party can choose to follow this link and retrieve an up-to-date list of the relevant Status Lists.
+The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this link to retrieve an up-to-date list of relevant Status Lists.
 
 # Further Examples
 
