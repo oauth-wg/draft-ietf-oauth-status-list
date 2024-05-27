@@ -1031,7 +1031,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 16 November 2024</td>
+<td class="center">Expires 28 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-15" class="published">15 May 2024</time>
+<time datetime="2024-05-27" class="published">27 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-16">16 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-28">28 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,7 +1101,7 @@ The status list token data structures themselves are also represented as JWTs or
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1732,9 +1732,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-56a2646269747301636c73744a78dadbb918000217015d584056563ed9f171f1cdce
-63e809b80999814d7bcd6aac7e2269c0bd15eb09e4497ef2e553838f3871a37a42b6
-d62166305dd303ca99c272df13aa6eca8b5d693740
+56a2646269747301636c73744a78dadbb918000217015d5840456aeb311b9e05fdcf
+c206f1006bc86ef90c98a91b2c1153a123f0909a42195d0a7ea3b9d98a492de5f471
+49cba94a49c0dfe5ec3ff740e7c3adb3ebd49b6529
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2016,15 +2016,15 @@ In the case of "application/statuslist+cwt", the response <span class="bcp14">MU
       <h2 id="name-batch-fetching">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-batch-fetching" class="section-name selfRef">Batch Fetching</a>
       </h2>
-<p id="section-9-1">To allow a Relying Party to fetch all status lists for a specific type of credential or a specific issuer, an optional mechanism is provided to retrieve an Object containing a list of Status Lists called Status List Aggregation. This mechanism is intended to optimize fetching and caching mechanisms and allow offline validation of the status.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">To allow a Relying Party to fetch all Status Lists for a specific Referenced Token or issuer, an optional mechanism is provided to retrieve a list of URIs to all Status List Tokens called Status List Aggregation. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <p id="section-9-2">There are two options that a Relying Party can use to discover the relevant Status List Aggregation URI.
 An issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href="#section-9-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-9-3.1">
-          <p id="section-9-3.1.1">Issuer metadata: The issuer publishes an URI which links to Status List Aggregation<a href="#section-9-3.1.1" class="pilcrow">¶</a></p>
+          <p id="section-9-3.1.1">Issuer metadata: The issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol<a href="#section-9-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-9-3.2">
-          <p id="section-9-3.2.1">Status List Parameter: The issuer can choose to add an additional claim to the Status List (Token) that links to the Status List Aggregation.<a href="#section-9-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-9-3.2.1">Status List Parameter: The issuer of the Referenced Token includes an additional claim to the Status List (Token) that links to the Status List Aggregation.<a href="#section-9-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="status-list-aggregation-in-json-format">
@@ -2035,7 +2035,7 @@ An issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
 <p id="section-9.1-1">This section defines the structure for a JSON-encoded Status List Aggregation:<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-9.1-2.1">
-            <p id="section-9.1-2.1.1"><code>status_lists</code>: <span class="bcp14">REQUIRED</span>. Contains an array of strings, each containing an URI to a Status List (Token)<a href="#section-9.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-9.1-2.1.1"><code>status_lists</code>: <span class="bcp14">REQUIRED</span>. The <code>status_lists</code> claim <span class="bcp14">MUST</span> be an array of strings, each containing an URI to a Status List (Token).<a href="#section-9.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-9.1-3">The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return <span class="bcp14">SHOULD</span> be <code>application/json</code>.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
@@ -2076,7 +2076,7 @@ An issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
         <h3 id="name-status-list-parameter">
 <a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-status-list-parameter" class="section-name selfRef">Status List Parameter</a>
         </h3>
-<p id="section-9.3-1">The URI to the Status List Aggregation <span class="bcp14">MAY</span> be provided as the optional parameter <code>aggregation_uri</code> in the Status List itself as explained in<a href="#status-list-cbor" class="auto internal xref">Section 4.2</a> and <a href="#status-list-json" class="auto internal xref">Section 4.1</a> respectively. A Relying Party can choose to follow this link and retrieve an up-to-date list of the relevant Status Lists.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
+<p id="section-9.3-1">The URI to the Status List Aggregation <span class="bcp14">MAY</span> be provided as the optional parameter <code>aggregation_uri</code> in the Status List itself as explained in<a href="#status-list-cbor" class="auto internal xref">Section 4.2</a> and <a href="#status-list-json" class="auto internal xref">Section 4.1</a> respectively. A Relying Party may use this link to retrieve an up-to-date list of relevant Status Lists.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
