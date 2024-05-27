@@ -468,7 +468,7 @@ TBD
 
 To allow a Relying Party to fetch all Status Lists for a specific Referenced Token or issuer, an optional mechanism is provided to retrieve a list of URIs to all Status List Tokens called Status List Aggregation. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status.
 
-There are two options that a Relying Party can use to discover the relevant Status List Aggregation URI.
+There are two options for a Relying Party to retrieve the Status List Aggregation.
 An issuer MAY support any of these mechanisms:
 
 - Issuer metadata: The issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
