@@ -1,5 +1,6 @@
 from status_list import StatusList
 from status_token import StatusListToken
+from referenced_token import CWT
 from datetime import datetime, timedelta, timezone
 import os
 import util
@@ -123,6 +124,18 @@ def statusListCWT():
     util.outputFile(folder + "status_list_cwt", util.printText(hex_encoded))
     util.outputFile(folder + "status_list_cwt_diag", util.printCBORDiagnostics(status_cwt))
 
+def referencedTokenCWT():
+    encoded = CWT(
+        iat=iat,
+        exp=exp,
+        sub="12345",
+        iss="https://example.com",
+        jwk=key
+    )
+    hex_encoded = encoded.hex()
+    util.outputFile(folder + "referenced_token_cwt", util.printText(hex_encoded))
+    util.outputFile(folder + "referenced_token_cwt_diag", util.printCBORDiagnostics(encoded))
+
 if __name__ == "__main__":
     if not os.path.exists(folder):
         os.makedirs(folder)
@@ -132,3 +145,5 @@ if __name__ == "__main__":
     statusListEncoding1BitCBOR()
     statusListEncoding2BitCBOR()
     statusListCWT()
+    referencedTokenCWT()
+
