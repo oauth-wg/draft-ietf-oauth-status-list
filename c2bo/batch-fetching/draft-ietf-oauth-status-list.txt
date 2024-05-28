@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 28 November 2024                                               
+Expires: 29 November 2024                                               
                                                               C. Bormann
-                                                             27 May 2024
+                                                             28 May 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 November 2024.
+   This Internet-Draft will expire on 29 November 2024.
 
 Copyright Notice
 
@@ -91,9 +91,9 @@ Table of Contents
      8.3.  Caching
      8.4.  Validation Rules
    9.  Batch Fetching
-     9.1.  Status List Aggregation in JSON Format
-     9.2.  Issuer Metadata
-     9.3.  Status List Parameter
+     9.1.  Issuer Metadata
+     9.2.  Status List Parameter
+     9.3.  Status List Aggregation in JSON Format
    10. Further Examples
      10.1.  Status List Token with 2-Bit Status Values in JWT format
    11. Security Considerations
@@ -531,9 +531,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   56a2646269747301636c73744a78dadbb918000217015d58406173c49c78b6cc3819
-   2158afc90f7b1ce772b9cf69d7f8643f82d2417ffb56328b86f9531d29a03794d696
-   dab143dd5a19086912a4847646e3c6b6d5755dfbe1
+   56a2646269747301636c73744a78dadbb918000217015d5840962824f9dee9b98568
+   b31f2414e454a79fa48914601dd2de869d936f413852fee997f5c11107d075ec9e62
+   f6c2bff7445736b501b8cfe3a77df1c1e5c99d0d78
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -823,7 +823,26 @@ d2                              # tag(18)
       an additional claim to the Status List (Token) that links to the
       Status List Aggregation.
 
-9.1.  Status List Aggregation in JSON Format
+9.1.  Issuer Metadata
+
+   The issuer MAY link to the Status List Aggregation URI in metadata
+   that can be provided by different means like .well-known metadata as
+   is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc /
+   mDL.
+
+      OpenID4VCI Example
+
+      VICAL example
+
+9.2.  Status List Parameter
+
+   The URI to the Status List Aggregation MAY be provided as the
+   optional parameter aggregation_uri in the Status List itself as
+   explained inSection 4.2 and Section 4.1 respectively.  A Relying
+   Party may use this link to retrieve an up-to-date list of relevant
+   Status Lists.
+
+9.3.  Status List Aggregation in JSON Format
 
    This section defines the structure for a JSON-encoded Status List
    Aggregation:
@@ -845,25 +864,6 @@ d2                              # tag(18)
          "https://example.com/statuslists/3"
       ]
    }
-
-9.2.  Issuer Metadata
-
-   The issuer MAY link to the Status List Aggregation URI in metadata
-   that can be provided by different means like .well-known metadata as
-   is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc /
-   mDL.
-
-      OpenID4VCI Example
-
-      VICAL example
-
-9.3.  Status List Parameter
-
-   The URI to the Status List Aggregation MAY be provided as the
-   optional parameter aggregation_uri in the Status List itself as
-   explained inSection 4.2 and Section 4.1 respectively.  A Relying
-   Party may use this link to retrieve an up-to-date list of relevant
-   Status Lists.
 
 10.  Further Examples
 

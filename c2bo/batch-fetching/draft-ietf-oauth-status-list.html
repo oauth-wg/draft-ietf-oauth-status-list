@@ -1031,7 +1031,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 28 November 2024</td>
+<td class="center">Expires 29 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-27" class="published">27 May 2024</time>
+<time datetime="2024-05-28" class="published">28 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-28">28 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-29">29 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,7 +1101,7 @@ The status list token data structures themselves are also represented as JWTs or
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1215,13 +1215,13 @@ The status list token data structures themselves are also represented as JWTs or
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-batch-fetching" class="internal xref">Batch Fetching</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-status-list-aggregation-in-" class="internal xref">Status List Aggregation in JSON Format</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-issuer-metadata" class="internal xref">Issuer Metadata</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-issuer-metadata" class="internal xref">Issuer Metadata</a></p>
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-status-list-parameter" class="internal xref">Status List Parameter</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-status-list-parameter" class="internal xref">Status List Parameter</a></p>
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-status-list-aggregation-in-" class="internal xref">Status List Aggregation in JSON Format</a></p>
 </li>
             </ul>
 </li>
@@ -1732,9 +1732,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-56a2646269747301636c73744a78dadbb918000217015d58406173c49c78b6cc3819
-2158afc90f7b1ce772b9cf69d7f8643f82d2417ffb56328b86f9531d29a03794d696
-dab143dd5a19086912a4847646e3c6b6d5755dfbe1
+56a2646269747301636c73744a78dadbb918000217015d5840962824f9dee9b98568
+b31f2414e454a79fa48914601dd2de869d936f413852fee997f5c11107d075ec9e62
+f6c2bff7445736b501b8cfe3a77df1c1e5c99d0d78
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2027,20 +2027,46 @@ An issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
           <p id="section-9-3.2.1">Status List Parameter: The issuer of the Referenced Token includes an additional claim to the Status List (Token) that links to the Status List Aggregation.<a href="#section-9-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<div id="status-list-aggregation-in-json-format">
+<div id="issuer-metadata">
 <section id="section-9.1">
-        <h3 id="name-status-list-aggregation-in-">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-status-list-aggregation-in-" class="section-name selfRef">Status List Aggregation in JSON Format</a>
+        <h3 id="name-issuer-metadata">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-issuer-metadata" class="section-name selfRef">Issuer Metadata</a>
         </h3>
-<p id="section-9.1-1">This section defines the structure for a JSON-encoded Status List Aggregation:<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-9.1-2.1">
-            <p id="section-9.1-2.1.1"><code>status_lists</code>: <span class="bcp14">REQUIRED</span>. The <code>status_lists</code> claim <span class="bcp14">MUST</span> be an array of strings, each containing an URI to a Status List (Token).<a href="#section-9.1-2.1.1" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">The issuer <span class="bcp14">MAY</span> link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-9.1-2.1">
+            <p id="section-9.1-2.1.1">OpenID4VCI Example<a href="#section-9.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-9.1-3">The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return <span class="bcp14">SHOULD</span> be <code>application/json</code>.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
-<p id="section-9.1-4">The following is a non-normative example for media type <code>application/json</code>:<a href="#section-9.1-4" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-9.1-5">
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-9.1-3.1">
+            <p id="section-9.1-3.1.1">VICAL example<a href="#section-9.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="status-list-parameter">
+<section id="section-9.2">
+        <h3 id="name-status-list-parameter">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-status-list-parameter" class="section-name selfRef">Status List Parameter</a>
+        </h3>
+<p id="section-9.2-1">The URI to the Status List Aggregation <span class="bcp14">MAY</span> be provided as the optional parameter <code>aggregation_uri</code> in the Status List itself as explained in<a href="#status-list-cbor" class="auto internal xref">Section 4.2</a> and <a href="#status-list-json" class="auto internal xref">Section 4.1</a> respectively. A Relying Party may use this link to retrieve an up-to-date list of relevant Status Lists.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="status-list-aggregation-in-json-format">
+<section id="section-9.3">
+        <h3 id="name-status-list-aggregation-in-">
+<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-status-list-aggregation-in-" class="section-name selfRef">Status List Aggregation in JSON Format</a>
+        </h3>
+<p id="section-9.3-1">This section defines the structure for a JSON-encoded Status List Aggregation:<a href="#section-9.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-9.3-2.1">
+            <p id="section-9.3-2.1.1"><code>status_lists</code>: <span class="bcp14">REQUIRED</span>. The <code>status_lists</code> claim <span class="bcp14">MUST</span> be an array of strings, each containing an URI to a Status List (Token).<a href="#section-9.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-9.3-3">The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return <span class="bcp14">SHOULD</span> be <code>application/json</code>.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
+<p id="section-9.3-4">The following is a non-normative example for media type <code>application/json</code>:<a href="#section-9.3-4" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-9.3-5">
 <pre>
 {
    "status_lists" : [
@@ -2049,34 +2075,8 @@ An issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
       "https://example.com/statuslists/3"
    ]
 }
-</pre><a href="#section-9.1-5" class="pilcrow">¶</a>
+</pre><a href="#section-9.3-5" class="pilcrow">¶</a>
 </div>
-</section>
-</div>
-<div id="issuer-metadata">
-<section id="section-9.2">
-        <h3 id="name-issuer-metadata">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-issuer-metadata" class="section-name selfRef">Issuer Metadata</a>
-        </h3>
-<p id="section-9.2-1">The issuer <span class="bcp14">MAY</span> link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-9.2-2.1">
-            <p id="section-9.2-2.1.1">OpenID4VCI Example<a href="#section-9.2-2.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-9.2-3.1">
-            <p id="section-9.2-3.1.1">VICAL example<a href="#section-9.2-3.1.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-</section>
-</div>
-<div id="status-list-parameter">
-<section id="section-9.3">
-        <h3 id="name-status-list-parameter">
-<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-status-list-parameter" class="section-name selfRef">Status List Parameter</a>
-        </h3>
-<p id="section-9.3-1">The URI to the Status List Aggregation <span class="bcp14">MAY</span> be provided as the optional parameter <code>aggregation_uri</code> in the Status List itself as explained in<a href="#status-list-cbor" class="auto internal xref">Section 4.2</a> and <a href="#status-list-json" class="auto internal xref">Section 4.1</a> respectively. A Relying Party may use this link to retrieve an up-to-date list of relevant Status Lists.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
