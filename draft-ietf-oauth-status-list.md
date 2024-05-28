@@ -474,6 +474,18 @@ An issuer MAY support any of these mechanisms:
 - Issuer metadata: The issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
 - Status List Parameter: The issuer of the Referenced Token includes an additional claim to the Status List (Token) that links to the Status List Aggregation.
 
+## Issuer Metadata
+
+The issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.
+
+> OpenID4VCI Example
+
+> VICAL example
+
+## Status List Parameter
+
+The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this link to retrieve an up-to-date list of relevant Status Lists.
+
 ## Status List Aggregation in JSON Format
 
 This section defines the structure for a JSON-encoded Status List Aggregation:
@@ -494,19 +506,6 @@ The following is a non-normative example for media type `application/json`:
    ]
 }
 ~~~
-
-
-## Issuer Metadata
-
-The issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.
-
-> OpenID4VCI Example
-
-> VICAL example
-
-## Status List Parameter
-
-The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this link to retrieve an up-to-date list of relevant Status Lists.
 
 # Further Examples
 
