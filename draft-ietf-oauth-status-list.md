@@ -220,7 +220,7 @@ This section defines the structure for a CBOR-encoded Status List:
 * The `StatusList` structure is a map (Major Type 5) and defines the following entries:
   * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
-  * `aggregation_uri`: OPTIONAL. Byte string (Major Type2) that contains an URI to retrieve the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
+  * `aggregation_uri`: OPTIONAL. Text string (Major Type3) that contains an URI to retrieve the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the CBOR representation of the Status List:
 
