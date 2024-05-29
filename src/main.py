@@ -54,24 +54,22 @@ def statusListEncoding1Bit():
     status_list = exampleStatusList1Bit()
     encoded = status_list.encodeAsJSON()
     text = "byte_array = [{}, {}] \nencoded:\n{}".format(
-        hex(status_list.list[0]),
-        hex(status_list.list[1]),
-        util.printObject(encoded)
+        hex(status_list.list[0]), hex(status_list.list[1]), util.printObject(encoded)
     )
     util.outputFile(folder + "status_list_encoding_json", text)
+
 
 def statusListEncoding1BitCBOR():
     status_list = exampleStatusList1Bit()
     encoded = status_list.encodeAsCBOR()
     hex_encoded = encoded.hex()
     text = "byte_array = [{}, {}] \nencoded:\n{}".format(
-        hex(status_list.list[0]),
-        hex(status_list.list[1]),
-        util.printText(hex_encoded)
+        hex(status_list.list[0]), hex(status_list.list[1]), util.printText(hex_encoded)
     )
     util.outputFile(folder + "status_list_encoding_cbor", text)
     diag = util.printCBORDiagnostics(encoded)
     util.outputFile(folder + "status_list_encoding_cbor_diag", diag)
+
 
 def statusListEncoding2Bit():
     status_list = exampleStatusList2Bit()
@@ -83,6 +81,7 @@ def statusListEncoding2Bit():
         util.printObject(encoded),
     )
     util.outputFile(folder + "status_list_encoding2_json", text)
+
 
 def statusListEncoding2BitCBOR():
     status_list = exampleStatusList2Bit()
@@ -98,6 +97,7 @@ def statusListEncoding2BitCBOR():
     diag = util.printCBORDiagnostics(encoded)
     util.outputFile(folder + "status_list_encoding2_cbor_diag", diag)
 
+
 def statusListJWT():
     status_list = exampleStatusList1Bit()
     jwt = StatusListToken(
@@ -109,6 +109,7 @@ def statusListJWT():
     status_jwt = jwt.buildJWT(iat=iat, exp=exp, ttl=ttl)
     text = util.formatToken(status_jwt, key)
     util.outputFile(folder + "status_list_jwt", text)
+
 
 def statusListCWT():
     status_list = exampleStatusList1Bit()
@@ -122,19 +123,19 @@ def statusListCWT():
     status_cwt = cwt.buildCWT(iat=iat, exp=exp, ttl=ttl)
     hex_encoded = status_cwt.hex()
     util.outputFile(folder + "status_list_cwt", util.printText(hex_encoded))
-    util.outputFile(folder + "status_list_cwt_diag", util.printCBORDiagnostics(status_cwt))
+    util.outputFile(
+        folder + "status_list_cwt_diag", util.printCBORDiagnostics(status_cwt)
+    )
+
 
 def referencedTokenCWT():
-    encoded = CWT(
-        iat=iat,
-        exp=exp,
-        sub="12345",
-        iss="https://example.com",
-        jwk=key
-    )
+    encoded = CWT(iat=iat, exp=exp, sub="12345", iss="https://example.com", jwk=key)
     hex_encoded = encoded.hex()
     util.outputFile(folder + "referenced_token_cwt", util.printText(hex_encoded))
-    util.outputFile(folder + "referenced_token_cwt_diag", util.printCBORDiagnostics(encoded))
+    util.outputFile(
+        folder + "referenced_token_cwt_diag", util.printCBORDiagnostics(encoded)
+    )
+
 
 if __name__ == "__main__":
     if not os.path.exists(folder):
@@ -146,4 +147,3 @@ if __name__ == "__main__":
     statusListEncoding2BitCBOR()
     statusListCWT()
     referencedTokenCWT()
-
