@@ -1031,7 +1031,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 29 November 2024</td>
+<td class="center">Expires 30 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-28" class="published">28 May 2024</time>
+<time datetime="2024-05-29" class="published">29 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-29">29 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-30">30 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,7 +1101,7 @@ The status list token data structures themselves are also represented as JWTs or
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1558,7 +1558,7 @@ encoded:
             </ul>
 </li>
         </ul>
-<p id="section-4.2-3">The following example illustrates the CBOR representation of the Status List:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">The following example illustrates the CBOR representation of the Status List in Hex:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.2-4">
 <pre>
 byte_array = [0xb9, 0xa3]
@@ -1566,7 +1566,7 @@ encoded:
 a2646269747301636c73744a78dadbb918000217015d
 </pre><a href="#section-4.2-4" class="pilcrow">¶</a>
 </div>
-<p id="section-4.2-5">The following is the CBOR diagnostic output of the example above:<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<p id="section-4.2-5">The following is the CBOR Annotated Hex output of the example above:<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.2-6">
 <pre>
 a2                              # map(2)
@@ -1710,18 +1710,18 @@ a2                              # map(2)
             <p id="section-5.2-7.4.1">Application of additional restrictions and policy are at the discretion of the verifying party.<a href="#section-5.2-7.4.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-5.2-8">The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):<a href="#section-5.2-8" class="pilcrow">¶</a></p>
+<p id="section-5.2-8">The following is a non-normative example for a Status List Token in CWT format in Hex:<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-9">
 <pre>
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584010b75a
-abdd91cf7c94547c7b398bc56227729b57a513c5025d0f09c637fb18db5d6daeff4e
-c1ecf26064839f0ac02966a7a012a5b9651c5ed3fb9b87f7d8821e
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584096778c
+31be979d5ad3f5c7898e7fa8edb817152597623560bf76aca2a598670b07537171ab
+3a00ac7c2e6908a5daadb8cf30431e99aef7d37cabc91b0004c4b8
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
-<p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
+<p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-11">
 <pre>
 d2                              # tag(18)
@@ -1744,12 +1744,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      10b75aabdd91cf7c94547c7b  #       "\x10·Z«Ý\x91Ï|\x94T|{"
-      398bc56227729b57a513c502  #       "9\x8bÅb'r\x9bW¥\x13Å\x02"
-      5d0f09c637fb18db5d6daeff  #       "]\x0f\x09Æ7û\x18Û]m®ÿ"
-      4ec1ecf26064839f0ac02966  #       "NÁìò`d\x83\x9f\x0aÀ)f"
-      a7a012a5b9651c5ed3fb9b87  #       "§\xa0\x12¥¹e\x1c^Óû\x9b\x87"
-      f7d8821e                  #       "÷Ø\x82\x1e"
+      96778c31be979d5ad3f5c789  #       "\x96w\x8c1¾\x97\x9dZÓõÇ\x89"
+      8e7fa8edb817152597623560  #       "\x8e\x7f¨í¸\x17\x15%\x97b5`"
+      bf76aca2a598670b07537171  #       "¿v¬¢¥\x98g\x0b\x07Sqq"
+      ab3a00ac7c2e6908a5daadb8  #       "«:\x00¬|.i\x08¥Ú\xad¸"
+      cf30431e99aef7d37cabc91b  #       "Ï0C\x1e\x99®÷Ó|«É\x1b"
+      0004c4b8                  #       "\x00\x04Ä¸"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1848,30 +1848,39 @@ d2                              # tag(18)
 </li>
         </ul>
 <p id="section-6.3-4">Application of additional restrictions and policy are at the discretion of the verifying party.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
-<p id="section-6.3-5">The following is a non-normative example for a decoded payload of a Referenced Token:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-ascii-art art-text artwork" id="section-6.3-6">
+<p id="section-6.3-5">The following is a non-normative example of a Referenced Token in CWT format in Hex:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-6">
 <pre>
-18(
-    [
-      / protected / &lt;&lt; {
-        / alg / 1: -7 / ES256 /
-      } &gt;&gt;,
-      / unprotected / {
-        / kid / 4: h'3132' / '13' /
-      },
-      / payload / &lt;&lt; {
-        / iss    / 1: "https://example.com",
-        / status / 65535: {
-          "status_list": {
-            "idx": 0,
-            "uri": "https://example.com/statuslists/1"
-          }
-        }
-      } &gt;&gt;,
-      / signature / h'...'
-    ]
-  )
+d28443a10126a1044231325829a402653132333435017368747470733a2f2f657861
+6d706c652e636f6d061a648c5bea041a8898dfea584025c1558979ea961ce95c630b
+c8ba610eb5f81667f1057e50bb44e00e11b2682a3718535c9aa1d5e8ca0e9b4e52c3
+60727656e308059921603c0b3ba5c297b28e
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
+</div>
+<p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-8">
+<pre>
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&amp;"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 29                       #     bytes(41)
+      a40265313233343501736874  #       "¤\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea                #       "\x1a\x88\x98ßê"
+    58 40                       #     bytes(64)
+      25c1558979ea961ce95c630b  #       "%ÁU\x89yê\x96\x1cé\c\x0b"
+      c8ba610eb5f81667f1057e50  #       "Èºa\x0eµø\x16gñ\x05~P"
+      bb44e00e11b2682a3718535c  #       "»Dà\x0e\x11²h*7\x18S\"
+      9aa1d5e8ca0e9b4e52c36072  #       "\x9a¡ÕèÊ\x0e\x9bNRÃ`r"
+      7656e308059921603c0b3ba5  #       "vVã\x08\x05\x99!`&lt;\x0b;¥"
+      c297b28e                  #       "Â\x97²\x8e"
+</pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
