@@ -220,13 +220,13 @@ This section defines the structure for a CBOR-encoded Status List:
   * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
 
-The following example illustrates the CBOR representation of the Status List:
+The following example illustrates the CBOR representation of the Status List in Hex:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding_cbor}
 ~~~~~~~~~~
 
-The following is the CBOR diagnostic output of the example above:
+The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding_cbor_diag}
@@ -298,13 +298,13 @@ The following additional rules apply:
 
 4. Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):
+The following is a non-normative example for a Status List Token in CWT format in Hex:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_cwt}
 ~~~~~~~~~~
 
-The following is the CBOR diagnostic output of the example above:
+The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_cwt_diag}
@@ -364,31 +364,18 @@ The following content applies to the CWT Claims Set:
 
 Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a decoded payload of a Referenced Token:
+The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
-~~~ ascii-art
+~~~~~~~~~~
+{::include ./examples/referenced_token_cwt}
+~~~~~~~~~~
 
-18(
-    [
-      / protected / << {
-        / alg / 1: -7 / ES256 /
-      } >>,
-      / unprotected / {
-        / kid / 4: h'3132' / '13' /
-      },
-      / payload / << {
-        / iss    / 1: "https://example.com",
-        / status / 65535: {
-          "status_list": {
-            "idx": 0,
-            "uri": "https://example.com/statuslists/1"
-          }
-        }
-      } >>,
-      / signature / h'...'
-    ]
-  )
-~~~
+The following is the CBOR Annotated Hex output of the example above:
+
+~~~~~~~~~~
+{::include ./examples/referenced_token_cwt_diag}
+~~~~~~~~~~
+
 
 ## Referenced Token in other COSE/CBOR Format {#referenced-token-cose}
 
