@@ -1716,9 +1716,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584096778c
-31be979d5ad3f5c7898e7fa8edb817152597623560bf76aca2a598670b07537171ab
-3a00ac7c2e6908a5daadb8cf30431e99aef7d37cabc91b0004c4b8
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584068240c
+00c12594286b49a0464ca00cef7f2232fab1e8930fde1872dd6004ff78e4736a02d1
+c00a6824100d2f384a1ab0a032a42d4ff5bf7e1cc9015cfc79bed6
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1744,12 +1744,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      96778c31be979d5ad3f5c789  #       "\x96w\x8c1¾\x97\x9dZÓõÇ\x89"
-      8e7fa8edb817152597623560  #       "\x8e\x7f¨í¸\x17\x15%\x97b5`"
-      bf76aca2a598670b07537171  #       "¿v¬¢¥\x98g\x0b\x07Sqq"
-      ab3a00ac7c2e6908a5daadb8  #       "«:\x00¬|.i\x08¥Ú\xad¸"
-      cf30431e99aef7d37cabc91b  #       "Ï0C\x1e\x99®÷Ó|«É\x1b"
-      0004c4b8                  #       "\x00\x04Ä¸"
+      68240c00c12594286b49a046  #       "h$\x0c\x00Á%\x94(kI\xa0F"
+      4ca00cef7f2232fab1e8930f  #       "L\xa0\x0cï\x7f"2ú±è\x93\x0f"
+      de1872dd6004ff78e4736a02  #       "Þ\x18rÝ`\x04ÿxäsj\x02"
+      d1c00a6824100d2f384a1ab0  #       "ÑÀ\x0ah$\x10\x0d/8J\x1a°"
+      a032a42d4ff5bf7e1cc9015c  #       "\xa02¤-Oõ¿~\x1cÉ\x01\"
+      fc79bed6                  #       "üy¾Ö"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1851,10 +1851,12 @@ d2                              # tag(18)
 <p id="section-6.3-5">The following is a non-normative example of a Referenced Token in CWT format in Hex:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.3-6">
 <pre>
-d28443a10126a1044231325829a402653132333435017368747470733a2f2f657861
-6d706c652e636f6d061a648c5bea041a8898dfea584025c1558979ea961ce95c630b
-c8ba610eb5f81667f1057e50bb44e00e11b2682a3718535c9aa1d5e8ca0e9b4e52c3
-60727656e308059921603c0b3ba5c297b28e
+d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
+6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
+7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
+7374617475736c697374732f31584064aefb6d2f43d75f1c56cb5d16596ce7534443
+b22278c1509d229082f8ea7a6bb9382204cb64e0e916470af6122b2e52b1e2161bfc
+32da871a9e7413932e8c01
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1868,18 +1870,23 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 29                       #     bytes(41)
-      a40265313233343501736874  #       "¤\x02e12345\x01sht"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
       7470733a2f2f6578616d706c  #       "tps://exampl"
       652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea                #       "\x1a\x88\x98ßê"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      25c1558979ea961ce95c630b  #       "%ÁU\x89yê\x96\x1cé\c\x0b"
-      c8ba610eb5f81667f1057e50  #       "Èºa\x0eµø\x16gñ\x05~P"
-      bb44e00e11b2682a3718535c  #       "»Dà\x0e\x11²h*7\x18S\"
-      9aa1d5e8ca0e9b4e52c36072  #       "\x9a¡ÕèÊ\x0e\x9bNRÃ`r"
-      7656e308059921603c0b3ba5  #       "vVã\x08\x05\x99!`&lt;\x0b;¥"
-      c297b28e                  #       "Â\x97²\x8e"
+      64aefb6d2f43d75f1c56cb5d  #       "d®ûm/C×_\x1cVË]"
+      16596ce7534443b22278c150  #       "\x16YlçSDC²"xÁP"
+      9d229082f8ea7a6bb9382204  #       "\x9d"\x90\x82øêzk¹8"\x04"
+      cb64e0e916470af6122b2e52  #       "Ëdàé\x16G\x0aö\x12+.R"
+      b1e2161bfc32da871a9e7413  #       "±â\x16\x1bü2Ú\x87\x1a\x9et\x13"
+      932e8c01                  #       "\x93.\x8c\x01"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
