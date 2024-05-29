@@ -129,7 +129,15 @@ def statusListCWT():
 
 
 def referencedTokenCWT():
-    encoded = CWT(iat=iat, exp=exp, sub="12345", iss="https://example.com", jwk=key)
+    encoded = CWT(
+        iat=iat,
+        exp=exp,
+        sub="12345",
+        iss="https://example.com",
+        jwk=key,
+        status_url="https://example.com/statuslists/1",
+        status_idx=0,
+    )
     hex_encoded = encoded.hex()
     util.outputFile(folder + "referenced_token_cwt", util.printText(hex_encoded))
     util.outputFile(
