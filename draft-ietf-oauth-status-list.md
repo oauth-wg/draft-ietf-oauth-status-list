@@ -205,7 +205,7 @@ This section defines the structure for a JSON-encoded Status List:
 * `status_list`: REQUIRED. JSON Object that contains a Status List. The object contains exactly two claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded (as defined in Section 2 of {{RFC7515}}) Status List as specified in [](#status-list).
-   * `aggregation_uri`: OPTIONAL. An URI to retrieve a the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
+   * `aggregation_uri`: OPTIONAL. JSON String that contains an URI to retrieve a the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the JSON representation of the Status List:
 
