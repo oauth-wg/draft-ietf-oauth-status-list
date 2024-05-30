@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-05-28T00:13:56.033608+00:00",
+  "timestamp": "2024-05-30T00:14:11.707242+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2498,11 +2498,13 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "tplooker"
+      ],
       "labels": [],
       "body": "",
       "createdAt": "2024-02-27T07:25:54Z",
-      "updatedAt": "2024-03-20T23:26:46Z",
+      "updatedAt": "2024-05-29T06:22:24Z",
       "closedAt": null,
       "comments": []
     },
@@ -3028,6 +3030,54 @@
       "body": "COSE typ is now registered in IANA. Because of that, the TBD could be removed.",
       "createdAt": "2024-05-27T06:05:33Z",
       "updatedAt": "2024-05-27T06:05:33Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 145,
+      "id": "I_kwDOJZ2aqs6KbaHv",
+      "title": "Be more elaborate on CBOR/CWT types and definitions",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/145",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This includes standalone seperate references for each of the claims rather then referencing the JWT based definition.",
+      "createdAt": "2024-05-29T06:09:54Z",
+      "updatedAt": "2024-05-29T06:31:20Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 146,
+      "id": "I_kwDOJZ2aqs6KbizX",
+      "title": "Implementation consideration to endianess",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/146",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "we currently assume there is no issue, but it may be worth to write it down",
+      "createdAt": "2024-05-29T06:28:15Z",
+      "updatedAt": "2024-05-29T06:28:15Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 147,
+      "id": "I_kwDOJZ2aqs6KboUm",
+      "title": "Decide whether to drop the unsigned option",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/147",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The unsigned option hasn't shown any interest at all and complicates matters within the draft. Therefore, we consider to drop this feature again. Is anybody planning to use this?",
+      "createdAt": "2024-05-29T06:43:18Z",
+      "updatedAt": "2024-05-29T06:43:18Z",
       "closedAt": null,
       "comments": []
     }
@@ -8700,13 +8750,13 @@
       "labels": [],
       "body": "closes #27\r\n\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/batch-fetching/draft-ietf-oauth-status-list.html \r\n",
       "createdAt": "2024-05-15T06:04:00Z",
-      "updatedAt": "2024-05-27T12:03:14Z",
+      "updatedAt": "2024-05-29T13:21:21Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7add93a256b5cb56befd2c83d19f5940c90c1141",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/batch-fetching",
-      "headRefOid": "1c309a694c8f151a348eaf43ee1b7c2458f68b1e",
+      "headRefOid": "0a0db707781f9ec6c81e0e588af1b2c10a56ddf4",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -8905,6 +8955,86 @@
           "createdAt": "2024-05-24T13:32:02Z",
           "updatedAt": "2024-05-24T13:32:02Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs58G00S",
+          "commit": {
+            "abbreviatedOid": "ce20ff9"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-28T08:53:14Z",
+          "updatedAt": "2024-05-28T08:53:14Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "Hmm, we need to define the major type here, but yeah we can probably make this a bit cleaner - let's briefly discuss tomorrow",
+              "createdAt": "2024-05-28T08:53:14Z",
+              "updatedAt": "2024-05-28T08:53:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs58PJOC",
+          "commit": {
+            "abbreviatedOid": "fe3ae5d"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-29T06:06:46Z",
+          "updatedAt": "2024-05-29T06:06:46Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "I think we should use major type 3 - text string.",
+              "createdAt": "2024-05-29T06:06:46Z",
+              "updatedAt": "2024-05-29T06:06:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs58PJPi",
+          "commit": {
+            "abbreviatedOid": "fe3ae5d"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-29T06:06:51Z",
+          "updatedAt": "2024-05-29T06:06:52Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n   * `aggregation_uri`: OPTIONAL. JSON String that contains an URI to retrieve a the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.\r\n```",
+              "createdAt": "2024-05-29T06:06:52Z",
+              "updatedAt": "2024-05-29T06:06:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs58PKXm",
+          "commit": {
+            "abbreviatedOid": "fe3ae5d"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-05-29T06:10:19Z",
+          "updatedAt": "2024-05-29T06:10:19Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n  * `aggregation_uri`: OPTIONAL. Text string (Major Type3) that contains an URI to retrieve the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.\r\n```",
+              "createdAt": "2024-05-29T06:10:19Z",
+              "updatedAt": "2024-05-29T06:10:19Z"
+            }
+          ]
         }
       ]
     }
