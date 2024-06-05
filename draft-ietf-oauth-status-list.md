@@ -802,6 +802,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -03
 
+* change cwt referenced token example to hex and annotated hex
 * clarify the sub claim of Status List Token
 * relax status_list iss requirements for CWT
 * Fixes missing parts & iana ttl registration in CWT examples
