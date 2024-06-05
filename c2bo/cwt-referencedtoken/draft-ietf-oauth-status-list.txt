@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 30 November 2024                                               
+Expires: 7 December 2024                                                
                                                               C. Bormann
-                                                             29 May 2024
+                                                             5 June 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 November 2024.
+   This Internet-Draft will expire on 7 December 2024.
 
 Copyright Notice
 
@@ -521,9 +521,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584068240c
-   00c12594286b49a0464ca00cef7f2232fab1e8930fde1872dd6004ff78e4736a02d1
-   c00a6824100d2f384a1ab0a032a42d4ff5bf7e1cc9015cfc79bed6
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ffc4a0
+   81edf3c31fe2f0b2376bb828a258b7646d064fcb2e0218c27b18b8b3391747d0286a
+   5075d53d26e109ffce4f016a8a2c4a2e533cbab293889bca19d304
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -547,12 +547,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      68240c00c12594286b49a046  #       "h$\x0c\x00Á%\x94(kI\xa0F"
-      4ca00cef7f2232fab1e8930f  #       "L\xa0\x0cï\x7f"2ú±è\x93\x0f"
-      de1872dd6004ff78e4736a02  #       "Þ\x18rÝ`\x04ÿxäsj\x02"
-      d1c00a6824100d2f384a1ab0  #       "ÑÀ\x0ah$\x10\x0d/8J\x1a°"
-      a032a42d4ff5bf7e1cc9015c  #       "\xa02¤-Oõ¿~\x1cÉ\x01\"
-      fc79bed6                  #       "üy¾Ö"
+      ffc4a081edf3c31fe2f0b237  #       "ÿÄ\xa0\x81íóÃ\x1fâð²7"
+      6bb828a258b7646d064fcb2e  #       "k¸(¢X·dm\x06OË."
+      0218c27b18b8b3391747d028  #       "\x02\x18Â{\x18¸³9\x17GÐ("
+      6a5075d53d26e109ffce4f01  #       "jPuÕ=&á\x09ÿÎO\x01"
+      6a8a2c4a2e533cbab293889b  #       "j\x8a,J.S<º²\x93\x88\x9b"
+      ca19d304                  #       "Ê\x19Ó\x04"
 
 6.  Referenced Token
 
@@ -659,37 +659,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584064aefb6d2f43d75f1c56cb5d16596ce7534443
-   b22278c1509d229082f8ea7a6bb9382204cb64e0e916470af6122b2e52b1e2161bfc
-   32da871a9e7413932e8c01
+   7374617475736c697374732f31584063da84eb17933478596cbad62d37a7e86ed54c
+   3cd734fd9f3c9d1b81a632fce697942e667dfc4484c3c6ddbdb57e1280156fac45b9
+   0a1787a5fc59b85ec0fc37
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      64aefb6d2f43d75f1c56cb5d  #       "d®ûm/C×_\x1cVË]"
-      16596ce7534443b22278c150  #       "\x16YlçSDC²"xÁP"
-      9d229082f8ea7a6bb9382204  #       "\x9d"\x90\x82øêzk¹8"\x04"
-      cb64e0e916470af6122b2e52  #       "Ëdàé\x16G\x0aö\x12+.R"
-      b1e2161bfc32da871a9e7413  #       "±â\x16\x1bü2Ú\x87\x1a\x9et\x13"
-      932e8c01                  #       "\x93.\x8c\x01"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         63da84eb17933478596cbad6  #       "cÚ\x84ë\x17\x934xYlºÖ"
+         2d37a7e86ed54c3cd734fd9f  #       "-7§ènÕL<×4ý\x9f"
+         3c9d1b81a632fce697942e66  #       "<\x9d\x1b\x81¦2üæ\x97\x94.f"
+         7dfc4484c3c6ddbdb57e1280  #       "}üD\x84ÃÆÝ½µ~\x12\x80"
+         156fac45b90a1787a5fc59b8  #       "\x15o¬E¹\x0a\x17\x87¥üY¸"
+         5ec0fc37                  #       "^Àü7"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1485,6 +1485,8 @@ Acknowledgments
 Document History
 
    -03
+
+   *  change cwt referenced token example to hex and annotated hex
 
    *  clarify the sub claim of Status List Token
 
