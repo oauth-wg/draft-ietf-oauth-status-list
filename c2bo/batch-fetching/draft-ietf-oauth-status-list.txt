@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 30 November 2024                                               
+Expires: 7 December 2024                                                
                                                               C. Bormann
-                                                             29 May 2024
+                                                             5 June 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 November 2024.
+   This Internet-Draft will expire on 7 December 2024.
 
 Copyright Notice
 
@@ -374,7 +374,7 @@ Table of Contents
       -  lst: REQUIRED.  Byte string (Major Type 2) that contains the
          Status List as specified in Section 4.1.
 
-      -  aggregation_uri: OPTIONAL.  Text string (Major Type3) that
+      -  aggregation_uri: OPTIONAL.  Text string (Major Type 3) that
          contains an URI to retrieve the Status List Aggregation for
          this credential type.  See section Section 9 for further
          detail.
@@ -531,9 +531,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325860a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   56a2646269747301636c73744a78dadbb918000217015d584041b1392a1b68e9e03d
-   4f90268f3eea3966b4b8dff8cfb8f55f830604a8faa15f677bea1faab8992c4ca41f
-   02597ae9f323341a26618b1a11ebcf022533dfda6b
+   56a2646269747301636c73744a78dadbb918000217015d58403410e3808ac439020e
+   943114bb7e79f8cc9f4d0f70ad32f635bf6efbfa3fe3181432aa36be9f78761a9313
+   6a73a800543ba67c3a46923288cf85a7e22039dd71
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -827,12 +827,11 @@ d2                              # tag(18)
 
    The issuer MAY link to the Status List Aggregation URI in metadata
    that can be provided by different means like .well-known metadata as
-   is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc /
-   mDL.
+   is used commonly in OAuth and OpenID, or via a VICAL extension for
+   ISO mDoc / mDL.
 
-      OpenID4VCI Example
-
-      VICAL example
+   The concrete specification on how this is implemented depends on the
+   specific ecosystem and is out of scope of this specification.
 
 9.2.  Status List Parameter
 
@@ -852,7 +851,9 @@ d2                              # tag(18)
 
    The Status List Aggregation URI provides a list of Status List URIs.
    This aggregation in JSON and the media type return SHOULD be
-   application/json.
+   application/json.  A Relying Party can iterate through this list and
+   fetch all Status List Tokens before encountering the specific URI in
+   a Referenced Token.
 
    The following is a non-normative example for media type application/
    json:
