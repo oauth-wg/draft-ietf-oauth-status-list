@@ -220,7 +220,7 @@ This section defines the structure for a CBOR-encoded Status List:
 * The `StatusList` structure is a map (Major Type 5) and defines the following entries:
   * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
-  * `aggregation_uri`: OPTIONAL. Text string (Major Type3) that contains an URI to retrieve the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
+  * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains an URI to retrieve the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the CBOR representation of the Status List:
 
@@ -476,11 +476,9 @@ An issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.
+The issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.
 
-> OpenID4VCI Example
-
-> VICAL example
+The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
 
 ## Status List Parameter
 
@@ -492,7 +490,7 @@ This section defines the structure for a JSON-encoded Status List Aggregation:
 
 * `status_lists`: REQUIRED. The `status_lists` claim MUST be an array of strings, each containing an URI to a Status List (Token).
 
-The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return SHOULD be `application/json`.
+The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return SHOULD be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
 
 The following is a non-normative example for media type `application/json`:
 
