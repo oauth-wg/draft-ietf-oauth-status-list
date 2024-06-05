@@ -858,6 +858,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -03
 
+* introduce batch fetching mechanism
 * clarify the sub claim of Status List Token
 * relax status_list iss requirements for CWT
 * Fixes missing parts & iana ttl registration in CWT examples
