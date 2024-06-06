@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 16 November 2024                                               
+Expires: 8 December 2024                                                
                                                               C. Bormann
-                                                             15 May 2024
+                                                             6 June 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 November 2024.
+   This Internet-Draft will expire on 8 December 2024.
 
 Copyright Notice
 
@@ -88,8 +88,7 @@ Table of Contents
    8.  Verification and Processing
      8.1.  Status List Request
      8.2.  Status List Response
-     8.3.  Caching
-     8.4.  Validation Rules
+     8.3.  Validation Rules
    9.  Further Examples
      9.1.  Status List Token with 2-Bit Status Values in JWT format
    10. Security Considerations
@@ -521,9 +520,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58405a0157
-   26cf3d4faa24778233e1697aae384737e613f40022b3e74ce3af76382b3438d844fa
-   4a15b20bf517955f59824a3f73c33c61a2261f0a24b949b6d1e943
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840650ffa
+   121e3798254361a52428f5d8e5902d637d3bfc9fdbf75099b61a67aff1941e31cb63
+   ff98a8548b1ca81f18989b02f5850c121736d516a6b1d0bea602d0
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -547,12 +546,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      5a015726cf3d4faa24778233  #       "Z\x01W&Ï=Oª$w\x823"
-      e1697aae384737e613f40022  #       "áiz®8G7æ\x13ô\x00""
-      b3e74ce3af76382b3438d844  #       "³çLã¯v8+48ØD"
-      fa4a15b20bf517955f59824a  #       "úJ\x15²\x0bõ\x17\x95_Y\x82J"
-      3f73c33c61a2261f0a24b949  #       "?sÃ<a¢&\x1f\x0a$¹I"
-      b6d1e943                  #       "¶ÑéC"
+      650ffa121e3798254361a524  #       "e\x0fú\x12\x1e7\x98%Ca¥$"
+      28f5d8e5902d637d3bfc9fdb  #       "(õØå\x90-c};ü\x9fÛ"
+      f75099b61a67aff1941e31cb  #       "÷P\x99¶\x1ag¯ñ\x94\x1e1Ë"
+      63ff98a8548b1ca81f18989b  #       "cÿ\x98¨T\x8b\x1c¨\x1f\x18\x98\x9b"
+      02f5850c121736d516a6b1d0  #       "\x02õ\x85\x0c\x12\x176Õ\x16¦±Ð"
+      bea602d0                  #       "¾¦\x02Ð"
 
 6.  Referenced Token
 
@@ -784,14 +783,7 @@ d2                              # tag(18)
    The HTTP response SHOULD use gzip Content-Encoding as defined in
    [RFC9110].
 
-8.3.  Caching
-
-   If caching is required (e.g., to enable the use of alternative
-   mechanisms for hosting, like Content Delivery Networks), the control
-   of the caching mechanism SHOULD be implemented using the standard
-   HTTP Cache-Control as defined in [RFC9111].
-
-8.4.  Validation Rules
+8.3.  Validation Rules
 
    TBD
 
@@ -1471,6 +1463,8 @@ Acknowledgments
 Document History
 
    -03
+
+   *  remove http caching in favor of the new ttl claim
 
    *  clarify the sub claim of Status List Token
 
