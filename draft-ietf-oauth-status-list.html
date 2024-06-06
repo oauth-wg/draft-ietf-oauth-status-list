@@ -1337,7 +1337,7 @@ The status list token data structures themselves are also represented as JWTs or
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">Token formats secured by JOSE <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span> or COSE <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>, such as JSON Web Tokens (JWTs) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, CBOR Web Tokens (CWTs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> and ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided by an endpoint or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided via HTTPS or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>.
 The following diagram depicts the basic conceptual relationship.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1713,9 +1713,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840650ffa
-121e3798254361a52428f5d8e5902d637d3bfc9fdbf75099b61a67aff1941e31cb63
-ff98a8548b1ca81f18989b02f5850c121736d516a6b1d0bea602d0
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ef53e2
+565b79a858fdef986fc149663e72304c8c4d80037b7ddc040af73c762aa91b50b7ae
+975f7c07da2f278ba6214a68770b3157a271a79443b5c1ef4c8110
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1741,12 +1741,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      650ffa121e3798254361a524  #       "e\x0fú\x12\x1e7\x98%Ca¥$"
-      28f5d8e5902d637d3bfc9fdb  #       "(õØå\x90-c};ü\x9fÛ"
-      f75099b61a67aff1941e31cb  #       "÷P\x99¶\x1ag¯ñ\x94\x1e1Ë"
-      63ff98a8548b1ca81f18989b  #       "cÿ\x98¨T\x8b\x1c¨\x1f\x18\x98\x9b"
-      02f5850c121736d516a6b1d0  #       "\x02õ\x85\x0c\x12\x176Õ\x16¦±Ð"
-      bea602d0                  #       "¾¦\x02Ð"
+      ef53e2565b79a858fdef986f  #       "ïSâV[y¨Xýï\x98o"
+      c149663e72304c8c4d80037b  #       "ÁIf&gt;r0L\x8cM\x80\x03{"
+      7ddc040af73c762aa91b50b7  #       "}Ü\x04\x0a÷&lt;v*©\x1bP·"
+      ae975f7c07da2f278ba6214a  #       "®\x97_|\x07Ú/'\x8b¦!J"
+      68770b3157a271a79443b5c1  #       "hw\x0b1W¢q§\x94CµÁ"
+      ef4c8110                  #       "ïL\x81\x10"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1929,23 +1929,24 @@ Status types described by this specification comprise:<a href="#section-7.1-1" c
         <h3 id="name-status-list-request">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-status-list-request" class="section-name selfRef">Status List Request</a>
         </h3>
-<p id="section-8.1-1">To obtain the Status List or Status List Token, the Relying Party <span class="bcp14">MUST</span> send a HTTP GET request to the Status List Endpoint. Communication with the Status List Endpoint <span class="bcp14">MUST</span> utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check <span class="bcp14">MUST</span> be performed as defined in Section 5 and 6 of <span>[<a href="#RFC6125" class="cite xref">RFC6125</a>]</span>.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">The Relying Party <span class="bcp14">SHOULD</span> send the following Accept-Header to indicate the requested response type:<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">To obtain the Status List or Status List Token, the Relying Party <span class="bcp14">MUST</span> send an HTTP GET request to the URI provided in the Referenced Token.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">If the Status List is provided by an HTTP endpoint (and not as a Status List Token), the provider of the Status List <span class="bcp14">MUST</span> utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check <span class="bcp14">MUST</span> be performed as defined in Section 5 and 6 of <span>[<a href="#RFC6125" class="cite xref">RFC6125</a>]</span>.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-3">The Relying Party <span class="bcp14">SHOULD</span> send the following Accept-Header to indicate the requested response type:<a href="#section-8.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-8.1-3.1">
-            <p id="section-8.1-3.1.1">"application/statuslist+json" for Status List in JSON format<a href="#section-8.1-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-8.1-4.1">
+            <p id="section-8.1-4.1.1">"application/statuslist+json" for Status List in JSON format<a href="#section-8.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-8.1-3.2">
-            <p id="section-8.1-3.2.1">"application/statuslist+jwt" for Status List in JWT format<a href="#section-8.1-3.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-8.1-4.2">
+            <p id="section-8.1-4.2.1">"application/statuslist+jwt" for Status List in JWT format<a href="#section-8.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-8.1-3.3">
-            <p id="section-8.1-3.3.1">"application/statuslist+cbor" for Status List in CBOR format<a href="#section-8.1-3.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-8.1-4.3">
+            <p id="section-8.1-4.3.1">"application/statuslist+cbor" for Status List in CBOR format<a href="#section-8.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-8.1-3.4">
-            <p id="section-8.1-3.4.1">"application/statuslist+cwt" for Status List in CWT format<a href="#section-8.1-3.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-8.1-4.4">
+            <p id="section-8.1-4.4.1">"application/statuslist+cwt" for Status List in CWT format<a href="#section-8.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-8.1-4">If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.1-5">If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.<a href="#section-8.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="status-list-response">
@@ -2838,16 +2839,22 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-03<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">remove http caching in favor of the new ttl claim<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">require TLS only for fetching Status List, not for Status List Token<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">clarify the sub claim of Status List Token<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">remove the undefined phrase Status List endpoint<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">remove http caching in favor of the new ttl claim<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">clarify the sub claim of Status List Token<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.5">
+          <p id="appendix-B-2.5.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.6">
+          <p id="appendix-B-2.6.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
