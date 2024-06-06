@@ -141,7 +141,7 @@ Table of Contents
    List.  Each Referenced Token is allocated an index during issuance
    that represents its position within this bit array.  The value of the
    bit(s) at this index correspond to the Referenced Token's status.  A
-   Status List may either be provided by an endpoint or be signed and
+   Status List may either be provided via HTTPS or be signed and
    embedded into a Status List Token, whereas this document defines its
    representations in JWT and CWT.  Status Lists may be composed for
    expressing a range of Status Types.  This document defines basic
@@ -520,9 +520,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840650ffa
-   121e3798254361a52428f5d8e5902d637d3bfc9fdbf75099b61a67aff1941e31cb63
-   ff98a8548b1ca81f18989b02f5850c121736d516a6b1d0bea602d0
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ef53e2
+   565b79a858fdef986fc149663e72304c8c4d80037b7ddc040af73c762aa91b50b7ae
+   975f7c07da2f278ba6214a68770b3157a271a79443b5c1ef4c8110
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -546,12 +546,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      650ffa121e3798254361a524  #       "e\x0fú\x12\x1e7\x98%Ca¥$"
-      28f5d8e5902d637d3bfc9fdb  #       "(õØå\x90-c};ü\x9fÛ"
-      f75099b61a67aff1941e31cb  #       "÷P\x99¶\x1ag¯ñ\x94\x1e1Ë"
-      63ff98a8548b1ca81f18989b  #       "cÿ\x98¨T\x8b\x1c¨\x1f\x18\x98\x9b"
-      02f5850c121736d516a6b1d0  #       "\x02õ\x85\x0c\x12\x176Õ\x16¦±Ð"
-      bea602d0                  #       "¾¦\x02Ð"
+      ef53e2565b79a858fdef986f  #       "ïSâV[y¨Xýï\x98o"
+      c149663e72304c8c4d80037b  #       "ÁIf>r0L\x8cM\x80\x03{"
+      7ddc040af73c762aa91b50b7  #       "}Ü\x04\x0a÷<v*©\x1bP·"
+      ae975f7c07da2f278ba6214a  #       "®\x97_|\x07Ú/'\x8b¦!J"
+      68770b3157a271a79443b5c1  #       "hw\x0b1W¢q§\x94CµÁ"
+      ef4c8110                  #       "ïL\x81\x10"
 
 6.  Referenced Token
 
@@ -739,11 +739,14 @@ d2                              # tag(18)
 8.1.  Status List Request
 
    To obtain the Status List or Status List Token, the Relying Party
-   MUST send a HTTP GET request to the Status List Endpoint.
-   Communication with the Status List Endpoint MUST utilize TLS.  Which
-   version(s) should be implemented will vary over time.  A TLS server
-   certificate check MUST be performed as defined in Section 5 and 6 of
-   [RFC6125].
+   MUST send an HTTP GET request to the URI provided in the Referenced
+   Token.
+
+   If the Status List is provided by an HTTP endpoint (and not as a
+   Status List Token), the provider of the Status List MUST utilize TLS.
+   Which version(s) should be implemented will vary over time.  A TLS
+   server certificate check MUST be performed as defined in Section 5
+   and 6 of [RFC6125].
 
    The Relying Party SHOULD send the following Accept-Header to indicate
    the requested response type:
@@ -1463,6 +1466,11 @@ Acknowledgments
 Document History
 
    -03
+
+   *  require TLS only for fetching Status List, not for Status List
+      Token
+
+   *  remove the undefined phrase Status List endpoint
 
    *  remove http caching in favor of the new ttl claim
 
