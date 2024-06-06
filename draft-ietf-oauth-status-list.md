@@ -457,10 +457,6 @@ In the case of "application/statuslist+cwt", the response MUST be of type CWT an
 
 The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
-## Caching
-
-If caching is required (e.g., to enable the use of alternative mechanisms for hosting, like Content Delivery Networks), the control of the caching mechanism SHOULD be implemented using the standard HTTP Cache-Control as defined in {{RFC9111}}.
-
 ## Validation Rules
 
 TBD
@@ -819,6 +815,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 * require TLS only for fetching Status List, not for Status List Token
 * remove the undefined phrase Status List endpoint
+* remove http caching in favor of the new ttl claim
 * clarify the sub claim of Status List Token
 * relax status_list iss requirements for CWT
 * Fixes missing parts & iana ttl registration in CWT examples
