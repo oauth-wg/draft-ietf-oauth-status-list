@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-06T00:13:48.319372+00:00",
+  "timestamp": "2024-06-09T00:15:55.271226+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2578,7 +2578,7 @@
       "id": "I_kwDOJZ2aqs6BjaE7",
       "title": "Status List Endpoint is undefined",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/120",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "joelposti",
       "authorAssociation": "NONE",
       "assignees": [
@@ -2587,8 +2587,8 @@
       "labels": [],
       "body": "Section [8.1. ](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-02.html#section-8.1)[Status List Request](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-02.html#name-status-list-request) mentions Status List Endpoint. The term is not mentioned elsewhere in the specification nor is it defined.",
       "createdAt": "2024-03-07T10:37:56Z",
-      "updatedAt": "2024-05-08T06:32:52Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-06T06:15:06Z",
+      "closedAt": "2024-06-06T06:15:06Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2695,7 +2695,7 @@
       "id": "I_kwDOJZ2aqs6DBEzP",
       "title": "Remove the requirement to use TLS to retrieve Status List Tokens from the Status List Endpoint",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/126",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "MattiasLass",
       "authorAssociation": "NONE",
       "assignees": [
@@ -2704,8 +2704,8 @@
       "labels": [],
       "body": "Section '8.1. Status List Request' currently states:\r\n\r\n> Communication with the Status List Endpoint MUST utilize TLS.\r\n\r\nThis seems redundant when the endpoint is used to retrieve a Status List Token, as the Token's integrity is already guaranteed by requiring it to be signed using an asymmetric cryptographic algorithm.\r\n\r\nIf requiring TLS was intended for providing confidentiality of the Token, this seems unnecessary. The endpoint is publicly accessible - there does not seem to be any client authentication mechanisms described for it - thus the Tokens could be retrieved by anybody.",
       "createdAt": "2024-03-20T17:17:27Z",
-      "updatedAt": "2024-05-08T06:24:41Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-06T06:15:06Z",
+      "closedAt": "2024-06-06T06:15:06Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2853,7 +2853,7 @@
       "id": "I_kwDOJZ2aqs6IL0hg",
       "title": "Remove HTTP Caching as ttl is defined",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/135",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2862,8 +2862,8 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-05-08T06:38:11Z",
-      "updatedAt": "2024-06-05T13:54:42Z",
-      "closedAt": null,
+      "updatedAt": "2024-06-06T06:12:09Z",
+      "closedAt": "2024-06-06T06:12:08Z",
       "comments": []
     },
     {
@@ -2987,11 +2987,13 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [],
       "body": "Remove the restriction that object cointains \"exactly two claims\"",
       "createdAt": "2024-05-15T06:39:57Z",
-      "updatedAt": "2024-05-15T06:40:41Z",
+      "updatedAt": "2024-06-06T06:42:03Z",
       "closedAt": null,
       "comments": []
     },
@@ -3007,7 +3009,7 @@
       "labels": [],
       "body": "If an OP wanted to publish the Token Status List JWT on an endpoint, perhaps something like `token_status_list_jwt` with `Content-Type: application/jwt` ... it would be nice to specify that in the spec.",
       "createdAt": "2024-05-21T19:33:46Z",
-      "updatedAt": "2024-05-23T17:58:41Z",
+      "updatedAt": "2024-06-06T06:41:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -3016,6 +3018,13 @@
           "body": "I'm not sure what you are suggesting. Are you suggesting that AS or RS has a link to a status list token in his metadata or are you suggesting media types? The latter is already defined in the draft.",
           "createdAt": "2024-05-23T17:58:16Z",
           "updatedAt": "2024-05-23T17:58:41Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Is this covered by #141 ?",
+          "createdAt": "2024-06-06T06:41:40Z",
+          "updatedAt": "2024-06-06T06:41:40Z"
         }
       ]
     },
@@ -3027,11 +3036,13 @@
       "state": "OPEN",
       "author": "awoie",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [],
       "body": "COSE typ is now registered in IANA. Because of that, the TBD could be removed.",
       "createdAt": "2024-05-27T06:05:33Z",
-      "updatedAt": "2024-05-27T06:05:33Z",
+      "updatedAt": "2024-06-06T06:38:48Z",
       "closedAt": null,
       "comments": []
     },
@@ -3043,11 +3054,13 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "tplooker"
+      ],
       "labels": [],
       "body": "This includes standalone seperate references for each of the claims rather then referencing the JWT based definition.",
       "createdAt": "2024-05-29T06:09:54Z",
-      "updatedAt": "2024-05-29T06:31:20Z",
+      "updatedAt": "2024-06-06T06:38:10Z",
       "closedAt": null,
       "comments": []
     },
@@ -3063,7 +3076,7 @@
       "labels": [],
       "body": "we currently assume there is no issue, but it may be worth to write it down",
       "createdAt": "2024-05-29T06:28:15Z",
-      "updatedAt": "2024-05-29T06:28:15Z",
+      "updatedAt": "2024-06-06T06:37:20Z",
       "closedAt": null,
       "comments": []
     },
@@ -8680,24 +8693,26 @@
       "id": "PR_kwDOJZ2aqs5vbpVE",
       "title": "clarifications on TLS usage, remove Status List Endpoint",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/140",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "\"endpoint\" is still mentioned in there, unsure we we completely want to get rid of it\r\n\r\nCloses #120 \r\nCloses #126 ",
       "createdAt": "2024-05-14T17:44:25Z",
-      "updatedAt": "2024-05-15T07:13:15Z",
+      "updatedAt": "2024-06-06T06:15:07Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "007bcfe068407895edc7012752a525aa8879ba7b",
+      "baseRefOid": "d2ce6bce73c722e98298e66227c3fcec699d2844",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "120-status-list-endpoint-is-undefined",
-      "headRefOid": "3979c05cd297048b9587189ee7eb728ead16ff13",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "61d1ea2269c836d8ed4efe6085dccc5dae1340df",
+      "closedAt": "2024-06-06T06:15:04Z",
+      "mergedAt": "2024-06-06T06:15:04Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "8b844e1ee711a3f2d4e7b9e5b0bd1834124598d1"
+      },
       "comments": [],
       "reviews": [
         {
@@ -8737,6 +8752,19 @@
               "updatedAt": "2024-05-14T19:49:49Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs59ONfb",
+          "commit": {
+            "abbreviatedOid": "3979c05"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-06T06:12:37Z",
+          "updatedAt": "2024-06-06T06:12:37Z",
+          "comments": []
         }
       ]
     },
@@ -9050,9 +9078,9 @@
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
-      "body": "Changes the CWT example to a Hex and annotated Hex version instead of diagnstic.\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/cwt-referencedtoken/draft-ietf-oauth-status-list.html\r\n\r\nDid you have time to check this example with your team @tplooker?",
+      "body": "Changes the CWT example to a Hex and annotated Hex version instead of diagnstic.\r\ncloses: #113\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/cwt-referencedtoken/draft-ietf-oauth-status-list.html\r\n\r\n\r\nDid you have time to check this example with your team @tplooker?",
       "createdAt": "2024-06-05T11:35:05Z",
-      "updatedAt": "2024-06-05T12:30:20Z",
+      "updatedAt": "2024-06-06T10:43:25Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "007bcfe068407895edc7012752a525aa8879ba7b",
@@ -9071,26 +9099,55 @@
       "id": "PR_kwDOJZ2aqs5xj0gy",
       "title": "remove http caching section",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/149",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "removes the http caching reference as we introduced the `ttl` option.\r\ncloses #135\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/http-caching/draft-ietf-oauth-status-list.html",
       "createdAt": "2024-06-05T13:54:26Z",
-      "updatedAt": "2024-06-05T13:54:27Z",
+      "updatedAt": "2024-06-06T06:12:08Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "007bcfe068407895edc7012752a525aa8879ba7b",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/http-caching",
       "headRefOid": "8a65d08946f6c29245808aac47b399b68f20de4d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-06-06T06:12:08Z",
+      "mergedAt": "2024-06-06T06:12:08Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "d2ce6bce73c722e98298e66227c3fcec699d2844"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs59ONRW",
+          "commit": {
+            "abbreviatedOid": "8a65d08"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-06T06:11:55Z",
+          "updatedAt": "2024-06-06T06:11:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs59ONTj",
+          "commit": {
+            "abbreviatedOid": "8a65d08"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-06-06T06:12:01Z",
+          "updatedAt": "2024-06-06T06:12:01Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
