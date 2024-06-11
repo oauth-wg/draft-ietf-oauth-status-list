@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 7 December 2024                                                
+Expires: 13 December 2024                                               
                                                               C. Bormann
-                                                             5 June 2024
+                                                            11 June 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 December 2024.
+   This Internet-Draft will expire on 13 December 2024.
 
 Copyright Notice
 
@@ -88,8 +88,7 @@ Table of Contents
    8.  Verification and Processing
      8.1.  Status List Request
      8.2.  Status List Response
-     8.3.  Caching
-     8.4.  Validation Rules
+     8.3.  Validation Rules
    9.  Batch Fetching
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
@@ -146,7 +145,7 @@ Table of Contents
    List.  Each Referenced Token is allocated an index during issuance
    that represents its position within this bit array.  The value of the
    bit(s) at this index correspond to the Referenced Token's status.  A
-   Status List may either be provided by an endpoint or be signed and
+   Status List may either be provided via HTTPS or be signed and
    embedded into a Status List Token, whereas this document defines its
    representations in JWT and CWT.  Status Lists may be composed for
    expressing a range of Status Types.  This document defines basic
@@ -534,9 +533,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840c8226c
-   ff1b6f5c6456b46a4b57b6c2e83c750fb560cb784e26c44bb0c6c5ce0fe712c2586d
-   5f4ea38b722a8f80024e36d7ba7952245c23f29348ec91b3318955
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840acef50
+   5dbbbcb0ecb2c63526d6fdbac99e9575e82be5970b99d36464cd1677efc4e92ab987
+   c01371f1d0a1ccc62a4b2186a14a589a1ce22e0b111abe5c0b3eaf
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -560,12 +559,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      c8226cff1b6f5c6456b46a4b  #       "È"lÿ\x1bo\dV´jK"
-      57b6c2e83c750fb560cb784e  #       "W¶Âè<u\x0fµ`ËxN"
-      26c44bb0c6c5ce0fe712c258  #       "&ÄK°ÆÅÎ\x0fç\x12ÂX"
-      6d5f4ea38b722a8f80024e36  #       "m_N£\x8br*\x8f\x80\x02N6"
-      d7ba7952245c23f29348ec91  #       "×ºyR$\#ò\x93Hì\x91"
-      b3318955                  #       "³1\x89U"
+      acef505dbbbcb0ecb2c63526  #       "¬ïP]»¼°ì²Æ5&"
+      d6fdbac99e9575e82be5970b  #       "ÖýºÉ\x9e\x95uè+å\x97\x0b"
+      99d36464cd1677efc4e92ab9  #       "\x99ÓddÍ\x16wïÄé*¹"
+      87c01371f1d0a1ccc62a4b21  #       "\x87À\x13qñÐ¡ÌÆ*K!"
+      86a14a589a1ce22e0b111abe  #       "\x86¡JX\x9a\x1câ.\x0b\x11\x1a¾"
+      5c0b3eaf                  #       "\\x0b>¯"
 
 6.  Referenced Token
 
@@ -753,11 +752,14 @@ d2                              # tag(18)
 8.1.  Status List Request
 
    To obtain the Status List or Status List Token, the Relying Party
-   MUST send a HTTP GET request to the Status List Endpoint.
-   Communication with the Status List Endpoint MUST utilize TLS.  Which
-   version(s) should be implemented will vary over time.  A TLS server
-   certificate check MUST be performed as defined in Section 5 and 6 of
-   [RFC6125].
+   MUST send an HTTP GET request to the URI provided in the Referenced
+   Token.
+
+   If the Status List is provided by an HTTP endpoint (and not as a
+   Status List Token), the provider of the Status List MUST utilize TLS.
+   Which version(s) should be implemented will vary over time.  A TLS
+   server certificate check MUST be performed as defined in Section 5
+   and 6 of [RFC6125].
 
    The Relying Party SHOULD send the following Accept-Header to indicate
    the requested response type:
@@ -797,14 +799,7 @@ d2                              # tag(18)
    The HTTP response SHOULD use gzip Content-Encoding as defined in
    [RFC9110].
 
-8.3.  Caching
-
-   If caching is required (e.g., to enable the use of alternative
-   mechanisms for hosting, like Content Delivery Networks), the control
-   of the caching mechanism SHOULD be implemented using the standard
-   HTTP Cache-Control as defined in [RFC9111].
-
-8.4.  Validation Rules
+8.3.  Validation Rules
 
    TBD
 
@@ -1548,6 +1543,13 @@ Document History
    -03
 
    *  introduce batch fetching mechanism
+
+   *  require TLS only for fetching Status List, not for Status List
+      Token
+
+   *  remove the undefined phrase Status List endpoint
+
+   *  remove http caching in favor of the new ttl claim
 
    *  clarify the sub claim of Status List Token
 
