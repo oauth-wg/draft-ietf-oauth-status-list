@@ -82,7 +82,7 @@ class StatusListToken:
         ttl: timedelta = None,
         optional_claims: Dict = None,
         optional_header: Dict = None,
-        compact=True
+        compact=True,
     ) -> str:
         # build claims
         if optional_claims is not None:
@@ -111,7 +111,7 @@ class StatusListToken:
         token = jwt.JWT(header=header, claims=claims)
         token.make_signed_token(self._key)
         return token.serialize(compact=compact)
-    
+
     def buildCWT(
         self,
         iat: datetime = datetime.utcnow(),
@@ -119,7 +119,7 @@ class StatusListToken:
         ttl: timedelta = None,
         optional_claims: Dict = None,
         optional_protected_header: Dict = None,
-        optional_unprotected_header: Dict = None
+        optional_unprotected_header: Dict = None,
     ) -> bytes:
         # build claims
         if optional_claims is not None:
@@ -147,7 +147,7 @@ class StatusListToken:
             unprotected_header = {}
 
         if self._key.key_id:
-            unprotected_header[COSEHeaders.KID] = self._key.key_id.encode('utf-8')
+            unprotected_header[COSEHeaders.KID] = self._key.key_id.encode("utf-8")
         protected_header[COSEHeaders.ALG] = self._alg
         protected_header[16] = STATUS_LIST_TYP_CWT
 
@@ -159,7 +159,7 @@ class StatusListToken:
             dumps(claims),
             key,
             protected=protected_header,
-            unprotected=unprotected_header
+            unprotected=unprotected_header,
         )
 
         return encoded
