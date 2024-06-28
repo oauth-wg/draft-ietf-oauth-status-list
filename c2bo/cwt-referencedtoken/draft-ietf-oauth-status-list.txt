@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 7 December 2024                                                
+Expires: 30 December 2024                                               
                                                               C. Bormann
-                                                             5 June 2024
+                                                            28 June 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 December 2024.
+   This Internet-Draft will expire on 30 December 2024.
 
 Copyright Notice
 
@@ -88,8 +88,7 @@ Table of Contents
    8.  Verification and Processing
      8.1.  Status List Request
      8.2.  Status List Response
-     8.3.  Caching
-     8.4.  Validation Rules
+     8.3.  Validation Rules
    9.  Further Examples
      9.1.  Status List Token with 2-Bit Status Values in JWT format
    10. Security Considerations
@@ -142,7 +141,7 @@ Table of Contents
    List.  Each Referenced Token is allocated an index during issuance
    that represents its position within this bit array.  The value of the
    bit(s) at this index correspond to the Referenced Token's status.  A
-   Status List may either be provided by an endpoint or be signed and
+   Status List may either be provided via HTTPS or be signed and
    embedded into a Status List Token, whereas this document defines its
    representations in JWT and CWT.  Status Lists may be composed for
    expressing a range of Status Types.  This document defines basic
@@ -521,9 +520,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ffc4a0
-   81edf3c31fe2f0b2376bb828a258b7646d064fcb2e0218c27b18b8b3391747d0286a
-   5075d53d26e109ffce4f016a8a2c4a2e533cbab293889bca19d304
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840a569e5
+   0adf256d473b68d76bc6b35e86f0a541280efa8023c5eb60a90affaacc7dbb720752
+   927f7b78c05386b082fa5498975fe13af6679ab8da7a9001302cfe
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -547,12 +546,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ffc4a081edf3c31fe2f0b237  #       "ÿÄ\xa0\x81íóÃ\x1fâð²7"
-      6bb828a258b7646d064fcb2e  #       "k¸(¢X·dm\x06OË."
-      0218c27b18b8b3391747d028  #       "\x02\x18Â{\x18¸³9\x17GÐ("
-      6a5075d53d26e109ffce4f01  #       "jPuÕ=&á\x09ÿÎO\x01"
-      6a8a2c4a2e533cbab293889b  #       "j\x8a,J.S<º²\x93\x88\x9b"
-      ca19d304                  #       "Ê\x19Ó\x04"
+      a569e50adf256d473b68d76b  #       "¥iå\x0aß%mG;h×k"
+      c6b35e86f0a541280efa8023  #       "Æ³^\x86ð¥A(\x0eú\x80#"
+      c5eb60a90affaacc7dbb7207  #       "Åë`©\x0aÿªÌ}»r\x07"
+      52927f7b78c05386b082fa54  #       "R\x92\x7f{xÀS\x86°\x82úT"
+      98975fe13af6679ab8da7a90  #       "\x98\x97_á:ög\x9a¸Úz\x90"
+      01302cfe                  #       "\x010,þ"
 
 6.  Referenced Token
 
@@ -659,37 +658,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584063da84eb17933478596cbad62d37a7e86ed54c
-   3cd734fd9f3c9d1b81a632fce697942e667dfc4484c3c6ddbdb57e1280156fac45b9
-   0a1787a5fc59b85ec0fc37
+   7374617475736c697374732f315840838a140780c49a1d2c7001ee8fdc13e4d6b1fb
+   907620ce6e40384813305d2abcc6f7dc155967d807f3e230043faed78a2100e339b8
+   47b191cb9c55df9c428c84
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         63da84eb17933478596cbad6  #       "cÚ\x84ë\x17\x934xYlºÖ"
-         2d37a7e86ed54c3cd734fd9f  #       "-7§ènÕL<×4ý\x9f"
-         3c9d1b81a632fce697942e66  #       "<\x9d\x1b\x81¦2üæ\x97\x94.f"
-         7dfc4484c3c6ddbdb57e1280  #       "}üD\x84ÃÆÝ½µ~\x12\x80"
-         156fac45b90a1787a5fc59b8  #       "\x15o¬E¹\x0a\x17\x87¥üY¸"
-         5ec0fc37                  #       "^Àü7"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      838a140780c49a1d2c7001ee  #       "\x83\x8a\x14\x07\x80Ä\x9a\x1d,p\x01î"
+      8fdc13e4d6b1fb907620ce6e  #       "\x8fÜ\x13äÖ±û\x90v În"
+      40384813305d2abcc6f7dc15  #       "@8H\x130]*¼Æ÷Ü\x15"
+      5967d807f3e230043faed78a  #       "YgØ\x07óâ0\x04?®×\x8a"
+      2100e339b847b191cb9c55df  #       "!\x00ã9¸G±\x91Ë\x9cUß"
+      9c428c84                  #       "\x9cB\x8c\x84"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -754,11 +753,14 @@ d2                              # tag(18)
 8.1.  Status List Request
 
    To obtain the Status List or Status List Token, the Relying Party
-   MUST send a HTTP GET request to the Status List Endpoint.
-   Communication with the Status List Endpoint MUST utilize TLS.  Which
-   version(s) should be implemented will vary over time.  A TLS server
-   certificate check MUST be performed as defined in Section 5 and 6 of
-   [RFC6125].
+   MUST send an HTTP GET request to the URI provided in the Referenced
+   Token.
+
+   If the Status List is provided by an HTTP endpoint (and not as a
+   Status List Token), the provider of the Status List MUST utilize TLS.
+   Which version(s) should be implemented will vary over time.  A TLS
+   server certificate check MUST be performed as defined in Section 5
+   and 6 of [RFC6125].
 
    The Relying Party SHOULD send the following Accept-Header to indicate
    the requested response type:
@@ -798,14 +800,7 @@ d2                              # tag(18)
    The HTTP response SHOULD use gzip Content-Encoding as defined in
    [RFC9110].
 
-8.3.  Caching
-
-   If caching is required (e.g., to enable the use of alternative
-   mechanisms for hosting, like Content Delivery Networks), the control
-   of the caching mechanism SHOULD be implemented using the standard
-   HTTP Cache-Control as defined in [RFC9111].
-
-8.4.  Validation Rules
+8.3.  Validation Rules
 
    TBD
 
@@ -1487,6 +1482,13 @@ Document History
    -03
 
    *  change cwt referenced token example to hex and annotated hex
+
+   *  require TLS only for fetching Status List, not for Status List
+      Token
+
+   *  remove the undefined phrase Status List endpoint
+
+   *  remove http caching in favor of the new ttl claim
 
    *  clarify the sub claim of Status List Token
 
