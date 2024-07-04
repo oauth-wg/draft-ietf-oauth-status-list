@@ -21,7 +21,8 @@ author:
     email: paul.bastian@posteo.de
  -
     fullname: Christian Bormann
-    email: chris.bormann@gmx.de
+    organization: Robert Bosch GmbH
+    email: christiancarl.bormann@bosch.com
 
 normative:
   RFC1950: RFC1950
@@ -38,6 +39,7 @@ normative:
   RFC9052: RFC9052
   RFC9110: RFC9110
   RFC9111: RFC9111
+  RFC9596: RFC9596
   IANA.MediaTypes:
     author:
       org: "IANA"
@@ -58,7 +60,6 @@ normative:
       org: "IANA"
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
-  CWT.typ: I-D.ietf-cose-typ-header-parameter
 
 informative:
   RFC6749: RFC6749
@@ -220,13 +221,13 @@ This section defines the structure for a CBOR-encoded Status List:
   * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
 
-The following example illustrates the CBOR representation of the Status List:
+The following example illustrates the CBOR representation of the Status List in Hex:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding_cbor}
 ~~~~~~~~~~
 
-The following is the CBOR diagnostic output of the example above:
+The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding_cbor_diag}
@@ -277,7 +278,7 @@ The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {
 
 The following content applies to the CWT protected header:
 
-* `16` TBD (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{CWT.typ}}.
+* `16` (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{RFC9596}}.
 
 The following content applies to the CWT Claims Set:
 
@@ -298,13 +299,13 @@ The following additional rules apply:
 
 4. Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):
+The following is a non-normative example for a Status List Token in CWT format in Hex:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_cwt}
 ~~~~~~~~~~
 
-The following is the CBOR diagnostic output of the example above:
+The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_cwt_diag}
@@ -364,31 +365,18 @@ The following content applies to the CWT Claims Set:
 
 Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a decoded payload of a Referenced Token:
+The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
-~~~ ascii-art
+~~~~~~~~~~
+{::include ./examples/referenced_token_cwt}
+~~~~~~~~~~
 
-18(
-    [
-      / protected / << {
-        / alg / 1: -7 / ES256 /
-      } >>,
-      / unprotected / {
-        / kid / 4: h'3132' / '13' /
-      },
-      / payload / << {
-        / iss    / 1: "https://example.com",
-        / status / 65535: {
-          "status_list": {
-            "idx": 0,
-            "uri": "https://example.com/statuslists/1"
-          }
-        }
-      } >>,
-      / signature / h'...'
-    ]
-  )
-~~~
+The following is the CBOR Annotated Hex output of the example above:
+
+~~~~~~~~~~
+{::include ./examples/referenced_token_cwt_diag}
+~~~~~~~~~~
+
 
 ## Referenced Token in other COSE/CBOR Format {#referenced-token-cose}
 
@@ -814,6 +802,7 @@ for their valuable contributions, discussions and feedback to this specification
 -03
 
 * relax requirements for status_list claims to contain other parameters
+* change cwt referenced token example to hex and annotated hex
 * require TLS only for fetching Status List, not for Status List Token
 * remove the undefined phrase Status List endpoint
 * remove http caching in favor of the new ttl claim
