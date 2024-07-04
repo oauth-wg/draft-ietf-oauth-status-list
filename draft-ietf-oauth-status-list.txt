@@ -7,6 +7,7 @@ Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
 Expires: 5 January 2025                                                 
                                                               C. Bormann
+                                                       Robert Bosch GmbH
                                                              4 July 2024
 
 
@@ -476,8 +477,8 @@ Table of Contents
 
    The following content applies to the CWT protected header:
 
-   *  16 TBD (type): REQUIRED.  The type of the CWT MUST be
-      statuslist+cwt as defined in [CWT.typ].
+   *  16 (type): REQUIRED.  The type of the CWT MUST be statuslist+cwt
+      as defined in [RFC9596].
 
    The following content applies to the CWT Claims Set:
 
@@ -520,9 +521,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840679f91
-   1d34e21282f849e76a9850d46d42aec449430531ddab1330e5137aa235f478864799
-   f6a1fce5887b79ea85658310cea49b212e6e967145016bf6e8b347
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840a86f51
+   3c01c96be97db026f875344efd4337806f7ac74b32c03553900e1d2296e0368c4556
+   8e856fe362945a991791ddeb6da302319ebeb4324edbb98e1b1c6d
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -546,12 +547,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      679f911d34e21282f849e76a  #       "g\x9f\x91\x1d4â\x12\x82øIçj"
-      9850d46d42aec449430531dd  #       "\x98PÔmB®ÄIC\x051Ý"
-      ab1330e5137aa235f4788647  #       "«\x130å\x13z¢5ôx\x86G"
-      99f6a1fce5887b79ea856583  #       "\x99ö¡üå\x88{yê\x85e\x83"
-      10cea49b212e6e967145016b  #       "\x10Î¤\x9b!.n\x96qE\x01k"
-      f6e8b347                  #       "öè³G"
+      a86f513c01c96be97db026f8  #       "¨oQ<\x01Éké}°&ø"
+      75344efd4337806f7ac74b32  #       "u4NýC7\x80ozÇK2"
+      c03553900e1d2296e0368c45  #       "À5S\x90\x0e\x1d"\x96à6\x8cE"
+      568e856fe362945a991791dd  #       "V\x8e\x85oãb\x94Z\x99\x17\x91Ý"
+      eb6da302319ebeb4324edbb9  #       "ëm£\x021\x9e¾´2NÛ¹"
+      8e1b1c6d                  #       "\x8e\x1b\x1cm"
 
 6.  Referenced Token
 
@@ -658,37 +659,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158409efeb74ecce3d0395b987cff401a97ca594b5a
-   58566b164576fa2322af99674a66a009e16bc5514bd78d0e5f887865d9a138779580
-   0ab953280915191a6edaf5
+   7374617475736c697374732f315840bb967808446683616f0e66859f584c415e3775
+   0ea3dfc8c703b94ddb4314c9ac6523c31c999e9e4fc2ca040d37f23cbefcd5e19b44
+   4748b1494cc142e8852159
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      9efeb74ecce3d0395b987cff  #       "\x9eþ·NÌãÐ9[\x98|ÿ"
-      401a97ca594b5a58566b1645  #       "@\x1a\x97ÊYKZXVk\x16E"
-      76fa2322af99674a66a009e1  #       "vú#"¯\x99gJf\xa0\x09á"
-      6bc5514bd78d0e5f887865d9  #       "kÅQK×\x8d\x0e_\x88xeÙ"
-      a1387795800ab95328091519  #       "¡8w\x95\x80\x0a¹S(\x09\x15\x19"
-      1a6edaf5                  #       "\x1anÚõ"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         bb967808446683616f0e6685  #       "»\x96x\x08Df\x83ao\x0ef\x85"
+         9f584c415e37750ea3dfc8c7  #       "\x9fXLA^7u\x0e£ßÈÇ"
+         03b94ddb4314c9ac6523c31c  #       "\x03¹MÛC\x14É¬e#Ã\x1c"
+         999e9e4fc2ca040d37f23cbe  #       "\x99\x9e\x9eOÂÊ\x04\x0d7ò<¾"
+         fcd5e19b444748b1494cc142  #       "üÕá\x9bDGH±ILÁB"
+         e8852159                  #       "è\x85!Y"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1344,12 +1345,6 @@ d2                              # tag(18)
 
 14.1.  Normative References
 
-   [CWT.typ]  Jones, M. B. and O. Steele, "COSE "typ" (type) Header
-              Parameter", Work in Progress, Internet-Draft, draft-ietf-
-              cose-typ-header-parameter-05, 3 April 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              typ-header-parameter-05>.
-
    [IANA.CWT] IANA, "CBOR Web Token (CWT) Claims", n.d.,
               <https://www.iana.org/assignments/cwt/cwt.xhtml>.
 
@@ -1441,6 +1436,11 @@ d2                              # tag(18)
               Ed., "HTTP Caching", STD 98, RFC 9111,
               DOI 10.17487/RFC9111, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9111>.
+
+   [RFC9596]  Jones, M.B. and O. Steele, "CBOR Object Signing and
+              Encryption (COSE) "typ" (type) Header Parameter",
+              RFC 9596, DOI 10.17487/RFC9596, June 2024,
+              <https://www.rfc-editor.org/rfc/rfc9596>.
 
 14.2.  Informative References
 
@@ -1561,4 +1561,5 @@ Authors' Addresses
 
 
    Christian Bormann
-   Email: chris.bormann@gmx.de
+   Robert Bosch GmbH
+   Email: christiancarl.bormann@bosch.com

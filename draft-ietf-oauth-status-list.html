@@ -1060,6 +1060,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </div>
 <div class="author">
       <div class="author-name">C. Bormann</div>
+<div class="org">Robert Bosch GmbH</div>
 </div>
 </dd>
 </dl>
@@ -1667,7 +1668,7 @@ a2                              # map(2)
 <p id="section-5.2-2">The following content applies to the CWT protected header:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.1">
-            <p id="section-5.2-3.1.1"><code>16</code> TBD (type): <span class="bcp14">REQUIRED</span>. The type of the CWT <span class="bcp14">MUST</span> be <code>statuslist+cwt</code> as defined in <span>[<a href="#CWT.typ" class="cite xref">CWT.typ</a>]</span>.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-3.1.1"><code>16</code> (type): <span class="bcp14">REQUIRED</span>. The type of the CWT <span class="bcp14">MUST</span> be <code>statuslist+cwt</code> as defined in <span>[<a href="#RFC9596" class="cite xref">RFC9596</a>]</span>.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-4">The following content applies to the CWT Claims Set:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
@@ -1712,9 +1713,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840679f91
-1d34e21282f849e76a9850d46d42aec449430531ddab1330e5137aa235f478864799
-f6a1fce5887b79ea85658310cea49b212e6e967145016bf6e8b347
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840a86f51
+3c01c96be97db026f875344efd4337806f7ac74b32c03553900e1d2296e0368c4556
+8e856fe362945a991791ddeb6da302319ebeb4324edbb98e1b1c6d
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1740,12 +1741,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      679f911d34e21282f849e76a  #       "g\x9f\x91\x1d4â\x12\x82øIçj"
-      9850d46d42aec449430531dd  #       "\x98PÔmB®ÄIC\x051Ý"
-      ab1330e5137aa235f4788647  #       "«\x130å\x13z¢5ôx\x86G"
-      99f6a1fce5887b79ea856583  #       "\x99ö¡üå\x88{yê\x85e\x83"
-      10cea49b212e6e967145016b  #       "\x10Î¤\x9b!.n\x96qE\x01k"
-      f6e8b347                  #       "öè³G"
+      a86f513c01c96be97db026f8  #       "¨oQ&lt;\x01Éké}°&amp;ø"
+      75344efd4337806f7ac74b32  #       "u4NýC7\x80ozÇK2"
+      c03553900e1d2296e0368c45  #       "À5S\x90\x0e\x1d"\x96à6\x8cE"
+      568e856fe362945a991791dd  #       "V\x8e\x85oãb\x94Z\x99\x17\x91Ý"
+      eb6da302319ebeb4324edbb9  #       "ëm£\x021\x9e¾´2NÛ¹"
+      8e1b1c6d                  #       "\x8e\x1b\x1cm"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1850,9 +1851,9 @@ d2                              # tag(18)
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158409efeb74ecce3d0395b987cff401a97ca594b5a
-58566b164576fa2322af99674a66a009e16bc5514bd78d0e5f887865d9a138779580
-0ab953280915191a6edaf5
+7374617475736c697374732f315840bb967808446683616f0e66859f584c415e3775
+0ea3dfc8c703b94ddb4314c9ac6523c31c999e9e4fc2ca040d37f23cbefcd5e19b44
+4748b1494cc142e8852159
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1877,12 +1878,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      9efeb74ecce3d0395b987cff  #       "\x9eþ·NÌãÐ9[\x98|ÿ"
-      401a97ca594b5a58566b1645  #       "@\x1a\x97ÊYKZXVk\x16E"
-      76fa2322af99674a66a009e1  #       "vú#"¯\x99gJf\xa0\x09á"
-      6bc5514bd78d0e5f887865d9  #       "kÅQK×\x8d\x0e_\x88xeÙ"
-      a1387795800ab95328091519  #       "¡8w\x95\x80\x0a¹S(\x09\x15\x19"
-      1a6edaf5                  #       "\x1anÚõ"
+      bb967808446683616f0e6685  #       "»\x96x\x08Df\x83ao\x0ef\x85"
+      9f584c415e37750ea3dfc8c7  #       "\x9fXLA^7u\x0e£ßÈÇ"
+      03b94ddb4314c9ac6523c31c  #       "\x03¹MÛC\x14É¬e#Ã\x1c"
+      999e9e4fc2ca040d37f23cbe  #       "\x99\x9e\x9eOÂÊ\x04\x0d7ò&lt;¾"
+      fcd5e19b444748b1494cc142  #       "üÕá\x9bDGH±ILÁB"
+      e8852159                  #       "è\x85!Y"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2708,10 +2709,6 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <a href="#section-14.1" class="section-number selfRef">14.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="CWT.typ">[CWT.typ]</dt>
-        <dd>
-<span class="refAuthor">Jones, M. B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"COSE "typ" (type) Header Parameter"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-typ-header-parameter-05</span>, <time datetime="2024-04-03" class="refDate">3 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-05">https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-05</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="IANA.CWT">[IANA.CWT]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.iana.org/assignments/cwt/cwt.xhtml">https://www.iana.org/assignments/cwt/cwt.xhtml</a>&gt;</span>. </dd>
@@ -2789,8 +2786,12 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9111">[RFC9111]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Caching"</span>, <span class="seriesInfo">STD 98</span>, <span class="seriesInfo">RFC 9111</span>, <span class="seriesInfo">DOI 10.17487/RFC9111</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9111">https://www.rfc-editor.org/rfc/rfc9111</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9596">[RFC9596]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) "typ" (type) Header Parameter"</span>, <span class="seriesInfo">RFC 9596</span>, <span class="seriesInfo">DOI 10.17487/RFC9596</span>, <time datetime="2024-06" class="refDate">June 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9596">https://www.rfc-editor.org/rfc/rfc9596</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2975,9 +2976,10 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </address>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Christian Bormann</span></div>
+<div dir="auto" class="left"><span class="org">Robert Bosch GmbH</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:chris.bormann@gmx.de" class="email">chris.bormann@gmx.de</a>
+<a href="mailto:christiancarl.bormann@bosch.com" class="email">christiancarl.bormann@bosch.com</a>
 </div>
 </address>
 </section>
