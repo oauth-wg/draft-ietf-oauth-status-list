@@ -202,7 +202,7 @@ index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
 
 This section defines the structure for a JSON-encoded Status List:
 
-* `status_list`: REQUIRED. JSON Object that contains a Status List. It MUST contain the following claims:
+* `status_list`: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded (as defined in Section 2 of {{RFC7515}}) Status List as specified in [](#status-list).
 
@@ -324,7 +324,7 @@ The following content applies to the JWT Claims Set:
 
 * `iss`: REQUIRED when also present in the Status List Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.
 * `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains at least one reference to a status mechanism.
-  * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. It MUST contain the following claims:
+  * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. It MUST at least contain the following claims:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
     * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Status List or Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
