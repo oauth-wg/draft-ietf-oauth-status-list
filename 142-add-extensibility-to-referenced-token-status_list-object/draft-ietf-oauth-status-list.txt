@@ -7,6 +7,7 @@ Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
 Expires: 5 January 2025                                                 
                                                               C. Bormann
+                                                       Robert Bosch GmbH
                                                              4 July 2024
 
 
@@ -366,13 +367,13 @@ Table of Contents
          Status List as specified in Section 4.1.
 
    The following example illustrates the CBOR representation of the
-   Status List:
+   Status List in Hex:
 
    byte_array = [0xb9, 0xa3]
    encoded:
    a2646269747301636c73744a78dadbb918000217015d
 
-   The following is the CBOR diagnostic output of the example above:
+   The following is the CBOR Annotated Hex output of the example above:
 
    a2                              # map(2)
      64                            #   string(4)
@@ -476,8 +477,8 @@ Table of Contents
 
    The following content applies to the CWT protected header:
 
-   *  16 TBD (type): REQUIRED.  The type of the CWT MUST be
-      statuslist+cwt as defined in [CWT.typ].
+   *  16 (type): REQUIRED.  The type of the CWT MUST be statuslist+cwt
+      as defined in [RFC9596].
 
    The following content applies to the CWT Claims Set:
 
@@ -515,16 +516,16 @@ Table of Contents
        discretion of the verifying party.
 
    The following is a non-normative example for a Status List Token in
-   CWT format (not including the type header yet):
+   CWT format in Hex:
 
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840667447
-   c7ad67ed39b3bba4c00c6fa3239cbe96ea5c15e89421747749b6c4f3e0ffdfc0517e
-   5a7839291c1750c081acb8a985715161a0ce57b5c3b186009f1c71
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840acd686
+   ba34eb892d4ce02d55dc2cc5ac3397ccb2fe95953036f8123e9c7a61e6227a9bd6d2
+   cd7643c558859763b075c8ee14e3a4f3130888790cfa4969f52a26
 
-   The following is the CBOR diagnostic output of the example above:
+   The following is the CBOR Annotated Hex output of the example above:
 
 d2                              # tag(18)
   84                            #   array(4)
@@ -546,12 +547,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      667447c7ad67ed39b3bba4c0  #       "ftGÇ\xadgí9³»¤À"
-      0c6fa3239cbe96ea5c15e894  #       "\x0co£#\x9c¾\x96ê\\x15è\x94"
-      21747749b6c4f3e0ffdfc051  #       "!twI¶ÄóàÿßÀQ"
-      7e5a7839291c1750c081acb8  #       "~Zx9)\x1c\x17PÀ\x81¬¸"
-      a985715161a0ce57b5c3b186  #       "©\x85qQa\xa0ÎWµÃ±\x86"
-      009f1c71                  #       "\x00\x9f\x1cq"
+      acd686ba34eb892d4ce02d55  #       "¬Ö\x86º4ë\x89-Là-U"
+      dc2cc5ac3397ccb2fe959530  #       "Ü,Å¬3\x97Ì²þ\x95\x950"
+      36f8123e9c7a61e6227a9bd6  #       "6ø\x12>\x9czaæ"z\x9bÖ"
+      d2cd7643c558859763b075c8  #       "ÒÍvCÅX\x85\x97c°uÈ"
+      ee14e3a4f3130888790cfa49  #       "î\x14ã¤ó\x13\x08\x88y\x0cúI"
+      69f52a26                  #       "iõ*&"
 
 6.  Referenced Token
 
@@ -652,29 +653,43 @@ d2                              # tag(18)
    Application of additional restrictions and policy are at the
    discretion of the verifying party.
 
-   The following is a non-normative example for a decoded payload of a
-   Referenced Token:
+   The following is a non-normative example of a Referenced Token in CWT
+   format in Hex:
 
-   18(
-       [
-         / protected / << {
-           / alg / 1: -7 / ES256 /
-         } >>,
-         / unprotected / {
-           / kid / 4: h'3132' / '13' /
-         },
-         / payload / << {
-           / iss    / 1: "https://example.com",
-           / status / 65535: {
-             "status_list": {
-               "idx": 0,
-               "uri": "https://example.com/statuslists/1"
-             }
-           }
-         } >>,
-         / signature / h'...'
-       ]
-     )
+   d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
+   6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
+   7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
+   7374617475736c697374732f315840b70b545169b4c58644e66f835919bb93f8a8b8
+   7e208aee1b4b37819bf2083cc9802d7e072874203ba5cc82799d7da555ba726ae3bf
+   d6e678147e72d839c248c5
+
+   The following is the CBOR Annotated Hex output of the example above:
+
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         b70b545169b4c58644e66f83  #       "·\x0bTQi´Å\x86Dæo\x83"
+         5919bb93f8a8b87e208aee1b  #       "Y\x19»\x93ø¨¸~ \x8aî\x1b"
+         4b37819bf2083cc9802d7e07  #       "K7\x81\x9bò\x08<É\x80-~\x07"
+         2874203ba5cc82799d7da555  #       "(t ;¥Ì\x82y\x9d}¥U"
+         ba726ae3bfd6e678147e72d8  #       "ºrjã¿Öæx\x14~rØ"
+         39c248c5                  #       "9ÂHÅ"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1330,12 +1345,6 @@ d2                              # tag(18)
 
 14.1.  Normative References
 
-   [CWT.typ]  Jones, M. B. and O. Steele, "COSE "typ" (type) Header
-              Parameter", Work in Progress, Internet-Draft, draft-ietf-
-              cose-typ-header-parameter-05, 3 April 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              typ-header-parameter-05>.
-
    [IANA.CWT] IANA, "CBOR Web Token (CWT) Claims", n.d.,
               <https://www.iana.org/assignments/cwt/cwt.xhtml>.
 
@@ -1428,6 +1437,11 @@ d2                              # tag(18)
               DOI 10.17487/RFC9111, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9111>.
 
+   [RFC9596]  Jones, M.B. and O. Steele, "CBOR Object Signing and
+              Encryption (COSE) "typ" (type) Header Parameter",
+              RFC 9596, DOI 10.17487/RFC9596, June 2024,
+              <https://www.rfc-editor.org/rfc/rfc9596>.
+
 14.2.  Informative References
 
    [ISO.mdoc] ISO/IEC JTC 1/SC 17, "ISO/IEC 18013-5:2021 ISO-compliant
@@ -1469,6 +1483,8 @@ Document History
 
    *  relax requirements for status_list claims to contain other
       parameters
+
+   *  change cwt referenced token example to hex and annotated hex
 
    *  require TLS only for fetching Status List, not for Status List
       Token
@@ -1548,4 +1564,5 @@ Authors' Addresses
 
 
    Christian Bormann
-   Email: chris.bormann@gmx.de
+   Robert Bosch GmbH
+   Email: christiancarl.bormann@bosch.com
