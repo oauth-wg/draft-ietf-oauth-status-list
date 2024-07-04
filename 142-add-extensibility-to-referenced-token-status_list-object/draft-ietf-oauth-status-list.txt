@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 4 January 2025                                                 
+Expires: 5 January 2025                                                 
                                                               C. Bormann
-                                                             3 July 2024
+                                                             4 July 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 January 2025.
+   This Internet-Draft will expire on 5 January 2025.
 
 Copyright Notice
 
@@ -330,7 +330,7 @@ Table of Contents
    This section defines the structure for a JSON-encoded Status List:
 
    *  status_list: REQUIRED.  JSON Object that contains a Status List.
-      It MUST contain the following claims:
+      It MUST contain at least the following claims:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the Status List (lst).  The allowed values
@@ -520,9 +520,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584061b6ca
-   eceddc9f3fd53b42ca23488edcb5a67ae48ee29370c575e28f90e6e51ae264af61e6
-   4d052d47c9db204d26a9e359700f898c4ea7088b7d1a23bf4e7152
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840667447
+   c7ad67ed39b3bba4c00c6fa3239cbe96ea5c15e89421747749b6c4f3e0ffdfc0517e
+   5a7839291c1750c081acb8a985715161a0ce57b5c3b186009f1c71
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -546,12 +546,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      61b6caeceddc9f3fd53b42ca  #       "a¶ÊìíÜ\x9f?Õ;BÊ"
-      23488edcb5a67ae48ee29370  #       "#H\x8eÜµ¦zä\x8eâ\x93p"
-      c575e28f90e6e51ae264af61  #       "Åuâ\x8f\x90æå\x1aâd¯a"
-      e64d052d47c9db204d26a9e3  #       "æM\x05-GÉÛ M&©ã"
-      59700f898c4ea7088b7d1a23  #       "Yp\x0f\x89\x8cN§\x08\x8b}\x1a#"
-      bf4e7152                  #       "¿NqR"
+      667447c7ad67ed39b3bba4c0  #       "ftGÇ\xadgí9³»¤À"
+      0c6fa3239cbe96ea5c15e894  #       "\x0co£#\x9c¾\x96ê\\x15è\x94"
+      21747749b6c4f3e0ffdfc051  #       "!twI¶ÄóàÿßÀQ"
+      7e5a7839291c1750c081acb8  #       "~Zx9)\x1c\x17PÀ\x81¬¸"
+      a985715161a0ce57b5c3b186  #       "©\x85qQa\xa0ÎWµÃ±\x86"
+      009f1c71                  #       "\x00\x9f\x1cq"
 
 6.  Referenced Token
 
@@ -586,7 +586,7 @@ d2                              # tag(18)
 
       -  status_list: REQUIRED when the status list mechanism defined in
          this specification is used.  It contains a reference to a
-         Status List or Status List Token.  It MUST contain the
+         Status List or Status List Token.  It MUST at least contain the
          following claims:
 
          o  idx: REQUIRED.  The idx (index) claim MUST specify an
