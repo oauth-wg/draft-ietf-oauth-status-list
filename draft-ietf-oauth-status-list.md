@@ -21,7 +21,8 @@ author:
     email: paul.bastian@posteo.de
  -
     fullname: Christian Bormann
-    email: chris.bormann@gmx.de
+    organization: Robert Bosch GmbH
+    email: christiancarl.bormann@bosch.com
 
 normative:
   RFC1950: RFC1950
