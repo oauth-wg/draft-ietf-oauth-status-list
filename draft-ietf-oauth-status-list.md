@@ -38,6 +38,7 @@ normative:
   RFC9052: RFC9052
   RFC9110: RFC9110
   RFC9111: RFC9111
+  RFC9596: RFC9596
   IANA.MediaTypes:
     author:
       org: "IANA"
@@ -58,7 +59,6 @@ normative:
       org: "IANA"
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
-  CWT.typ: I-D.ietf-cose-typ-header-parameter
 
 informative:
   RFC6749: RFC6749
@@ -277,7 +277,7 @@ The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {
 
 The following content applies to the CWT protected header:
 
-* `16` TBD (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{CWT.typ}}.
+* `16` (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{RFC9596}}.
 
 The following content applies to the CWT Claims Set:
 
