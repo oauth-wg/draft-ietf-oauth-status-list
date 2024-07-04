@@ -331,7 +331,7 @@ Table of Contents
    This section defines the structure for a JSON-encoded Status List:
 
    *  status_list: REQUIRED.  JSON Object that contains a Status List.
-      The object contains exactly two claims:
+      It MUST contain at least the following claims:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the Status List (lst).  The allowed values
@@ -521,9 +521,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840a86f51
-   3c01c96be97db026f875344efd4337806f7ac74b32c03553900e1d2296e0368c4556
-   8e856fe362945a991791ddeb6da302319ebeb4324edbb98e1b1c6d
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58408807ae
+   54563daedd297763c48a01ea634e5482e2676f3c6963e3bdfa5b8dd9e1903643bc29
+   b2286e72fc36ec87949c08f5d7693da90116c0c507fb4c230effa7
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -547,12 +547,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      a86f513c01c96be97db026f8  #       "¨oQ<\x01Éké}°&ø"
-      75344efd4337806f7ac74b32  #       "u4NýC7\x80ozÇK2"
-      c03553900e1d2296e0368c45  #       "À5S\x90\x0e\x1d"\x96à6\x8cE"
-      568e856fe362945a991791dd  #       "V\x8e\x85oãb\x94Z\x99\x17\x91Ý"
-      eb6da302319ebeb4324edbb9  #       "ëm£\x021\x9e¾´2NÛ¹"
-      8e1b1c6d                  #       "\x8e\x1b\x1cm"
+      8807ae54563daedd297763c4  #       "\x88\x07®TV=®Ý)wcÄ"
+      8a01ea634e5482e2676f3c69  #       "\x8a\x01êcNT\x82âgo<i"
+      63e3bdfa5b8dd9e1903643bc  #       "cã½ú[\x8dÙá\x906C¼"
+      29b2286e72fc36ec87949c08  #       ")²(nrü6ì\x87\x94\x9c\x08"
+      f5d7693da90116c0c507fb4c  #       "õ×i=©\x01\x16ÀÅ\x07ûL"
+      230effa7                  #       "#\x0eÿ§"
 
 6.  Referenced Token
 
@@ -587,8 +587,8 @@ d2                              # tag(18)
 
       -  status_list: REQUIRED when the status list mechanism defined in
          this specification is used.  It contains a reference to a
-         Status List or Status List Token.  The object contains exactly
-         two claims:
+         Status List or Status List Token.  It MUST at least contain the
+         following claims:
 
          o  idx: REQUIRED.  The idx (index) claim MUST specify an
             Integer that represents the index to check for status
@@ -659,37 +659,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840bb967808446683616f0e66859f584c415e3775
-   0ea3dfc8c703b94ddb4314c9ac6523c31c999e9e4fc2ca040d37f23cbefcd5e19b44
-   4748b1494cc142e8852159
+   7374617475736c697374732f315840591486fc1b98b9907915545705dd14eebca41f
+   f7567769efcfc112328251b20839a46487ed626147b28e79705f9a2680d12a7ccc7e
+   6be5d82bf0bef38d83b098
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         bb967808446683616f0e6685  #       "»\x96x\x08Df\x83ao\x0ef\x85"
-         9f584c415e37750ea3dfc8c7  #       "\x9fXLA^7u\x0e£ßÈÇ"
-         03b94ddb4314c9ac6523c31c  #       "\x03¹MÛC\x14É¬e#Ã\x1c"
-         999e9e4fc2ca040d37f23cbe  #       "\x99\x9e\x9eOÂÊ\x04\x0d7ò<¾"
-         fcd5e19b444748b1494cc142  #       "üÕá\x9bDGH±ILÁB"
-         e8852159                  #       "è\x85!Y"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      591486fc1b98b99079155457  #       "Y\x14\x86ü\x1b\x98¹\x90y\x15TW"
+      05dd14eebca41ff7567769ef  #       "\x05Ý\x14î¼¤\x1f÷Vwiï"
+      cfc112328251b20839a46487  #       "ÏÁ\x122\x82Q²\x089¤d\x87"
+      ed626147b28e79705f9a2680  #       "íbaG²\x8eyp_\x9a&\x80"
+      d12a7ccc7e6be5d82bf0bef3  #       "Ñ*|Ì~kåØ+ð¾ó"
+      8d83b098                  #       "\x8d\x83°\x98"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1480,6 +1480,9 @@ Acknowledgments
 Document History
 
    -03
+
+   *  relax requirements for status_list claims to contain other
+      parameters
 
    *  change cwt referenced token example to hex and annotated hex
 
