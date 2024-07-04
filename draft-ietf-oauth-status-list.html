@@ -1512,7 +1512,7 @@ index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
 <p id="section-4.1-1">This section defines the structure for a JSON-encoded Status List:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1">
-            <p id="section-4.1-2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. JSON Object that contains a Status List. The object contains exactly two claims:<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. JSON Object that contains a Status List. It <span class="bcp14">MUST</span> contain at least the following claims:<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1.2.1">
                 <p id="section-4.1-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. JSON Integer specifying the number of bits per Referenced Token in the Status List (<code>lst</code>). The allowed values for <code>bits</code> are 1,2,4 and 8.<a href="#section-4.1-2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -1713,9 +1713,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840a86f51
-3c01c96be97db026f875344efd4337806f7ac74b32c03553900e1d2296e0368c4556
-8e856fe362945a991791ddeb6da302319ebeb4324edbb98e1b1c6d
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58408807ae
+54563daedd297763c48a01ea634e5482e2676f3c6963e3bdfa5b8dd9e1903643bc29
+b2286e72fc36ec87949c08f5d7693da90116c0c507fb4c230effa7
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1741,12 +1741,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      a86f513c01c96be97db026f8  #       "¨oQ&lt;\x01Éké}°&amp;ø"
-      75344efd4337806f7ac74b32  #       "u4NýC7\x80ozÇK2"
-      c03553900e1d2296e0368c45  #       "À5S\x90\x0e\x1d"\x96à6\x8cE"
-      568e856fe362945a991791dd  #       "V\x8e\x85oãb\x94Z\x99\x17\x91Ý"
-      eb6da302319ebeb4324edbb9  #       "ëm£\x021\x9e¾´2NÛ¹"
-      8e1b1c6d                  #       "\x8e\x1b\x1cm"
+      8807ae54563daedd297763c4  #       "\x88\x07®TV=®Ý)wcÄ"
+      8a01ea634e5482e2676f3c69  #       "\x8a\x01êcNT\x82âgo&lt;i"
+      63e3bdfa5b8dd9e1903643bc  #       "cã½ú[\x8dÙá\x906C¼"
+      29b2286e72fc36ec87949c08  #       ")²(nrü6ì\x87\x94\x9c\x08"
+      f5d7693da90116c0c507fb4c  #       "õ×i=©\x01\x16ÀÅ\x07ûL"
+      230effa7                  #       "#\x0eÿ§"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1781,7 +1781,7 @@ d2                              # tag(18)
             <p id="section-6.2-3.2.1"><code>status</code>: <span class="bcp14">REQUIRED</span>. The <code>status</code> (status) claim <span class="bcp14">MUST</span> specify a JSON Object that contains at least one reference to a status mechanism.<a href="#section-6.2-3.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-3.2.2.1">
-                <p id="section-6.2-3.2.2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. The object contains exactly two claims:<a href="#section-6.2-3.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2-3.2.2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. It <span class="bcp14">MUST</span> at least contain the following claims:<a href="#section-6.2-3.2.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-3.2.2.1.2.1">
                     <p id="section-6.2-3.2.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of <code>idx</code> <span class="bcp14">MUST</span> be a non-negative number, containing a value of zero or greater.<a href="#section-6.2-3.2.2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -1851,9 +1851,9 @@ d2                              # tag(18)
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840bb967808446683616f0e66859f584c415e3775
-0ea3dfc8c703b94ddb4314c9ac6523c31c999e9e4fc2ca040d37f23cbefcd5e19b44
-4748b1494cc142e8852159
+7374617475736c697374732f315840591486fc1b98b9907915545705dd14eebca41f
+f7567769efcfc112328251b20839a46487ed626147b28e79705f9a2680d12a7ccc7e
+6be5d82bf0bef38d83b098
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1878,12 +1878,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      bb967808446683616f0e6685  #       "»\x96x\x08Df\x83ao\x0ef\x85"
-      9f584c415e37750ea3dfc8c7  #       "\x9fXLA^7u\x0e£ßÈÇ"
-      03b94ddb4314c9ac6523c31c  #       "\x03¹MÛC\x14É¬e#Ã\x1c"
-      999e9e4fc2ca040d37f23cbe  #       "\x99\x9e\x9eOÂÊ\x04\x0d7ò&lt;¾"
-      fcd5e19b444748b1494cc142  #       "üÕá\x9bDGH±ILÁB"
-      e8852159                  #       "è\x85!Y"
+      591486fc1b98b99079155457  #       "Y\x14\x86ü\x1b\x98¹\x90y\x15TW"
+      05dd14eebca41ff7567769ef  #       "\x05Ý\x14î¼¤\x1f÷Vwiï"
+      cfc112328251b20839a46487  #       "ÏÁ\x122\x82Q²\x089¤d\x87"
+      ed626147b28e79705f9a2680  #       "íbaG²\x8eyp_\x9a&amp;\x80"
+      d12a7ccc7e6be5d82bf0bef3  #       "Ñ*|Ì~kåØ+ð¾ó"
+      8d83b098                  #       "\x8d\x83°\x98"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2855,25 +2855,28 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-03<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">change cwt referenced token example to hex and annotated hex<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">relax requirements for status_list claims to contain other parameters<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">require TLS only for fetching Status List, not for Status List Token<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">change cwt referenced token example to hex and annotated hex<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">remove the undefined phrase Status List endpoint<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">require TLS only for fetching Status List, not for Status List Token<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">remove http caching in favor of the new ttl claim<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">remove the undefined phrase Status List endpoint<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">clarify the sub claim of Status List Token<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">remove http caching in favor of the new ttl claim<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.6">
-          <p id="appendix-B-2.6.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.6.1">clarify the sub claim of Status List Token<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.7">
-          <p id="appendix-B-2.7.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.7.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.8">
+          <p id="appendix-B-2.8.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
