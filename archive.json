@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-02T00:14:15.152036+00:00",
+  "timestamp": "2024-07-04T00:13:58.242581+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -3108,9 +3108,24 @@
       "labels": [],
       "body": "In our current use case, we have implemented the bitstring status list (https://www.w3.org/TR/vc-bitstring-status-list/) and want to keep it as compatible as possible.\r\n\r\nOne of the incompatibilities we discovered in chapters 6.2, 6.3, and 6.4 is that the status list property is limited to a status list.\r\nWe would suggest allowing a list of status lists in those chapters instead.",
       "createdAt": "2024-06-27T05:55:44Z",
-      "updatedAt": "2024-06-27T05:55:44Z",
+      "updatedAt": "2024-07-03T14:11:20Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "IETF Status List has a different approach here: Instead of having two status lists, one for revocation and one for suspension, we have the option to include more than one bit per Referenced Token into the statuslist, thus representing multiple possible status values.\r\n\r\nThis seems like an easier approach and avoids possible problems with concurrency.\r\n\r\nDo you have any use cases in mind, where this approach is insufficient?",
+          "createdAt": "2024-07-03T12:11:19Z",
+          "updatedAt": "2024-07-03T12:11:19Z"
+        },
+        {
+          "author": "bj-ms",
+          "authorAssociation": "NONE",
+          "body": "No, it was more about compatibility but as you say you take another approach.\r\n\r\nAre there some differences in privacy concerns between IETF Status List and Bitstring that you know of?",
+          "createdAt": "2024-07-03T14:11:19Z",
+          "updatedAt": "2024-07-03T14:11:19Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -9219,13 +9234,93 @@
       "labels": [],
       "body": "closes #144\r\n\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/cwt-typ/draft-ietf-oauth-status-list.html ",
       "createdAt": "2024-07-01T14:34:38Z",
-      "updatedAt": "2024-07-01T14:34:38Z",
+      "updatedAt": "2024-07-03T12:05:00Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "e200685ea7ddf4f20ff13ab2618950d69bdcdfb1",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/cwt-typ",
       "headRefOid": "8b2f7b7ae219a9ecb03f2e8564faa8b88711c3ab",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6AhgBp",
+          "commit": {
+            "abbreviatedOid": "8b2f7b7"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-03T12:05:00Z",
+          "updatedAt": "2024-07-03T12:05:00Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 153,
+      "id": "PR_kwDOJZ2aqs50Plfz",
+      "title": "Change affiliation",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/153",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Change my affiliation",
+      "createdAt": "2024-07-02T20:09:58Z",
+      "updatedAt": "2024-07-03T12:02:08Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "e200685ea7ddf4f20ff13ab2618950d69bdcdfb1",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/affiliation",
+      "headRefOid": "2572fbb4540d430f1174da66a1064492e6e312fe",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6AhemS",
+          "commit": {
+            "abbreviatedOid": "2572fbb"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-03T12:02:08Z",
+          "updatedAt": "2024-07-03T12:02:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 154,
+      "id": "PR_kwDOJZ2aqs50VWXO",
+      "title": "relax requirements for status_list claims to contain other parameters",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/154",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #142 ",
+      "createdAt": "2024-07-03T14:13:48Z",
+      "updatedAt": "2024-07-03T14:16:36Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "e200685ea7ddf4f20ff13ab2618950d69bdcdfb1",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "142-add-extensibility-to-referenced-token-status_list-object",
+      "headRefOid": "e838a1303d5de342722fa7587f2a34c7cbe2a631",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
