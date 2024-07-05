@@ -205,7 +205,7 @@ This section defines the structure for a JSON-encoded Status List:
 * `status_list`: REQUIRED. JSON Object that contains a Status List. The object contains exactly two claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded (as defined in Section 2 of {{RFC7515}}) Status List as specified in [](#status-list).
-   * `aggregation_uri`: OPTIONAL. JSON String that contains an URI to retrieve a the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
+   * `aggregation_uri`: OPTIONAL. JSON String that contains an URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the JSON representation of the Status List:
 
@@ -220,7 +220,7 @@ This section defines the structure for a CBOR-encoded Status List:
 * The `StatusList` structure is a map (Major Type 5) and defines the following entries:
   * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
-  * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains an URI to retrieve the Status List Aggregation for this credential type. See section [](#batch-fetching) for further detail.
+  * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains an URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the CBOR representation of the Status List:
 
@@ -463,9 +463,9 @@ The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
 TBD
 
-# Batch Fetching {#batch-fetching}
+# Status List Aggregation {#batch-fetching}
 
-To allow a Relying Party to fetch all Status Lists for a specific Referenced Token or issuer, an optional mechanism is provided to retrieve a list of URIs to all Status List Tokens called Status List Aggregation. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status.
+Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status.
 
 There are two options for a Relying Party to retrieve the Status List Aggregation.
 An issuer MAY support any of these mechanisms:
@@ -481,13 +481,13 @@ The concrete specification on how this is implemented depends on the specific ec
 
 ## Status List Parameter
 
-The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this link to retrieve an up-to-date list of relevant Status Lists.
+The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this URI to retrieve an up-to-date list of relevant Status Lists.
 
 ## Status List Aggregation in JSON Format
 
 This section defines the structure for a JSON-encoded Status List Aggregation:
 
-* `status_lists`: REQUIRED. The `status_lists` claim MUST be an array of strings, each containing an URI to a Status List (Token).
+* `status_lists`: REQUIRED. JSON array of strings that contains URIs linking to Status List (Tokens).
 
 The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return SHOULD be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
 
