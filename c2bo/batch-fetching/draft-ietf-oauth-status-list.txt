@@ -5,9 +5,9 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 13 December 2024                                               
+Expires: 6 January 2025                                                 
                                                               C. Bormann
-                                                            11 June 2024
+                                                             5 July 2024
 
 
                            Token Status List
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 December 2024.
+   This Internet-Draft will expire on 6 January 2025.
 
 Copyright Notice
 
@@ -89,7 +89,7 @@ Table of Contents
      8.1.  Status List Request
      8.2.  Status List Response
      8.3.  Validation Rules
-   9.  Batch Fetching
+   9.  Status List Aggregation
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
      9.3.  Status List Aggregation in JSON Format
@@ -346,8 +346,8 @@ Table of Contents
          [RFC7515]) Status List as specified in Section 4.
 
       -  aggregation_uri: OPTIONAL.  JSON String that contains an URI to
-         retrieve a the Status List Aggregation for this credential
-         type.  See section Section 9 for further detail.
+         retrieve the Status List Aggregation for this type of
+         Referenced Token.  See section Section 9 for further detail.
 
    The following example illustrates the JSON representation of the
    Status List:
@@ -375,8 +375,8 @@ Table of Contents
 
       -  aggregation_uri: OPTIONAL.  Text string (Major Type 3) that
          contains an URI to retrieve the Status List Aggregation for
-         this credential type.  See section Section 9 for further
-         detail.
+         this type of Referenced Token.  See section Section 9 for
+         further detail.
 
    The following example illustrates the CBOR representation of the
    Status List:
@@ -533,9 +533,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840acef50
-   5dbbbcb0ecb2c63526d6fdbac99e9575e82be5970b99d36464cd1677efc4e92ab987
-   c01371f1d0a1ccc62a4b2186a14a589a1ce22e0b111abe5c0b3eaf
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ef2f61
+   5f6dcf9990d68e14839b93307ef35a4e566477cef3a1c076eb2259e279774d0bbe31
+   16ee68912deb47992cbbd02ca22c902de16bfdd320d009bd5c22fc
 
    The following is the CBOR diagnostic output of the example above:
 
@@ -559,12 +559,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      acef505dbbbcb0ecb2c63526  #       "¬ïP]»¼°ì²Æ5&"
-      d6fdbac99e9575e82be5970b  #       "ÖýºÉ\x9e\x95uè+å\x97\x0b"
-      99d36464cd1677efc4e92ab9  #       "\x99ÓddÍ\x16wïÄé*¹"
-      87c01371f1d0a1ccc62a4b21  #       "\x87À\x13qñÐ¡ÌÆ*K!"
-      86a14a589a1ce22e0b111abe  #       "\x86¡JX\x9a\x1câ.\x0b\x11\x1a¾"
-      5c0b3eaf                  #       "\\x0b>¯"
+      ef2f615f6dcf9990d68e1483  #       "ï/a_mÏ\x99\x90Ö\x8e\x14\x83"
+      9b93307ef35a4e566477cef3  #       "\x9b\x930~óZNVdwÎó"
+      a1c076eb2259e279774d0bbe  #       "¡Àvë"YâywM\x0b¾"
+      3116ee68912deb47992cbbd0  #       "1\x16îh\x91-ëG\x99,»Ð"
+      2ca22c902de16bfdd320d009  #       ",¢,\x90-ákýÓ Ð\x09"
+      bd5c22fc                  #       "½\"ü"
 
 6.  Referenced Token
 
@@ -803,13 +803,13 @@ d2                              # tag(18)
 
    TBD
 
-9.  Batch Fetching
+9.  Status List Aggregation
 
-   To allow a Relying Party to fetch all Status Lists for a specific
-   Referenced Token or issuer, an optional mechanism is provided to
-   retrieve a list of URIs to all Status List Tokens called Status List
-   Aggregation.  This mechanism is intended to support fetching and
-   caching mechanisms and allow offline validation of the status.
+   Status List Aggregation is an optional mechanism to retrieve a list
+   of URIs to all Status List Tokens, allowing a Relying Party to fetch
+   all relevant Status Lists for a specific type of Referenced Token or
+   issuer.  This mechanism is intended to support fetching and caching
+   mechanisms and allow offline validation of the status.
 
    There are two options for a Relying Party to retrieve the Status List
    Aggregation.  An issuer MAY support any of these mechanisms:
@@ -837,7 +837,7 @@ d2                              # tag(18)
    The URI to the Status List Aggregation MAY be provided as the
    optional parameter aggregation_uri in the Status List itself as
    explained inSection 4.2 and Section 4.1 respectively.  A Relying
-   Party may use this link to retrieve an up-to-date list of relevant
+   Party may use this URI to retrieve an up-to-date list of relevant
    Status Lists.
 
 9.3.  Status List Aggregation in JSON Format
@@ -845,8 +845,8 @@ d2                              # tag(18)
    This section defines the structure for a JSON-encoded Status List
    Aggregation:
 
-   *  status_lists: REQUIRED.  The status_lists claim MUST be an array
-      of strings, each containing an URI to a Status List (Token).
+   *  status_lists: REQUIRED.  JSON array of strings that contains URIs
+      linking to Status List (Tokens).
 
    The Status List Aggregation URI provides a list of Status List URIs.
    This aggregation in JSON and the media type return SHOULD be
