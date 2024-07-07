@@ -1030,7 +1030,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 6 January 2025</td>
+<td class="center">Expires 8 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-05" class="published">5 July 2024</time>
+<time datetime="2024-07-07" class="published">7 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-06">6 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-01-08">8 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1060,6 +1060,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </div>
 <div class="author">
       <div class="author-name">C. Bormann</div>
+<div class="org">Robert Bosch GmbH</div>
 </div>
 </dd>
 </dl>
@@ -1100,7 +1101,7 @@ The status list token data structures themselves are also represented as JWTs or
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1525,7 +1526,7 @@ index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
 <p id="section-4.1-1">This section defines the structure for a JSON-encoded Status List:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1">
-            <p id="section-4.1-2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. JSON Object that contains a Status List. The object contains exactly two claims:<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. JSON Object that contains a Status List. It <span class="bcp14">MUST</span> contain at least the following claims:<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1.2.1">
                 <p id="section-4.1-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. JSON Integer specifying the number of bits per Referenced Token in the Status List (<code>lst</code>). The allowed values for <code>bits</code> are 1,2,4 and 8.<a href="#section-4.1-2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -1574,7 +1575,7 @@ encoded:
             </ul>
 </li>
         </ul>
-<p id="section-4.2-3">The following example illustrates the CBOR representation of the Status List:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">The following example illustrates the CBOR representation of the Status List in Hex:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.2-4">
 <pre>
 byte_array = [0xb9, 0xa3]
@@ -1582,7 +1583,7 @@ encoded:
 a2646269747301636c73744a78dadbb918000217015d
 </pre><a href="#section-4.2-4" class="pilcrow">¶</a>
 </div>
-<p id="section-4.2-5">The following is the CBOR diagnostic output of the example above:<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<p id="section-4.2-5">The following is the CBOR Annotated Hex output of the example above:<a href="#section-4.2-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.2-6">
 <pre>
 a2                              # map(2)
@@ -1687,7 +1688,7 @@ a2                              # map(2)
 <p id="section-5.2-2">The following content applies to the CWT protected header:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.1">
-            <p id="section-5.2-3.1.1"><code>16</code> TBD (type): <span class="bcp14">REQUIRED</span>. The type of the CWT <span class="bcp14">MUST</span> be <code>statuslist+cwt</code> as defined in <span>[<a href="#CWT.typ" class="cite xref">CWT.typ</a>]</span>.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-3.1.1"><code>16</code> (type): <span class="bcp14">REQUIRED</span>. The type of the CWT <span class="bcp14">MUST</span> be <code>statuslist+cwt</code> as defined in <span>[<a href="#RFC9596" class="cite xref">RFC9596</a>]</span>.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-4">The following content applies to the CWT Claims Set:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
@@ -1726,18 +1727,18 @@ a2                              # map(2)
             <p id="section-5.2-7.4.1">Application of additional restrictions and policy are at the discretion of the verifying party.<a href="#section-5.2-7.4.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-5.2-8">The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):<a href="#section-5.2-8" class="pilcrow">¶</a></p>
+<p id="section-5.2-8">The following is a non-normative example for a Status List Token in CWT format in Hex:<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-9">
 <pre>
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ef2f61
-5f6dcf9990d68e14839b93307ef35a4e566477cef3a1c076eb2259e279774d0bbe31
-16ee68912deb47992cbbd02ca22c902de16bfdd320d009bd5c22fc
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584021ef73
+14b14907b8c792e95473fbcebb0fcd5bf73ad343af41ebe5de1ab1c3cc08701a7618
+6fac0678b106029804108edfa2b6d96af719bf2243251545985687
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
-<p id="section-5.2-10">The following is the CBOR diagnostic output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
+<p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-11">
 <pre>
 d2                              # tag(18)
@@ -1760,12 +1761,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ef2f615f6dcf9990d68e1483  #       "ï/a_mÏ\x99\x90Ö\x8e\x14\x83"
-      9b93307ef35a4e566477cef3  #       "\x9b\x930~óZNVdwÎó"
-      a1c076eb2259e279774d0bbe  #       "¡Àvë"YâywM\x0b¾"
-      3116ee68912deb47992cbbd0  #       "1\x16îh\x91-ëG\x99,»Ð"
-      2ca22c902de16bfdd320d009  #       ",¢,\x90-ákýÓ Ð\x09"
-      bd5c22fc                  #       "½\"ü"
+      21ef7314b14907b8c792e954  #       "!ïs\x14±I\x07¸Ç\x92éT"
+      73fbcebb0fcd5bf73ad343af  #       "sûÎ»\x0fÍ[÷:ÓC¯"
+      41ebe5de1ab1c3cc08701a76  #       "AëåÞ\x1a±ÃÌ\x08p\x1av"
+      186fac0678b106029804108e  #       "\x18o¬\x06x±\x06\x02\x98\x04\x10\x8e"
+      dfa2b6d96af719bf22432515  #       "ß¢¶Ùj÷\x19¿"C%\x15"
+      45985687                  #       "E\x98V\x87"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1800,7 +1801,7 @@ d2                              # tag(18)
             <p id="section-6.2-3.2.1"><code>status</code>: <span class="bcp14">REQUIRED</span>. The <code>status</code> (status) claim <span class="bcp14">MUST</span> specify a JSON Object that contains at least one reference to a status mechanism.<a href="#section-6.2-3.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-3.2.2.1">
-                <p id="section-6.2-3.2.2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. The object contains exactly two claims:<a href="#section-6.2-3.2.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.2-3.2.2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. It <span class="bcp14">MUST</span> at least contain the following claims:<a href="#section-6.2-3.2.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-3.2.2.1.2.1">
                     <p id="section-6.2-3.2.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of <code>idx</code> <span class="bcp14">MUST</span> be a non-negative number, containing a value of zero or greater.<a href="#section-6.2-3.2.2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -1864,30 +1865,46 @@ d2                              # tag(18)
 </li>
         </ul>
 <p id="section-6.3-4">Application of additional restrictions and policy are at the discretion of the verifying party.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
-<p id="section-6.3-5">The following is a non-normative example for a decoded payload of a Referenced Token:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-ascii-art art-text artwork" id="section-6.3-6">
+<p id="section-6.3-5">The following is a non-normative example of a Referenced Token in CWT format in Hex:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-6">
 <pre>
-18(
-    [
-      / protected / &lt;&lt; {
-        / alg / 1: -7 / ES256 /
-      } &gt;&gt;,
-      / unprotected / {
-        / kid / 4: h'3132' / '13' /
-      },
-      / payload / &lt;&lt; {
-        / iss    / 1: "https://example.com",
-        / status / 65535: {
-          "status_list": {
-            "idx": 0,
-            "uri": "https://example.com/statuslists/1"
-          }
-        }
-      } &gt;&gt;,
-      / signature / h'...'
-    ]
-  )
+d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
+6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
+7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
+7374617475736c697374732f315840a71143bf5fbb6a39dc2ebdc61db43f2ff4f9c9
+c1b2500f0803e93f84993808f67d4c5faa600a4b0fdec357a6c2d18ff2999f3dbed2
+1a45b46585a40b0a689d54
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
+</div>
+<p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-8">
+<pre>
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&amp;"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      a71143bf5fbb6a39dc2ebdc6  #       "§\x11C¿_»j9Ü.½Æ"
+      1db43f2ff4f9c9c1b2500f08  #       "\x1d´?/ôùÉÁ²P\x0f\x08"
+      03e93f84993808f67d4c5faa  #       "\x03é?\x84\x998\x08ö}L_ª"
+      600a4b0fdec357a6c2d18ff2  #       "`\x0aK\x0fÞÃW¦ÂÑ\x8fò"
+      999f3dbed21a45b46585a40b  #       "\x99\x9f=¾Ò\x1aE´e\x85¤\x0b"
+      0a689d54                  #       "\x0ah\x9dT"
+</pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2018,7 +2035,7 @@ An issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
           <p id="section-9-3.1.1">Issuer metadata: The issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol<a href="#section-9-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-9-3.2">
-          <p id="section-9-3.2.1">Status List Parameter: The issuer of the Referenced Token includes an additional claim to the Status List (Token) that links to the Status List Aggregation.<a href="#section-9-3.2.1" class="pilcrow">¶</a></p>
+          <p id="section-9-3.2.1">Status List Parameter: The issuer of the Referenced Token includes an additional claim in the Status List (Token) that contains the Status List Aggregation URI.<a href="#section-9-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <div id="issuer-metadata">
@@ -2773,10 +2790,6 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <a href="#section-15.1" class="section-number selfRef">15.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
-<dt id="CWT.typ">[CWT.typ]</dt>
-        <dd>
-<span class="refAuthor">Jones, M. B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"COSE "typ" (type) Header Parameter"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-typ-header-parameter-05</span>, <time datetime="2024-04-03" class="refDate">3 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-05">https://datatracker.ietf.org/doc/html/draft-ietf-cose-typ-header-parameter-05</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="IANA.CWT">[IANA.CWT]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.iana.org/assignments/cwt/cwt.xhtml">https://www.iana.org/assignments/cwt/cwt.xhtml</a>&gt;</span>. </dd>
@@ -2854,8 +2867,12 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9111">[RFC9111]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Caching"</span>, <span class="seriesInfo">STD 98</span>, <span class="seriesInfo">RFC 9111</span>, <span class="seriesInfo">DOI 10.17487/RFC9111</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9111">https://www.rfc-editor.org/rfc/rfc9111</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9596">[RFC9596]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE) "typ" (type) Header Parameter"</span>, <span class="seriesInfo">RFC 9596</span>, <span class="seriesInfo">DOI 10.17487/RFC9596</span>, <time datetime="2024-06" class="refDate">June 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9596">https://www.rfc-editor.org/rfc/rfc9596</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2919,25 +2936,31 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-03<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">introduce batch fetching mechanism<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">introduce the status list aggregation mechanism<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">require TLS only for fetching Status List, not for Status List Token<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">relax requirements for status_list claims to contain other parameters<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">remove the undefined phrase Status List endpoint<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">change cwt referenced token example to hex and annotated hex<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">remove http caching in favor of the new ttl claim<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">require TLS only for fetching Status List, not for Status List Token<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">clarify the sub claim of Status List Token<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">remove the undefined phrase Status List endpoint<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.6">
-          <p id="appendix-B-2.6.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.6.1">remove http caching in favor of the new ttl claim<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.7">
-          <p id="appendix-B-2.7.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.7.1">clarify the sub claim of Status List Token<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.8">
+          <p id="appendix-B-2.8.1">relax status_list iss requirements for CWT<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.9">
+          <p id="appendix-B-2.9.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-02<a href="#appendix-B-3" class="pilcrow">¶</a></p>
@@ -3040,9 +3063,10 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </address>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Christian Bormann</span></div>
+<div dir="auto" class="left"><span class="org">Robert Bosch GmbH</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:chris.bormann@gmx.de" class="email">chris.bormann@gmx.de</a>
+<a href="mailto:christiancarl.bormann@bosch.com" class="email">christiancarl.bormann@bosch.com</a>
 </div>
 </address>
 </section>
