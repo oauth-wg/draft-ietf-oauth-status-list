@@ -521,9 +521,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840174657
-   1d1d0f62e1a4667e92e33f2e3192c78935575a9fe7386a5787cf32d0f38a41c66325
-   5c3ce2eaf7b974443ebdddf248a5bff3871bcefe57480cff10e866
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58403ec50b
+   8c2999ab8b84d89dc3ab9b980fe97e1d8572bcfa40567b7c01e90649ec68e9580405
+   046c41960335a5c65d1469094ca445a3163d33731c85e39bdc2826
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -547,12 +547,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      1746571d1d0f62e1a4667e92  #       "\x17FW\x1d\x1d\x0fbá¤f~\x92"
-      e33f2e3192c78935575a9fe7  #       "ã?.1\x92Ç\x895WZ\x9fç"
-      386a5787cf32d0f38a41c663  #       "8jW\x87Ï2Ðó\x8aAÆc"
-      255c3ce2eaf7b974443ebddd  #       "%\<âê÷¹tD>½Ý"
-      f248a5bff3871bcefe57480c  #       "òH¥¿ó\x87\x1bÎþWH\x0c"
-      ff10e866                  #       "ÿ\x10èf"
+      3ec50b8c2999ab8b84d89dc3  #       ">Å\x0b\x8c)\x99«\x8b\x84Ø\x9dÃ"
+      ab9b980fe97e1d8572bcfa40  #       "«\x9b\x98\x0fé~\x1d\x85r¼ú@"
+      567b7c01e90649ec68e95804  #       "V{|\x01é\x06IìhéX\x04"
+      05046c41960335a5c65d1469  #       "\x05\x04lA\x96\x035¥Æ]\x14i"
+      094ca445a3163d33731c85e3  #       "\x09L¤E£\x16=3s\x1c\x85ã"
+      9bdc2826                  #       "\x9bÜ(&"
 
 6.  Referenced Token
 
@@ -659,9 +659,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840a45296fbea31587ffe8da8df8fc2250b5fbdd9
-   e72793894bba9dbbbdc69cb71fb01ffd980c17be79f10419e8b1bdba71267307e1ce
-   d72cff75e31179d01de9e7
+   7374617475736c697374732f3158407e9ea6bb8ad754172f588cf760ba583a3d5a33
+   3eff15c2f137c1f5828245a2386c260f4af643b170df82e257f99630c51e632f9b1b
+   7d72fd543e9cc3315bf308
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -684,12 +684,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         a45296fbea31587ffe8da8df  #       "¤R\x96ûê1X\x7fþ\x8d¨ß"
-         8fc2250b5fbdd9e72793894b  #       "\x8fÂ%\x0b_½Ùç'\x93\x89K"
-         ba9dbbbdc69cb71fb01ffd98  #       "º\x9d»½Æ\x9c·\x1f°\x1fý\x98"
-         0c17be79f10419e8b1bdba71  #       "\x0c\x17¾yñ\x04\x19è±½ºq"
-         267307e1ced72cff75e31179  #       "&s\x07áÎ×,ÿuã\x11y"
-         d01de9e7                  #       "Ð\x1déç"
+         7e9ea6bb8ad754172f588cf7  #       "~\x9e¦»\x8a×T\x17/X\x8c÷"
+         60ba583a3d5a333eff15c2f1  #       "`ºX:=Z3>ÿ\x15Âñ"
+         37c1f5828245a2386c260f4a  #       "7Áõ\x82\x82E¢8l&\x0fJ"
+         f643b170df82e257f99630c5  #       "öC±pß\x82âWù\x960Å"
+         1e632f9b1b7d72fd543e9cc3  #       "\x1ec/\x9b\x1b}rýT>\x9cÃ"
+         315bf308                  #       "1[ó\x08"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -842,7 +842,7 @@ d2                              # tag(18)
            freshness of the Status List Token, it SHOULD check the
            issued at claim (iat or 6)
 
-       3.  If expiration time is defined (expor 4), it MUST be checked
+       3.  If expiration time is defined (exp or 4), it MUST be checked
            if the Status List Token is expired
 
        4.  If the Referenced Token contains an issuer claim, the Status
