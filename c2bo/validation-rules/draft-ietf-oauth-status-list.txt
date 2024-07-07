@@ -521,9 +521,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58403ec50b
-   8c2999ab8b84d89dc3ab9b980fe97e1d8572bcfa40567b7c01e90649ec68e9580405
-   046c41960335a5c65d1469094ca445a3163d33731c85e39bdc2826
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58408f7c74
+   0d1b423a9bbc1077273c37ebde17923989d27d858e272d93caceaa6cc6b697c04260
+   93b19747d9333ec650168c460f4a2c536cb4916b93fc38ad444276
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -547,12 +547,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3ec50b8c2999ab8b84d89dc3  #       ">Å\x0b\x8c)\x99«\x8b\x84Ø\x9dÃ"
-      ab9b980fe97e1d8572bcfa40  #       "«\x9b\x98\x0fé~\x1d\x85r¼ú@"
-      567b7c01e90649ec68e95804  #       "V{|\x01é\x06IìhéX\x04"
-      05046c41960335a5c65d1469  #       "\x05\x04lA\x96\x035¥Æ]\x14i"
-      094ca445a3163d33731c85e3  #       "\x09L¤E£\x16=3s\x1c\x85ã"
-      9bdc2826                  #       "\x9bÜ(&"
+      8f7c740d1b423a9bbc107727  #       "\x8f|t\x0d\x1bB:\x9b¼\x10w'"
+      3c37ebde17923989d27d858e  #       "<7ëÞ\x17\x929\x89Ò}\x85\x8e"
+      272d93caceaa6cc6b697c042  #       "'-\x93ÊÎªlÆ¶\x97ÀB"
+      6093b19747d9333ec650168c  #       "`\x93±\x97GÙ3>ÆP\x16\x8c"
+      460f4a2c536cb4916b93fc38  #       "F\x0fJ,Sl´\x91k\x93ü8"
+      ad444276                  #       "\xadDBv"
 
 6.  Referenced Token
 
@@ -659,9 +659,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158407e9ea6bb8ad754172f588cf760ba583a3d5a33
-   3eff15c2f137c1f5828245a2386c260f4af643b170df82e257f99630c51e632f9b1b
-   7d72fd543e9cc3315bf308
+   7374617475736c697374732f31584001cae4d2a1cc8b13113d13f2eb8cdb21ddc4f1
+   3c10e21092b4deb6e33a4a0cdf8bcd0a34e654d33709ee0a5436ce40284bf9d29e04
+   80df13fbe7924e9fc8361c
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -684,12 +684,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         7e9ea6bb8ad754172f588cf7  #       "~\x9e¦»\x8a×T\x17/X\x8c÷"
-         60ba583a3d5a333eff15c2f1  #       "`ºX:=Z3>ÿ\x15Âñ"
-         37c1f5828245a2386c260f4a  #       "7Áõ\x82\x82E¢8l&\x0fJ"
-         f643b170df82e257f99630c5  #       "öC±pß\x82âWù\x960Å"
-         1e632f9b1b7d72fd543e9cc3  #       "\x1ec/\x9b\x1b}rýT>\x9cÃ"
-         315bf308                  #       "1[ó\x08"
+         01cae4d2a1cc8b13113d13f2  #       "\x01ÊäÒ¡Ì\x8b\x13\x11=\x13ò"
+         eb8cdb21ddc4f13c10e21092  #       "ë\x8cÛ!ÝÄñ<\x10â\x10\x92"
+         b4deb6e33a4a0cdf8bcd0a34  #       "´Þ¶ã:J\x0cß\x8bÍ\x0a4"
+         e654d33709ee0a5436ce4028  #       "æTÓ7\x09î\x0aT6Î@("
+         4bf9d29e0480df13fbe7924e  #       "KùÒ\x9e\x04\x80ß\x13ûç\x92N"
+         9fc8361c                  #       "\x9fÈ6\x1c"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -808,9 +808,11 @@ d2                              # tag(18)
    attributes, valid signature, expiration time.  As this is out of
    scope of this document, this validation is not be described here, but
    is expected to be done according to the format of the Referenced
-   Token.  If this validation was not successful, the Referenced Token
-   MUST be rejected.  If the validation was successful, the Relying
-   Party MUST perform the following validation:
+   Token.
+
+   If this validation was not successful, the Referenced Token MUST be
+   rejected.  If the validation was successful, the Relying Party MUST
+   perform the following validation for the Status List:
 
    1.  Check for the existence of a status claim, check for the
        existence of a status_list claim within the status claim and
@@ -857,7 +859,13 @@ d2                              # tag(18)
        with DEFLATE [RFC1951] and ZLIB [RFC1950]
 
    6.  Retrieve the status value of the index specified in the
-       Referenced Token as described in Section 4:
+       Referenced Token as described in Section 4
+
+   7.  Check the status value as described in Section 7
+
+   If any of these checks fails, no statement about the status of the
+   Referenced Token can be made and the Referenced Token SHOULD be
+   rejected.
 
 9.  Further Examples
 
