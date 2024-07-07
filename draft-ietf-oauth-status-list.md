@@ -21,7 +21,8 @@ author:
     email: paul.bastian@posteo.de
  -
     fullname: Christian Bormann
-    email: chris.bormann@gmx.de
+    organization: Robert Bosch GmbH
+    email: christiancarl.bormann@bosch.com
 
 normative:
   RFC1950: RFC1950
@@ -38,6 +39,7 @@ normative:
   RFC9052: RFC9052
   RFC9110: RFC9110
   RFC9111: RFC9111
+  RFC9596: RFC9596
   IANA.MediaTypes:
     author:
       org: "IANA"
@@ -58,7 +60,6 @@ normative:
       org: "IANA"
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
-  CWT.typ: I-D.ietf-cose-typ-header-parameter
 
 informative:
   RFC6749: RFC6749
@@ -202,7 +203,7 @@ index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
 
 This section defines the structure for a JSON-encoded Status List:
 
-* `status_list`: REQUIRED. JSON Object that contains a Status List. The object contains exactly two claims:
+* `status_list`: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded (as defined in Section 2 of {{RFC7515}}) Status List as specified in [](#status-list).
    * `aggregation_uri`: OPTIONAL. JSON String that contains an URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
@@ -222,13 +223,13 @@ This section defines the structure for a CBOR-encoded Status List:
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
   * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains an URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
 
-The following example illustrates the CBOR representation of the Status List:
+The following example illustrates the CBOR representation of the Status List in Hex:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding_cbor}
 ~~~~~~~~~~
 
-The following is the CBOR diagnostic output of the example above:
+The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding_cbor_diag}
@@ -279,7 +280,7 @@ The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {
 
 The following content applies to the CWT protected header:
 
-* `16` TBD (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{CWT.typ}}.
+* `16` (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{RFC9596}}.
 
 The following content applies to the CWT Claims Set:
 
@@ -300,13 +301,13 @@ The following additional rules apply:
 
 4. Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a Status List Token in CWT format (not including the type header yet):
+The following is a non-normative example for a Status List Token in CWT format in Hex:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_cwt}
 ~~~~~~~~~~
 
-The following is the CBOR diagnostic output of the example above:
+The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_cwt_diag}
@@ -326,7 +327,7 @@ The following content applies to the JWT Claims Set:
 
 * `iss`: REQUIRED when also present in the Status List Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.
 * `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains at least one reference to a status mechanism.
-  * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. The object contains exactly two claims:
+  * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. It MUST at least contain the following claims:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
     * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Status List or Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
@@ -366,31 +367,18 @@ The following content applies to the CWT Claims Set:
 
 Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a decoded payload of a Referenced Token:
+The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
-~~~ ascii-art
+~~~~~~~~~~
+{::include ./examples/referenced_token_cwt}
+~~~~~~~~~~
 
-18(
-    [
-      / protected / << {
-        / alg / 1: -7 / ES256 /
-      } >>,
-      / unprotected / {
-        / kid / 4: h'3132' / '13' /
-      },
-      / payload / << {
-        / iss    / 1: "https://example.com",
-        / status / 65535: {
-          "status_list": {
-            "idx": 0,
-            "uri": "https://example.com/statuslists/1"
-          }
-        }
-      } >>,
-      / signature / h'...'
-    ]
-  )
-~~~
+The following is the CBOR Annotated Hex output of the example above:
+
+~~~~~~~~~~
+{::include ./examples/referenced_token_cwt_diag}
+~~~~~~~~~~
+
 
 ## Referenced Token in other COSE/CBOR Format {#referenced-token-cose}
 
@@ -857,6 +845,8 @@ for their valuable contributions, discussions and feedback to this specification
 -03
 
 * introduce batch fetching mechanism
+* relax requirements for status_list claims to contain other parameters
+* change cwt referenced token example to hex and annotated hex
 * require TLS only for fetching Status List, not for Status List Token
 * remove the undefined phrase Status List endpoint
 * remove http caching in favor of the new ttl claim
