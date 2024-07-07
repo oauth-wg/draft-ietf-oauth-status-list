@@ -459,7 +459,7 @@ There are two options for a Relying Party to retrieve the Status List Aggregatio
 An issuer MAY support any of these mechanisms:
 
 - Issuer metadata: The issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
-- Status List Parameter: The issuer of the Referenced Token includes an additional claim to the Status List (Token) that links to the Status List Aggregation.
+- Status List Parameter: The issuer of the Referenced Token includes an additional claim in the Status List (Token) that contains the Status List Aggregation URI.
 
 ## Issuer Metadata
 
@@ -844,7 +844,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -03
 
-* introduce batch fetching mechanism
+* introduce the status list aggregation mechanism
 * relax requirements for status_list claims to contain other parameters
 * change cwt referenced token example to hex and annotated hex
 * require TLS only for fetching Status List, not for Status List Token
