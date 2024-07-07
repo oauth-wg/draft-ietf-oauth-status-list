@@ -5,9 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 6 January 2025                                                 
+Expires: 8 January 2025                                                 
                                                               C. Bormann
-                                                             5 July 2024
+                                                       Robert Bosch GmbH
+                                                             7 July 2024
 
 
                            Token Status List
@@ -49,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 January 2025.
+   This Internet-Draft will expire on 8 January 2025.
 
 Copyright Notice
 
@@ -334,7 +335,7 @@ Table of Contents
    This section defines the structure for a JSON-encoded Status List:
 
    *  status_list: REQUIRED.  JSON Object that contains a Status List.
-      The object contains exactly two claims:
+      It MUST contain at least the following claims:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the Status List (lst).  The allowed values
@@ -379,13 +380,13 @@ Table of Contents
          further detail.
 
    The following example illustrates the CBOR representation of the
-   Status List:
+   Status List in Hex:
 
    byte_array = [0xb9, 0xa3]
    encoded:
    a2646269747301636c73744a78dadbb918000217015d
 
-   The following is the CBOR diagnostic output of the example above:
+   The following is the CBOR Annotated Hex output of the example above:
 
    a2                              # map(2)
      64                            #   string(4)
@@ -489,8 +490,8 @@ Table of Contents
 
    The following content applies to the CWT protected header:
 
-   *  16 TBD (type): REQUIRED.  The type of the CWT MUST be
-      statuslist+cwt as defined in [CWT.typ].
+   *  16 (type): REQUIRED.  The type of the CWT MUST be statuslist+cwt
+      as defined in [RFC9596].
 
    The following content applies to the CWT Claims Set:
 
@@ -528,16 +529,16 @@ Table of Contents
        discretion of the verifying party.
 
    The following is a non-normative example for a Status List Token in
-   CWT format (not including the type header yet):
+   CWT format in Hex:
 
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ef2f61
-   5f6dcf9990d68e14839b93307ef35a4e566477cef3a1c076eb2259e279774d0bbe31
-   16ee68912deb47992cbbd02ca22c902de16bfdd320d009bd5c22fc
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584021ef73
+   14b14907b8c792e95473fbcebb0fcd5bf73ad343af41ebe5de1ab1c3cc08701a7618
+   6fac0678b106029804108edfa2b6d96af719bf2243251545985687
 
-   The following is the CBOR diagnostic output of the example above:
+   The following is the CBOR Annotated Hex output of the example above:
 
 d2                              # tag(18)
   84                            #   array(4)
@@ -559,12 +560,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ef2f615f6dcf9990d68e1483  #       "ï/a_mÏ\x99\x90Ö\x8e\x14\x83"
-      9b93307ef35a4e566477cef3  #       "\x9b\x930~óZNVdwÎó"
-      a1c076eb2259e279774d0bbe  #       "¡Àvë"YâywM\x0b¾"
-      3116ee68912deb47992cbbd0  #       "1\x16îh\x91-ëG\x99,»Ð"
-      2ca22c902de16bfdd320d009  #       ",¢,\x90-ákýÓ Ð\x09"
-      bd5c22fc                  #       "½\"ü"
+      21ef7314b14907b8c792e954  #       "!ïs\x14±I\x07¸Ç\x92éT"
+      73fbcebb0fcd5bf73ad343af  #       "sûÎ»\x0fÍ[÷:ÓC¯"
+      41ebe5de1ab1c3cc08701a76  #       "AëåÞ\x1a±ÃÌ\x08p\x1av"
+      186fac0678b106029804108e  #       "\x18o¬\x06x±\x06\x02\x98\x04\x10\x8e"
+      dfa2b6d96af719bf22432515  #       "ß¢¶Ùj÷\x19¿"C%\x15"
+      45985687                  #       "E\x98V\x87"
 
 6.  Referenced Token
 
@@ -599,8 +600,8 @@ d2                              # tag(18)
 
       -  status_list: REQUIRED when the status list mechanism defined in
          this specification is used.  It contains a reference to a
-         Status List or Status List Token.  The object contains exactly
-         two claims:
+         Status List or Status List Token.  It MUST at least contain the
+         following claims:
 
          o  idx: REQUIRED.  The idx (index) claim MUST specify an
             Integer that represents the index to check for status
@@ -665,29 +666,43 @@ d2                              # tag(18)
    Application of additional restrictions and policy are at the
    discretion of the verifying party.
 
-   The following is a non-normative example for a decoded payload of a
-   Referenced Token:
+   The following is a non-normative example of a Referenced Token in CWT
+   format in Hex:
 
-   18(
-       [
-         / protected / << {
-           / alg / 1: -7 / ES256 /
-         } >>,
-         / unprotected / {
-           / kid / 4: h'3132' / '13' /
-         },
-         / payload / << {
-           / iss    / 1: "https://example.com",
-           / status / 65535: {
-             "status_list": {
-               "idx": 0,
-               "uri": "https://example.com/statuslists/1"
-             }
-           }
-         } >>,
-         / signature / h'...'
-       ]
-     )
+   d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
+   6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
+   7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
+   7374617475736c697374732f315840a71143bf5fbb6a39dc2ebdc61db43f2ff4f9c9
+   c1b2500f0803e93f84993808f67d4c5faa600a4b0fdec357a6c2d18ff2999f3dbed2
+   1a45b46585a40b0a689d54
+
+   The following is the CBOR Annotated Hex output of the example above:
+
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         a71143bf5fbb6a39dc2ebdc6  #       "§\x11C¿_»j9Ü.½Æ"
+         1db43f2ff4f9c9c1b2500f08  #       "\x1d´?/ôùÉÁ²P\x0f\x08"
+         03e93f84993808f67d4c5faa  #       "\x03é?\x84\x998\x08ö}L_ª"
+         600a4b0fdec357a6c2d18ff2  #       "`\x0aK\x0fÞÃW¦ÂÑ\x8fò"
+         999f3dbed21a45b46585a40b  #       "\x99\x9f=¾Ò\x1aE´e\x85¤\x0b"
+         0a689d54                  #       "\x0ah\x9dT"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -819,8 +834,8 @@ d2                              # tag(18)
       available metadata of an issuance protocol
 
    *  Status List Parameter: The issuer of the Referenced Token includes
-      an additional claim to the Status List (Token) that links to the
-      Status List Aggregation.
+      an additional claim in the Status List (Token) that contains the
+      Status List Aggregation URI.
 
 9.1.  Issuer Metadata
 
@@ -1405,12 +1420,6 @@ d2                              # tag(18)
 
 15.1.  Normative References
 
-   [CWT.typ]  Jones, M. B. and O. Steele, "COSE "typ" (type) Header
-              Parameter", Work in Progress, Internet-Draft, draft-ietf-
-              cose-typ-header-parameter-05, 3 April 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              typ-header-parameter-05>.
-
    [IANA.CWT] IANA, "CBOR Web Token (CWT) Claims", n.d.,
               <https://www.iana.org/assignments/cwt/cwt.xhtml>.
 
@@ -1503,6 +1512,11 @@ d2                              # tag(18)
               DOI 10.17487/RFC9111, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9111>.
 
+   [RFC9596]  Jones, M.B. and O. Steele, "CBOR Object Signing and
+              Encryption (COSE) "typ" (type) Header Parameter",
+              RFC 9596, DOI 10.17487/RFC9596, June 2024,
+              <https://www.rfc-editor.org/rfc/rfc9596>.
+
 15.2.  Informative References
 
    [ISO.mdoc] ISO/IEC JTC 1/SC 17, "ISO/IEC 18013-5:2021 ISO-compliant
@@ -1542,7 +1556,12 @@ Document History
 
    -03
 
-   *  introduce batch fetching mechanism
+   *  introduce the status list aggregation mechanism
+
+   *  relax requirements for status_list claims to contain other
+      parameters
+
+   *  change cwt referenced token example to hex and annotated hex
 
    *  require TLS only for fetching Status List, not for Status List
       Token
@@ -1622,4 +1641,5 @@ Authors' Addresses
 
 
    Christian Bormann
-   Email: chris.bormann@gmx.de
+   Robert Bosch GmbH
+   Email: christiancarl.bormann@bosch.com
