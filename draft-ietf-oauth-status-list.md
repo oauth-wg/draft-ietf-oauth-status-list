@@ -454,7 +454,7 @@ As this is out of scope of this document, this validation is not be described he
 If this validation was not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
 
 1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jwt) for JWTs and [](#referenced-token-cwt) for CWTs. This step can be overruled if defined within the Referenced Token Format natively
-2. Resolve the Status List from the provided URI or make sure it was provided in other ways (e.g., by caching)
+2. Resolve the Status List from the provided URI
 3. Validate the Status List Token:
     1. Validate the Status List Token by following the rules defined in section 7.2 of {{RFC7519}} for JWTs and section 7.2 of {{RFC8392}} for CWTs.
     2. Check for the existence of the required claims as defined in [](#status-list-token-jwt) and [](#status-list-token-cwt)
