@@ -38,7 +38,6 @@ normative:
   RFC8949: RFC8949
   RFC9052: RFC9052
   RFC9110: RFC9110
-  RFC9111: RFC9111
   RFC9596: RFC9596
   IANA.MediaTypes:
     author:
@@ -449,7 +448,27 @@ The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
 ## Validation Rules
 
-TBD
+Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature, expiration time.
+As this is out of scope of this document, this validation is not be described here, but is expected to be done according to the format of the Referenced Token.
+
+If this validation was not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
+
+1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jwt) for JWTs and [](#referenced-token-cwt) for CWTs. This step can be overruled if defined within the Referenced Token Format natively
+2. Resolve the Status List from the provided URI
+3. Validate the Status List Token:
+    1. Validate the Status List Token by following the rules defined in section 7.2 of {{RFC7519}} for JWTs and section 7.2 of {{RFC8392}} for CWTs.
+    2. Check for the existence of the required claims as defined in [](#status-list-token-jwt) and [](#status-list-token-cwt)
+4. All existing claims in the Status List Token MUST be checked according to the rules in [](#status-list-token-jwt) and [](#status-list-token-cwt)
+    1. The subject claim (`sub` or `2`) of the Status List Token MUST be equal to the `uri` claim in the `status_list` object of the Referenced Token
+    2. If the Relying Party has custom policies regarding the freshness of the Status List Token, it SHOULD check the issued at claim (`iat` or `6`)
+    3. If expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
+    4. If the Referenced Token contains an issuer claim, the Status List Token MUST contain the same issuer claim (`iss` or `1`)
+    5. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
+5. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
+6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bound of the status list
+7. Check the status value as described in [](#status-types)
+
+If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
 
 # Status List Aggregation {#batch-fetching}
 
@@ -844,6 +863,8 @@ for their valuable contributions, discussions and feedback to this specification
 
 -03
 
+* remove unused reference to RFC9111
+* add validation rules for status list token
 * introduce the status list aggregation mechanism
 * relax requirements for status_list claims to contain other parameters
 * change cwt referenced token example to hex and annotated hex
