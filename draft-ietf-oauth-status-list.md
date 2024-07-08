@@ -206,6 +206,7 @@ This section defines the structure for a JSON-encoded Status List:
 * `status_list`: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded (as defined in Section 2 of {{RFC7515}}) Status List as specified in [](#status-list).
+   * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the JSON representation of the Status List:
 
@@ -220,6 +221,7 @@ This section defines the structure for a CBOR-encoded Status List:
 * The `StatusList` structure is a map (Major Type 5) and defines the following entries:
   * `bits`: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list-json).
+  * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the CBOR representation of the Status List in Hex:
 
@@ -448,6 +450,47 @@ The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 ## Validation Rules
 
 TBD
+
+# Status List Aggregation {#batch-fetching}
+
+Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
+
+There are two options for a Relying Party to retrieve the Status List Aggregation.
+An issuer MAY support any of these mechanisms:
+
+- Issuer metadata: The issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
+- Status List Parameter: The issuer of the Referenced Token includes an additional claim in the Status List (Token) that contains the Status List Aggregation URI.
+
+## Issuer Metadata
+
+The issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.
+
+The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
+
+## Status List Parameter
+
+The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this URI to retrieve an up-to-date list of relevant Status Lists.
+
+## Status List Aggregation in JSON Format
+
+This section defines the structure for a JSON-encoded Status List Aggregation:
+
+* `status_lists`: REQUIRED. JSON array of strings that contains URIs linking to Status List (Tokens).
+
+The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return SHOULD be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
+
+The following is a non-normative example for media type `application/json`:
+
+~~~ json
+
+{
+   "status_lists" : [
+      "https://example.com/statuslists/1",
+      "https://example.com/statuslists/2",
+      "https://example.com/statuslists/3"
+   ]
+}
+~~~
 
 # Further Examples
 
@@ -801,6 +844,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -03
 
+* introduce the status list aggregation mechanism
 * relax requirements for status_list claims to contain other parameters
 * change cwt referenced token example to hex and annotated hex
 * require TLS only for fetching Status List, not for Status List Token
