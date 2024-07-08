@@ -451,7 +451,7 @@ The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature, expiration time.
 As this is out of scope of this document, this validation is not be described here, but is expected to be done according to the format of the Referenced Token.
 
-If this validation was not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation for the Status List:
+If this validation was not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
 
 1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jwt) for JWTs and [](#referenced-token-cwt) for CWTs. This step can be overruled if defined within the Referenced Token Format natively
 2. Resolve the Status List from the provided URI or make sure it was provided in other ways (e.g., by caching)
