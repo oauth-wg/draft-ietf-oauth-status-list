@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-07T00:15:41.778402+00:00",
+  "timestamp": "2024-07-09T00:14:16.271004+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -770,7 +770,7 @@
       "id": "I_kwDOJZ2aqs5ozHOP",
       "title": "Add suggestions for API for batch fetching statuslists",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -779,8 +779,8 @@
       "labels": [],
       "body": "If a verifier wants all statuslists for a specific type of Referenced Token, e.g. for offlien caching, then it would be handy, if the issuer provides a API endpoint to get those in one call, e.g. as an array.",
       "createdAt": "2023-06-15T07:39:24Z",
-      "updatedAt": "2024-07-04T06:18:40Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-08T07:21:02Z",
+      "closedAt": "2024-07-08T07:21:02Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2837,15 +2837,15 @@
       "id": "I_kwDOJZ2aqs6IL0M4",
       "title": "Finish Validation Rules",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/134",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-validation-rules",
       "createdAt": "2024-05-08T06:37:17Z",
-      "updatedAt": "2024-07-04T06:18:29Z",
-      "closedAt": null,
+      "updatedAt": "2024-07-08T20:03:33Z",
+      "closedAt": "2024-07-08T20:03:33Z",
       "comments": []
     },
     {
@@ -3133,6 +3133,22 @@
           "updatedAt": "2024-07-04T12:58:01Z"
         }
       ]
+    },
+    {
+      "number": 156,
+      "id": "I_kwDOJZ2aqs6Ow62g",
+      "title": "Simplifying compression requirements",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/156",
+      "state": "OPEN",
+      "author": "cobward",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I have some concerns about the complexity of the compression requirements:\r\n\r\n> \r\n>    3.  The byte array is compressed using DEFLATE [RFC1951] with the\r\n>        ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to\r\n>        use the highest compression level available.\r\n\r\nand\r\n\r\n> \r\n>    The HTTP response SHOULD use gzip Content-Encoding as defined in\r\n>    [RFC9110].\r\n\r\nThe first quoted requirement adds needless complexity and computation on the part of the issuer, as compression can happen at the HTTP level (as indicated by the second requirement), so an implementation following the recommendations of this specification would end up compressing twice at the highest available compression level. With the second requirement there is ambiguity with how it interacts with the requirements in RFC9110 with respect to handling the Accept-Encoding request header.\r\n\r\nMy proposal is to remove the requirement for DEFLATE compression on internal structure, and instead rely solely on compression of the entire response using the request/response mechanism defined in RFC9110, section 8.4.",
+      "createdAt": "2024-07-08T09:57:47Z",
+      "updatedAt": "2024-07-08T09:58:56Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -8811,24 +8827,26 @@
       "id": "PR_kwDOJZ2aqs5vevnb",
       "title": "batch fetching status lists",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/141",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "closes #27\r\n\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/batch-fetching/draft-ietf-oauth-status-list.html \r\n",
       "createdAt": "2024-05-15T06:04:00Z",
-      "updatedAt": "2024-07-05T07:25:38Z",
+      "updatedAt": "2024-07-08T07:21:01Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "8b844e1ee711a3f2d4e7b9e5b0bd1834124598d1",
+      "baseRefOid": "f9ffaf9705e89ac29d5f2b72e37fd58390c2e3a2",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/batch-fetching",
-      "headRefOid": "61acdaf6532d56376f05356c70430d5085060aaa",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "7ec8736d9c814e2a6d2a43f9d2d0fddce6f20bb9",
+      "closedAt": "2024-07-08T07:21:01Z",
+      "mergedAt": "2024-07-08T07:21:01Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "16a284405a9849075510c525cfd0a39fa35b254c"
+      },
       "comments": [
         {
           "author": "paulbastian",
@@ -8836,6 +8854,13 @@
           "body": "Some ideas for renaming:\r\n- Status List Pool\r\n- Status List Collection\r\n- Status List Set\r\n- Status List Batch",
           "createdAt": "2024-07-04T12:57:12Z",
           "updatedAt": "2024-07-04T12:57:12Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "I'd merge this as is and move things to section 8 with another PR that perhaps also finds a better name than `aggregation_uri` if that's fine w/ you @paulbastian @tplooker?",
+          "createdAt": "2024-07-07T10:15:04Z",
+          "updatedAt": "2024-07-07T10:15:04Z"
         }
       ],
       "reviews": [
@@ -9219,6 +9244,92 @@
               "updatedAt": "2024-07-05T06:56:31Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6A3GrL",
+          "commit": {
+            "abbreviatedOid": "0d7baae"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-07T21:48:29Z",
+          "updatedAt": "2024-07-07T21:48:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6A3d_G",
+          "commit": {
+            "abbreviatedOid": "0d7baae"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T01:21:16Z",
+          "updatedAt": "2024-07-08T01:21:16Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n   * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.\r\n```",
+              "createdAt": "2024-07-08T01:21:16Z",
+              "updatedAt": "2024-07-08T01:21:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6A3eAn",
+          "commit": {
+            "abbreviatedOid": "0d7baae"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T01:21:28Z",
+          "updatedAt": "2024-07-08T01:21:28Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\n  * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.\r\n```",
+              "createdAt": "2024-07-08T01:21:28Z",
+              "updatedAt": "2024-07-08T01:21:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6A3eOu",
+          "commit": {
+            "abbreviatedOid": "0d7baae"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T01:23:05Z",
+          "updatedAt": "2024-07-08T01:23:06Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "```suggestion\r\nStatus List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.\r\n```",
+              "createdAt": "2024-07-08T01:23:06Z",
+              "updatedAt": "2024-07-08T01:23:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6A3eXG",
+          "commit": {
+            "abbreviatedOid": "0d7baae"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM as a first cut with the minor language changes I highlighted.",
+          "createdAt": "2024-07-08T01:24:09Z",
+          "updatedAt": "2024-07-08T01:24:09Z",
+          "comments": []
         }
       ]
     },
@@ -9562,6 +9673,202 @@
           "body": "",
           "createdAt": "2024-07-04T06:10:54Z",
           "updatedAt": "2024-07-04T06:10:54Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 155,
+      "id": "PR_kwDOJZ2aqs50nahE",
+      "title": "first attempt on validation rules",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/155",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #134 \r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/validation-rules/draft-ietf-oauth-status-list.html",
+      "createdAt": "2024-07-07T16:01:39Z",
+      "updatedAt": "2024-07-08T20:03:32Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "16a284405a9849075510c525cfd0a39fa35b254c",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/validation-rules",
+      "headRefOid": "c5a7ef3562198ad88aa5be665fa6d7828645c054",
+      "closedAt": "2024-07-08T20:03:32Z",
+      "mergedAt": "2024-07-08T20:03:32Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "f99e04f360ee8f7c872d65c11e2a3bcba02ffe89"
+      },
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think there is room for improvement but I'd rather start with something to get feedback",
+          "createdAt": "2024-07-07T21:55:19Z",
+          "updatedAt": "2024-07-07T21:55:19Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6A3Gxs",
+          "commit": {
+            "abbreviatedOid": "39410f4"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-07T21:51:20Z",
+          "updatedAt": "2024-07-07T21:54:40Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "What if ttl is not present?",
+              "createdAt": "2024-07-07T21:51:20Z",
+              "updatedAt": "2024-07-07T21:54:40Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "Check index value is within size of the byte array?",
+              "createdAt": "2024-07-07T21:53:50Z",
+              "updatedAt": "2024-07-07T21:54:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6A3d3B",
+          "commit": {
+            "abbreviatedOid": "39410f4"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T01:20:24Z",
+          "updatedAt": "2024-07-08T01:20:24Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n    5. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)\r\n```\r\n\r\nIts not IAT you add the TTL too in order to determine whether to resolve an update its the time of resolving the status list.",
+              "createdAt": "2024-07-08T01:20:24Z",
+              "updatedAt": "2024-07-08T01:20:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6A4vor",
+          "commit": {
+            "abbreviatedOid": "39410f4"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T06:18:07Z",
+          "updatedAt": "2024-07-08T06:18:08Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n    5. If the `ttl` claim is present and the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)\r\n```",
+              "createdAt": "2024-07-08T06:18:08Z",
+              "updatedAt": "2024-07-08T06:18:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6A4v8E",
+          "commit": {
+            "abbreviatedOid": "39410f4"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T06:18:43Z",
+          "updatedAt": "2024-07-08T06:18:43Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\n6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bound of the status list\r\n```",
+              "createdAt": "2024-07-08T06:18:43Z",
+              "updatedAt": "2024-07-08T06:18:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6BADzf",
+          "commit": {
+            "abbreviatedOid": "e814fd2"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T20:01:09Z",
+          "updatedAt": "2024-07-08T20:01:09Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nUpon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature, expiration time.\r\n```",
+              "createdAt": "2024-07-08T20:01:09Z",
+              "updatedAt": "2024-07-08T20:01:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6BAEZs",
+          "commit": {
+            "abbreviatedOid": "bc3453e"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T20:02:02Z",
+          "updatedAt": "2024-07-08T20:02:03Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nIf this validation was not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:\r\n```",
+              "createdAt": "2024-07-08T20:02:02Z",
+              "updatedAt": "2024-07-08T20:02:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6BAFCE",
+          "commit": {
+            "abbreviatedOid": "11c351f"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-07-08T20:02:53Z",
+          "updatedAt": "2024-07-08T20:02:53Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\n2. Resolve the Status List from the provided URI\r\n```",
+              "createdAt": "2024-07-08T20:02:53Z",
+              "updatedAt": "2024-07-08T20:02:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6BAFWl",
+          "commit": {
+            "abbreviatedOid": "c5a7ef3"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-08T20:03:24Z",
+          "updatedAt": "2024-07-08T20:03:24Z",
           "comments": []
         }
       ]
