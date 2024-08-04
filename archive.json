@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-01T00:16:24.542047+00:00",
+  "timestamp": "2024-08-04T00:16:00.211584+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -3147,6 +3147,22 @@
       "body": "I have some concerns about the complexity of the compression requirements:\r\n\r\n> \r\n>    3.  The byte array is compressed using DEFLATE [RFC1951] with the\r\n>        ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to\r\n>        use the highest compression level available.\r\n\r\nand\r\n\r\n> \r\n>    The HTTP response SHOULD use gzip Content-Encoding as defined in\r\n>    [RFC9110].\r\n\r\nThe first quoted requirement adds needless complexity and computation on the part of the issuer, as compression can happen at the HTTP level (as indicated by the second requirement), so an implementation following the recommendations of this specification would end up compressing twice at the highest available compression level. With the second requirement there is ambiguity with how it interacts with the requirements in RFC9110 with respect to handling the Accept-Encoding request header.\r\n\r\nMy proposal is to remove the requirement for DEFLATE compression on internal structure, and instead rely solely on compression of the entire response using the request/response mechanism defined in RFC9110, section 8.4.",
       "createdAt": "2024-07-08T09:57:47Z",
       "updatedAt": "2024-07-08T09:58:56Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 157,
+      "id": "I_kwDOJZ2aqs6Rsz2u",
+      "title": "Easy way to debug a Status List",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/157",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "With this online tool you are quickly able to decode a JWT Status List for debugging:\r\n\r\nhttps://gchq.github.io/CyberChef/#recipe=JWT_Decode()JPath_expression('status_list.lst','%5C%5Cn')From_Base64('A-Za-z0-9-_',true,false)Zlib_Inflate(0,0,'Adaptive',false,false)To_Binary('Line%20feed',8)Add_line_numbers()\r\n\r\nShall we add it to the readme?",
+      "createdAt": "2024-08-02T08:55:06Z",
+      "updatedAt": "2024-08-02T08:55:06Z",
       "closedAt": null,
       "comments": []
     }
