@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-06T00:14:42.798904+00:00",
+  "timestamp": "2024-08-08T00:14:41.964202+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -251,15 +251,15 @@
       "id": "I_kwDOJZ2aqs5mW5EE",
       "title": "Optional authorization towards the statusList endpoint",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "To limit the tracking/profiling possiblities of the statusList, an optional mechanism for verifiers to get authorized access could be implemented. This limits the entities that have access to the status list. A mechanism could be:\r\n- not defined in this spec but added to privacy considerations\r\n- defined in this spec",
       "createdAt": "2023-05-19T13:44:53Z",
-      "updatedAt": "2023-05-26T12:43:11Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-07T06:33:10Z",
+      "closedAt": "2024-08-07T06:33:10Z",
       "comments": [
         {
           "author": "c2bo",
@@ -288,6 +288,13 @@
           "body": "Main spec should have a short discussion why/where this would make sense.\r\nIn-depth discussion can happen in an appendix.",
           "createdAt": "2023-05-26T12:43:11Z",
           "updatedAt": "2023-05-26T12:43:11Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Discussed in editor's call and decided that this is out of scope currently for the draft",
+          "createdAt": "2024-08-07T06:33:10Z",
+          "updatedAt": "2024-08-07T06:33:10Z"
         }
       ]
     },
@@ -362,7 +369,7 @@
       "labels": [],
       "body": "we assume (and that's good) that the issuer of a VC is responsible of its lifecycle, and then it has to maintain the revocation status of its issued vcs.\r\n\r\nthere may be some cases where the revocation list could be deployed outside the issuer domain\r\n\r\nin this case the status JSON Object shouln't be a JWS instead, signed by the owner of the status list (different from the isser)? \r\n\r\n````\r\n  \"sts\": $JWS\r\n````  ",
       "createdAt": "2023-05-21T00:11:48Z",
-      "updatedAt": "2023-07-11T06:29:59Z",
+      "updatedAt": "2024-08-07T06:44:17Z",
       "closedAt": null,
       "comments": [
         {
@@ -406,6 +413,13 @@
           "body": "Clarify after discussions with @tplooker : This is only about hosting the Status List Token, not about the htird party signing the Token",
           "createdAt": "2023-07-11T06:29:58Z",
           "updatedAt": "2023-07-11T06:29:58Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- we acknowledge 3rd Party hosting by the Status List Provider and will explain this in more detail in the spec, see #158 \r\n- other scenarios, where the issuer of the Referenced Token is not the same as the issuer of the Status List Token will not be detailed, but are still possible to do with this spec given that we don't give guidance on the key management\r\n\r\nPending close if no new feedback",
+          "createdAt": "2024-08-07T06:44:16Z",
+          "updatedAt": "2024-08-07T06:44:16Z"
         }
       ]
     },
@@ -670,7 +684,7 @@
       "labels": [],
       "body": "Add:\r\n- prevent double allocating an index\r\n- randomize allocation of indexes/avoid sequential usage",
       "createdAt": "2023-06-07T19:34:15Z",
-      "updatedAt": "2023-07-11T09:52:39Z",
+      "updatedAt": "2024-08-07T07:03:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -746,7 +760,7 @@
       "labels": [],
       "body": "remaining issue from PR #20. \r\n\r\nalternatives are \"referencing token\".",
       "createdAt": "2023-06-13T19:20:19Z",
-      "updatedAt": "2024-02-06T07:39:58Z",
+      "updatedAt": "2024-08-07T06:55:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -762,6 +776,13 @@
           "body": "> remaining issue from PR #20.\r\n> \r\n> alternatives are \"referencing token\".\r\n\r\nHi, not sure this is the right place to raise the Referencing / Referenced Token discussion again. \r\nIn any case, a way out would perhaps be to drop the 'referencing' language, since it seems unsolvable to me, as there are references between the two tokens both ways. So what about calling the Referenced Token the Listed Token instead? To me, that summarizes the relationship rather neatly: the Status List Token contains the status list, the status of a Listed Token is included in that list. ",
           "createdAt": "2023-09-21T09:04:24Z",
           "updatedAt": "2023-09-21T09:06:06Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > remaining issue from PR #20.\r\n> > alternatives are \"referencing token\".\r\n> \r\n> Hi, not sure this is the right place to raise the Referencing / Referenced Token discussion again. In any case, a way out would perhaps be to drop the 'referencing' language, since it seems unsolvable to me, as there are references between the two tokens both ways. So what about calling the Referenced Token the Listed Token instead? To me, that summarizes the relationship rather neatly: the Status List Token contains the status list, the status of a Listed Token is included in that list.\r\n\r\nAs the Status List draft is today also laying out a framework for other status mechanisms, the term \"Referenced Token\" seems better fitting as its quite neutral and would fit the Status Assertion draft as well, while \"Listed Token\" is very specific to Status List. We would hope that other Status mechanisms extending the proposed framework of this draft would adopt the same terminology. Looking at @peppelinux",
+          "createdAt": "2024-08-07T06:55:38Z",
+          "updatedAt": "2024-08-07T06:55:38Z"
         }
       ]
     },
@@ -923,9 +944,17 @@
       "labels": [],
       "body": "Is it allowed/recommended to have Status List Token in one format and the Referenced Token in another format?",
       "createdAt": "2023-07-11T06:25:53Z",
-      "updatedAt": "2023-07-11T06:25:53Z",
+      "updatedAt": "2024-08-07T06:56:38Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Imho, I would not prevent this from this draft, but most likely people will keep within their ecosystem. ",
+          "createdAt": "2024-08-07T06:56:37Z",
+          "updatedAt": "2024-08-07T06:56:37Z"
+        }
+      ]
     },
     {
       "number": 39,
@@ -986,7 +1015,7 @@
       "labels": [],
       "body": "@tlodderstedt propoeses to:\r\n\r\n- rename `status` to something shorter\r\n- rename `uri` to `slt` (status list token)",
       "createdAt": "2023-07-11T19:31:30Z",
-      "updatedAt": "2024-02-06T07:40:24Z",
+      "updatedAt": "2024-08-07T07:00:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -1002,6 +1031,13 @@
           "body": "Status List Token:\r\n```\r\n{\r\n  \"typ\": \"statuslist+jwt\",\r\n  \"alg\": \"ES256\",\r\n  \"kid\": \"11\"\r\n}\r\n.\r\n{\r\n  \"iss\": \"https://example.com\",\r\n  \"sub\": \"https://example.com/statuslists/1\",\r\n  \"iat\": 1683560915,\r\n  \"exp\": 1686232115,\r\n  \"sl\": {\r\n    \"bts\": 1,\r\n    \"lst\": \"H4sIAMo_jGQC_9u5GABc9QE7AgAAAA\"\r\n  }\r\n}\r\n```\r\nsl (tatus list), bts (bits), lst (list)\r\nReferenced Token:\r\n```\r\n{\r\n  \"alg\": \"ES256\",\r\n  \"kid\": \"11\"\r\n}\r\n.\r\n{\r\n  \"iss\": \"https://example.com\",\r\n  \"sta\": {\r\n    \"slt\": \"https://example.com/statuslists/1\",\r\n    \"idx\": 0    \r\n  }\r\n}\r\n```\r\nsta (status), slt(status list toklen), idx (index)",
           "createdAt": "2023-07-17T08:07:15Z",
           "updatedAt": "2023-07-17T08:07:15Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- Given that this would be breaking changes and we have a considerable amount of specifications and having limited benefits on the other side, we tend to not make these changes",
+          "createdAt": "2024-08-07T07:00:39Z",
+          "updatedAt": "2024-08-07T07:00:39Z"
         }
       ]
     },
@@ -1086,7 +1122,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-07-17T15:48:46Z",
-      "updatedAt": "2023-07-18T11:01:56Z",
+      "updatedAt": "2024-08-07T13:24:59Z",
       "closedAt": null,
       "comments": [
         {
@@ -1095,6 +1131,13 @@
           "body": "the text is existing in JWT encoding, does it make sense to emphasize this change from standard base64url encoding again in our spec?",
           "createdAt": "2023-07-18T11:01:56Z",
           "updatedAt": "2023-07-18T11:01:56Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "I like the solution in sd-jwt - they introduced it as terminology:\r\n> base64url denotes the URL-safe base64 encoding without padding defined in Section 2 of [[RFC7515](https://drafts.oauth.net/oauth-selective-disclosure-jwt/draft-ietf-oauth-selective-disclosure-jwt.html#RFC7515)].\r\n\r\nShould we move that to terminology and reference via base64url in the text?",
+          "createdAt": "2024-08-07T13:24:57Z",
+          "updatedAt": "2024-08-07T13:24:57Z"
         }
       ]
     },
@@ -2504,7 +2547,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2024-02-27T07:25:54Z",
-      "updatedAt": "2024-05-29T06:22:24Z",
+      "updatedAt": "2024-08-07T06:27:27Z",
       "closedAt": null,
       "comments": []
     },
@@ -2763,7 +2806,7 @@
       "labels": [],
       "body": "It may be a good idea to add guidance on the implications of not signing the status list to make the security trade-offs explicit.",
       "createdAt": "2024-03-21T00:13:11Z",
-      "updatedAt": "2024-05-08T06:22:45Z",
+      "updatedAt": "2024-08-07T08:24:14Z",
       "closedAt": null,
       "comments": [
         {
@@ -2779,6 +2822,13 @@
           "body": "Editors Call Discussion:\r\n- Add security consideration for now\r\n- Discuss if the unsigned option should stay in or not for the long term (usefulness/security/less options)",
           "createdAt": "2024-04-02T06:13:43Z",
           "updatedAt": "2024-04-02T06:13:43Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Linked to #147 ",
+          "createdAt": "2024-08-07T08:24:13Z",
+          "updatedAt": "2024-08-07T08:24:13Z"
         }
       ]
     },
@@ -3060,7 +3110,7 @@
       "labels": [],
       "body": "This includes standalone seperate references for each of the claims rather then referencing the JWT based definition.",
       "createdAt": "2024-05-29T06:09:54Z",
-      "updatedAt": "2024-06-06T06:38:10Z",
+      "updatedAt": "2024-08-07T06:27:37Z",
       "closedAt": null,
       "comments": []
     },
@@ -3076,7 +3126,7 @@
       "labels": [],
       "body": "we currently assume there is no issue, but it may be worth to write it down",
       "createdAt": "2024-05-29T06:28:15Z",
-      "updatedAt": "2024-06-06T06:37:20Z",
+      "updatedAt": "2024-08-07T06:27:40Z",
       "closedAt": null,
       "comments": []
     },
@@ -3092,9 +3142,24 @@
       "labels": [],
       "body": "The unsigned option hasn't shown any interest at all and complicates matters within the draft. Therefore, we consider to drop this feature again. Is anybody planning to use this?",
       "createdAt": "2024-05-29T06:43:18Z",
-      "updatedAt": "2024-05-29T06:43:18Z",
+      "updatedAt": "2024-08-07T06:54:35Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "cre8",
+          "authorAssociation": "NONE",
+          "body": "I support the removal of the unsigned option. If the verifier does not want to validate the signature, it can skip this \"feature\" without any further step. This signature operation on the issuer site is also quite small compared to the other functions like interacting with the database and building up the bit string.\r\n\r\nThe argument \"signed data is more valuable in a data breach\" was only brought up when a it was personal data, which is not the case in this scenario. In this case, the status list is all the time public available, so there is no need to hack into any system to get it ^^",
+          "createdAt": "2024-08-07T06:39:11Z",
+          "updatedAt": "2024-08-07T06:40:24Z"
+        },
+        {
+          "author": "manecke",
+          "authorAssociation": "NONE",
+          "body": "Our aim should be to create specifications that are as consistent and compact as possible. Each additional endpoint or option also offers new attack vectors. \r\n\r\nWe also try to create a system that is as secure as possible. We have Trusted Verifier, Trusted Issuer etc. With this in mind, I see no benefit in using unsigned data. In this case, I cannot check the integrity and authenticity of the data on a terminal device at a later point in time. In addition, the data would then be transferred as raw data in the cluster. \r\n\r\nIn this sense, I would take up IDunion's suggestion and only offer the signed option and only offer this option. Clients who do not want to check the integrity of the data can simply do without validating the list/signature. This corresponds to the unsigned option (the amount of data is only one signature larger). \r\n\r\nFurthermore, in the offline use case, if I cache the data on a terminal device, I need the option of being able to check the data. In my view, this option should be prioritized. You should also generally consider whether I really want to omit the check in a status list. This is at least questionable in the majority of cases.",
+          "createdAt": "2024-08-07T06:54:34Z",
+          "updatedAt": "2024-08-07T06:54:34Z"
+        }
+      ]
     },
     {
       "number": 151,
@@ -3162,7 +3227,31 @@
       "labels": [],
       "body": "With this online tool you are quickly able to decode a JWT Status List for debugging:\r\n\r\nhttps://gchq.github.io/CyberChef/#recipe=JWT_Decode()JPath_expression('status_list.lst','%5C%5Cn')From_Base64('A-Za-z0-9-_',true,false)Zlib_Inflate(0,0,'Adaptive',false,false)To_Binary('Line%20feed',8)Add_line_numbers()\r\n\r\nShall we add it to the readme?",
       "createdAt": "2024-08-02T08:55:06Z",
-      "updatedAt": "2024-08-02T08:55:06Z",
+      "updatedAt": "2024-08-06T10:41:53Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "I think that is a good idea for the Readme",
+          "createdAt": "2024-08-06T10:41:52Z",
+          "updatedAt": "2024-08-06T10:41:52Z"
+        }
+      ]
+    },
+    {
+      "number": 158,
+      "id": "I_kwDOJZ2aqs6SMNsI",
+      "title": "Explain Status List Provider and other roles in the introduction",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/158",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Something like this picutre used in the last IETF presentation:\r\n\r\n![image](https://github.com/user-attachments/assets/86e48867-0f3a-4715-8bce-a13e1514c814)\r\n",
+      "createdAt": "2024-08-07T06:41:30Z",
+      "updatedAt": "2024-08-07T06:41:30Z",
       "closedAt": null,
       "comments": []
     }
