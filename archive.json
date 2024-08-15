@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-13T00:15:37.062369+00:00",
+  "timestamp": "2024-08-15T00:14:45.738440+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -362,15 +362,15 @@
       "id": "I_kwDOJZ2aqs5ma5F5",
       "title": "Ownership of the status endpoint and third party status list providers use case",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/10",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "peppelinux",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "we assume (and that's good) that the issuer of a VC is responsible of its lifecycle, and then it has to maintain the revocation status of its issued vcs.\r\n\r\nthere may be some cases where the revocation list could be deployed outside the issuer domain\r\n\r\nin this case the status JSON Object shouln't be a JWS instead, signed by the owner of the status list (different from the isser)? \r\n\r\n````\r\n  \"sts\": $JWS\r\n````  ",
       "createdAt": "2023-05-21T00:11:48Z",
-      "updatedAt": "2024-08-07T06:44:17Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-14T06:39:52Z",
+      "closedAt": "2024-08-14T06:39:51Z",
       "comments": [
         {
           "author": "tplooker",
@@ -420,6 +420,13 @@
           "body": "Editors Call:\r\n- we acknowledge 3rd Party hosting by the Status List Provider and will explain this in more detail in the spec, see #158 \r\n- other scenarios, where the issuer of the Referenced Token is not the same as the issuer of the Status List Token will not be detailed, but are still possible to do with this spec given that we don't give guidance on the key management\r\n\r\nPending close if no new feedback",
           "createdAt": "2024-08-07T06:44:16Z",
           "updatedAt": "2024-08-07T06:44:16Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- opened #159 to solve the latter discussion\r\n- closing this one",
+          "createdAt": "2024-08-14T06:39:51Z",
+          "updatedAt": "2024-08-14T06:39:51Z"
         }
       ]
     },
@@ -675,7 +682,7 @@
     {
       "number": 24,
       "id": "I_kwDOJZ2aqs5oGi-v",
-      "title": "Add implementations consinderations",
+      "title": "Add implementations considerations",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/24",
       "state": "OPEN",
       "author": "paulbastian",
@@ -684,7 +691,7 @@
       "labels": [],
       "body": "Add:\r\n- prevent double allocating an index\r\n- randomize allocation of indexes/avoid sequential usage",
       "createdAt": "2023-06-07T19:34:15Z",
-      "updatedAt": "2024-08-07T07:03:58Z",
+      "updatedAt": "2024-08-14T06:40:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -760,7 +767,7 @@
       "labels": [],
       "body": "remaining issue from PR #20. \r\n\r\nalternatives are \"referencing token\".",
       "createdAt": "2023-06-13T19:20:19Z",
-      "updatedAt": "2024-08-07T06:55:40Z",
+      "updatedAt": "2024-08-14T07:39:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -783,6 +790,20 @@
           "body": "> > remaining issue from PR #20.\r\n> > alternatives are \"referencing token\".\r\n> \r\n> Hi, not sure this is the right place to raise the Referencing / Referenced Token discussion again. In any case, a way out would perhaps be to drop the 'referencing' language, since it seems unsolvable to me, as there are references between the two tokens both ways. So what about calling the Referenced Token the Listed Token instead? To me, that summarizes the relationship rather neatly: the Status List Token contains the status list, the status of a Listed Token is included in that list.\r\n\r\nAs the Status List draft is today also laying out a framework for other status mechanisms, the term \"Referenced Token\" seems better fitting as its quite neutral and would fit the Status Assertion draft as well, while \"Listed Token\" is very specific to Status List. We would hope that other Status mechanisms extending the proposed framework of this draft would adopt the same terminology. Looking at @peppelinux",
           "createdAt": "2024-08-07T06:55:38Z",
           "updatedAt": "2024-08-07T06:55:38Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The term seems established right now. Pending close if no further feedback",
+          "createdAt": "2024-08-14T06:42:05Z",
+          "updatedAt": "2024-08-14T06:42:05Z"
+        },
+        {
+          "author": "david-bakker",
+          "authorAssociation": "NONE",
+          "body": "OK with me!",
+          "createdAt": "2024-08-14T07:39:07Z",
+          "updatedAt": "2024-08-14T07:39:07Z"
         }
       ]
     },
@@ -940,11 +961,13 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [],
       "body": "Is it allowed/recommended to have Status List Token in one format and the Referenced Token in another format?",
       "createdAt": "2023-07-11T06:25:53Z",
-      "updatedAt": "2024-08-07T06:56:38Z",
+      "updatedAt": "2024-08-14T06:45:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -953,6 +976,13 @@
           "body": "Imho, I would not prevent this from this draft, but most likely people will keep within their ecosystem. ",
           "createdAt": "2024-08-07T06:56:37Z",
           "updatedAt": "2024-08-07T06:56:37Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- keep the option to have the mixing\r\n- add some guidance to implementers consideration",
+          "createdAt": "2024-08-14T06:45:35Z",
+          "updatedAt": "2024-08-14T06:45:35Z"
         }
       ]
     },
@@ -1008,15 +1038,15 @@
       "id": "I_kwDOJZ2aqs5rRCxi",
       "title": "Rename claim names of Referenced Token",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/40",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "@tlodderstedt propoeses to:\r\n\r\n- rename `status` to something shorter\r\n- rename `uri` to `slt` (status list token)",
       "createdAt": "2023-07-11T19:31:30Z",
-      "updatedAt": "2024-08-07T07:00:40Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-14T06:47:01Z",
+      "closedAt": "2024-08-14T06:47:01Z",
       "comments": [
         {
           "author": "c2bo",
@@ -1118,11 +1148,13 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [],
       "body": "",
       "createdAt": "2023-07-17T15:48:46Z",
-      "updatedAt": "2024-08-07T13:24:59Z",
+      "updatedAt": "2024-08-14T06:47:37Z",
       "closedAt": null,
       "comments": [
         {
@@ -1205,15 +1237,15 @@
       "id": "I_kwDOJZ2aqs5r3eCL",
       "title": "Mandatory signature algorithms?",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/46",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Do we want normative text on required signature algorithms, e.g. ES256?",
       "createdAt": "2023-07-18T11:05:11Z",
-      "updatedAt": "2023-08-23T06:47:23Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-14T06:49:20Z",
+      "closedAt": "2024-08-14T06:49:20Z",
       "comments": [
         {
           "author": "c2bo",
@@ -1221,6 +1253,13 @@
           "body": "Imho, this should be part of an interop profile and not part of this spec. We should stick to / allow jose/cose in this work.",
           "createdAt": "2023-08-23T06:47:13Z",
           "updatedAt": "2023-08-23T06:47:23Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- agreed to close this\r\n- JOSE already has mandatory ones\r\n- mandatory algos didn't seem to age will in the past\r\n- leave it to profiles",
+          "createdAt": "2024-08-14T06:49:20Z",
+          "updatedAt": "2024-08-14T06:49:20Z"
         }
       ]
     },
@@ -1236,7 +1275,7 @@
       "labels": [],
       "body": "As we declined to include a size property to the status list, we do not have other means than to decode&decompress the encoded status list and get status list size from the byte array length/size:\r\nstatus list size = byte array size * 8 / bits\r\nTherefore it makes to add the requirement that status list size must \"fill up\" to bytes",
       "createdAt": "2023-07-18T12:01:54Z",
-      "updatedAt": "2023-08-23T06:45:24Z",
+      "updatedAt": "2024-08-14T06:56:31Z",
       "closedAt": null,
       "comments": [
         {
@@ -1245,6 +1284,13 @@
           "body": "ready for PR after #57 ",
           "createdAt": "2023-08-23T06:45:24Z",
           "updatedAt": "2023-08-23T06:45:24Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- only danger that we currently see is that some bits at the end have random/un-assigned values\r\n- leaving this open for now",
+          "createdAt": "2024-08-14T06:56:30Z",
+          "updatedAt": "2024-08-14T06:56:30Z"
         }
       ]
     },
@@ -1556,7 +1602,7 @@
       "labels": [],
       "body": "We're going to implement this beautiful draft. Aside of our requirements already satisfied by the current text, we have debated about the following privacy concern:\r\n\r\n- Once an RP has obtained the VP from a wallet instance, and the related status list ref related to one or more digital credential, the RP may continuously check the status of the credentials without any control/limit. This raises a privacy issue since an RP may control the mobile driving license of a citizen until this expire and completely out of the scope of the historical authentication made by the citizen to the RP, and the consent given.\r\n\r\nanother example: by asking the EAA related to an affiliation, an RP may check if a day a User was fired. And so on, exposing personal information that are not intended to be monitored/controlled over time.\r\n\r\nThis raised to our minds the requirement to protect the status endpoint for specific audiences and cryptographically, using sender-constrained tokens.\r\n\r\nSince the User gives the consent for the presentation of the credentials, then the Holder should issue a grant token for accessing to the status of the credentials.\r\n\r\nWe take into account that the RS that hosts the status list MUST not inspect or know the identity of the requester (the RP) because it must not track the usage of a specific credential, owned by a citizen, to a specific RP.\r\n\r\nHere some points of discussion to be further explored:\r\n\r\n1. The RP MUST provide to the Wallet Instance an ephemeral key for each requested credential within the presentation request\r\n2. the Wallet Instance issues a signed status list token, by signing it using the private key referred to the public one included in the credential cnf.jwk. \r\n3. The status list token doesn't contains any information about the RP.\r\n4. The signed status list token is provided to the RP with a PoP bound to the ephemeral key provided at point 1\r\n5. the RP can only use that status list token to the RS that hosts the status list by cryptographically proving its possession\r\n6. the RS that provide the status list doesn't know the identity of the client that consumes the status list\r\n7. the status token expires in a short period (less than hours), taking out any possibility to grant the access to that anonymous client the status list for that specific credential\r\n8. each time in the future the RP needs to check the status of a previously obtained digital credential, it MUST ask to the Holder (via email or any other digital delivery under the sole control of the User and offered by this latter to the RP) a presentation of that digital credential (by type)\r\n\r\nin this way the user is always in full control of which RP is going to check the status of their digital credential.\r\n\r\nIs there any idea, concern, issue, enhanchement to be considered before all?\r\n\r\nIf I miss something please don't esitate to bring me on the right path, I was quite far for a long time from this draft, then here my excuse in advance\r\n\r\n",
       "createdAt": "2023-09-11T22:50:49Z",
-      "updatedAt": "2023-10-23T09:32:19Z",
+      "updatedAt": "2024-08-14T07:12:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -1656,6 +1702,13 @@
           "body": "I think we have to discuss this with the other co-authors and at IETF Prague. We also plan to schedule a semi-regular open call, where these things could be argued.",
           "createdAt": "2023-10-23T09:32:19Z",
           "updatedAt": "2023-10-23T09:32:19Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@peppelinux @fmarino-ipzs I assume this issue is solved with your draft on status assertions?\r\nPending close",
+          "createdAt": "2024-08-14T07:12:40Z",
+          "updatedAt": "2024-08-14T07:12:52Z"
         }
       ]
     },
@@ -3251,7 +3304,33 @@
       "labels": [],
       "body": "Something like this picutre used in the last IETF presentation:\r\n\r\n![image](https://github.com/user-attachments/assets/86e48867-0f3a-4715-8bce-a13e1514c814)\r\n",
       "createdAt": "2024-08-07T06:41:30Z",
-      "updatedAt": "2024-08-07T06:41:30Z",
+      "updatedAt": "2024-08-14T06:37:30Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- Status List Provider -> Status List Issuer, which also may sign the Status List himself. In most cases though Issuer = Status List Issuer",
+          "createdAt": "2024-08-14T06:37:29Z",
+          "updatedAt": "2024-08-14T06:37:29Z"
+        }
+      ]
+    },
+    {
+      "number": 159,
+      "id": "I_kwDOJZ2aqs6S7T2G",
+      "title": "Remove requirement on matching iss values",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/159",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "paulbastian"
+      ],
+      "labels": [],
+      "body": "To allow Status List Issuer being different from Issuer and using iss values, we should remove this constraint\r\n            ",
+      "createdAt": "2024-08-14T06:38:37Z",
+      "updatedAt": "2024-08-14T06:38:47Z",
       "closedAt": null,
       "comments": []
     }
