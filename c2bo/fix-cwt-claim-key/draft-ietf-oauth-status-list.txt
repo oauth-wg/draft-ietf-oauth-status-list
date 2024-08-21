@@ -5,9 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 2 January 2025                                                 
+Expires: 22 February 2025                                               
                                                               C. Bormann
-                                                             1 July 2024
+                                                       Robert Bosch GmbH
+                                                          21 August 2024
 
 
                            Token Status List
@@ -49,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 January 2025.
+   This Internet-Draft will expire on 22 February 2025.
 
 Copyright Notice
 
@@ -89,36 +90,40 @@ Table of Contents
      8.1.  Status List Request
      8.2.  Status List Response
      8.3.  Validation Rules
-   9.  Further Examples
-     9.1.  Status List Token with 2-Bit Status Values in JWT format
-   10. Security Considerations
-     10.1.  Correct decoding and parsing of the encoded status list
-     10.2.  Cached and Stale status lists
-     10.3.  Authorized access to the Status List
-     10.4.  History
-   11. Privacy Considerations
-     11.1.  Limiting issuers observability of token verification
-     11.2.  Malicious Issuers
-     11.3.  Unobservability of Relying Parties
-     11.4.  Unlinkability
-     11.5.  Third Party Hosting
-   12. Implementation Considerations
-     12.1.  Token Lifecycle
-   13. IANA Considerations
-     13.1.  JSON Web Token Claims Registration
-       13.1.1.  Registry Contents
-     13.2.  JWT Status Mechanism Methods Registry
-       13.2.1.  Registration Template
-       13.2.2.  Initial Registry Contents
-     13.3.  CBOR Web Token Claims Registration
-       13.3.1.  Registry Contents
-     13.4.  CWT Status Mechanism Methods Registry
-       13.4.1.  Registration Template
-       13.4.2.  Initial Registry Contents
-     13.5.  Media Type Registration
-   14. References
-     14.1.  Normative References
-     14.2.  Informative References
+   9.  Status List Aggregation
+     9.1.  Issuer Metadata
+     9.2.  Status List Parameter
+     9.3.  Status List Aggregation in JSON Format
+   10. Further Examples
+     10.1.  Status List Token with 2-Bit Status Values in JWT format
+   11. Security Considerations
+     11.1.  Correct decoding and parsing of the encoded status list
+     11.2.  Cached and Stale status lists
+     11.3.  Authorized access to the Status List
+     11.4.  History
+   12. Privacy Considerations
+     12.1.  Limiting issuers observability of token verification
+     12.2.  Malicious Issuers
+     12.3.  Unobservability of Relying Parties
+     12.4.  Unlinkability
+     12.5.  Third Party Hosting
+   13. Implementation Considerations
+     13.1.  Token Lifecycle
+   14. IANA Considerations
+     14.1.  JSON Web Token Claims Registration
+       14.1.1.  Registry Contents
+     14.2.  JWT Status Mechanism Methods Registry
+       14.2.1.  Registration Template
+       14.2.2.  Initial Registry Contents
+     14.3.  CBOR Web Token Claims Registration
+       14.3.1.  Registry Contents
+     14.4.  CWT Status Mechanism Methods Registry
+       14.4.1.  Registration Template
+       14.4.2.  Initial Registry Contents
+     14.5.  Media Type Registration
+   15. References
+     15.1.  Normative References
+     15.2.  Informative References
    Acknowledgments
    Document History
    Authors' Addresses
@@ -330,7 +335,7 @@ Table of Contents
    This section defines the structure for a JSON-encoded Status List:
 
    *  status_list: REQUIRED.  JSON Object that contains a Status List.
-      The object contains exactly two claims:
+      It MUST contain at least the following claims:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the Status List (lst).  The allowed values
@@ -340,6 +345,10 @@ Table of Contents
          all the Referenced Tokens it conveys statuses for.  The value
          MUST be the base64url-encoded (as defined in Section 2 of
          [RFC7515]) Status List as specified in Section 4.
+
+      -  aggregation_uri: OPTIONAL.  JSON String that contains a URI to
+         retrieve the Status List Aggregation for this type of
+         Referenced Token.  See section Section 9 for further detail.
 
    The following example illustrates the JSON representation of the
    Status List:
@@ -365,14 +374,19 @@ Table of Contents
       -  lst: REQUIRED.  Byte string (Major Type 2) that contains the
          Status List as specified in Section 4.1.
 
+      -  aggregation_uri: OPTIONAL.  Text string (Major Type 3) that
+         contains a URI to retrieve the Status List Aggregation for this
+         type of Referenced Token.  See section Section 9 for further
+         detail.
+
    The following example illustrates the CBOR representation of the
-   Status List:
+   Status List in Hex:
 
    byte_array = [0xb9, 0xa3]
    encoded:
    a2646269747301636c73744a78dadbb918000217015d
 
-   The following is the CBOR diagnostic output of the example above:
+   The following is the CBOR Annotated Hex output of the example above:
 
    a2                              # map(2)
      64                            #   string(4)
@@ -496,7 +510,7 @@ Table of Contents
    *  65534 (time to live): OPTIONAL.  Same definition as ttl claim in
       Section 5.1.
 
-   *  65535 (status list): REQUIRED.  The status list claim MUST specify
+   *  65533 (status_list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the rules outlined in Section 4.2.
 
    The following additional rules apply:
@@ -515,16 +529,16 @@ Table of Contents
        discretion of the verifying party.
 
    The following is a non-normative example for a Status List Token in
-   CWT format (not including the type header yet):
+   CWT format in Hex:
 
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58402fe52f
-   0cbce058605c6fbb97fb16baa952807eae3701c86c17a385b35e1112dcbc2a534374
-   c7e259b86a57abf3bc6b71365d14cc9e4f4d6a984d114f615cd4bf
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584091acb3
+   9dffab74d2094161ffaf371d442c70fbe1e99822fa58936f392b234ec25b02783c5f
+   2f2d4f3aa60afa213bfa411c642fa6c918939ce0125342aef3dc9d
 
-   The following is the CBOR diagnostic output of the example above:
+   The following is the CBOR Annotated Hex output of the example above:
 
 d2                              # tag(18)
   84                            #   array(4)
@@ -546,12 +560,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      2fe52f0cbce058605c6fbb97  #       "/å/\x0c¼àX`\o»\x97"
-      fb16baa952807eae3701c86c  #       "û\x16º©R\x80~®7\x01Èl"
-      17a385b35e1112dcbc2a5343  #       "\x17£\x85³^\x11\x12Ü¼*SC"
-      74c7e259b86a57abf3bc6b71  #       "tÇâY¸jW«ó¼kq"
-      365d14cc9e4f4d6a984d114f  #       "6]\x14Ì\x9eOMj\x98M\x11O"
-      615cd4bf                  #       "a\Ô¿"
+      91acb39dffab74d2094161ff  #       "\x91¬³\x9dÿ«tÒ\x09Aaÿ"
+      af371d442c70fbe1e99822fa  #       "¯7\x1dD,pûáé\x98"ú"
+      58936f392b234ec25b02783c  #       "X\x93o9+#NÂ[\x02x<"
+      5f2f2d4f3aa60afa213bfa41  #       "_/-O:¦\x0aú!;úA"
+      1c642fa6c918939ce0125342  #       "\x1cd/¦É\x18\x93\x9cà\x12SB"
+      aef3dc9d                  #       "®óÜ\x9d"
 
 6.  Referenced Token
 
@@ -586,8 +600,8 @@ d2                              # tag(18)
 
       -  status_list: REQUIRED when the status list mechanism defined in
          this specification is used.  It contains a reference to a
-         Status List or Status List Token.  The object contains exactly
-         two claims:
+         Status List or Status List Token.  It MUST at least contain the
+         following claims:
 
          o  idx: REQUIRED.  The idx (index) claim MUST specify an
             Integer that represents the index to check for status
@@ -652,29 +666,43 @@ d2                              # tag(18)
    Application of additional restrictions and policy are at the
    discretion of the verifying party.
 
-   The following is a non-normative example for a decoded payload of a
-   Referenced Token:
+   The following is a non-normative example of a Referenced Token in CWT
+   format in Hex:
 
-   18(
-       [
-         / protected / << {
-           / alg / 1: -7 / ES256 /
-         } >>,
-         / unprotected / {
-           / kid / 4: h'3132' / '13' /
-         },
-         / payload / << {
-           / iss    / 1: "https://example.com",
-           / status / 65535: {
-             "status_list": {
-               "idx": 0,
-               "uri": "https://example.com/statuslists/1"
-             }
-           }
-         } >>,
-         / signature / h'...'
-       ]
-     )
+   d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
+   6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
+   7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
+   7374617475736c697374732f3158402997bbd066bd7e6fa31388c7313be9593e5220
+   5d986cd650cc7cef6e3689ceff8e934fea86344e69db4666ec47aeede1de3503ea14
+   6b2fb72f2fa6f824343a91
+
+   The following is the CBOR Annotated Hex output of the example above:
+
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         2997bbd066bd7e6fa31388c7  #       ")\x97»Ðf½~o£\x13\x88Ç"
+         313be9593e52205d986cd650  #       "1;éY>R ]\x98lÖP"
+         cc7cef6e3689ceff8e934fea  #       "Ì|ïn6\x89Îÿ\x8e\x93Oê"
+         86344e69db4666ec47aeede1  #       "\x864NiÛFfìG®íá"
+         de3503ea146b2fb72f2fa6f8  #       "Þ5\x03ê\x14k/·//¦ø"
+         24343a91                  #       "$4:\x91"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -788,11 +816,137 @@ d2                              # tag(18)
 
 8.3.  Validation Rules
 
-   TBD
+   Upon receiving a Referenced Token, a Relying Party MUST first perform
+   the validation of the Referenced Token - e.g., checking for expected
+   attributes, valid signature, expiration time.  As this is out of
+   scope of this document, this validation is not be described here, but
+   is expected to be done according to the format of the Referenced
+   Token.
 
-9.  Further Examples
+   If this validation was not successful, the Referenced Token MUST be
+   rejected.  If the validation was successful, the Relying Party MUST
+   perform the following validation steps to evaluate the status of the
+   reference token:
 
-9.1.  Status List Token with 2-Bit Status Values in JWT format
+   1.  Check for the existence of a status claim, check for the
+       existence of a status_list claim within the status claim and
+       validate that the content of status_list adheres to the rules
+       defined in Section 6.2 for JWTs and Section 6.3 for CWTs.  This
+       step can be overruled if defined within the Referenced Token
+       Format natively
+
+   2.  Resolve the Status List from the provided URI
+
+   3.  Validate the Status List Token:
+
+       1.  Validate the Status List Token by following the rules defined
+           in section 7.2 of [RFC7519] for JWTs and section 7.2 of
+           [RFC8392] for CWTs.
+
+       2.  Check for the existence of the required claims as defined in
+           Section 5.1 and Section 5.2
+
+   4.  All existing claims in the Status List Token MUST be checked
+       according to the rules in Section 5.1 and Section 5.2
+
+       1.  The subject claim (sub or 2) of the Status List Token MUST be
+           equal to the uri claim in the status_list object of the
+           Referenced Token
+
+       2.  If the Relying Party has custom policies regarding the
+           freshness of the Status List Token, it SHOULD check the
+           issued at claim (iat or 6)
+
+       3.  If expiration time is defined (exp or 4), it MUST be checked
+           if the Status List Token is expired
+
+       4.  If the Referenced Token contains an issuer claim, the Status
+           List Token MUST contain the same issuer claim (iss or 1)
+
+       5.  If the Relying Party is using a system for caching the Status
+           List Token, it SHOULD check the ttl claim of the Status List
+           Token and retrieve a fresh copy if (time status was resolved
+           + ttl < current time)
+
+   5.  Decompress the Status List with a decompressor that is compatible
+       with DEFLATE [RFC1951] and ZLIB [RFC1950]
+
+   6.  Retrieve the status value of the index specified in the
+       Referenced Token as described in Section 4.  Fail if the provided
+       index is out of bound of the status list
+
+   7.  Check the status value as described in Section 7
+
+   If any of these checks fails, no statement about the status of the
+   Referenced Token can be made and the Referenced Token SHOULD be
+   rejected.
+
+9.  Status List Aggregation
+
+   Status List Aggregation is an optional mechanism to retrieve a list
+   of URIs to all Status List Tokens, allowing a Relying Party to fetch
+   all relevant Status Lists for a specific type of Referenced Token or
+   issuer.  This mechanism is intended to support fetching and caching
+   mechanisms and allow offline validation of the status of a reference
+   token for a period of time.
+
+   There are two options for a Relying Party to retrieve the Status List
+   Aggregation.  An issuer MAY support any of these mechanisms:
+
+   *  Issuer metadata: The issuer of the Referenced Token publishes an
+      URI which links to Status List Aggregation, e.g. in publicly
+      available metadata of an issuance protocol
+
+   *  Status List Parameter: The issuer of the Referenced Token includes
+      an additional claim in the Status List (Token) that contains the
+      Status List Aggregation URI.
+
+9.1.  Issuer Metadata
+
+   The issuer MAY link to the Status List Aggregation URI in metadata
+   that can be provided by different means like .well-known metadata as
+   is used commonly in OAuth and OpenID, or via a VICAL extension for
+   ISO mDoc / mDL.
+
+   The concrete specification on how this is implemented depends on the
+   specific ecosystem and is out of scope of this specification.
+
+9.2.  Status List Parameter
+
+   The URI to the Status List Aggregation MAY be provided as the
+   optional parameter aggregation_uri in the Status List itself as
+   explained inSection 4.2 and Section 4.1 respectively.  A Relying
+   Party may use this URI to retrieve an up-to-date list of relevant
+   Status Lists.
+
+9.3.  Status List Aggregation in JSON Format
+
+   This section defines the structure for a JSON-encoded Status List
+   Aggregation:
+
+   *  status_lists: REQUIRED.  JSON array of strings that contains URIs
+      linking to Status List (Tokens).
+
+   The Status List Aggregation URI provides a list of Status List URIs.
+   This aggregation in JSON and the media type return SHOULD be
+   application/json.  A Relying Party can iterate through this list and
+   fetch all Status List Tokens before encountering the specific URI in
+   a Referenced Token.
+
+   The following is a non-normative example for media type application/
+   json:
+
+   {
+      "status_lists" : [
+         "https://example.com/statuslists/1",
+         "https://example.com/statuslists/2",
+         "https://example.com/statuslists/3"
+      ]
+   }
+
+10.  Further Examples
+
+10.1.  Status List Token with 2-Bit Status Values in JWT format
 
    In this example, the Status List additionally includes the Status
    Type "SUSPENDED".  As the Status Type value for "SUSPENDED" is 0x02
@@ -837,14 +991,14 @@ d2                              # tag(18)
      "lst": "eNo76fITAAPfAgc"
    }
 
-10.  Security Considerations
+11.  Security Considerations
 
-10.1.  Correct decoding and parsing of the encoded status list
+11.1.  Correct decoding and parsing of the encoded status list
 
    TODO elaborate on risks of incorrect parsing/decoding leading to
    erroneous status data
 
-10.2.  Cached and Stale status lists
+11.2.  Cached and Stale status lists
 
    When consumers or verifiers of the Status List fetch the data, they
    need to be aware of its up-to-date status.  The 'ttl' (time-to-live)
@@ -855,20 +1009,20 @@ d2                              # tag(18)
    how often they need to fetch a fresh copy of the status list even if
    that status list is not expired.
 
-10.3.  Authorized access to the Status List
+11.3.  Authorized access to the Status List
 
    TODO elaborate on authorization mechanisms preventing misuse and
    profiling as described in privacy section
 
-10.4.  History
+11.4.  History
 
    TODO elaborate on status list only providing the up-to date/latest
    status, no historical data, may be provided by the underlying hosting
    architecture
 
-11.  Privacy Considerations
+12.  Privacy Considerations
 
-11.1.  Limiting issuers observability of token verification
+12.1.  Limiting issuers observability of token verification
 
    The main privacy consideration for a Status List, especially in the
    context of the Issuer-Holder-Verifier model [SD-JWT.VC], is to
@@ -891,7 +1045,7 @@ d2                              # tag(18)
    but also impacts the performance as more data has to be transferred
    to read the Status List.
 
-11.2.  Malicious Issuers
+12.2.  Malicious Issuers
 
    A malicious Issuer could bypass the privacy benefits of the herd
    privacy by generating a unique Status List for every Referenced
@@ -902,7 +1056,7 @@ d2                              # tag(18)
    Parties that request large amounts of Referenced Tokens by comparing
    the number of different Status Lists and their sizes.
 
-11.3.  Unobservability of Relying Parties
+12.3.  Unobservability of Relying Parties
 
    Once the Relying Party receives the Referenced Token, this enables
    him to request the Status List to validate its status through the
@@ -917,10 +1071,10 @@ d2                              # tag(18)
    license or checking the employment status of an employee credential.
 
    This behaviour could be mitigated by: - adding authorization rules to
-   the Status List, see Section 10.3. - regular re-issuance of the
-   Referenced Token, see Section 12.1.
+   the Status List, see Section 11.3. - regular re-issuance of the
+   Referenced Token, see Section 13.1.
 
-11.4.  Unlinkability
+12.4.  Unlinkability
 
    Colluding Issuers and a Relying Parties have the possibility to link
    two transactions, as the tuple of uri and index inside the Referenced
@@ -934,7 +1088,7 @@ d2                              # tag(18)
 
    To avoid privacy risks for colluding Relying Parties, it is
    RECOMMENDED that Issuers use batch issuance to issue multiple tokens,
-   see Section 12.1.
+   see Section 13.1.
 
    To avoid further correlatable information by the values of uri and
    index, Issuers are RECOMMENDED to:
@@ -946,7 +1100,7 @@ d2                              # tag(18)
 
    *  choose to deploy and utilize multiple Status Lists simultaneously
 
-11.5.  Third Party Hosting
+12.5.  Third Party Hosting
 
    TODO elaborate on increased privacy if the status list is hosted by a
    third party instead of the issuer reducing tracking possibilities
@@ -955,9 +1109,9 @@ d2                              # tag(18)
    The Status List Provider may be the issuer of the Status List but may
    also be outsourced to a trusted third party.
 
-12.  Implementation Considerations
+13.  Implementation Considerations
 
-12.1.  Token Lifecycle
+13.1.  Token Lifecycle
 
    The lifetime of a Status List (and the Status List Token) depends on
    the lifetime of its Referenced Tokens.  Once all Referenced Tokens
@@ -975,15 +1129,15 @@ d2                              # tag(18)
    batch issued Referenced Tokens might reveal this correlation later
    on.
 
-13.  IANA Considerations
+14.  IANA Considerations
 
-13.1.  JSON Web Token Claims Registration
+14.1.  JSON Web Token Claims Registration
 
    This specification requests registration of the following Claims in
    the IANA "JSON Web Token Claims" registry [IANA.JWT] established by
    [RFC7519].
 
-13.1.1.  Registry Contents
+14.1.1.  Registry Contents
 
    *  Claim Name: status
 
@@ -1015,14 +1169,14 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 5.1 of this specification
 
-13.2.  JWT Status Mechanism Methods Registry
+14.2.  JWT Status Mechanism Methods Registry
 
    This specification establishes the IANA "Status Mechanism Methods"
    registry for JWT "status" member values.  The registry records the
    status mechanism method member and a reference to the specification
    that defines it.
 
-13.2.1.  Registration Template
+14.2.1.  Registration Template
 
    Status Method Value:
 
@@ -1048,7 +1202,7 @@ d2                              # tag(18)
       the documents.  An indication of the relevant sections may also be
       included but is not required.
 
-13.2.2.  Initial Registry Contents
+14.2.2.  Initial Registry Contents
 
    *  Status Method Value: status_list
 
@@ -1059,13 +1213,13 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 6.2 of this specification
 
-13.3.  CBOR Web Token Claims Registration
+14.3.  CBOR Web Token Claims Registration
 
    This specification requests registration of the following Claims in
    the IANA "CBOR Web Token (CWT) Claims" registry [IANA.CWT]
    established by [RFC8392].
 
-13.3.1.  Registry Contents
+14.3.1.  Registry Contents
 
 
 
@@ -1083,6 +1237,8 @@ d2                              # tag(18)
 
 
    *  Claim Name: status_list
+
+   *  Claim Key: TBD (requested assignment 65533)
 
    *  Claim Description: A status list containing up-to-date status
       information on multiple other CWTs encoded as a bitarray.
@@ -1103,14 +1259,14 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 5.2 of this specification
 
-13.4.  CWT Status Mechanism Methods Registry
+14.4.  CWT Status Mechanism Methods Registry
 
    This specification establishes the IANA "Status Mechanism Methods"
    registry for CWT "status" member values.  The registry records the
    status mechanism method member and a reference to the specification
    that defines it.
 
-13.4.1.  Registration Template
+14.4.1.  Registration Template
 
    Status Method Value:
 
@@ -1136,7 +1292,7 @@ d2                              # tag(18)
       the documents.  An indication of the relevant sections may also be
       included but is not required.
 
-13.4.2.  Initial Registry Contents
+14.4.2.  Initial Registry Contents
 
    *  Status Method Value: status_list
 
@@ -1147,7 +1303,7 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 6.3 of this specification
 
-13.5.  Media Type Registration
+14.5.  Media Type Registration
 
    This section requests registration of the following media types
    [RFC2046] in the "Media Types" registry [IANA.MediaTypes] in the
@@ -1326,9 +1482,9 @@ d2                              # tag(18)
 
    *  Provisional registration?  No
 
-14.  References
+15.  References
 
-14.1.  Normative References
+15.1.  Normative References
 
    [IANA.CWT] IANA, "CBOR Web Token (CWT) Claims", n.d.,
               <https://www.iana.org/assignments/cwt/cwt.xhtml>.
@@ -1417,17 +1573,12 @@ d2                              # tag(18)
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9110>.
 
-   [RFC9111]  Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
-              Ed., "HTTP Caching", STD 98, RFC 9111,
-              DOI 10.17487/RFC9111, June 2022,
-              <https://www.rfc-editor.org/rfc/rfc9111>.
-
    [RFC9596]  Jones, M.B. and O. Steele, "CBOR Object Signing and
               Encryption (COSE) "typ" (type) Header Parameter",
               RFC 9596, DOI 10.17487/RFC9596, June 2024,
               <https://www.rfc-editor.org/rfc/rfc9596>.
 
-14.2.  Informative References
+15.2.  Informative References
 
    [ISO.mdoc] ISO/IEC JTC 1/SC 17, "ISO/IEC 18013-5:2021 ISO-compliant
               driving licence", n.d..
@@ -1448,9 +1599,9 @@ d2                              # tag(18)
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-03, 4 March
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04, 8 July
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-03>.
+              oauth-sd-jwt-vc-04>.
 
 Acknowledgments
 
@@ -1464,7 +1615,22 @@ Acknowledgments
 
 Document History
 
+   -04
+
+   *  added status_list CWT claim key assigned
+
    -03
+
+   *  remove unused reference to RFC9111
+
+   *  add validation rules for status list token
+
+   *  introduce the status list aggregation mechanism
+
+   *  relax requirements for status_list claims to contain other
+      parameters
+
+   *  change cwt referenced token example to hex and annotated hex
 
    *  require TLS only for fetching Status List, not for Status List
       Token
@@ -1544,4 +1710,5 @@ Authors' Addresses
 
 
    Christian Bormann
-   Email: chris.bormann@gmx.de
+   Robert Bosch GmbH
+   Email: christiancarl.bormann@bosch.com
