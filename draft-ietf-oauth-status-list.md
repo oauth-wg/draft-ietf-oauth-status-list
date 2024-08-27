@@ -151,6 +151,9 @@ Status List Token:
 Referenced Token:
 : A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{RFC8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC9052}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
 
+base64url:
+: Denotes the URL-safe base64 encoding without padding as defined in Section 2 of [RFC7515] as "Base64url Encoding".
+
 # Status List {#status-list}
 
 A Status List is a byte array that contains the statuses of many Referenced Tokens represented by one or multiple bits. A common representation of a Status List is composed by the following algorithm:
@@ -204,7 +207,7 @@ This section defines the structure for a JSON-encoded Status List:
 
 * `status_list`: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
-   * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded (as defined in Section 2 of {{RFC7515}}) Status List as specified in [](#status-list).
+   * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded Status List as specified in [](#status-list).
    * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
 
 The following example illustrates the JSON representation of the Status List:
@@ -552,7 +555,7 @@ index      3   2   1   0      7   6   5   4      11  10  9   8
 
 ~~~
 
-Resulting in the byte array and compressed/base64url encoded status list:
+Resulting in the byte array and compressed/base64url-encoded status list:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding2_json}
