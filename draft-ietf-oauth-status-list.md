@@ -152,7 +152,7 @@ Referenced Token:
 : A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} or CBOR {{RFC8949}} for representation of the token and secure it using JSON Object Signing as defined in {{RFC7515}} or CBOR Object Signing and Encryption as defined in {{RFC9052}}. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.
 
 base64url:
-: Denotes the URL-safe base64 encoding without padding as defined in Section 2 of [RFC7515] as "Base64url Encoding".
+: Denotes the URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
 
 # Status List {#status-list}
 
