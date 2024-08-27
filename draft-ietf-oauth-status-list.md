@@ -864,6 +864,10 @@ for their valuable contributions, discussions and feedback to this specification
 # Document History
 {:numbered="false"}
 
+-04
+
+* move base64url definition to terminology
+
 -03
 
 * remove unused reference to RFC9111
