@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 9 January 2025                                                 
+Expires: 1 March 2025                                                   
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                             8 July 2024
+                                                          28 August 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 January 2025.
+   This Internet-Draft will expire on 1 March 2025.
 
 Copyright Notice
 
@@ -270,6 +270,9 @@ Table of Contents
       contained Status List may give a Relying Party additional
       information about up-to-date status of the Referenced Token.
 
+   base64url:  Denotes the URL-safe base64 encoding without padding as
+      defined in Section 2 of [RFC7515] as "Base64url Encoding".
+
 4.  Status List
 
    A Status List is a byte array that contains the statuses of many
@@ -343,8 +346,8 @@ Table of Contents
 
       -  lst: REQUIRED.  JSON String that contains the status values for
          all the Referenced Tokens it conveys statuses for.  The value
-         MUST be the base64url-encoded (as defined in Section 2 of
-         [RFC7515]) Status List as specified in Section 4.
+         MUST be the base64url-encoded Status List as specified in
+         Section 4.
 
       -  aggregation_uri: OPTIONAL.  JSON String that contains a URI to
          retrieve the Status List Aggregation for this type of
@@ -534,9 +537,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58406a2c50
-   7e744911978a7b5e5eed625c7b78d22fa04a8ef08d3222017d761f0352ab458a807b
-   d8433289157e962a5396f9d351ea7911bd36900ee39c5201b35577
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840090834
+   390180ff29cffe84a9255f715b9f3863c2073288dd810351c713f5c36f97b6357b3e
+   7f00e0b8833d12a339e4fa034845640ba939b085fa14f33e908de4
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -560,12 +563,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      6a2c507e744911978a7b5e5e  #       "j,P~tI\x11\x97\x8a{^^"
-      ed625c7b78d22fa04a8ef08d  #       "íb\{xÒ/\xa0J\x8eð\x8d"
-      3222017d761f0352ab458a80  #       "2"\x01}v\x1f\x03R«E\x8a\x80"
-      7bd8433289157e962a5396f9  #       "{ØC2\x89\x15~\x96*S\x96ù"
-      d351ea7911bd36900ee39c52  #       "ÓQêy\x11½6\x90\x0eã\x9cR"
-      01b35577                  #       "\x01³Uw"
+      090834390180ff29cffe84a9  #       "\x09\x0849\x01\x80ÿ)Ïþ\x84©"
+      255f715b9f3863c2073288dd  #       "%_q[\x9f8cÂ\x072\x88Ý"
+      810351c713f5c36f97b6357b  #       "\x81\x03QÇ\x13õÃo\x97¶5{"
+      3e7f00e0b8833d12a339e4fa  #       ">\x7f\x00à¸\x83=\x12£9äú"
+      034845640ba939b085fa14f3  #       "\x03HEd\x0b©9°\x85ú\x14ó"
+      3e908de4                  #       ">\x90\x8dä"
 
 6.  Referenced Token
 
@@ -672,37 +675,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840a51d86a7bc7f4bd6d08b482d65ec776c39f736
-   cd5a796730c2f867f351b7f0eb41af65b1b33f4d275585903d98896ff2962cde164f
-   adc4d245a6499a472d2f11
+   7374617475736c697374732f3158403f52bfb4e52f7df37cbebcc09f91e03984e55b
+   7e70bc01ae566e1d0954ea7ec781d5432a3a59996cc6aaf7be72724043d21f1e7125
+   019d34f78ac28c2166e79a
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         a51d86a7bc7f4bd6d08b482d  #       "¥\x1d\x86§¼\x7fKÖÐ\x8bH-"
-         65ec776c39f736cd5a796730  #       "eìwl9÷6ÍZyg0"
-         c2f867f351b7f0eb41af65b1  #       "ÂøgóQ·ðëA¯e±"
-         b33f4d275585903d98896ff2  #       "³?M'U\x85\x90=\x98\x89oò"
-         962cde164fadc4d245a6499a  #       "\x96,Þ\x16O\xadÄÒE¦I\x9a"
-         472d2f11                  #       "G-/\x11"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      3f52bfb4e52f7df37cbebcc0  #       "?R¿´å/}ó|¾¼À"
+      9f91e03984e55b7e70bc01ae  #       "\x9f\x91à9\x84å[~p¼\x01®"
+      566e1d0954ea7ec781d5432a  #       "Vn\x1d\x09Tê~Ç\x81ÕC*"
+      3a59996cc6aaf7be72724043  #       ":Y\x99lÆª÷¾rr@C"
+      d21f1e7125019d34f78ac28c  #       "Ò\x1f\x1eq%\x01\x9d4÷\x8aÂ\x8c"
+      2166e79a                  #       "!fç\x9a"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -981,7 +984,7 @@ d2                              # tag(18)
               \___________/      \___________/      \___________/
                    0xC9               0x44               0xF9
 
-   Resulting in the byte array and compressed/base64url encoded status
+   Resulting in the byte array and compressed/base64url-encoded status
    list:
 
    byte_array = [0xc9, 0x44, 0xf9]
@@ -1612,6 +1615,10 @@ Acknowledgments
    specification.
 
 Document History
+
+   -04
+
+   *  move base64url definition to terminology
 
    -03
 
