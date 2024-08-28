@@ -513,7 +513,7 @@ Table of Contents
    *  65534 (time to live): OPTIONAL.  Same definition as ttl claim in
       Section 5.1.
 
-   *  65535 (status list): REQUIRED.  The status list claim MUST specify
+   *  65533 (status list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the rules outlined in Section 4.2.
 
    The following additional rules apply:
@@ -537,9 +537,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840090834
-   390180ff29cffe84a9255f715b9f3863c2073288dd810351c713f5c36f97b6357b3e
-   7f00e0b8833d12a339e4fa034845640ba939b085fa14f33e908de4
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ed8b59
+   6a49e5c3f5efe58fc40b551f51be94238afbc8973d55d88fbde4d32ce38e9d68dbb6
+   2fb37e9392c26572bb70b9b9ec489547d284018e753014853fbda0
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -563,12 +563,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      090834390180ff29cffe84a9  #       "\x09\x0849\x01\x80ÿ)Ïþ\x84©"
-      255f715b9f3863c2073288dd  #       "%_q[\x9f8cÂ\x072\x88Ý"
-      810351c713f5c36f97b6357b  #       "\x81\x03QÇ\x13õÃo\x97¶5{"
-      3e7f00e0b8833d12a339e4fa  #       ">\x7f\x00à¸\x83=\x12£9äú"
-      034845640ba939b085fa14f3  #       "\x03HEd\x0b©9°\x85ú\x14ó"
-      3e908de4                  #       ">\x90\x8dä"
+      ed8b596a49e5c3f5efe58fc4  #       "í\x8bYjIåÃõïå\x8fÄ"
+      0b551f51be94238afbc8973d  #       "\x0bU\x1fQ¾\x94#\x8aûÈ\x97="
+      55d88fbde4d32ce38e9d68db  #       "UØ\x8f½äÓ,ã\x8e\x9dhÛ"
+      b62fb37e9392c26572bb70b9  #       "¶/³~\x93\x92Âer»p¹"
+      b9ec489547d284018e753014  #       "¹ìH\x95GÒ\x84\x01\x8eu0\x14"
+      853fbda0                  #       "\x85?½\xa0"
 
 6.  Referenced Token
 
@@ -675,37 +675,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158403f52bfb4e52f7df37cbebcc09f91e03984e55b
-   7e70bc01ae566e1d0954ea7ec781d5432a3a59996cc6aaf7be72724043d21f1e7125
-   019d34f78ac28c2166e79a
+   7374617475736c697374732f315840e86741ba732da4f4cdc375c20549aa0ff1da87
+   719bec0a6e2305252ae5d6173a490f10015962f421ab64fab353a41b03c8cf3e6238
+   aac0b4969a3b6554bbad8e
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      3f52bfb4e52f7df37cbebcc0  #       "?R¿´å/}ó|¾¼À"
-      9f91e03984e55b7e70bc01ae  #       "\x9f\x91à9\x84å[~p¼\x01®"
-      566e1d0954ea7ec781d5432a  #       "Vn\x1d\x09Tê~Ç\x81ÕC*"
-      3a59996cc6aaf7be72724043  #       ":Y\x99lÆª÷¾rr@C"
-      d21f1e7125019d34f78ac28c  #       "Ò\x1f\x1eq%\x01\x9d4÷\x8aÂ\x8c"
-      2166e79a                  #       "!fç\x9a"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         e86741ba732da4f4cdc375c2  #       "ègAºs-¤ôÍÃuÂ"
+         0549aa0ff1da87719bec0a6e  #       "\x05Iª\x0fñÚ\x87q\x9bì\x0an"
+         2305252ae5d6173a490f1001  #       "#\x05%*åÖ\x17:I\x0f\x10\x01"
+         5962f421ab64fab353a41b03  #       "Ybô!«dú³S¤\x1b\x03"
+         c8cf3e6238aac0b4969a3b65  #       "ÈÏ>b8ªÀ´\x96\x9a;e"
+         54bbad8e                  #       "T»\xad\x8e"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1241,6 +1241,8 @@ d2                              # tag(18)
 
    *  Claim Name: status_list
 
+   *  Claim Key: TBD (requested assignment 65533)
+
    *  Claim Description: A status list containing up-to-date status
       information on multiple other CWTs encoded as a bitarray.
 
@@ -1617,6 +1619,8 @@ Acknowledgments
 Document History
 
    -04
+
+   *  added status_list CWT claim key assigned
 
    *  move base64url definition to terminology
 
