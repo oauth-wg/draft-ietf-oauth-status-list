@@ -288,7 +288,7 @@ The following content applies to the CWT Claims Set:
 * `6` (issued at): REQUIRED. Same definition as `iat` claim in [](#status-list-token-jwt).
 * `4` (expiration time): OPTIONAL. Same definition as `exp` claim in [](#status-list-token-jwt).
 * `65534` (time to live): OPTIONAL. Same definition as `ttl` claim in [](#status-list-token-jwt).
-* `65533` (status_list): REQUIRED. The status list claim MUST specify the Status List conforming to the rules outlined in [](#status-list-cbor).
+* `65533` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the rules outlined in [](#status-list-cbor).
 
 The following additional rules apply:
 
