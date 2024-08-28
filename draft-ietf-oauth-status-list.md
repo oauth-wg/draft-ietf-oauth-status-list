@@ -253,7 +253,6 @@ The following content applies to the JWT Header:
 
 The following content applies to the JWT Claims Set:
 
-* `iss`: REQUIRED when also present in the Referenced Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the Referenced Token.
 * `sub`: REQUIRED. The `sub` (subject) claim MUST specify the URI of the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `iat`: REQUIRED. The `iat` (issued at) claim MUST specify the time at which the Status List Token was issued.
 * `exp`: OPTIONAL. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer.
@@ -286,7 +285,6 @@ The following content applies to the CWT protected header:
 
 The following content applies to the CWT Claims Set:
 
-* `1` (issuer): REQUIRED. Same definition as `iss` claim in [](#status-list-token-jwt).
 * `2` (subject): REQUIRED. Same definition as `sub` claim in [](#status-list-token-jwt).
 * `6` (issued at): REQUIRED. Same definition as `iat` claim in [](#status-list-token-jwt).
 * `4` (expiration time): OPTIONAL. Same definition as `exp` claim in [](#status-list-token-jwt).
@@ -327,7 +325,6 @@ The Referenced Token MUST be encoded as a "JSON Web Token (JWT)" according to {{
 
 The following content applies to the JWT Claims Set:
 
-* `iss`: REQUIRED when also present in the Status List Token. The `iss` (issuer) claim MUST specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications MUST compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of {{RFC3986}}. The value MUST be equal to that of the `iss` claim contained within the referenced Status List Token.
 * `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains at least one reference to a status mechanism.
   * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. It MUST at least contain the following claims:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
@@ -361,7 +358,6 @@ The Referenced Token MUST be encoded as a "COSE Web Token (CWT)" object accordin
 
 The following content applies to the CWT Claims Set:
 
-* `1` (issuer): REQUIRED when also present in the Referenced Token. Same definition as `iss` claim in [](#referenced-token-jwt).
 * `65535` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:
   * `status_list` (status list): REQUIRED when the status list mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jwt) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
     * `idx`: REQUIRED. Same definition as `idx` claim in [](#referenced-token-jwt).
@@ -465,8 +461,7 @@ If this validation was not successful, the Referenced Token MUST be rejected. If
     1. The subject claim (`sub` or `2`) of the Status List Token MUST be equal to the `uri` claim in the `status_list` object of the Referenced Token
     2. If the Relying Party has custom policies regarding the freshness of the Status List Token, it SHOULD check the issued at claim (`iat` or `6`)
     3. If expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
-    4. If the Referenced Token contains an issuer claim, the Status List Token MUST contain the same issuer claim (`iss` or `1`)
-    5. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
+    4. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
 5. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
 6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bound of the status list
 7. Check the status value as described in [](#status-types)
@@ -868,6 +863,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* remove requirement for matching iss claim in Referenced Token and Status List Token
 * fix reference of Status List in CBOR format
 * added status_list CWT claim key assigned
 * move base64url definition to terminology
