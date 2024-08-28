@@ -1462,6 +1462,11 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd style="margin-left: 1.5em" id="section-3-1.10">
           <p id="section-3-1.10.1">A cryptographically secured data structure which contains a reference to a Status List or Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> for representation of the token and secure it using JSON Object Signing as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR Object Signing and Encryption as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. The information from the contained Status List may give a Relying Party additional information about up-to-date status of the Referenced Token.<a href="#section-3-1.10.1" class="pilcrow">¶</a></p>
 </dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.11">base64url:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.12">
+          <p id="section-3-1.12.1">Denotes the URL-safe base64 encoding without padding as defined in Section 2 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.12.1" class="pilcrow">¶</a></p>
+</dd>
       <dd class="break"></dd>
 </dl>
 </section>
@@ -1532,7 +1537,7 @@ index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
                 <p id="section-4.1-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. JSON Integer specifying the number of bits per Referenced Token in the Status List (<code>lst</code>). The allowed values for <code>bits</code> are 1,2,4 and 8.<a href="#section-4.1-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.1-2.1.2.2">
-                <p id="section-4.1-2.1.2.2.1"><code>lst</code>: <span class="bcp14">REQUIRED</span>. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value <span class="bcp14">MUST</span> be the base64url-encoded (as defined in Section 2 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>) Status List as specified in <a href="#status-list" class="auto internal xref">Section 4</a>.<a href="#section-4.1-2.1.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.1-2.1.2.2.1"><code>lst</code>: <span class="bcp14">REQUIRED</span>. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value <span class="bcp14">MUST</span> be the base64url-encoded Status List as specified in <a href="#status-list" class="auto internal xref">Section 4</a>.<a href="#section-4.1-2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.1-2.1.2.3">
                 <p id="section-4.1-2.1.2.3.1"><code>aggregation_uri</code>: <span class="bcp14">OPTIONAL</span>. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section <a href="#batch-fetching" class="auto internal xref">Section 9</a> for further detail.<a href="#section-4.1-2.1.2.3.1" class="pilcrow">¶</a></p>
@@ -1733,9 +1738,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840d71e74
-0a01575a977cb3a2955e88f7fed6966bc9b877bb5666bd4cdbd4c10e22515174a837
-134b0bbf60ae897915024eab810e23a25e0f833693d021f5d46222
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840994003
+a3d86df1026697cdb16a3aed00d39e7d6d720c6de14d8508e59f068c74e4534cdb2d
+492c827a32be87d1ad91e721f96df997c49fa48a89bf534c4359ad
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1761,12 +1766,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      d71e740a01575a977cb3a295  #       "×\x1et\x0a\x01WZ\x97|³¢\x95"
-      5e88f7fed6966bc9b877bb56  #       "^\x88÷þÖ\x96kÉ¸w»V"
-      66bd4cdbd4c10e22515174a8  #       "f½LÛÔÁ\x0e"QQt¨"
-      37134b0bbf60ae897915024e  #       "7\x13K\x0b¿`®\x89y\x15\x02N"
-      ab810e23a25e0f833693d021  #       "«\x81\x0e#¢^\x0f\x836\x93Ð!"
-      f5d46222                  #       "õÔb""
+      994003a3d86df1026697cdb1  #       "\x99@\x03£Ømñ\x02f\x97Í±"
+      6a3aed00d39e7d6d720c6de1  #       "j:í\x00Ó\x9e}mr\x0cmá"
+      4d8508e59f068c74e4534cdb  #       "M\x85\x08å\x9f\x06\x8ctäSLÛ"
+      2d492c827a32be87d1ad91e7  #       "-I,\x82z2¾\x87Ñ\xad\x91ç"
+      21f96df997c49fa48a89bf53  #       "!ùmù\x97Ä\x9f¤\x8a\x89¿S"
+      4c4359ad                  #       "LCY\xad"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1871,9 +1876,9 @@ d2                              # tag(18)
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840f57eccaff2dba81e245398ffd3b3ae48529a04
-3b38b46b6d4c410a9c3d5945f11f138bdfc6e2a941fbeb0d531ff63417dac92d6755
-7675d97077f25c84ed8b03
+7374617475736c697374732f31584071d0d94a46e649441aa9c2d2364e7d32fce712
+e99cbb8bacd9ab7e5c5952fec5530cbf3fddc8bf9072819b7ad07347610a2ed6df48
+f28a46034fedd076dd0156
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1898,12 +1903,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      f57eccaff2dba81e245398ff  #       "õ~Ì¯òÛ¨\x1e$S\x98ÿ"
-      d3b3ae48529a043b38b46b6d  #       "Ó³®HR\x9a\x04;8´km"
-      4c410a9c3d5945f11f138bdf  #       "LA\x0a\x9c=YEñ\x1f\x13\x8bß"
-      c6e2a941fbeb0d531ff63417  #       "Æâ©Aûë\x0dS\x1fö4\x17"
-      dac92d67557675d97077f25c  #       "ÚÉ-gUvuÙpwò\"
-      84ed8b03                  #       "\x84í\x8b\x03"
+      71d0d94a46e649441aa9c2d2  #       "qÐÙJFæID\x1a©ÂÒ"
+      364e7d32fce712e99cbb8bac  #       "6N}2üç\x12é\x9c»\x8b¬"
+      d9ab7e5c5952fec5530cbf3f  #       "Ù«~\YRþÅS\x0c¿?"
+      ddc8bf9072819b7ad0734761  #       "ÝÈ¿\x90r\x81\x9bzÐsGa"
+      0a2ed6df48f28a46034fedd0  #       "\x0a.ÖßHò\x8aF\x03OíÐ"
+      76dd0156                  #       "vÝ\x01V"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2178,7 +2183,7 @@ index      3   2   1   0      7   6   5   4      11  10  9   8
 
 </pre><a href="#section-10.1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-10.1-6">Resulting in the byte array and compressed/base64url encoded status list:<a href="#section-10.1-6" class="pilcrow">¶</a></p>
+<p id="section-10.1-6">Resulting in the byte array and compressed/base64url-encoded status list:<a href="#section-10.1-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-10.1-7">
 <pre>
 byte_array = [0xc9, 0x44, 0xf9]
@@ -2989,6 +2994,9 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
           <p id="appendix-B-2.1.1">added status_list CWT claim key assigned<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.2">
+          <p id="appendix-B-2.2.1">move base64url definition to terminology<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-03<a href="#appendix-B-3" class="pilcrow">¶</a></p>

@@ -270,6 +270,9 @@ Table of Contents
       contained Status List may give a Relying Party additional
       information about up-to-date status of the Referenced Token.
 
+   base64url:  Denotes the URL-safe base64 encoding without padding as
+      defined in Section 2 of [RFC7515] as "Base64url Encoding".
+
 4.  Status List
 
    A Status List is a byte array that contains the statuses of many
@@ -343,8 +346,8 @@ Table of Contents
 
       -  lst: REQUIRED.  JSON String that contains the status values for
          all the Referenced Tokens it conveys statuses for.  The value
-         MUST be the base64url-encoded (as defined in Section 2 of
-         [RFC7515]) Status List as specified in Section 4.
+         MUST be the base64url-encoded Status List as specified in
+         Section 4.
 
       -  aggregation_uri: OPTIONAL.  JSON String that contains a URI to
          retrieve the Status List Aggregation for this type of
@@ -534,9 +537,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840d71e74
-   0a01575a977cb3a2955e88f7fed6966bc9b877bb5666bd4cdbd4c10e22515174a837
-   134b0bbf60ae897915024eab810e23a25e0f833693d021f5d46222
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840994003
+   a3d86df1026697cdb16a3aed00d39e7d6d720c6de14d8508e59f068c74e4534cdb2d
+   492c827a32be87d1ad91e721f96df997c49fa48a89bf534c4359ad
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -560,12 +563,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      d71e740a01575a977cb3a295  #       "×\x1et\x0a\x01WZ\x97|³¢\x95"
-      5e88f7fed6966bc9b877bb56  #       "^\x88÷þÖ\x96kÉ¸w»V"
-      66bd4cdbd4c10e22515174a8  #       "f½LÛÔÁ\x0e"QQt¨"
-      37134b0bbf60ae897915024e  #       "7\x13K\x0b¿`®\x89y\x15\x02N"
-      ab810e23a25e0f833693d021  #       "«\x81\x0e#¢^\x0f\x836\x93Ð!"
-      f5d46222                  #       "õÔb""
+      994003a3d86df1026697cdb1  #       "\x99@\x03£Ømñ\x02f\x97Í±"
+      6a3aed00d39e7d6d720c6de1  #       "j:í\x00Ó\x9e}mr\x0cmá"
+      4d8508e59f068c74e4534cdb  #       "M\x85\x08å\x9f\x06\x8ctäSLÛ"
+      2d492c827a32be87d1ad91e7  #       "-I,\x82z2¾\x87Ñ\xad\x91ç"
+      21f96df997c49fa48a89bf53  #       "!ùmù\x97Ä\x9f¤\x8a\x89¿S"
+      4c4359ad                  #       "LCY\xad"
 
 6.  Referenced Token
 
@@ -672,9 +675,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840f57eccaff2dba81e245398ffd3b3ae48529a04
-   3b38b46b6d4c410a9c3d5945f11f138bdfc6e2a941fbeb0d531ff63417dac92d6755
-   7675d97077f25c84ed8b03
+   7374617475736c697374732f31584071d0d94a46e649441aa9c2d2364e7d32fce712
+   e99cbb8bacd9ab7e5c5952fec5530cbf3fddc8bf9072819b7ad07347610a2ed6df48
+   f28a46034fedd076dd0156
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -697,12 +700,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         f57eccaff2dba81e245398ff  #       "õ~Ì¯òÛ¨\x1e$S\x98ÿ"
-         d3b3ae48529a043b38b46b6d  #       "Ó³®HR\x9a\x04;8´km"
-         4c410a9c3d5945f11f138bdf  #       "LA\x0a\x9c=YEñ\x1f\x13\x8bß"
-         c6e2a941fbeb0d531ff63417  #       "Æâ©Aûë\x0dS\x1fö4\x17"
-         dac92d67557675d97077f25c  #       "ÚÉ-gUvuÙpwò\"
-         84ed8b03                  #       "\x84í\x8b\x03"
+         71d0d94a46e649441aa9c2d2  #       "qÐÙJFæID\x1a©ÂÒ"
+         364e7d32fce712e99cbb8bac  #       "6N}2üç\x12é\x9c»\x8b¬"
+         d9ab7e5c5952fec5530cbf3f  #       "Ù«~\YRþÅS\x0c¿?"
+         ddc8bf9072819b7ad0734761  #       "ÝÈ¿\x90r\x81\x9bzÐsGa"
+         0a2ed6df48f28a46034fedd0  #       "\x0a.ÖßHò\x8aF\x03OíÐ"
+         76dd0156                  #       "vÝ\x01V"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -981,7 +984,7 @@ d2                              # tag(18)
               \___________/      \___________/      \___________/
                    0xC9               0x44               0xF9
 
-   Resulting in the byte array and compressed/base64url encoded status
+   Resulting in the byte array and compressed/base64url-encoded status
    list:
 
    byte_array = [0xc9, 0x44, 0xf9]
@@ -1618,6 +1621,8 @@ Document History
    -04
 
    *  added status_list CWT claim key assigned
+
+   *  move base64url definition to terminology
 
    -03
 
