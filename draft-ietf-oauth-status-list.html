@@ -1572,7 +1572,7 @@ encoded:
                 <p id="section-4.2-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for <code>bits</code> are 1, 2, 4 and 8.<a href="#section-4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.2-2.1.2.2">
-                <p id="section-4.2-2.1.2.2.1"><code>lst</code>: <span class="bcp14">REQUIRED</span>. Byte string (Major Type 2) that contains the Status List as specified in <a href="#status-list-json" class="auto internal xref">Section 4.1</a>.<a href="#section-4.2-2.1.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.2-2.1.2.2.1"><code>lst</code>: <span class="bcp14">REQUIRED</span>. Byte string (Major Type 2) that contains the Status List as specified in <a href="#status-list" class="auto internal xref">Section 4</a>.<a href="#section-4.2-2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.2-2.1.2.3">
                 <p id="section-4.2-2.1.2.3.1"><code>aggregation_uri</code>: <span class="bcp14">OPTIONAL</span>. Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section <a href="#batch-fetching" class="auto internal xref">Section 9</a> for further detail.<a href="#section-4.2-2.1.2.3.1" class="pilcrow">¶</a></p>
@@ -1738,9 +1738,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ed8b59
-6a49e5c3f5efe58fc40b551f51be94238afbc8973d55d88fbde4d32ce38e9d68dbb6
-2fb37e9392c26572bb70b9b9ec489547d284018e753014853fbda0
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840e9db2d
+0df3c9a0ee29b2dd67e683eca84d49a8adf26c1b14bfb33709a826ab256bc8e82c65
+685f122b3a4a695b8155a50af502be265a972d7607a40c8dc7f216
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1766,12 +1766,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ed8b596a49e5c3f5efe58fc4  #       "í\x8bYjIåÃõïå\x8fÄ"
-      0b551f51be94238afbc8973d  #       "\x0bU\x1fQ¾\x94#\x8aûÈ\x97="
-      55d88fbde4d32ce38e9d68db  #       "UØ\x8f½äÓ,ã\x8e\x9dhÛ"
-      b62fb37e9392c26572bb70b9  #       "¶/³~\x93\x92Âer»p¹"
-      b9ec489547d284018e753014  #       "¹ìH\x95GÒ\x84\x01\x8eu0\x14"
-      853fbda0                  #       "\x85?½\xa0"
+      e9db2d0df3c9a0ee29b2dd67  #       "éÛ-\x0dóÉ\xa0î)²Ýg"
+      e683eca84d49a8adf26c1b14  #       "æ\x83ì¨MI¨\xadòl\x1b\x14"
+      bfb33709a826ab256bc8e82c  #       "¿³7\x09¨&amp;«%kÈè,"
+      65685f122b3a4a695b8155a5  #       "eh_\x12+:Ji[\x81U¥"
+      0af502be265a972d7607a40c  #       "\x0aõ\x02¾&amp;Z\x97-v\x07¤\x0c"
+      8dc7f216                  #       "\x8dÇò\x16"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1876,9 +1876,9 @@ d2                              # tag(18)
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840e86741ba732da4f4cdc375c20549aa0ff1da87
-719bec0a6e2305252ae5d6173a490f10015962f421ab64fab353a41b03c8cf3e6238
-aac0b4969a3b6554bbad8e
+7374617475736c697374732f3158405ccd9c9c6d194278462d213a8659f4d10ac284
+70ab90e19dd6a46b8469859171e76ddca4125145aea12cfa7f156d6573962987a4d9
+296f99c07c75090e34ae97
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1903,12 +1903,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      e86741ba732da4f4cdc375c2  #       "ègAºs-¤ôÍÃuÂ"
-      0549aa0ff1da87719bec0a6e  #       "\x05Iª\x0fñÚ\x87q\x9bì\x0an"
-      2305252ae5d6173a490f1001  #       "#\x05%*åÖ\x17:I\x0f\x10\x01"
-      5962f421ab64fab353a41b03  #       "Ybô!«dú³S¤\x1b\x03"
-      c8cf3e6238aac0b4969a3b65  #       "ÈÏ&gt;b8ªÀ´\x96\x9a;e"
-      54bbad8e                  #       "T»\xad\x8e"
+      5ccd9c9c6d194278462d213a  #       "\Í\x9c\x9cm\x19BxF-!:"
+      8659f4d10ac28470ab90e19d  #       "\x86YôÑ\x0aÂ\x84p«\x90á\x9d"
+      d6a46b8469859171e76ddca4  #       "Ö¤k\x84i\x85\x91qçmÜ¤"
+      125145aea12cfa7f156d6573  #       "\x12QE®¡,ú\x7f\x15mes"
+      962987a4d9296f99c07c7509  #       "\x96)\x87¤Ù)o\x99À|u\x09"
+      0e34ae97                  #       "\x0e4®\x97"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2975,6 +2975,7 @@ Filip Skokan,
 Francesco Marino,
 Guiseppe De Marco,
 Kristina Yasuda,
+Markus Kreusch,
 Michael B. Jones,
 Mike Prorock,
 Oliver Terbu,
@@ -2993,10 +2994,13 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-04<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">added status_list CWT claim key assigned<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">move base64url definition to terminology<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">added status_list CWT claim key assigned<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.3">
+          <p id="appendix-B-2.3.1">move base64url definition to terminology<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-03<a href="#appendix-B-3" class="pilcrow">¶</a></p>
