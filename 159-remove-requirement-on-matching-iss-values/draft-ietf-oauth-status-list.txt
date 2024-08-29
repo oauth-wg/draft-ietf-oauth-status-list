@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 1 March 2025                                                   
+Expires: 2 March 2025                                                   
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                          28 August 2024
+                                                          29 August 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 March 2025.
+   This Internet-Draft will expire on 2 March 2025.
 
 Copyright Notice
 
@@ -468,7 +468,6 @@ Table of Contents
    {
      "exp": 2291720170,
      "iat": 1686920170,
-     "iss": "https://example.com",
      "status_list": {
        "bits": 1,
        "lst": "eNrbuRgAAhcBXQ"
@@ -522,12 +521,12 @@ Table of Contents
    The following is a non-normative example for a Status List Token in
    CWT format in Hex:
 
-   d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
-   747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
-   68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840ae832a
-   2e34360c57c0c88f13772a1f6ce8b53d8251ba06e558122396c9994d2eea81ec847a
-   51da9b2394b11b02ebae552438bf207d669f081765a09375edeb0f
+   d28453a20126106e7374617475736c6973742b637774a1044231325851a502782168
+   747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
+   648c5bea041a8898dfea19fffe19a8c019ffff56a2646269747301636c73744a78da
+   dbb918000217015d5840c3228dedf192f8ed3def1da77f22d78e010404e09d60b830
+   c38ffa4da4eeb325303455d126fb872981b1206f57f6691c852be2e33383b8bac963
+   72685f904d30
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -540,23 +539,21 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 66                       #     bytes(102)
-      a602782168747470733a2f2f  #       "¦\x02x!https://"
+    58 51                       #     bytes(81)
+      a502782168747470733a2f2f  #       "¥\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
-      31017368747470733a2f2f65  #       "1\x01shttps://e"
-      78616d706c652e636f6d061a  #       "xample.com\x06\x1a"
-      648c5bea041a8898dfea19ff  #       "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿ"
-      fe19a8c019ffff56a2646269  #       "þ\x19¨À\x19ÿÿV¢dbi"
-      747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
-      18000217015d              #       "\x18\x00\x02\x17\x01]"
+      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
+      ea19fffe19a8c019ffff56a2  #       "ê\x19ÿþ\x19¨À\x19ÿÿV¢"
+      646269747301636c73744a78  #       "dbits\x01clstJx"
+      dadbb918000217015d        #       "ÚÛ¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ae832a2e34360c57c0c88f13  #       "®\x83*.46\x0cWÀÈ\x8f\x13"
-      772a1f6ce8b53d8251ba06e5  #       "w*\x1flèµ=\x82Qº\x06å"
-      58122396c9994d2eea81ec84  #       "X\x12#\x96É\x99M.ê\x81ì\x84"
-      7a51da9b2394b11b02ebae55  #       "zQÚ\x9b#\x94±\x1b\x02ë®U"
-      2438bf207d669f081765a093  #       "$8¿ }f\x9f\x08\x17e\xa0\x93"
-      75edeb0f                  #       "uíë\x0f"
+      c3228dedf192f8ed3def1da7  #       "Ã"\x8díñ\x92øí=ï\x1d§"
+      7f22d78e010404e09d60b830  #       "\x7f"×\x8e\x01\x04\x04à\x9d`¸0"
+      c38ffa4da4eeb325303455d1  #       "Ã\x8fúM¤î³%04UÑ"
+      26fb872981b1206f57f6691c  #       "&û\x87)\x81± oWöi\x1c"
+      852be2e33383b8bac9637268  #       "\x85+âã3\x83¸ºÉcrh"
+      5f904d30                  #       "_\x90M0"
 
 6.  Referenced Token
 
@@ -651,9 +648,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584084316dd1a453b9381171ea6ddf2a43d2ad4e0c
-   fbd73d3f83436c86a450a4c6641757fb81cbaf8b0cbc9e7e0ac28a0aae3452c07624
-   e9055166d537e9842a4de1
+   7374617475736c697374732f3158407411b56cee33e91f4e2e97085299d85f446465
+   326f0cf1ac82b6cf6c72952db5f0f264639c41de402137987eb78eeb1bb98284c984
+   bcadd2556e928aa1d92608
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -676,12 +673,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      84316dd1a453b9381171ea6d  #       "\x841mÑ¤S¹8\x11qêm"
-      df2a43d2ad4e0cfbd73d3f83  #       "ß*CÒ\xadN\x0cû×=?\x83"
-      436c86a450a4c6641757fb81  #       "Cl\x86¤P¤Æd\x17Wû\x81"
-      cbaf8b0cbc9e7e0ac28a0aae  #       "Ë¯\x8b\x0c¼\x9e~\x0aÂ\x8a\x0a®"
-      3452c07624e9055166d537e9  #       "4RÀv$é\x05QfÕ7é"
-      842a4de1                  #       "\x84*Má"
+      7411b56cee33e91f4e2e9708  #       "t\x11µlî3é\x1fN.\x97\x08"
+      5299d85f446465326f0cf1ac  #       "R\x99Ø_Dde2o\x0cñ¬"
+      82b6cf6c72952db5f0f26463  #       "\x82¶Ïlr\x95-µðòdc"
+      9c41de402137987eb78eeb1b  #       "\x9cAÞ@!7\x98~·\x8eë\x1b"
+      b98284c984bcadd2556e928a  #       "¹\x82\x84É\x84¼\xadÒUn\x92\x8a"
+      a1d92608                  #       "¡Ù&\x08"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
