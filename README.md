@@ -28,3 +28,7 @@ $ make
 Command line usage requires that you have the necessary software installed.  See
 [the instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/SETUP.md).
 
+# Testing
+
+You may use this [Cyberchef script](https://gchq.github.io/CyberChef/#recipe=JWT_Decode()JPath_expression('status_list.lst','%5C%5Cn')From_Base64('A-Za-z0-9-_',true,false)Zlib_Inflate(0,0,'Adaptive',false,false)To_Binary('Line%20feed',8)Add_line_numbers()) to quickly analyze a Token Status List in JWT format.
+
