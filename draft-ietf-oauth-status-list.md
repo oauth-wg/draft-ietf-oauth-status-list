@@ -59,6 +59,11 @@ normative:
       org: "IANA"
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
+  CORS:
+    author:
+      org: "WHATWG"
+    title: "Fetch Living Standard"
+    target: "https://fetch.spec.whatwg.org/#http-cors-protocol"
 
 informative:
   RFC6749: RFC6749
@@ -423,6 +428,8 @@ The processing rules for JWT or CWT precede any evaluation of a Referenced Token
 To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.
 
 If the Status List is provided by an HTTP endpoint (and not as a Status List Token), the provider of the Status List MUST utilize TLS. Which version(s) should be implemented will vary over time. A TLS server certificate check MUST be performed as defined in Section 5 and 6 of {{RFC6125}}.
+
+The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-Based clients to access it.
 
 The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:
 
@@ -868,6 +875,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* add CORS considerations to the http endpoint
 * fix reference of Status List in CBOR format
 * added status_list CWT claim key assigned
 * move base64url definition to terminology
