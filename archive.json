@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-27T00:15:11.937310+00:00",
+  "timestamp": "2024-08-29T00:15:23.396927+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -52,6 +52,11 @@
       "name": "dependencies",
       "description": "Pull requests that update a dependency file",
       "color": "0366d6"
+    },
+    {
+      "name": "feature",
+      "description": "",
+      "color": "DD8C73"
     }
   ],
   "issues": [
@@ -691,7 +696,7 @@
       "labels": [],
       "body": "Add:\r\n- prevent double allocating an index\r\n- randomize allocation of indexes/avoid sequential usage",
       "createdAt": "2023-06-07T19:34:15Z",
-      "updatedAt": "2024-08-14T06:40:02Z",
+      "updatedAt": "2024-08-28T07:00:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -700,6 +705,13 @@
           "body": "Peter proposes a dynamic sized list, I don't see anything preventing this",
           "createdAt": "2023-07-11T09:52:38Z",
           "updatedAt": "2023-07-11T09:52:38Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "initialize new status list with reasonable default value to avoid update on issuance",
+          "createdAt": "2024-08-28T07:00:22Z",
+          "updatedAt": "2024-08-28T07:00:22Z"
         }
       ]
     },
@@ -760,15 +772,15 @@
       "id": "I_kwDOJZ2aqs5oowGp",
       "title": "rename \"referenced token\" ",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/26",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Sakurann",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "remaining issue from PR #20. \r\n\r\nalternatives are \"referencing token\".",
       "createdAt": "2023-06-13T19:20:19Z",
-      "updatedAt": "2024-08-14T07:39:08Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-28T07:18:54Z",
+      "closedAt": "2024-08-28T07:18:54Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -1145,7 +1157,7 @@
       "id": "I_kwDOJZ2aqs5rxPUF",
       "title": "Strip = from Base64url encoding?",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/44",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1154,8 +1166,8 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-07-17T15:48:46Z",
-      "updatedAt": "2024-08-14T06:47:37Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-28T06:30:49Z",
+      "closedAt": "2024-08-28T06:30:49Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -1275,7 +1287,7 @@
       "labels": [],
       "body": "As we declined to include a size property to the status list, we do not have other means than to decode&decompress the encoded status list and get status list size from the byte array length/size:\r\nstatus list size = byte array size * 8 / bits\r\nTherefore it makes to add the requirement that status list size must \"fill up\" to bytes",
       "createdAt": "2023-07-18T12:01:54Z",
-      "updatedAt": "2024-08-14T06:56:31Z",
+      "updatedAt": "2024-08-28T06:42:47Z",
       "closedAt": null,
       "comments": [
         {
@@ -1291,6 +1303,13 @@
           "body": "Editors Call:\r\n- only danger that we currently see is that some bits at the end have random/un-assigned values\r\n- leaving this open for now",
           "createdAt": "2024-08-14T06:56:30Z",
           "updatedAt": "2024-08-14T06:56:30Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- maybe add this as a recommendation in implementation consideration",
+          "createdAt": "2024-08-28T06:42:46Z",
+          "updatedAt": "2024-08-28T06:42:46Z"
         }
       ]
     },
@@ -1360,7 +1379,7 @@
       "labels": [],
       "body": "There are multiple cases that require multiple statuses to be attached to something.... this draft is also covering cbor\r\n\r\ncan we at least for cbor permit a flag that lets us embed an array of bytes into a particular status index - that would permit this use case to be covered easily",
       "createdAt": "2023-08-04T21:51:43Z",
-      "updatedAt": "2023-08-23T06:21:13Z",
+      "updatedAt": "2024-08-28T06:51:25Z",
       "closedAt": null,
       "comments": [
         {
@@ -1369,6 +1388,13 @@
           "body": "Multiple statuses are reflected by having more than 1 bit per index (through bits 2,4 or 8).\r\nBeside this, the option to have multiple Status Lists per Referenced Token still persists, however this is probably not a major use case.\r\nAdding the option for arrays in the Status List seems too complicated as we already have multiple bits as an option",
           "createdAt": "2023-08-23T06:21:12Z",
           "updatedAt": "2023-08-23T06:21:12Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- the design considerations aim for simplicity for the majority of use cases\r\n- the requirement seems niche to us and complicates the design, while we already have the ability to reflect more than 0/1 with `bits` > 1\r\n- given that we have the extension point at the `status` claim, one could build an extended status list that allows for such feature\r\n- however, we would like to understand these use cases better",
+          "createdAt": "2024-08-28T06:51:24Z",
+          "updatedAt": "2024-08-28T06:51:24Z"
         }
       ]
     },
@@ -1595,15 +1621,15 @@
       "id": "I_kwDOJZ2aqs5wvEbi",
       "title": "Privacy requirement - how to provide and demonstrate the consent given to the RP to allow it to check the revocation status",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/62",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "peppelinux",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "We're going to implement this beautiful draft. Aside of our requirements already satisfied by the current text, we have debated about the following privacy concern:\r\n\r\n- Once an RP has obtained the VP from a wallet instance, and the related status list ref related to one or more digital credential, the RP may continuously check the status of the credentials without any control/limit. This raises a privacy issue since an RP may control the mobile driving license of a citizen until this expire and completely out of the scope of the historical authentication made by the citizen to the RP, and the consent given.\r\n\r\nanother example: by asking the EAA related to an affiliation, an RP may check if a day a User was fired. And so on, exposing personal information that are not intended to be monitored/controlled over time.\r\n\r\nThis raised to our minds the requirement to protect the status endpoint for specific audiences and cryptographically, using sender-constrained tokens.\r\n\r\nSince the User gives the consent for the presentation of the credentials, then the Holder should issue a grant token for accessing to the status of the credentials.\r\n\r\nWe take into account that the RS that hosts the status list MUST not inspect or know the identity of the requester (the RP) because it must not track the usage of a specific credential, owned by a citizen, to a specific RP.\r\n\r\nHere some points of discussion to be further explored:\r\n\r\n1. The RP MUST provide to the Wallet Instance an ephemeral key for each requested credential within the presentation request\r\n2. the Wallet Instance issues a signed status list token, by signing it using the private key referred to the public one included in the credential cnf.jwk. \r\n3. The status list token doesn't contains any information about the RP.\r\n4. The signed status list token is provided to the RP with a PoP bound to the ephemeral key provided at point 1\r\n5. the RP can only use that status list token to the RS that hosts the status list by cryptographically proving its possession\r\n6. the RS that provide the status list doesn't know the identity of the client that consumes the status list\r\n7. the status token expires in a short period (less than hours), taking out any possibility to grant the access to that anonymous client the status list for that specific credential\r\n8. each time in the future the RP needs to check the status of a previously obtained digital credential, it MUST ask to the Holder (via email or any other digital delivery under the sole control of the User and offered by this latter to the RP) a presentation of that digital credential (by type)\r\n\r\nin this way the user is always in full control of which RP is going to check the status of their digital credential.\r\n\r\nIs there any idea, concern, issue, enhanchement to be considered before all?\r\n\r\nIf I miss something please don't esitate to bring me on the right path, I was quite far for a long time from this draft, then here my excuse in advance\r\n\r\n",
       "createdAt": "2023-09-11T22:50:49Z",
-      "updatedAt": "2024-08-14T07:12:52Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-28T08:31:19Z",
+      "closedAt": "2024-08-28T08:31:19Z",
       "comments": [
         {
           "author": "fmarino-ipzs",
@@ -1709,6 +1735,13 @@
           "body": "@peppelinux @fmarino-ipzs I assume this issue is solved with your draft on status assertions?\r\nPending close",
           "createdAt": "2024-08-14T07:12:40Z",
           "updatedAt": "2024-08-14T07:12:52Z"
+        },
+        {
+          "author": "peppelinux",
+          "authorAssociation": "NONE",
+          "body": "Ok, the draf is here: https://datatracker.ietf.org/doc/draft-demarco-oauth-status-assertions/",
+          "createdAt": "2024-08-28T08:31:19Z",
+          "updatedAt": "2024-08-28T08:31:19Z"
         }
       ]
     },
@@ -2924,16 +2957,24 @@
       "id": "I_kwDOJZ2aqs6G8kwH",
       "title": "Implementation Consideration",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/133",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "initialize new status list with reasonable default value to avoid update on issuance",
       "createdAt": "2024-04-25T16:33:39Z",
-      "updatedAt": "2024-04-25T16:33:39Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-08-28T07:00:15Z",
+      "closedAt": "2024-08-28T07:00:14Z",
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Duplicate #24 ",
+          "createdAt": "2024-08-28T07:00:14Z",
+          "updatedAt": "2024-08-28T07:00:14Z"
+        }
+      ]
     },
     {
       "number": 134,
@@ -3053,10 +3094,12 @@
       "author": "decentralgabe",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "feature"
+      ],
       "body": "We have a use case, in the financial field, to determine the time when the status of a given credential has changed. This requirement comes from US financial compliance regulation and is non negotiable.\r\n\r\nThe spec already supports an optional TTL which helps, but does not directly solve this issue. With a validity window (TTL), and consistent fetching (at the windows expiry) of status lists one could determine that a bit had flipped within a given window, and be able to approximate a timestamp of a given status change. Of course, this approach is noisy and inefficient.\r\n\r\nTo build off this section -- https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-history -- we can make this type of query simpler. I would like to see language added to the spec that speaks to the (optional) capability of a status list server to support historical queries, or revisions of the document from a given time period. I believe this would maintain the privacy preserving characteristics of the specification while adding the ability for verifiers to approximate status change time, which is useful in a number of circumstances, especially as an optional-to-implement feature.\r\n\r\nI am also open to other solutions that are similarly privacy preserving that support either directly or indirectly discerning 'time of status change', to date I have only seen solutions that would be far less privacy preserving, such as requesting specific instances (losing herd privacy).",
       "createdAt": "2024-05-09T22:05:17Z",
-      "updatedAt": "2024-05-10T18:45:55Z",
+      "updatedAt": "2024-08-28T06:59:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -3079,6 +3122,13 @@
           "body": "1 is a good fit - yes\r\n2 is inefficient, but at least the capability will exist\r\n\r\n> we are working on an alternative mechanism that would fit better for this requirement imho\r\n\r\ncould you provide additional detail?",
           "createdAt": "2024-05-10T18:45:53Z",
           "updatedAt": "2024-05-10T18:45:53Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- we gave this another thought whether to integrate this\r\n- extension to HTTP request protocol seems rather simple:\r\n  - HTTP GET https://example.com/statuslist/1?time=1686920170\r\n  - add OPTIONAL query parameter `time` with Unix timestamp in seconds\r\n  - if Status List Provider doesn't support this ignore or throw error?\r\n  - add privacy consideration  that this makes profiling easier",
+          "createdAt": "2024-08-28T06:58:22Z",
+          "updatedAt": "2024-08-28T06:58:22Z"
         }
       ]
     },
@@ -3226,7 +3276,7 @@
       "labels": [],
       "body": "In our current use case, we have implemented the bitstring status list (https://www.w3.org/TR/vc-bitstring-status-list/) and want to keep it as compatible as possible.\r\n\r\nOne of the incompatibilities we discovered in chapters 6.2, 6.3, and 6.4 is that the status list property is limited to a status list.\r\nWe would suggest allowing a list of status lists in those chapters instead.",
       "createdAt": "2024-06-27T05:55:44Z",
-      "updatedAt": "2024-07-04T12:58:02Z",
+      "updatedAt": "2024-08-28T10:27:55Z",
       "closedAt": null,
       "comments": [
         {
@@ -3249,6 +3299,13 @@
           "body": "I don't think there are any differences regarding privacy.",
           "createdAt": "2024-07-04T12:58:01Z",
           "updatedAt": "2024-07-04T12:58:01Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@bj-ms Are there any open questions on this one or do you have further feedback?",
+          "createdAt": "2024-08-28T10:27:55Z",
+          "updatedAt": "2024-08-28T10:27:55Z"
         }
       ]
     },
@@ -3331,6 +3388,22 @@
       "body": "To allow Status List Issuer being different from Issuer and using iss values, we should remove this constraint\r\n            ",
       "createdAt": "2024-08-14T06:38:37Z",
       "updatedAt": "2024-08-14T06:38:47Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 165,
+      "id": "I_kwDOJZ2aqs6UmWkC",
+      "title": "Reference the JWT BCP",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/165",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-28T22:20:45Z",
+      "updatedAt": "2024-08-28T22:20:46Z",
       "closedAt": null,
       "comments": []
     }
@@ -5471,7 +5544,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #55\r\nCloses #56 \r\nCloses #41 \r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n- [x] change graphic in Introduction\r\n- [ ] update introduction text\r\n- [ ] update terminology\r\n- [ ] auto-generate status list encoding output\r\n- [ ] move some examples to annex?\r\n- [ ] auto-generate referenced token\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-looker-oauth-jwt-cwt-status-list/plain/draft-looker-oauth-jwt-cwt-status-list.html)",
       "createdAt": "2023-08-14T12:14:48Z",
-      "updatedAt": "2024-01-15T07:11:44Z",
+      "updatedAt": "2024-08-28T20:50:51Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "58c91091c080b59860732bea8bc95c140c304473",
@@ -5721,7 +5794,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #2 \r\n\r\n## \ud83d\udcd1 Description\r\nDefines the HTTP GET API\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-looker-oauth-jwt-cwt-status-list/http/draft-looker-oauth-jwt-cwt-status-list.html)",
       "createdAt": "2023-09-20T19:21:09Z",
-      "updatedAt": "2023-10-06T06:50:11Z",
+      "updatedAt": "2024-08-28T20:50:33Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "6da501fc27174d0fe8a36ca04fd2fe01de20f407",
@@ -5776,7 +5849,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #4 #60\r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2023-09-20T20:49:39Z",
-      "updatedAt": "2023-10-06T06:50:39Z",
+      "updatedAt": "2024-08-28T20:50:31Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "6da501fc27174d0fe8a36ca04fd2fe01de20f407",
@@ -5838,7 +5911,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #64 \r\n\r\n## \ud83d\udcd1 Description\r\nUse term Relying Party and Issuer\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2023-10-20T22:08:00Z",
-      "updatedAt": "2023-10-23T06:10:51Z",
+      "updatedAt": "2024-08-28T20:50:31Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "58c91091c080b59860732bea8bc95c140c304473",
@@ -5893,7 +5966,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #59 \r\n\r\n## \ud83d\udcd1 Description\r\nIANA Consideration to register JWT Claim names and media types\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2023-10-20T22:54:52Z",
-      "updatedAt": "2023-10-23T06:12:01Z",
+      "updatedAt": "2024-08-28T20:50:30Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "58c91091c080b59860732bea8bc95c140c304473",
@@ -5988,7 +6061,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #54 \r\n\r\n## \ud83d\udcd1 Description\r\nThis PR adds a section on design considerations.\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2023-10-22T19:38:19Z",
-      "updatedAt": "2024-01-15T07:10:51Z",
+      "updatedAt": "2024-08-28T20:50:06Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "2e8e7aec6b757263d9fe356dc0f3815ffc5dd177",
@@ -6125,7 +6198,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses # <!-- Issue # here -->\r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2023-10-22T21:40:36Z",
-      "updatedAt": "2023-10-23T00:45:00Z",
+      "updatedAt": "2024-08-28T20:50:29Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "58c91091c080b59860732bea8bc95c140c304473",
@@ -6235,7 +6308,7 @@
       "labels": [],
       "body": "Closes #67 and #39.\r\n\r\n## \ud83d\udcd1 Description\r\nSwitches to zlib instead of gzip encoding and adds the recommendation to use the best available compression.\r\n\r\n## Preview Link\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2023-11-01T19:22:50Z",
-      "updatedAt": "2024-01-15T16:47:49Z",
+      "updatedAt": "2024-08-28T20:50:47Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "85fa6f499ae1ec612552c428e5ef77d2d1260e50",
@@ -6520,7 +6593,7 @@
       "labels": [],
       "body": "Adds a new line before the pre-defined status types so it renders properly as a list",
       "createdAt": "2023-12-07T14:02:27Z",
-      "updatedAt": "2023-12-21T20:18:02Z",
+      "updatedAt": "2024-08-28T20:50:27Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "5e89ba2bea20e16e8d6f1533bd4e5745758866d4",
@@ -6568,7 +6641,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #82 \r\n\r\n## \ud83d\udcd1 Description\r\nAdds access token as an example use-case for status list.\r\n\r\n## Preview Link\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/access-token/draft-ietf-oauth-status-list.html)",
       "createdAt": "2023-12-12T09:00:20Z",
-      "updatedAt": "2024-01-09T12:17:40Z",
+      "updatedAt": "2024-08-28T20:50:05Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "5e89ba2bea20e16e8d6f1533bd4e5745758866d4",
@@ -7174,7 +7247,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #77 \r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://github.com/<repo-name>/<branch-name>/<draft-name>.html)",
       "createdAt": "2023-12-29T17:59:17Z",
-      "updatedAt": "2024-01-09T12:06:00Z",
+      "updatedAt": "2024-08-28T20:50:03Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "5e89ba2bea20e16e8d6f1533bd4e5745758866d4",
@@ -7265,7 +7338,7 @@
       "labels": [],
       "body": "## \ud83d\udcd1 Description\r\nfixes the rendering of the last history (01)\r\n\r\n## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/history-rendering/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-01-31T07:52:02Z",
-      "updatedAt": "2024-02-05T10:04:30Z",
+      "updatedAt": "2024-08-28T20:50:06Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "8bf472ac4e3b6aaca67cc5f789aaa4984ed0969c",
@@ -7391,7 +7464,7 @@
       "labels": [],
       "body": "Closes #94 ",
       "createdAt": "2024-02-07T16:20:46Z",
-      "updatedAt": "2024-02-13T07:25:42Z",
+      "updatedAt": "2024-08-28T20:50:07Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "abe3214cd79226c9735ab8a62401242af61dbbc6",
@@ -7446,7 +7519,7 @@
       "labels": [],
       "body": "Closes #96 \r\n\r\nAlternative to #49 as it had gone stale.",
       "createdAt": "2024-02-17T09:27:41Z",
-      "updatedAt": "2024-02-27T19:40:08Z",
+      "updatedAt": "2024-08-28T20:50:09Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "0b836009d13c807fa5e56177748512332482a5d2",
@@ -7791,7 +7864,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses # <!-- Issue # here -->\r\n\r\n## \ud83d\udcd1 Description\r\n<!-- Add a brief description of the pr -->\r\n\r\n<!-- You can also choose to add a list of changes and if they have been completed or not by using the markdown to-do list syntax\r\n- [ ] Not Completed\r\n- [x] Completed\r\n-->\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/paulbastian/sd-jwt-ref#go.draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-19T16:06:51Z",
-      "updatedAt": "2024-02-20T07:19:52Z",
+      "updatedAt": "2024-08-28T20:50:08Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f960404e4f3745885434566cad9c6a6dff42f19e",
@@ -7866,7 +7939,7 @@
       "labels": [],
       "body": "## Preview Link\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/c2bo/fix-references/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-19T18:45:43Z",
-      "updatedAt": "2024-02-20T14:59:41Z",
+      "updatedAt": "2024-08-28T20:50:08Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "ff54acebe619eb51ccdf3f0e14d9d4c3db63ed79",
@@ -8077,7 +8150,7 @@
       "labels": [],
       "body": "<!-- If this pull request closes an issue, please mention the issue number below -->\r\nCloses #3\r\nCloses #109 \r\nCloses #110 \r\n\r\n## \ud83d\udcd1 Description\r\nThis PR adds:\r\n- CBOR/CWT encoding for status list and status list info\r\n- Example implementation for CBOR/CWT\r\n\r\nNot included yet: examples for referenced tokens (COSE, CWT) but that should be trivial to add.\r\n\r\n## Preview Link\r\n\r\n<!-- Update the link below to provide reviewers with a convenient link to view a rendered version of the PR-->\r\n<!-- In general the link should be of the form https://github.com/<repo-name>/<branch-name>/<draft-name>.html-->\r\n\r\n[click here for rendered preview of PR](https://vcstuff.github.io/draft-ietf-oauth-status-list/awoie/add-cwt/draft-ietf-oauth-status-list.html)",
       "createdAt": "2024-02-19T23:31:12Z",
-      "updatedAt": "2024-03-03T21:35:51Z",
+      "updatedAt": "2024-08-28T20:50:10Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "1b1a63f8fbfbc290c9da395d07c608f77b638ca9",
@@ -8613,7 +8686,7 @@
       "labels": [],
       "body": "upgrade python dependencies",
       "createdAt": "2024-03-03T21:44:00Z",
-      "updatedAt": "2024-03-04T06:07:36Z",
+      "updatedAt": "2024-08-28T20:50:11Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "0da03a10b348ce2086439b390c1a39cbc05636ee",
@@ -8655,7 +8728,7 @@
       "labels": [],
       "body": "add cborg dependency to publish workflow",
       "createdAt": "2024-03-04T07:03:43Z",
-      "updatedAt": "2024-03-04T07:08:35Z",
+      "updatedAt": "2024-08-28T20:50:12Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "32f5c8bc2f4bed7ce2853eff73b7e024678e9e10",
@@ -8683,7 +8756,7 @@
       "labels": [],
       "body": "Fixes broken links\r\n\r\nfixes #123",
       "createdAt": "2024-03-18T09:43:27Z",
-      "updatedAt": "2024-03-18T10:32:27Z",
+      "updatedAt": "2024-08-28T20:50:12Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "1198edeff82efca8fc22d90b571d57c73813a338",
@@ -9018,7 +9091,7 @@
       "labels": [],
       "body": "closes #27\r\n\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/batch-fetching/draft-ietf-oauth-status-list.html \r\n",
       "createdAt": "2024-05-15T06:04:00Z",
-      "updatedAt": "2024-07-08T07:21:01Z",
+      "updatedAt": "2024-08-28T20:49:45Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f9ffaf9705e89ac29d5f2b72e37fd58390c2e3a2",
@@ -9571,7 +9644,7 @@
       "labels": [],
       "body": "removes the http caching reference as we introduced the `ttl` option.\r\ncloses #135\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/http-caching/draft-ietf-oauth-status-list.html",
       "createdAt": "2024-06-05T13:54:26Z",
-      "updatedAt": "2024-06-06T06:12:08Z",
+      "updatedAt": "2024-08-28T20:49:40Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "007bcfe068407895edc7012752a525aa8879ba7b",
@@ -9626,7 +9699,7 @@
       "labels": [],
       "body": "Updates to current versions from https://github.com/martinthomson/internet-draft-template/",
       "createdAt": "2024-06-11T08:34:55Z",
-      "updatedAt": "2024-06-18T14:34:10Z",
+      "updatedAt": "2024-08-28T20:49:41Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "8b844e1ee711a3f2d4e7b9e5b0bd1834124598d1",
@@ -10062,50 +10135,88 @@
       "id": "PR_kwDOJZ2aqs548vEW",
       "title": "add cwt claim key for status_list ",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/160",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Adds a claim key for `status_list` used in the status list token in CWT format and fixes the reference.",
       "createdAt": "2024-08-21T08:07:24Z",
-      "updatedAt": "2024-08-21T08:07:25Z",
+      "updatedAt": "2024-08-28T06:37:14Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "f99e04f360ee8f7c872d65c11e2a3bcba02ffe89",
+      "baseRefOid": "5be97eea739a5b4a1d005fc58084e83241c52171",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/fix-cwt-claim-key",
-      "headRefOid": "1012408db22838e8e09a32eb73be5657ec2699b6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "21ec224635fc85ac5f067613a031d9ca8ab3652e",
+      "closedAt": "2024-08-28T06:37:11Z",
+      "mergedAt": "2024-08-28T06:37:11Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "5da26d60c97def6303957302bdf9afd1f80a005d"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6HBYb2",
+          "commit": {
+            "abbreviatedOid": "1012408"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-28T06:33:39Z",
+          "updatedAt": "2024-08-28T06:33:39Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n* `65533` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the rules outlined in [](#status-list-cbor).\r\n```",
+              "createdAt": "2024-08-28T06:33:39Z",
+              "updatedAt": "2024-08-28T06:33:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6HBZIo",
+          "commit": {
+            "abbreviatedOid": "fdf0036"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-28T06:35:06Z",
+          "updatedAt": "2024-08-28T06:35:06Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 161,
       "id": "PR_kwDOJZ2aqs55HKs6",
       "title": "fix reference of Status List in CBOR format",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/161",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Status List `lst` claim was referencing Chapter 4.1 instead of Chapter 4, which made it ambiguous whether to base64url-encode or not",
       "createdAt": "2024-08-22T11:18:45Z",
-      "updatedAt": "2024-08-22T12:19:36Z",
+      "updatedAt": "2024-08-28T06:38:26Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "f99e04f360ee8f7c872d65c11e2a3bcba02ffe89",
+      "baseRefOid": "5da26d60c97def6303957302bdf9afd1f80a005d",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/minor1",
-      "headRefOid": "204dd9eee0341fd4a4395f62e094e878a1f5ec54",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "6bbcebecc5a2a0ed72c2c8638f863b9a4f149ea9",
+      "closedAt": "2024-08-28T06:38:23Z",
+      "mergedAt": "2024-08-28T06:38:23Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "e4572f0cb71504e5abb3ad10c7305e1ac9138a66"
+      },
       "comments": [],
       "reviews": [
         {
@@ -10122,6 +10233,194 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 162,
+      "id": "PR_kwDOJZ2aqs55iDFo",
+      "title": "move base64url introduction to terminology",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/162",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "closes #44\r\n\r\nRedered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/44-clarify-base64-encoding/draft-ietf-oauth-status-list.html",
+      "createdAt": "2024-08-27T07:56:38Z",
+      "updatedAt": "2024-08-28T20:49:50Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f99e04f360ee8f7c872d65c11e2a3bcba02ffe89",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/44-clarify-base64-encoding",
+      "headRefOid": "acab6f6fc96145e328128d616b9a7e10462bc5d7",
+      "closedAt": "2024-08-28T06:30:48Z",
+      "mergedAt": "2024-08-28T06:30:48Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "5be97eea739a5b4a1d005fc58084e83241c52171"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6G2tYu",
+          "commit": {
+            "abbreviatedOid": "b060cce"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T08:04:34Z",
+          "updatedAt": "2024-08-27T08:05:09Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Does this render correctly?",
+              "createdAt": "2024-08-27T08:04:34Z",
+              "updatedAt": "2024-08-27T08:05:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6G2yB-",
+          "commit": {
+            "abbreviatedOid": "b060cce"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-27T08:13:12Z",
+          "updatedAt": "2024-08-27T08:13:13Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Same as the rest in the Terminology section: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/44-clarify-base64-encoding/draft-ietf-oauth-status-list.html#name-terminology",
+              "createdAt": "2024-08-27T08:13:12Z",
+              "updatedAt": "2024-08-27T08:13:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6G24Qw",
+          "commit": {
+            "abbreviatedOid": "b060cce"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-27T08:23:51Z",
+          "updatedAt": "2024-08-27T08:23:51Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I meant square brackets instead of double curly brackets. Let's be consistent",
+              "createdAt": "2024-08-27T08:23:51Z",
+              "updatedAt": "2024-08-27T08:24:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6G27x7",
+          "commit": {
+            "abbreviatedOid": "b060cce"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-27T08:29:12Z",
+          "updatedAt": "2024-08-27T08:29:13Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "ohh - I didn't even realize that :D, changed it",
+              "createdAt": "2024-08-27T08:29:12Z",
+              "updatedAt": "2024-08-27T08:29:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6G28UR",
+          "commit": {
+            "abbreviatedOid": "acab6f6"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-27T08:29:42Z",
+          "updatedAt": "2024-08-27T08:29:42Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 163,
+      "id": "PR_kwDOJZ2aqs55r9zu",
+      "title": "add testing tool",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/163",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #157 ",
+      "createdAt": "2024-08-28T10:07:50Z",
+      "updatedAt": "2024-08-28T15:55:32Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "e4572f0cb71504e5abb3ad10c7305e1ac9138a66",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/testing",
+      "headRefOid": "7388c326e8f88688d40c3bd1dfcd8c830e94aab2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6HGuhJ",
+          "commit": {
+            "abbreviatedOid": "7388c32"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-28T15:55:32Z",
+          "updatedAt": "2024-08-28T15:55:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 164,
+      "id": "PR_kwDOJZ2aqs55wl2L",
+      "title": "remove requirement for matching iss claim in Referenced Token and Sta\u2026",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/164",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #159 \r\nCloses #108 ",
+      "createdAt": "2024-08-28T21:38:40Z",
+      "updatedAt": "2024-08-28T21:38:41Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "e4572f0cb71504e5abb3ad10c7305e1ac9138a66",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "159-remove-requirement-on-matching-iss-values",
+      "headRefOid": "d0bb5a363f8cbec73fbd875946fa62384682e436",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
