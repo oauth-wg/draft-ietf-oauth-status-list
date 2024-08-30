@@ -347,7 +347,6 @@ The following is a non-normative example for a decoded header and payload of a R
 }
 .
 {
-  "iss": "https://example.com",
   "status": {
     "status_list": {
       "idx": 0,
