@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-03T00:15:24.310511+00:00",
+  "timestamp": "2024-09-05T00:15:15.042986+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -3492,6 +3492,30 @@
           "body": "I think there are two reasons, why a failed negotiation my not be that significant:\r\n- the unsigned option may probably be deleted, leaving us with 2 possible media types instead of 4\r\n- from the ecosystem / context it may be clear whether JWT or CWT is expected\r\n\r\nWe could say that more complex header values as `Accept: application/statuslist+*;q=0.5,application/statuslist+cwt` are restricted?",
           "createdAt": "2024-08-30T14:24:53Z",
           "updatedAt": "2024-08-30T14:24:53Z"
+        }
+      ]
+    },
+    {
+      "number": 169,
+      "id": "I_kwDOJZ2aqs6VMjnb",
+      "title": "Make it more clear that CWT `lst` claim is not base64url encoded",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/169",
+      "state": "CLOSED",
+      "author": "awoie",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The reference in 4.2 Status List in CBOR Format should be probably fixed to refer to 4 Status List instead of 4.2 Status List in JSON since it suggests that the `lst` claim is encoded in base64url which it is not because this would not make much sense and the examples reinforce this interpretation.\r\n\r\n> lst: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [Section 4.1](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-03.html#status-list-json).",
+      "createdAt": "2024-09-03T14:53:08Z",
+      "updatedAt": "2024-09-03T15:00:53Z",
+      "closedAt": "2024-09-03T15:00:52Z",
+      "comments": [
+        {
+          "author": "awoie",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closing since this has been addressed already.",
+          "createdAt": "2024-09-03T15:00:52Z",
+          "updatedAt": "2024-09-03T15:00:52Z"
         }
       ]
     }
