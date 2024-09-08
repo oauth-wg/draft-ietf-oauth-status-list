@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-05T00:15:15.042986+00:00",
+  "timestamp": "2024-09-08T00:17:19.932056+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -57,6 +57,16 @@
       "name": "feature",
       "description": "",
       "color": "DD8C73"
+    },
+    {
+      "name": "ready-for-pr",
+      "description": "",
+      "color": "19E11B"
+    },
+    {
+      "name": "discuss",
+      "description": "",
+      "color": "03BA91"
     }
   ],
   "issues": [
@@ -693,10 +703,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "Add:\r\n- prevent double allocating an index\r\n- randomize allocation of indexes/avoid sequential usage",
       "createdAt": "2023-06-07T19:34:15Z",
-      "updatedAt": "2024-08-28T07:00:24Z",
+      "updatedAt": "2024-09-05T07:04:49Z",
       "closedAt": null,
       "comments": [
         {
@@ -976,10 +988,12 @@
       "assignees": [
         "c2bo"
       ],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "Is it allowed/recommended to have Status List Token in one format and the Referenced Token in another format?",
       "createdAt": "2023-07-11T06:25:53Z",
-      "updatedAt": "2024-08-14T06:45:45Z",
+      "updatedAt": "2024-09-05T07:04:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -1284,10 +1298,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "As we declined to include a size property to the status list, we do not have other means than to decode&decompress the encoded status list and get status list size from the byte array length/size:\r\nstatus list size = byte array size * 8 / bits\r\nTherefore it makes to add the requirement that status list size must \"fill up\" to bytes",
       "createdAt": "2023-07-18T12:01:54Z",
-      "updatedAt": "2024-08-28T06:42:47Z",
+      "updatedAt": "2024-09-05T07:05:11Z",
       "closedAt": null,
       "comments": [
         {
@@ -2296,10 +2312,12 @@
       "author": "awoie",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "`status` is not really a claim about a subject and is never selectively disclosed, so it would makes sense to make it a JWT header. It would also work well with the existing `crit` JOSE header that can then mark `status` as critical.\r\n\r\nSee https://github.com/oauth-wg/oauth-sd-jwt-vc/issues/192",
       "createdAt": "2023-12-06T20:51:53Z",
-      "updatedAt": "2023-12-11T13:33:57Z",
+      "updatedAt": "2024-09-05T06:57:29Z",
       "closedAt": null,
       "comments": [
         {
@@ -2315,6 +2333,13 @@
           "body": "Using JSON serialization or COSE Sign Document (as mdoc cbor MSO) would give the benefit to allow the update of the status object without breaking the signature of the JWS.\r\n\r\nWhile having a compact-serialization does not.\r\n\r\nI'd see benefits in having it in the unprotected header, while in the protected header not.\r\n\r\nI believe that there may be use cases or situations where the status key may be disclosable, then it makes sense to me to keep it in the payload and allow the issuers to make it disclosable or not.\r\n\r\na least, even if I really don't like this argument, there are some implementations that have issues with custom/unsupported header parameters. This may have huge impact on the implementation -> not a good argument, but something.\r\n\r\ndefinitively, I would like to have the status in the payload, as the credential type.",
           "createdAt": "2023-12-08T15:07:15Z",
           "updatedAt": "2023-12-11T13:33:57Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- current approach is in line with current best practice and we wouldn't start the discussion here, see iat, exp..\r\n- would break current implementations without much benefit",
+          "createdAt": "2024-09-05T06:57:16Z",
+          "updatedAt": "2024-09-05T06:57:16Z"
         }
       ]
     },
@@ -2367,10 +2392,12 @@
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "In order to mitigate issuers being able to track verifiers when retrieving a status list, consider adding an implementation consideration to recommend usage of a private relay protocol like [Oblivious HTTP](https://datatracker.ietf.org/doc/html/draft-ietf-ohai-ohttp).",
       "createdAt": "2024-01-15T08:14:41Z",
-      "updatedAt": "2024-01-15T08:14:41Z",
+      "updatedAt": "2024-09-05T06:54:08Z",
       "closedAt": null,
       "comments": []
     },
@@ -2475,10 +2502,12 @@
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "Also consider the application and usage of a mechanism like etag to allow a consuming party to determine whether their copy of a given status list is the latest.",
       "createdAt": "2024-02-20T07:31:30Z",
-      "updatedAt": "2024-03-07T10:24:41Z",
+      "updatedAt": "2024-09-05T06:53:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -2506,10 +2535,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "",
       "createdAt": "2024-02-20T07:41:25Z",
-      "updatedAt": "2024-03-20T16:06:28Z",
+      "updatedAt": "2024-09-05T06:52:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -2570,10 +2601,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "As the similar requirement was relaxed on SD-JWT, I think we should consider the same.",
       "createdAt": "2024-02-22T09:58:08Z",
-      "updatedAt": "2024-02-22T09:58:08Z",
+      "updatedAt": "2024-09-05T06:52:26Z",
       "closedAt": null,
       "comments": []
     },
@@ -2586,12 +2619,22 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "",
       "createdAt": "2024-02-27T07:25:19Z",
-      "updatedAt": "2024-02-27T07:25:19Z",
+      "updatedAt": "2024-09-05T06:50:39Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- rename 6.2 [Referenced Token in JWT Format](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-referenced-token-in-jwt-for) -> Referenced Token in JOSE\r\n- add SD-JWT example\r\n- is it possible to merge 6.3 and 6.4 and make some specifics for CWT? include both cwt and mdoc example",
+          "createdAt": "2024-09-05T06:50:14Z",
+          "updatedAt": "2024-09-05T06:50:14Z"
+        }
+      ]
     },
     {
       "number": 113,
@@ -2630,10 +2673,12 @@
       "assignees": [
         "tplooker"
       ],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "",
       "createdAt": "2024-02-27T07:25:54Z",
-      "updatedAt": "2024-08-07T06:27:27Z",
+      "updatedAt": "2024-09-05T06:41:14Z",
       "closedAt": null,
       "comments": []
     },
@@ -2960,10 +3005,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "Observability of Issuer's issuance behaviour, i.e. outsiders could observe how many tokens an issuer is issuing, therefore get information on his business.\r\nCountermeasures: Maintain multiple lists in parallel, use decoy entries",
       "createdAt": "2024-04-25T16:32:52Z",
-      "updatedAt": "2024-04-25T16:32:52Z",
+      "updatedAt": "2024-09-05T06:40:32Z",
       "closedAt": null,
       "comments": []
     },
@@ -3093,10 +3140,12 @@
       "author": "cre8",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "Some CDNs like github repos/pages only provide static hosting and therefore no way to set the content-type to another value.\r\n\r\nFor the JOSE case I could publish a txt or json file.\r\nSo when it's a json file, it should be equal to `application/statuslist+json`, in case of a JWT it is `application/statuslist+jwt`.",
       "createdAt": "2024-05-08T09:22:15Z",
-      "updatedAt": "2024-05-08T09:22:15Z",
+      "updatedAt": "2024-09-05T06:39:29Z",
       "closedAt": null,
       "comments": []
     },
@@ -3108,13 +3157,16 @@
       "state": "OPEN",
       "author": "decentralgabe",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [
-        "feature"
+        "feature",
+        "ready-for-pr"
       ],
       "body": "We have a use case, in the financial field, to determine the time when the status of a given credential has changed. This requirement comes from US financial compliance regulation and is non negotiable.\r\n\r\nThe spec already supports an optional TTL which helps, but does not directly solve this issue. With a validity window (TTL), and consistent fetching (at the windows expiry) of status lists one could determine that a bit had flipped within a given window, and be able to approximate a timestamp of a given status change. Of course, this approach is noisy and inefficient.\r\n\r\nTo build off this section -- https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-history -- we can make this type of query simpler. I would like to see language added to the spec that speaks to the (optional) capability of a status list server to support historical queries, or revisions of the document from a given time period. I believe this would maintain the privacy preserving characteristics of the specification while adding the ability for verifiers to approximate status change time, which is useful in a number of circumstances, especially as an optional-to-implement feature.\r\n\r\nI am also open to other solutions that are similarly privacy preserving that support either directly or indirectly discerning 'time of status change', to date I have only seen solutions that would be far less privacy preserving, such as requesting specific instances (losing herd privacy).",
       "createdAt": "2024-05-09T22:05:17Z",
-      "updatedAt": "2024-08-28T06:59:24Z",
+      "updatedAt": "2024-09-05T06:24:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -3174,10 +3226,12 @@
       "author": "nynymike",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "If an OP wanted to publish the Token Status List JWT on an endpoint, perhaps something like `token_status_list_jwt` with `Content-Type: application/jwt` ... it would be nice to specify that in the spec.",
       "createdAt": "2024-05-21T19:33:46Z",
-      "updatedAt": "2024-06-06T06:41:41Z",
+      "updatedAt": "2024-09-05T06:36:35Z",
       "closedAt": null,
       "comments": [
         {
@@ -3225,10 +3279,12 @@
       "assignees": [
         "tplooker"
       ],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "This includes standalone seperate references for each of the claims rather then referencing the JWT based definition.",
       "createdAt": "2024-05-29T06:09:54Z",
-      "updatedAt": "2024-08-07T06:27:37Z",
+      "updatedAt": "2024-09-05T06:25:11Z",
       "closedAt": null,
       "comments": []
     },
@@ -3241,10 +3297,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "we currently assume there is no issue, but it may be worth to write it down",
       "createdAt": "2024-05-29T06:28:15Z",
-      "updatedAt": "2024-08-07T06:27:40Z",
+      "updatedAt": "2024-09-05T06:25:20Z",
       "closedAt": null,
       "comments": []
     },
@@ -3257,10 +3315,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "The unsigned option hasn't shown any interest at all and complicates matters within the draft. Therefore, we consider to drop this feature again. Is anybody planning to use this?",
       "createdAt": "2024-05-29T06:43:18Z",
-      "updatedAt": "2024-08-07T06:54:35Z",
+      "updatedAt": "2024-09-05T06:34:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -3340,10 +3400,12 @@
       "author": "cobward",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "I have some concerns about the complexity of the compression requirements:\r\n\r\n> \r\n>    3.  The byte array is compressed using DEFLATE [RFC1951] with the\r\n>        ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to\r\n>        use the highest compression level available.\r\n\r\nand\r\n\r\n> \r\n>    The HTTP response SHOULD use gzip Content-Encoding as defined in\r\n>    [RFC9110].\r\n\r\nThe first quoted requirement adds needless complexity and computation on the part of the issuer, as compression can happen at the HTTP level (as indicated by the second requirement), so an implementation following the recommendations of this specification would end up compressing twice at the highest available compression level. With the second requirement there is ambiguity with how it interacts with the requirements in RFC9110 with respect to handling the Accept-Encoding request header.\r\n\r\nMy proposal is to remove the requirement for DEFLATE compression on internal structure, and instead rely solely on compression of the entire response using the request/response mechanism defined in RFC9110, section 8.4.",
       "createdAt": "2024-07-08T09:57:47Z",
-      "updatedAt": "2024-08-29T07:37:17Z",
+      "updatedAt": "2024-09-05T06:34:27Z",
       "closedAt": null,
       "comments": [
         {
@@ -3388,10 +3450,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "Something like this picutre used in the last IETF presentation:\r\n\r\n![image](https://github.com/user-attachments/assets/86e48867-0f3a-4715-8bce-a13e1514c814)\r\n",
       "createdAt": "2024-08-07T06:41:30Z",
-      "updatedAt": "2024-08-14T06:37:30Z",
+      "updatedAt": "2024-09-05T06:25:32Z",
       "closedAt": null,
       "comments": [
         {
@@ -3414,10 +3478,12 @@
       "assignees": [
         "paulbastian"
       ],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "To allow Status List Issuer being different from Issuer and using iss values, we should remove this constraint\r\n            ",
       "createdAt": "2024-08-14T06:38:37Z",
-      "updatedAt": "2024-08-14T06:38:47Z",
+      "updatedAt": "2024-09-05T06:25:39Z",
       "closedAt": null,
       "comments": []
     },
@@ -3432,10 +3498,12 @@
       "assignees": [
         "paulbastian"
       ],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "",
       "createdAt": "2024-08-28T22:20:45Z",
-      "updatedAt": "2024-08-29T07:33:00Z",
+      "updatedAt": "2024-09-05T06:28:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -3480,10 +3548,12 @@
       "author": "markuskreusch",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "As described in https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-03.html#section-8.1 content negotiation using the accept header is used when requesting a status list / status list token. This is used to request different formats depending on the needs of the caller using a single URI for the status list.\r\n\r\nThis mechanism in general is valid and follows the http standards. Implementing this works well when an application server is used to serve the status lists.\r\n\r\nNevertheless in practice this causes problems in some scenarios. Several CDNs and services that provide caches of other HTTP resources do not implement the required functionality correctly.\r\n\r\nFor example [cloudflare, does explicitly ignore the accept header even if the vary http response header is used](https://developers.cloudflare.com/cache/concepts/cache-control/#other). Some other services offer this functionality tough, for example Amazon CloudFront.\r\n\r\nIn addition nginx can not easily handle content negotiation using the accept header correctly. Using the a map section together with the Accept header allows to choose different resources based on the requested content type. This is only working for single value Accept headers though. More complex header values as `Accept: application/statuslist+*;q=0.5,application/statuslist+cwt` can not easily be handled. The current state of the standard does not mention such option but does not forbid them either. Apache2 has https://httpd.apache.org/docs/current/content-negotiation.html, that could solve this. I did not evaluate that further.\r\n\r\nSo even though the mechanism is good and simple as is and follows http standards, it might be difficult to implement when using a CDN to scale serving the status list.\r\n\r\nA possible solution would be to use distinct URIs to request the status list depending on the type (for example by appending extensions like jwt, cwt, json and cbor) instead of the request header. This seems to me as a workaround and a suboptimal solution though. As the specification as it is is totally valid IMHO it could as well been left as it is, which means the need for implementation of this functionality in the used components will arise and the usage of certain CDNs is not possible.\r\n\r\nRelated to #137 but addresses the request handling instead of response generation.",
       "createdAt": "2024-08-29T18:21:00Z",
-      "updatedAt": "2024-08-30T14:24:54Z",
+      "updatedAt": "2024-09-05T06:42:07Z",
       "closedAt": null,
       "comments": [
         {
@@ -10535,7 +10605,7 @@
       "labels": [],
       "body": "Closes #159 \r\nCloses #108 ",
       "createdAt": "2024-08-28T21:38:40Z",
-      "updatedAt": "2024-08-30T20:16:33Z",
+      "updatedAt": "2024-09-05T06:23:01Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
@@ -10574,6 +10644,13 @@
           "body": "Otherwise approved, as I can't review my own PR apparently",
           "createdAt": "2024-08-29T16:56:44Z",
           "updatedAt": "2024-08-29T16:56:44Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@tplooker please review",
+          "createdAt": "2024-09-05T06:23:00Z",
+          "updatedAt": "2024-09-05T06:23:00Z"
         }
       ],
       "reviews": [
