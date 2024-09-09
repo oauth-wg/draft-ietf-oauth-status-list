@@ -1254,13 +1254,16 @@ The status list token data structures themselves are also represented as JWTs or
                 <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-malicious-issuers" class="internal xref">Malicious Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.3">
-                <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-unobservability-of-relying-" class="internal xref">Unobservability of Relying Parties</a></p>
+                <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-observability-of-relying-pa" class="internal xref">Observability of Relying Parties</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.4">
-                <p id="section-toc.1-1.12.2.4.1"><a href="#section-12.4" class="auto internal xref">12.4</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
+                <p id="section-toc.1-1.12.2.4.1"><a href="#section-12.4" class="auto internal xref">12.4</a>.  <a href="#name-observability-of-outsiders" class="internal xref">Observability of Outsiders</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5">
-                <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-third-party-hosting" class="internal xref">Third Party Hosting</a></p>
+                <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.6">
+                <p id="section-toc.1-1.12.2.6.1"><a href="#section-12.6" class="auto internal xref">12.6</a>.  <a href="#name-third-party-hosting" class="internal xref">Third Party Hosting</a></p>
 </li>
             </ul>
 </li>
@@ -1735,9 +1738,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58402d7bba
-153c2b3b1c28f33beef80c10f584ef7fcb03525485efd5e194f948bb2d876cf837b9
-9c2c079318d2deadf8efc017600dc25e503bebc80093d8c30a57c9
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840bc6ae5
+bc44b47126aa005bab31b2f5e80f3bfdc3972084ef5568aab428478a2e8c958729bf
+4bdd8c4f4a1876ab3ad674f46c6fc69b616eaf4f3ead70dc2d5737
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1763,12 +1766,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      2d7bba153c2b3b1c28f33bee  #       "-{º\x15&lt;+;\x1c(ó;î"
-      f80c10f584ef7fcb03525485  #       "ø\x0c\x10õ\x84ï\x7fË\x03RT\x85"
-      efd5e194f948bb2d876cf837  #       "ïÕá\x94ùH»-\x87lø7"
-      b99c2c079318d2deadf8efc0  #       "¹\x9c,\x07\x93\x18ÒÞ\xadøïÀ"
-      17600dc25e503bebc80093d8  #       "\x17`\x0dÂ^P;ëÈ\x00\x93Ø"
-      c30a57c9                  #       "Ã\x0aWÉ"
+      bc6ae5bc44b47126aa005bab  #       "¼jå¼D´q&amp;ª\x00[«"
+      31b2f5e80f3bfdc3972084ef  #       "1²õè\x0f;ýÃ\x97 \x84ï"
+      5568aab428478a2e8c958729  #       "Uhª´(G\x8a.\x8c\x95\x87)"
+      bf4bdd8c4f4a1876ab3ad674  #       "¿KÝ\x8cOJ\x18v«:Öt"
+      f46c6fc69b616eaf4f3ead70  #       "ôloÆ\x9ban¯O&gt;\xadp"
+      dc2d5737                  #       "Ü-W7"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1873,9 +1876,9 @@ d2                              # tag(18)
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840294b27e3db79763b265e6653be5374c8a96daf
-ff488e9f544636898205d8a6268cbdf938d4136872a6d564dbd0b6ed35f89ef16c57
-4c51a9db4feed8f4ec52ec
+7374617475736c697374732f3158400e39e87051e08b1ffe5c10375efde81660643f
+ab86b01e8fa6e9be8988d40efefa1e475d94ce9e101be3edffbe03d5ced4cbb908f0
+50177f56e56edf325493a6
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1900,12 +1903,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      294b27e3db79763b265e6653  #       ")K'ãÛyv;&amp;^fS"
-      be5374c8a96dafff488e9f54  #       "¾StÈ©m¯ÿH\x8e\x9fT"
-      4636898205d8a6268cbdf938  #       "F6\x89\x82\x05Ø¦&amp;\x8c½ù8"
-      d4136872a6d564dbd0b6ed35  #       "Ô\x13hr¦ÕdÛÐ¶í5"
-      f89ef16c574c51a9db4feed8  #       "ø\x9eñlWLQ©ÛOîØ"
-      f4ec52ec                  #       "ôìRì"
+      0e39e87051e08b1ffe5c1037  #       "\x0e9èpQà\x8b\x1fþ\\x107"
+      5efde81660643fab86b01e8f  #       "^ýè\x16`d?«\x86°\x1e\x8f"
+      a6e9be8988d40efefa1e475d  #       "¦é¾\x89\x88Ô\x0eþú\x1eG]"
+      94ce9e101be3edffbe03d5ce  #       "\x94Î\x9e\x10\x1bãíÿ¾\x03ÕÎ"
+      d4cbb908f050177f56e56edf  #       "ÔË¹\x08ðP\x17\x7fVånß"
+      325493a6                  #       "2T\x93¦"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2257,8 +2260,8 @@ a fresh copy of the status list even if that status list is not expired.<a href=
 </div>
 <div id="privacy-relying-party">
 <section id="section-12.3">
-        <h3 id="name-unobservability-of-relying-">
-<a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-unobservability-of-relying-" class="section-name selfRef">Unobservability of Relying Parties</a>
+        <h3 id="name-observability-of-relying-pa">
+<a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-observability-of-relying-pa" class="section-name selfRef">Observability of Relying Parties</a>
         </h3>
 <p id="section-12.3-1">Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided <code>uri</code> parameter and look up the corresponding <code>index</code>. However, the Relying Party may persistently store the <code>uri</code> and <code>index</code> of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.<a href="#section-12.3-1" class="pilcrow">¶</a></p>
 <p id="section-12.3-2">TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture<a href="#section-12.3-2" class="pilcrow">¶</a></p>
@@ -2266,35 +2269,49 @@ a fresh copy of the status list even if that status list is not expired.<a href=
 - regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="unlinkability">
+<div id="observability-of-outsiders">
 <section id="section-12.4">
-        <h3 id="name-unlinkability">
-<a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
+        <h3 id="name-observability-of-outsiders">
+<a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-observability-of-outsiders" class="section-name selfRef">Observability of Outsiders</a>
         </h3>
-<p id="section-12.4-1">Colluding Issuers and a Relying Parties have the possibility to link two transactions, as the tuple of <code>uri</code> and <code>index</code> inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
-<p id="section-12.4-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.4-2" class="pilcrow">¶</a></p>
-<p id="section-12.4-3">To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.4-3" class="pilcrow">¶</a></p>
+<p id="section-12.4-1">Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
+<p id="section-12.4-2">This behaviour could be mitigated by:
+- disable the historical data feature (TODO:link)
+- disable the Status List Aggregation {#batch-fetching}
+- choose non-sequential, pseudo-random or random indices
+- use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
+- choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="unlinkability">
+<section id="section-12.5">
+        <h3 id="name-unlinkability">
+<a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
+        </h3>
+<p id="section-12.5-1">Colluding Issuers and Relying Parties have the possibility to link two transactions, as the tuple of <code>uri</code> and <code>index</code> inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
+<p id="section-12.5-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.5-2" class="pilcrow">¶</a></p>
+<p id="section-12.5-3">To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-12.4-4.1">
-            <p id="section-12.4-4.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.4-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-12.5-4.1">
+            <p id="section-12.5-4.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.5-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-12.4-4.2">
-            <p id="section-12.4-4.2.1">use decoy or dead entries to obfuscate the real number of Referenced Tokens within a Status List<a href="#section-12.4-4.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-12.5-4.2">
+            <p id="section-12.5-4.2.1">use decoy entries to obfuscate the real number of Referenced Tokens within a Status List<a href="#section-12.5-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-12.4-4.3">
-            <p id="section-12.4-4.3.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.4-4.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-12.5-4.3">
+            <p id="section-12.5-4.3.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.5-4.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="third-party-hosting">
-<section id="section-12.5">
+<section id="section-12.6">
         <h3 id="name-third-party-hosting">
-<a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-third-party-hosting" class="section-name selfRef">Third Party Hosting</a>
+<a href="#section-12.6" class="section-number selfRef">12.6. </a><a href="#name-third-party-hosting" class="section-name selfRef">Third Party Hosting</a>
         </h3>
-<p id="section-12.5-1">TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
+<p id="section-12.6-1">TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
 TODO evaluate definition of Status List Provider?
- An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
+ An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.<a href="#section-12.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2994,19 +3011,22 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-04<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">add security considerations on correct parsing and decoding<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">add privacy consideration on observability of outsiders<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">add CORS considerations to the http endpoint<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">add security considerations on correct parsing and decoding<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">add CORS considerations to the http endpoint<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">added status_list CWT claim key assigned<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">move base64url definition to terminology<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">added status_list CWT claim key assigned<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.6">
+          <p id="appendix-B-2.6.1">move base64url definition to terminology<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-03<a href="#appendix-B-3" class="pilcrow">¶</a></p>

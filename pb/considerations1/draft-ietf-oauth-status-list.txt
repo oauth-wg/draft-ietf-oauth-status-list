@@ -103,9 +103,10 @@ Table of Contents
    12. Privacy Considerations
      12.1.  Limiting issuers observability of token verification
      12.2.  Malicious Issuers
-     12.3.  Unobservability of Relying Parties
-     12.4.  Unlinkability
-     12.5.  Third Party Hosting
+     12.3.  Observability of Relying Parties
+     12.4.  Observability of Outsiders
+     12.5.  Unlinkability
+     12.6.  Third Party Hosting
    13. Implementation Considerations
      13.1.  Token Lifecycle
    14. IANA Considerations
@@ -536,9 +537,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58402d7bba
-   153c2b3b1c28f33beef80c10f584ef7fcb03525485efd5e194f948bb2d876cf837b9
-   9c2c079318d2deadf8efc017600dc25e503bebc80093d8c30a57c9
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840bc6ae5
+   bc44b47126aa005bab31b2f5e80f3bfdc3972084ef5568aab428478a2e8c958729bf
+   4bdd8c4f4a1876ab3ad674f46c6fc69b616eaf4f3ead70dc2d5737
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -562,12 +563,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      2d7bba153c2b3b1c28f33bee  #       "-{º\x15<+;\x1c(ó;î"
-      f80c10f584ef7fcb03525485  #       "ø\x0c\x10õ\x84ï\x7fË\x03RT\x85"
-      efd5e194f948bb2d876cf837  #       "ïÕá\x94ùH»-\x87lø7"
-      b99c2c079318d2deadf8efc0  #       "¹\x9c,\x07\x93\x18ÒÞ\xadøïÀ"
-      17600dc25e503bebc80093d8  #       "\x17`\x0dÂ^P;ëÈ\x00\x93Ø"
-      c30a57c9                  #       "Ã\x0aWÉ"
+      bc6ae5bc44b47126aa005bab  #       "¼jå¼D´q&ª\x00[«"
+      31b2f5e80f3bfdc3972084ef  #       "1²õè\x0f;ýÃ\x97 \x84ï"
+      5568aab428478a2e8c958729  #       "Uhª´(G\x8a.\x8c\x95\x87)"
+      bf4bdd8c4f4a1876ab3ad674  #       "¿KÝ\x8cOJ\x18v«:Öt"
+      f46c6fc69b616eaf4f3ead70  #       "ôloÆ\x9ban¯O>\xadp"
+      dc2d5737                  #       "Ü-W7"
 
 6.  Referenced Token
 
@@ -674,9 +675,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840294b27e3db79763b265e6653be5374c8a96daf
-   ff488e9f544636898205d8a6268cbdf938d4136872a6d564dbd0b6ed35f89ef16c57
-   4c51a9db4feed8f4ec52ec
+   7374617475736c697374732f3158400e39e87051e08b1ffe5c10375efde81660643f
+   ab86b01e8fa6e9be8988d40efefa1e475d94ce9e101be3edffbe03d5ced4cbb908f0
+   50177f56e56edf325493a6
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -699,12 +700,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         294b27e3db79763b265e6653  #       ")K'ãÛyv;&^fS"
-         be5374c8a96dafff488e9f54  #       "¾StÈ©m¯ÿH\x8e\x9fT"
-         4636898205d8a6268cbdf938  #       "F6\x89\x82\x05Ø¦&\x8c½ù8"
-         d4136872a6d564dbd0b6ed35  #       "Ô\x13hr¦ÕdÛÐ¶í5"
-         f89ef16c574c51a9db4feed8  #       "ø\x9eñlWLQ©ÛOîØ"
-         f4ec52ec                  #       "ôìRì"
+         0e39e87051e08b1ffe5c1037  #       "\x0e9èpQà\x8b\x1fþ\\x107"
+         5efde81660643fab86b01e8f  #       "^ýè\x16`d?«\x86°\x1e\x8f"
+         a6e9be8988d40efefa1e475d  #       "¦é¾\x89\x88Ô\x0eþú\x1eG]"
+         94ce9e101be3edffbe03d5ce  #       "\x94Î\x9e\x10\x1bãíÿ¾\x03ÕÎ"
+         d4cbb908f050177f56e56edf  #       "ÔË¹\x08ðP\x17\x7fVånß"
+         325493a6                  #       "2T\x93¦"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1070,7 +1071,7 @@ d2                              # tag(18)
    Parties that request large amounts of Referenced Tokens by comparing
    the number of different Status Lists and their sizes.
 
-12.3.  Unobservability of Relying Parties
+12.3.  Observability of Relying Parties
 
    Once the Relying Party receives the Referenced Token, this enables
    him to request the Status List to validate its status through the
@@ -1091,9 +1092,25 @@ d2                              # tag(18)
    This behaviour could be mitigated by: - regular re-issuance of the
    Referenced Token, see Section 13.1.
 
-12.4.  Unlinkability
+12.4.  Observability of Outsiders
 
-   Colluding Issuers and a Relying Parties have the possibility to link
+   Outside actors may analyse the publicly available Status Lists to get
+   information on the internal processes of the Issuer and his related
+   business.  This data may allow inferences on the total number of
+   issued Reference Tokens and the revocation rate.  Additionally,
+   actors may regularly fetch this data or use the historic data
+   functionality to learn how these numbers change over time.
+
+   This behaviour could be mitigated by: - disable the historical data
+   feature (TODO:link) - disable the Status List Aggregation {#batch-
+   fetching} - choose non-sequential, pseudo-random or random indices -
+   use decoy entries to obfuscate the real number of Referenced Tokens
+   within a Status List - choose to deploy and utilize multiple Status
+   Lists simultaneously
+
+12.5.  Unlinkability
+
+   Colluding Issuers and Relying Parties have the possibility to link
    two transactions, as the tuple of uri and index inside the Referenced
    Token are unique and therefore traceable data.  By comparing the
    status claims of received Referenced Tokens, two colluding Relying
@@ -1112,12 +1129,12 @@ d2                              # tag(18)
 
    *  choose non-sequential, pseudo-random or random indices
 
-   *  use decoy or dead entries to obfuscate the real number of
-      Referenced Tokens within a Status List
+   *  use decoy entries to obfuscate the real number of Referenced
+      Tokens within a Status List
 
    *  choose to deploy and utilize multiple Status Lists simultaneously
 
-12.5.  Third Party Hosting
+12.6.  Third Party Hosting
 
    TODO elaborate on increased privacy if the status list is hosted by a
    third party instead of the issuer reducing tracking possibilities
@@ -1641,6 +1658,8 @@ Acknowledgments
 Document History
 
    -04
+
+   *  add privacy consideration on observability of outsiders
 
    *  add security considerations on correct parsing and decoding
 
