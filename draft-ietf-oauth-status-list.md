@@ -632,9 +632,15 @@ TODO evaluate definition of Status List Provider?
 
 The lifetime of a Status List (and the Status List Token) depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List (and the Status List Token).
 
-Referenced Tokens may be regularly re-issued to increase security or to mitigate linkability and prevent tracking by Relying Parties. In this case, every Referenced Token MUST have a fresh Status List entry.
+Referenced Tokens may be regularly re-issued to increase security or to mitigate linkability and limit tracking by the Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry.
 
 Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.
+
+## Default Values and Double Allocation
+
+The implementation is RECOMMENDED to initialize the Status List byte array with a default value and provide this as an initialization parameter to the Issuer. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.
+
+The implementation is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for mulitple Referenced Tokens. The Issuer MUST prevent any unintended double allocation by using the Status List.
 
 # IANA Considerations
 
@@ -875,6 +881,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* add implementation consideration for Default Values and Double Allocation
 * add CORS considerations to the http endpoint
 * fix reference of Status List in CBOR format
 * added status_list CWT claim key assigned
