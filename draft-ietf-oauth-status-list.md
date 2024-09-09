@@ -574,7 +574,7 @@ Resulting in the byte array and compressed/base64url-encoded status list:
 
 ## Correct decoding and parsing of the encoded status list
 
-Implementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations may check the index on the wrong data or misscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least signicant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianess does not apply here because each status value fits within a single byte.
+Implementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.
 
 Implementations shall always verify correctness using the test vectors given by this specification.
 
