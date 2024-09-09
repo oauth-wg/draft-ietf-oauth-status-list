@@ -101,7 +101,7 @@ Table of Contents
      11.2.  Security Guidance for JWT and CWT
      11.3.  Cached and Stale status lists
    12. Privacy Considerations
-     12.1.  Limiting issuers observability of token verification
+     12.1.  Observability of Issuers
      12.2.  Malicious Issuers
      12.3.  Observability of Relying Parties
      12.4.  Observability of Outsiders
@@ -537,9 +537,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840bc6ae5
-   bc44b47126aa005bab31b2f5e80f3bfdc3972084ef5568aab428478a2e8c958729bf
-   4bdd8c4f4a1876ab3ad674f46c6fc69b616eaf4f3ead70dc2d5737
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840532d8d
+   038fcab4b27f1c8af7f0803d1ae99d9e37bcaa361d9cf943e9d1bde44b74ca07f08f
+   2e015ba1a942c6ae120d5c1620a296e234596aac7e9e7c865b2303
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -563,12 +563,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      bc6ae5bc44b47126aa005bab  #       "¼jå¼D´q&ª\x00[«"
-      31b2f5e80f3bfdc3972084ef  #       "1²õè\x0f;ýÃ\x97 \x84ï"
-      5568aab428478a2e8c958729  #       "Uhª´(G\x8a.\x8c\x95\x87)"
-      bf4bdd8c4f4a1876ab3ad674  #       "¿KÝ\x8cOJ\x18v«:Öt"
-      f46c6fc69b616eaf4f3ead70  #       "ôloÆ\x9ban¯O>\xadp"
-      dc2d5737                  #       "Ü-W7"
+      532d8d038fcab4b27f1c8af7  #       "S-\x8d\x03\x8fÊ´²\x7f\x1c\x8a÷"
+      f0803d1ae99d9e37bcaa361d  #       "ð\x80=\x1aé\x9d\x9e7¼ª6\x1d"
+      9cf943e9d1bde44b74ca07f0  #       "\x9cùCéÑ½äKtÊ\x07ð"
+      8f2e015ba1a942c6ae120d5c  #       "\x8f.\x01[¡©BÆ®\x12\x0d\"
+      1620a296e234596aac7e9e7c  #       "\x16 ¢\x96â4Yj¬~\x9e|"
+      865b2303                  #       "\x86[#\x03"
 
 6.  Referenced Token
 
@@ -675,9 +675,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158400e39e87051e08b1ffe5c10375efde81660643f
-   ab86b01e8fa6e9be8988d40efefa1e475d94ce9e101be3edffbe03d5ced4cbb908f0
-   50177f56e56edf325493a6
+   7374617475736c697374732f315840406128c987f6cfc475b04702fe622fd59208d4
+   37fa6ab2fe4ff1202589a160343611886f3adaccf2766418df5ab3ac35f138894ffd
+   2650ab99e36c6d10499b79
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -700,12 +700,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         0e39e87051e08b1ffe5c1037  #       "\x0e9èpQà\x8b\x1fþ\\x107"
-         5efde81660643fab86b01e8f  #       "^ýè\x16`d?«\x86°\x1e\x8f"
-         a6e9be8988d40efefa1e475d  #       "¦é¾\x89\x88Ô\x0eþú\x1eG]"
-         94ce9e101be3edffbe03d5ce  #       "\x94Î\x9e\x10\x1bãíÿ¾\x03ÕÎ"
-         d4cbb908f050177f56e56edf  #       "ÔË¹\x08ðP\x17\x7fVånß"
-         325493a6                  #       "2T\x93¦"
+         406128c987f6cfc475b04702  #       "@a(É\x87öÏÄu°G\x02"
+         fe622fd59208d437fa6ab2fe  #       "þb/Õ\x92\x08Ô7új²þ"
+         4ff1202589a160343611886f  #       "Oñ %\x89¡`46\x11\x88o"
+         3adaccf2766418df5ab3ac35  #       ":ÚÌòvd\x18ßZ³¬5"
+         f138894ffd2650ab99e36c6d  #       "ñ8\x89Oý&P«\x99ãlm"
+         10499b79                  #       "\x10I\x9by"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1037,7 +1037,7 @@ d2                              # tag(18)
 
 12.  Privacy Considerations
 
-12.1.  Limiting issuers observability of token verification
+12.1.  Observability of Issuers
 
    The main privacy consideration for a Status List, especially in the
    context of the Issuer-Holder-Verifier model [SD-JWT.VC], is to
@@ -1059,6 +1059,11 @@ d2                              # tag(18)
    Status List called its size.  A larger size results in better privacy
    but also impacts the performance as more data has to be transferred
    to read the Status List.
+
+   Additionally, the Issuer may analyse data from the HTTP request to
+   identify the Relying Party, e.g. through the sender's IP address.
+   This behaviour may be mitigated by private relay protocols or other
+   mechanism hiding the original sender like [RFC9458].
 
 12.2.  Malicious Issuers
 
@@ -1638,6 +1643,10 @@ d2                              # tag(18)
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/rfc/rfc7800>.
 
+   [RFC9458]  Thomson, M. and C. A. Wood, "Oblivious HTTP", RFC 9458,
+              DOI 10.17487/RFC9458, January 2024,
+              <https://www.rfc-editor.org/rfc/rfc9458>.
+
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
@@ -1658,6 +1667,8 @@ Acknowledgments
 Document History
 
    -04
+
+   *  add privacy consideration on using private relay protocols
 
    *  add privacy consideration on observability of outsiders
 
