@@ -362,9 +362,9 @@ The following is a non-normative example for a decoded header and payload of a R
 
 ## Referenced Token in SD-JWT-VC Format {#referenced-token-sdjwt}
 
-SD-JWT-VC {{SD-JWT.VC}} introduces the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT.
+SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jwt}}.
 
-The following is a non-normative example for a Referenced Token in SD-JWT-VC {{SD-JWT.VC}} format in serialized form as received from an Issuer:
+The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:
 
 ~~~ ascii-art
 
