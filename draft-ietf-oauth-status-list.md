@@ -35,6 +35,7 @@ normative:
   RFC7519: RFC7519
   RFC8259: RFC8259
   RFC8392: RFC8392
+  RFC8725: RFC8725
   RFC8949: RFC8949
   RFC9052: RFC9052
   RFC9110: RFC9110
@@ -571,7 +572,16 @@ Resulting in the byte array and compressed/base64url-encoded status list:
 # Security Considerations {#Security}
 
 ## Correct decoding and parsing of the encoded status list
-TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data
+
+Implementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations may check the index on the wrong data or misscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least signicant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianess does not apply here because each status value fits within a single byte.
+
+Implementations shall always verify correctness using the test vectors given by this specification.
+
+## Security Guidance for JWT and CWT
+
+Status List Token in JWT format should follow the security considerations of {{RFC7519}} and the best current practices of {{RFC8725}}.
+
+Status List Token in CWT format should follow the security considerations of {{RFC8392}}.
 
 ## Cached and Stale status lists
 
@@ -579,12 +589,6 @@ When consumers or verifiers of the Status List fetch the data, they need to be a
 in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
 a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
 a fresh copy of the status list even if that status list is not expired.
-
-## Authorized access to the Status List {#security-authorization}
-TODO elaborate on authorization mechanisms preventing misuse and profiling as described in privacy section
-
-## History
-TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
 
 # Privacy Considerations
 
@@ -604,8 +608,9 @@ A malicious Issuer could bypass the privacy benefits of the herd privacy by gene
 
 Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
+TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
+
 This behaviour could be mitigated by:
-- adding authorization rules to the Status List, see [](#security-authorization).
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
 ## Unlinkability
@@ -875,6 +880,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* add security considerations on correct parsing and decoding
 * add CORS considerations to the http endpoint
 * fix reference of Status List in CBOR format
 * added status_list CWT claim key assigned
