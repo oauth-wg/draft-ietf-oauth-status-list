@@ -1741,9 +1741,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d58403a79a6
-91d693b98cb1e37f9ca690298506227d894456ca6808c8695602fd0099b804f8f29e
-4c7d1588f18ac11bc0c7de1ff792481acaa7b30a6f49f5d469f128
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840027599
+8fc8331c0c9a939345436b15deeedb083af871376575a13191f9e1742ba83aee2453
+809ad48458a4d411ecb454e0a17b7f9058566e142406d13d0b63a1
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1769,12 +1769,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3a79a691d693b98cb1e37f9c  #       ":y¦\x91Ö\x93¹\x8c±ã\x7f\x9c"
-      a690298506227d894456ca68  #       "¦\x90)\x85\x06"}\x89DVÊh"
-      08c8695602fd0099b804f8f2  #       "\x08ÈiV\x02ý\x00\x99¸\x04øò"
-      9e4c7d1588f18ac11bc0c7de  #       "\x9eL}\x15\x88ñ\x8aÁ\x1bÀÇÞ"
-      1ff792481acaa7b30a6f49f5  #       "\x1f÷\x92H\x1aÊ§³\x0aoIõ"
-      d469f128                  #       "Ôiñ("
+      0275998fc8331c0c9a939345  #       "\x02u\x99\x8fÈ3\x1c\x0c\x9a\x93\x93E"
+      436b15deeedb083af8713765  #       "Ck\x15ÞîÛ\x08:øq7e"
+      75a13191f9e1742ba83aee24  #       "u¡1\x91ùát+¨:î$"
+      53809ad48458a4d411ecb454  #       "S\x80\x9aÔ\x84X¤Ô\x11ì´T"
+      e0a17b7f9058566e142406d1  #       "à¡{\x7f\x90XVn\x14$\x06Ñ"
+      3d0b63a1                  #       "=\x0bc¡"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1849,8 +1849,8 @@ d2                              # tag(18)
         <h3 id="name-referenced-token-in-sd-jwt-">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-referenced-token-in-sd-jwt-" class="section-name selfRef">Referenced Token in SD-JWT-VC Format</a>
         </h3>
-<p id="section-6.3-1">SD-JWT-VC <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> introduces the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.3-2">The following is a non-normative example for a Referenced Token in SD-JWT-VC <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> format in serialized form as received from an Issuer:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">SD-JWT-based Verifiable Credentials <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in <span class="contact-name">referenced-token-jwt</span>.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-6.3-3">
 <pre>
 eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
@@ -1930,9 +1930,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584052c7ee4f23615fbc9c7c22112c911600fd466f
-41981b689529ba890f09d2f113f08ab4abbbb7c18c229035494c1e7d8b4def623003
-c59e5929bf7c68f6037a7d
+7374617475736c697374732f315840f69333497c5df09c967d320d706ad6686986df
+cad642bc578ae0987c97617bee3df7d769d64c26f43b1e048f350a21ecd600f119a9
+5a709fda910c9f91071de4
 </pre><a href="#section-6.4-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.4-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.4-7" class="pilcrow">¶</a></p>
@@ -1957,12 +1957,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      52c7ee4f23615fbc9c7c2211  #       "RÇîO#a_¼\x9c|"\x11"
-      2c911600fd466f41981b6895  #       ",\x91\x16\x00ýFoA\x98\x1bh\x95"
-      29ba890f09d2f113f08ab4ab  #       ")º\x89\x0f\x09Òñ\x13ð\x8a´«"
-      bbb7c18c229035494c1e7d8b  #       "»·Á\x8c"\x905IL\x1e}\x8b"
-      4def623003c59e5929bf7c68  #       "Mïb0\x03Å\x9eY)¿|h"
-      f6037a7d                  #       "ö\x03z}"
+      f69333497c5df09c967d320d  #       "ö\x933I|]ð\x9c\x96}2\x0d"
+      706ad6686986dfcad642bc57  #       "pjÖhi\x86ßÊÖB¼W"
+      8ae0987c97617bee3df7d769  #       "\x8aà\x98|\x97a{î=÷×i"
+      d64c26f43b1e048f350a21ec  #       "ÖL&amp;ô;\x1e\x04\x8f5\x0a!ì"
+      d600f119a95a709fda910c9f  #       "Ö\x00ñ\x19©Zp\x9fÚ\x91\x0c\x9f"
+      91071de4                  #       "\x91\x07\x1dä"
 </pre><a href="#section-6.4-8" class="pilcrow">¶</a>
 </div>
 </section>
