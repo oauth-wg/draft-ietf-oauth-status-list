@@ -1741,9 +1741,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
 68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840027599
-8fc8331c0c9a939345436b15deeedb083af871376575a13191f9e1742ba83aee2453
-809ad48458a4d411ecb454e0a17b7f9058566e142406d13d0b63a1
+19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840e5bad1
+cf0093df589429a503f1a0662f504705a72d1e7d6b08483b2bb02bc9e730081850b6
+fc9589bd67997e7e19b66a9748332579bed7d6970a3ee46a59fe49
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1769,12 +1769,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      0275998fc8331c0c9a939345  #       "\x02u\x99\x8fÈ3\x1c\x0c\x9a\x93\x93E"
-      436b15deeedb083af8713765  #       "Ck\x15ÞîÛ\x08:øq7e"
-      75a13191f9e1742ba83aee24  #       "u¡1\x91ùát+¨:î$"
-      53809ad48458a4d411ecb454  #       "S\x80\x9aÔ\x84X¤Ô\x11ì´T"
-      e0a17b7f9058566e142406d1  #       "à¡{\x7f\x90XVn\x14$\x06Ñ"
-      3d0b63a1                  #       "=\x0bc¡"
+      e5bad1cf0093df589429a503  #       "åºÑÏ\x00\x93ßX\x94)¥\x03"
+      f1a0662f504705a72d1e7d6b  #       "ñ\xa0f/PG\x05§-\x1e}k"
+      08483b2bb02bc9e730081850  #       "\x08H;+°+Éç0\x08\x18P"
+      b6fc9589bd67997e7e19b66a  #       "¶ü\x95\x89½g\x99~~\x19¶j"
+      9748332579bed7d6970a3ee4  #       "\x97H3%y¾×Ö\x97\x0a&gt;ä"
+      6a59fe49                  #       "jYþI"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1849,7 +1849,7 @@ d2                              # tag(18)
         <h3 id="name-referenced-token-in-sd-jwt-">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-referenced-token-in-sd-jwt-" class="section-name selfRef">Referenced Token in SD-JWT-VC Format</a>
         </h3>
-<p id="section-6.3-1">SD-JWT-based Verifiable Credentials <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in <span class="contact-name">referenced-token-jwt</span>.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">SD-JWT-based Verifiable Credentials <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-6.3-3">
 <pre>
@@ -1930,9 +1930,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840f69333497c5df09c967d320d706ad6686986df
-cad642bc578ae0987c97617bee3df7d769d64c26f43b1e048f350a21ecd600f119a9
-5a709fda910c9f91071de4
+7374617475736c697374732f315840878dd97689038f41bc91f3120f9c565067cdce
+f09d8db7889016da47b48e0e60a04e6e9cdb8497085779972cec00c7e68c19335b35
+9f4958d8943227571328a7
 </pre><a href="#section-6.4-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.4-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.4-7" class="pilcrow">¶</a></p>
@@ -1957,12 +1957,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      f69333497c5df09c967d320d  #       "ö\x933I|]ð\x9c\x96}2\x0d"
-      706ad6686986dfcad642bc57  #       "pjÖhi\x86ßÊÖB¼W"
-      8ae0987c97617bee3df7d769  #       "\x8aà\x98|\x97a{î=÷×i"
-      d64c26f43b1e048f350a21ec  #       "ÖL&amp;ô;\x1e\x04\x8f5\x0a!ì"
-      d600f119a95a709fda910c9f  #       "Ö\x00ñ\x19©Zp\x9fÚ\x91\x0c\x9f"
-      91071de4                  #       "\x91\x07\x1dä"
+      878dd97689038f41bc91f312  #       "\x87\x8dÙv\x89\x03\x8fA¼\x91ó\x12"
+      0f9c565067cdcef09d8db788  #       "\x0f\x9cVPgÍÎð\x9d\x8d·\x88"
+      9016da47b48e0e60a04e6e9c  #       "\x90\x16ÚG´\x8e\x0e`\xa0Nn\x9c"
+      db8497085779972cec00c7e6  #       "Û\x84\x97\x08Wy\x97,ì\x00Çæ"
+      8c19335b359f4958d8943227  #       "\x8c\x193[5\x9fIXØ\x942'"
+      571328a7                  #       "W\x13(§"
 </pre><a href="#section-6.4-8" class="pilcrow">¶</a>
 </div>
 </section>
