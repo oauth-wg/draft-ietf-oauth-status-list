@@ -81,10 +81,9 @@ Table of Contents
      5.2.  Status List Token in CWT Format
    6.  Referenced Token
      6.1.  Status Claim
-     6.2.  Referenced Token in JWT Format
-     6.3.  Referenced Token in SD-JWT-VC Format
-     6.4.  Referenced Token in CWT Format
-     6.5.  Referenced Token in other COSE/CBOR Format
+     6.2.  Referenced Token in JOSE Format
+     6.3.  Referenced Token in CWT Format
+     6.4.  Referenced Token in other COSE/CBOR Format
    7.  Status Types
      7.1.  Status Types Values
    8.  Verification and Processing
@@ -538,9 +537,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840e5bad1
-   cf0093df589429a503f1a0662f504705a72d1e7d6b08483b2bb02bc9e730081850b6
-   fc9589bd67997e7e19b66a9748332579bed7d6970a3ee46a59fe49
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840b9c3e3
+   80e46827683cb7f3de4e554d9ff2113ea68e2ce0802718cc8e677b122ee9a155c215
+   2abd1e8af80231580dad6cdfdd85142108fd95c5ab93feae5f5b80
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -564,12 +563,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      e5bad1cf0093df589429a503  #       "åºÑÏ\x00\x93ßX\x94)¥\x03"
-      f1a0662f504705a72d1e7d6b  #       "ñ\xa0f/PG\x05§-\x1e}k"
-      08483b2bb02bc9e730081850  #       "\x08H;+°+Éç0\x08\x18P"
-      b6fc9589bd67997e7e19b66a  #       "¶ü\x95\x89½g\x99~~\x19¶j"
-      9748332579bed7d6970a3ee4  #       "\x97H3%y¾×Ö\x97\x0a>ä"
-      6a59fe49                  #       "jYþI"
+      b9c3e380e46827683cb7f3de  #       "¹Ãã\x80äh'h<·óÞ"
+      4e554d9ff2113ea68e2ce080  #       "NUM\x9fò\x11>¦\x8e,à\x80"
+      2718cc8e677b122ee9a155c2  #       "'\x18Ì\x8eg{\x12.é¡UÂ"
+      152abd1e8af80231580dad6c  #       "\x15*½\x1e\x8aø\x021X\x0d\xadl"
+      dfdd85142108fd95c5ab93fe  #       "ßÝ\x85\x14!\x08ý\x95Å«\x93þ"
+      ae5f5b80                  #       "®_[\x80"
 
 6.  Referenced Token
 
@@ -583,10 +582,10 @@ d2                              # tag(18)
    analogous to "cnf" claim in Section 3.1 of [RFC7800] in which
    different authenticity confirmation methods can be included.
 
-6.2.  Referenced Token in JWT Format
+6.2.  Referenced Token in JOSE Format
 
-   The Referenced Token MUST be encoded as a "JSON Web Token (JWT)"
-   according to [RFC7519].
+   The Referenced Token MAY be encoded as a "JSON Web Token (JWT)"
+   according to [RFC7519] or other formats based on JOSE.
 
    The following content applies to the JWT Claims Set:
 
@@ -639,8 +638,6 @@ d2                              # tag(18)
      }
    }
 
-6.3.  Referenced Token in SD-JWT-VC Format
-
    SD-JWT-based Verifiable Credentials [SD-JWT.VC] introduce the usage
    of Status List in Section 3.2.2.2.  The "status" object uses the same
    encoding as a JWT as defined in Section 6.2.
@@ -685,7 +682,7 @@ d2                              # tag(18)
      "_sd_alg": "sha-256"
    }
 
-6.4.  Referenced Token in CWT Format
+6.3.  Referenced Token in CWT Format
 
    The Referenced Token MUST be encoded as a "COSE Web Token (CWT)"
    object according to [RFC8392].
@@ -722,9 +719,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840878dd97689038f41bc91f3120f9c565067cdce
-   f09d8db7889016da47b48e0e60a04e6e9cdb8497085779972cec00c7e68c19335b35
-   9f4958d8943227571328a7
+   7374617475736c697374732f3158401dcf1139f11dda14be234def64b3321238706d
+   4ec456637a58f04b266bd15b5eb23f0548821da752ffa22b1214ddb33800ea08f252
+   ae88879a8cdd756e68e7c9
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -747,14 +744,14 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      878dd97689038f41bc91f312  #       "\x87\x8dÙv\x89\x03\x8fA¼\x91ó\x12"
-      0f9c565067cdcef09d8db788  #       "\x0f\x9cVPgÍÎð\x9d\x8d·\x88"
-      9016da47b48e0e60a04e6e9c  #       "\x90\x16ÚG´\x8e\x0e`\xa0Nn\x9c"
-      db8497085779972cec00c7e6  #       "Û\x84\x97\x08Wy\x97,ì\x00Çæ"
-      8c19335b359f4958d8943227  #       "\x8c\x193[5\x9fIXØ\x942'"
-      571328a7                  #       "W\x13(§"
+      1dcf1139f11dda14be234def  #       "\x1dÏ\x119ñ\x1dÚ\x14¾#Mï"
+      64b3321238706d4ec456637a  #       "d³2\x128pmNÄVcz"
+      58f04b266bd15b5eb23f0548  #       "XðK&kÑ[^²?\x05H"
+      821da752ffa22b1214ddb338  #       "\x82\x1d§Rÿ¢+\x12\x14Ý³8"
+      00ea08f252ae88879a8cdd75  #       "\x00ê\x08òR®\x88\x87\x9a\x8cÝu"
+      6e68e7c9                  #       "nhçÉ"
 
-6.5.  Referenced Token in other COSE/CBOR Format
+6.4.  Referenced Token in other COSE/CBOR Format
 
    The Referenced Token MUST be encoded as a COSE_Sign1 or COSE_Sign
    CBOR structure as defined in "CBOR Object Signing and Encryption
@@ -762,7 +759,7 @@ d2                              # tag(18)
 
    It is required to encode the status mechanisms referred to in the
    Referenced Token using the Status CBOR structure defined in
-   Section 6.4.
+   Section 6.3.
 
    It is RECOMMENDED to use status for the label of the field that
    contains the Status CBOR structure.
@@ -885,7 +882,7 @@ d2                              # tag(18)
    1.  Check for the existence of a status claim, check for the
        existence of a status_list claim within the status claim and
        validate that the content of status_list adheres to the rules
-       defined in Section 6.2 for JWTs and Section 6.4 for CWTs.  This
+       defined in Section 6.2 for JWTs and Section 6.3 for CWTs.  This
        step can be overruled if defined within the Referenced Token
        Format natively
 
@@ -1355,7 +1352,7 @@ d2                              # tag(18)
 
    *  Change Controller: IETF
 
-   *  Specification Document(s): Section 6.4 of this specification
+   *  Specification Document(s): Section 6.3 of this specification
 
 14.5.  Media Type Registration
 
