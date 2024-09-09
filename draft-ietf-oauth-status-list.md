@@ -326,9 +326,9 @@ The following is the CBOR Annotated Hex output of the example above:
 
 By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
-## Referenced Token in JWT Format {#referenced-token-jwt}
+## Referenced Token in JOSE Format {#referenced-token-jwt}
 
-The Referenced Token MUST be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}.
+The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}} or other formats based on JOSE.
 
 The following content applies to the JWT Claims Set:
 
@@ -359,8 +359,6 @@ The following is a non-normative example for a decoded header and payload of a R
   }
 }
 ~~~
-
-## Referenced Token in SD-JWT-VC Format {#referenced-token-sdjwt}
 
 SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jwt}}.
 
