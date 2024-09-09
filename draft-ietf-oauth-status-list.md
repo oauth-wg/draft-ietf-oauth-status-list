@@ -70,6 +70,7 @@ informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
   RFC7800: RFC7800
+  RFC9458: RFC9458
   SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
   ISO.mdoc:
     author:
@@ -592,13 +593,15 @@ a fresh copy of the status list even if that status list is not expired.
 
 # Privacy Considerations
 
-## Limiting issuers observability of token verification {#privacy-issuer}
+## Observability of Issuers {#privacy-issuer}
 
 The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{SD-JWT.VC}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
 The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.
 
 The herd privacy is depending on the number of entities within the Status List called its size. A larger size results in better privacy but also impacts the performance as more data has to be transferred to read the Status List.
+
+Additionally, the Issuer may analyse data from the HTTP request to identify the Relying Party, e.g. through the sender's IP address. This behaviour may be mitigated by private relay protocols or other mechanism hiding the original sender like {{RFC9458}}.
 
 ## Malicious Issuers
 
@@ -613,7 +616,7 @@ TODO elaborate on status list only providing the up-to date/latest status, no hi
 This behaviour could be mitigated by:
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
-## Observability of Outsiders
+## Observability of Outsiders {#privacy-outsider}
 
 Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.
 
@@ -891,6 +894,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* add privacy consideration on using private relay protocols
 * add privacy consideration on observability of outsiders
 * add security considerations on correct parsing and decoding
 * add CORS considerations to the http endpoint
