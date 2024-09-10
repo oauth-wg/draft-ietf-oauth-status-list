@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-08T00:17:19.932056+00:00",
+  "timestamp": "2024-09-10T00:15:52.983368+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -3553,7 +3553,7 @@
       ],
       "body": "As described in https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-03.html#section-8.1 content negotiation using the accept header is used when requesting a status list / status list token. This is used to request different formats depending on the needs of the caller using a single URI for the status list.\r\n\r\nThis mechanism in general is valid and follows the http standards. Implementing this works well when an application server is used to serve the status lists.\r\n\r\nNevertheless in practice this causes problems in some scenarios. Several CDNs and services that provide caches of other HTTP resources do not implement the required functionality correctly.\r\n\r\nFor example [cloudflare, does explicitly ignore the accept header even if the vary http response header is used](https://developers.cloudflare.com/cache/concepts/cache-control/#other). Some other services offer this functionality tough, for example Amazon CloudFront.\r\n\r\nIn addition nginx can not easily handle content negotiation using the accept header correctly. Using the a map section together with the Accept header allows to choose different resources based on the requested content type. This is only working for single value Accept headers though. More complex header values as `Accept: application/statuslist+*;q=0.5,application/statuslist+cwt` can not easily be handled. The current state of the standard does not mention such option but does not forbid them either. Apache2 has https://httpd.apache.org/docs/current/content-negotiation.html, that could solve this. I did not evaluate that further.\r\n\r\nSo even though the mechanism is good and simple as is and follows http standards, it might be difficult to implement when using a CDN to scale serving the status list.\r\n\r\nA possible solution would be to use distinct URIs to request the status list depending on the type (for example by appending extensions like jwt, cwt, json and cbor) instead of the request header. This seems to me as a workaround and a suboptimal solution though. As the specification as it is is totally valid IMHO it could as well been left as it is, which means the need for implementation of this functionality in the used components will arise and the usage of certain CDNs is not possible.\r\n\r\nRelated to #137 but addresses the request handling instead of response generation.",
       "createdAt": "2024-08-29T18:21:00Z",
-      "updatedAt": "2024-09-05T06:42:07Z",
+      "updatedAt": "2024-09-09T08:03:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -3562,6 +3562,13 @@
           "body": "I think there are two reasons, why a failed negotiation my not be that significant:\r\n- the unsigned option may probably be deleted, leaving us with 2 possible media types instead of 4\r\n- from the ecosystem / context it may be clear whether JWT or CWT is expected\r\n\r\nWe could say that more complex header values as `Accept: application/statuslist+*;q=0.5,application/statuslist+cwt` are restricted?",
           "createdAt": "2024-08-30T14:24:53Z",
           "updatedAt": "2024-08-30T14:24:53Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> A possible solution would be to use distinct URIs to request the status list depending on the type (for example by appending extensions like jwt, cwt, json and cbor) instead of the request header. This seems to me as a workaround and a suboptimal solution though. As the specification as it is is totally valid IMHO it could as well been left as it is, which means the need for implementation of this functionality in the used components will arise and the usage of certain CDNs is not possible.\r\n\r\nThis is kind of what I would expect for most cases in reality: A CBOR based Credential will likely reference to a status list that is only available in CWT form. The only solution to make this more explicit (and if we don't trust the header based approach) would be to make this explicit in the URI I guess?\r\n",
+          "createdAt": "2024-09-09T08:03:07Z",
+          "updatedAt": "2024-09-09T08:03:07Z"
         }
       ]
     },
@@ -10720,6 +10727,186 @@
           "body": "",
           "createdAt": "2024-08-29T07:31:08Z",
           "updatedAt": "2024-08-29T07:31:08Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 170,
+      "id": "PR_kwDOJZ2aqs563RXq",
+      "title": "update security consideration",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/170",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #146 \r\nCloses #165 \r\nCloses #132 \r\nCloses #93 ",
+      "createdAt": "2024-09-09T14:45:57Z",
+      "updatedAt": "2024-09-09T16:42:36Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/considerations1",
+      "headRefOid": "543b2badf54f493810e4088ae99f93288d324b25",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6Igcv3",
+          "commit": {
+            "abbreviatedOid": "58fe222"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-09T15:06:34Z",
+          "updatedAt": "2024-09-09T15:06:35Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nImplementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations might check the index at the wrong position or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called \"right to left\") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.\r\n```",
+              "createdAt": "2024-09-09T15:06:35Z",
+              "updatedAt": "2024-09-09T15:06:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6IgupS",
+          "commit": {
+            "abbreviatedOid": "8111f4c"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-09T15:36:13Z",
+          "updatedAt": "2024-09-09T15:36:13Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "with the first phrase \"on the wrong data\" I meant for example calculating index on the still compressed data, which happened to my colleagues during a test. Shall we keep this?",
+              "createdAt": "2024-09-09T15:36:13Z",
+              "updatedAt": "2024-09-09T15:36:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6IhMzO",
+          "commit": {
+            "abbreviatedOid": "58fe222"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-09T16:30:40Z",
+          "updatedAt": "2024-09-09T16:30:41Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nImplementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called \"right to left\") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.\r\n```",
+              "createdAt": "2024-09-09T16:30:40Z",
+              "updatedAt": "2024-09-09T16:30:52Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 171,
+      "id": "PR_kwDOJZ2aqs563mTs",
+      "title": "sd jwt example",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/171",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Rendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/sd-jwt-example/draft-ietf-oauth-status-list.html \r\n\r\nAdds an example for a referenced token in sd-jwt-vc form.",
+      "createdAt": "2024-09-09T15:26:26Z",
+      "updatedAt": "2024-09-09T16:42:11Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/sd-jwt-example",
+      "headRefOid": "da83e8c6dfc1eddd19666bb9047b1d59de2008ef",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6Igtup",
+          "commit": {
+            "abbreviatedOid": "a35ce2d"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "- rename previous section to Referenced Token with JOSE\r\n- make first phrase \"The Referenced Token MUST be..\" less strict\r\n- combine with this section and make JWT+SD-JWT two examples for the same section",
+          "createdAt": "2024-09-09T15:34:33Z",
+          "updatedAt": "2024-09-09T15:34:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6IhSaE",
+          "commit": {
+            "abbreviatedOid": "da83e8c"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-09T16:42:11Z",
+          "updatedAt": "2024-09-09T16:42:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 172,
+      "id": "PR_kwDOJZ2aqs564MzS",
+      "title": "add implementation consideration for Default Values and Double Alloca\u2026",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/172",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026tion",
+      "createdAt": "2024-09-09T16:53:00Z",
+      "updatedAt": "2024-09-09T18:25:56Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/considerations2",
+      "headRefOid": "7cd51970713f20c2e8abe1f7421801f1af5030a2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6IiKoU",
+          "commit": {
+            "abbreviatedOid": "7cd5197"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-09T18:25:56Z",
+          "updatedAt": "2024-09-09T18:25:56Z",
           "comments": []
         }
       ]
