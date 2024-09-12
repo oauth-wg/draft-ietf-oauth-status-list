@@ -82,9 +82,8 @@ Table of Contents
    6.  Referenced Token
      6.1.  Status Claim
      6.2.  Referenced Token in JWT Format
-     6.3.  Referenced Token in SD-JWT-VC Format
-     6.4.  Referenced Token in CWT Format
-     6.5.  Referenced Token in other COSE/CBOR Format
+     6.3.  Referenced Token in CWT Format
+     6.4.  Referenced Token in other COSE/CBOR Format
    7.  Status Types
      7.1.  Status Types Values
    8.  Verification and Processing
@@ -538,9 +537,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325865a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffffa2646269747301636c73744a78dadbb918000217015d58409df499dc
-   2f731eba7ea23be930f7022c09124c1bbd4d025f43447fa4cc4f11d72915d0ba39db
-   dd0290db271e7c50e41be7dd4ae291db1d2250e582dad82b22c5
+   19a8c019ffffa2646269747301636c73744a78dadbb918000217015d5840803a0ba9
+   d4dce1ea1bb8e3068fd32139ae893f24930af614d86fe12ae48bb40e19d0658cffda
+   70d34492518349ce075710866a85e7f8ba2e02b704859c5b053e
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -564,12 +563,12 @@ d2                              # tag(18)
       7301636c73744a78dadbb918  #       "s\x01clstJxÚÛ¹\x18"
       000217015d                #       "\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      9df499dc2f731eba7ea23be9  #       "\x9dô\x99Ü/s\x1eº~¢;é"
-      30f7022c09124c1bbd4d025f  #       "0÷\x02,\x09\x12L\x1b½M\x02_"
-      43447fa4cc4f11d72915d0ba  #       "CD\x7f¤ÌO\x11×)\x15Ðº"
-      39dbdd0290db271e7c50e41b  #       "9ÛÝ\x02\x90Û'\x1e|Pä\x1b"
-      e7dd4ae291db1d2250e582da  #       "çÝJâ\x91Û\x1d"På\x82Ú"
-      d82b22c5                  #       "Ø+"Å"
+      803a0ba9d4dce1ea1bb8e306  #       "\x80:\x0b©ÔÜáê\x1b¸ã\x06"
+      8fd32139ae893f24930af614  #       "\x8fÓ!9®\x89?$\x93\x0aö\x14"
+      d86fe12ae48bb40e19d0658c  #       "Øoá*ä\x8b´\x0e\x19Ðe\x8c"
+      ffda70d34492518349ce0757  #       "ÿÚpÓD\x92Q\x83IÎ\x07W"
+      10866a85e7f8ba2e02b70485  #       "\x10\x86j\x85çøº.\x02·\x04\x85"
+      9c5b053e                  #       "\x9c[\x05>"
 
 6.  Referenced Token
 
@@ -639,54 +638,7 @@ d2                              # tag(18)
      }
    }
 
-6.3.  Referenced Token in SD-JWT-VC Format
-
-   SD-JWT-VC [SD-JWT.VC] introduces the usage of Status List in
-   Section 3.2.2.2.  The "status" object uses the same encoding as a
-   JWT.
-
-   The following is a non-normative example for a Referenced Token in
-   SD-JWT-VC [SD-JWT.VC] format in serialized form as received from an
-   Issuer:
-
-   eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
-   Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
-   cyI6ICJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsICJpYXQiOiAxNjgzMDAwMDAw
-   LCAiZXhwIjogMTg4MzAwMDAwMCwgInN1YiI6ICI2YzVjMGE0OS1iNTg5LTQzMWQtYmFl
-   Ny0yMTkxMjJhOWVjMmMiLCAic3RhdHVzIjogeyJzdGF0dXNfbGlzdCI6IHsiaWR4Ijog
-   MCwgInVyaSI6ICJodHRwczovL2V4YW1wbGUuY29tL3N0YXR1c2xpc3RzLzEifX0sICJf
-   c2RfYWxnIjogInNoYS0yNTYifQ.-kgS-R-Z4DEDlqb8kb6381_gHHNatsoF1fcVKZk3M
-   06CrnV8F8k9d2w2V_YAOvgcb0f11FqDFezXBXH30d4vcw~WyIyR0xDNDJzS1F2ZUNmR2
-   ZyeU5STjl3IiwgInN0cmVldF9hZGRyZXNzIiwgIlNjaHVsc3RyLiAxMiJd~WyJlbHVWN
-   U9nM2dTTklJOEVZbnN4QV9BIiwgImxvY2FsaXR5IiwgIlNjaHVscGZvcnRhIl0~WyI2S
-   Wo3dE0tYTVpVlBHYm9TNXRtdlZBIiwgInJlZ2lvbiIsICJTYWNoc2VuLUFuaGFsdCJd~
-   WyJlSThaV205UW5LUHBOUGVOZW5IZGhRIiwgImNvdW50cnkiLCAiREUiXQ~WyJRZ19PN
-   jR6cUF4ZTQxMmExMDhpcm9BIiwgImFkZHJlc3MiLCB7Il9zZCI6IFsiNnZoOWJxLXpTN
-   EdLTV83R3BnZ1ZiWXp6dTZvT0dYcm1OVkdQSFA3NVVkMCIsICI5Z2pWdVh0ZEZST0NnU
-   nJ0TmNHVVhtRjY1cmRlemlfNkVyX2o3NmttWXlNIiwgIktVUkRQaDRaQzE5LTN0aXotR
-   GYzOVY4ZWlkeTFvVjNhM0gxRGEyTjBnODgiLCAiV045cjlkQ0JKOEhUQ3NTMmpLQVN4V
-   GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
-
-   Resulting payload of the example above:
-
-   {
-     "_sd": [
-       "HvrKX6fPV0v9K_yCVFBiLFHsMaxcD_114Em6VT8x1lg"
-     ],
-     "iss": "https://example.com/issuer",
-     "iat": 1683000000,
-     "exp": 1883000000,
-     "sub": "6c5c0a49-b589-431d-bae7-219122a9ec2c",
-     "status": {
-       "status_list": {
-         "idx": 0,
-         "uri": "https://example.com/statuslists/1"
-       }
-     },
-     "_sd_alg": "sha-256"
-   }
-
-6.4.  Referenced Token in CWT Format
+6.3.  Referenced Token in CWT Format
 
    The Referenced Token MUST be encoded as a "COSE Web Token (CWT)"
    object according to [RFC8392].
@@ -723,9 +675,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840e23f8b0f766c1f833b58f4d442efca0edd996f
-   7a1a09ccd776f672044c4cb60a8d7a9c12bffd7ccb5d987011dab71b62e52ec4f508
-   8def00def8b1c260c7edf2
+   7374617475736c697374732f315840ea802d70f809ede4e2f31e4e89e24c5bd046fa
+   f94889f0461daf48784c3652edd46f992239cbe180f617945099a6b5d940497230cf
+   cd019c69dd26c28ef48130
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -748,14 +700,14 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         e23f8b0f766c1f833b58f4d4  #       "â?\x8b\x0fvl\x1f\x83;XôÔ"
-         42efca0edd996f7a1a09ccd7  #       "BïÊ\x0eÝ\x99oz\x1a\x09Ì×"
-         76f672044c4cb60a8d7a9c12  #       "vör\x04LL¶\x0a\x8dz\x9c\x12"
-         bffd7ccb5d987011dab71b62  #       "¿ý|Ë]\x98p\x11Ú·\x1bb"
-         e52ec4f5088def00def8b1c2  #       "å.Äõ\x08\x8dï\x00Þø±Â"
-         60c7edf2                  #       "`Çíò"
+         ea802d70f809ede4e2f31e4e  #       "ê\x80-pø\x09íäâó\x1eN"
+         89e24c5bd046faf94889f046  #       "\x89âL[ÐFúùH\x89ðF"
+         1daf48784c3652edd46f9922  #       "\x1d¯HxL6RíÔo\x99""
+         39cbe180f617945099a6b5d9  #       "9Ëá\x80ö\x17\x94P\x99¦µÙ"
+         40497230cfcd019c69dd26c2  #       "@Ir0ÏÍ\x01\x9ciÝ&Â"
+         8ef48130                  #       "\x8eô\x810"
 
-6.5.  Referenced Token in other COSE/CBOR Format
+6.4.  Referenced Token in other COSE/CBOR Format
 
    The Referenced Token MUST be encoded as a COSE_Sign1 or COSE_Sign
    CBOR structure as defined in "CBOR Object Signing and Encryption
@@ -763,7 +715,7 @@ d2                              # tag(18)
 
    It is required to encode the status mechanisms referred to in the
    Referenced Token using the Status CBOR structure defined in
-   Section 6.4.
+   Section 6.3.
 
    It is RECOMMENDED to use status for the label of the field that
    contains the Status CBOR structure.
@@ -886,7 +838,7 @@ d2                              # tag(18)
    1.  Check for the existence of a status claim, check for the
        existence of a status_list claim within the status claim and
        validate that the content of status_list adheres to the rules
-       defined in Section 6.2 for JWTs and Section 6.4 for CWTs.  This
+       defined in Section 6.2 for JWTs and Section 6.3 for CWTs.  This
        step can be overruled if defined within the Referenced Token
        Format natively
 
@@ -1356,7 +1308,7 @@ d2                              # tag(18)
 
    *  Change Controller: IETF
 
-   *  Specification Document(s): Section 6.4 of this specification
+   *  Specification Document(s): Section 6.3 of this specification
 
 14.5.  Media Type Registration
 
@@ -1675,7 +1627,7 @@ Document History
 
    -04
 
-   *  add sd-jwt-vc example
+   *  fix CWT status_list map encoding
 
    *  add CORS considerations to the http endpoint
 
