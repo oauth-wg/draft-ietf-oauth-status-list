@@ -875,6 +875,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* fix CWT status_list map encoding
 * add CORS considerations to the http endpoint
 * fix reference of Status List in CBOR format
 * added status_list CWT claim key assigned
