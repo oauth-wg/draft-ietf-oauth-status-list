@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-10T00:15:52.983368+00:00",
+  "timestamp": "2024-09-12T00:15:55.908939+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -702,13 +702,15 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "Add:\r\n- prevent double allocating an index\r\n- randomize allocation of indexes/avoid sequential usage",
       "createdAt": "2023-06-07T19:34:15Z",
-      "updatedAt": "2024-09-05T07:04:49Z",
+      "updatedAt": "2024-09-11T06:10:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -1297,13 +1299,15 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "As we declined to include a size property to the status list, we do not have other means than to decode&decompress the encoded status list and get status list size from the byte array length/size:\r\nstatus list size = byte array size * 8 / bits\r\nTherefore it makes to add the requirement that status list size must \"fill up\" to bytes",
       "createdAt": "2023-07-18T12:01:54Z",
-      "updatedAt": "2024-09-05T07:05:11Z",
+      "updatedAt": "2024-09-11T06:43:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -1392,10 +1396,12 @@
       "author": "mprorock",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "There are multiple cases that require multiple statuses to be attached to something.... this draft is also covering cbor\r\n\r\ncan we at least for cbor permit a flag that lets us embed an array of bytes into a particular status index - that would permit this use case to be covered easily",
       "createdAt": "2023-08-04T21:51:43Z",
-      "updatedAt": "2024-08-28T06:51:25Z",
+      "updatedAt": "2024-09-11T06:18:34Z",
       "closedAt": null,
       "comments": [
         {
@@ -1419,15 +1425,15 @@
       "id": "I_kwDOJZ2aqs5thEp4",
       "title": "arbitrary size restrictions on status",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/52",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mprorock",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Is there a good reason to limit size to \"Each status of a Referenced Token MUST be represented with a bit size of 1,2,4, or 8\"\r\n\r\nThis can easily be resolved by setting a `size` parameter along side `bits` as suggested in #47 \r\n\r\nthen you can easily seek to the bits you are after since you know the max size and the number of bits each status takes up \r\n\r\nThis also permits implementers to cover both cases where packing into 3 bits is desireable for space reasons, or have a large number of potential statuses to reflect\r\n",
       "createdAt": "2023-08-04T21:57:14Z",
-      "updatedAt": "2023-08-23T06:14:35Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-11T06:19:33Z",
+      "closedAt": "2024-09-11T06:19:33Z",
       "comments": [
         {
           "author": "c2bo",
@@ -1461,12 +1467,22 @@
       "author": "mprorock",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "\"Status Types MUST be numeric values between 0 and 255\" \r\nProbably better to just have hex pass through if you are after numerics, rather than set a status type, otherwise, why would we not permit a message to be attached and referenced, perhaps from a lookup table external.  see the `credentialSubject.statusMessages` implementation/spec [defined in the equivalent w3c work](https://w3c.github.io/vc-status-list-2021/#statuslist2021credential)\r\n",
       "createdAt": "2023-08-04T22:00:57Z",
-      "updatedAt": "2023-08-04T22:00:57Z",
+      "updatedAt": "2024-09-11T06:24:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- we need further information to understand this issue\r\n- Status Types are represented as a number with 1 to 8 bits according to the chosen `bits` value\r\n- hex is just the representation, but the actual usage in this draft is binary\r\n- we favor few, simple status types described in a global registry to avoid misunderstandings\r\n- in this registry there may be some \"application-specific\" types, where ecosystems could define this on their own, but out of scope for this spec\r\n- pending close without further feedback",
+          "createdAt": "2024-09-11T06:24:23Z",
+          "updatedAt": "2024-09-11T06:24:23Z"
+        }
+      ]
     },
     {
       "number": 54,
@@ -1895,10 +1911,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "This came up twice now, so I think it makes sense to open this issue.\r\n\r\nThe StatusList2021 \"counts\" entries from right to left.\r\n\r\nAs our goal is to support multi-bit support for status types and bits are usually \"counted\" from right to left, we envision this more of a byte array, therefore counting indices and bits from right to left.\r\n\r\nTherefore, the 1-bit strings do not match. Is this a problem? What are the consequences?",
       "createdAt": "2023-10-19T12:51:44Z",
-      "updatedAt": "2023-11-09T22:33:44Z",
+      "updatedAt": "2024-09-11T06:29:12Z",
       "closedAt": null,
       "comments": [
         {
@@ -1942,6 +1960,13 @@
           "body": "Thats true, I was only stating my opinion and we should probably get more feedback on this.",
           "createdAt": "2023-11-09T22:33:44Z",
           "updatedAt": "2023-11-09T22:33:44Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- we still believe to achieve our design goal of implementation easiness and simplicity, an approach using byte array instead of bitarray is better\r\n- changes now would break many libraries for both standards\r\n- so there is probably no solution to this\r\n- pending close",
+          "createdAt": "2024-09-11T06:29:06Z",
+          "updatedAt": "2024-09-11T06:29:06Z"
         }
       ]
     },
@@ -1974,15 +1999,15 @@
       "id": "I_kwDOJZ2aqs50llpa",
       "title": "Call for Adoption Feedback: JSON/CBOR instead of JWT/CWT",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/72",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/oauth/hSOvzlKZTUJpI8ucB1CLNo5koqg/\r\n\r\n> The latest draft (i.e. draft-looker-oauth-jwt-cwt-status-list-latest) \r\n> which is available at :\r\n> https://vcstuff.github.io/draft-looker-oauth-jwt-cwt-status-list/draft-looker-oauth-jwt-cwt-status-list.html \r\n> \r\n> includes the following illustrative drawing:\r\n> \r\n> +------------------++-------------------+\r\n> ||References||\r\n> ||------------------->||\r\n> | Referenced Token || Status List Token |\r\n> |(JSON or CBOR)||(JWT or CWT)|\r\n> ||Describes Status||\r\n> ||<-------------------||\r\n> +------------------+ +-------------------+\r\n> \r\n> This drawing is not identical to the drawing of the referenced draft.\r\n> \r\n> On the left side, \"JSON or CBOR\" are mentioned instead of \"JWT or CWT\".\r\n> However, such change would indeed be appropriate (and in both rectangles \r\n> as explained below).\r\n\r\n> In section 4. of JWT [RFC7519] The text states:\r\n> \r\n>           The JWT Claims Set represents a JSON object whose members are \r\n> the claims conveyed by the JWT.\r\n> The Claim Names within a JWT Claims Set MUST be unique. JWT parsers MUST \r\n> either reject JWTs\r\n>           with duplicate Claim Names oruse a JSON parser that returns \r\n> only the lexically last duplicate member name (...).\r\n> \r\n> In [RFC8392] such sentence is not present which means that a Claim does \r\n> not need to be unique.\r\n> \r\n> However, in some applications, it might be useful to use JSON tokens \r\n> that contain several occurrences of the same claim within it.\r\n> In addition, the processing of such tokens would not necessarily need to \r\n> follow the description made in section 7 of [RFC7519], i.e. JWTs.\r\n> \r\n> As a first example, let us consider the case where the URI placed under \r\n> the \"status_list \" claim does not respond.\r\n> For resilience considerations, another URI should be defined. This can \r\n> be handled in two ways:\r\n> \r\n> - using a more complex claim structure for the \"status_list\" claim, or\r\n> \r\n> - allowing the inclusion of several \"status_list\" claims.\r\n> \r\n> As another example, currently the claim \"nationalities\" has been \r\n> registered by the IANA. See: https://www.iana.org/assignments/jwt/jwt.xhtml\r\n> \r\n> In order to support selective disclosure, the claim \"nationality\" should \r\n> be defined, so that two \"nationality\" claims can be present,\r\n> in order to allow bi-national users to choose which \"nationality\" \r\n> claim(s) to disclose, without disclosing that they have two nationality \r\n> claims.\r\n> \r\n>         Note: Using a different name for tokens supporting credentials, \r\n> e.g., JXT ot CXT (with the letter \"X\" different from the letter \"J\")\r\n>                  would address this problem.\r\n> \r\n> The abstract states:\r\n> \r\n> This specification defines status list data structures for representing \r\n> the status of JSON Web Tokens (JWTs) [RFC7519] and\r\n> CBOR Web Tokens (CWTs) [RFC8392]. The status list data structures \r\n> themselves are also represented as JWTs or CWTs.\r\n> \r\n> Both sentences imply restrictions since they limit the use of the \r\n> mechanism only to JWTs and CWTs.\r\n> \r\n> Limiting the use of the Status List mechanism to JWTs and CWTs would not \r\n> allow other forms of JSON or CBOR tokens\r\n> to take advantage of the mechanism described in this draft.\r\n> \r\n> The abstract should be modified to be able to support other forms of \r\n> JSON or CBOR tokens,\r\n> while JWTs and CWTs should be mentioned as examples.\r\n> \r\n> In order to allow future evolutions, the same kind of change should be \r\n> done for Status List Tokens.\r\n> \r\n> In order to allow for such a possibility, the title should include \"JSON \r\n> and CBOR\" rather than \"JWT and CWT\".\r\n> \r\n> *Proposed changes:*\r\n> \r\n> 1) Change proposal for the title of the document:\r\n> \r\n> JSON and CBOR encoded Status Lists\r\n> \r\n> 2) Change proposal for the Abstract:\r\n> \r\n> This specification defines status list data structures for representing \r\n> the status of JavaScript Object Notation (JSON) tokens [RFC8259] and\r\n>           of Concise Binary Object Representation (CBOR) tokens \r\n> [RFC7049] (see also [RFC8949]), */such as/* JSON Web Tokens (JWTs) \r\n> [RFC7519] and\r\n>           CBOR Web Tokens (CWTs) [RFC8392].\r\n> \r\n> The status list data structures themselves are represented as JSON \r\n> tokens or CBOR tokens.\r\n> \r\n> 3) The same kind of change should be done within the document, e.g. :\r\n> *\r\n> **+----------------------++----------------------+\r\n> ||References||\r\n> ||------------------->||\r\n> |Referenced Token||Status List Token|\r\n> | (JSON or CBOR token) || (JSON or CBOR token) |\r\n> ||Describes Status||\r\n> ||<-------------------||\r\n> +----------------------++----------------------+\r\n\r\n",
       "createdAt": "2023-10-22T18:43:19Z",
-      "updatedAt": "2023-12-21T20:22:08Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-11T06:30:32Z",
+      "closedAt": "2024-09-11T06:30:32Z",
       "comments": [
         {
           "author": "c2bo",
@@ -2002,10 +2027,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "https://mailarchive.ietf.org/arch/msg/oauth/hSOvzlKZTUJpI8ucB1CLNo5koqg/\r\n\r\n> PS. A remainder:\r\n> \r\n> - the protocol leaks information that allows verifiers to link the \r\n> tokens they receive.\r\n> \r\n> -depending upon the architecture deployed by the token Issuer, the \r\n> Issuer may be in a position to act as Big Brother,\r\n>            i.e. allowing it to know where and when a token it has issued \r\n> has been used.\r\n\r\n",
       "createdAt": "2023-10-22T18:47:51Z",
-      "updatedAt": "2023-10-22T18:47:51Z",
+      "updatedAt": "2024-09-11T06:37:39Z",
       "closedAt": null,
       "comments": []
     },
@@ -2199,10 +2226,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "discuss"
+      ],
       "body": "",
       "createdAt": "2023-11-10T17:47:55Z",
-      "updatedAt": "2023-11-10T17:47:55Z",
+      "updatedAt": "2024-09-11T06:30:44Z",
       "closedAt": null,
       "comments": []
     },
@@ -2218,7 +2247,7 @@
       "labels": [],
       "body": "George asks to describe under which circumstances / contexts the StatusList works best/is helpful compared to other mechanisms. David asks under which conditions this should not be used, expected revocation rates might be very high",
       "createdAt": "2023-11-10T17:51:23Z",
-      "updatedAt": "2023-11-16T07:40:27Z",
+      "updatedAt": "2024-09-11T06:39:37Z",
       "closedAt": null,
       "comments": [
         {
@@ -2227,6 +2256,13 @@
           "body": "consider this for implementation considerations or annex",
           "createdAt": "2023-11-16T07:40:27Z",
           "updatedAt": "2023-11-16T07:40:27Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- we see the usefulness of such guidance but it should be in a separate document, e.g. informational RFC",
+          "createdAt": "2024-09-11T06:39:35Z",
+          "updatedAt": "2024-09-11T06:39:35Z"
         }
       ]
     },
@@ -3449,13 +3485,15 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "Something like this picutre used in the last IETF presentation:\r\n\r\n![image](https://github.com/user-attachments/assets/86e48867-0f3a-4715-8bce-a13e1514c814)\r\n",
       "createdAt": "2024-08-07T06:41:30Z",
-      "updatedAt": "2024-09-05T06:25:32Z",
+      "updatedAt": "2024-09-11T06:42:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -10741,9 +10779,9 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "Closes #146 \r\nCloses #165 \r\nCloses #132 \r\nCloses #93 ",
+      "body": "Closes #146 \r\nCloses #165 \r\nCloses #132 \r\nCloses #93 \r\nCloses #73",
       "createdAt": "2024-09-09T14:45:57Z",
-      "updatedAt": "2024-09-09T16:42:36Z",
+      "updatedAt": "2024-09-11T06:37:12Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
@@ -10830,7 +10868,7 @@
       "labels": [],
       "body": "Rendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/sd-jwt-example/draft-ietf-oauth-status-list.html \r\n\r\nAdds an example for a referenced token in sd-jwt-vc form.",
       "createdAt": "2024-09-09T15:26:26Z",
-      "updatedAt": "2024-09-09T16:42:11Z",
+      "updatedAt": "2024-09-11T06:17:11Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
@@ -10841,7 +10879,22 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closes #112, except for the COSE part. Do we want to merge those sections as well in this PR?",
+          "createdAt": "2024-09-10T17:26:04Z",
+          "updatedAt": "2024-09-10T17:26:55Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "I'd prefer a separate PR that includes the COSE parts and a mDL/mDoc example.",
+          "createdAt": "2024-09-10T18:04:16Z",
+          "updatedAt": "2024-09-10T18:04:16Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJZ2aqs6Igtup",
@@ -10867,6 +10920,19 @@
           "body": "",
           "createdAt": "2024-09-09T16:42:11Z",
           "updatedAt": "2024-09-09T16:42:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6I1nxv",
+          "commit": {
+            "abbreviatedOid": "da83e8c"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-11T06:17:11Z",
+          "updatedAt": "2024-09-11T06:17:11Z",
           "comments": []
         }
       ]
