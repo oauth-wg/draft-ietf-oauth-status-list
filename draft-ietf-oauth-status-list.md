@@ -605,6 +605,7 @@ A malicious Issuer could bypass the privacy benefits of the herd privacy by gene
 Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
 This behaviour could be mitigated by:
+
 - adding authorization rules to the Status List, see [](#security-authorization).
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
@@ -653,7 +654,7 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 <br/>
 
 * Claim Name: `status_list`
-* Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+* Claim Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
 * Specification Document(s):  [](#status-list-token-jwt) of this specification
 
@@ -690,7 +691,7 @@ Specification Document(s):
 ### Initial Registry Contents
 
 * Status Method Value: `status_list`
-* Status Method Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+* Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
 * Specification Document(s):  [](#referenced-token-jwt) of this specification
 
@@ -713,7 +714,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 * Claim Name: `status_list`
 * Claim Key: TBD (requested assignment 65533)
-* Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
+* Claim Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
 * Specification Document(s):  [](#status-list-token-cwt) of this specification
 
@@ -750,7 +751,7 @@ Specification Document(s):
 ### Initial Registry Contents
 
 * Status Method Value: `status_list`
-* Status Method Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
+* Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
 * Specification Document(s):  [](#referenced-token-cwt) of this specification
 
@@ -875,6 +876,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* editorial fixes
 * add CORS considerations to the http endpoint
 * fix reference of Status List in CBOR format
 * added status_list CWT claim key assigned
