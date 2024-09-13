@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 13 March 2025                                                  
+Expires: 17 March 2025                                                  
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                        9 September 2024
+                                                       13 September 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 March 2025.
+   This Internet-Draft will expire on 17 March 2025.
 
 Copyright Notice
 
@@ -110,6 +110,7 @@ Table of Contents
    13. Implementation Considerations
      13.1.  Token Lifecycle
      13.2.  Default Values and Double Allocation
+     13.3.  Status List Size
    14. IANA Considerations
      14.1.  JSON Web Token Claims Registration
        14.1.1.  Registry Contents
@@ -538,9 +539,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840161f47
-   b7c0a2f88b5f8f4ed5870a9e2974f5e305c63b10802b7c8796e2a3566276e3e3fb26
-   155ceb012cd2ae91191fa60275a5b7643af714ed89c6876b86d1d3
+   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840531dd4
+   fc91e1fa08d5b674a5f8183ed15ab67708584e87e566dc268b77f0c508c4b5ced2e3
+   95aab67bd8a2cabc8b63ff8a2f559c0c9dbe4d01dd90f52fb09e7a
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -564,12 +565,12 @@ d2                              # tag(18)
       747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
       18000217015d              #       "\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      161f47b7c0a2f88b5f8f4ed5  #       "\x16\x1fG·À¢ø\x8b_\x8fNÕ"
-      870a9e2974f5e305c63b1080  #       "\x87\x0a\x9e)tõã\x05Æ;\x10\x80"
-      2b7c8796e2a3566276e3e3fb  #       "+|\x87\x96â£Vbvããû"
-      26155ceb012cd2ae91191fa6  #       "&\x15\ë\x01,Ò®\x91\x19\x1f¦"
-      0275a5b7643af714ed89c687  #       "\x02u¥·d:÷\x14í\x89Æ\x87"
-      6b86d1d3                  #       "k\x86ÑÓ"
+      531dd4fc91e1fa08d5b674a5  #       "S\x1dÔü\x91áú\x08Õ¶t¥"
+      f8183ed15ab67708584e87e5  #       "ø\x18>ÑZ¶w\x08XN\x87å"
+      66dc268b77f0c508c4b5ced2  #       "fÜ&\x8bwðÅ\x08ÄµÎÒ"
+      e395aab67bd8a2cabc8b63ff  #       "ã\x95ª¶{Ø¢Ê¼\x8bcÿ"
+      8a2f559c0c9dbe4d01dd90f5  #       "\x8a/U\x9c\x0c\x9d¾M\x01Ý\x90õ"
+      2fb09e7a                  #       "/°\x9ez"
 
 6.  Referenced Token
 
@@ -676,37 +677,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158400802a03d42d8e06b6420bbbf2ca3ea94700245
-   aa3614209c8c25db432c6f98525656b079d3bdcf786953bf79f24b1d2b282756834e
-   e3075ade6ca9510d16971a
+   7374617475736c697374732f3158401073e9847c1dfc9d1d749469ad18ba579074aa
+   d506c6909e8bf4ef61219a007086284f7d2602c10683d8da2be0fc0075b51564d1e8
+   21f82ac0d49f03290ce718
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         0802a03d42d8e06b6420bbbf  #       "\x08\x02\xa0=BØàkd »¿"
-         2ca3ea94700245aa3614209c  #       ",£ê\x94p\x02Eª6\x14 \x9c"
-         8c25db432c6f98525656b079  #       "\x8c%ÛC,o\x98RVV°y"
-         d3bdcf786953bf79f24b1d2b  #       "Ó½ÏxiS¿yòK\x1d+"
-         282756834ee3075ade6ca951  #       "('V\x83Nã\x07ZÞl©Q"
-         0d16971a                  #       "\x0d\x16\x97\x1a"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      1073e9847c1dfc9d1d749469  #       "\x10sé\x84|\x1dü\x9d\x1dt\x94i"
+      ad18ba579074aad506c6909e  #       "\xad\x18ºW\x90tªÕ\x06Æ\x90\x9e"
+      8bf4ef61219a007086284f7d  #       "\x8bôïa!\x9a\x00p\x86(O}"
+      2602c10683d8da2be0fc0075  #       "&\x02Á\x06\x83ØÚ+àü\x00u"
+      b51564d1e821f82ac0d49f03  #       "µ\x15dÑè!ø*ÀÔ\x9f\x03"
+      290ce718                  #       ")\x0cç\x18"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1149,6 +1150,19 @@ d2                              # tag(18)
    re-using the same uri and index for mulitple Referenced Tokens.  The
    Issuer MUST prevent any unintended double allocation by using the
    Status List.
+
+13.3.  Status List Size
+
+   Status List Issuer may increase the size of a Status List if it
+   requires indices for additional Referenced Tokens.  It is RECOMMENDED
+   that the size of a Status List fills up the byte boundary, i.e. size
+   % bits = 0.
+
+   The Status List Issuer may chunk its Referenced Tokens into multiple
+   Status Lists to reduce the transmission size of an individual Status
+   List Token.  This may be useful for setups where some entities
+   operate in constrained environments, e.g. for mobile internet or
+   embedded devices.
 
 14.  IANA Considerations
 
@@ -1641,8 +1655,8 @@ Document History
 
    -04
 
-   *  add implementation consideration for Default Values and Double
-      Allocation
+   *  add implementation consideration for Default Values, Double
+      Allocation and Status List Size
 
    *  add CORS considerations to the http endpoint
 
