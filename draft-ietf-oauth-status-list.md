@@ -642,6 +642,12 @@ The implementation is RECOMMENDED to initialize the Status List byte array with 
 
 The implementation is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for mulitple Referenced Tokens. The Issuer MUST prevent any unintended double allocation by using the Status List.
 
+## Status List Size
+
+Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List fills up the byte boundary, i.e. `size` % `bits` = 0.
+
+The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices.
+
 # IANA Considerations
 
 ## JSON Web Token Claims Registration
@@ -881,7 +887,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
-* add implementation consideration for Default Values and Double Allocation
+* add implementation consideration for Default Values, Double Allocation and Status List Size
 * add CORS considerations to the http endpoint
 * fix reference of Status List in CBOR format
 * added status_list CWT claim key assigned
