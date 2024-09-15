@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-12T00:15:55.908939+00:00",
+  "timestamp": "2024-09-15T00:17:42.078279+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -67,6 +67,11 @@
       "name": "discuss",
       "description": "",
       "color": "03BA91"
+    },
+    {
+      "name": "editorial",
+      "description": "",
+      "color": "DAF986"
     }
   ],
   "issues": [
@@ -3631,6 +3636,32 @@
           "body": "Closing since this has been addressed already.",
           "createdAt": "2024-09-03T15:00:52Z",
           "updatedAt": "2024-09-03T15:00:52Z"
+        }
+      ]
+    },
+    {
+      "number": 174,
+      "id": "I_kwDOJZ2aqs6WctZi",
+      "title": "Clean up IANA section",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/174",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "We should clean up the IANA section a bit, especially https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-media-type-registration needs some work imho. Can we remove the n/a parameters from that part or are they required?\r\n",
+      "createdAt": "2024-09-13T07:40:41Z",
+      "updatedAt": "2024-09-13T16:32:01Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think it is the recommended way: https://datatracker.ietf.org/doc/html/rfc6838#section-5.6\r\n",
+          "createdAt": "2024-09-13T16:32:00Z",
+          "updatedAt": "2024-09-13T16:32:00Z"
         }
       ]
     }
@@ -10949,13 +10980,13 @@
       "labels": [],
       "body": "\u2026tion",
       "createdAt": "2024-09-09T16:53:00Z",
-      "updatedAt": "2024-09-09T18:25:56Z",
+      "updatedAt": "2024-09-13T16:53:45Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/considerations2",
-      "headRefOid": "7cd51970713f20c2e8abe1f7421801f1af5030a2",
+      "headRefOid": "9fe284ff7dbfbba543be3d39385c3b753beb913c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -10973,6 +11004,46 @@
           "body": "",
           "createdAt": "2024-09-09T18:25:56Z",
           "updatedAt": "2024-09-09T18:25:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 173,
+      "id": "PR_kwDOJZ2aqs57VCHx",
+      "title": "fix CWT status_list map encoding",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/173",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "`status_list` in the Status List Token in CWT form was encoded as Byte String instead of Map (type 5) as defined in the CBOR Section (4.2).\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/fix-cwt-statuslist-encoding/draft-ietf-oauth-status-list.html",
+      "createdAt": "2024-09-12T16:27:54Z",
+      "updatedAt": "2024-09-13T16:41:51Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/fix-cwt-statuslist-encoding",
+      "headRefOid": "a1b7e512465324e668ff779791fed7ed43ed0662",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6JTgNQ",
+          "commit": {
+            "abbreviatedOid": "a1b7e51"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-13T16:41:51Z",
+          "updatedAt": "2024-09-13T16:41:51Z",
           "comments": []
         }
       ]
