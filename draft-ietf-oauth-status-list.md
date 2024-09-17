@@ -649,14 +649,14 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 * Claim Name: `status`
 * Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the JWT.
 * Change Controller: IETF
-* Specification Document(s):  [](#status-claim) of this specification
+* Specification Document(s): [](#status-claim) of this specification
 
 <br/>
 
 * Claim Name: `status_list`
 * Claim Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s):  [](#status-list-token-jwt) of this specification
+* Specification Document(s): [](#status-list-token-jwt) of this specification
 
 <br/>
 
@@ -693,7 +693,7 @@ Specification Document(s):
 * Status Method Value: `status_list`
 * Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s):  [](#referenced-token-jwt) of this specification
+* Specification Document(s): [](#referenced-token-jwt) of this specification
 
 ## CBOR Web Token Claims Registration
 
@@ -708,7 +708,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 * Claim Key: TBD (requested assignment 65535)
 * Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.
 * Change Controller: IETF
-* Specification Document(s):  [](#status-claim) of this specification
+* Specification Document(s): [](#status-claim) of this specification
 
 <br/>
 
@@ -716,7 +716,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 * Claim Key: TBD (requested assignment 65533)
 * Claim Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s):  [](#status-list-token-cwt) of this specification
+* Specification Document(s): [](#status-list-token-cwt) of this specification
 
 <br/>
 
@@ -753,7 +753,7 @@ Specification Document(s):
 * Status Method Value: `status_list`
 * Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s):  [](#referenced-token-cwt) of this specification
+* Specification Document(s): [](#referenced-token-cwt) of this specification
 
 ## Media Type Registration
 
@@ -767,15 +767,13 @@ To indicate that the content is an JSON-based Status List:
   * Subtype name: statuslist+json
   * Required parameters: n/a
   * Optional parameters: n/a
-  * Encoding considerations: binary; A JSON-based Status List is a JSON Object.
-  * Security considerations: See (#Security) of \[ this specification \]
+  * Encoding considerations: See [](#status-list-json) of this specification
+  * Security considerations: See [](#Security) of this specification
   * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
+  * Published specification: this specification
+  * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
+  * Additional information: n/a
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
@@ -789,15 +787,13 @@ To indicate that the content is an JWT-based Status List:
   * Subtype name: statuslist+jwt
   * Required parameters: n/a
   * Optional parameters: n/a
-  * Encoding considerations: binary; A JWT-based Status List is a JWT; JWT values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') characters.
-  * Security considerations: See (#Security) of \[ this specification \]
+  * Encoding considerations: See [](#status-list-token-jwt) of this specification
+  * Security considerations: See [](#Security) of this specification
   * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
+  * Published specification: this specification
+  * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
+  * Additional information: n/a
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
@@ -811,15 +807,13 @@ To indicate that the content is an CBOR-based Status List:
   * Subtype name: statuslist+cbor
   * Required parameters: n/a
   * Optional parameters: n/a
-  * Encoding considerations: binary; A CBOR-based Status List is a CBOR Object.
-  * Security considerations: See (#Security) of \[ this specification \]
+  * Encoding considerations: See [](#status-list-cbor) of this specification
+  * Security considerations: See [](#Security) of this specification
   * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
+  * Published specification: this specification
+  * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
+  * Additional information: n/a
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
@@ -833,15 +827,13 @@ To indicate that the content is an CWT-based Status List:
   * Subtype name: statuslist+cwt
   * Required parameters: n/a
   * Optional parameters: n/a
-  * Encoding considerations: binary;
-  * Security considerations: See (#Security) of \[ this specification \]
+  * Encoding considerations: See [](#status-list-token-cwt) of this specification
+  * Security considerations: See [](#Security) of this specification
   * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
+  * Published specification: this specification
+  * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
+  * Additional information: n/a
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
