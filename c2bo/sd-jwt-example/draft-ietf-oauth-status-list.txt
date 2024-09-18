@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 13 March 2025                                                  
+Expires: 22 March 2025                                                  
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                        9 September 2024
+                                                       18 September 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 March 2025.
+   This Internet-Draft will expire on 22 March 2025.
 
 Copyright Notice
 
@@ -534,12 +534,12 @@ Table of Contents
    The following is a non-normative example for a Status List Token in
    CWT format in Hex:
 
-   d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
+   d28453a20126106e7374617475736c6973742b637774a1044231325865a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d584062477d
-   dd055fc949394de93170ec536641b53731f606ae85173b1585c74203ad5883ce4847
-   d0ecf1e2b49f8fe6b6fc2b98ec78e2e14ba5e8f6129678868a0ac4
+   19a8c019ffffa2646269747301636c73744a78dadbb918000217015d58406cabde80
+   4daa52ad3cbd77100c7fd7a941d9bc2c707117eeacdfb4704ae0270aef81bce5efb5
+   f9a107cf7955feea1887e64f7952d8a0e36a9e6cc85469f87ff2
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -552,23 +552,23 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 66                       #     bytes(102)
+    58 65                       #     bytes(101)
       a602782168747470733a2f2f  #       "¦\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
       31017368747470733a2f2f65  #       "1\x01shttps://e"
       78616d706c652e636f6d061a  #       "xample.com\x06\x1a"
       648c5bea041a8898dfea19ff  #       "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿ"
-      fe19a8c019ffff56a2646269  #       "þ\x19¨À\x19ÿÿV¢dbi"
-      747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
-      18000217015d              #       "\x18\x00\x02\x17\x01]"
+      fe19a8c019ffffa264626974  #       "þ\x19¨À\x19ÿÿ¢dbit"
+      7301636c73744a78dadbb918  #       "s\x01clstJxÚÛ¹\x18"
+      000217015d                #       "\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      62477ddd055fc949394de931  #       "bG}Ý\x05_ÉI9Mé1"
-      70ec536641b53731f606ae85  #       "pìSfAµ71ö\x06®\x85"
-      173b1585c74203ad5883ce48  #       "\x17;\x15\x85ÇB\x03\xadX\x83ÎH"
-      47d0ecf1e2b49f8fe6b6fc2b  #       "GÐìñâ´\x9f\x8fæ¶ü+"
-      98ec78e2e14ba5e8f6129678  #       "\x98ìxâáK¥èö\x12\x96x"
-      868a0ac4                  #       "\x86\x8a\x0aÄ"
+      6cabde804daa52ad3cbd7710  #       "l«Þ\x80MªR\xad<½w\x10"
+      0c7fd7a941d9bc2c707117ee  #       "\x0c\x7f×©AÙ¼,pq\x17î"
+      acdfb4704ae0270aef81bce5  #       "¬ß´pJà'\x0aï\x81¼å"
+      efb5f9a107cf7955feea1887  #       "ïµù¡\x07ÏyUþê\x18\x87"
+      e64f7952d8a0e36a9e6cc854  #       "æOyRØ\xa0ãj\x9elÈT"
+      69f87ff2                  #       "iø\x7fò"
 
 6.  Referenced Token
 
@@ -719,37 +719,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158408fadf68483b3c2f27b8bd7825b56303e57ea5b
-   b51a86e96e6ac12af593ca78d0ed0912b992cf43d5d914879f609316bb9072af1f93
-   667656212bd9410503044c
+   7374617475736c697374732f315840049defb06cabd248c36830f9ee6d608ee663c0
+   346a02f7802be929656c39d1f0616c8c952a88ad54173a7a2abe93c956589059a7af
+   277750858bb1fa9ef4801e
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      8fadf68483b3c2f27b8bd782  #       "\x8f\xadö\x84\x83³Âò{\x8b×\x82"
-      5b56303e57ea5bb51a86e96e  #       "[V0>Wê[µ\x1a\x86én"
-      6ac12af593ca78d0ed0912b9  #       "jÁ*õ\x93ÊxÐí\x09\x12¹"
-      92cf43d5d914879f609316bb  #       "\x92ÏCÕÙ\x14\x87\x9f`\x93\x16»"
-      9072af1f93667656212bd941  #       "\x90r¯\x1f\x93fvV!+ÙA"
-      0503044c                  #       "\x05\x03\x04L"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         049defb06cabd248c36830f9  #       "\x04\x9dï°l«ÒHÃh0ù"
+         ee6d608ee663c0346a02f780  #       "îm`\x8eæcÀ4j\x02÷\x80"
+         2be929656c39d1f0616c8c95  #       "+é)el9Ñðal\x8c\x95"
+         2a88ad54173a7a2abe93c956  #       "*\x88\xadT\x17:z*¾\x93ÉV"
+         589059a7af277750858bb1fa  #       "X\x90Y§¯'wP\x85\x8b±ú"
+         9ef4801e                  #       "\x9eô\x80\x1e"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1121,9 +1121,11 @@ d2                              # tag(18)
    and unknown to the Holder, e.g. profiling the suspension of a driving
    license or checking the employment status of an employee credential.
 
-   This behaviour could be mitigated by: - adding authorization rules to
-   the Status List, see Section 11.3. - regular re-issuance of the
-   Referenced Token, see Section 13.1.
+   This behaviour could be mitigated by:
+
+   *  adding authorization rules to the Status List, see Section 11.3.
+
+   *  regular re-issuance of the Referenced Token, see Section 13.1.
 
 12.4.  Unlinkability
 
@@ -1204,7 +1206,7 @@ d2                              # tag(18)
    *  Claim Name: status_list
 
    *  Claim Description: A status list containing up-to-date status
-      information on multiple other JWTs encoded as a bitarray.
+      information on multiple tokens.
 
    *  Change Controller: IETF
 
@@ -1258,7 +1260,7 @@ d2                              # tag(18)
    *  Status Method Value: status_list
 
    *  Status Method Description: A status list containing up-to-date
-      status information on multiple other JWTs encoded as a bitarray.
+      status information on multiple tokens.
 
    *  Change Controller: IETF
 
@@ -1292,7 +1294,7 @@ d2                              # tag(18)
    *  Claim Key: TBD (requested assignment 65533)
 
    *  Claim Description: A status list containing up-to-date status
-      information on multiple other CWTs encoded as a bitarray.
+      information on multiple tokens.
 
    *  Change Controller: IETF
 
@@ -1348,7 +1350,7 @@ d2                              # tag(18)
    *  Status Method Value: status_list
 
    *  Status Method Description: A status list containing up-to-date
-      status information on multiple other CWTs encoded as a bitarray.
+      status information on multiple tokens.
 
    *  Change Controller: IETF
 
@@ -1370,25 +1372,20 @@ d2                              # tag(18)
 
    *  Optional parameters: n/a
 
-   *  Encoding considerations: binary; A JSON-based Status List is a
-      JSON Object.
+   *  Encoding considerations: See Section 4.1 of this specification
 
-   *  Security considerations: See (#Security) of [ this specification ]
+   *  Security considerations: See Section 11 of this specification
 
    *  Interoperability considerations: n/a
 
-   *  Published specification: [ this specification ]
+   *  Published specification: this specification
 
-   *  Applications that use this media type: Applications using [ this
-      specification ] for updated status information of tokens
+   *  Applications that use this media type: Applications using this
+      specification for updated status information of tokens
 
    *  Fragment identifier considerations: n/a
 
-   *  Additional information:
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
+   *  Additional information: n/a
 
    *  Person & email address to contact for further information: Paul
       Bastian, paul.bastian@posteo.de
@@ -1413,27 +1410,20 @@ d2                              # tag(18)
 
    *  Optional parameters: n/a
 
-   *  Encoding considerations: binary; A JWT-based Status List is a JWT;
-      JWT values are encoded as a series of base64url-encoded values
-      (some of which may be the empty string) separated by period ('.')
-      characters.
+   *  Encoding considerations: See Section 5.1 of this specification
 
-   *  Security considerations: See (#Security) of [ this specification ]
+   *  Security considerations: See Section 11 of this specification
 
    *  Interoperability considerations: n/a
 
-   *  Published specification: [ this specification ]
+   *  Published specification: this specification
 
-   *  Applications that use this media type: Applications using [ this
-      specification ] for updated status information of tokens
+   *  Applications that use this media type: Applications using this
+      specification for updated status information of tokens
 
    *  Fragment identifier considerations: n/a
 
-   *  Additional information:
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
+   *  Additional information: n/a
 
    *  Person & email address to contact for further information: Paul
       Bastian, paul.bastian@posteo.de
@@ -1458,25 +1448,20 @@ d2                              # tag(18)
 
    *  Optional parameters: n/a
 
-   *  Encoding considerations: binary; A CBOR-based Status List is a
-      CBOR Object.
+   *  Encoding considerations: See Section 4.2 of this specification
 
-   *  Security considerations: See (#Security) of [ this specification ]
+   *  Security considerations: See Section 11 of this specification
 
    *  Interoperability considerations: n/a
 
-   *  Published specification: [ this specification ]
+   *  Published specification: this specification
 
-   *  Applications that use this media type: Applications using [ this
-      specification ] for updated status information of tokens
+   *  Applications that use this media type: Applications using this
+      specification for updated status information of tokens
 
    *  Fragment identifier considerations: n/a
 
-   *  Additional information:
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
+   *  Additional information: n/a
 
    *  Person & email address to contact for further information: Paul
       Bastian, paul.bastian@posteo.de
@@ -1501,24 +1486,20 @@ d2                              # tag(18)
 
    *  Optional parameters: n/a
 
-   *  Encoding considerations: binary;
+   *  Encoding considerations: See Section 5.2 of this specification
 
-   *  Security considerations: See (#Security) of [ this specification ]
+   *  Security considerations: See Section 11 of this specification
 
    *  Interoperability considerations: n/a
 
-   *  Published specification: [ this specification ]
+   *  Published specification: this specification
 
-   *  Applications that use this media type: Applications using [ this
-      specification ] for updated status information of tokens
+   *  Applications that use this media type: Applications using this
+      specification for updated status information of tokens
 
    *  Fragment identifier considerations: n/a
 
-   *  Additional information:
-
-      -  File extension(s): n/a
-
-      -  Macintosh file type code(s): n/a
+   *  Additional information: n/a
 
    *  Person & email address to contact for further information: Paul
       Bastian, paul.bastian@posteo.de
@@ -1672,6 +1653,10 @@ Document History
    -04
 
    *  add sd-jwt-vc example
+
+   *  fix CWT status_list map encoding
+
+   *  editorial fixes
 
    *  add CORS considerations to the http endpoint
 
