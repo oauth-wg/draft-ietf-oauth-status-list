@@ -326,9 +326,9 @@ The following is the CBOR Annotated Hex output of the example above:
 
 By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
-## Referenced Token in JWT Format {#referenced-token-jwt}
+## Referenced Token in JOSE Format {#referenced-token-jwt}
 
-The Referenced Token MUST be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}.
+The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}} or other formats based on JOSE.
 
 The following content applies to the JWT Claims Set:
 
@@ -357,6 +357,53 @@ The following is a non-normative example for a decoded header and payload of a R
       "uri": "https://example.com/statuslists/1"
     }
   }
+}
+~~~
+
+SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jwt}}.
+
+The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:
+
+~~~ ascii-art
+
+eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
+Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
+cyI6ICJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsICJpYXQiOiAxNjgzMDAwMDAw
+LCAiZXhwIjogMTg4MzAwMDAwMCwgInN1YiI6ICI2YzVjMGE0OS1iNTg5LTQzMWQtYmFl
+Ny0yMTkxMjJhOWVjMmMiLCAic3RhdHVzIjogeyJzdGF0dXNfbGlzdCI6IHsiaWR4Ijog
+MCwgInVyaSI6ICJodHRwczovL2V4YW1wbGUuY29tL3N0YXR1c2xpc3RzLzEifX0sICJf
+c2RfYWxnIjogInNoYS0yNTYifQ.-kgS-R-Z4DEDlqb8kb6381_gHHNatsoF1fcVKZk3M
+06CrnV8F8k9d2w2V_YAOvgcb0f11FqDFezXBXH30d4vcw~WyIyR0xDNDJzS1F2ZUNmR2
+ZyeU5STjl3IiwgInN0cmVldF9hZGRyZXNzIiwgIlNjaHVsc3RyLiAxMiJd~WyJlbHVWN
+U9nM2dTTklJOEVZbnN4QV9BIiwgImxvY2FsaXR5IiwgIlNjaHVscGZvcnRhIl0~WyI2S
+Wo3dE0tYTVpVlBHYm9TNXRtdlZBIiwgInJlZ2lvbiIsICJTYWNoc2VuLUFuaGFsdCJd~
+WyJlSThaV205UW5LUHBOUGVOZW5IZGhRIiwgImNvdW50cnkiLCAiREUiXQ~WyJRZ19PN
+jR6cUF4ZTQxMmExMDhpcm9BIiwgImFkZHJlc3MiLCB7Il9zZCI6IFsiNnZoOWJxLXpTN
+EdLTV83R3BnZ1ZiWXp6dTZvT0dYcm1OVkdQSFA3NVVkMCIsICI5Z2pWdVh0ZEZST0NnU
+nJ0TmNHVVhtRjY1cmRlemlfNkVyX2o3NmttWXlNIiwgIktVUkRQaDRaQzE5LTN0aXotR
+GYzOVY4ZWlkeTFvVjNhM0gxRGEyTjBnODgiLCAiV045cjlkQ0JKOEhUQ3NTMmpLQVN4V
+GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
+~~~
+
+Resulting payload of the example above:
+
+~~~ ascii-art
+
+{
+  "_sd": [
+    "HvrKX6fPV0v9K_yCVFBiLFHsMaxcD_114Em6VT8x1lg"
+  ],
+  "iss": "https://example.com/issuer",
+  "iat": 1683000000,
+  "exp": 1883000000,
+  "sub": "6c5c0a49-b589-431d-bae7-219122a9ec2c",
+  "status": {
+    "status_list": {
+      "idx": 0,
+      "uri": "https://example.com/statuslists/1"
+    }
+  },
+  "_sd_alg": "sha-256"
 }
 ~~~
 
@@ -868,6 +915,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* add sd-jwt-vc example
 * fix CWT status_list map encoding
 * editorial fixes
 * add CORS considerations to the http endpoint
