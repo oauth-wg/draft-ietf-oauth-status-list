@@ -623,7 +623,7 @@ Implementations are RECOMMENDED to verify correctness using the test vectors giv
 
 A Status List Token in the JWT format should follow the security considerations of {{RFC7519}} and the best current practices of {{RFC8725}}.
 
-Status List Token in CWT format should follow the security considerations of {{RFC8392}}.
+A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
 
 ## Cached and Stale status lists
 
