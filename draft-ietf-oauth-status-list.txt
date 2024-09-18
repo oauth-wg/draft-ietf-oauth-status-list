@@ -421,15 +421,6 @@ Table of Contents
 
    The following content applies to the JWT Claims Set:
 
-   *  iss: REQUIRED when also present in the Referenced Token.  The iss
-      (issuer) claim MUST specify a unique string identifier for the
-      entity that issued the Status List Token.  In the absence of an
-      application profile specifying otherwise, compliant applications
-      MUST compare issuer values using the Simple String Comparison
-      method defined in Section 6.2.1 of [RFC3986].  The value MUST be
-      equal to that of the iss claim contained within the Referenced
-      Token.
-
    *  sub: REQUIRED.  The sub (subject) claim MUST specify the URI of
       the Status List Token.  The value MUST be equal to that of the uri
       claim contained in the status_list claim of the Referenced Token.
@@ -477,7 +468,6 @@ Table of Contents
    {
      "exp": 2291720170,
      "iat": 1686920170,
-     "iss": "https://example.com",
      "status_list": {
        "bits": 1,
        "lst": "eNrbuRgAAhcBXQ"
@@ -497,9 +487,6 @@ Table of Contents
       as defined in [RFC9596].
 
    The following content applies to the CWT Claims Set:
-
-   *  1 (issuer): REQUIRED.  Same definition as iss claim in
-      Section 5.1.
 
    *  2 (subject): REQUIRED.  Same definition as sub claim in
       Section 5.1.
@@ -534,12 +521,12 @@ Table of Contents
    The following is a non-normative example for a Status List Token in
    CWT format in Hex:
 
-   d28453a20126106e7374617475736c6973742b637774a1044231325865a602782168
-   747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
-   68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffffa2646269747301636c73744a78dadbb918000217015d58406f04a5fe
-   0a22544bf870d24eeb939477d12a4499d3adb375a4ff74e04ff278ebd7f5bd855b72
-   de4ade6ffca04f15979df04296940bf1072ca1dcf7b6fa39eaf3
+   d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
+   747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
+   648c5bea041a8898dfea19fffe19a8c019ffffa2646269747301636c73744a78dadb
+   b918000217015d5840441ac5ab5bba2acc7af61801e63cf6640c692bf8ff502250b6
+   50a3fb69f05dc0632dafbbfd21bfbeaa32b059c755b87c0067433dda7002f1e52ab5
+   604e3d68cd
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -552,23 +539,21 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 65                       #     bytes(101)
-      a602782168747470733a2f2f  #       "¦\x02x!https://"
+    58 50                       #     bytes(80)
+      a502782168747470733a2f2f  #       "¥\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
-      31017368747470733a2f2f65  #       "1\x01shttps://e"
-      78616d706c652e636f6d061a  #       "xample.com\x06\x1a"
-      648c5bea041a8898dfea19ff  #       "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿ"
-      fe19a8c019ffffa264626974  #       "þ\x19¨À\x19ÿÿ¢dbit"
-      7301636c73744a78dadbb918  #       "s\x01clstJxÚÛ¹\x18"
-      000217015d                #       "\x00\x02\x17\x01]"
+      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
+      ea19fffe19a8c019ffffa264  #       "ê\x19ÿþ\x19¨À\x19ÿÿ¢d"
+      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
+      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      6f04a5fe0a22544bf870d24e  #       "o\x04¥þ\x0a"TKøpÒN"
-      eb939477d12a4499d3adb375  #       "ë\x93\x94wÑ*D\x99Ó\xad³u"
-      a4ff74e04ff278ebd7f5bd85  #       "¤ÿtàOòxë×õ½\x85"
-      5b72de4ade6ffca04f15979d  #       "[rÞJÞoü\xa0O\x15\x97\x9d"
-      f04296940bf1072ca1dcf7b6  #       "ðB\x96\x94\x0bñ\x07,¡Ü÷¶"
-      fa39eaf3                  #       "ú9êó"
+      441ac5ab5bba2acc7af61801  #       "D\x1aÅ«[º*Ìzö\x18\x01"
+      e63cf6640c692bf8ff502250  #       "æ<öd\x0ci+øÿP"P"
+      b650a3fb69f05dc0632dafbb  #       "¶P£ûið]Àc-¯»"
+      fd21bfbeaa32b059c755b87c  #       "ý!¿¾ª2°YÇU¸|"
+      0067433dda7002f1e52ab560  #       "\x00gC=Úp\x02ñå*µ`"
+      4e3d68cd                  #       "N=hÍ"
 
 6.  Referenced Token
 
@@ -588,15 +573,6 @@ d2                              # tag(18)
    according to [RFC7519] or other formats based on JOSE.
 
    The following content applies to the JWT Claims Set:
-
-   *  iss: REQUIRED when also present in the Status List Token.  The iss
-      (issuer) claim MUST specify a unique string identifier for the
-      entity that issued the Referenced Token.  In the absence of an
-      application profile specifying otherwise, compliant applications
-      MUST compare issuer values using the Simple String Comparison
-      method defined in Section 6.2.1 of [RFC3986].  The value MUST be
-      equal to that of the iss claim contained within the referenced
-      Status List Token.
 
    *  status: REQUIRED.  The status (status) claim MUST specify a JSON
       Object that contains at least one reference to a status mechanism.
@@ -629,7 +605,6 @@ d2                              # tag(18)
    }
    .
    {
-     "iss": "https://example.com",
      "status": {
        "status_list": {
          "idx": 0,
@@ -689,9 +664,6 @@ d2                              # tag(18)
 
    The following content applies to the CWT Claims Set:
 
-   *  1 (issuer): REQUIRED when also present in the Referenced Token.
-      Same definition as iss claim in Section 6.2.
-
    *  65535 (status): REQUIRED.  The status claim is encoded as a Status
       CBOR structure and MUST include at least one data item that refers
       to a status mechanism.  Each data item in the Status CBOR
@@ -719,9 +691,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158404368d016da62f592087beec42e16a59ab467e1
-   2a003369c3d05302f43e211d1998836348436af90e30938f3de3bb50da66a77c5952
-   35b6f02ca0f3cc2765795b
+   7374617475736c697374732f315840ccf212b30bcfcb8881e6d899e8e9c9dee90ec6
+   ee6c988c5dee58d445d94ace64d64d114e27dd17e9d9e6c956fef3ca4dbcee6548f6
+   1f97d3a0aa5f6c5d41b3d7
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -744,12 +716,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         4368d016da62f592087beec4  #       "ChÐ\x16Úbõ\x92\x08{îÄ"
-         2e16a59ab467e12a003369c3  #       ".\x16¥\x9a´gá*\x003iÃ"
-         d05302f43e211d1998836348  #       "ÐS\x02ô>!\x1d\x19\x98\x83cH"
-         436af90e30938f3de3bb50da  #       "Cjù\x0e0\x93\x8f=ã»PÚ"
-         66a77c595235b6f02ca0f3cc  #       "f§|YR5¶ð,\xa0óÌ"
-         2765795b                  #       "'ey["
+         ccf212b30bcfcb8881e6d899  #       "Ìò\x12³\x0bÏË\x88\x81æØ\x99"
+         e8e9c9dee90ec6ee6c988c5d  #       "èéÉÞé\x0eÆîl\x98\x8c]"
+         ee58d445d94ace64d64d114e  #       "îXÔEÙJÎdÖM\x11N"
+         27dd17e9d9e6c956fef3ca4d  #       "'Ý\x17éÙæÉVþóÊM"
+         bcee6548f61f97d3a0aa5f6c  #       "¼îeHö\x1f\x97Ó\xa0ª_l"
+         5d41b3d7                  #       "]A³×"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -911,10 +883,7 @@ d2                              # tag(18)
        3.  If expiration time is defined (exp or 4), it MUST be checked
            if the Status List Token is expired
 
-       4.  If the Referenced Token contains an issuer claim, the Status
-           List Token MUST contain the same issuer claim (iss or 1)
-
-       5.  If the Relying Party is using a system for caching the Status
+       4.  If the Relying Party is using a system for caching the Status
            List Token, it SHOULD check the ttl claim of the Status List
            Token and retrieve a fresh copy if (time status was resolved
            + ttl < current time)
@@ -1651,6 +1620,9 @@ Acknowledgments
 Document History
 
    -04
+
+   *  remove requirement for matching iss claim in Referenced Token and
+      Status List Token
 
    *  add sd-jwt-vc example
 
