@@ -324,9 +324,9 @@ The following is the CBOR Annotated Hex output of the example above:
 
 By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
-## Referenced Token in JWT Format {#referenced-token-jwt}
+## Referenced Token in JOSE Format {#referenced-token-jwt}
 
-The Referenced Token MUST be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}.
+The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}} or other formats based on JOSE.
 
 The following content applies to the JWT Claims Set:
 
@@ -353,6 +353,53 @@ The following is a non-normative example for a decoded header and payload of a R
       "uri": "https://example.com/statuslists/1"
     }
   }
+}
+~~~
+
+SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jwt}}.
+
+The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:
+
+~~~ ascii-art
+
+eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
+Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
+cyI6ICJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsICJpYXQiOiAxNjgzMDAwMDAw
+LCAiZXhwIjogMTg4MzAwMDAwMCwgInN1YiI6ICI2YzVjMGE0OS1iNTg5LTQzMWQtYmFl
+Ny0yMTkxMjJhOWVjMmMiLCAic3RhdHVzIjogeyJzdGF0dXNfbGlzdCI6IHsiaWR4Ijog
+MCwgInVyaSI6ICJodHRwczovL2V4YW1wbGUuY29tL3N0YXR1c2xpc3RzLzEifX0sICJf
+c2RfYWxnIjogInNoYS0yNTYifQ.-kgS-R-Z4DEDlqb8kb6381_gHHNatsoF1fcVKZk3M
+06CrnV8F8k9d2w2V_YAOvgcb0f11FqDFezXBXH30d4vcw~WyIyR0xDNDJzS1F2ZUNmR2
+ZyeU5STjl3IiwgInN0cmVldF9hZGRyZXNzIiwgIlNjaHVsc3RyLiAxMiJd~WyJlbHVWN
+U9nM2dTTklJOEVZbnN4QV9BIiwgImxvY2FsaXR5IiwgIlNjaHVscGZvcnRhIl0~WyI2S
+Wo3dE0tYTVpVlBHYm9TNXRtdlZBIiwgInJlZ2lvbiIsICJTYWNoc2VuLUFuaGFsdCJd~
+WyJlSThaV205UW5LUHBOUGVOZW5IZGhRIiwgImNvdW50cnkiLCAiREUiXQ~WyJRZ19PN
+jR6cUF4ZTQxMmExMDhpcm9BIiwgImFkZHJlc3MiLCB7Il9zZCI6IFsiNnZoOWJxLXpTN
+EdLTV83R3BnZ1ZiWXp6dTZvT0dYcm1OVkdQSFA3NVVkMCIsICI5Z2pWdVh0ZEZST0NnU
+nJ0TmNHVVhtRjY1cmRlemlfNkVyX2o3NmttWXlNIiwgIktVUkRQaDRaQzE5LTN0aXotR
+GYzOVY4ZWlkeTFvVjNhM0gxRGEyTjBnODgiLCAiV045cjlkQ0JKOEhUQ3NTMmpLQVN4V
+GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
+~~~
+
+Resulting payload of the example above:
+
+~~~ ascii-art
+
+{
+  "_sd": [
+    "HvrKX6fPV0v9K_yCVFBiLFHsMaxcD_114Em6VT8x1lg"
+  ],
+  "iss": "https://example.com/issuer",
+  "iat": 1683000000,
+  "exp": 1883000000,
+  "sub": "6c5c0a49-b589-431d-bae7-219122a9ec2c",
+  "status": {
+    "status_list": {
+      "idx": 0,
+      "uri": "https://example.com/statuslists/1"
+    }
+  },
+  "_sd_alg": "sha-256"
 }
 ~~~
 
@@ -599,6 +646,7 @@ A malicious Issuer could bypass the privacy benefits of the herd privacy by gene
 Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
 This behaviour could be mitigated by:
+
 - adding authorization rules to the Status List, see [](#security-authorization).
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
@@ -642,14 +690,14 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 * Claim Name: `status`
 * Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the JWT.
 * Change Controller: IETF
-* Specification Document(s):  [](#status-claim) of this specification
+* Specification Document(s): [](#status-claim) of this specification
 
 <br/>
 
 * Claim Name: `status_list`
-* Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+* Claim Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s):  [](#status-list-token-jwt) of this specification
+* Specification Document(s): [](#status-list-token-jwt) of this specification
 
 <br/>
 
@@ -684,9 +732,9 @@ Specification Document(s):
 ### Initial Registry Contents
 
 * Status Method Value: `status_list`
-* Status Method Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.
+* Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s):  [](#referenced-token-jwt) of this specification
+* Specification Document(s): [](#referenced-token-jwt) of this specification
 
 ## CBOR Web Token Claims Registration
 
@@ -701,15 +749,15 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 * Claim Key: TBD (requested assignment 65535)
 * Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.
 * Change Controller: IETF
-* Specification Document(s):  [](#status-claim) of this specification
+* Specification Document(s): [](#status-claim) of this specification
 
 <br/>
 
 * Claim Name: `status_list`
 * Claim Key: TBD (requested assignment 65533)
-* Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
+* Claim Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s):  [](#status-list-token-cwt) of this specification
+* Specification Document(s): [](#status-list-token-cwt) of this specification
 
 <br/>
 
@@ -744,9 +792,9 @@ Specification Document(s):
 ### Initial Registry Contents
 
 * Status Method Value: `status_list`
-* Status Method Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.
+* Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s):  [](#referenced-token-cwt) of this specification
+* Specification Document(s): [](#referenced-token-cwt) of this specification
 
 ## Media Type Registration
 
@@ -760,15 +808,13 @@ To indicate that the content is an JSON-based Status List:
   * Subtype name: statuslist+json
   * Required parameters: n/a
   * Optional parameters: n/a
-  * Encoding considerations: binary; A JSON-based Status List is a JSON Object.
-  * Security considerations: See (#Security) of \[ this specification \]
+  * Encoding considerations: See [](#status-list-json) of this specification
+  * Security considerations: See [](#Security) of this specification
   * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
+  * Published specification: this specification
+  * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
+  * Additional information: n/a
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
@@ -782,15 +828,13 @@ To indicate that the content is an JWT-based Status List:
   * Subtype name: statuslist+jwt
   * Required parameters: n/a
   * Optional parameters: n/a
-  * Encoding considerations: binary; A JWT-based Status List is a JWT; JWT values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') characters.
-  * Security considerations: See (#Security) of \[ this specification \]
+  * Encoding considerations: See [](#status-list-token-jwt) of this specification
+  * Security considerations: See [](#Security) of this specification
   * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
+  * Published specification: this specification
+  * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
+  * Additional information: n/a
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
@@ -804,15 +848,13 @@ To indicate that the content is an CBOR-based Status List:
   * Subtype name: statuslist+cbor
   * Required parameters: n/a
   * Optional parameters: n/a
-  * Encoding considerations: binary; A CBOR-based Status List is a CBOR Object.
-  * Security considerations: See (#Security) of \[ this specification \]
+  * Encoding considerations: See [](#status-list-cbor) of this specification
+  * Security considerations: See [](#Security) of this specification
   * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
+  * Published specification: this specification
+  * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
+  * Additional information: n/a
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
@@ -826,15 +868,13 @@ To indicate that the content is an CWT-based Status List:
   * Subtype name: statuslist+cwt
   * Required parameters: n/a
   * Optional parameters: n/a
-  * Encoding considerations: binary;
-  * Security considerations: See (#Security) of \[ this specification \]
+  * Encoding considerations: See [](#status-list-token-cwt) of this specification
+  * Security considerations: See [](#Security) of this specification
   * Interoperability considerations: n/a
-  * Published specification: \[ this specification \]
-  * Applications that use this media type: Applications using \[ this specification \] for updated status information of tokens
+  * Published specification: this specification
+  * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
-  * Additional information:
-    * File extension(s): n/a
-    * Macintosh file type code(s): n/a
+  * Additional information: n/a
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
@@ -870,6 +910,9 @@ for their valuable contributions, discussions and feedback to this specification
 -04
 
 * remove requirement for matching iss claim in Referenced Token and Status List Token
+* add sd-jwt-vc example
+* fix CWT status_list map encoding
+* editorial fixes
 * add CORS considerations to the http endpoint
 * fix reference of Status List in CBOR format
 * added status_list CWT claim key assigned

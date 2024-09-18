@@ -61,7 +61,7 @@ def statusListEncoding1Bit():
 
 def statusListEncoding1BitCBOR():
     status_list = exampleStatusList1Bit()
-    encoded = status_list.encodeAsCBOR()
+    encoded = status_list.encodeAsCBORRaw()
     hex_encoded = encoded.hex()
     text = "byte_array = [{}, {}] \nencoded:\n{}".format(
         hex(status_list.list[0]), hex(status_list.list[1]), util.printText(hex_encoded)
@@ -85,7 +85,7 @@ def statusListEncoding2Bit():
 
 def statusListEncoding2BitCBOR():
     status_list = exampleStatusList2Bit()
-    encoded = status_list.encodeAsCBOR()
+    encoded = status_list.encodeAsCBORRaw()
     hex_encoded = encoded.hex()
     text = "byte_array = [{}, {}, {}] \nencoded:\n{}".format(
         hex(status_list.list[0]),
