@@ -534,12 +534,12 @@ Table of Contents
    The following is a non-normative example for a Status List Token in
    CWT format in Hex:
 
-   d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
+   d28453a20126106e7374617475736c6973742b637774a1044231325865a602782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
    68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-   19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840524c0b
-   5446ea4a49d9a1180c8f8519940a361deaa9544e4755226d5913a3432e758a67be18
-   4e2d31f3ff88b5ff8258f999b0be13e2a38475a7d8f7ee8febaff2
+   19a8c019ffffa2646269747301636c73744a78dadbb918000217015d58408e553c76
+   73b0a9a9095f4a5e4d5a5ea4a42a2b0f087ebbc63475dc7a83e230b12b14b46fc0e9
+   24a23c665415f9bfb904c44a93a808fc6d0c02f6323031a16584
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -552,23 +552,23 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 66                       #     bytes(102)
+    58 65                       #     bytes(101)
       a602782168747470733a2f2f  #       "¦\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
       31017368747470733a2f2f65  #       "1\x01shttps://e"
       78616d706c652e636f6d061a  #       "xample.com\x06\x1a"
       648c5bea041a8898dfea19ff  #       "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿ"
-      fe19a8c019ffff56a2646269  #       "þ\x19¨À\x19ÿÿV¢dbi"
-      747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
-      18000217015d              #       "\x18\x00\x02\x17\x01]"
+      fe19a8c019ffffa264626974  #       "þ\x19¨À\x19ÿÿ¢dbit"
+      7301636c73744a78dadbb918  #       "s\x01clstJxÚÛ¹\x18"
+      000217015d                #       "\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      524c0b5446ea4a49d9a1180c  #       "RL\x0bTFêJIÙ¡\x18\x0c"
-      8f8519940a361deaa9544e47  #       "\x8f\x85\x19\x94\x0a6\x1dê©TNG"
-      55226d5913a3432e758a67be  #       "U"mY\x13£C.u\x8ag¾"
-      184e2d31f3ff88b5ff8258f9  #       "\x18N-1óÿ\x88µÿ\x82Xù"
-      99b0be13e2a38475a7d8f7ee  #       "\x99°¾\x13â£\x84u§Ø÷î"
-      8febaff2                  #       "\x8fë¯ò"
+      8e553c7673b0a9a9095f4a5e  #       "\x8eU<vs°©©\x09_J^"
+      4d5a5ea4a42a2b0f087ebbc6  #       "MZ^¤¤*+\x0f\x08~»Æ"
+      3475dc7a83e230b12b14b46f  #       "4uÜz\x83â0±+\x14´o"
+      c0e924a23c665415f9bfb904  #       "Àé$¢<fT\x15ù¿¹\x04"
+      c44a93a808fc6d0c02f63230  #       "ÄJ\x93¨\x08üm\x0c\x02ö20"
+      31a16584                  #       "1¡e\x84"
 
 6.  Referenced Token
 
@@ -675,9 +675,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158409a08da69d254e898b142a21fb6efe67bdc5a73
-   01b64e2e65e94cd020bc3ba87acd8d26b141e547e14f049b7d93cff100941cdb5982
-   5164d6a483324e25492b6f
+   7374617475736c697374732f3158404de1ebb2417ed011294b7353037675acd1a22d
+   902089c7821710d6cd7c70533ee300d45468b35b90af2bcaa8a1b4adb3df9bc1474e
+   6d2300252f2deb782fa29e
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -700,12 +700,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         9a08da69d254e898b142a21f  #       "\x9a\x08ÚiÒTè\x98±B¢\x1f"
-         b6efe67bdc5a7301b64e2e65  #       "¶ïæ{ÜZs\x01¶N.e"
-         e94cd020bc3ba87acd8d26b1  #       "éLÐ ¼;¨zÍ\x8d&±"
-         41e547e14f049b7d93cff100  #       "AåGáO\x04\x9b}\x93Ïñ\x00"
-         941cdb59825164d6a483324e  #       "\x94\x1cÛY\x82QdÖ¤\x832N"
-         25492b6f                  #       "%I+o"
+         4de1ebb2417ed011294b7353  #       "Máë²A~Ð\x11)KsS"
+         037675acd1a22d902089c782  #       "\x03vu¬Ñ¢-\x90 \x89Ç\x82"
+         1710d6cd7c70533ee300d454  #       "\x17\x10ÖÍ|pS>ã\x00ÔT"
+         68b35b90af2bcaa8a1b4adb3  #       "h³[\x90¯+Ê¨¡´\xad³"
+         df9bc1474e6d2300252f2deb  #       "ß\x9bÁGNm#\x00%/-ë"
+         782fa29e                  #       "x/¢\x9e"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1607,6 +1607,8 @@ Acknowledgments
 Document History
 
    -04
+
+   *  fix CWT status_list map encoding
 
    *  editorial fixes
 
