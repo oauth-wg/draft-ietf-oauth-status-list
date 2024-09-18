@@ -632,7 +632,7 @@ TODO evaluate definition of Status List Provider?
 
 The lifetime of a Status List (and the Status List Token) depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List (and the Status List Token).
 
-Referenced Tokens may be regularly re-issued to increase security or to mitigate linkability and limit tracking by the Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry.
+Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this becoming possible source of correlation.
 
 Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.
 
