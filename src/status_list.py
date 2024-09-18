@@ -43,6 +43,10 @@ class StatusList:
             "bits": self.bits,
             "lst": encoded_list,
         }
+        return object
+
+    def encodeAsCBORRaw(self) -> Dict:
+        object = self.encodeAsCBOR()
         return dumps(object)
 
     def decode(self, input: str):
