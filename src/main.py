@@ -101,7 +101,6 @@ def statusListEncoding2BitCBOR():
 def statusListJWT():
     status_list = exampleStatusList1Bit()
     jwt = StatusListToken(
-        issuer="https://example.com",
         subject="https://example.com/statuslists/1",
         list=status_list,
         key=key,
@@ -114,7 +113,6 @@ def statusListJWT():
 def statusListCWT():
     status_list = exampleStatusList1Bit()
     cwt = StatusListToken(
-        issuer="https://example.com",
         subject="https://example.com/statuslists/1",
         list=status_list,
         key=key,
