@@ -638,9 +638,9 @@ Referenced Tokens may also be issued in batches, such that Holders can use indiv
 
 ## Default Values and Double Allocation
 
-The implementation is RECOMMENDED to initialize the Status List byte array with a default value and provide this as an initialization parameter to the Issuer. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.
+Implementations producing Status Lists are RECOMMENDED to initialize the Status List byte array with a default value and provide this as an initialization parameter to the Issuer. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.
 
-The implementation is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for mulitple Referenced Tokens. The Issuer MUST prevent any unintended double allocation by using the Status List.
+Implementations producing Status Lists are RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens. The Issuer MUST prevent any unintended double allocation by using the Status List.
 
 ## Status List Size
 
