@@ -135,7 +135,7 @@ class StatusListToken:
             claims[CWTClaims.EXP] = int(exp.timestamp())
         if ttl is not None:
             claims[65534] = int(ttl.total_seconds())
-        claims[65535] = self.list.encodeAsCBOR()
+        claims[65533] = self.list.encodeAsCBOR()
 
         # build header
         if optional_protected_header is not None:
