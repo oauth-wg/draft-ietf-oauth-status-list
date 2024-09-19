@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-17T00:13:40.131424+00:00",
+  "timestamp": "2024-09-19T00:16:01.420844+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2349,7 +2349,7 @@
       "id": "I_kwDOJZ2aqs549Z0j",
       "title": "Consider making `status` a JWT header instead of a JWT claim",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/86",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "awoie",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -2358,8 +2358,8 @@
       ],
       "body": "`status` is not really a claim about a subject and is never selectively disclosed, so it would makes sense to make it a JWT header. It would also work well with the existing `crit` JOSE header that can then mark `status` as critical.\r\n\r\nSee https://github.com/oauth-wg/oauth-sd-jwt-vc/issues/192",
       "createdAt": "2023-12-06T20:51:53Z",
-      "updatedAt": "2024-09-05T06:57:29Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-17T18:39:08Z",
+      "closedAt": "2024-09-17T18:39:08Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2381,6 +2381,13 @@
           "body": "Editors Call:\r\n- current approach is in line with current best practice and we wouldn't start the discussion here, see iat, exp..\r\n- would break current implementations without much benefit",
           "createdAt": "2024-09-05T06:57:16Z",
           "updatedAt": "2024-09-05T06:57:16Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Discussed with @awoie , we are closing this issue.",
+          "createdAt": "2024-09-17T18:39:08Z",
+          "updatedAt": "2024-09-17T18:39:08Z"
         }
       ]
     },
@@ -2542,13 +2549,15 @@
       "state": "OPEN",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "tplooker"
+      ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "Also consider the application and usage of a mechanism like etag to allow a consuming party to determine whether their copy of a given status list is the latest.",
       "createdAt": "2024-02-20T07:31:30Z",
-      "updatedAt": "2024-09-05T06:53:27Z",
+      "updatedAt": "2024-09-18T06:17:29Z",
       "closedAt": null,
       "comments": [
         {
@@ -2564,6 +2573,20 @@
           "body": "Since Status List Tokens are distributed via HTTP endpoints it might be beneficial to elaborate on how ttl and exp claims interplay with HTTP headers such as Cache-Control and Expires.\r\n\r\nFor example, if the value of ttl claim is `60` and the value of Cache-Control HTTP header is `max-age=30` which of these takes the precedence? My assumption is that ttl takes precedence since its signed data.\r\n\r\nAnother example: ttl is `60` but Cache-Control HTTP header is `no-store`. Should the consumer cache the Status List Token or not? Issuer says yes, but whatever CDN operator says no.",
           "createdAt": "2024-03-07T10:24:40Z",
           "updatedAt": "2024-03-07T10:24:40Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- put it under implementation considerations\r\n- highlight difference exp being point of time, ttl is a duration\r\n- include the ascii art explainer we once created",
+          "createdAt": "2024-09-18T06:16:15Z",
+          "updatedAt": "2024-09-18T06:16:15Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "![image](https://github.com/user-attachments/assets/5fc1aa45-c202-46bb-a6e8-dcc0d1b511b4)\r\n",
+          "createdAt": "2024-09-18T06:17:27Z",
+          "updatedAt": "2024-09-18T06:17:27Z"
         }
       ]
     },
@@ -2572,7 +2595,7 @@
       "id": "I_kwDOJZ2aqs5_xq69",
       "title": "do we mandate the issuer of Referenced Token is the same entity issuing the Status List?",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/108",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -2581,8 +2604,8 @@
       ],
       "body": "",
       "createdAt": "2024-02-20T07:41:25Z",
-      "updatedAt": "2024-09-05T06:52:53Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-18T06:38:44Z",
+      "closedAt": "2024-09-18T06:38:44Z",
       "comments": [
         {
           "author": "MattiasLass",
@@ -3515,7 +3538,7 @@
       "id": "I_kwDOJZ2aqs6S7T2G",
       "title": "Remove requirement on matching iss values",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/159",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -3526,8 +3549,8 @@
       ],
       "body": "To allow Status List Issuer being different from Issuer and using iss values, we should remove this constraint\r\n            ",
       "createdAt": "2024-08-14T06:38:37Z",
-      "updatedAt": "2024-09-05T06:25:39Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-18T06:38:45Z",
+      "closedAt": "2024-09-18T06:38:45Z",
       "comments": []
     },
     {
@@ -3596,7 +3619,7 @@
       ],
       "body": "As described in https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-03.html#section-8.1 content negotiation using the accept header is used when requesting a status list / status list token. This is used to request different formats depending on the needs of the caller using a single URI for the status list.\r\n\r\nThis mechanism in general is valid and follows the http standards. Implementing this works well when an application server is used to serve the status lists.\r\n\r\nNevertheless in practice this causes problems in some scenarios. Several CDNs and services that provide caches of other HTTP resources do not implement the required functionality correctly.\r\n\r\nFor example [cloudflare, does explicitly ignore the accept header even if the vary http response header is used](https://developers.cloudflare.com/cache/concepts/cache-control/#other). Some other services offer this functionality tough, for example Amazon CloudFront.\r\n\r\nIn addition nginx can not easily handle content negotiation using the accept header correctly. Using the a map section together with the Accept header allows to choose different resources based on the requested content type. This is only working for single value Accept headers though. More complex header values as `Accept: application/statuslist+*;q=0.5,application/statuslist+cwt` can not easily be handled. The current state of the standard does not mention such option but does not forbid them either. Apache2 has https://httpd.apache.org/docs/current/content-negotiation.html, that could solve this. I did not evaluate that further.\r\n\r\nSo even though the mechanism is good and simple as is and follows http standards, it might be difficult to implement when using a CDN to scale serving the status list.\r\n\r\nA possible solution would be to use distinct URIs to request the status list depending on the type (for example by appending extensions like jwt, cwt, json and cbor) instead of the request header. This seems to me as a workaround and a suboptimal solution though. As the specification as it is is totally valid IMHO it could as well been left as it is, which means the need for implementation of this functionality in the used components will arise and the usage of certain CDNs is not possible.\r\n\r\nRelated to #137 but addresses the request handling instead of response generation.",
       "createdAt": "2024-08-29T18:21:00Z",
-      "updatedAt": "2024-09-09T08:03:08Z",
+      "updatedAt": "2024-09-18T06:41:28Z",
       "closedAt": null,
       "comments": [
         {
@@ -3612,6 +3635,13 @@
           "body": "> A possible solution would be to use distinct URIs to request the status list depending on the type (for example by appending extensions like jwt, cwt, json and cbor) instead of the request header. This seems to me as a workaround and a suboptimal solution though. As the specification as it is is totally valid IMHO it could as well been left as it is, which means the need for implementation of this functionality in the used components will arise and the usage of certain CDNs is not possible.\r\n\r\nThis is kind of what I would expect for most cases in reality: A CBOR based Credential will likely reference to a status list that is only available in CWT form. The only solution to make this more explicit (and if we don't trust the header based approach) would be to make this explicit in the URI I guess?\r\n",
           "createdAt": "2024-09-09T08:03:07Z",
           "updatedAt": "2024-09-09T08:03:07Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Discussed on editors call tonight, one possible recommendation we could make to implementations is that if you are representing the same underlying status list in both CWT and JWT forms, use distinct URIs for these two different status list representations e.g JWT -> https:example.com/statuslists/jwt/1 CWT -> https:example.com/statuslists/cwt/1. The only draw back I see to this approach is that in effect the reference to the status list that is put in the reference token effectively sets the content type of the returned status list, rather then making it subject to negotiation via the Accept header. I don't believe in practise is an issue because generally the same securing approach that is being used for the reference token should be used for the status list e.g SD-JWT reference token -> JWT status list.",
+          "createdAt": "2024-09-18T06:41:27Z",
+          "updatedAt": "2024-09-18T06:41:27Z"
         }
       ]
     },
@@ -3644,17 +3674,18 @@
       "id": "I_kwDOJZ2aqs6WctZi",
       "title": "Clean up IANA section",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/174",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [
+        "ready-for-pr",
         "editorial"
       ],
       "body": "We should clean up the IANA section a bit, especially https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-media-type-registration needs some work imho. Can we remove the n/a parameters from that part or are they required?\r\n",
       "createdAt": "2024-09-13T07:40:41Z",
-      "updatedAt": "2024-09-13T16:32:01Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-18T06:10:27Z",
+      "closedAt": "2024-09-18T06:10:18Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -3662,6 +3693,13 @@
           "body": "I think it is the recommended way: https://datatracker.ietf.org/doc/html/rfc6838#section-5.6\r\n",
           "createdAt": "2024-09-13T16:32:00Z",
           "updatedAt": "2024-09-13T16:32:00Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closed by #175 ",
+          "createdAt": "2024-09-18T06:10:18Z",
+          "updatedAt": "2024-09-18T06:10:27Z"
         }
       ]
     }
@@ -10674,24 +10712,26 @@
       "id": "PR_kwDOJZ2aqs55wl2L",
       "title": "remove requirement for matching iss claim in Referenced Token and Sta\u2026",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/164",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #159 \r\nCloses #108 ",
       "createdAt": "2024-08-28T21:38:40Z",
-      "updatedAt": "2024-09-05T06:23:01Z",
+      "updatedAt": "2024-09-18T06:38:46Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "baseRefOid": "4bf0c65f9032df7083f1f88ad417939913faa611",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "159-remove-requirement-on-matching-iss-values",
-      "headRefOid": "52c52940324549c78ad915d9baabf6d734529a26",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "0076ade18fe5546edba1eb15994508a509308fc3",
+      "closedAt": "2024-09-18T06:38:43Z",
+      "mergedAt": "2024-09-18T06:38:43Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "ce693f404c4e33424d677be0d047df3b92dfdc3b"
+      },
       "comments": [
         {
           "author": "c2bo",
@@ -10741,6 +10781,19 @@
           "body": "",
           "createdAt": "2024-08-29T06:35:42Z",
           "updatedAt": "2024-08-29T06:35:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6JyhJf",
+          "commit": {
+            "abbreviatedOid": "52c5294"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T06:11:09Z",
+          "updatedAt": "2024-09-18T06:11:09Z",
           "comments": []
         }
       ]
@@ -10812,13 +10865,13 @@
       "labels": [],
       "body": "Closes #146 \r\nCloses #165 \r\nCloses #132 \r\nCloses #93 \r\nCloses #73",
       "createdAt": "2024-09-09T14:45:57Z",
-      "updatedAt": "2024-09-11T06:37:12Z",
+      "updatedAt": "2024-09-18T09:48:22Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "baseRefOid": "ce693f404c4e33424d677be0d047df3b92dfdc3b",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/considerations1",
-      "headRefOid": "543b2badf54f493810e4088ae99f93288d324b25",
+      "headRefOid": "2d30edce82c042135cf120343a1eeb450bae076b",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -10884,6 +10937,106 @@
               "updatedAt": "2024-09-09T16:30:52Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6JqCwQ",
+          "commit": {
+            "abbreviatedOid": "543b2ba"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Not sure about the language in the security considerations section. Other RFCs seem to use normative language here - e.g., https://datatracker.ietf.org/doc/html/rfc9449#name-security-considerations.\r\n\r\nLooks good apart from that part IMHO",
+          "createdAt": "2024-09-17T11:40:39Z",
+          "updatedAt": "2024-09-17T11:45:12Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "Should we use stronger language here? If yes, we have probably more parts in this section, where it would make sense.\r\n```suggestion\r\nImplementations are RECOMMENDED to verify correctness using the test vectors given by this specification.\r\n```",
+              "createdAt": "2024-09-17T11:40:39Z",
+              "updatedAt": "2024-09-17T11:45:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6JynIf",
+          "commit": {
+            "abbreviatedOid": "543b2ba"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T06:28:07Z",
+          "updatedAt": "2024-09-18T06:28:07Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "Are we leaving this in or shall we move it to an issue?",
+              "createdAt": "2024-09-18T06:28:07Z",
+              "updatedAt": "2024-09-18T06:28:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Jyu6s",
+          "commit": {
+            "abbreviatedOid": "2a6af2c"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T06:45:51Z",
+          "updatedAt": "2024-09-18T06:45:51Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "we had in before, so I would leave it in here",
+              "createdAt": "2024-09-18T06:45:51Z",
+              "updatedAt": "2024-09-18T06:45:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6J0Tey",
+          "commit": {
+            "abbreviatedOid": "2a6af2c"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T09:45:06Z",
+          "updatedAt": "2024-09-18T09:45:07Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\nA Status List Token in the JWT format should follow the security considerations of {{RFC7519}} and the best current practices of {{RFC8725}}.\r\n```",
+              "createdAt": "2024-09-18T09:45:06Z",
+              "updatedAt": "2024-09-18T09:45:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6J0Tol",
+          "commit": {
+            "abbreviatedOid": "2a6af2c"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T09:45:23Z",
+          "updatedAt": "2024-09-18T09:45:23Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\nA Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.\r\n```",
+              "createdAt": "2024-09-18T09:45:23Z",
+              "updatedAt": "2024-09-18T09:45:23Z"
+            }
+          ]
         }
       ]
     },
@@ -10892,24 +11045,26 @@
       "id": "PR_kwDOJZ2aqs563mTs",
       "title": "sd jwt example",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/171",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Rendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/sd-jwt-example/draft-ietf-oauth-status-list.html \r\n\r\nAdds an example for a referenced token in sd-jwt-vc form.",
       "createdAt": "2024-09-09T15:26:26Z",
-      "updatedAt": "2024-09-11T06:17:11Z",
+      "updatedAt": "2024-09-18T06:09:08Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "baseRefOid": "1482e02bc5d37dd8fd4c66aeb7d2927e1ed9ae2c",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/sd-jwt-example",
-      "headRefOid": "da83e8c6dfc1eddd19666bb9047b1d59de2008ef",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "804102380f50642616bababa5fc03a2d7ff797a3",
+      "closedAt": "2024-09-18T06:09:05Z",
+      "mergedAt": "2024-09-18T06:09:05Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "4bf0c65f9032df7083f1f88ad417939913faa611"
+      },
       "comments": [
         {
           "author": "paulbastian",
@@ -10965,6 +11120,19 @@
           "createdAt": "2024-09-11T06:17:11Z",
           "updatedAt": "2024-09-11T06:17:11Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Jyfnk",
+          "commit": {
+            "abbreviatedOid": "da83e8c"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T06:06:17Z",
+          "updatedAt": "2024-09-18T06:06:17Z",
+          "comments": []
         }
       ]
     },
@@ -10980,13 +11148,13 @@
       "labels": [],
       "body": "\u2026tion",
       "createdAt": "2024-09-09T16:53:00Z",
-      "updatedAt": "2024-09-13T16:53:45Z",
+      "updatedAt": "2024-09-18T09:50:27Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/considerations2",
-      "headRefOid": "9fe284ff7dbfbba543be3d39385c3b753beb913c",
+      "headRefOid": "467ae1b4d957d9613a4f86bfae11da9834211ec9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -11005,6 +11173,86 @@
           "createdAt": "2024-09-09T18:25:56Z",
           "updatedAt": "2024-09-09T18:25:56Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6J0K2O",
+          "commit": {
+            "abbreviatedOid": "9fe284f"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T09:38:10Z",
+          "updatedAt": "2024-09-18T09:38:11Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nReferenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this becoming possible source of correlation.\r\n```\r\n\r\nMinor nit",
+              "createdAt": "2024-09-18T09:38:10Z",
+              "updatedAt": "2024-09-18T09:38:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6J0LmE",
+          "commit": {
+            "abbreviatedOid": "9fe284f"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T09:39:10Z",
+          "updatedAt": "2024-09-18T09:39:11Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nImplementations producing status lists are RECOMMENDED to initialize the Status List byte array with a default value and provide this as an initialization parameter to the Issuer. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.\r\n```",
+              "createdAt": "2024-09-18T09:39:10Z",
+              "updatedAt": "2024-09-18T09:39:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6J0L3f",
+          "commit": {
+            "abbreviatedOid": "9fe284f"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T09:39:29Z",
+          "updatedAt": "2024-09-18T09:39:29Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "```suggestion\r\nImplementations producing status lists are RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for mulitple Referenced Tokens. The Issuer MUST prevent any unintended double allocation by using the Status List.\r\n```",
+              "createdAt": "2024-09-18T09:39:29Z",
+              "updatedAt": "2024-09-18T09:39:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6J0Rqp",
+          "commit": {
+            "abbreviatedOid": "9fe284f"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-18T09:43:32Z",
+          "updatedAt": "2024-09-18T09:43:33Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\r\nThe Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.\r\n```",
+              "createdAt": "2024-09-18T09:43:33Z",
+              "updatedAt": "2024-09-18T09:43:33Z"
+            }
+          ]
         }
       ]
     },
@@ -11013,24 +11261,26 @@
       "id": "PR_kwDOJZ2aqs57VCHx",
       "title": "fix CWT status_list map encoding",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/173",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "`status_list` in the Status List Token in CWT form was encoded as Byte String instead of Map (type 5) as defined in the CBOR Section (4.2).\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/fix-cwt-statuslist-encoding/draft-ietf-oauth-status-list.html",
       "createdAt": "2024-09-12T16:27:54Z",
-      "updatedAt": "2024-09-13T16:41:51Z",
+      "updatedAt": "2024-09-18T06:07:36Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "baseRefOid": "9940f5589a8019619088374513896c355c7b95f9",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/fix-cwt-statuslist-encoding",
-      "headRefOid": "a1b7e512465324e668ff779791fed7ed43ed0662",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "737f92c5d1835984e748b96d374aef7e89e583d6",
+      "closedAt": "2024-09-18T06:07:33Z",
+      "mergedAt": "2024-09-18T06:07:33Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "1482e02bc5d37dd8fd4c66aeb7d2927e1ed9ae2c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -11044,6 +11294,82 @@
           "body": "",
           "createdAt": "2024-09-13T16:41:51Z",
           "updatedAt": "2024-09-13T16:41:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Jyc8V",
+          "commit": {
+            "abbreviatedOid": "a1b7e51"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T06:02:47Z",
+          "updatedAt": "2024-09-18T06:02:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 175,
+      "id": "PR_kwDOJZ2aqs57xzUC",
+      "title": "fix rendering & improve IANA registration text",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/175",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "- fixes the list rendering (missing newline)\r\n- clarifies IANA text to just reference other tokens\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/editiorial-fixes/draft-ietf-oauth-status-list.html ",
+      "createdAt": "2024-09-17T15:13:55Z",
+      "updatedAt": "2024-09-18T06:05:38Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "b019cbf1c86269329e4bd40731360ddc286c3a12",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/editiorial-fixes",
+      "headRefOid": "1154bbd133636e5422e464da7bf023ad96249bce",
+      "closedAt": "2024-09-18T06:05:01Z",
+      "mergedAt": "2024-09-18T06:05:01Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "9940f5589a8019619088374513896c355c7b95f9"
+      },
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I did further fixes on media types",
+          "createdAt": "2024-09-17T19:05:29Z",
+          "updatedAt": "2024-09-17T19:05:29Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6JuFu2",
+          "commit": {
+            "abbreviatedOid": "1dde590"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-17T18:35:14Z",
+          "updatedAt": "2024-09-17T18:35:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Jybal",
+          "commit": {
+            "abbreviatedOid": "1154bbd"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-18T06:01:34Z",
+          "updatedAt": "2024-09-18T06:01:34Z",
           "comments": []
         }
       ]
