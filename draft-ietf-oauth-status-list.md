@@ -35,6 +35,7 @@ normative:
   RFC7519: RFC7519
   RFC8259: RFC8259
   RFC8392: RFC8392
+  RFC8725: RFC8725
   RFC8949: RFC8949
   RFC9052: RFC9052
   RFC9110: RFC9110
@@ -69,6 +70,7 @@ informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
   RFC7800: RFC7800
+  RFC9458: RFC9458
   SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
   ISO.mdoc:
     author:
@@ -612,7 +614,16 @@ Resulting in the byte array and compressed/base64url-encoded status list:
 # Security Considerations {#Security}
 
 ## Correct decoding and parsing of the encoded status list
-TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data
+
+Implementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.
+
+Implementations are RECOMMENDED to verify correctness using the test vectors given by this specification.
+
+## Security Guidance for JWT and CWT
+
+A Status List Token in the JWT format should follow the security considerations of {{RFC7519}} and the best current practices of {{RFC8725}}.
+
+A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
 
 ## Cached and Stale status lists
 
@@ -621,15 +632,9 @@ in the Status List Token provides one mechanism for setting a maximum cache time
 a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
 a fresh copy of the status list even if that status list is not expired.
 
-## Authorized access to the Status List {#security-authorization}
-TODO elaborate on authorization mechanisms preventing misuse and profiling as described in privacy section
-
-## History
-TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
-
 # Privacy Considerations
 
-## Limiting issuers observability of token verification {#privacy-issuer}
+## Observability of Issuers {#privacy-issuer}
 
 The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{SD-JWT.VC}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
@@ -637,29 +642,42 @@ The Status List approaches these privacy implications by integrating the status 
 
 The herd privacy is depending on the number of entities within the Status List called its size. A larger size results in better privacy but also impacts the performance as more data has to be transferred to read the Status List.
 
+Additionally, the Issuer may analyse data from the HTTP request to identify the Relying Party, e.g. through the sender's IP address. This behaviour may be mitigated by private relay protocols or other mechanism hiding the original sender like {{RFC9458}}.
+
 ## Malicious Issuers
 
 A malicious Issuer could bypass the privacy benefits of the herd privacy by generating a unique Status List for every Referenced Token. By these means, he could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. This malicious behaviour could be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes.
 
-## Unobservability of Relying Parties {#privacy-relying-party}
+## Observability of Relying Parties {#privacy-relying-party}
 
 Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
-This behaviour could be mitigated by:
+TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
 
-- adding authorization rules to the Status List, see [](#security-authorization).
+This behaviour could be mitigated by:
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
+
+## Observability of Outsiders {#privacy-outsider}
+
+Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.
+
+This behaviour could be mitigated by:
+- disable the historical data feature (TODO:link)
+- disable the Status List Aggregation {#batch-fetching}
+- choose non-sequential, pseudo-random or random indices
+- use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
+- choose to deploy and utilize multiple Status Lists simultaneously
 
 ## Unlinkability
 
-Colluding Issuers and a Relying Parties have the possibility to link two transactions, as the tuple of `uri` and `index` inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
+Colluding Issuers and Relying Parties have the possibility to link two transactions, as the tuple of `uri` and `index` inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
 To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers use batch issuance to issue multiple tokens, see [](#implementation-lifecycle).
 
 To avoid further correlatable information by the values of `uri` and `index`, Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
-- use decoy or dead entries to obfuscate the real number of Referenced Tokens within a Status List
+- use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
 - choose to deploy and utilize multiple Status Lists simultaneously
 
 ## Third Party Hosting
@@ -909,6 +927,9 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* add privacy consideration on using private relay protocols
+* add privacy consideration on observability of outsiders
+* add security considerations on correct parsing and decoding
 * remove requirement for matching iss claim in Referenced Token and Status List Token
 * add sd-jwt-vc example
 * fix CWT status_list map encoding
