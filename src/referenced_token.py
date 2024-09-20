@@ -11,7 +11,7 @@ def CWT(
     iss: str,
     status_url: str,
     status_idx: int,
-    exp: datetime = None,
+    exp: datetime | None = None,
 ):
     claims = {}
     claims[CWTClaims.SUB] = sub

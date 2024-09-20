@@ -22,13 +22,13 @@ class StatusListToken:
 
     def __init__(
         self,
-        issuer: str,
         subject: str,
         key: jwk.JWK,
-        list: StatusList = None,
+        issuer: str | None = None,
+        list: StatusList | None = None,
         size: int = 2**20,
         bits: int = 1,
-        alg: str = None,
+        alg: str | None = None,
     ):
         if list is not None:
             self.list = list
@@ -78,10 +78,10 @@ class StatusListToken:
     def buildJWT(
         self,
         iat: datetime = datetime.utcnow(),
-        exp: datetime = None,
-        ttl: timedelta = None,
-        optional_claims: Dict = None,
-        optional_header: Dict = None,
+        exp: datetime | None = None,
+        ttl: timedelta | None = None,
+        optional_claims: Dict | None = None,
+        optional_header: Dict | None = None,
         compact=True,
     ) -> str:
         # build claims
@@ -90,7 +90,8 @@ class StatusListToken:
         else:
             claims = {}
         claims["sub"] = self.subject
-        claims["iss"] = self.issuer
+        if self.issuer is not None:
+            claims["iss"] = self.issuer
         claims["iat"] = int(iat.timestamp())
         if exp is not None:
             claims["exp"] = int(exp.timestamp())
@@ -115,11 +116,11 @@ class StatusListToken:
     def buildCWT(
         self,
         iat: datetime = datetime.utcnow(),
-        exp: datetime = None,
-        ttl: timedelta = None,
-        optional_claims: Dict = None,
-        optional_protected_header: Dict = None,
-        optional_unprotected_header: Dict = None,
+        exp: datetime | None = None,
+        ttl: timedelta | None = None,
+        optional_claims: Dict | None = None,
+        optional_protected_header: Dict | None = None,
+        optional_unprotected_header: Dict | None = None,
     ) -> bytes:
         # build claims
         if optional_claims is not None:
@@ -127,13 +128,14 @@ class StatusListToken:
         else:
             claims = {}
         claims[CWTClaims.SUB] = self.subject
-        claims[CWTClaims.ISS] = self.issuer
+        if self.issuer is not None:
+            claims[CWTClaims.ISS] = self.issuer
         claims[CWTClaims.IAT] = int(iat.timestamp())
         if exp is not None:
             claims[CWTClaims.EXP] = int(exp.timestamp())
         if ttl is not None:
             claims[65534] = int(ttl.total_seconds())
-        claims[65535] = self.list.encodeAsCBOR()
+        claims[65533] = self.list.encodeAsCBOR()
 
         # build header
         if optional_protected_header is not None:
