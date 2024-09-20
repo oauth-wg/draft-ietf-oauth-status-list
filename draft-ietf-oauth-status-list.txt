@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 22 March 2025                                                  
+Expires: 24 March 2025                                                  
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                       18 September 2024
+                                                       20 September 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 March 2025.
+   This Internet-Draft will expire on 24 March 2025.
 
 Copyright Notice
 
@@ -98,15 +98,15 @@ Table of Contents
      10.1.  Status List Token with 2-Bit Status Values in JWT format
    11. Security Considerations
      11.1.  Correct decoding and parsing of the encoded status list
-     11.2.  Cached and Stale status lists
-     11.3.  Authorized access to the Status List
-     11.4.  History
+     11.2.  Security Guidance for JWT and CWT
+     11.3.  Cached and Stale status lists
    12. Privacy Considerations
-     12.1.  Limiting issuers observability of token verification
+     12.1.  Observability of Issuers
      12.2.  Malicious Issuers
-     12.3.  Unobservability of Relying Parties
-     12.4.  Unlinkability
-     12.5.  Third Party Hosting
+     12.3.  Observability of Relying Parties
+     12.4.  Observability of Outsiders
+     12.5.  Unlinkability
+     12.6.  Third Party Hosting
    13. Implementation Considerations
      13.1.  Token Lifecycle
    14. IANA Considerations
@@ -524,9 +524,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019ffffa2646269747301636c73744a78dadb
-   b918000217015d5840441ac5ab5bba2acc7af61801e63cf6640c692bf8ff502250b6
-   50a3fb69f05dc0632dafbbfd21bfbeaa32b059c755b87c0067433dda7002f1e52ab5
-   604e3d68cd
+   b918000217015d58404a0e5668ef53b679f74be65396182d9b06de4c151a3fec9727
+   31399e2cb3cd9bcce776256573f2926f28d48eed3d767c866bb78b90211dbc41fe84
+   fceb93f93f
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -548,12 +548,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      441ac5ab5bba2acc7af61801  #       "D\x1aÅ«[º*Ìzö\x18\x01"
-      e63cf6640c692bf8ff502250  #       "æ<öd\x0ci+øÿP"P"
-      b650a3fb69f05dc0632dafbb  #       "¶P£ûið]Àc-¯»"
-      fd21bfbeaa32b059c755b87c  #       "ý!¿¾ª2°YÇU¸|"
-      0067433dda7002f1e52ab560  #       "\x00gC=Úp\x02ñå*µ`"
-      4e3d68cd                  #       "N=hÍ"
+      4a0e5668ef53b679f74be653  #       "J\x0eVhïS¶y÷KæS"
+      96182d9b06de4c151a3fec97  #       "\x96\x18-\x9b\x06ÞL\x15\x1a?ì\x97"
+      2731399e2cb3cd9bcce77625  #       "'19\x9e,³Í\x9bÌçv%"
+      6573f2926f28d48eed3d767c  #       "esò\x92o(Ô\x8eí=v|"
+      866bb78b90211dbc41fe84fc  #       "\x86k·\x8b\x90!\x1d¼Aþ\x84ü"
+      eb93f93f                  #       "ë\x93ù?"
 
 6.  Referenced Token
 
@@ -691,9 +691,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840ccf212b30bcfcb8881e6d899e8e9c9dee90ec6
-   ee6c988c5dee58d445d94ace64d64d114e27dd17e9d9e6c956fef3ca4dbcee6548f6
-   1f97d3a0aa5f6c5d41b3d7
+   7374617475736c697374732f3158409b28f15e34d0d92149d0963c77dfdf24d5c783
+   1d0576a1aae4a979c567efe29a3c6516720fc5df05c09f7fd1e6d547eb9ae9fa4ae8
+   78b572da916409b08ba392
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -716,12 +716,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         ccf212b30bcfcb8881e6d899  #       "Ìò\x12³\x0bÏË\x88\x81æØ\x99"
-         e8e9c9dee90ec6ee6c988c5d  #       "èéÉÞé\x0eÆîl\x98\x8c]"
-         ee58d445d94ace64d64d114e  #       "îXÔEÙJÎdÖM\x11N"
-         27dd17e9d9e6c956fef3ca4d  #       "'Ý\x17éÙæÉVþóÊM"
-         bcee6548f61f97d3a0aa5f6c  #       "¼îeHö\x1f\x97Ó\xa0ª_l"
-         5d41b3d7                  #       "]A³×"
+         9b28f15e34d0d92149d0963c  #       "\x9b(ñ^4ÐÙ!IÐ\x96<"
+         77dfdf24d5c7831d0576a1aa  #       "wßß$ÕÇ\x83\x1d\x05v¡ª"
+         e4a979c567efe29a3c651672  #       "ä©yÅgïâ\x9a<e\x16r"
+         0fc5df05c09f7fd1e6d547eb  #       "\x0fÅß\x05À\x9f\x7fÑæÕGë"
+         9ae9fa4ae878b572da916409  #       "\x9aéúJèxµrÚ\x91d\x09"
+         b08ba392                  #       "°\x8b£\x92"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1015,10 +1015,30 @@ d2                              # tag(18)
 
 11.1.  Correct decoding and parsing of the encoded status list
 
-   TODO elaborate on risks of incorrect parsing/decoding leading to
-   erroneous status data
+   Implementers should be particularly careful for the correct parsing
+   and decoding of the status list.  Incorrect implementations might
+   check the index on the wrong data or miscalculate the bit and byte
+   index leading to an erroneous status of the Referenced Token.
+   Beware, that bits are indexed (bit order) from least significant bit
+   to most significant bit (also called "right to left") while bytes are
+   indexed (byte order) in their natural incrementing byte order
+   (usually written for display purpose from left to write).  Endianness
+   does not apply here because each status value fits within a single
+   byte.
 
-11.2.  Cached and Stale status lists
+   Implementations are RECOMMENDED to verify correctness using the test
+   vectors given by this specification.
+
+11.2.  Security Guidance for JWT and CWT
+
+   A Status List Token in the JWT format should follow the security
+   considerations of [RFC7519] and the best current practices of
+   [RFC8725].
+
+   A Status List Token in the CWT format should follow the security
+   considerations of [RFC8392].
+
+11.3.  Cached and Stale status lists
 
    When consumers or verifiers of the Status List fetch the data, they
    need to be aware of its up-to-date status.  The 'ttl' (time-to-live)
@@ -1029,20 +1049,9 @@ d2                              # tag(18)
    how often they need to fetch a fresh copy of the status list even if
    that status list is not expired.
 
-11.3.  Authorized access to the Status List
-
-   TODO elaborate on authorization mechanisms preventing misuse and
-   profiling as described in privacy section
-
-11.4.  History
-
-   TODO elaborate on status list only providing the up-to date/latest
-   status, no historical data, may be provided by the underlying hosting
-   architecture
-
 12.  Privacy Considerations
 
-12.1.  Limiting issuers observability of token verification
+12.1.  Observability of Issuers
 
    The main privacy consideration for a Status List, especially in the
    context of the Issuer-Holder-Verifier model [SD-JWT.VC], is to
@@ -1065,6 +1074,11 @@ d2                              # tag(18)
    but also impacts the performance as more data has to be transferred
    to read the Status List.
 
+   Additionally, the Issuer may analyse data from the HTTP request to
+   identify the Relying Party, e.g. through the sender's IP address.
+   This behaviour may be mitigated by private relay protocols or other
+   mechanism hiding the original sender like [RFC9458].
+
 12.2.  Malicious Issuers
 
    A malicious Issuer could bypass the privacy benefits of the herd
@@ -1076,7 +1090,7 @@ d2                              # tag(18)
    Parties that request large amounts of Referenced Tokens by comparing
    the number of different Status Lists and their sizes.
 
-12.3.  Unobservability of Relying Parties
+12.3.  Observability of Relying Parties
 
    Once the Relying Party receives the Referenced Token, this enables
    him to request the Status List to validate its status through the
@@ -1090,15 +1104,32 @@ d2                              # tag(18)
    and unknown to the Holder, e.g. profiling the suspension of a driving
    license or checking the employment status of an employee credential.
 
-   This behaviour could be mitigated by:
+   TODO elaborate on status list only providing the up-to date/latest
+   status, no historical data, may be provided by the underlying hosting
+   architecture
 
-   *  adding authorization rules to the Status List, see Section 11.3.
+   This behaviour could be mitigated by: - regular re-issuance of the
+   Referenced Token, see Section 13.1.
 
-   *  regular re-issuance of the Referenced Token, see Section 13.1.
+12.4.  Observability of Outsiders
 
-12.4.  Unlinkability
+   Outside actors may analyse the publicly available Status Lists to get
+   information on the internal processes of the Issuer and his related
+   business.  This data may allow inferences on the total number of
+   issued Reference Tokens and the revocation rate.  Additionally,
+   actors may regularly fetch this data or use the historic data
+   functionality to learn how these numbers change over time.
 
-   Colluding Issuers and a Relying Parties have the possibility to link
+   This behaviour could be mitigated by: - disable the historical data
+   feature (TODO:link) - disable the Status List Aggregation {#batch-
+   fetching} - choose non-sequential, pseudo-random or random indices -
+   use decoy entries to obfuscate the real number of Referenced Tokens
+   within a Status List - choose to deploy and utilize multiple Status
+   Lists simultaneously
+
+12.5.  Unlinkability
+
+   Colluding Issuers and Relying Parties have the possibility to link
    two transactions, as the tuple of uri and index inside the Referenced
    Token are unique and therefore traceable data.  By comparing the
    status claims of received Referenced Tokens, two colluding Relying
@@ -1117,12 +1148,12 @@ d2                              # tag(18)
 
    *  choose non-sequential, pseudo-random or random indices
 
-   *  use decoy or dead entries to obfuscate the real number of
-      Referenced Tokens within a Status List
+   *  use decoy entries to obfuscate the real number of Referenced
+      Tokens within a Status List
 
    *  choose to deploy and utilize multiple Status Lists simultaneously
 
-12.5.  Third Party Hosting
+12.6.  Third Party Hosting
 
    TODO elaborate on increased privacy if the status list is hosted by a
    third party instead of the issuer reducing tracking possibilities
@@ -1562,6 +1593,11 @@ d2                              # tag(18)
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
               May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
 
+   [RFC8725]  Sheffer, Y., Hardt, D., and M. Jones, "JSON Web Token Best
+              Current Practices", BCP 225, RFC 8725,
+              DOI 10.17487/RFC8725, February 2020,
+              <https://www.rfc-editor.org/rfc/rfc8725>.
+
    [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", STD 94, RFC 8949,
               DOI 10.17487/RFC8949, December 2020,
@@ -1600,12 +1636,16 @@ d2                              # tag(18)
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/rfc/rfc7800>.
 
+   [RFC9458]  Thomson, M. and C. A. Wood, "Oblivious HTTP", RFC 9458,
+              DOI 10.17487/RFC9458, January 2024,
+              <https://www.rfc-editor.org/rfc/rfc9458>.
+
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-04>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-05, 18
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-oauth-sd-jwt-vc-05>.
 
 Acknowledgments
 
@@ -1620,6 +1660,12 @@ Acknowledgments
 Document History
 
    -04
+
+   *  add privacy consideration on using private relay protocols
+
+   *  add privacy consideration on observability of outsiders
+
+   *  add security considerations on correct parsing and decoding
 
    *  remove requirement for matching iss claim in Referenced Token and
       Status List Token

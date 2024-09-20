@@ -1030,7 +1030,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 22 March 2025</td>
+<td class="center">Expires 24 March 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-18" class="published">18 September 2024</time>
+<time datetime="2024-09-20" class="published">20 September 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-03-22">22 March 2025</time></dd>
+<dd class="expires"><time datetime="2025-03-24">24 March 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,7 +1101,7 @@ The status list token data structures themselves are also represented as JWTs or
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 24 March 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1237,13 +1237,10 @@ The status list token data structures themselves are also represented as JWTs or
                 <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-correct-decoding-and-parsin" class="internal xref">Correct decoding and parsing of the encoded status list</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
-                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-cached-and-stale-status-lis" class="internal xref">Cached and Stale status lists</a></p>
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-security-guidance-for-jwt-a" class="internal xref">Security Guidance for JWT and CWT</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3">
-                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-authorized-access-to-the-st" class="internal xref">Authorized access to the Status List</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.4">
-                <p id="section-toc.1-1.11.2.4.1"><a href="#section-11.4" class="auto internal xref">11.4</a>.  <a href="#name-history" class="internal xref">History</a></p>
+                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-cached-and-stale-status-lis" class="internal xref">Cached and Stale status lists</a></p>
 </li>
             </ul>
 </li>
@@ -1251,19 +1248,22 @@ The status list token data structures themselves are also represented as JWTs or
             <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-limiting-issuers-observabil" class="internal xref">Limiting issuers observability of token verification</a></p>
+                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-observability-of-issuers" class="internal xref">Observability of Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
                 <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-malicious-issuers" class="internal xref">Malicious Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.3">
-                <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-unobservability-of-relying-" class="internal xref">Unobservability of Relying Parties</a></p>
+                <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-observability-of-relying-pa" class="internal xref">Observability of Relying Parties</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.4">
-                <p id="section-toc.1-1.12.2.4.1"><a href="#section-12.4" class="auto internal xref">12.4</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
+                <p id="section-toc.1-1.12.2.4.1"><a href="#section-12.4" class="auto internal xref">12.4</a>.  <a href="#name-observability-of-outsiders" class="internal xref">Observability of Outsiders</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5">
-                <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-third-party-hosting" class="internal xref">Third Party Hosting</a></p>
+                <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.6">
+                <p id="section-toc.1-1.12.2.6.1"><a href="#section-12.6" class="auto internal xref">12.6</a>.  <a href="#name-third-party-hosting" class="internal xref">Third Party Hosting</a></p>
 </li>
             </ul>
 </li>
@@ -1731,9 +1731,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019ffffa2646269747301636c73744a78dadb
-b918000217015d5840441ac5ab5bba2acc7af61801e63cf6640c692bf8ff502250b6
-50a3fb69f05dc0632dafbbfd21bfbeaa32b059c755b87c0067433dda7002f1e52ab5
-604e3d68cd
+b918000217015d58404a0e5668ef53b679f74be65396182d9b06de4c151a3fec9727
+31399e2cb3cd9bcce776256573f2926f28d48eed3d767c866bb78b90211dbc41fe84
+fceb93f93f
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1757,12 +1757,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      441ac5ab5bba2acc7af61801  #       "D\x1aÅ«[º*Ìzö\x18\x01"
-      e63cf6640c692bf8ff502250  #       "æ&lt;öd\x0ci+øÿP"P"
-      b650a3fb69f05dc0632dafbb  #       "¶P£ûið]Àc-¯»"
-      fd21bfbeaa32b059c755b87c  #       "ý!¿¾ª2°YÇU¸|"
-      0067433dda7002f1e52ab560  #       "\x00gC=Úp\x02ñå*µ`"
-      4e3d68cd                  #       "N=hÍ"
+      4a0e5668ef53b679f74be653  #       "J\x0eVhïS¶y÷KæS"
+      96182d9b06de4c151a3fec97  #       "\x96\x18-\x9b\x06ÞL\x15\x1a?ì\x97"
+      2731399e2cb3cd9bcce77625  #       "'19\x9e,³Í\x9bÌçv%"
+      6573f2926f28d48eed3d767c  #       "esò\x92o(Ô\x8eí=v|"
+      866bb78b90211dbc41fe84fc  #       "\x86k·\x8b\x90!\x1d¼Aþ\x84ü"
+      eb93f93f                  #       "ë\x93ù?"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1904,9 +1904,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840ccf212b30bcfcb8881e6d899e8e9c9dee90ec6
-ee6c988c5dee58d445d94ace64d64d114e27dd17e9d9e6c956fef3ca4dbcee6548f6
-1f97d3a0aa5f6c5d41b3d7
+7374617475736c697374732f3158409b28f15e34d0d92149d0963c77dfdf24d5c783
+1d0576a1aae4a979c567efe29a3c6516720fc5df05c09f7fd1e6d547eb9ae9fa4ae8
+78b572da916409b08ba392
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1931,12 +1931,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      ccf212b30bcfcb8881e6d899  #       "Ìò\x12³\x0bÏË\x88\x81æØ\x99"
-      e8e9c9dee90ec6ee6c988c5d  #       "èéÉÞé\x0eÆîl\x98\x8c]"
-      ee58d445d94ace64d64d114e  #       "îXÔEÙJÎdÖM\x11N"
-      27dd17e9d9e6c956fef3ca4d  #       "'Ý\x17éÙæÉVþóÊM"
-      bcee6548f61f97d3a0aa5f6c  #       "¼îeHö\x1f\x97Ó\xa0ª_l"
-      5d41b3d7                  #       "]A³×"
+      9b28f15e34d0d92149d0963c  #       "\x9b(ñ^4ÐÙ!IÐ\x96&lt;"
+      77dfdf24d5c7831d0576a1aa  #       "wßß$ÕÇ\x83\x1d\x05v¡ª"
+      e4a979c567efe29a3c651672  #       "ä©yÅgïâ\x9a&lt;e\x16r"
+      0fc5df05c09f7fd1e6d547eb  #       "\x0fÅß\x05À\x9f\x7fÑæÕGë"
+      9ae9fa4ae878b572da916409  #       "\x9aéúJèxµrÚ\x91d\x09"
+      b08ba392                  #       "°\x8b£\x92"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2234,34 +2234,28 @@ encoded:
         <h3 id="name-correct-decoding-and-parsin">
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-correct-decoding-and-parsin" class="section-name selfRef">Correct decoding and parsing of the encoded status list</a>
         </h3>
-<p id="section-11.1-1">TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.1-1">Implementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.1-2">Implementations are <span class="bcp14">RECOMMENDED</span> to verify correctness using the test vectors given by this specification.<a href="#section-11.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-guidance-for-jwt-and-cwt">
+<section id="section-11.2">
+        <h3 id="name-security-guidance-for-jwt-a">
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-security-guidance-for-jwt-a" class="section-name selfRef">Security Guidance for JWT and CWT</a>
+        </h3>
+<p id="section-11.2-1">A Status List Token in the JWT format should follow the security considerations of <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> and the best current practices of <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span>.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.2-2">A Status List Token in the CWT format should follow the security considerations of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-11.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cached-and-stale-status-lists">
-<section id="section-11.2">
+<section id="section-11.3">
         <h3 id="name-cached-and-stale-status-lis">
-<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-cached-and-stale-status-lis" class="section-name selfRef">Cached and Stale status lists</a>
+<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-cached-and-stale-status-lis" class="section-name selfRef">Cached and Stale status lists</a>
         </h3>
-<p id="section-11.2-1">When consumers or verifiers of the Status List fetch the data, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
+<p id="section-11.3-1">When consumers or verifiers of the Status List fetch the data, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
 in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
 a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
-a fresh copy of the status list even if that status list is not expired.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="security-authorization">
-<section id="section-11.3">
-        <h3 id="name-authorized-access-to-the-st">
-<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-authorized-access-to-the-st" class="section-name selfRef">Authorized access to the Status List</a>
-        </h3>
-<p id="section-11.3-1">TODO elaborate on authorization mechanisms preventing misuse and profiling as described in privacy section<a href="#section-11.3-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="history">
-<section id="section-11.4">
-        <h3 id="name-history">
-<a href="#section-11.4" class="section-number selfRef">11.4. </a><a href="#name-history" class="section-name selfRef">History</a>
-        </h3>
-<p id="section-11.4-1">TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture<a href="#section-11.4-1" class="pilcrow">¶</a></p>
+a fresh copy of the status list even if that status list is not expired.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2273,12 +2267,13 @@ a fresh copy of the status list even if that status list is not expired.<a href=
       </h2>
 <div id="privacy-issuer">
 <section id="section-12.1">
-        <h3 id="name-limiting-issuers-observabil">
-<a href="#section-12.1" class="section-number selfRef">12.1. </a><a href="#name-limiting-issuers-observabil" class="section-name selfRef">Limiting issuers observability of token verification</a>
+        <h3 id="name-observability-of-issuers">
+<a href="#section-12.1" class="section-number selfRef">12.1. </a><a href="#name-observability-of-issuers" class="section-name selfRef">Observability of Issuers</a>
         </h3>
 <p id="section-12.1-1">The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.<a href="#section-12.1-1" class="pilcrow">¶</a></p>
 <p id="section-12.1-2">The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.<a href="#section-12.1-2" class="pilcrow">¶</a></p>
 <p id="section-12.1-3">The herd privacy is depending on the number of entities within the Status List called its size. A larger size results in better privacy but also impacts the performance as more data has to be transferred to read the Status List.<a href="#section-12.1-3" class="pilcrow">¶</a></p>
+<p id="section-12.1-4">Additionally, the Issuer may analyse data from the HTTP request to identify the Relying Party, e.g. through the sender's IP address. This behaviour may be mitigated by private relay protocols or other mechanism hiding the original sender like <span>[<a href="#RFC9458" class="cite xref">RFC9458</a>]</span>.<a href="#section-12.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="malicious-issuers">
@@ -2291,50 +2286,58 @@ a fresh copy of the status list even if that status list is not expired.<a href=
 </div>
 <div id="privacy-relying-party">
 <section id="section-12.3">
-        <h3 id="name-unobservability-of-relying-">
-<a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-unobservability-of-relying-" class="section-name selfRef">Unobservability of Relying Parties</a>
+        <h3 id="name-observability-of-relying-pa">
+<a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-observability-of-relying-pa" class="section-name selfRef">Observability of Relying Parties</a>
         </h3>
 <p id="section-12.3-1">Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided <code>uri</code> parameter and look up the corresponding <code>index</code>. However, the Relying Party may persistently store the <code>uri</code> and <code>index</code> of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.<a href="#section-12.3-1" class="pilcrow">¶</a></p>
-<p id="section-12.3-2">This behaviour could be mitigated by:<a href="#section-12.3-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-12.3-3.1">
-            <p id="section-12.3-3.1.1">adding authorization rules to the Status List, see <a href="#security-authorization" class="auto internal xref">Section 11.3</a>.<a href="#section-12.3-3.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-12.3-3.2">
-            <p id="section-12.3-3.2.1">regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.3-3.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-12.3-2">TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture<a href="#section-12.3-2" class="pilcrow">¶</a></p>
+<p id="section-12.3-3">This behaviour could be mitigated by:
+- regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="privacy-outsider">
+<section id="section-12.4">
+        <h3 id="name-observability-of-outsiders">
+<a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-observability-of-outsiders" class="section-name selfRef">Observability of Outsiders</a>
+        </h3>
+<p id="section-12.4-1">Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
+<p id="section-12.4-2">This behaviour could be mitigated by:
+- disable the historical data feature (TODO:link)
+- disable the Status List Aggregation {#batch-fetching}
+- choose non-sequential, pseudo-random or random indices
+- use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
+- choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="unlinkability">
-<section id="section-12.4">
+<section id="section-12.5">
         <h3 id="name-unlinkability">
-<a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
+<a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
         </h3>
-<p id="section-12.4-1">Colluding Issuers and a Relying Parties have the possibility to link two transactions, as the tuple of <code>uri</code> and <code>index</code> inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
-<p id="section-12.4-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.4-2" class="pilcrow">¶</a></p>
-<p id="section-12.4-3">To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.4-3" class="pilcrow">¶</a></p>
+<p id="section-12.5-1">Colluding Issuers and Relying Parties have the possibility to link two transactions, as the tuple of <code>uri</code> and <code>index</code> inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
+<p id="section-12.5-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.5-2" class="pilcrow">¶</a></p>
+<p id="section-12.5-3">To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-12.4-4.1">
-            <p id="section-12.4-4.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.4-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-12.5-4.1">
+            <p id="section-12.5-4.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.5-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-12.4-4.2">
-            <p id="section-12.4-4.2.1">use decoy or dead entries to obfuscate the real number of Referenced Tokens within a Status List<a href="#section-12.4-4.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-12.5-4.2">
+            <p id="section-12.5-4.2.1">use decoy entries to obfuscate the real number of Referenced Tokens within a Status List<a href="#section-12.5-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-12.4-4.3">
-            <p id="section-12.4-4.3.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.4-4.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-12.5-4.3">
+            <p id="section-12.5-4.3.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.5-4.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="third-party-hosting">
-<section id="section-12.5">
+<section id="section-12.6">
         <h3 id="name-third-party-hosting">
-<a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-third-party-hosting" class="section-name selfRef">Third Party Hosting</a>
+<a href="#section-12.6" class="section-number selfRef">12.6. </a><a href="#name-third-party-hosting" class="section-name selfRef">Third Party Hosting</a>
         </h3>
-<p id="section-12.5-1">TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
+<p id="section-12.6-1">TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
 TODO evaluate definition of Status List Provider?
- An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
+ An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.<a href="#section-12.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2918,6 +2921,10 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8725">[RFC8725]</dt>
+        <dd>
+<span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Hardt, D.</span>, and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"JSON Web Token Best Current Practices"</span>, <span class="seriesInfo">BCP 225</span>, <span class="seriesInfo">RFC 8725</span>, <span class="seriesInfo">DOI 10.17487/RFC8725</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8725">https://www.rfc-editor.org/rfc/rfc8725</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8949">[RFC8949]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>&gt;</span>. </dd>
@@ -2959,9 +2966,13 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)"</span>, <span class="seriesInfo">RFC 7800</span>, <span class="seriesInfo">DOI 10.17487/RFC7800</span>, <time datetime="2016-04" class="refDate">April 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7800">https://www.rfc-editor.org/rfc/rfc7800</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9458">[RFC9458]</dt>
+        <dd>
+<span class="refAuthor">Thomson, M.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Oblivious HTTP"</span>, <span class="seriesInfo">RFC 9458</span>, <span class="seriesInfo">DOI 10.17487/RFC9458</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9458">https://www.rfc-editor.org/rfc/rfc9458</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="SD-JWT.VC">[SD-JWT.VC]</dt>
       <dd>
-<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-04</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-04">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-05</span>, <time datetime="2024-09-18" class="refDate">18 September 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-05">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2998,28 +3009,37 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-04<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">remove requirement for matching iss claim in Referenced Token and Status List Token<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">add privacy consideration on using private relay protocols<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">add sd-jwt-vc example<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">add privacy consideration on observability of outsiders<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">fix CWT status_list map encoding<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">add security considerations on correct parsing and decoding<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">editorial fixes<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">remove requirement for matching iss claim in Referenced Token and Status List Token<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">add CORS considerations to the http endpoint<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">add sd-jwt-vc example<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.6">
-          <p id="appendix-B-2.6.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.6.1">fix CWT status_list map encoding<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.7">
-          <p id="appendix-B-2.7.1">added status_list CWT claim key assigned<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.7.1">editorial fixes<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.8">
-          <p id="appendix-B-2.8.1">move base64url definition to terminology<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.8.1">add CORS considerations to the http endpoint<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.9">
+          <p id="appendix-B-2.9.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.10">
+          <p id="appendix-B-2.10.1">added status_list CWT claim key assigned<a href="#appendix-B-2.10.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.11">
+          <p id="appendix-B-2.11.1">move base64url definition to terminology<a href="#appendix-B-2.11.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-03<a href="#appendix-B-3" class="pilcrow">¶</a></p>
