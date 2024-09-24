@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 24 March 2025                                                  
+Expires: 28 March 2025                                                  
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                       20 September 2024
+                                                       24 September 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 March 2025.
+   This Internet-Draft will expire on 28 March 2025.
 
 Copyright Notice
 
@@ -109,6 +109,8 @@ Table of Contents
      12.6.  Third Party Hosting
    13. Implementation Considerations
      13.1.  Token Lifecycle
+     13.2.  Default Values and Double Allocation
+     13.3.  Status List Size
    14. IANA Considerations
      14.1.  JSON Web Token Claims Registration
        14.1.1.  Registry Contents
@@ -524,9 +526,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840a0bf0684171cc97f6a7569bd9982c2b653ba8c5aa9e3d3595b
-   7a2b296834cd1bdf87a574f2b3bb01ed1ba8022c4fd2d799c8a93d55889fc89a5f1f
-   c267ae44de
+   b918000217015d58408bc8b1a6387862e4f94402c7d77f417fd4902ef71df8bdffc6
+   88f421b7f9b605ca25d537c3bb2bdec5307840e99e2bcd2b708e52c331a32d0e41fc
+   426487bf51
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -548,12 +550,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      a0bf0684171cc97f6a7569bd  #       "\xa0¿\x06\x84\x17\x1cÉ\x7fjui½"
-      9982c2b653ba8c5aa9e3d359  #       "\x99\x82Â¶Sº\x8cZ©ãÓY"
-      5b7a2b296834cd1bdf87a574  #       "[z+)h4Í\x1bß\x87¥t"
-      f2b3bb01ed1ba8022c4fd2d7  #       "ò³»\x01í\x1b¨\x02,OÒ×"
-      99c8a93d55889fc89a5f1fc2  #       "\x99È©=U\x88\x9fÈ\x9a_\x1fÂ"
-      67ae44de                  #       "g®DÞ"
+      8bc8b1a6387862e4f94402c7  #       "\x8bÈ±¦8xbäùD\x02Ç"
+      d77f417fd4902ef71df8bdff  #       "×\x7fA\x7fÔ\x90.÷\x1dø½ÿ"
+      c688f421b7f9b605ca25d537  #       "Æ\x88ô!·ù¶\x05Ê%Õ7"
+      c3bb2bdec5307840e99e2bcd  #       "Ã»+ÞÅ0x@é\x9e+Í"
+      2b708e52c331a32d0e41fc42  #       "+p\x8eRÃ1£-\x0eAüB"
+      6487bf51                  #       "d\x87¿Q"
 
 6.  Referenced Token
 
@@ -691,37 +693,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584051989e0267832b97a03771041b69424484956c
-   ef8b6edaf0d468f2586d79aec90666fd2922462d37c607fbe76274ca3691d84f839f
-   f4733db0721e16f4d144b5
+   7374617475736c697374732f3158402c55f1252a58679d3d9cff68776f25fd4c8e19
+   f860843e3820d6ed1a8692bea950dbdcc75508a40d4629371e5c5ddf481263dce8d0
+   202eb54ad3d2d9e7a51c23
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      51989e0267832b97a0377104  #       "Q\x98\x9e\x02g\x83+\x97\xa07q\x04"
-      1b69424484956cef8b6edaf0  #       "\x1biBD\x84\x95lï\x8bnÚð"
-      d468f2586d79aec90666fd29  #       "ÔhòXmy®É\x06fý)"
-      22462d37c607fbe76274ca36  #       ""F-7Æ\x07ûçbtÊ6"
-      91d84f839ff4733db0721e16  #       "\x91ØO\x83\x9fôs=°r\x1e\x16"
-      f4d144b5                  #       "ôÑDµ"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         2c55f1252a58679d3d9cff68  #       ",Uñ%*Xg\x9d=\x9cÿh"
+         776f25fd4c8e19f860843e38  #       "wo%ýL\x8e\x19ø`\x84>8"
+         20d6ed1a8692bea950dbdcc7  #       " Öí\x1a\x86\x92¾©PÛÜÇ"
+         5508a40d4629371e5c5ddf48  #       "U\x08¤\x0dF)7\x1e\]ßH"
+         1263dce8d0202eb54ad3d2d9  #       "\x12cÜèÐ .µJÓÒÙ"
+         e7a51c23                  #       "ç¥\x1c#"
 
 6.4.  Referenced Token in other COSE/CBOR Format
 
@@ -1171,16 +1173,42 @@ d2                              # tag(18)
    are expired, the Issuer may stop serving the Status List (and the
    Status List Token).
 
-   Referenced Tokens may be regularly re-issued to increase security or
-   to mitigate linkability and prevent tracking by Relying Parties.  In
-   this case, every Referenced Token MUST have a fresh Status List
-   entry.
+   Referenced Tokens may be regularly re-issued to mitigate linkability
+   of presentations to Relying Parties.  In this case, every re-issued
+   Referenced Token MUST have a fresh Status List entry in order to
+   prevent this becoming possible source of correlation.
 
    Referenced Tokens may also be issued in batches, such that Holders
    can use individual tokens for every transaction.  In this case, every
    Referenced Token MUST have a dedicated Status List entry.  Revoking
    batch issued Referenced Tokens might reveal this correlation later
    on.
+
+13.2.  Default Values and Double Allocation
+
+   Implementations producing Status Lists are RECOMMENDED to initialize
+   the Status List byte array with a default value and provide this as
+   an initialization parameter to the Issuer.  The Issuer is RECOMMENDED
+   to use a default value that represents the most common value for its
+   Referenced Tokens to avoid an update during issuance.
+
+   Implementations producing Status Lists are RECOMMENDED to prevent
+   double allocation, i.e. re-using the same uri and index for multiple
+   Referenced Tokens.  The Issuer MUST prevent any unintended double
+   allocation by using the Status List.
+
+13.3.  Status List Size
+
+   The Status List Issuer may increase the size of a Status List if it
+   requires indices for additional Referenced Tokens.  It is RECOMMENDED
+   that the size of a Status List in bits is divisible in bytes (8 bits)
+   without a remainder, i.e. size-in-bits % 8 = 0.
+
+   The Status List Issuer may chunk its Referenced Tokens into multiple
+   Status Lists to reduce the transmission size of an individual Status
+   List Token.  This may be useful for setups where some entities
+   operate in constrained environments, e.g. for mobile internet or
+   embedded devices.
 
 14.  IANA Considerations
 
@@ -1660,6 +1688,9 @@ Acknowledgments
 Document History
 
    -04
+
+   *  add implementation consideration for Default Values, Double
+      Allocation and Status List Size
 
    *  add privacy consideration on using private relay protocols
 
