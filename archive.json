@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-24T00:16:33.639563+00:00",
+  "timestamp": "2024-09-26T00:16:19.385977+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -704,7 +704,7 @@
       "id": "I_kwDOJZ2aqs5oGi-v",
       "title": "Add implementations considerations",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -715,8 +715,8 @@
       ],
       "body": "Add:\r\n- prevent double allocating an index\r\n- randomize allocation of indexes/avoid sequential usage",
       "createdAt": "2023-06-07T19:34:15Z",
-      "updatedAt": "2024-09-11T06:10:56Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-24T18:54:45Z",
+      "closedAt": "2024-09-24T18:54:45Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -1301,7 +1301,7 @@
       "id": "I_kwDOJZ2aqs5r3ya-",
       "title": "requirement for status list size",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/47",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1312,8 +1312,8 @@
       ],
       "body": "As we declined to include a size property to the status list, we do not have other means than to decode&decompress the encoded status list and get status list size from the byte array length/size:\r\nstatus list size = byte array size * 8 / bits\r\nTherefore it makes to add the requirement that status list size must \"fill up\" to bytes",
       "createdAt": "2023-07-18T12:01:54Z",
-      "updatedAt": "2024-09-11T06:43:08Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-24T18:54:45Z",
+      "closedAt": "2024-09-24T18:54:45Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -3702,6 +3702,22 @@
           "updatedAt": "2024-09-18T06:10:27Z"
         }
       ]
+    },
+    {
+      "number": 177,
+      "id": "I_kwDOJZ2aqs6X0SqD",
+      "title": "Missing IANA section for status types",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/177",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The section 7 explains how to setup the registry (https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-status-types) but we are missing a corresponding section in the IANA appendix ",
+      "createdAt": "2024-09-25T06:34:55Z",
+      "updatedAt": "2024-09-25T06:34:55Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -11164,24 +11180,26 @@
       "id": "PR_kwDOJZ2aqs564MzS",
       "title": "add implementation consideration for Default Values and Double Alloca\u2026",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/172",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #47\r\nCloses #24 ",
       "createdAt": "2024-09-09T16:53:00Z",
-      "updatedAt": "2024-09-23T15:51:00Z",
+      "updatedAt": "2024-09-24T18:54:59Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "28065cb20213e3464555ab1d11217212e2a8df5f",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/considerations2",
       "headRefOid": "d37cabfa1e63e62c22b4c443df5053001fdf5d61",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-24T18:54:44Z",
+      "mergedAt": "2024-09-24T18:54:44Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "2f57d2f6f18f7ce60aff52763ab2c3c9df4751b2"
+      },
       "comments": [],
       "reviews": [
         {
@@ -11336,6 +11354,19 @@
               "updatedAt": "2024-09-20T19:52:02Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6KpbIw",
+          "commit": {
+            "abbreviatedOid": "d37cabf"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-24T18:54:38Z",
+          "updatedAt": "2024-09-24T18:54:38Z",
+          "comments": []
         }
       ]
     },
