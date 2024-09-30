@@ -467,7 +467,7 @@ The processing rules for JWT or CWT precede any evaluation of a Referenced Token
 
 # Verification and Processing
 
-## Status List Request
+## Status List Request {#status-list-request}
 
 To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.
 
@@ -483,6 +483,24 @@ The Relying Party SHOULD send the following Accept-Header to indicate the reques
 - "application/statuslist+cwt" for Status List in CWT format
 
 If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.
+
+The following are non-normative examples for a request and response for a status list with type `application/statuslist+jwt`:
+
+~~~ ascii-art
+
+GET /statuslists/1 HTTP/1.1
+Host: example.com
+Accept: application/statuslist+jwt
+~~~
+
+
+~~~ ascii-art
+
+HTTP/1.1 200 OK
+Content-Type: application/statuslist+jwt
+
+{::include ./examples/status_list_jwt_raw}
+~~~
 
 ## Status List Response
 
@@ -631,6 +649,34 @@ When consumers or verifiers of the Status List fetch the data, they need to be a
 in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
 a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
 a fresh copy of the status list even if that status list is not expired.
+
+## Historical resolution
+By design, the Status List mechanism only conveys information about the state of a Referenced Token at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.
+
+If support for historical status information needs to be supported, this can be achieved by extending the Status List Request as originally defined in [](#status-list-request) to support requesting specific timestamps. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is purely optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
+
+To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` followed by a unix timestamp. The response for a valid request SHOULD contain a status list that was valid for that specified time or an error for the JWT and CWT variants and MUST contain a valid status list or an error for the unsigned option.
+
+If the Server does not support the additional query parameter, it SHOULD signal that by returning a status code of 501 (Not Implemented), or if the queried time is not supported with a status code of 406 (Not Acceptable). These response MUST be supported for the unsigned option, where the client has not other way of checking when the response was valid. The client MUST verify this for the JWT and CWT variants by checking that the specified timestamp is within `iat` (`6` for CWT) and `exp` (`4` for CWT).
+
+The following is a non-normative example for a GET request using the `time`query parameter:
+
+~~~ ascii-art
+
+GET /statuslists/1?time=1686925000 HTTP/1.1
+Host: example.com
+Accept: application/statuslist+jwt
+~~~
+
+The following is a non-normative example for a response for the above Request:
+
+~~~ ascii-art
+
+HTTP/1.1 200 OK
+Content-Type: application/statuslist+jwt
+
+{::include ./examples/status_list_jwt_raw}
+~~~
 
 # Privacy Considerations
 
@@ -939,6 +985,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* add optional support for historical requests
 * add implementation consideration for Default Values, Double Allocation and Status List Size
 * add privacy consideration on using private relay protocols
 * add privacy consideration on observability of outsiders
