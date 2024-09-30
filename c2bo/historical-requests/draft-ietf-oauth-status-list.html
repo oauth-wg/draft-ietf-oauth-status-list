@@ -1176,7 +1176,7 @@ The status list token data structures themselves are also represented as JWTs or
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-status-claim" class="internal xref">Status Claim</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-referenced-token-in-jwt-for" class="internal xref">Referenced Token in JWT Format</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-referenced-token-in-jose-fo" class="internal xref">Referenced Token in JOSE Format</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
                 <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-referenced-token-in-cwt-for" class="internal xref">Referenced Token in CWT Format</a></p>
@@ -1237,10 +1237,10 @@ The status list token data structures themselves are also represented as JWTs or
                 <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.  <a href="#name-correct-decoding-and-parsin" class="internal xref">Correct decoding and parsing of the encoded status list</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
-                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-cached-and-stale-status-lis" class="internal xref">Cached and Stale status lists</a></p>
+                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-security-guidance-for-jwt-a" class="internal xref">Security Guidance for JWT and CWT</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3">
-                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-authorized-access-to-the-st" class="internal xref">Authorized access to the Status List</a></p>
+                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-cached-and-stale-status-lis" class="internal xref">Cached and Stale status lists</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.4">
                 <p id="section-toc.1-1.11.2.4.1"><a href="#section-11.4" class="auto internal xref">11.4</a>.  <a href="#name-historical-resolution" class="internal xref">Historical resolution</a></p>
@@ -1251,19 +1251,22 @@ The status list token data structures themselves are also represented as JWTs or
             <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-privacy-considerations" class="internal xref">Privacy Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-limiting-issuers-observabil" class="internal xref">Limiting issuers observability of token verification</a></p>
+                <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-observability-of-issuers" class="internal xref">Observability of Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
                 <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-malicious-issuers" class="internal xref">Malicious Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.3">
-                <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-unobservability-of-relying-" class="internal xref">Unobservability of Relying Parties</a></p>
+                <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-observability-of-relying-pa" class="internal xref">Observability of Relying Parties</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.4">
-                <p id="section-toc.1-1.12.2.4.1"><a href="#section-12.4" class="auto internal xref">12.4</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
+                <p id="section-toc.1-1.12.2.4.1"><a href="#section-12.4" class="auto internal xref">12.4</a>.  <a href="#name-observability-of-outsiders" class="internal xref">Observability of Outsiders</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5">
-                <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-third-party-hosting" class="internal xref">Third Party Hosting</a></p>
+                <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.6">
+                <p id="section-toc.1-1.12.2.6.1"><a href="#section-12.6" class="auto internal xref">12.6</a>.  <a href="#name-third-party-hosting" class="internal xref">Third Party Hosting</a></p>
 </li>
             </ul>
 </li>
@@ -1272,6 +1275,12 @@ The status list token data structures themselves are also represented as JWTs or
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
                 <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="auto internal xref">13.1</a>.  <a href="#name-token-lifecycle" class="internal xref">Token Lifecycle</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
+                <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="auto internal xref">13.2</a>.  <a href="#name-default-values-and-double-a" class="internal xref">Default Values and Double Allocation</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
+                <p id="section-toc.1-1.13.2.3.1"><a href="#section-13.3" class="auto internal xref">13.3</a>.  <a href="#name-status-list-size" class="internal xref">Status List Size</a></p>
 </li>
             </ul>
 </li>
@@ -1627,22 +1636,19 @@ a2                              # map(2)
 <p id="section-5.1-4">The following content applies to the JWT Claims Set:<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1-5.1">
-            <p id="section-5.1-5.1.1"><code>iss</code>: <span class="bcp14">REQUIRED</span> when also present in the Referenced Token. The <code>iss</code> (issuer) claim <span class="bcp14">MUST</span> specify a unique string identifier for the entity that issued the Status List Token. In the absence of an application profile specifying otherwise, compliant applications <span class="bcp14">MUST</span> compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. The value <span class="bcp14">MUST</span> be equal to that of the <code>iss</code> claim contained within the Referenced Token.<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.1.1"><code>sub</code>: <span class="bcp14">REQUIRED</span>. The <code>sub</code> (subject) claim <span class="bcp14">MUST</span> specify the URI of the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.2">
-            <p id="section-5.1-5.2.1"><code>sub</code>: <span class="bcp14">REQUIRED</span>. The <code>sub</code> (subject) claim <span class="bcp14">MUST</span> specify the URI of the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.2.1"><code>iat</code>: <span class="bcp14">REQUIRED</span>. The <code>iat</code> (issued at) claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.3">
-            <p id="section-5.1-5.3.1"><code>iat</code>: <span class="bcp14">REQUIRED</span>. The <code>iat</code> (issued at) claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.3.1"><code>exp</code>: <span class="bcp14">OPTIONAL</span>. The <code>exp</code> (expiration time) claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by its issuer.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.4">
-            <p id="section-5.1-5.4.1"><code>exp</code>: <span class="bcp14">OPTIONAL</span>. The <code>exp</code> (expiration time) claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by its issuer.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.4.1"><code>ttl</code>: <span class="bcp14">OPTIONAL</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.5">
-            <p id="section-5.1-5.5.1"><code>ttl</code>: <span class="bcp14">OPTIONAL</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number.<a href="#section-5.1-5.5.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-5.1-5.6">
-            <p id="section-5.1-5.6.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. The <code>status_list</code> (status list) claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-json" class="auto internal xref">Section 4.1</a>.<a href="#section-5.1-5.6.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.5.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. The <code>status_list</code> (status list) claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-json" class="auto internal xref">Section 4.1</a>.<a href="#section-5.1-5.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.1-6">The following additional rules apply:<a href="#section-5.1-6" class="pilcrow">¶</a></p>
@@ -1672,7 +1678,6 @@ a2                              # map(2)
 {
   "exp": 2291720170,
   "iat": 1686920170,
-  "iss": "https://example.com",
   "status_list": {
     "bits": 1,
     "lst": "eNrbuRgAAhcBXQ"
@@ -1699,22 +1704,19 @@ a2                              # map(2)
 <p id="section-5.2-4">The following content applies to the CWT Claims Set:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-5.1">
-            <p id="section-5.2-5.1.1"><code>1</code> (issuer): <span class="bcp14">REQUIRED</span>. Same definition as <code>iss</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.1.1"><code>2</code> (subject): <span class="bcp14">REQUIRED</span>. Same definition as <code>sub</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.2">
-            <p id="section-5.2-5.2.1"><code>2</code> (subject): <span class="bcp14">REQUIRED</span>. Same definition as <code>sub</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.2.1"><code>6</code> (issued at): <span class="bcp14">REQUIRED</span>. Same definition as <code>iat</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.3">
-            <p id="section-5.2-5.3.1"><code>6</code> (issued at): <span class="bcp14">REQUIRED</span>. Same definition as <code>iat</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.3.1"><code>4</code> (expiration time): <span class="bcp14">OPTIONAL</span>. Same definition as <code>exp</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.4">
-            <p id="section-5.2-5.4.1"><code>4</code> (expiration time): <span class="bcp14">OPTIONAL</span>. Same definition as <code>exp</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.4.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. Same definition as <code>ttl</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.5">
-            <p id="section-5.2-5.5.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. Same definition as <code>ttl</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-5.2-5.6">
-            <p id="section-5.2-5.6.1"><code>65533</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-5.6.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.5.1"><code>65533</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-6">The following additional rules apply:<a href="#section-5.2-6" class="pilcrow">¶</a></p>
@@ -1735,12 +1737,12 @@ a2                              # map(2)
 <p id="section-5.2-8">The following is a non-normative example for a Status List Token in CWT format in Hex:<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-9">
 <pre>
-d28453a20126106e7374617475736c6973742b637774a1044231325866a602782168
-747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f310173
-68747470733a2f2f6578616d706c652e636f6d061a648c5bea041a8898dfea19fffe
-19a8c019ffff56a2646269747301636c73744a78dadbb918000217015d5840dc420b
-f1b41b8cac5c9b0fbb120fc56f123334f711418674ad84be70f9b2da3ffd289331cb
-ad37c9c2f8bdd07741199902d529446bb824d697bdb3331bcabd2c
+d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
+747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
+648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
+b918000217015d5840c3935e4815404ad6848ce560c73be37930adfb4e8b85a6ff1e
+b4670d0c615c15ef25a290b368435aa3964ad215602a0f472f8ab0cb73da6a2d77dc
+5bc6c190b9
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1755,23 +1757,21 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 66                       #     bytes(102)
-      a602782168747470733a2f2f  #       "¦\x02x!https://"
+    58 50                       #     bytes(80)
+      a502782168747470733a2f2f  #       "¥\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
-      31017368747470733a2f2f65  #       "1\x01shttps://e"
-      78616d706c652e636f6d061a  #       "xample.com\x06\x1a"
-      648c5bea041a8898dfea19ff  #       "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿ"
-      fe19a8c019ffff56a2646269  #       "þ\x19¨À\x19ÿÿV¢dbi"
-      747301636c73744a78dadbb9  #       "ts\x01clstJxÚÛ¹"
-      18000217015d              #       "\x18\x00\x02\x17\x01]"
+      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
+      ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
+      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
+      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      dc420bf1b41b8cac5c9b0fbb  #       "ÜB\x0bñ´\x1b\x8c¬\\x9b\x0f»"
-      120fc56f123334f711418674  #       "\x12\x0fÅo\x1234÷\x11A\x86t"
-      ad84be70f9b2da3ffd289331  #       "\xad\x84¾pù²Ú?ý(\x931"
-      cbad37c9c2f8bdd077411999  #       "Ë\xad7ÉÂø½ÐwA\x19\x99"
-      02d529446bb824d697bdb333  #       "\x02Õ)Dk¸$Ö\x97½³3"
-      1bcabd2c                  #       "\x1bÊ½,"
+      c3935e4815404ad6848ce560  #       "Ã\x93^H\x15@JÖ\x84\x8cå`"
+      c73be37930adfb4e8b85a6ff  #       "Ç;ãy0\xadûN\x8b\x85¦ÿ"
+      1eb4670d0c615c15ef25a290  #       "\x1e´g\x0d\x0ca\\x15ï%¢\x90"
+      b368435aa3964ad215602a0f  #       "³hCZ£\x96JÒ\x15`*\x0f"
+      472f8ab0cb73da6a2d77dc5b  #       "G/\x8a°ËsÚj-wÜ["
+      c6c190b9                  #       "ÆÁ\x90¹"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1793,26 +1793,23 @@ d2                              # tag(18)
 </div>
 <div id="referenced-token-jwt">
 <section id="section-6.2">
-        <h3 id="name-referenced-token-in-jwt-for">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-referenced-token-in-jwt-for" class="section-name selfRef">Referenced Token in JWT Format</a>
+        <h3 id="name-referenced-token-in-jose-fo">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-referenced-token-in-jose-fo" class="section-name selfRef">Referenced Token in JOSE Format</a>
         </h3>
-<p id="section-6.2-1">The Referenced Token <span class="bcp14">MUST</span> be encoded as a "JSON Web Token (JWT)" according to <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "JSON Web Token (JWT)" according to <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> or other formats based on JOSE.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">The following content applies to the JWT Claims Set:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-3.1">
-            <p id="section-6.2-3.1.1"><code>iss</code>: <span class="bcp14">REQUIRED</span> when also present in the Status List Token. The <code>iss</code> (issuer) claim <span class="bcp14">MUST</span> specify a unique string identifier for the entity that issued the Referenced Token. In the absence of an application profile specifying otherwise, compliant applications <span class="bcp14">MUST</span> compare issuer values using the Simple String Comparison method defined in Section 6.2.1 of <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. The value <span class="bcp14">MUST</span> be equal to that of the <code>iss</code> claim contained within the referenced Status List Token.<a href="#section-6.2-3.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.2-3.2">
-            <p id="section-6.2-3.2.1"><code>status</code>: <span class="bcp14">REQUIRED</span>. The <code>status</code> (status) claim <span class="bcp14">MUST</span> specify a JSON Object that contains at least one reference to a status mechanism.<a href="#section-6.2-3.2.1" class="pilcrow">¶</a></p>
+            <p id="section-6.2-3.1.1"><code>status</code>: <span class="bcp14">REQUIRED</span>. The <code>status</code> (status) claim <span class="bcp14">MUST</span> specify a JSON Object that contains at least one reference to a status mechanism.<a href="#section-6.2-3.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.2-3.2.2.1">
-                <p id="section-6.2-3.2.2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. It <span class="bcp14">MUST</span> at least contain the following claims:<a href="#section-6.2-3.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.2-3.1.2.1">
+                <p id="section-6.2-3.1.2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It contains a reference to a Status List or Status List Token. It <span class="bcp14">MUST</span> at least contain the following claims:<a href="#section-6.2-3.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.2-3.2.2.1.2.1">
-                    <p id="section-6.2-3.2.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of <code>idx</code> <span class="bcp14">MUST</span> be a non-negative number, containing a value of zero or greater.<a href="#section-6.2-3.2.2.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.2-3.1.2.1.2.1">
+                    <p id="section-6.2-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of <code>idx</code> <span class="bcp14">MUST</span> be a non-negative number, containing a value of zero or greater.<a href="#section-6.2-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="normal" id="section-6.2-3.2.2.1.2.2">
-                    <p id="section-6.2-3.2.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a String value that identifies the Status List or Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-6.2-3.2.2.1.2.2.1" class="pilcrow">¶</a></p>
+                  <li class="normal" id="section-6.2-3.1.2.1.2.2">
+                    <p id="section-6.2-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a String value that identifies the Status List or Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-6.2-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -1829,7 +1826,6 @@ d2                              # tag(18)
 }
 .
 {
-  "iss": "https://example.com",
   "status": {
     "status_list": {
       "idx": 0,
@@ -1838,6 +1834,50 @@ d2                              # tag(18)
   }
 }
 </pre><a href="#section-6.2-6" class="pilcrow">¶</a>
+</div>
+<p id="section-6.2-7">SD-JWT-based Verifiable Credentials <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.2-7" class="pilcrow">¶</a></p>
+<p id="section-6.2-8">The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:<a href="#section-6.2-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-6.2-9">
+<pre>
+eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
+Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
+cyI6ICJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsICJpYXQiOiAxNjgzMDAwMDAw
+LCAiZXhwIjogMTg4MzAwMDAwMCwgInN1YiI6ICI2YzVjMGE0OS1iNTg5LTQzMWQtYmFl
+Ny0yMTkxMjJhOWVjMmMiLCAic3RhdHVzIjogeyJzdGF0dXNfbGlzdCI6IHsiaWR4Ijog
+MCwgInVyaSI6ICJodHRwczovL2V4YW1wbGUuY29tL3N0YXR1c2xpc3RzLzEifX0sICJf
+c2RfYWxnIjogInNoYS0yNTYifQ.-kgS-R-Z4DEDlqb8kb6381_gHHNatsoF1fcVKZk3M
+06CrnV8F8k9d2w2V_YAOvgcb0f11FqDFezXBXH30d4vcw~WyIyR0xDNDJzS1F2ZUNmR2
+ZyeU5STjl3IiwgInN0cmVldF9hZGRyZXNzIiwgIlNjaHVsc3RyLiAxMiJd~WyJlbHVWN
+U9nM2dTTklJOEVZbnN4QV9BIiwgImxvY2FsaXR5IiwgIlNjaHVscGZvcnRhIl0~WyI2S
+Wo3dE0tYTVpVlBHYm9TNXRtdlZBIiwgInJlZ2lvbiIsICJTYWNoc2VuLUFuaGFsdCJd~
+WyJlSThaV205UW5LUHBOUGVOZW5IZGhRIiwgImNvdW50cnkiLCAiREUiXQ~WyJRZ19PN
+jR6cUF4ZTQxMmExMDhpcm9BIiwgImFkZHJlc3MiLCB7Il9zZCI6IFsiNnZoOWJxLXpTN
+EdLTV83R3BnZ1ZiWXp6dTZvT0dYcm1OVkdQSFA3NVVkMCIsICI5Z2pWdVh0ZEZST0NnU
+nJ0TmNHVVhtRjY1cmRlemlfNkVyX2o3NmttWXlNIiwgIktVUkRQaDRaQzE5LTN0aXotR
+GYzOVY4ZWlkeTFvVjNhM0gxRGEyTjBnODgiLCAiV045cjlkQ0JKOEhUQ3NTMmpLQVN4V
+GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
+</pre><a href="#section-6.2-9" class="pilcrow">¶</a>
+</div>
+<p id="section-6.2-10">Resulting payload of the example above:<a href="#section-6.2-10" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-6.2-11">
+<pre>
+{
+  "_sd": [
+    "HvrKX6fPV0v9K_yCVFBiLFHsMaxcD_114Em6VT8x1lg"
+  ],
+  "iss": "https://example.com/issuer",
+  "iat": 1683000000,
+  "exp": 1883000000,
+  "sub": "6c5c0a49-b589-431d-bae7-219122a9ec2c",
+  "status": {
+    "status_list": {
+      "idx": 0,
+      "uri": "https://example.com/statuslists/1"
+    }
+  },
+  "_sd_alg": "sha-256"
+}
+</pre><a href="#section-6.2-11" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1850,19 +1890,16 @@ d2                              # tag(18)
 <p id="section-6.3-2">The following content applies to the CWT Claims Set:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1">
-            <p id="section-6.3-3.1.1"><code>1</code> (issuer): <span class="bcp14">REQUIRED</span> when also present in the Referenced Token. Same definition as <code>iss</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-6.3-3.2">
-            <p id="section-6.3-3.2.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim is encoded as a <code>Status</code> CBOR structure and <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:<a href="#section-6.3-3.2.1" class="pilcrow">¶</a></p>
+            <p id="section-6.3-3.1.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim is encoded as a <code>Status</code> CBOR structure and <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.3-3.2.2.1">
-                <p id="section-6.3-3.2.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-3.2.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.3-3.1.2.1">
+                <p id="section-6.3-3.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-3.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.3-3.2.2.1.2.1">
-                    <p id="section-6.3-3.2.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>idx</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.2.2.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.3-3.1.2.1.2.1">
+                    <p id="section-6.3-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>idx</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="normal" id="section-6.3-3.2.2.1.2.2">
-                    <p id="section-6.3-3.2.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>uri</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.2.2.1.2.2.1" class="pilcrow">¶</a></p>
+                  <li class="normal" id="section-6.3-3.1.2.1.2.2">
+                    <p id="section-6.3-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>uri</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -1876,9 +1913,9 @@ d2                              # tag(18)
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584070dbd8168fd8b7450ec993e23f467e2069a913
-ff7d9498586a32aea197b3ba9b13285cdb43bac0f5929d0a88c87c38fb4b70b98053
-bb7486faa058064694845d
+7374617475736c697374732f315840852ba0a03b744d521f82318ba39f6ff749d9da
+51bc3d4d85c753883a3928a4c70d49212fe24d2191645aaa04d94b8e3b02f6fcaa7a
+08e4d24390263e43aeee23
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1903,12 +1940,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      70dbd8168fd8b7450ec993e2  #       "pÛØ\x16\x8fØ·E\x0eÉ\x93â"
-      3f467e2069a913ff7d949858  #       "?F~ i©\x13ÿ}\x94\x98X"
-      6a32aea197b3ba9b13285cdb  #       "j2®¡\x97³º\x9b\x13(\Û"
-      43bac0f5929d0a88c87c38fb  #       "CºÀõ\x92\x9d\x0a\x88È|8û"
-      4b70b98053bb7486faa05806  #       "Kp¹\x80S»t\x86ú\xa0X\x06"
-      4694845d                  #       "F\x94\x84]"
+      852ba0a03b744d521f82318b  #       "\x85+\xa0\xa0;tMR\x1f\x821\x8b"
+      a39f6ff749d9da51bc3d4d85  #       "£\x9fo÷IÙÚQ¼=M\x85"
+      c753883a3928a4c70d49212f  #       "ÇS\x88:9(¤Ç\x0dI!/"
+      e24d2191645aaa04d94b8e3b  #       "âM!\x91dZª\x04ÙK\x8e;"
+      02f6fcaa7a08e4d24390263e  #       "\x02öüªz\x08äÒC\x90&amp;&gt;"
+      43aeee23                  #       "C®î#"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1990,8 +2027,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.Mmjr6brP5dbxgY1PrOgP9qouqcCl954CzoDgbYKefh1IoxjNJZQd
-cfTsbvuX-lyVUaCWrqJ0GQqiRbZ02qK29A
+nR0bCI6NDMyMDB9.L8272Hq_AYJoqP7U2oV00hosA3luLF3TFSHTHC8NrDtlg-gECjJG
+0qZ2Ozjb7-xhqATL8IJM71o6BUo80T35eA
 </pre><a href="#section-8.1-6" class="pilcrow">¶</a>
 </div>
 <p id="section-8.1-7">The Relying Party <span class="bcp14">SHOULD</span> send the following Accept-Header to indicate the requested response type:<a href="#section-8.1-7" class="pilcrow">¶</a></p>
@@ -2078,10 +2115,7 @@ As this is out of scope of this document, this validation is not be described he
                 <p id="section-8.3-3.4.2.3.1">If expiration time is defined (<code>exp</code> or <code>4</code>), it <span class="bcp14">MUST</span> be checked if the Status List Token is expired<a href="#section-8.3-3.4.2.3.1" class="pilcrow">¶</a></p>
 </li>
               <li id="section-8.3-3.4.2.4">
-                <p id="section-8.3-3.4.2.4.1">If the Referenced Token contains an issuer claim, the Status List Token <span class="bcp14">MUST</span> contain the same issuer claim (<code>iss</code> or <code>1</code>)<a href="#section-8.3-3.4.2.4.1" class="pilcrow">¶</a></p>
-</li>
-              <li id="section-8.3-3.4.2.5">
-                <p id="section-8.3-3.4.2.5.1">If the Relying Party is using a system for caching the Status List Token, it <span class="bcp14">SHOULD</span> check the <code>ttl</code> claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl &lt; current time)<a href="#section-8.3-3.4.2.5.1" class="pilcrow">¶</a></p>
+                <p id="section-8.3-3.4.2.4.1">If the Relying Party is using a system for caching the Status List Token, it <span class="bcp14">SHOULD</span> check the <code>ttl</code> claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl &lt; current time)<a href="#section-8.3-3.4.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ol>
 </li>
@@ -2230,26 +2264,28 @@ encoded:
         <h3 id="name-correct-decoding-and-parsin">
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-correct-decoding-and-parsin" class="section-name selfRef">Correct decoding and parsing of the encoded status list</a>
         </h3>
-<p id="section-11.1-1">TODO elaborate on risks of incorrect parsing/decoding leading to erroneous status data<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.1-1">Implementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.1-2">Implementations are <span class="bcp14">RECOMMENDED</span> to verify correctness using the test vectors given by this specification.<a href="#section-11.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-guidance-for-jwt-and-cwt">
+<section id="section-11.2">
+        <h3 id="name-security-guidance-for-jwt-a">
+<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-security-guidance-for-jwt-a" class="section-name selfRef">Security Guidance for JWT and CWT</a>
+        </h3>
+<p id="section-11.2-1">A Status List Token in the JWT format should follow the security considerations of <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> and the best current practices of <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span>.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
+<p id="section-11.2-2">A Status List Token in the CWT format should follow the security considerations of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-11.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cached-and-stale-status-lists">
-<section id="section-11.2">
+<section id="section-11.3">
         <h3 id="name-cached-and-stale-status-lis">
-<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-cached-and-stale-status-lis" class="section-name selfRef">Cached and Stale status lists</a>
+<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-cached-and-stale-status-lis" class="section-name selfRef">Cached and Stale status lists</a>
         </h3>
-<p id="section-11.2-1">When consumers or verifiers of the Status List fetch the data, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
+<p id="section-11.3-1">When consumers or verifiers of the Status List fetch the data, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
 in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
 a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
-a fresh copy of the status list even if that status list is not expired.<a href="#section-11.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="security-authorization">
-<section id="section-11.3">
-        <h3 id="name-authorized-access-to-the-st">
-<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-authorized-access-to-the-st" class="section-name selfRef">Authorized access to the Status List</a>
-        </h3>
-<p id="section-11.3-1">TODO elaborate on authorization mechanisms preventing misuse and profiling as described in privacy section<a href="#section-11.3-1" class="pilcrow">¶</a></p>
+a fresh copy of the status list even if that status list is not expired.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="historical-resolution">
@@ -2278,8 +2314,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.Mmjr6brP5dbxgY1PrOgP9qouqcCl954CzoDgbYKefh1IoxjNJZQd
-cfTsbvuX-lyVUaCWrqJ0GQqiRbZ02qK29A
+nR0bCI6NDMyMDB9.L8272Hq_AYJoqP7U2oV00hosA3luLF3TFSHTHC8NrDtlg-gECjJG
+0qZ2Ozjb7-xhqATL8IJM71o6BUo80T35eA
 </pre><a href="#section-11.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2293,12 +2329,13 @@ cfTsbvuX-lyVUaCWrqJ0GQqiRbZ02qK29A
       </h2>
 <div id="privacy-issuer">
 <section id="section-12.1">
-        <h3 id="name-limiting-issuers-observabil">
-<a href="#section-12.1" class="section-number selfRef">12.1. </a><a href="#name-limiting-issuers-observabil" class="section-name selfRef">Limiting issuers observability of token verification</a>
+        <h3 id="name-observability-of-issuers">
+<a href="#section-12.1" class="section-number selfRef">12.1. </a><a href="#name-observability-of-issuers" class="section-name selfRef">Observability of Issuers</a>
         </h3>
 <p id="section-12.1-1">The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable him to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.<a href="#section-12.1-1" class="pilcrow">¶</a></p>
 <p id="section-12.1-2">The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.<a href="#section-12.1-2" class="pilcrow">¶</a></p>
 <p id="section-12.1-3">The herd privacy is depending on the number of entities within the Status List called its size. A larger size results in better privacy but also impacts the performance as more data has to be transferred to read the Status List.<a href="#section-12.1-3" class="pilcrow">¶</a></p>
+<p id="section-12.1-4">Additionally, the Issuer may analyse data from the HTTP request to identify the Relying Party, e.g. through the sender's IP address. This behaviour may be mitigated by private relay protocols or other mechanism hiding the original sender like <span>[<a href="#RFC9458" class="cite xref">RFC9458</a>]</span>.<a href="#section-12.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="malicious-issuers">
@@ -2311,44 +2348,58 @@ cfTsbvuX-lyVUaCWrqJ0GQqiRbZ02qK29A
 </div>
 <div id="privacy-relying-party">
 <section id="section-12.3">
-        <h3 id="name-unobservability-of-relying-">
-<a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-unobservability-of-relying-" class="section-name selfRef">Unobservability of Relying Parties</a>
+        <h3 id="name-observability-of-relying-pa">
+<a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-observability-of-relying-pa" class="section-name selfRef">Observability of Relying Parties</a>
         </h3>
 <p id="section-12.3-1">Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided <code>uri</code> parameter and look up the corresponding <code>index</code>. However, the Relying Party may persistently store the <code>uri</code> and <code>index</code> of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.<a href="#section-12.3-1" class="pilcrow">¶</a></p>
-<p id="section-12.3-2">This behaviour could be mitigated by:
-- adding authorization rules to the Status List, see <a href="#security-authorization" class="auto internal xref">Section 11.3</a>.
-- regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.3-2" class="pilcrow">¶</a></p>
+<p id="section-12.3-2">TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture<a href="#section-12.3-2" class="pilcrow">¶</a></p>
+<p id="section-12.3-3">This behaviour could be mitigated by:
+- regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="privacy-outsider">
+<section id="section-12.4">
+        <h3 id="name-observability-of-outsiders">
+<a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-observability-of-outsiders" class="section-name selfRef">Observability of Outsiders</a>
+        </h3>
+<p id="section-12.4-1">Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
+<p id="section-12.4-2">This behaviour could be mitigated by:
+- disable the historical data feature (TODO:link)
+- disable the Status List Aggregation {#batch-fetching}
+- choose non-sequential, pseudo-random or random indices
+- use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
+- choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="unlinkability">
-<section id="section-12.4">
+<section id="section-12.5">
         <h3 id="name-unlinkability">
-<a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
+<a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
         </h3>
-<p id="section-12.4-1">Colluding Issuers and a Relying Parties have the possibility to link two transactions, as the tuple of <code>uri</code> and <code>index</code> inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
-<p id="section-12.4-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.4-2" class="pilcrow">¶</a></p>
-<p id="section-12.4-3">To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.4-3" class="pilcrow">¶</a></p>
+<p id="section-12.5-1">Colluding Issuers and Relying Parties have the possibility to link two transactions, as the tuple of <code>uri</code> and <code>index</code> inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
+<p id="section-12.5-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.5-2" class="pilcrow">¶</a></p>
+<p id="section-12.5-3">To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-12.4-4.1">
-            <p id="section-12.4-4.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.4-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-12.5-4.1">
+            <p id="section-12.5-4.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.5-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-12.4-4.2">
-            <p id="section-12.4-4.2.1">use decoy or dead entries to obfuscate the real number of Referenced Tokens within a Status List<a href="#section-12.4-4.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-12.5-4.2">
+            <p id="section-12.5-4.2.1">use decoy entries to obfuscate the real number of Referenced Tokens within a Status List<a href="#section-12.5-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-12.4-4.3">
-            <p id="section-12.4-4.3.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.4-4.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-12.5-4.3">
+            <p id="section-12.5-4.3.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.5-4.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="third-party-hosting">
-<section id="section-12.5">
+<section id="section-12.6">
         <h3 id="name-third-party-hosting">
-<a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-third-party-hosting" class="section-name selfRef">Third Party Hosting</a>
+<a href="#section-12.6" class="section-number selfRef">12.6. </a><a href="#name-third-party-hosting" class="section-name selfRef">Third Party Hosting</a>
         </h3>
-<p id="section-12.5-1">TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
+<p id="section-12.6-1">TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
 TODO evaluate definition of Status List Provider?
- An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
+ An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.<a href="#section-12.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2364,8 +2415,26 @@ TODO evaluate definition of Status List Provider?
 <a href="#section-13.1" class="section-number selfRef">13.1. </a><a href="#name-token-lifecycle" class="section-name selfRef">Token Lifecycle</a>
         </h3>
 <p id="section-13.1-1">The lifetime of a Status List (and the Status List Token) depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List (and the Status List Token).<a href="#section-13.1-1" class="pilcrow">¶</a></p>
-<p id="section-13.1-2">Referenced Tokens may be regularly re-issued to increase security or to mitigate linkability and prevent tracking by Relying Parties. In this case, every Referenced Token <span class="bcp14">MUST</span> have a fresh Status List entry.<a href="#section-13.1-2" class="pilcrow">¶</a></p>
+<p id="section-13.1-2">Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token <span class="bcp14">MUST</span> have a fresh Status List entry in order to prevent this becoming possible source of correlation.<a href="#section-13.1-2" class="pilcrow">¶</a></p>
 <p id="section-13.1-3">Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token <span class="bcp14">MUST</span> have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.<a href="#section-13.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="default-values-and-double-allocation">
+<section id="section-13.2">
+        <h3 id="name-default-values-and-double-a">
+<a href="#section-13.2" class="section-number selfRef">13.2. </a><a href="#name-default-values-and-double-a" class="section-name selfRef">Default Values and Double Allocation</a>
+        </h3>
+<p id="section-13.2-1">Implementations producing Status Lists are <span class="bcp14">RECOMMENDED</span> to initialize the Status List byte array with a default value and provide this as an initialization parameter to the Issuer. The Issuer is <span class="bcp14">RECOMMENDED</span> to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.<a href="#section-13.2-1" class="pilcrow">¶</a></p>
+<p id="section-13.2-2">Implementations producing Status Lists are <span class="bcp14">RECOMMENDED</span> to prevent double allocation, i.e. re-using the same <code>uri</code> and <code>index</code> for multiple Referenced Tokens. The Issuer <span class="bcp14">MUST</span> prevent any unintended double allocation by using the Status List.<a href="#section-13.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="status-list-size">
+<section id="section-13.3">
+        <h3 id="name-status-list-size">
+<a href="#section-13.3" class="section-number selfRef">13.3. </a><a href="#name-status-list-size" class="section-name selfRef">Status List Size</a>
+        </h3>
+<p id="section-13.3-1">The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is <span class="bcp14">RECOMMENDED</span> that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. <code>size-in-bits</code> % 8 = 0.<a href="#section-13.3-1" class="pilcrow">¶</a></p>
+<p id="section-13.3-2">The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices.<a href="#section-13.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2398,7 +2467,7 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
               <p id="section-14.1.1-1.3.1">Change Controller: IETF<a href="#section-14.1.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.1.1-1.4">
-              <p id="section-14.1.1-1.4.1">Specification Document(s):  <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-14.1.1-1.4.1" class="pilcrow">¶</a></p>
+              <p id="section-14.1.1-1.4.1">Specification Document(s): <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-14.1.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-14.1.1-2"><br></p>
@@ -2407,13 +2476,13 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
               <p id="section-14.1.1-3.1.1">Claim Name: <code>status_list</code><a href="#section-14.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.1.1-3.2">
-              <p id="section-14.1.1-3.2.1">Claim Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.<a href="#section-14.1.1-3.2.1" class="pilcrow">¶</a></p>
+              <p id="section-14.1.1-3.2.1">Claim Description: A status list containing up-to-date status information on multiple tokens.<a href="#section-14.1.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.1.1-3.3">
               <p id="section-14.1.1-3.3.1">Change Controller: IETF<a href="#section-14.1.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.1.1-3.4">
-              <p id="section-14.1.1-3.4.1">Specification Document(s):  <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-14.1.1-3.4.1" class="pilcrow">¶</a></p>
+              <p id="section-14.1.1-3.4.1">Specification Document(s): <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-14.1.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-14.1.1-4"><br></p>
@@ -2482,13 +2551,13 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
               <p id="section-14.2.2-1.1.1">Status Method Value: <code>status_list</code><a href="#section-14.2.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.2.2-1.2">
-              <p id="section-14.2.2-1.2.1">Status Method Description: A status list containing up-to-date status information on multiple other JWTs encoded as a bitarray.<a href="#section-14.2.2-1.2.1" class="pilcrow">¶</a></p>
+              <p id="section-14.2.2-1.2.1">Status Method Description: A status list containing up-to-date status information on multiple tokens.<a href="#section-14.2.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.2.2-1.3">
               <p id="section-14.2.2-1.3.1">Change Controller: IETF<a href="#section-14.2.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.2.2-1.4">
-              <p id="section-14.2.2-1.4.1">Specification Document(s):  <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a> of this specification<a href="#section-14.2.2-1.4.1" class="pilcrow">¶</a></p>
+              <p id="section-14.2.2-1.4.1">Specification Document(s): <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a> of this specification<a href="#section-14.2.2-1.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2522,7 +2591,7 @@ IANA "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA.CWT" class="ci
               <p id="section-14.3.1-2.4.1">Change Controller: IETF<a href="#section-14.3.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.3.1-2.5">
-              <p id="section-14.3.1-2.5.1">Specification Document(s):  <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-14.3.1-2.5.1" class="pilcrow">¶</a></p>
+              <p id="section-14.3.1-2.5.1">Specification Document(s): <a href="#status-claim" class="auto internal xref">Section 6.1</a> of this specification<a href="#section-14.3.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-14.3.1-3"><br></p>
@@ -2534,13 +2603,13 @@ IANA "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA.CWT" class="ci
               <p id="section-14.3.1-4.2.1">Claim Key: TBD (requested assignment 65533)<a href="#section-14.3.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.3.1-4.3">
-              <p id="section-14.3.1-4.3.1">Claim Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.<a href="#section-14.3.1-4.3.1" class="pilcrow">¶</a></p>
+              <p id="section-14.3.1-4.3.1">Claim Description: A status list containing up-to-date status information on multiple tokens.<a href="#section-14.3.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.3.1-4.4">
               <p id="section-14.3.1-4.4.1">Change Controller: IETF<a href="#section-14.3.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.3.1-4.5">
-              <p id="section-14.3.1-4.5.1">Specification Document(s):  <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-14.3.1-4.5.1" class="pilcrow">¶</a></p>
+              <p id="section-14.3.1-4.5.1">Specification Document(s): <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-14.3.1-4.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-14.3.1-5"><br></p>
@@ -2612,13 +2681,13 @@ IANA "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA.CWT" class="ci
               <p id="section-14.4.2-1.1.1">Status Method Value: <code>status_list</code><a href="#section-14.4.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.4.2-1.2">
-              <p id="section-14.4.2-1.2.1">Status Method Description: A status list containing up-to-date status information on multiple other CWTs encoded as a bitarray.<a href="#section-14.4.2-1.2.1" class="pilcrow">¶</a></p>
+              <p id="section-14.4.2-1.2.1">Status Method Description: A status list containing up-to-date status information on multiple tokens.<a href="#section-14.4.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.4.2-1.3">
               <p id="section-14.4.2-1.3.1">Change Controller: IETF<a href="#section-14.4.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.4.2-1.4">
-              <p id="section-14.4.2-1.4.1">Specification Document(s):  <a href="#referenced-token-cwt" class="auto internal xref">Section 6.3</a> of this specification<a href="#section-14.4.2-1.4.1" class="pilcrow">¶</a></p>
+              <p id="section-14.4.2-1.4.1">Specification Document(s): <a href="#referenced-token-cwt" class="auto internal xref">Section 6.3</a> of this specification<a href="#section-14.4.2-1.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2648,33 +2717,25 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
             <p id="section-14.5-3.4.1">Optional parameters: n/a<a href="#section-14.5-3.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-3.5">
-            <p id="section-14.5-3.5.1">Encoding considerations: binary; A JSON-based Status List is a JSON Object.<a href="#section-14.5-3.5.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-3.5.1">Encoding considerations: See <a href="#status-list-json" class="auto internal xref">Section 4.1</a> of this specification<a href="#section-14.5-3.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-3.6">
-            <p id="section-14.5-3.6.1">Security considerations: See (#Security) of [ this specification ]<a href="#section-14.5-3.6.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-3.6.1">Security considerations: See <a href="#Security" class="auto internal xref">Section 11</a> of this specification<a href="#section-14.5-3.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-3.7">
             <p id="section-14.5-3.7.1">Interoperability considerations: n/a<a href="#section-14.5-3.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-3.8">
-            <p id="section-14.5-3.8.1">Published specification: [ this specification ]<a href="#section-14.5-3.8.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-3.8.1">Published specification: this specification<a href="#section-14.5-3.8.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-3.9">
-            <p id="section-14.5-3.9.1">Applications that use this media type: Applications using [ this specification ] for updated status information of tokens<a href="#section-14.5-3.9.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-3.9.1">Applications that use this media type: Applications using this specification for updated status information of tokens<a href="#section-14.5-3.9.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-3.10">
             <p id="section-14.5-3.10.1">Fragment identifier considerations: n/a<a href="#section-14.5-3.10.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-3.11">
-            <p id="section-14.5-3.11.1">Additional information:<a href="#section-14.5-3.11.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-14.5-3.11.2.1">
-                <p id="section-14.5-3.11.2.1.1">File extension(s): n/a<a href="#section-14.5-3.11.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-14.5-3.11.2.2">
-                <p id="section-14.5-3.11.2.2.1">Macintosh file type code(s): n/a<a href="#section-14.5-3.11.2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
+            <p id="section-14.5-3.11.1">Additional information: n/a<a href="#section-14.5-3.11.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-3.12">
             <p id="section-14.5-3.12.1">Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de<a href="#section-14.5-3.12.1" class="pilcrow">¶</a></p>
@@ -2710,33 +2771,25 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
             <p id="section-14.5-5.4.1">Optional parameters: n/a<a href="#section-14.5-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-5.5">
-            <p id="section-14.5-5.5.1">Encoding considerations: binary; A JWT-based Status List is a JWT; JWT values are encoded as a series of base64url-encoded values (some of which may be the empty string) separated by period ('.') characters.<a href="#section-14.5-5.5.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-5.5.1">Encoding considerations: See <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> of this specification<a href="#section-14.5-5.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-5.6">
-            <p id="section-14.5-5.6.1">Security considerations: See (#Security) of [ this specification ]<a href="#section-14.5-5.6.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-5.6.1">Security considerations: See <a href="#Security" class="auto internal xref">Section 11</a> of this specification<a href="#section-14.5-5.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-5.7">
             <p id="section-14.5-5.7.1">Interoperability considerations: n/a<a href="#section-14.5-5.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-5.8">
-            <p id="section-14.5-5.8.1">Published specification: [ this specification ]<a href="#section-14.5-5.8.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-5.8.1">Published specification: this specification<a href="#section-14.5-5.8.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-5.9">
-            <p id="section-14.5-5.9.1">Applications that use this media type: Applications using [ this specification ] for updated status information of tokens<a href="#section-14.5-5.9.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-5.9.1">Applications that use this media type: Applications using this specification for updated status information of tokens<a href="#section-14.5-5.9.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-5.10">
             <p id="section-14.5-5.10.1">Fragment identifier considerations: n/a<a href="#section-14.5-5.10.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-5.11">
-            <p id="section-14.5-5.11.1">Additional information:<a href="#section-14.5-5.11.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-14.5-5.11.2.1">
-                <p id="section-14.5-5.11.2.1.1">File extension(s): n/a<a href="#section-14.5-5.11.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-14.5-5.11.2.2">
-                <p id="section-14.5-5.11.2.2.1">Macintosh file type code(s): n/a<a href="#section-14.5-5.11.2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
+            <p id="section-14.5-5.11.1">Additional information: n/a<a href="#section-14.5-5.11.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-5.12">
             <p id="section-14.5-5.12.1">Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de<a href="#section-14.5-5.12.1" class="pilcrow">¶</a></p>
@@ -2772,33 +2825,25 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
             <p id="section-14.5-7.4.1">Optional parameters: n/a<a href="#section-14.5-7.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-7.5">
-            <p id="section-14.5-7.5.1">Encoding considerations: binary; A CBOR-based Status List is a CBOR Object.<a href="#section-14.5-7.5.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-7.5.1">Encoding considerations: See <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a> of this specification<a href="#section-14.5-7.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-7.6">
-            <p id="section-14.5-7.6.1">Security considerations: See (#Security) of [ this specification ]<a href="#section-14.5-7.6.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-7.6.1">Security considerations: See <a href="#Security" class="auto internal xref">Section 11</a> of this specification<a href="#section-14.5-7.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-7.7">
             <p id="section-14.5-7.7.1">Interoperability considerations: n/a<a href="#section-14.5-7.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-7.8">
-            <p id="section-14.5-7.8.1">Published specification: [ this specification ]<a href="#section-14.5-7.8.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-7.8.1">Published specification: this specification<a href="#section-14.5-7.8.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-7.9">
-            <p id="section-14.5-7.9.1">Applications that use this media type: Applications using [ this specification ] for updated status information of tokens<a href="#section-14.5-7.9.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-7.9.1">Applications that use this media type: Applications using this specification for updated status information of tokens<a href="#section-14.5-7.9.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-7.10">
             <p id="section-14.5-7.10.1">Fragment identifier considerations: n/a<a href="#section-14.5-7.10.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-7.11">
-            <p id="section-14.5-7.11.1">Additional information:<a href="#section-14.5-7.11.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-14.5-7.11.2.1">
-                <p id="section-14.5-7.11.2.1.1">File extension(s): n/a<a href="#section-14.5-7.11.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-14.5-7.11.2.2">
-                <p id="section-14.5-7.11.2.2.1">Macintosh file type code(s): n/a<a href="#section-14.5-7.11.2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
+            <p id="section-14.5-7.11.1">Additional information: n/a<a href="#section-14.5-7.11.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-7.12">
             <p id="section-14.5-7.12.1">Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de<a href="#section-14.5-7.12.1" class="pilcrow">¶</a></p>
@@ -2834,33 +2879,25 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
             <p id="section-14.5-9.4.1">Optional parameters: n/a<a href="#section-14.5-9.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-9.5">
-            <p id="section-14.5-9.5.1">Encoding considerations: binary;<a href="#section-14.5-9.5.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-9.5.1">Encoding considerations: See <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> of this specification<a href="#section-14.5-9.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-9.6">
-            <p id="section-14.5-9.6.1">Security considerations: See (#Security) of [ this specification ]<a href="#section-14.5-9.6.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-9.6.1">Security considerations: See <a href="#Security" class="auto internal xref">Section 11</a> of this specification<a href="#section-14.5-9.6.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-9.7">
             <p id="section-14.5-9.7.1">Interoperability considerations: n/a<a href="#section-14.5-9.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-9.8">
-            <p id="section-14.5-9.8.1">Published specification: [ this specification ]<a href="#section-14.5-9.8.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-9.8.1">Published specification: this specification<a href="#section-14.5-9.8.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-9.9">
-            <p id="section-14.5-9.9.1">Applications that use this media type: Applications using [ this specification ] for updated status information of tokens<a href="#section-14.5-9.9.1" class="pilcrow">¶</a></p>
+            <p id="section-14.5-9.9.1">Applications that use this media type: Applications using this specification for updated status information of tokens<a href="#section-14.5-9.9.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-9.10">
             <p id="section-14.5-9.10.1">Fragment identifier considerations: n/a<a href="#section-14.5-9.10.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-9.11">
-            <p id="section-14.5-9.11.1">Additional information:<a href="#section-14.5-9.11.1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-14.5-9.11.2.1">
-                <p id="section-14.5-9.11.2.1.1">File extension(s): n/a<a href="#section-14.5-9.11.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-14.5-9.11.2.2">
-                <p id="section-14.5-9.11.2.2.1">Macintosh file type code(s): n/a<a href="#section-14.5-9.11.2.2.1" class="pilcrow">¶</a></p>
-</li>
-            </ul>
+            <p id="section-14.5-9.11.1">Additional information: n/a<a href="#section-14.5-9.11.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.5-9.12">
             <p id="section-14.5-9.12.1">Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de<a href="#section-14.5-9.12.1" class="pilcrow">¶</a></p>
@@ -2964,6 +3001,10 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8725">[RFC8725]</dt>
+        <dd>
+<span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Hardt, D.</span>, and <span class="refAuthor">M. Jones</span>, <span class="refTitle">"JSON Web Token Best Current Practices"</span>, <span class="seriesInfo">BCP 225</span>, <span class="seriesInfo">RFC 8725</span>, <span class="seriesInfo">DOI 10.17487/RFC8725</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8725">https://www.rfc-editor.org/rfc/rfc8725</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8949">[RFC8949]</dt>
         <dd>
 <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>&gt;</span>. </dd>
@@ -3004,6 +3045,10 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <dt id="RFC7800">[RFC7800]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Proof-of-Possession Key Semantics for JSON Web Tokens (JWTs)"</span>, <span class="seriesInfo">RFC 7800</span>, <span class="seriesInfo">DOI 10.17487/RFC7800</span>, <time datetime="2016-04" class="refDate">April 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7800">https://www.rfc-editor.org/rfc/rfc7800</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9458">[RFC9458]</dt>
+        <dd>
+<span class="refAuthor">Thomson, M.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Oblivious HTTP"</span>, <span class="seriesInfo">RFC 9458</span>, <span class="seriesInfo">DOI 10.17487/RFC9458</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9458">https://www.rfc-editor.org/rfc/rfc9458</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SD-JWT.VC">[SD-JWT.VC]</dt>
       <dd>
@@ -3047,16 +3092,40 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
           <p id="appendix-B-2.1.1">add optional support for historical requests<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">add CORS considerations to the http endpoint<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">add implementation consideration for Default Values, Double Allocation and Status List Size<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">add privacy consideration on using private relay protocols<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">added status_list CWT claim key assigned<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">add privacy consideration on observability of outsiders<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">move base64url definition to terminology<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">add security considerations on correct parsing and decoding<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.6">
+          <p id="appendix-B-2.6.1">remove requirement for matching iss claim in Referenced Token and Status List Token<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.7">
+          <p id="appendix-B-2.7.1">add sd-jwt-vc example<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.8">
+          <p id="appendix-B-2.8.1">fix CWT status_list map encoding<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.9">
+          <p id="appendix-B-2.9.1">editorial fixes<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.10">
+          <p id="appendix-B-2.10.1">add CORS considerations to the http endpoint<a href="#appendix-B-2.10.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.11">
+          <p id="appendix-B-2.11.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.11.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.12">
+          <p id="appendix-B-2.12.1">added status_list CWT claim key assigned<a href="#appendix-B-2.12.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.13">
+          <p id="appendix-B-2.13.1">move base64url definition to terminology<a href="#appendix-B-2.13.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-03<a href="#appendix-B-3" class="pilcrow">¶</a></p>
