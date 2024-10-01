@@ -1176,7 +1176,7 @@ The status list token data structures themselves are also represented as JWTs or
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-status-claim" class="internal xref">Status Claim</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-referenced-token-in-jose-fo" class="internal xref">Referenced Token in JOSE Format</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-referenced-token-in-jose" class="internal xref">Referenced Token in JOSE</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
                 <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-referenced-token-in-cose" class="internal xref">Referenced Token in COSE</a></p>
@@ -1734,9 +1734,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d58403769c3913b854ad86f7e6d2d793822cd4caca208fe1f34a3d3
-c13f8a7db2eae1a56731dda1377fcf0ef6d6fe6bf22073153d2592de5d0da3cad262
-3798b6a32f
+b918000217015d58400d166b54605b190421cf828030212097c9f298b3885accdf30
+4b3e297fc5c2c8c48776c0841c053c4b06b82c6fbd84d1c4952cdee95b31a2dc4716
+6c939d22c2
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1760,12 +1760,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3769c3913b854ad86f7e6d2d  #       "7iÃ\x91;\x85JØo~m-"
-      793822cd4caca208fe1f34a3  #       "y8"ÍL¬¢\x08þ\x1f4£"
-      d3c13f8a7db2eae1a56731dd  #       "ÓÁ?\x8a}²êá¥g1Ý"
-      a1377fcf0ef6d6fe6bf22073  #       "¡7\x7fÏ\x0eöÖþkò s"
-      153d2592de5d0da3cad26237  #       "\x15=%\x92Þ]\x0d£ÊÒb7"
-      98b6a32f                  #       "\x98¶£/"
+      0d166b54605b190421cf8280  #       "\x0d\x16kT`[\x19\x04!Ï\x82\x80"
+      30212097c9f298b3885accdf  #       "0! \x97Éò\x98³\x88ZÌß"
+      304b3e297fc5c2c8c48776c0  #       "0K&gt;)\x7fÅÂÈÄ\x87vÀ"
+      841c053c4b06b82c6fbd84d1  #       "\x84\x1c\x05&lt;K\x06¸,o½\x84Ñ"
+      c4952cdee95b31a2dc47166c  #       "Ä\x95,Þé[1¢ÜG\x16l"
+      939d22c2                  #       "\x93\x9d"Â"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1787,8 +1787,8 @@ d2                              # tag(18)
 </div>
 <div id="referenced-token-jose">
 <section id="section-6.2">
-        <h3 id="name-referenced-token-in-jose-fo">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-referenced-token-in-jose-fo" class="section-name selfRef">Referenced Token in JOSE Format</a>
+        <h3 id="name-referenced-token-in-jose">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-referenced-token-in-jose" class="section-name selfRef">Referenced Token in JOSE</a>
         </h3>
 <p id="section-6.2-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "JSON Web Token (JWT)" according to <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> or other formats based on JOSE.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">The following content applies to the JWT Claims Set:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
@@ -1880,7 +1880,7 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
         <h3 id="name-referenced-token-in-cose">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-referenced-token-in-cose" class="section-name selfRef">Referenced Token in COSE</a>
         </h3>
-<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "COSE Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> or other formats based on JOSE.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "COSE Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> or other formats based on COSE.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">The following content applies to the CWT Claims Set:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1">
@@ -1907,9 +1907,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840cd9ed7721f430fd9640d0b0a162b8ca95379ea
-56a4269b55bd545d6a43fc5dcf40e82dab628e55b62d7e39ff833988f15451572d87
-aefeb65f377b5e1a613916
+7374617475736c697374732f3158403ee6bc6e76325a52049f9d2f502e8a37197a7d
+a4dd26426f9bfa455b315da8aa52541b44dcef61bfd6b3412a8d7053648b6b00ae4d
+65465562f2b918db335e74
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1934,12 +1934,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      cd9ed7721f430fd9640d0b0a  #       "Í\x9e×r\x1fC\x0fÙd\x0d\x0b\x0a"
-      162b8ca95379ea56a4269b55  #       "\x16+\x8c©SyêV¤&amp;\x9bU"
-      bd545d6a43fc5dcf40e82dab  #       "½T]jCü]Ï@è-«"
-      628e55b62d7e39ff833988f1  #       "b\x8eU¶-~9ÿ\x839\x88ñ"
-      5451572d87aefeb65f377b5e  #       "TQW-\x87®þ¶_7{^"
-      1a613916                  #       "\x1aa9\x16"
+      3ee6bc6e76325a52049f9d2f  #       "&gt;æ¼nv2ZR\x04\x9f\x9d/"
+      502e8a37197a7da4dd26426f  #       "P.\x8a7\x19z}¤Ý&amp;Bo"
+      9bfa455b315da8aa52541b44  #       "\x9búE[1]¨ªRT\x1bD"
+      dcef61bfd6b3412a8d705364  #       "Üïa¿Ö³A*\x8dpSd"
+      8b6b00ae4d65465562f2b918  #       "\x8bk\x00®MeFUbò¹\x18"
+      db335e74                  #       "Û3^t"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the MSO. The "status" parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
