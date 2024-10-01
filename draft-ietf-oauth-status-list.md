@@ -326,7 +326,7 @@ The following is the CBOR Annotated Hex output of the example above:
 
 By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
-## Referenced Token in JOSE Format {#referenced-token-jose}
+## Referenced Token in JOSE {#referenced-token-jose}
 
 The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}} or other formats based on JOSE.
 
@@ -407,7 +407,7 @@ Resulting payload of the example above:
 
 ## Referenced Token in COSE {#referenced-token-cose}
 
-The Referenced Token MAY be encoded as a "COSE Web Token (CWT)" object according to {{RFC8392}} or other formats based on JOSE.
+The Referenced Token MAY be encoded as a "COSE Web Token (CWT)" object according to {{RFC8392}} or other formats based on COSE.
 
 The following content applies to the CWT Claims Set:
 
