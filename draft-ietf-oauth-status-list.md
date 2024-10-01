@@ -993,6 +993,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -04
 
+* add mDL example as Referenced Token and consolidate CWT and CBOR sections
 * add implementation consideration for Default Values, Double Allocation and Status List Size
 * add privacy consideration on using private relay protocols
 * add privacy consideration on observability of outsiders
