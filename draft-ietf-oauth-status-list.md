@@ -484,7 +484,7 @@ fa484caa722c228288f01d0c03a2c3d66f646967657374416c676f726974686d675
 fe8a1c4cafe
 ~~~
 
-The following is the CBOR Annotated Hex output of the example above:
+The following is the CBOR Diagnostic Notation of the example above:
 
 ~~~~~~~~~~
 [
