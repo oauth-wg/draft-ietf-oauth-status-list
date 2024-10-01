@@ -430,13 +430,13 @@ The following is the CBOR Annotated Hex output of the example above:
 {::include ./examples/referenced_token_cwt_diag}
 ~~~~~~~~~~
 
-ISO mdoc {{ISO.mdoc}} may utilize the Status List mechanism by introducing the `status` parameter in the MSO. The "status" parameter uses the same encoding as a CWT as defined in {{referenced-token-cose}}.
+ISO mdoc {{ISO.mdoc}} may utilize the Status List mechanism by introducing the `status` parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The `status` parameter uses the same encoding as a CWT as defined in {{referenced-token-cose}}.
 
 It is RECOMMENDED to use `status` for the label of the field that contains the `Status` CBOR structure.
 
 Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a Referenced Token in ISO mDL form as received from an Issuer in Hex:
+The following is a non-normative example for an IssuerAuth as specified in ISO mDL (also referred to as signed MSO) in Hex:
 
 ~~~ ascii-art
 
