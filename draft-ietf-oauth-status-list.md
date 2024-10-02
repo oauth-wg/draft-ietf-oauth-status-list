@@ -653,13 +653,13 @@ a fresh copy of the status list even if that status list is not expired.
 ## Historical resolution
 By design, the Status List mechanism only conveys information about the state of a Referenced Token at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.
 
-If support for historical status information needs to be supported, this can be achieved by extending the Status List Request as originally defined in [](#status-list-request) to support requesting specific timestamps. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is purely optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
+If support for historical status information is needed, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
 
-To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` followed by a unix timestamp. The response for a valid request SHOULD contain a status list that was valid for that specified time or an error for the JWT and CWT variants and MUST contain a valid status list or an error for the unsigned option.
+To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List that was valid for that specified time or an error for the JWT and CWT variants and MUST contain a valid status list or an error for the unsigned option.
 
 If the Server does not support the additional query parameter, it SHOULD signal that by returning a status code of 501 (Not Implemented), or if the queried time is not supported with a status code of 406 (Not Acceptable). These response MUST be supported for the unsigned option, where the client has not other way of checking when the response was valid. The client MUST verify this for the JWT and CWT variants by checking that the specified timestamp is within `iat` (`6` for CWT) and `exp` (`4` for CWT).
 
-The following is a non-normative example for a GET request using the `time`query parameter:
+The following is a non-normative example for a GET request using the `time` query parameter:
 
 ~~~ ascii-art
 
