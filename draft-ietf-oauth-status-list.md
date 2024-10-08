@@ -788,7 +788,7 @@ Outside actors may analyse the publicly available Status Lists to get informatio
 This behaviour could be mitigated by:
 
 - disable the historical data feature (TODO:link)
-- disable the Status List Aggregation []{#batch-fetching}
+- disable the Status List Aggregation [](#batch-fetching)
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
 - choose to deploy and utilize multiple Status Lists simultaneously
