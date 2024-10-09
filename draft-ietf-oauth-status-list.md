@@ -778,6 +778,7 @@ Once the Relying Party receives the Referenced Token, this enables him to reques
 TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
 
 This behaviour could be mitigated by:
+
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
 ## Observability of Outsiders {#privacy-outsider}
@@ -785,8 +786,9 @@ This behaviour could be mitigated by:
 Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.
 
 This behaviour could be mitigated by:
+
 - disable the historical data feature (TODO:link)
-- disable the Status List Aggregation {#batch-fetching}
+- disable the Status List Aggregation [](#batch-fetching)
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
 - choose to deploy and utilize multiple Status Lists simultaneously
