@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-08T00:16:18.032625+00:00",
+  "timestamp": "2024-10-10T00:16:17.418620+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -1000,7 +1000,7 @@
       ],
       "body": "Is it allowed/recommended to have Status List Token in one format and the Referenced Token in another format?",
       "createdAt": "2023-07-11T06:25:53Z",
-      "updatedAt": "2024-09-05T07:04:56Z",
+      "updatedAt": "2024-10-09T06:36:38Z",
       "closedAt": null,
       "comments": [
         {
@@ -1406,7 +1406,7 @@
       ],
       "body": "There are multiple cases that require multiple statuses to be attached to something.... this draft is also covering cbor\r\n\r\ncan we at least for cbor permit a flag that lets us embed an array of bytes into a particular status index - that would permit this use case to be covered easily",
       "createdAt": "2023-08-04T21:51:43Z",
-      "updatedAt": "2024-09-11T06:18:34Z",
+      "updatedAt": "2024-10-09T06:39:47Z",
       "closedAt": null,
       "comments": [
         {
@@ -1422,6 +1422,13 @@
           "body": "Editors Call:\r\n- the design considerations aim for simplicity for the majority of use cases\r\n- the requirement seems niche to us and complicates the design, while we already have the ability to reflect more than 0/1 with `bits` > 1\r\n- given that we have the extension point at the `status` claim, one could build an extended status list that allows for such feature\r\n- however, we would like to understand these use cases better",
           "createdAt": "2024-08-28T06:51:24Z",
           "updatedAt": "2024-08-28T06:51:24Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- pending close without further feedback",
+          "createdAt": "2024-10-09T06:39:46Z",
+          "updatedAt": "2024-10-09T06:39:46Z"
         }
       ]
     },
@@ -1468,7 +1475,7 @@
       "id": "I_kwDOJZ2aqs5thFP0",
       "title": "restriction to numeric status",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/53",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mprorock",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -1477,8 +1484,8 @@
       ],
       "body": "\"Status Types MUST be numeric values between 0 and 255\" \r\nProbably better to just have hex pass through if you are after numerics, rather than set a status type, otherwise, why would we not permit a message to be attached and referenced, perhaps from a lookup table external.  see the `credentialSubject.statusMessages` implementation/spec [defined in the equivalent w3c work](https://w3c.github.io/vc-status-list-2021/#statuslist2021credential)\r\n",
       "createdAt": "2023-08-04T22:00:57Z",
-      "updatedAt": "2024-09-11T06:24:27Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-09T06:38:36Z",
+      "closedAt": "2024-10-09T06:38:36Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -1912,7 +1919,7 @@
       "id": "I_kwDOJZ2aqs50XAGW",
       "title": "Should the JWT StatusList encoded 1-bit bytearray map to W3C StatusList 2021 bitstring?",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/68",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -1921,8 +1928,8 @@
       ],
       "body": "This came up twice now, so I think it makes sense to open this issue.\r\n\r\nThe StatusList2021 \"counts\" entries from right to left.\r\n\r\nAs our goal is to support multi-bit support for status types and bits are usually \"counted\" from right to left, we envision this more of a byte array, therefore counting indices and bits from right to left.\r\n\r\nTherefore, the 1-bit strings do not match. Is this a problem? What are the consequences?",
       "createdAt": "2023-10-19T12:51:44Z",
-      "updatedAt": "2024-09-11T06:29:12Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-09T06:38:20Z",
+      "closedAt": "2024-10-09T06:38:20Z",
       "comments": [
         {
           "author": "brentzundel",
@@ -2557,7 +2564,7 @@
       ],
       "body": "Also consider the application and usage of a mechanism like etag to allow a consuming party to determine whether their copy of a given status list is the latest.",
       "createdAt": "2024-02-20T07:31:30Z",
-      "updatedAt": "2024-09-18T06:17:29Z",
+      "updatedAt": "2024-10-09T06:36:34Z",
       "closedAt": null,
       "comments": [
         {
@@ -3230,7 +3237,7 @@
       ],
       "body": "We have a use case, in the financial field, to determine the time when the status of a given credential has changed. This requirement comes from US financial compliance regulation and is non negotiable.\r\n\r\nThe spec already supports an optional TTL which helps, but does not directly solve this issue. With a validity window (TTL), and consistent fetching (at the windows expiry) of status lists one could determine that a bit had flipped within a given window, and be able to approximate a timestamp of a given status change. Of course, this approach is noisy and inefficient.\r\n\r\nTo build off this section -- https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-history -- we can make this type of query simpler. I would like to see language added to the spec that speaks to the (optional) capability of a status list server to support historical queries, or revisions of the document from a given time period. I believe this would maintain the privacy preserving characteristics of the specification while adding the ability for verifiers to approximate status change time, which is useful in a number of circumstances, especially as an optional-to-implement feature.\r\n\r\nI am also open to other solutions that are similarly privacy preserving that support either directly or indirectly discerning 'time of status change', to date I have only seen solutions that would be far less privacy preserving, such as requesting specific instances (losing herd privacy).",
       "createdAt": "2024-05-09T22:05:17Z",
-      "updatedAt": "2024-09-05T06:24:18Z",
+      "updatedAt": "2024-10-09T06:36:30Z",
       "closedAt": null,
       "comments": [
         {
@@ -3260,6 +3267,13 @@
           "body": "Editors Call:\r\n- we gave this another thought whether to integrate this\r\n- extension to HTTP request protocol seems rather simple:\r\n  - HTTP GET https://example.com/statuslist/1?time=1686920170\r\n  - add OPTIONAL query parameter `time` with Unix timestamp in seconds\r\n  - if Status List Provider doesn't support this ignore or throw error?\r\n  - add privacy consideration  that this makes profiling easier",
           "createdAt": "2024-08-28T06:58:22Z",
           "updatedAt": "2024-08-28T06:58:22Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@decentralgabe we have a PR for this issue, do you want to review #178 ?",
+          "createdAt": "2024-10-09T06:15:22Z",
+          "updatedAt": "2024-10-09T06:15:22Z"
         }
       ]
     },
@@ -3348,7 +3362,7 @@
       ],
       "body": "This includes standalone seperate references for each of the claims rather then referencing the JWT based definition.",
       "createdAt": "2024-05-29T06:09:54Z",
-      "updatedAt": "2024-09-05T06:25:11Z",
+      "updatedAt": "2024-10-09T06:36:24Z",
       "closedAt": null,
       "comments": []
     },
@@ -3469,7 +3483,7 @@
       ],
       "body": "I have some concerns about the complexity of the compression requirements:\r\n\r\n> \r\n>    3.  The byte array is compressed using DEFLATE [RFC1951] with the\r\n>        ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to\r\n>        use the highest compression level available.\r\n\r\nand\r\n\r\n> \r\n>    The HTTP response SHOULD use gzip Content-Encoding as defined in\r\n>    [RFC9110].\r\n\r\nThe first quoted requirement adds needless complexity and computation on the part of the issuer, as compression can happen at the HTTP level (as indicated by the second requirement), so an implementation following the recommendations of this specification would end up compressing twice at the highest available compression level. With the second requirement there is ambiguity with how it interacts with the requirements in RFC9110 with respect to handling the Accept-Encoding request header.\r\n\r\nMy proposal is to remove the requirement for DEFLATE compression on internal structure, and instead rely solely on compression of the entire response using the request/response mechanism defined in RFC9110, section 8.4.",
       "createdAt": "2024-07-08T09:57:47Z",
-      "updatedAt": "2024-09-05T06:34:27Z",
+      "updatedAt": "2024-10-09T06:37:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -3521,7 +3535,7 @@
       ],
       "body": "Something like this picutre used in the last IETF presentation:\r\n\r\n![image](https://github.com/user-attachments/assets/86e48867-0f3a-4715-8bce-a13e1514c814)\r\n",
       "createdAt": "2024-08-07T06:41:30Z",
-      "updatedAt": "2024-09-11T06:42:03Z",
+      "updatedAt": "2024-10-09T06:36:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -3711,13 +3725,41 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "paulbastian"
+      ],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "The section 7 explains how to setup the registry (https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-status-types) but we are missing a corresponding section in the IANA appendix ",
       "createdAt": "2024-09-25T06:34:55Z",
-      "updatedAt": "2024-09-25T06:34:55Z",
+      "updatedAt": "2024-10-09T06:36:15Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 181,
+      "id": "I_kwDOJZ2aqs6Zjlec",
+      "title": "Add Reserved For Private Use Range",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/181",
+      "state": "OPEN",
+      "author": "OR13",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The first few entries are valid, revoked, suspended.\r\n\r\nThere may be future well defined values that issuers and verifiers want global interoperability around.\r\n\r\nThere may also be a need for private use of this space.\r\n\r\nThis document should describe the \"reserved for private use range\", and leave room for enough globally interoperable and registered status values",
+      "createdAt": "2024-10-09T15:19:25Z",
+      "updatedAt": "2024-10-09T17:25:21Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We had similar ideas and totally agree",
+          "createdAt": "2024-10-09T17:25:19Z",
+          "updatedAt": "2024-10-09T17:25:19Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -11555,7 +11597,7 @@
       "labels": [],
       "body": "Adds support for historical resolution of status as an optional feature.\r\n\r\nCloses #138\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/historical-resolution/draft-ietf-oauth-status-list.html\r\n\r\nI will take another look at the wording / normative text and mark as ready for review when I am done.",
       "createdAt": "2024-09-30T13:27:29Z",
-      "updatedAt": "2024-10-02T05:54:22Z",
+      "updatedAt": "2024-10-09T17:03:24Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "2f57d2f6f18f7ce60aff52763ab2c3c9df4751b2",
@@ -11566,7 +11608,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "todo: \r\n- fix the references to this in privacy considerations\r\n- fix some wording / language",
+          "createdAt": "2024-10-09T08:08:20Z",
+          "updatedAt": "2024-10-09T08:08:20Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJZ2aqs6Lgqe9",
@@ -11605,6 +11655,19 @@
               "updatedAt": "2024-10-01T20:41:25Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6MiAeF",
+          "commit": {
+            "abbreviatedOid": "69f2649"
+          },
+          "author": "decentralgabe",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "the language looks good, thanks for including it.\r\n\r\nI will only add that while there may be privacy risks, there are legitimate business cases that require such historical data, such as guaranteeing compliance with financial regulation. In these cases, user privacy is made better by using this specification (as opposed to amore privacy-eroding solution), even if maximal privacy is not achieved. I hope the privacy section can speak to this nuance.",
+          "createdAt": "2024-10-09T17:03:24Z",
+          "updatedAt": "2024-10-09T17:03:24Z",
+          "comments": []
         }
       ]
     },
@@ -11787,6 +11850,70 @@
           "body": "Looks good imho",
           "createdAt": "2024-10-01T18:36:32Z",
           "updatedAt": "2024-10-01T18:36:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 180,
+      "id": "PR_kwDOJZ2aqs597Zeh",
+      "title": "editorial fixes",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/180",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2024-10-08T10:13:23Z",
+      "updatedAt": "2024-10-09T06:14:11Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "9c990a91033371372fb25fbfa340ed92eeccebe0",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "editorial",
+      "headRefOid": "950b026cb657166ec41204508b7b863ecaa93964",
+      "closedAt": "2024-10-09T06:14:11Z",
+      "mergedAt": "2024-10-09T06:14:11Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "d0dbf2753366d7193248223fe901561851434fca"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6MUdhT",
+          "commit": {
+            "abbreviatedOid": "bdabba1"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-08T11:13:57Z",
+          "updatedAt": "2024-10-08T11:13:57Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\n- disable the Status List Aggregation [](#batch-fetching)\r\n```",
+              "createdAt": "2024-10-08T11:13:57Z",
+              "updatedAt": "2024-10-08T11:13:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6MYQbS",
+          "commit": {
+            "abbreviatedOid": "950b026"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-08T17:56:03Z",
+          "updatedAt": "2024-10-08T17:56:03Z",
           "comments": []
         }
       ]
