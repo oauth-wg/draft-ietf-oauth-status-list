@@ -773,7 +773,7 @@ in the Status List Token provides one mechanism for setting a maximum cache time
 a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
 a fresh copy of the status list even if that status list is not expired.
 
-## Historical resolution
+## Historical resolution {#historical-resolution}
 By design, the Status List mechanism only conveys information about the state of a Referenced Token at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.
 
 If support for historical status information is needed, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
@@ -821,11 +821,11 @@ A malicious Issuer could bypass the privacy benefits of the herd privacy by gene
 
 Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
-TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
-
 This behaviour could be mitigated by:
 
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
+
+By default, this specification only supports providing status list information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). This feature should only be implemented when the use-case and the results of enabling such a feature are fully understood and considered.
 
 ## Observability of Outsiders {#privacy-outsider}
 
@@ -833,7 +833,7 @@ Outside actors may analyse the publicly available Status Lists to get informatio
 
 This behaviour could be mitigated by:
 
-- disable the historical data feature (TODO:link)
+- disable the historical data feature [](#historical-resolution)
 - disable the Status List Aggregation [](#batch-fetching)
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
