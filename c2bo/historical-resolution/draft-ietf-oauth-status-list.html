@@ -12,11 +12,11 @@
        This specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption(COSE), such as JSON Web Tokens (JWTs), CBOR Web Tokens (CWTs) and ISO mdoc.
 The status list token data structures themselves are also represented as JWTs or CWTs. 
     " name="description">
-<meta content="xml2rfc 3.23.1" name="generator">
+<meta content="xml2rfc 3.23.2" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.23.1
-    Python 3.12.6
+  xml2rfc 3.23.2
+    Python 3.12.7
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -1030,7 +1030,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 5 April 2025</td>
+<td class="center">Expires 18 April 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-10-02" class="published">2 October 2024</time>
+<time datetime="2024-10-15" class="published">15 October 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-04-05">5 April 2025</time></dd>
+<dd class="expires"><time datetime="2025-04-18">18 April 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,7 +1101,7 @@ The status list token data structures themselves are also represented as JWTs or
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1176,13 +1176,10 @@ The status list token data structures themselves are also represented as JWTs or
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-status-claim" class="internal xref">Status Claim</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-referenced-token-in-jose-fo" class="internal xref">Referenced Token in JOSE Format</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-referenced-token-in-jose" class="internal xref">Referenced Token in JOSE</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-referenced-token-in-cwt-for" class="internal xref">Referenced Token in CWT Format</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-referenced-token-in-other-c" class="internal xref">Referenced Token in other COSE/CBOR Format</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-referenced-token-in-cose" class="internal xref">Referenced Token in COSE</a></p>
 </li>
             </ul>
 </li>
@@ -1740,9 +1737,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840e2fefd1c45d5c040e2a68630f5bfad6d1685ae26c99ff774fe
-537a2fe42827cdd33e252cd46eaec19e813be2628bb91b056ac3caca10f085d68939
-cb30580254
+b918000217015d58408cbd6d5c81bc40b59a6216ace5cd16d17bb7b8e85a1085be35
+de4f0dba7ac899ca2ea812302dc7333ac971f052c2e03f3f4bfcbf8a92998f7b45ae
+1af808675a
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1766,12 +1763,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      e2fefd1c45d5c040e2a68630  #       "âþý\x1cEÕÀ@â¦\x860"
-      f5bfad6d1685ae26c99ff774  #       "õ¿\xadm\x16\x85®&amp;É\x9f÷t"
-      fe537a2fe42827cdd33e252c  #       "þSz/ä('ÍÓ&gt;%,"
-      d46eaec19e813be2628bb91b  #       "Ôn®Á\x9e\x81;âb\x8b¹\x1b"
-      056ac3caca10f085d68939cb  #       "\x05jÃÊÊ\x10ð\x85Ö\x899Ë"
-      30580254                  #       "0X\x02T"
+      8cbd6d5c81bc40b59a6216ac  #       "\x8c½m\\x81¼@µ\x9ab\x16¬"
+      e5cd16d17bb7b8e85a1085be  #       "åÍ\x16Ñ{·¸èZ\x10\x85¾"
+      35de4f0dba7ac899ca2ea812  #       "5ÞO\x0dºzÈ\x99Ê.¨\x12"
+      302dc7333ac971f052c2e03f  #       "0-Ç3:ÉqðRÂà?"
+      3f4bfcbf8a92998f7b45ae1a  #       "?Kü¿\x8a\x92\x99\x8f{E®\x1a"
+      f808675a                  #       "ø\x08gZ"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1791,10 +1788,10 @@ d2                              # tag(18)
 <p id="section-6.1-1">By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of <span>[<a href="#RFC7800" class="cite xref">RFC7800</a>]</span> in which different authenticity confirmation methods can be included.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="referenced-token-jwt">
+<div id="referenced-token-jose">
 <section id="section-6.2">
-        <h3 id="name-referenced-token-in-jose-fo">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-referenced-token-in-jose-fo" class="section-name selfRef">Referenced Token in JOSE Format</a>
+        <h3 id="name-referenced-token-in-jose">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-referenced-token-in-jose" class="section-name selfRef">Referenced Token in JOSE</a>
         </h3>
 <p id="section-6.2-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "JSON Web Token (JWT)" according to <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> or other formats based on JOSE.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">The following content applies to the JWT Claims Set:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
@@ -1835,7 +1832,7 @@ d2                              # tag(18)
 }
 </pre><a href="#section-6.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2-7">SD-JWT-based Verifiable Credentials <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.2-7" class="pilcrow">¶</a></p>
+<p id="section-6.2-7">SD-JWT-based Verifiable Credentials <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a>.<a href="#section-6.2-7" class="pilcrow">¶</a></p>
 <p id="section-6.2-8">The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:<a href="#section-6.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-6.2-9">
 <pre>
@@ -1881,25 +1878,25 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 </div>
 </section>
 </div>
-<div id="referenced-token-cwt">
+<div id="referenced-token-cose">
 <section id="section-6.3">
-        <h3 id="name-referenced-token-in-cwt-for">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-referenced-token-in-cwt-for" class="section-name selfRef">Referenced Token in CWT Format</a>
+        <h3 id="name-referenced-token-in-cose">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-referenced-token-in-cose" class="section-name selfRef">Referenced Token in COSE</a>
         </h3>
-<p id="section-6.3-1">The Referenced Token <span class="bcp14">MUST</span> be encoded as a "COSE Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "COSE Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> or other formats based on COSE.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">The following content applies to the CWT Claims Set:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1">
             <p id="section-6.3-3.1.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim is encoded as a <code>Status</code> CBOR structure and <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1.2.1">
-                <p id="section-6.3-3.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-3.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-6.3-3.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-3.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1.2.1.2.1">
-                    <p id="section-6.3-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>idx</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.3-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>idx</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.3-3.1.2.1.2.2">
-                    <p id="section-6.3-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>uri</code> claim in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.3-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>uri</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -1913,9 +1910,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158407e206aedacbee2f362cbff9be2505c0ae251eb
-ce42a0756e4cf11fe135c62009da6fc0fc2757d986c83ab1bce33c6b376b303da552
-a41200e1b0d7ab6777431c
+7374617475736c697374732f315840ecd6ae03b355d3f91fcb727002927184f0ee23
+4eefef2e62a02245eef1394d303f8740ceb0196873bb60ceeb1d227411f9f6820f32
+d284ee64b62f0b102b2fcd
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1940,27 +1937,148 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      7e206aedacbee2f362cbff9b  #       "~ jí¬¾âóbËÿ\x9b"
-      e2505c0ae251ebce42a0756e  #       "âP\\x0aâQëÎB\xa0un"
-      4cf11fe135c62009da6fc0fc  #       "Lñ\x1fá5Æ \x09ÚoÀü"
-      2757d986c83ab1bce33c6b37  #       "'WÙ\x86È:±¼ã&lt;k7"
-      6b303da552a41200e1b0d7ab  #       "k0=¥R¤\x12\x00á°×«"
-      6777431c                  #       "gwC\x1c"
+      ecd6ae03b355d3f91fcb7270  #       "ìÖ®\x03³UÓù\x1fËrp"
+      02927184f0ee234eefef2e62  #       "\x02\x92q\x84ðî#Nïï.b"
+      a02245eef1394d303f8740ce  #       "\xa0"Eîñ9M0?\x87@Î"
+      b0196873bb60ceeb1d227411  #       "°\x19hs»`Îë\x1d"t\x11"
+      f9f6820f32d284ee64b62f0b  #       "ùö\x82\x0f2Ò\x84îd¶/\x0b"
+      102b2fcd                  #       "\x10+/Í"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
-</section>
+<p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
+<p id="section-6.3-10">It is <span class="bcp14">RECOMMENDED</span> to use <code>status</code> for the label of the field that contains the <code>Status</code> CBOR structure.<a href="#section-6.3-10" class="pilcrow">¶</a></p>
+<p id="section-6.3-11">Application of additional restrictions and policy are at the discretion of the verifying party.<a href="#section-6.3-11" class="pilcrow">¶</a></p>
+<p id="section-6.3-12">The following is a non-normative example for an IssuerAuth as specified in ISO mDL (also referred to as signed MSO) in Hex:<a href="#section-6.3-12" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-6.3-13">
+<pre>
+8443a10126a118215901f3308201ef30820195a00302010202140bfec7da97e048e
+15ac3dacb9eafe82e64fd07f5300a06082a8648ce3d040302302331143012060355
+04030c0b75746f7069612069616361310b3009060355040613025553301e170d323
+4313030313030303030305a170d3235313030313030303030305a30213112301006
+035504030c0975746f706961206473310b300906035504061302555330593013060
+72a8648ce3d020106082a8648ce3d03010703420004ace7ab7340e5d9648c5a72a9
+a6f56745c7aad436a03a43efea77b5fa7b88f0197d57d8983e1b37d3a539f4d5883
+65e38cbbf5b94d68c547b5bc8731dcd2f146ba381a83081a5301c0603551d1f0415
+30133011a00fa00d820b6578616d706c652e636f6d301e0603551d1204173015811
+36578616d706c65406578616d706c652e636f6d301d0603551d0e0416041414e290
+17a6c35621ffc7a686b7b72db06cd12351301f0603551d2304183016801454fa238
+3a04c28e0d930792261c80c4881d2c00b300e0603551d0f0101ff04040302078030
+150603551d250101ff040b3009060728818c5d050102300a06082a8648ce3d04030
+20348003045022100b7103fd4b90529f50bd6f70c5ae5ce7f4f3d4d15a4e082812f
+9fa1f5c2e5aa0a0220070b2822ec7ce6c56804923a85b2cfbffd054cf9a915f070c
+fef7179a4bc6569590320d81859031ba766737461747573a16b7374617475735f6c
+697374a26369647819019c63757269782168747470733a2f2f6578616d706c652e6
+36f6d2f7374617475736c697374732f3167646f6354797065756f72672e69736f2e
+31383031332e352e312e6d444c6776657273696f6e63312e306c76616c696469747
+9496e666fa3667369676e6564c074323032342d31302d30315431333a33303a3032
+5a6976616c696446726f6dc074323032342d31302d30315431333a33303a30325a6
+a76616c6964556e74696cc074323032352d31302d30315431333a33303a30325a6c
+76616c756544696765737473a1716f72672e69736f2e31383031332e352e31ac005
+820a81d65ed5075fbd7ee19fa66e2bb3047ed826e2769873e7ef07c923da7a6f243
+01582048701a9546492284d266ed81d439230a582d0e1f17a08ab1859a3efe98069
+0a4025820d11fe48c8835b30bfb3895c3905436ddfb63f59ab9eee181b110985329
+2a8f62035820a741bf05e20a8bc359e32426106ed0899b2c60262cc3acc637ddc99
+41095fb7a045820ab67cb9a8f20a8572f77f02727367d08dc8e57fb89deb46b9c62
+6e94457b7d8b055820bacddb4142b3842bd555206eb5acb27ded063294995c7e7fe
+fbf93ece522604d065820bfd02b3aebdc05b53b5539226c38088d6d784b0ea0fab6
+9eb9311650a48d325307582027dab70fe71da63e5e5d199e8ae5b79cbe8904bc30c
+5b7544fb809e02ccb3e6a0858200dbd7ccc9c7727d3d17295f1b6f1914071670ee2
+3d4d33530c31f1f406b8e3b7095820a5beb5efadf37f21637209abc519830681cc5
+1f334818a823fec13b29552f5ba0a5820d8047c95f9272d7d07b2c13a9f5ac2ee02
+380ab272a165e569391d89a2152c3c0b582004939930ffb4911ef03487a153605a3
+0368b69f2437d6d21b4c90f92bc144c3e6d6465766963654b6579496e666fa16964
+65766963654b6579a40102200121582096313d6c63e24e3372742bfdb1a33ba2c89
+7dcd68ab8c753e4fbd48dca6b7f9a2258201fb3269edd418857de1b39a4e4a44b92
+fa484caa722c228288f01d0c03a2c3d66f646967657374416c676f726974686d675
+348412d3235365840b7c2d4abe85aa5ba814ef95de0385c71c802be8ac33a4a971a
+85ed800ba7acb59cb21035f4a68fc0caa450cbefd3b255aec72f83595f0ae7b7d50
+fe8a1c4cafe
+</pre><a href="#section-6.3-13" class="pilcrow">¶</a>
 </div>
-<div id="referenced-token-cose">
-<section id="section-6.4">
-        <h3 id="name-referenced-token-in-other-c">
-<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-referenced-token-in-other-c" class="section-name selfRef">Referenced Token in other COSE/CBOR Format</a>
-        </h3>
-<p id="section-6.4-1">The Referenced Token <span class="bcp14">MUST</span> be encoded as a <code>COSE_Sign1</code> or <code>COSE_Sign</code> CBOR structure as defined in "CBOR Object Signing and Encryption (COSE)" <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
-<p id="section-6.4-2">It is required to encode the status mechanisms referred to in the Referenced Token using the <code>Status</code> CBOR structure defined in <a href="#referenced-token-cwt" class="auto internal xref">Section 6.3</a>.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
-<p id="section-6.4-3">It is <span class="bcp14">RECOMMENDED</span> to use <code>status</code> for the label of the field that contains the <code>Status</code> CBOR structure.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
-<p id="section-6.4-4">Application of additional restrictions and policy are at the discretion of the verifying party.<a href="#section-6.4-4" class="pilcrow">¶</a></p>
-<p id="section-6.4-5">The following is a non-normative example for a decoded payload of a Referenced Token:<a href="#section-6.4-5" class="pilcrow">¶</a></p>
-<p id="section-6.4-6">TBD: example<a href="#section-6.4-6" class="pilcrow">¶</a></p>
+<p id="section-6.3-14">The following is the CBOR Diagnostic Notation of the example above:<a href="#section-6.3-14" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-15">
+<pre>
+[
+  &lt;&lt; {
+    1: -7
+  } &gt;&gt;,
+  {
+    33: h'308201ef30820195a00302010202140bfec7da97e048e15ac3dacb9ea
+    fe82e64fd07f5300a06082a8648ce3d04030230233114301206035504030c0b
+    75746f7069612069616361310b3009060355040613025553301e170d3234313
+    030313030303030305a170d3235313030313030303030305a30213112301006
+    035504030c0975746f706961206473310b30090603550406130255533059301
+    306072a8648ce3d020106082a8648ce3d03010703420004ace7ab7340e5d964
+    8c5a72a9a6f56745c7aad436a03a43efea77b5fa7b88f0197d57d8983e1b37d
+    3a539f4d588365e38cbbf5b94d68c547b5bc8731dcd2f146ba381a83081a530
+    1c0603551d1f041530133011a00fa00d820b6578616d706c652e636f6d301e0
+    603551d120417301581136578616d706c65406578616d706c652e636f6d301d
+    0603551d0e0416041414e29017a6c35621ffc7a686b7b72db06cd12351301f0
+    603551d2304183016801454fa2383a04c28e0d930792261c80c4881d2c00b30
+    0e0603551d0f0101ff04040302078030150603551d250101ff040b300906072
+    8818c5d050102300a06082a8648ce3d0403020348003045022100b7103fd4b9
+    0529f50bd6f70c5ae5ce7f4f3d4d15a4e082812f9fa1f5c2e5aa0a0220070b2
+    822ec7ce6c56804923a85b2cfbffd054cf9a915f070cfef7179a4bc6569'
+  },
+  &lt;&lt; 24( &lt;&lt; {
+    "status": {
+      "status_list": {
+        "idx": 412,
+        "uri": "https://example.com/statuslists/1"
+      }
+    },
+    "docType": "org.iso.18013.5.1.mDL",
+    "version": "1.0",
+    "validityInfo": {
+      "signed": 2024-10-01 13:30:02+00:00,
+      "validFrom": 2024-10-01 13:30:02+00:00,
+      "validUntil": 2025-10-01 13:30:02+00:00
+    },
+    "valueDigests": {
+      "org.iso.18013.5.1": {
+        0: h'a81d65ed5075fbd7ee19fa66e2bb3047ed826e2769873e7ef07c92
+        3da7a6f243',
+        1: h'48701a9546492284d266ed81d439230a582d0e1f17a08ab1859a3e
+        fe980690a4',
+        2: h'd11fe48c8835b30bfb3895c3905436ddfb63f59ab9eee181b11098
+        53292a8f62',
+        3: h'a741bf05e20a8bc359e32426106ed0899b2c60262cc3acc637ddc9
+        941095fb7a',
+        4: h'ab67cb9a8f20a8572f77f02727367d08dc8e57fb89deb46b9c626e
+        94457b7d8b',
+        5: h'bacddb4142b3842bd555206eb5acb27ded063294995c7e7fefbf93
+        ece522604d',
+        6: h'bfd02b3aebdc05b53b5539226c38088d6d784b0ea0fab69eb93116
+        50a48d3253',
+        7: h'27dab70fe71da63e5e5d199e8ae5b79cbe8904bc30c5b7544fb809
+        e02ccb3e6a',
+        8: h'0dbd7ccc9c7727d3d17295f1b6f1914071670ee23d4d33530c31f1
+        f406b8e3b7',
+        9: h'a5beb5efadf37f21637209abc519830681cc51f334818a823fec13
+        b29552f5ba',
+        10: h'd8047c95f9272d7d07b2c13a9f5ac2ee02380ab272a165e569391
+        d89a2152c3c',
+        11: h'04939930ffb4911ef03487a153605a30368b69f2437d6d21b4c90
+        f92bc144c3e'
+      }
+    },
+    "deviceKeyInfo": {
+      "deviceKey": {
+        1: 2,
+        -1: 1,
+        -2: h'96313d6c63e24e3372742bfdb1a33ba2c897dcd68ab8c753e4fbd
+        48dca6b7f9a',
+        -3: h'1fb3269edd418857de1b39a4e4a44b92fa484caa722c228288f01
+        d0c03a2c3d6'
+      }
+    },
+    "digestAlgorithm": "SHA-256"
+  } &gt;&gt; ) &gt;&gt;,
+  h'b7c2d4abe85aa5ba814ef95de0385c71c802be8ac33a4a971a85ed800ba7acb
+  59cb21035f4a68fc0caa450cbefd3b255aec72f83595f0ae7b7d50fe8a1c4cafe'
+]
+</pre><a href="#section-6.3-15" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 </section>
@@ -2043,8 +2161,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.19suhqueSOSYXUZ3FfRSBACZjD8e1V0-wwEkqbExoHQoKr5bQkZB
-iBeF3vhxmMtoTQYZ8WTviXxGCcuCJT0FZw
+nR0bCI6NDMyMDB9.JQJsc1NUVXnZebx-n71E8fRBxeI2V35vFA6JwDbDHHJ4z68Vfmq7
+38TT1dC3naYIn7giv15TjdqEik9cKBrkYA
 </pre><a href="#section-8.1-9" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2086,7 +2204,7 @@ As this is out of scope of this document, this validation is not be described he
 <p id="section-8.3-2">If this validation was not successful, the Referenced Token <span class="bcp14">MUST</span> be rejected. If the validation was successful, the Relying Party <span class="bcp14">MUST</span> perform the following validation steps to evaluate the status of the reference token:<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-8.3-3">
 <li id="section-8.3-3.1">
-            <p id="section-8.3-3.1.1">Check for the existence of a <code>status</code> claim, check for the existence of a <code>status_list</code> claim within the <code>status</code> claim and validate that the content of <code>status_list</code> adheres to the rules defined in <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a> for JWTs and <a href="#referenced-token-cwt" class="auto internal xref">Section 6.3</a> for CWTs. This step can be overruled if defined within the Referenced Token Format natively<a href="#section-8.3-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-3.1.1">Check for the existence of a <code>status</code> claim, check for the existence of a <code>status_list</code> claim within the <code>status</code> claim and validate that the content of <code>status_list</code> adheres to the rules defined in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> for JWTs and <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a> for CWTs. This step can be overruled if defined within the Referenced Token Format natively<a href="#section-8.3-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-8.3-3.2">
             <p id="section-8.3-3.2.1">Resolve the Status List from the provided URI<a href="#section-8.3-3.2.1" class="pilcrow">¶</a></p>
@@ -2315,8 +2433,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.19suhqueSOSYXUZ3FfRSBACZjD8e1V0-wwEkqbExoHQoKr5bQkZB
-iBeF3vhxmMtoTQYZ8WTviXxGCcuCJT0FZw
+nR0bCI6NDMyMDB9.JQJsc1NUVXnZebx-n71E8fRBxeI2V35vFA6JwDbDHHJ4z68Vfmq7
+38TT1dC3naYIn7giv15TjdqEik9cKBrkYA
 </pre><a href="#section-11.4-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2354,8 +2472,12 @@ iBeF3vhxmMtoTQYZ8WTviXxGCcuCJT0FZw
         </h3>
 <p id="section-12.3-1">Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided <code>uri</code> parameter and look up the corresponding <code>index</code>. However, the Relying Party may persistently store the <code>uri</code> and <code>index</code> of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.<a href="#section-12.3-1" class="pilcrow">¶</a></p>
 <p id="section-12.3-2">TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture<a href="#section-12.3-2" class="pilcrow">¶</a></p>
-<p id="section-12.3-3">This behaviour could be mitigated by:
-- regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.3-3" class="pilcrow">¶</a></p>
+<p id="section-12.3-3">This behaviour could be mitigated by:<a href="#section-12.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-12.3-4.1">
+            <p id="section-12.3-4.1.1">regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 <div id="privacy-outsider">
@@ -2364,12 +2486,24 @@ iBeF3vhxmMtoTQYZ8WTviXxGCcuCJT0FZw
 <a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-observability-of-outsiders" class="section-name selfRef">Observability of Outsiders</a>
         </h3>
 <p id="section-12.4-1">Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
-<p id="section-12.4-2">This behaviour could be mitigated by:
-- disable the historical data feature (TODO:link)
-- disable the Status List Aggregation {#batch-fetching}
-- choose non-sequential, pseudo-random or random indices
-- use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
-- choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.4-2" class="pilcrow">¶</a></p>
+<p id="section-12.4-2">This behaviour could be mitigated by:<a href="#section-12.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-12.4-3.1">
+            <p id="section-12.4-3.1.1">disable the historical data feature (TODO:link)<a href="#section-12.4-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-12.4-3.2">
+            <p id="section-12.4-3.2.1">disable the Status List Aggregation <a href="#batch-fetching" class="auto internal xref">Section 9</a><a href="#section-12.4-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-12.4-3.3">
+            <p id="section-12.4-3.3.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.4-3.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-12.4-3.4">
+            <p id="section-12.4-3.4.1">use decoy entries to obfuscate the real number of Referenced Tokens within a Status List<a href="#section-12.4-3.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-12.4-3.5">
+            <p id="section-12.4-3.5.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.4-3.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
 </section>
 </div>
 <div id="unlinkability">
@@ -2558,7 +2692,7 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
               <p id="section-14.2.2-1.3.1">Change Controller: IETF<a href="#section-14.2.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.2.2-1.4">
-              <p id="section-14.2.2-1.4.1">Specification Document(s): <a href="#referenced-token-jwt" class="auto internal xref">Section 6.2</a> of this specification<a href="#section-14.2.2-1.4.1" class="pilcrow">¶</a></p>
+              <p id="section-14.2.2-1.4.1">Specification Document(s): <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> of this specification<a href="#section-14.2.2-1.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -2688,7 +2822,7 @@ IANA "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA.CWT" class="ci
               <p id="section-14.4.2-1.3.1">Change Controller: IETF<a href="#section-14.4.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.4.2-1.4">
-              <p id="section-14.4.2-1.4.1">Specification Document(s): <a href="#referenced-token-cwt" class="auto internal xref">Section 6.3</a> of this specification<a href="#section-14.4.2-1.4.1" class="pilcrow">¶</a></p>
+              <p id="section-14.4.2-1.4.1">Specification Document(s): <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a> of this specification<a href="#section-14.4.2-1.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -3072,6 +3206,7 @@ Francesco Marino,
 Guiseppe De Marco,
 Kristina Yasuda,
 Markus Kreusch,
+Martijn Haring,
 Michael B. Jones,
 Mike Prorock,
 Oliver Terbu,
@@ -3093,40 +3228,43 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
           <p id="appendix-B-2.1.1">add optional support for historical requests<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">add implementation consideration for Default Values, Double Allocation and Status List Size<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">add mDL example as Referenced Token and consolidate CWT and CBOR sections<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">add privacy consideration on using private relay protocols<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">add implementation consideration for Default Values, Double Allocation and Status List Size<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">add privacy consideration on observability of outsiders<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">add privacy consideration on using private relay protocols<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">add security considerations on correct parsing and decoding<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">add privacy consideration on observability of outsiders<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.6">
-          <p id="appendix-B-2.6.1">remove requirement for matching iss claim in Referenced Token and Status List Token<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.6.1">add security considerations on correct parsing and decoding<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.7">
-          <p id="appendix-B-2.7.1">add sd-jwt-vc example<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.7.1">remove requirement for matching iss claim in Referenced Token and Status List Token<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.8">
-          <p id="appendix-B-2.8.1">fix CWT status_list map encoding<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.8.1">add sd-jwt-vc example<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.9">
-          <p id="appendix-B-2.9.1">editorial fixes<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.9.1">fix CWT status_list map encoding<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.10">
-          <p id="appendix-B-2.10.1">add CORS considerations to the http endpoint<a href="#appendix-B-2.10.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.10.1">editorial fixes<a href="#appendix-B-2.10.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.11">
-          <p id="appendix-B-2.11.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.11.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.11.1">add CORS considerations to the http endpoint<a href="#appendix-B-2.11.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.12">
-          <p id="appendix-B-2.12.1">added status_list CWT claim key assigned<a href="#appendix-B-2.12.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.12.1">fix reference of Status List in CBOR format<a href="#appendix-B-2.12.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.13">
-          <p id="appendix-B-2.13.1">move base64url definition to terminology<a href="#appendix-B-2.13.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.13.1">added status_list CWT claim key assigned<a href="#appendix-B-2.13.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.14">
+          <p id="appendix-B-2.14.1">move base64url definition to terminology<a href="#appendix-B-2.14.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-03<a href="#appendix-B-3" class="pilcrow">¶</a></p>
