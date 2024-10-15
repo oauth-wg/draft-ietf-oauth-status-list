@@ -326,7 +326,7 @@ The following is the CBOR Annotated Hex output of the example above:
 
 By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
-## Referenced Token in JOSE Format {#referenced-token-jwt}
+## Referenced Token in JOSE {#referenced-token-jose}
 
 The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}} or other formats based on JOSE.
 
@@ -358,7 +358,7 @@ The following is a non-normative example for a decoded header and payload of a R
 }
 ~~~
 
-SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jwt}}.
+SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jose}}.
 
 The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:
 
@@ -405,16 +405,16 @@ Resulting payload of the example above:
 }
 ~~~
 
-## Referenced Token in CWT Format {#referenced-token-cwt}
+## Referenced Token in COSE {#referenced-token-cose}
 
-The Referenced Token MUST be encoded as a "COSE Web Token (CWT)" object according to {{RFC8392}}.
+The Referenced Token MAY be encoded as a "COSE Web Token (CWT)" object according to {{RFC8392}} or other formats based on COSE.
 
 The following content applies to the CWT Claims Set:
 
 * `65535` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:
-  * `status_list` (status list): REQUIRED when the status list mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jwt) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
-    * `idx`: REQUIRED. Same definition as `idx` claim in [](#referenced-token-jwt).
-    * `uri`: REQUIRED. Same definition as `uri` claim in [](#referenced-token-jwt).
+  * `status_list` (status list): REQUIRED when the status list mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
+    * `idx`: REQUIRED. Same definition as `idx` claim in [](#referenced-token-jose).
+    * `uri`: REQUIRED. Same definition as `uri` claim in [](#referenced-token-jose).
 
 Application of additional restrictions and policy are at the discretion of the verifying party.
 
@@ -430,20 +430,143 @@ The following is the CBOR Annotated Hex output of the example above:
 {::include ./examples/referenced_token_cwt_diag}
 ~~~~~~~~~~
 
-
-## Referenced Token in other COSE/CBOR Format {#referenced-token-cose}
-
-The Referenced Token MUST be encoded as a `COSE_Sign1` or `COSE_Sign` CBOR structure as defined in "CBOR Object Signing and Encryption (COSE)" {{RFC9052}}.
-
-It is required to encode the status mechanisms referred to in the Referenced Token using the `Status` CBOR structure defined in [](#referenced-token-cwt).
+ISO mdoc {{ISO.mdoc}} may utilize the Status List mechanism by introducing the `status` parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The `status` parameter uses the same encoding as a CWT as defined in {{referenced-token-cose}}.
 
 It is RECOMMENDED to use `status` for the label of the field that contains the `Status` CBOR structure.
 
 Application of additional restrictions and policy are at the discretion of the verifying party.
 
-The following is a non-normative example for a decoded payload of a Referenced Token:
+The following is a non-normative example for an IssuerAuth as specified in ISO mDL (also referred to as signed MSO) in Hex:
 
-TBD: example
+~~~ ascii-art
+
+8443a10126a118215901f3308201ef30820195a00302010202140bfec7da97e048e
+15ac3dacb9eafe82e64fd07f5300a06082a8648ce3d040302302331143012060355
+04030c0b75746f7069612069616361310b3009060355040613025553301e170d323
+4313030313030303030305a170d3235313030313030303030305a30213112301006
+035504030c0975746f706961206473310b300906035504061302555330593013060
+72a8648ce3d020106082a8648ce3d03010703420004ace7ab7340e5d9648c5a72a9
+a6f56745c7aad436a03a43efea77b5fa7b88f0197d57d8983e1b37d3a539f4d5883
+65e38cbbf5b94d68c547b5bc8731dcd2f146ba381a83081a5301c0603551d1f0415
+30133011a00fa00d820b6578616d706c652e636f6d301e0603551d1204173015811
+36578616d706c65406578616d706c652e636f6d301d0603551d0e0416041414e290
+17a6c35621ffc7a686b7b72db06cd12351301f0603551d2304183016801454fa238
+3a04c28e0d930792261c80c4881d2c00b300e0603551d0f0101ff04040302078030
+150603551d250101ff040b3009060728818c5d050102300a06082a8648ce3d04030
+20348003045022100b7103fd4b90529f50bd6f70c5ae5ce7f4f3d4d15a4e082812f
+9fa1f5c2e5aa0a0220070b2822ec7ce6c56804923a85b2cfbffd054cf9a915f070c
+fef7179a4bc6569590320d81859031ba766737461747573a16b7374617475735f6c
+697374a26369647819019c63757269782168747470733a2f2f6578616d706c652e6
+36f6d2f7374617475736c697374732f3167646f6354797065756f72672e69736f2e
+31383031332e352e312e6d444c6776657273696f6e63312e306c76616c696469747
+9496e666fa3667369676e6564c074323032342d31302d30315431333a33303a3032
+5a6976616c696446726f6dc074323032342d31302d30315431333a33303a30325a6
+a76616c6964556e74696cc074323032352d31302d30315431333a33303a30325a6c
+76616c756544696765737473a1716f72672e69736f2e31383031332e352e31ac005
+820a81d65ed5075fbd7ee19fa66e2bb3047ed826e2769873e7ef07c923da7a6f243
+01582048701a9546492284d266ed81d439230a582d0e1f17a08ab1859a3efe98069
+0a4025820d11fe48c8835b30bfb3895c3905436ddfb63f59ab9eee181b110985329
+2a8f62035820a741bf05e20a8bc359e32426106ed0899b2c60262cc3acc637ddc99
+41095fb7a045820ab67cb9a8f20a8572f77f02727367d08dc8e57fb89deb46b9c62
+6e94457b7d8b055820bacddb4142b3842bd555206eb5acb27ded063294995c7e7fe
+fbf93ece522604d065820bfd02b3aebdc05b53b5539226c38088d6d784b0ea0fab6
+9eb9311650a48d325307582027dab70fe71da63e5e5d199e8ae5b79cbe8904bc30c
+5b7544fb809e02ccb3e6a0858200dbd7ccc9c7727d3d17295f1b6f1914071670ee2
+3d4d33530c31f1f406b8e3b7095820a5beb5efadf37f21637209abc519830681cc5
+1f334818a823fec13b29552f5ba0a5820d8047c95f9272d7d07b2c13a9f5ac2ee02
+380ab272a165e569391d89a2152c3c0b582004939930ffb4911ef03487a153605a3
+0368b69f2437d6d21b4c90f92bc144c3e6d6465766963654b6579496e666fa16964
+65766963654b6579a40102200121582096313d6c63e24e3372742bfdb1a33ba2c89
+7dcd68ab8c753e4fbd48dca6b7f9a2258201fb3269edd418857de1b39a4e4a44b92
+fa484caa722c228288f01d0c03a2c3d66f646967657374416c676f726974686d675
+348412d3235365840b7c2d4abe85aa5ba814ef95de0385c71c802be8ac33a4a971a
+85ed800ba7acb59cb21035f4a68fc0caa450cbefd3b255aec72f83595f0ae7b7d50
+fe8a1c4cafe
+~~~
+
+The following is the CBOR Diagnostic Notation of the example above:
+
+~~~~~~~~~~
+[
+  << {
+    1: -7
+  } >>,
+  {
+    33: h'308201ef30820195a00302010202140bfec7da97e048e15ac3dacb9ea
+    fe82e64fd07f5300a06082a8648ce3d04030230233114301206035504030c0b
+    75746f7069612069616361310b3009060355040613025553301e170d3234313
+    030313030303030305a170d3235313030313030303030305a30213112301006
+    035504030c0975746f706961206473310b30090603550406130255533059301
+    306072a8648ce3d020106082a8648ce3d03010703420004ace7ab7340e5d964
+    8c5a72a9a6f56745c7aad436a03a43efea77b5fa7b88f0197d57d8983e1b37d
+    3a539f4d588365e38cbbf5b94d68c547b5bc8731dcd2f146ba381a83081a530
+    1c0603551d1f041530133011a00fa00d820b6578616d706c652e636f6d301e0
+    603551d120417301581136578616d706c65406578616d706c652e636f6d301d
+    0603551d0e0416041414e29017a6c35621ffc7a686b7b72db06cd12351301f0
+    603551d2304183016801454fa2383a04c28e0d930792261c80c4881d2c00b30
+    0e0603551d0f0101ff04040302078030150603551d250101ff040b300906072
+    8818c5d050102300a06082a8648ce3d0403020348003045022100b7103fd4b9
+    0529f50bd6f70c5ae5ce7f4f3d4d15a4e082812f9fa1f5c2e5aa0a0220070b2
+    822ec7ce6c56804923a85b2cfbffd054cf9a915f070cfef7179a4bc6569'
+  },
+  << 24( << {
+    "status": {
+      "status_list": {
+        "idx": 412,
+        "uri": "https://example.com/statuslists/1"
+      }
+    },
+    "docType": "org.iso.18013.5.1.mDL",
+    "version": "1.0",
+    "validityInfo": {
+      "signed": 2024-10-01 13:30:02+00:00,
+      "validFrom": 2024-10-01 13:30:02+00:00,
+      "validUntil": 2025-10-01 13:30:02+00:00
+    },
+    "valueDigests": {
+      "org.iso.18013.5.1": {
+        0: h'a81d65ed5075fbd7ee19fa66e2bb3047ed826e2769873e7ef07c92
+        3da7a6f243',
+        1: h'48701a9546492284d266ed81d439230a582d0e1f17a08ab1859a3e
+        fe980690a4',
+        2: h'd11fe48c8835b30bfb3895c3905436ddfb63f59ab9eee181b11098
+        53292a8f62',
+        3: h'a741bf05e20a8bc359e32426106ed0899b2c60262cc3acc637ddc9
+        941095fb7a',
+        4: h'ab67cb9a8f20a8572f77f02727367d08dc8e57fb89deb46b9c626e
+        94457b7d8b',
+        5: h'bacddb4142b3842bd555206eb5acb27ded063294995c7e7fefbf93
+        ece522604d',
+        6: h'bfd02b3aebdc05b53b5539226c38088d6d784b0ea0fab69eb93116
+        50a48d3253',
+        7: h'27dab70fe71da63e5e5d199e8ae5b79cbe8904bc30c5b7544fb809
+        e02ccb3e6a',
+        8: h'0dbd7ccc9c7727d3d17295f1b6f1914071670ee23d4d33530c31f1
+        f406b8e3b7',
+        9: h'a5beb5efadf37f21637209abc519830681cc51f334818a823fec13
+        b29552f5ba',
+        10: h'd8047c95f9272d7d07b2c13a9f5ac2ee02380ab272a165e569391
+        d89a2152c3c',
+        11: h'04939930ffb4911ef03487a153605a30368b69f2437d6d21b4c90
+        f92bc144c3e'
+      }
+    },
+    "deviceKeyInfo": {
+      "deviceKey": {
+        1: 2,
+        -1: 1,
+        -2: h'96313d6c63e24e3372742bfdb1a33ba2c897dcd68ab8c753e4fbd
+        48dca6b7f9a',
+        -3: h'1fb3269edd418857de1b39a4e4a44b92fa484caa722c228288f01
+        d0c03a2c3d6'
+      }
+    },
+    "digestAlgorithm": "SHA-256"
+  } >> ) >>,
+  h'b7c2d4abe85aa5ba814ef95de0385c71c802be8ac33a4a971a85ed800ba7acb
+  59cb21035f4a68fc0caa450cbefd3b255aec72f83595f0ae7b7d50fe8a1c4cafe'
+]
+~~~~~~~~~~
 
 # Status Types {#status-types}
 
@@ -525,7 +648,7 @@ As this is out of scope of this document, this validation is not be described he
 
 If this validation was not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
 
-1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jwt) for JWTs and [](#referenced-token-cwt) for CWTs. This step can be overruled if defined within the Referenced Token Format natively
+1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jose) for JWTs and [](#referenced-token-cose) for CWTs. This step can be overruled if defined within the Referenced Token Format natively
 2. Resolve the Status List from the provided URI
 3. Validate the Status List Token:
     1. Validate the Status List Token by following the rules defined in section 7.2 of {{RFC7519}} for JWTs and section 7.2 of {{RFC8392}} for CWTs.
@@ -701,6 +824,7 @@ Once the Relying Party receives the Referenced Token, this enables him to reques
 TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
 
 This behaviour could be mitigated by:
+
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
 ## Observability of Outsiders {#privacy-outsider}
@@ -708,8 +832,9 @@ This behaviour could be mitigated by:
 Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.
 
 This behaviour could be mitigated by:
+
 - disable the historical data feature (TODO:link)
-- disable the Status List Aggregation {#batch-fetching}
+- disable the Status List Aggregation [](#batch-fetching)
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
 - choose to deploy and utilize multiple Status Lists simultaneously
@@ -810,7 +935,7 @@ Specification Document(s):
 * Status Method Value: `status_list`
 * Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s): [](#referenced-token-jwt) of this specification
+* Specification Document(s): [](#referenced-token-jose) of this specification
 
 ## CBOR Web Token Claims Registration
 
@@ -870,7 +995,7 @@ Specification Document(s):
 * Status Method Value: `status_list`
 * Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
-* Specification Document(s): [](#referenced-token-cwt) of this specification
+* Specification Document(s): [](#referenced-token-cose) of this specification
 
 ## Media Type Registration
 
@@ -970,6 +1095,7 @@ Francesco Marino,
 Guiseppe De Marco,
 Kristina Yasuda,
 Markus Kreusch,
+Martijn Haring,
 Michael B. Jones,
 Mike Prorock,
 Oliver Terbu,
@@ -986,6 +1112,7 @@ for their valuable contributions, discussions and feedback to this specification
 -04
 
 * add optional support for historical requests
+* add mDL example as Referenced Token and consolidate CWT and CBOR sections
 * add implementation consideration for Default Values, Double Allocation and Status List Size
 * add privacy consideration on using private relay protocols
 * add privacy consideration on observability of outsiders
