@@ -825,7 +825,7 @@ This behaviour could be mitigated by:
 
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
-By default, this specification only supports providing status list information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). This feature should only be implemented when the use-case and the results of enabling such a feature are fully understood and considered.
+By default, this specification only supports providing status list information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.
 
 ## Observability of Outsiders {#privacy-outsider}
 
