@@ -1109,9 +1109,12 @@ for their valuable contributions, discussions and feedback to this specification
 # Document History
 {:numbered="false"}
 
--04
+-05
 
 * add optional support for historical requests
+
+-04
+
 * add mDL example as Referenced Token and consolidate CWT and CBOR sections
 * add implementation consideration for Default Values, Double Allocation and Status List Size
 * add privacy consideration on using private relay protocols
