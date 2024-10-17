@@ -607,9 +607,9 @@ The Relying Party SHOULD send the following Accept-Header to indicate the reques
 
 If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.
 
-## Status List Response
+## Status List Response {#status-types-response}
 
-In the successful response, the Status List Provider MUST use the following content-type:
+In the successful response, the Status List Provider SHOULD use the following content-type:
 
 - "application/statuslist+json" for Status List in JSON format
 - "application/statuslist+jwt" for Status List in JWT format
@@ -832,6 +832,22 @@ Implementations producing Status Lists are RECOMMENDED to prevent double allocat
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
 The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices.
+
+## Status List Formats
+
+ This specification defines 4 different formats that can be used to provide a status list:
+
+ - JSON
+ - JWT
+ - CBOR
+ - CWT
+
+This decision was made to allow the highest degree of freedom to use the variant that best fits the ecosystem & use-case intending to add a status or validity information.
+
+This specification states no requirements to not mix different formats like a CBOR based token using a JWT for the status list, but the expectation is that within an ecosystem, a choice for specific formats is made.
+Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.
+
+The return type of a status list should be signaled by media type as described in [](#status-types-response). If no media type was provided and the expected type is not clearly defined the ecosystem, implementations should be robust to parsing errors. In that case, a client MAY attempt to guess the media type via inspection of the response or via name extension(s) of the URI.
 
 # IANA Considerations
 
