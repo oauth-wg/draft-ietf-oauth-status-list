@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T00:16:54.096520+00:00",
+  "timestamp": "2024-10-17T00:16:28.073054+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -1397,7 +1397,7 @@
       "id": "I_kwDOJZ2aqs5thDsV",
       "title": "\"A Status List can not represent multiple statuses per Referenced Token\"",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/51",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mprorock",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -1406,8 +1406,8 @@
       ],
       "body": "There are multiple cases that require multiple statuses to be attached to something.... this draft is also covering cbor\r\n\r\ncan we at least for cbor permit a flag that lets us embed an array of bytes into a particular status index - that would permit this use case to be covered easily",
       "createdAt": "2023-08-04T21:51:43Z",
-      "updatedAt": "2024-10-09T06:39:47Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-16T06:34:30Z",
+      "closedAt": "2024-10-16T06:34:30Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -2671,13 +2671,15 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [
-        "discuss"
+        "ready-for-pr"
       ],
       "body": "As the similar requirement was relaxed on SD-JWT, I think we should consider the same.",
       "createdAt": "2024-02-22T09:58:08Z",
-      "updatedAt": "2024-09-05T06:52:26Z",
+      "updatedAt": "2024-10-16T06:27:02Z",
       "closedAt": null,
       "comments": []
     },
@@ -3479,11 +3481,12 @@
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [
+        "ready-for-pr",
         "discuss"
       ],
       "body": "I have some concerns about the complexity of the compression requirements:\r\n\r\n> \r\n>    3.  The byte array is compressed using DEFLATE [RFC1951] with the\r\n>        ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to\r\n>        use the highest compression level available.\r\n\r\nand\r\n\r\n> \r\n>    The HTTP response SHOULD use gzip Content-Encoding as defined in\r\n>    [RFC9110].\r\n\r\nThe first quoted requirement adds needless complexity and computation on the part of the issuer, as compression can happen at the HTTP level (as indicated by the second requirement), so an implementation following the recommendations of this specification would end up compressing twice at the highest available compression level. With the second requirement there is ambiguity with how it interacts with the requirements in RFC9110 with respect to handling the Accept-Encoding request header.\r\n\r\nMy proposal is to remove the requirement for DEFLATE compression on internal structure, and instead rely solely on compression of the entire response using the request/response mechanism defined in RFC9110, section 8.4.",
       "createdAt": "2024-07-08T09:57:47Z",
-      "updatedAt": "2024-10-09T06:37:58Z",
+      "updatedAt": "2024-10-16T06:24:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -3492,6 +3495,13 @@
           "body": "Editors Call:\r\n- we would like have low size for other transport protocols\r\n- we may not 100% rely on HTTP compression in cases where HTTP headers get lost, e.g. some reverse proxy configurations\r\n- we could imagine compression_alg as an optional parameter that defaults to zlib, but could be none",
           "createdAt": "2024-08-29T07:36:59Z",
           "updatedAt": "2024-08-29T07:37:17Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- create an compression_alg\r\n- create an IANA registry with zlib required\r\n- we are considering adding none, but it seems unclear if the added complexity/negotiation is worth it\r\n- serves as an extension point to enable better ZKP proofs lateron",
+          "createdAt": "2024-10-16T06:24:02Z",
+          "updatedAt": "2024-10-16T06:24:02Z"
         }
       ]
     },
@@ -3749,7 +3759,7 @@
       "labels": [],
       "body": "The first few entries are valid, revoked, suspended.\r\n\r\nThere may be future well defined values that issuers and verifiers want global interoperability around.\r\n\r\nThere may also be a need for private use of this space.\r\n\r\nThis document should describe the \"reserved for private use range\", and leave room for enough globally interoperable and registered status values",
       "createdAt": "2024-10-09T15:19:25Z",
-      "updatedAt": "2024-10-09T17:25:21Z",
+      "updatedAt": "2024-10-16T06:12:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -3760,6 +3770,24 @@
           "updatedAt": "2024-10-09T17:25:19Z"
         }
       ]
+    },
+    {
+      "number": 182,
+      "id": "I_kwDOJZ2aqs6abH1h",
+      "title": "Clarify that implementations SHOULD NOT fail when one of the status lists referenced in the aggregation endpoint fails the processing rules",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/182",
+      "state": "OPEN",
+      "author": "tplooker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "ready-for-pr"
+      ],
+      "body": "",
+      "createdAt": "2024-10-16T06:36:31Z",
+      "updatedAt": "2024-10-16T06:37:09Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -11597,13 +11625,13 @@
       "labels": [],
       "body": "Adds support for historical resolution of status as an optional feature.\r\n\r\nCloses #138\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/historical-resolution/draft-ietf-oauth-status-list.html\r\n\r\nI will take another look at the wording / normative text and mark as ready for review when I am done.",
       "createdAt": "2024-09-30T13:27:29Z",
-      "updatedAt": "2024-10-09T17:03:24Z",
+      "updatedAt": "2024-10-16T11:00:27Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "2f57d2f6f18f7ce60aff52763ab2c3c9df4751b2",
+      "baseRefOid": "d0dbf2753366d7193248223fe901561851434fca",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/historical-resolution",
-      "headRefOid": "69f26498036340059d1f30d77a2d827654b89e42",
+      "headRefOid": "a9b070cecd6461b88782e764a205507e8fcd19a1",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
