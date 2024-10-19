@@ -774,7 +774,8 @@ a status list to a CDN or other distribution mechanism while giving guidance to 
 a fresh copy of the status list even if that status list is not expired.
 
 ## Historical resolution {#historical-resolution}
-By design, the Status List mechanism only conveys information about the state of a Referenced Token at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.
+
+By design, the Status List mechanism only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.
 
 If support for historical status information is needed, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
 
