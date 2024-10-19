@@ -835,14 +835,13 @@ The Status List Issuer may chunk its Referenced Tokens into multiple Status List
 
 ## Status List Formats
 
- This specification defines 4 different formats that can be used to provide a status list:
+ This specification defines 4 different formats of the status list:
 
  - JSON
  - JWT
  - CBOR
  - CWT
 
-This decision was made to allow the highest degree of freedom to use the variant that best fits the ecosystem & use-case intending to add a status or validity information.
 
 This specification states no requirements to not mix different formats like a CBOR based token using a JWT for the status list, but the expectation is that within an ecosystem, a choice for specific formats is made.
 Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.
