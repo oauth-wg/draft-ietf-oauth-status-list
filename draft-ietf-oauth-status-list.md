@@ -98,19 +98,19 @@ The following diagram depicts the relationship between the involved roles:
 
 ~~~ ascii-art
 
-           issue                 present                     
-           Referenced            Referenced                  
+           issue                 present
+           Referenced            Referenced
 ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
 │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
 └─┬──────┘            └────────┘            └──┬────────────┘
-  ▼ update status                              │             
-┌───────────────┐                              │             
-│ Status Issuer │                              │             
-└─┬─────────────┘                              │             
-  ▼ provide Status List                        │             
-┌─────────────────┐         fetch Status List  │             
-│ Status Provider │◄───────────────────────────┘             
-└─────────────────┘                                                                                             
+  ▼ update status                              │
+┌───────────────┐                              │
+│ Status Issuer │                              │
+└─┬─────────────┘                              │
+  ▼ provide Status List                        │
+┌─────────────────┐         fetch Status List  │
+│ Status Provider │◄───────────────────────────┘
+└─────────────────┘
 
 ~~~
 
@@ -120,17 +120,17 @@ The following diagram depicts the relationship between the artifacts:
 
 ~~~ ascii-art
 
-┌────────────────┐  describes status ┌──────────────────┐ 
-│  Status List   ├──────────────────►│ Referenced Token │ 
-│ (JSON or CBOR) │◄──────────────────┤  (JOSE or COSE)  │ 
-└─────┬──────────┘    references     └──────────────────┘ 
-      │                                                   
-      │ embedded in                                       
-      ▼                                                   
-┌───────────────────┐                                     
-│ Status List Token │                                     
-│  (JWT or CWT)     │                                     
-└───────────────────┘                                     
+┌────────────────┐  describes status ┌──────────────────┐
+│  Status List   ├──────────────────►│ Referenced Token │
+│ (JSON or CBOR) │◄──────────────────┤  (JOSE or COSE)  │
+└─────┬──────────┘    references     └──────────────────┘
+      │
+      │ embedded in
+      ▼
+┌───────────────────┐
+│ Status List Token │
+│  (JWT or CWT)     │
+└───────────────────┘
 
 ~~~
 
@@ -791,7 +791,7 @@ The Status List approaches these privacy implications by integrating the status 
 
 The herd privacy is depending on the number of entities within the Status List called its size. A larger size results in better privacy but also impacts the performance as more data has to be transferred to read the Status List.
 
-Additionally, the Issuer may analyse data from the HTTP request to identify the Relying Party, e.g. through the sender's IP address. 
+Additionally, the Issuer may analyse data from the HTTP request to identify the Relying Party, e.g. through the sender's IP address.
 
 This behaviour may be mitigated by:
 
