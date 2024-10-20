@@ -270,11 +270,11 @@ The following additional rules apply:
 
 1. The JWT MAY contain other claims.
 
-2. The JWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the JWT if it is using a Message Authentication Code (MAC) algorithm. Relying parties MUST reject JWTs with an invalid signature.
+2. The JWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject JWTs with an invalid signature.
 
 3. Relying parties MUST reject JWTs that are not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
 
-4. Application of additional restrictions and policy are at the discretion of the verifying party.
+4. Application of additional restrictions and policy are at the discretion of the Relying Party.
 
 The following is a non-normative example for a Status List Token in JWT format:
 
@@ -302,11 +302,11 @@ The following additional rules apply:
 
 1. The CWT MAY contain other claims.
 
-2. The CWT MUST be digitally signed using an asymmetric cryptographic algorithm. Relying parties MUST reject the CWT if it is using a Message Authentication Code (MAC) algorithm. Relying parties MUST reject CWTs with an invalid signature.
+2. The CWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject JWTs with an invalid signature.
 
 3. Relying parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
 
-4. Application of additional restrictions and policy are at the discretion of the verifying party.
+4. Application of additional restrictions and policy are at the discretion of the Relying Party.
 
 The following is a non-normative example for a Status List Token in CWT format in Hex:
 
