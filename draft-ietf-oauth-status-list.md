@@ -607,7 +607,7 @@ The Relying Party SHOULD send the following Accept-Header to indicate the reques
 
 If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.
 
-## Status List Response {#status-types-response}
+## Status List Response {#status-list-response}
 
 In the successful response, the Status List Provider SHOULD use the following content-type:
 
@@ -846,7 +846,7 @@ The Status List Issuer may chunk its Referenced Tokens into multiple Status List
 This specification states no requirements to not mix different formats like a CBOR based Referenced Token using a JWT for the Status List, but the expectation is that within an ecosystem, a choice for specific formats is made.
 Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.
 
-The return type of a status list should be signaled by media type as described in [](#status-types-response). If no media type was provided and the expected type is not clearly defined the ecosystem, implementations should be robust to parsing errors. In that case, a client MAY attempt to guess the media type via inspection of the response or name extension(s) of the URI.
+The return type of a status list should be signaled by media type as described in [](#status-list-response). If no media type was provided and the expected type is not clearly defined the ecosystem, implementations should be robust to parsing errors. In that case, a client MAY attempt to guess the media type via inspection of the response or name extension(s) of the URI.
 
 # IANA Considerations
 
