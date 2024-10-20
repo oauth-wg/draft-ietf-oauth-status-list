@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-17T00:16:28.073054+00:00",
+  "timestamp": "2024-10-20T00:18:30.525344+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -11625,13 +11625,13 @@
       "labels": [],
       "body": "Adds support for historical resolution of status as an optional feature.\r\n\r\nCloses #138\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/historical-resolution/draft-ietf-oauth-status-list.html\r\n\r\nI will take another look at the wording / normative text and mark as ready for review when I am done.",
       "createdAt": "2024-09-30T13:27:29Z",
-      "updatedAt": "2024-10-16T11:00:27Z",
+      "updatedAt": "2024-10-19T07:56:40Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "d0dbf2753366d7193248223fe901561851434fca",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/historical-resolution",
-      "headRefOid": "a9b070cecd6461b88782e764a205507e8fcd19a1",
+      "headRefOid": "240c92785e7967fee52dd4eb4f1dce2458d314d9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -11696,6 +11696,46 @@
           "createdAt": "2024-10-09T17:03:24Z",
           "updatedAt": "2024-10-09T17:03:24Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N0GC9",
+          "commit": {
+            "abbreviatedOid": "a9b070c"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T06:37:21Z",
+          "updatedAt": "2024-10-19T06:37:21Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\n## Historical resolution {#historical-resolution}\r\n\r\n```",
+              "createdAt": "2024-10-19T06:37:21Z",
+              "updatedAt": "2024-10-19T06:37:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N0GEf",
+          "commit": {
+            "abbreviatedOid": "a9b070c"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T06:38:06Z",
+          "updatedAt": "2024-10-19T06:38:06Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\r\nBy design, the Status List mechanism only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.\r\n```",
+              "createdAt": "2024-10-19T06:38:06Z",
+              "updatedAt": "2024-10-19T06:38:06Z"
+            }
+          ]
         }
       ]
     },
@@ -11942,6 +11982,113 @@
           "body": "",
           "createdAt": "2024-10-08T17:56:03Z",
           "updatedAt": "2024-10-08T17:56:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 183,
+      "id": "PR_kwDOJZ2aqs5-8GeQ",
+      "title": "mixing formats and media types",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/183",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "closes #38\r\ncloses #168\r\ncloses #137\r\n\r\nRendered preview: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/mixing-formats/draft-ietf-oauth-status-list.html\r\n\r\nThis PR attempts to add a bit of language about mixing formats and also changes the content-type in the status list response to SHOULD and language around content type parsing that is similar to the language used in HTTP/1.1.\r\n\r\nI am happy to remove the media types part if we want a bit more discussion, but when I started writing this, it felt like right path so I decided to include it as a proposal.",
+      "createdAt": "2024-10-17T09:15:17Z",
+      "updatedAt": "2024-10-19T07:58:01Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "d0dbf2753366d7193248223fe901561851434fca",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/mixing-formats",
+      "headRefOid": "d8286481ba2ce466ee44dd3689a2f8926dfca42b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6N0F8H",
+          "commit": {
+            "abbreviatedOid": "38b916d"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T06:33:30Z",
+          "updatedAt": "2024-10-19T06:33:31Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\r\n```\r\n\r\nGenerally we shouldn't document decisions in spec text.",
+              "createdAt": "2024-10-19T06:33:30Z",
+              "updatedAt": "2024-10-19T06:33:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N0F_w",
+          "commit": {
+            "abbreviatedOid": "38b916d"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-19T06:35:22Z",
+          "updatedAt": "2024-10-19T06:35:22Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\n This specification defines 4 different formats of the status list:\r\n```",
+              "createdAt": "2024-10-19T06:35:22Z",
+              "updatedAt": "2024-10-19T06:35:22Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 184,
+      "id": "PR_kwDOJZ2aqs5_KayE",
+      "title": "fix: update cwt claim definitions",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/184",
+      "state": "OPEN",
+      "author": "tplooker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #145 ",
+      "createdAt": "2024-10-19T06:58:36Z",
+      "updatedAt": "2024-10-19T17:16:23Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "d0dbf2753366d7193248223fe901561851434fca",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "tl/issue-145",
+      "headRefOid": "57b3bb34b40998170ff03232eb85c885f62f7265",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6N1pB2",
+          "commit": {
+            "abbreviatedOid": "57b3bb3"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "We should adjust adjust lines 415-417 as well",
+          "createdAt": "2024-10-19T17:16:23Z",
+          "updatedAt": "2024-10-19T17:16:23Z",
           "comments": []
         }
       ]
