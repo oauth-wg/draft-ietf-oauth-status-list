@@ -620,7 +620,7 @@ The processing rules for JWT or CWT precede any evaluation of a Referenced Token
 
 # Verification and Processing
 
-## Status List Request
+## Status List Request {#status-list-request}
 
 To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.
 
@@ -636,6 +636,24 @@ The Relying Party SHOULD send the following Accept-Header to indicate the reques
 - "application/statuslist+cwt" for Status List in CWT format
 
 If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.
+
+The following are non-normative examples for a request and response for a status list with type `application/statuslist+jwt`:
+
+~~~ ascii-art
+
+GET /statuslists/1 HTTP/1.1
+Host: example.com
+Accept: application/statuslist+jwt
+~~~
+
+
+~~~ ascii-art
+
+HTTP/1.1 200 OK
+Content-Type: application/statuslist+jwt
+
+{::include ./examples/status_list_jwt_raw}
+~~~
 
 ## Status List Response
 
@@ -674,6 +692,33 @@ If this validation was not successful, the Referenced Token MUST be rejected. If
 7. Check the status value as described in [](#status-types)
 
 If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
+
+## Historical resolution {#historical-resolution}
+
+By default, the Status List mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. This feature has additional privacy implications as described in [](#privacy-historical).
+
+To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List that was valid for that specified time or an error for the JWT and CWT variants and MUST contain a valid status list or an error for the unsigned option.
+
+If the Server does not support the additional query parameter, it SHOULD return a status code of 501 (Not Implemented), or if the requested time is not supported it SHOULD return a status code of 406 (Not Acceptable). These status codes MUST be supported for the unsigned option, where the client has not other way of checking when the response was valid and SHOULD be supported for the signed options. A status list token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client MUST verify support for this feature for the JWT and CWT variants by checking that the requested timestamp is within the valid time of the returned token signaled via `iat` (`6` for CWT) and `exp` (`4` for CWT).
+
+The following is a non-normative example for a GET request using the `time` query parameter:
+
+~~~ ascii-art
+
+GET /statuslists/1?time=1686925000 HTTP/1.1
+Host: example.com
+Accept: application/statuslist+jwt
+~~~
+
+The following is a non-normative example for a response for the above Request:
+
+~~~ ascii-art
+
+HTTP/1.1 200 OK
+Content-Type: application/statuslist+jwt
+
+{::include ./examples/status_list_jwt_raw}
+~~~
 
 # Status List Aggregation {#batch-fetching}
 
@@ -809,8 +854,6 @@ A malicious Issuer could bypass the privacy benefits of the herd privacy by gene
 
 Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
-TODO elaborate on status list only providing the up-to date/latest status, no historical data, may be provided by the underlying hosting architecture
-
 This behaviour could be mitigated by:
 
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
@@ -821,7 +864,7 @@ Outside actors may analyse the publicly available Status Lists to get informatio
 
 This behaviour could be mitigated by:
 
-- disable the historical data feature (TODO:link)
+- disable the historical data feature [](#historical-resolution)
 - disable the Status List Aggregation [](#batch-fetching)
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
@@ -844,6 +887,12 @@ To avoid further correlatable information by the values of `uri` and `index`, Is
 If the roles of the Issuer and the Status Provider are performed by two different entities, this may give additional privacy assurances as the Issuer has no means to identify the Relying Party or its request.
 
 Third Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs.
+
+## Historical Resolution {#privacy-historical}
+
+By default, this specification only supports providing status list information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.
+
+There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
 
 # Implementation Considerations {#implementation}
 
@@ -1175,6 +1224,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -05
 
+* add optional support for historical requests
 * update CBOR claim definitions
 * improve section on Status Types and introduce IANA registry for it
 * add Status Issuer and Status Provider role description to the introduction/terminology

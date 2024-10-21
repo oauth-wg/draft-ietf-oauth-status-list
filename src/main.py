@@ -110,6 +110,19 @@ def statusListJWT():
     util.outputFile(folder + "status_list_jwt", text)
 
 
+def statusListJWTRaw():
+    status_list = exampleStatusList1Bit()
+    jwt = StatusListToken(
+        issuer="https://example.com",
+        subject="https://example.com/statuslists/1",
+        list=status_list,
+        key=key,
+    )
+    status_jwt = jwt.buildJWT(iat=iat, exp=exp, ttl=ttl)
+    text = util.printText(status_jwt)
+    util.outputFile(folder + "status_list_jwt_raw", text)
+
+
 def statusListCWT():
     status_list = exampleStatusList1Bit()
     cwt = StatusListToken(
@@ -149,6 +162,7 @@ if __name__ == "__main__":
     statusListEncoding1Bit()
     statusListEncoding2Bit()
     statusListJWT()
+    statusListJWTRaw()
     statusListEncoding1BitCBOR()
     statusListEncoding2BitCBOR()
     statusListCWT()
