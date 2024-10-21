@@ -172,6 +172,9 @@ Status Issuer:
 Status Provider:
 : An entity that provides the Status List or Status List Token on a public endpoint. This role may be fulfilled by the Status Issuer.
 
+Holder:
+: An entity that receives Referenced Tokens form the Issuer and presents them to Relying Parties.
+
 Relying Party:
 : An entity that relies on the Status List to validate the status of the Referenced Token. Also known as Verifier.
 
