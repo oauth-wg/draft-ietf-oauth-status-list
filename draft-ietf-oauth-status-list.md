@@ -664,6 +664,35 @@ If this validation was not successful, the Referenced Token MUST be rejected. If
 
 If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
 
+## Historical resolution {#historical-resolution}
+
+By design, the Status List mechanism only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.
+
+If support for historical status information is needed, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
+
+To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List that was valid for that specified time or an error for the JWT and CWT variants and MUST contain a valid status list or an error for the unsigned option.
+
+If the Server does not support the additional query parameter, it SHOULD return a status code of 501 (Not Implemented), or if the requested time is not supported it SHOULD return a status code of 406 (Not Acceptable). These status codes MUST be supported for the unsigned option, where the client has not other way of checking when the response was valid and SHOULD be supported for the signed options. A status list token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client MUST verify support for this feature for the JWT and CWT variants by checking that the requested timestamp is within the valid time of the returned token signaled via `iat` (`6` for CWT) and `exp` (`4` for CWT).
+
+The following is a non-normative example for a GET request using the `time` query parameter:
+
+~~~ ascii-art
+
+GET /statuslists/1?time=1686925000 HTTP/1.1
+Host: example.com
+Accept: application/statuslist+jwt
+~~~
+
+The following is a non-normative example for a response for the above Request:
+
+~~~ ascii-art
+
+HTTP/1.1 200 OK
+Content-Type: application/statuslist+jwt
+
+{::include ./examples/status_list_jwt_raw}
+~~~
+
 # Status List Aggregation {#batch-fetching}
 
 Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
@@ -772,35 +801,6 @@ When consumers or verifiers of the Status List fetch the data, they need to be a
 in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
 a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
 a fresh copy of the status list even if that status list is not expired.
-
-## Historical resolution {#historical-resolution}
-
-By design, the Status List mechanism only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.
-
-If support for historical status information is needed, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
-
-To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List that was valid for that specified time or an error for the JWT and CWT variants and MUST contain a valid status list or an error for the unsigned option.
-
-If the Server does not support the additional query parameter, it SHOULD return a status code of 501 (Not Implemented), or if the requested time is not supported it SHOULD return a status code of 406 (Not Acceptable). These status codes MUST be supported for the unsigned option, where the client has not other way of checking when the response was valid and SHOULD be supported for the signed options. A status list token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client MUST verify support for this feature for the JWT and CWT variants by checking that the requested timestamp is within the valid time of the returned token signaled via `iat` (`6` for CWT) and `exp` (`4` for CWT).
-
-The following is a non-normative example for a GET request using the `time` query parameter:
-
-~~~ ascii-art
-
-GET /statuslists/1?time=1686925000 HTTP/1.1
-Host: example.com
-Accept: application/statuslist+jwt
-~~~
-
-The following is a non-normative example for a response for the above Request:
-
-~~~ ascii-art
-
-HTTP/1.1 200 OK
-Content-Type: application/statuslist+jwt
-
-{::include ./examples/status_list_jwt_raw}
-~~~
 
 # Privacy Considerations
 
