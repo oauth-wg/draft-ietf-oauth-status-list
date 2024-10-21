@@ -147,14 +147,14 @@ Table of Contents
    List.  Each Referenced Token is allocated an index during issuance
    that represents its position within this bit array.  The value of the
    bit(s) at this index correspond to the Referenced Token's status.  A
-   Status List may either be provided via HTTPS or be signed and
-   embedded into a Status List Token, whereas this document defines its
-   representations in JWT and CWT.  Status Lists may be composed for
-   expressing a range of Status Types.  This document defines basic
-   Status Types for the most common use cases as well as an
-   extensibility mechanism for custom Status Types.  The document also
-   defines how an issuer of a Referenced Token references a Status List
-   (Token).
+   Status List may either be provided via HTTPS or be protected within a
+   Status List Token by cryptographic signature or MAC, whereas this
+   document defines its representations in JWT and CWT.  Status Lists
+   may be composed for expressing a range of Status Types.  This
+   document defines basic Status Types for the most common use cases as
+   well as an extensibility mechanism for custom Status Types.  The
+   document also defines how an issuer of a Referenced Token references
+   a Status List (Token).
 
    An example for the usage of a Status List is to manage the status of
    issued access tokens as defined in section 1.4 of [RFC6749].  Token
@@ -482,10 +482,9 @@ Table of Contents
 
    1.  The JWT MAY contain other claims.
 
-   2.  The JWT MUST be digitally signed using an asymmetric
-       cryptographic algorithm.  Relying Parties MUST reject the JWT if
-       it is using a Message Authentication Code (MAC) algorithm.
-       Relying Parties MUST reject JWTs with an invalid signature.
+   2.  The JWT MUST be secured using a cryptographic signature or MAC
+       algorithm.  Relying Parties MUST reject JWTs with an invalid
+       signature.
 
    3.  Relying Parties MUST reject JWTs that are not valid in all other
        respects per "JSON Web Token (JWT)" [RFC7519].
@@ -544,10 +543,9 @@ Table of Contents
 
    1.  The CWT MAY contain other claims.
 
-   2.  The CWT MUST be digitally signed using an asymmetric
-       cryptographic algorithm.  Relying Parties MUST reject the CWT if
-       it is using a Message Authentication Code (MAC) algorithm.
-       Relying Parties MUST reject CWTs with an invalid signature.
+   2.  The CWT MUST be secured using a cryptographic signature or MAC
+       algorithm.  Relying Parties MUST reject CWTs with an invalid
+       signature.
 
    3.  Relying Parties MUST reject CWTs that are not valid in all other
        respects per "CBOR Web Token (CWT)" [RFC8392].
@@ -561,9 +559,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840f4888b797844e1dec424e7dae68c68cd756dbc2c86e2a160ae
-   fbf0133d4bb3e9a7430192adeb3a1ce778201b9c4747d7cfd2b9b000cfd7ed4e6e99
-   7820cda450
+   b918000217015d5840c6e1c7fb342aca52f347e0edfa4da9fa450fafc09de6382e67
+   9d79adfead6f72985dd299cfc29b7b63692ceb0bb5fee48e032a3692fc61b49d8de6
+   73a7c45468
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -585,12 +583,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      f4888b797844e1dec424e7da  #       "ô\x88\x8byxDáÞÄ$çÚ"
-      e68c68cd756dbc2c86e2a160  #       "æ\x8chÍum¼,\x86â¡`"
-      aefbf0133d4bb3e9a7430192  #       "®ûð\x13=K³é§C\x01\x92"
-      adeb3a1ce778201b9c4747d7  #       "\xadë:\x1cçx \x1b\x9cGG×"
-      cfd2b9b000cfd7ed4e6e9978  #       "ÏÒ¹°\x00Ï×íNn\x99x"
-      20cda450                  #       " Í¤P"
+      c6e1c7fb342aca52f347e0ed  #       "ÆáÇû4*ÊRóGàí"
+      fa4da9fa450fafc09de6382e  #       "úM©úE\x0f¯À\x9dæ8."
+      679d79adfead6f72985dd299  #       "g\x9dy\xadþ\xador\x98]Ò\x99"
+      cfc29b7b63692ceb0bb5fee4  #       "ÏÂ\x9b{ci,ë\x0bµþä"
+      8e032a3692fc61b49d8de673  #       "\x8e\x03*6\x92üa´\x9d\x8dæs"
+      a7c45468                  #       "§ÄTh"
 
 6.  Referenced Token
 
@@ -728,37 +726,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158408ce7882c6dba88c9025b699e914accedb2354c
-   9a4fb7c6bf7f352c421d25cbb87eb3643952985eedee11b7c6a29f7a09d153c6cc4b
-   b74f203c0f4bddb53756a5
+   7374617475736c697374732f315840188441870d3c14cd04c973e31ae09f19463ed5
+   d652342c421f9f2c2265e1ddba39c41e8d4bd5e894471ffce33a49a0f635b32298ce
+   b7dca7ee3e554edee80360
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         8ce7882c6dba88c9025b699e  #       "\x8cç\x88,mº\x88É\x02[i\x9e"
-         914accedb2354c9a4fb7c6bf  #       "\x91JÌí²5L\x9aO·Æ¿"
-         7f352c421d25cbb87eb36439  #       "\x7f5,B\x1d%Ë¸~³d9"
-         52985eedee11b7c6a29f7a09  #       "R\x98^íî\x11·Æ¢\x9fz\x09"
-         d153c6cc4bb74f203c0f4bdd  #       "ÑSÆÌK·O <\x0fKÝ"
-         b53756a5                  #       "µ7V¥"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      188441870d3c14cd04c973e3  #       "\x18\x84A\x87\x0d<\x14Í\x04Ésã"
+      1ae09f19463ed5d652342c42  #       "\x1aà\x9f\x19F>ÕÖR4,B"
+      1f9f2c2265e1ddba39c41e8d  #       "\x1f\x9f,"eáÝº9Ä\x1e\x8d"
+      4bd5e894471ffce33a49a0f6  #       "KÕè\x94G\x1füã:I\xa0ö"
+      35b32298ceb7dca7ee3e554e  #       "5³"\x98Î·Ü§î>UN"
+      dee80360                  #       "Þè\x03`"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1860,6 +1858,8 @@ Document History
       introduction/terminology
 
    *  add information on third party hosting to security consideration
+
+   *  remove constraint that Status List Token must not use a MAC
 
    -04
 

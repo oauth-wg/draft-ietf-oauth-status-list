@@ -1354,7 +1354,7 @@ The status list token data structures themselves are also represented as JWTs or
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">Token formats secured by JOSE <span>[<a href="#IANA.JOSE" class="cite xref">IANA.JOSE</a>]</span> or COSE <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>, such as JSON Web Tokens (JWTs) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, CBOR Web Tokens (CWTs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> and ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided via HTTPS or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-2">This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided via HTTPS or be protected within a Status List Token by cryptographic signature or MAC, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>.
 The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>):<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1683,7 +1683,7 @@ a2                              # map(2)
             <p id="section-5.1-7.1.1">The JWT <span class="bcp14">MAY</span> contain other claims.<a href="#section-5.1-7.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-7.2">
-            <p id="section-5.1-7.2.1">The JWT <span class="bcp14">MUST</span> be digitally signed using an asymmetric cryptographic algorithm. Relying Parties <span class="bcp14">MUST</span> reject the JWT if it is using a Message Authentication Code (MAC) algorithm. Relying Parties <span class="bcp14">MUST</span> reject JWTs with an invalid signature.<a href="#section-5.1-7.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-7.2.1">The JWT <span class="bcp14">MUST</span> be secured using a cryptographic signature or MAC algorithm. Relying Parties <span class="bcp14">MUST</span> reject JWTs with an invalid signature.<a href="#section-5.1-7.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.1-7.3">
             <p id="section-5.1-7.3.1">Relying Parties <span class="bcp14">MUST</span> reject JWTs that are not valid in all other respects per "JSON Web Token (JWT)" <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>.<a href="#section-5.1-7.3.1" class="pilcrow">¶</a></p>
@@ -1751,7 +1751,7 @@ a2                              # map(2)
             <p id="section-5.2-7.1.1">The CWT <span class="bcp14">MAY</span> contain other claims.<a href="#section-5.2-7.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.2-7.2">
-            <p id="section-5.2-7.2.1">The CWT <span class="bcp14">MUST</span> be digitally signed using an asymmetric cryptographic algorithm. Relying Parties <span class="bcp14">MUST</span> reject the CWT if it is using a Message Authentication Code (MAC) algorithm. Relying Parties <span class="bcp14">MUST</span> reject CWTs with an invalid signature.<a href="#section-5.2-7.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-7.2.1">The CWT <span class="bcp14">MUST</span> be secured using a cryptographic signature or MAC algorithm. Relying Parties <span class="bcp14">MUST</span> reject CWTs with an invalid signature.<a href="#section-5.2-7.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-5.2-7.3">
             <p id="section-5.2-7.3.1">Relying Parties <span class="bcp14">MUST</span> reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-5.2-7.3.1" class="pilcrow">¶</a></p>
@@ -1766,9 +1766,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840f4888b797844e1dec424e7dae68c68cd756dbc2c86e2a160ae
-fbf0133d4bb3e9a7430192adeb3a1ce778201b9c4747d7cfd2b9b000cfd7ed4e6e99
-7820cda450
+b918000217015d5840c6e1c7fb342aca52f347e0edfa4da9fa450fafc09de6382e67
+9d79adfead6f72985dd299cfc29b7b63692ceb0bb5fee48e032a3692fc61b49d8de6
+73a7c45468
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1792,12 +1792,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      f4888b797844e1dec424e7da  #       "ô\x88\x8byxDáÞÄ$çÚ"
-      e68c68cd756dbc2c86e2a160  #       "æ\x8chÍum¼,\x86â¡`"
-      aefbf0133d4bb3e9a7430192  #       "®ûð\x13=K³é§C\x01\x92"
-      adeb3a1ce778201b9c4747d7  #       "\xadë:\x1cçx \x1b\x9cGG×"
-      cfd2b9b000cfd7ed4e6e9978  #       "ÏÒ¹°\x00Ï×íNn\x99x"
-      20cda450                  #       " Í¤P"
+      c6e1c7fb342aca52f347e0ed  #       "ÆáÇû4*ÊRóGàí"
+      fa4da9fa450fafc09de6382e  #       "úM©úE\x0f¯À\x9dæ8."
+      679d79adfead6f72985dd299  #       "g\x9dy\xadþ\xador\x98]Ò\x99"
+      cfc29b7b63692ceb0bb5fee4  #       "ÏÂ\x9b{ci,ë\x0bµþä"
+      8e032a3692fc61b49d8de673  #       "\x8e\x03*6\x92üa´\x9d\x8dæs"
+      a7c45468                  #       "§ÄTh"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1939,9 +1939,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158408ce7882c6dba88c9025b699e914accedb2354c
-9a4fb7c6bf7f352c421d25cbb87eb3643952985eedee11b7c6a29f7a09d153c6cc4b
-b74f203c0f4bddb53756a5
+7374617475736c697374732f315840188441870d3c14cd04c973e31ae09f19463ed5
+d652342c421f9f2c2265e1ddba39c41e8d4bd5e894471ffce33a49a0f635b32298ce
+b7dca7ee3e554edee80360
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1966,12 +1966,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      8ce7882c6dba88c9025b699e  #       "\x8cç\x88,mº\x88É\x02[i\x9e"
-      914accedb2354c9a4fb7c6bf  #       "\x91JÌí²5L\x9aO·Æ¿"
-      7f352c421d25cbb87eb36439  #       "\x7f5,B\x1d%Ë¸~³d9"
-      52985eedee11b7c6a29f7a09  #       "R\x98^íî\x11·Æ¢\x9fz\x09"
-      d153c6cc4bb74f203c0f4bdd  #       "ÑSÆÌK·O &lt;\x0fKÝ"
-      b53756a5                  #       "µ7V¥"
+      188441870d3c14cd04c973e3  #       "\x18\x84A\x87\x0d&lt;\x14Í\x04Ésã"
+      1ae09f19463ed5d652342c42  #       "\x1aà\x9f\x19F&gt;ÕÖR4,B"
+      1f9f2c2265e1ddba39c41e8d  #       "\x1f\x9f,"eáÝº9Ä\x1e\x8d"
+      4bd5e894471ffce33a49a0f6  #       "KÕè\x94G\x1füã:I\xa0ö"
+      35b32298ceb7dca7ee3e554e  #       "5³"\x98Î·Ü§î&gt;UN"
+      dee80360                  #       "Þè\x03`"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -3212,6 +3212,9 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
           <p id="appendix-B-2.2.1">add information on third party hosting to security consideration<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.3">
+          <p id="appendix-B-2.3.1">remove constraint that Status List Token must not use a MAC<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-04<a href="#appendix-B-3" class="pilcrow">¶</a></p>
