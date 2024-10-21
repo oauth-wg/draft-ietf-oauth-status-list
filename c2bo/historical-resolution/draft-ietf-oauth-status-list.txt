@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 22 April 2025                                                  
+Expires: 24 April 2025                                                  
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                         19 October 2024
+                                                         21 October 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 April 2025.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
@@ -89,6 +89,7 @@ Table of Contents
      8.1.  Status List Request
      8.2.  Status List Response
      8.3.  Validation Rules
+     8.4.  Historical resolution
    9.  Status List Aggregation
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
@@ -99,7 +100,6 @@ Table of Contents
      11.1.  Correct decoding and parsing of the encoded status list
      11.2.  Security Guidance for JWT and CWT
      11.3.  Cached and Stale status lists
-     11.4.  Historical resolution
    12. Privacy Considerations
      12.1.  Observability of Issuers
      12.2.  Malicious Issuers
@@ -526,9 +526,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840b9e7aedab6df45608ba2bc822fd3069c9e8e51084390dae4cd
-   70e3b5c34cbd7f059d24bc6e8afc7c439ae4c5250460bc8a6c00f6b286ac3e395526
-   338172e6cf
+   b918000217015d5840482eff0b5de655b404ae4b65d4c1d4dccb7ab3b61077d2b1d2
+   86c04febdd9a0d76ba073b49d3100d57ff9b4c95e7c41d4c458164cc26832905f2a4
+   4d62db2496
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -550,12 +550,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      b9e7aedab6df45608ba2bc82  #       "¹ç®Ú¶ßE`\x8b¢¼\x82"
-      2fd3069c9e8e51084390dae4  #       "/Ó\x06\x9c\x9e\x8eQ\x08C\x90Úä"
-      cd70e3b5c34cbd7f059d24bc  #       "ÍpãµÃL½\x7f\x05\x9d$¼"
-      6e8afc7c439ae4c5250460bc  #       "n\x8aü|C\x9aäÅ%\x04`¼"
-      8a6c00f6b286ac3e39552633  #       "\x8al\x00ö²\x86¬>9U&3"
-      8172e6cf                  #       "\x81ræÏ"
+      482eff0b5de655b404ae4b65  #       "H.ÿ\x0b]æU´\x04®Ke"
+      d4c1d4dccb7ab3b61077d2b1  #       "ÔÁÔÜËz³¶\x10wÒ±"
+      d286c04febdd9a0d76ba073b  #       "Ò\x86ÀOëÝ\x9a\x0dvº\x07;"
+      49d3100d57ff9b4c95e7c41d  #       "IÓ\x10\x0dWÿ\x9bL\x95çÄ\x1d"
+      4c458164cc26832905f2a44d  #       "LE\x81dÌ&\x83)\x05ò¤M"
+      62db2496                  #       "bÛ$\x96"
 
 6.  Referenced Token
 
@@ -693,9 +693,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840186d70b5db4fdea736d5311bf7f7e774b10729
-   5502527d41faf17d7ac2723a244be73c2c9f33fcf03e47cd1f30751719057775ac6f
-   07daa53b0c68ed3d4fe38f
+   7374617475736c697374732f3158406003ef3743f8576554f6cd7aef0b52c51794dc
+   3efc0e72dfe610fda2b970162470adae0e8938f17d97d522847078d7fb0552abd865
+   e88116d4dc44eb9e60dee8
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -718,12 +718,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         186d70b5db4fdea736d5311b  #       "\x18mpµÛOÞ§6Õ1\x1b"
-         f7f7e774b107295502527d41  #       "÷÷çt±\x07)U\x02R}A"
-         faf17d7ac2723a244be73c2c  #       "úñ}zÂr:$Kç<,"
-         9f33fcf03e47cd1f30751719  #       "\x9f3üð>GÍ\x1f0u\x17\x19"
-         057775ac6f07daa53b0c68ed  #       "\x05wu¬o\x07Ú¥;\x0chí"
-         3d4fe38f                  #       "=Oã\x8f"
+         6003ef3743f8576554f6cd7a  #       "`\x03ï7CøWeTöÍz"
+         ef0b52c51794dc3efc0e72df  #       "ï\x0bRÅ\x17\x94Ü>ü\x0erß"
+         e610fda2b970162470adae0e  #       "æ\x10ý¢¹p\x16$p\xad®\x0e"
+         8938f17d97d522847078d7fb  #       "\x898ñ}\x97Õ"\x84px×û"
+         0552abd865e88116d4dc44eb  #       "\x05R«Øeè\x81\x16ÔÜDë"
+         9e60dee8                  #       "\x9e`Þè"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -947,8 +947,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.-TeL19nF_ZPc0RxGP4QOBn7K6eN1a4f108AsGrw6bYlIZZbkXay7
-   I-yUSjcSeflvsYHrJbVs_q5IOV32iArwFg
+   nR0bCI6NDMyMDB9.O3W3Hu4Zy_TMXEpamBhUTpIDNMyDJuXSmJ-0Ouf6OXdwUSbIkxmG
+   JRsEMmrfU-hjKfigWT06TiIZ6EBK5vu7Vw
 
 8.2.  Status List Response
 
@@ -1037,6 +1037,67 @@ d2                              # tag(18)
    If any of these checks fails, no statement about the status of the
    Referenced Token can be made and the Referenced Token SHOULD be
    rejected.
+
+8.4.  Historical resolution
+
+   By design, the Status List mechanism only conveys information about
+   the state of Reference Tokens at the time the Status List Token was
+   issued.  The validity period for this information, as defined by the
+   issuer, is explicitly stated by the iat (issued at) and exp
+   (expiration time) claims for JWT, and their corresponding ones for
+   the CWT representation.
+
+   If support for historical status information is needed, this can be
+   achieved by extending the request for the Status List as defined in
+   Section 8.1 with a timestamp.  There are strong privacy concerns that
+   have to be carefully taken into considerations when providing a
+   mechanism that allows historic requests for status information - see
+   Section 12.3 for more details.  Support for this functionality is
+   optional and Implementers are RECOMMENDED to not support historic
+   requests unless there are strong reasons to do so and after carefully
+   considering the privacy implications.
+
+   To obtain the Status List or Status List Token, the Relying Party
+   MUST send an HTTP GET request to the URI provided in the Referenced
+   Token with the additional query parameter time and its value being a
+   unix timestamp.  The response for a valid request SHOULD contain a
+   Status List that was valid for that specified time or an error for
+   the JWT and CWT variants and MUST contain a valid status list or an
+   error for the unsigned option.
+
+   If the Server does not support the additional query parameter, it
+   SHOULD return a status code of 501 (Not Implemented), or if the
+   requested time is not supported it SHOULD return a status code of 406
+   (Not Acceptable).  These status codes MUST be supported for the
+   unsigned option, where the client has not other way of checking when
+   the response was valid and SHOULD be supported for the signed
+   options.  A status list token might be served via static file hosting
+   (e.g., leveraging a Content Delivery Network), which would result in
+   the client not being able to retrieve those status codes.  Thus, the
+   client MUST verify support for this feature for the JWT and CWT
+   variants by checking that the requested timestamp is within the valid
+   time of the returned token signaled via iat (6 for CWT) and exp (4
+   for CWT).
+
+   The following is a non-normative example for a GET request using the
+   time query parameter:
+
+   GET /statuslists/1?time=1686925000 HTTP/1.1
+   Host: example.com
+   Accept: application/statuslist+jwt
+
+   The following is a non-normative example for a response for the above
+   Request:
+
+   HTTP/1.1 200 OK
+   Content-Type: application/statuslist+jwt
+
+   eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
+   yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
+   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
+   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
+   nR0bCI6NDMyMDB9.O3W3Hu4Zy_TMXEpamBhUTpIDNMyDJuXSmJ-0Ouf6OXdwUSbIkxmG
+   JRsEMmrfU-hjKfigWT06TiIZ6EBK5vu7Vw
 
 9.  Status List Aggregation
 
@@ -1186,67 +1247,6 @@ d2                              # tag(18)
    how often they need to fetch a fresh copy of the status list even if
    that status list is not expired.
 
-11.4.  Historical resolution
-
-   By design, the Status List mechanism only conveys information about
-   the state of Reference Tokens at the time the Status List Token was
-   issued.  The validity period for this information, as defined by the
-   issuer, is explicitly stated by the iat (issued at) and exp
-   (expiration time) claims for JWT, and their corresponding ones for
-   the CWT representation.
-
-   If support for historical status information is needed, this can be
-   achieved by extending the request for the Status List as defined in
-   Section 8.1 with a timestamp.  There are strong privacy concerns that
-   have to be carefully taken into considerations when providing a
-   mechanism that allows historic requests for status information - see
-   Section 12.3 for more details.  Support for this functionality is
-   optional and Implementers are RECOMMENDED to not support historic
-   requests unless there are strong reasons to do so and after carefully
-   considering the privacy implications.
-
-   To obtain the Status List or Status List Token, the Relying Party
-   MUST send an HTTP GET request to the URI provided in the Referenced
-   Token with the additional query parameter time and its value being a
-   unix timestamp.  The response for a valid request SHOULD contain a
-   Status List that was valid for that specified time or an error for
-   the JWT and CWT variants and MUST contain a valid status list or an
-   error for the unsigned option.
-
-   If the Server does not support the additional query parameter, it
-   SHOULD return a status code of 501 (Not Implemented), or if the
-   requested time is not supported it SHOULD return a status code of 406
-   (Not Acceptable).  These status codes MUST be supported for the
-   unsigned option, where the client has not other way of checking when
-   the response was valid and SHOULD be supported for the signed
-   options.  A status list token might be served via static file hosting
-   (e.g., leveraging a Content Delivery Network), which would result in
-   the client not being able to retrieve those status codes.  Thus, the
-   client MUST verify support for this feature for the JWT and CWT
-   variants by checking that the requested timestamp is within the valid
-   time of the returned token signaled via iat (6 for CWT) and exp (4
-   for CWT).
-
-   The following is a non-normative example for a GET request using the
-   time query parameter:
-
-   GET /statuslists/1?time=1686925000 HTTP/1.1
-   Host: example.com
-   Accept: application/statuslist+jwt
-
-   The following is a non-normative example for a response for the above
-   Request:
-
-   HTTP/1.1 200 OK
-   Content-Type: application/statuslist+jwt
-
-   eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
-   yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
-   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
-   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.-TeL19nF_ZPc0RxGP4QOBn7K6eN1a4f108AsGrw6bYlIZZbkXay7
-   I-yUSjcSeflvsYHrJbVs_q5IOV32iArwFg
-
 12.  Privacy Considerations
 
 12.1.  Observability of Issuers
@@ -1311,7 +1311,7 @@ d2                              # tag(18)
    the lookup of historical information like a validity state at a
    specific point in time.  There exists optional support for a query
    parameter that allows these kind of historic lookups as described in
-   Section 11.4.  There are scenarios where such a functionality is
+   Section 8.4.  There are scenarios where such a functionality is
    necessary, but this feature should only be implemented when the
    scenario and the consequences of enabling historical resolution are
    fully understood.
@@ -1327,7 +1327,7 @@ d2                              # tag(18)
 
    This behaviour could be mitigated by:
 
-   *  disable the historical data feature Section 11.4
+   *  disable the historical data feature Section 8.4
 
    *  disable the Status List Aggregation Section 9
 
