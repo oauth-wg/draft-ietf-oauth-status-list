@@ -412,9 +412,9 @@ Table of Contents
    *  The StatusList structure is a map (Major Type 5) and defines the
       following entries:
 
-      -  bits: REQUIRED.  Unsigned int (Major Type 0) that contains the
-         number of bits per Referenced Token in the Status List.  The
-         allowed values for bits are 1, 2, 4 and 8.
+      -  bits: REQUIRED.  Unsigned integer (Major Type 0) that contains
+         the number of bits per Referenced Token in the Status List.
+         The allowed values for bits are 1, 2, 4 and 8.
 
       -  lst: REQUIRED.  Byte string (Major Type 2) that contains the
          Status List as specified in Section 4.
@@ -463,21 +463,25 @@ Table of Contents
 
    The following content applies to the JWT Claims Set:
 
-   *  sub: REQUIRED.  The sub (subject) claim MUST specify the URI of
-      the Status List Token.  The value MUST be equal to that of the uri
-      claim contained in the status_list claim of the Referenced Token.
+   *  sub: REQUIRED.  As generally defined in [RFC7519].  The sub
+      (subject) claim MUST specify the URI of the Status List Token.
+      The value MUST be equal to that of the uri claim contained in the
+      status_list claim of the Referenced Token.
 
-   *  iat: REQUIRED.  The iat (issued at) claim MUST specify the time at
-      which the Status List Token was issued.
+   *  iat: REQUIRED.  As generally defined in [RFC7519].  The iat
+      (issued at) claim MUST specify the time at which the Status List
+      Token was issued.
 
-   *  exp: OPTIONAL.  The exp (expiration time) claim, if present, MUST
-      specify the time at which the Status List Token is considered
-      expired by the Status Issuer.
+   *  exp: OPTIONAL.  As generally defined in [RFC7519].  The exp
+      (expiration time) claim, if present, MUST specify the time at
+      which the Status List Token is considered expired by the Status
+      Issuer.
 
    *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST
       specify the maximum amount of time, in seconds, that the Status
       List Token can be cached by a consumer before a fresh copy SHOULD
-      be retrieved.  The value of the claim MUST be a positive number.
+      be retrieved.  The value of the claim MUST be a positive number
+      encoded in JSON as a number.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the rules outlined in
@@ -529,17 +533,24 @@ Table of Contents
 
    The following content applies to the CWT Claims Set:
 
-   *  2 (subject): REQUIRED.  Same definition as sub claim in
-      Section 5.1.
+   *  2 (subject): REQUIRED.  As generally defined in [RFC8392].  The
+      subject claim MUST specify the URI of the Status List Token.  The
+      value MUST be equal to that of the uri claim contained in the
+      status_list claim of the Referenced Token.
 
-   *  6 (issued at): REQUIRED.  Same definition as iat claim in
-      Section 5.1.
+   *  6 (issued at): REQUIRED.  As generally defined in [RFC8392].  The
+      issued at claim MUST specify the time at which the Status List
+      Token was issued.
 
-   *  4 (expiration time): OPTIONAL.  Same definition as exp claim in
-      Section 5.1.
+   *  4 (expiration time): OPTIONAL.  As generally defined in [RFC8392].
+      The expiration time claim, if present, MUST specify the time at
+      which the Status List Token is considered expired by its issuer.
 
-   *  65534 (time to live): OPTIONAL.  Same definition as ttl claim in
-      Section 5.1.
+   *  65534 (time to live): OPTIONAL.  Unsigned integer (Major Type 0).
+      The time to live claim, if present, MUST specify the maximum
+      amount of time, in seconds, that the Status List Token can be
+      cached by a consumer before a fresh copy SHOULD be retrieved.  The
+      value of the claim MUST be a positive number.
 
    *  65533 (status list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the rules outlined in Section 4.2.
@@ -564,9 +575,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d584034fbd3bf919b6fa36879e90a16207a4dc1f65bcde840827a35
-   94141031cfbdb0f1dfe6d3e78ebbaef1efce5faaa7bc61f8e7251b0f31b3f9762796
-   0a7e3641e7
+   b918000217015d58400ca35a0336b7a3e35f8f5ebf0e096aab08fa60dc7bb6e77520
+   a0908d573f8d1349b36270e8a5adfc183158b1abfdca5c3d501baaf20f075c4fa175
+   58aeac2c8c
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -588,12 +599,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      34fbd3bf919b6fa36879e90a  #       "4ûÓ¿\x91\x9bo£hyé\x0a"
-      16207a4dc1f65bcde840827a  #       "\x16 zMÁö[Íè@\x82z"
-      3594141031cfbdb0f1dfe6d3  #       "5\x94\x14\x101Ï½°ñßæÓ"
-      e78ebbaef1efce5faaa7bc61  #       "ç\x8e»®ñïÎ_ª§¼a"
-      f8e7251b0f31b3f97627960a  #       "øç%\x1b\x0f1³ùv'\x96\x0a"
-      7e3641e7                  #       "~6Aç"
+      0ca35a0336b7a3e35f8f5ebf  #       "\x0c£Z\x036·£ã_\x8f^¿"
+      0e096aab08fa60dc7bb6e775  #       "\x0e\x09j«\x08ú`Ü{¶çu"
+      20a0908d573f8d1349b36270  #       " \xa0\x90\x8dW?\x8d\x13I³bp"
+      e8a5adfc183158b1abfdca5c  #       "è¥\xadü\x181X±«ýÊ\"
+      3d501baaf20f075c4fa17558  #       "=P\x1bªò\x0f\x07\O¡uX"
+      aeac2c8c                  #       "®¬,\x8c"
 
 6.  Referenced Token
 
@@ -718,9 +729,17 @@ d2                              # tag(18)
          MUST be encoded as a StatusListInfo CBOR structure with the
          following fields:
 
-         o  idx: REQUIRED.  Same definition as idx claim in Section 6.2.
+         o  idx: REQUIRED.  Unsigned integer (Major Type 0) The idx
+            (index) claim MUST specify an Integer that represents the
+            index to check for status information in the Status List for
+            the current Referenced Token.  The value of idx MUST be a
+            non-negative number, containing a value of zero or greater.
 
-         o  uri: REQUIRED.  Same definition as uri claim in Section 6.2.
+         o  uri: REQUIRED.  Text string (Major Type 3).  The uri (URI)
+            claim MUST specify a String value that identifies the Status
+            List or Status List Token containing the status information
+            for the Referenced Token.  The value of uri MUST be a URI
+            conforming to [RFC3986].
 
    Application of additional restrictions and policy are at the
    discretion of the Relying Party.
@@ -731,9 +750,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584020dd702a2745db90e636499e83debbd0690f78
-   873acaea0ceec51904a83a5c03d78963241fe40cd74ff99b81348a2dc83ca326be00
-   980f5f13e4ad2980decf6b
+   7374617475736c697374732f3158404c3574dc4d1b7bcca18909d52342538704d840
+   bfbd4f68ec62085c8ddcf55a3f08c2904a09771224e5831c09de753fdba54ad3c485
+   ee01571488c82b52c0ee90
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -756,12 +775,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         20dd702a2745db90e636499e  #       " Ýp*'EÛ\x90æ6I\x9e"
-         83debbd0690f78873acaea0c  #       "\x83Þ»Ði\x0fx\x87:Êê\x0c"
-         eec51904a83a5c03d7896324  #       "îÅ\x19\x04¨:\\x03×\x89c$"
-         1fe40cd74ff99b81348a2dc8  #       "\x1fä\x0c×Où\x9b\x814\x8a-È"
-         3ca326be00980f5f13e4ad29  #       "<£&¾\x00\x98\x0f_\x13ä\xad)"
-         80decf6b                  #       "\x80ÞÏk"
+         4c3574dc4d1b7bcca18909d5  #       "L5tÜM\x1b{Ì¡\x89\x09Õ"
+         2342538704d840bfbd4f68ec  #       "#BS\x87\x04Ø@¿½Ohì"
+         62085c8ddcf55a3f08c2904a  #       "b\x08\\x8dÜõZ?\x08Â\x90J"
+         09771224e5831c09de753fdb  #       "\x09w\x12$å\x83\x1c\x09Þu?Û"
+         a54ad3c485ee01571488c82b  #       "¥JÓÄ\x85î\x01W\x14\x88È+"
+         52c0ee90                  #       "RÀî\x90"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -999,8 +1018,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.kCcQwQd-8cvXS4L4FWZYffuQZ-EvTNGG55m5wzm17wL4vtoX27HR
-   a4qGalFIg-93atNv3zbfHcfgrsYrISl-Pg
+   nR0bCI6NDMyMDB9.PaTZ1F_a5z5LXUtksRDZfu4LcOz29fuvXWIHIeSdh5xDbpxqOe7Z
+   DGvGwzkhp1OOOXCNPeIIA39Lx7vas6OgCA
 
 8.2.  Status List Response
 
@@ -1145,8 +1164,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.kCcQwQd-8cvXS4L4FWZYffuQZ-EvTNGG55m5wzm17wL4vtoX27HR
-   a4qGalFIg-93atNv3zbfHcfgrsYrISl-Pg
+   nR0bCI6NDMyMDB9.PaTZ1F_a5z5LXUtksRDZfu4LcOz29fuvXWIHIeSdh5xDbpxqOe7Z
+   DGvGwzkhp1OOOXCNPeIIA39Lx7vas6OgCA
 
 9.  Status List Aggregation
 
@@ -2086,6 +2105,8 @@ Document History
    -05
 
    *  add optional support for historical requests
+
+   *  update CBOR claim definitions
 
    *  improve section on Status Types and introduce IANA registry for it
 

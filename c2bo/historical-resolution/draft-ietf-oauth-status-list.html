@@ -1621,7 +1621,7 @@ encoded:
             <p id="section-4.2-2.1.1">The <code>StatusList</code> structure is a map (Major Type 5) and defines the following entries:<a href="#section-4.2-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-2.1.2.1">
-                <p id="section-4.2-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for <code>bits</code> are 1, 2, 4 and 8.<a href="#section-4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-4.2-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for <code>bits</code> are 1, 2, 4 and 8.<a href="#section-4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.2-2.1.2.2">
                 <p id="section-4.2-2.1.2.2.1"><code>lst</code>: <span class="bcp14">REQUIRED</span>. Byte string (Major Type 2) that contains the Status List as specified in <a href="#status-list" class="auto internal xref">Section 4</a>.<a href="#section-4.2-2.1.2.2.1" class="pilcrow">¶</a></p>
@@ -1679,16 +1679,16 @@ a2                              # map(2)
 <p id="section-5.1-4">The following content applies to the JWT Claims Set:<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1-5.1">
-            <p id="section-5.1-5.1.1"><code>sub</code>: <span class="bcp14">REQUIRED</span>. The <code>sub</code> (subject) claim <span class="bcp14">MUST</span> specify the URI of the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.1.1"><code>sub</code>: <span class="bcp14">REQUIRED</span>. As generally defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. The <code>sub</code> (subject) claim <span class="bcp14">MUST</span> specify the URI of the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.2">
-            <p id="section-5.1-5.2.1"><code>iat</code>: <span class="bcp14">REQUIRED</span>. The <code>iat</code> (issued at) claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.2.1"><code>iat</code>: <span class="bcp14">REQUIRED</span>. As generally defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. The <code>iat</code> (issued at) claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.3">
-            <p id="section-5.1-5.3.1"><code>exp</code>: <span class="bcp14">OPTIONAL</span>. The <code>exp</code> (expiration time) claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by the Status Issuer.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.3.1"><code>exp</code>: <span class="bcp14">OPTIONAL</span>. As generally defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. The <code>exp</code> (expiration time) claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by the Status Issuer.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.4">
-            <p id="section-5.1-5.4.1"><code>ttl</code>: <span class="bcp14">OPTIONAL</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.4.1"><code>ttl</code>: <span class="bcp14">OPTIONAL</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number encoded in JSON as a number.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.5">
             <p id="section-5.1-5.5.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. The <code>status_list</code> (status list) claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-json" class="auto internal xref">Section 4.1</a>.<a href="#section-5.1-5.5.1" class="pilcrow">¶</a></p>
@@ -1747,16 +1747,16 @@ a2                              # map(2)
 <p id="section-5.2-4">The following content applies to the CWT Claims Set:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-5.1">
-            <p id="section-5.2-5.1.1"><code>2</code> (subject): <span class="bcp14">REQUIRED</span>. Same definition as <code>sub</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.1.1"><code>2</code> (subject): <span class="bcp14">REQUIRED</span>. As generally defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The subject claim <span class="bcp14">MUST</span> specify the URI of the Status List Token. The value <span class="bcp14">MUST</span> be equal to that of the <code>uri</code> claim contained in the <code>status_list</code> claim of the Referenced Token.<a href="#section-5.2-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.2">
-            <p id="section-5.2-5.2.1"><code>6</code> (issued at): <span class="bcp14">REQUIRED</span>. Same definition as <code>iat</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.2.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.2.1"><code>6</code> (issued at): <span class="bcp14">REQUIRED</span>. As generally defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The issued at claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.3">
-            <p id="section-5.2-5.3.1"><code>4</code> (expiration time): <span class="bcp14">OPTIONAL</span>. Same definition as <code>exp</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.3.1"><code>4</code> (expiration time): <span class="bcp14">OPTIONAL</span>. As generally defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The expiration time claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by its issuer.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.4">
-            <p id="section-5.2-5.4.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. Same definition as <code>ttl</code> claim in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.4.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. Unsigned integer (Major Type 0). The time to live claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.5">
             <p id="section-5.2-5.5.1"><code>65533</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
@@ -1783,9 +1783,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d584034fbd3bf919b6fa36879e90a16207a4dc1f65bcde840827a35
-94141031cfbdb0f1dfe6d3e78ebbaef1efce5faaa7bc61f8e7251b0f31b3f9762796
-0a7e3641e7
+b918000217015d58400ca35a0336b7a3e35f8f5ebf0e096aab08fa60dc7bb6e77520
+a0908d573f8d1349b36270e8a5adfc183158b1abfdca5c3d501baaf20f075c4fa175
+58aeac2c8c
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1809,12 +1809,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      34fbd3bf919b6fa36879e90a  #       "4ûÓ¿\x91\x9bo£hyé\x0a"
-      16207a4dc1f65bcde840827a  #       "\x16 zMÁö[Íè@\x82z"
-      3594141031cfbdb0f1dfe6d3  #       "5\x94\x14\x101Ï½°ñßæÓ"
-      e78ebbaef1efce5faaa7bc61  #       "ç\x8e»®ñïÎ_ª§¼a"
-      f8e7251b0f31b3f97627960a  #       "øç%\x1b\x0f1³ùv'\x96\x0a"
-      7e3641e7                  #       "~6Aç"
+      0ca35a0336b7a3e35f8f5ebf  #       "\x0c£Z\x036·£ã_\x8f^¿"
+      0e096aab08fa60dc7bb6e775  #       "\x0e\x09j«\x08ú`Ü{¶çu"
+      20a0908d573f8d1349b36270  #       " \xa0\x90\x8dW?\x8d\x13I³bp"
+      e8a5adfc183158b1abfdca5c  #       "è¥\xadü\x181X±«ýÊ\"
+      3d501baaf20f075c4fa17558  #       "=P\x1bªò\x0f\x07\O¡uX"
+      aeac2c8c                  #       "®¬,\x8c"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1939,10 +1939,10 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
                 <p id="section-6.3-3.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-3.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1.2.1.2.1">
-                    <p id="section-6.3-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>idx</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.3-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (Major Type 0) The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of <code>idx</code> <span class="bcp14">MUST</span> be a non-negative number, containing a value of zero or greater.<a href="#section-6.3-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.3-3.1.2.1.2.2">
-                    <p id="section-6.3-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>uri</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.3-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Text string (Major Type 3). The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a String value that identifies the Status List or Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-6.3-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -1956,9 +1956,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584020dd702a2745db90e636499e83debbd0690f78
-873acaea0ceec51904a83a5c03d78963241fe40cd74ff99b81348a2dc83ca326be00
-980f5f13e4ad2980decf6b
+7374617475736c697374732f3158404c3574dc4d1b7bcca18909d52342538704d840
+bfbd4f68ec62085c8ddcf55a3f08c2904a09771224e5831c09de753fdba54ad3c485
+ee01571488c82b52c0ee90
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1983,12 +1983,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      20dd702a2745db90e636499e  #       " Ýp*'EÛ\x90æ6I\x9e"
-      83debbd0690f78873acaea0c  #       "\x83Þ»Ði\x0fx\x87:Êê\x0c"
-      eec51904a83a5c03d7896324  #       "îÅ\x19\x04¨:\\x03×\x89c$"
-      1fe40cd74ff99b81348a2dc8  #       "\x1fä\x0c×Où\x9b\x814\x8a-È"
-      3ca326be00980f5f13e4ad29  #       "&lt;£&amp;¾\x00\x98\x0f_\x13ä\xad)"
-      80decf6b                  #       "\x80ÞÏk"
+      4c3574dc4d1b7bcca18909d5  #       "L5tÜM\x1b{Ì¡\x89\x09Õ"
+      2342538704d840bfbd4f68ec  #       "#BS\x87\x04Ø@¿½Ohì"
+      62085c8ddcf55a3f08c2904a  #       "b\x08\\x8dÜõZ?\x08Â\x90J"
+      09771224e5831c09de753fdb  #       "\x09w\x12$å\x83\x1c\x09Þu?Û"
+      a54ad3c485ee01571488c82b  #       "¥JÓÄ\x85î\x01W\x14\x88È+"
+      52c0ee90                  #       "RÀî\x90"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2214,8 +2214,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.kCcQwQd-8cvXS4L4FWZYffuQZ-EvTNGG55m5wzm17wL4vtoX27HR
-a4qGalFIg-93atNv3zbfHcfgrsYrISl-Pg
+nR0bCI6NDMyMDB9.PaTZ1F_a5z5LXUtksRDZfu4LcOz29fuvXWIHIeSdh5xDbpxqOe7Z
+DGvGwzkhp1OOOXCNPeIIA39Lx7vas6OgCA
 </pre><a href="#section-8.1-9" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2328,8 +2328,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.kCcQwQd-8cvXS4L4FWZYffuQZ-EvTNGG55m5wzm17wL4vtoX27HR
-a4qGalFIg-93atNv3zbfHcfgrsYrISl-Pg
+nR0bCI6NDMyMDB9.PaTZ1F_a5z5LXUtksRDZfu4LcOz29fuvXWIHIeSdh5xDbpxqOe7Z
+DGvGwzkhp1OOOXCNPeIIA39Lx7vas6OgCA
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3455,16 +3455,19 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
           <p id="appendix-B-2.1.1">add optional support for historical requests<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">improve section on Status Types and introduce IANA registry for it<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">update CBOR claim definitions<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">add Status Issuer and Status Provider role description to the introduction/terminology<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">improve section on Status Types and introduce IANA registry for it<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">add information on third party hosting to security consideration<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">add Status Issuer and Status Provider role description to the introduction/terminology<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">remove constraint that Status List Token must not use a MAC<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">add information on third party hosting to security consideration<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.6">
+          <p id="appendix-B-2.6.1">remove constraint that Status List Token must not use a MAC<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-04<a href="#appendix-B-3" class="pilcrow">¶</a></p>
