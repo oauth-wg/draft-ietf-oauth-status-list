@@ -185,14 +185,14 @@ Table of Contents
    └─────────────────┘
 
    An Issuer issues Referenced Tokens to a Holder, the Holder uses and
-   presents those Referenced Tokens to a Relying Party.  The Issuer give
-   updated status information to the Status Issuer, who creates a Status
-   List (Token).  The Status Issuer gives the Status List (Token) to the
-   Status Provider, who serves the Status List (Token) on a public,
-   resolvable endpoint.  The roles of the Issuer (of the Referenced
-   Token), the Status Issuer and the Status Provider may be fulfilled by
-   the same entity.  If not further specified, the term Issuer may refer
-   to an entity acting for all three roles.
+   presents those Referenced Tokens to a Relying Party.  The Issuer
+   gives updated status information to the Status Issuer, who creates a
+   Status List (Token).  The Status Issuer gives the Status List (Token)
+   to the Status Provider, who serves the Status List (Token) on a
+   public, resolvable endpoint.  The roles of the Issuer (of the
+   Referenced Token), the Status Issuer and the Status Provider may be
+   fulfilled by the same entity.  If not further specified, the term
+   Issuer may refer to an entity acting for all three roles.
 
    The following diagram depicts the relationship between the artifacts:
 
@@ -561,9 +561,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58402de315daf2a29de8af7a6b3b4e0603e8144be5f223221b8538
-   7087bdf3bd1a6c56ce241d01136c7de583a330857da8cd894ebee571a5033ae6a156
-   ddd104a906
+   b918000217015d584068bfea457ab1d64c54d2513df0b76b3e53587209b93e834fde
+   3353735322d787febd70753e5d270168795fbe8bba310fbe1ebfb27416b9904aeb5b
+   3483b3550d
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -585,12 +585,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      2de315daf2a29de8af7a6b3b  #       "-ã\x15Úò¢\x9dè¯zk;"
-      4e0603e8144be5f223221b85  #       "N\x06\x03è\x14Kåò#"\x1b\x85"
-      387087bdf3bd1a6c56ce241d  #       "8p\x87½ó½\x1alVÎ$\x1d"
-      01136c7de583a330857da8cd  #       "\x01\x13l}å\x83£0\x85}¨Í"
-      894ebee571a5033ae6a156dd  #       "\x89N¾åq¥\x03:æ¡VÝ"
-      d104a906                  #       "Ñ\x04©\x06"
+      68bfea457ab1d64c54d2513d  #       "h¿êEz±ÖLTÒQ="
+      f0b76b3e53587209b93e834f  #       "ð·k>SXr\x09¹>\x83O"
+      de3353735322d787febd7075  #       "Þ3SsS"×\x87þ½pu"
+      3e5d270168795fbe8bba310f  #       ">]'\x01hy_¾\x8bº1\x0f"
+      be1ebfb27416b9904aeb5b34  #       "¾\x1e¿²t\x16¹\x90Jë[4"
+      83b3550d                  #       "\x83³U\x0d"
 
 6.  Referenced Token
 
@@ -728,37 +728,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840d49e6d89ad36d2a9bba3bb0ed322ded3e28a1d
-   31983675940224244e8cd945db2497de85a4e5b83bc32d54126eef78d105daa19f90
-   5b089d2634caa3fa6e13a8
+   7374617475736c697374732f315840e25c8fe1a4e056e611e4c7de9a4686ba11c638
+   dcf6f94ccdb08d4901a3d43220c3b68de44f5689e036b39bbc3792be2b841c01e498
+   037d962525d40a888f9d00
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         d49e6d89ad36d2a9bba3bb0e  #       "Ô\x9em\x89\xad6Ò©»£»\x0e"
-         d322ded3e28a1d3198367594  #       "Ó"ÞÓâ\x8a\x1d1\x986u\x94"
-         0224244e8cd945db2497de85  #       "\x02$$N\x8cÙEÛ$\x97Þ\x85"
-         a4e5b83bc32d54126eef78d1  #       "¤å¸;Ã-T\x12nïxÑ"
-         05daa19f905b089d2634caa3  #       "\x05Ú¡\x9f\x90[\x08\x9d&4Ê£"
-         fa6e13a8                  #       "ún\x13¨"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      e25c8fe1a4e056e611e4c7de  #       "â\\x8fá¤àVæ\x11äÇÞ"
+      9a4686ba11c638dcf6f94ccd  #       "\x9aF\x86º\x11Æ8ÜöùLÍ"
+      b08d4901a3d43220c3b68de4  #       "°\x8dI\x01£Ô2 Ã¶\x8dä"
+      4f5689e036b39bbc3792be2b  #       "OV\x89à6³\x9b¼7\x92¾+"
+      841c01e498037d962525d40a  #       "\x84\x1c\x01ä\x98\x03}\x96%%Ô\x0a"
+      888f9d00                  #       "\x88\x8f\x9d\x00"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1237,7 +1237,7 @@ d2                              # tag(18)
    *  private relay protocols or other mechanism hiding the original
       sender like [RFC9458].
 
-   *  using Third Party Hosting, see Section 12.6.
+   *  using trusted Third Party Hosting, see Section 12.6.
 
 12.2.  Malicious Issuers
 
@@ -1324,12 +1324,12 @@ d2                              # tag(18)
 
    If the roles of the Issuer and the Status Provider are performed by
    two different entities, this may give additional privacy assurances
-   as the Issuer has no means to identity the Relying Party or its
+   as the Issuer has no means to identify the Relying Party or its
    request.
 
    Third Party hosting may also allow for greater scalability, as the
    Status List Tokens may be served by operators with greater resources,
-   like CDNS.
+   like CDNs.
 
 13.  Implementation Considerations
 
