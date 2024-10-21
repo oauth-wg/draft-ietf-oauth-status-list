@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 23 April 2025                                                  
+Expires: 24 April 2025                                                  
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                         20 October 2024
+                                                         21 October 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2025.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
@@ -285,6 +285,9 @@ Table of Contents
    Status Provider:  An entity that provides the Status List or Status
       List Token on a public endpoint.  This role may be fulfilled by
       the Status Issuer.
+
+   Holder:  An entity that receives Referenced Tokens form the Issuer
+      and presents them to Relying Parties.
 
    Relying Party:  An entity that relies on the Status List to validate
       the status of the Referenced Token.  Also known as Verifier.
@@ -558,9 +561,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58405359d5f387c44da62c53b9d28a6f404d7a60f9e39ae3326c79
-   50ed37fedf1d9c01b9b74f3281f7e3398141c7f36fde6aa1e8ffd004fbdbadf625c0
-   2143a8dc95
+   b918000217015d58402de315daf2a29de8af7a6b3b4e0603e8144be5f223221b8538
+   7087bdf3bd1a6c56ce241d01136c7de583a330857da8cd894ebee571a5033ae6a156
+   ddd104a906
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -582,12 +585,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      5359d5f387c44da62c53b9d2  #       "SYÕó\x87ÄM¦,S¹Ò"
-      8a6f404d7a60f9e39ae3326c  #       "\x8ao@Mz`ùã\x9aã2l"
-      7950ed37fedf1d9c01b9b74f  #       "yPí7þß\x1d\x9c\x01¹·O"
-      3281f7e3398141c7f36fde6a  #       "2\x81÷ã9\x81AÇóoÞj"
-      a1e8ffd004fbdbadf625c021  #       "¡èÿÐ\x04ûÛ\xadö%À!"
-      43a8dc95                  #       "C¨Ü\x95"
+      2de315daf2a29de8af7a6b3b  #       "-ã\x15Úò¢\x9dè¯zk;"
+      4e0603e8144be5f223221b85  #       "N\x06\x03è\x14Kåò#"\x1b\x85"
+      387087bdf3bd1a6c56ce241d  #       "8p\x87½ó½\x1alVÎ$\x1d"
+      01136c7de583a330857da8cd  #       "\x01\x13l}å\x83£0\x85}¨Í"
+      894ebee571a5033ae6a156dd  #       "\x89N¾åq¥\x03:æ¡VÝ"
+      d104a906                  #       "Ñ\x04©\x06"
 
 6.  Referenced Token
 
@@ -725,9 +728,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840aa4043522d02b92a55d464485a6ddcbb7628b7
-   53ec4f5fa9a9e5857514c569bcc50a37eaec3fc665700f8506d152071cdb667344a5
-   8edb80ae9c7a2f12540e95
+   7374617475736c697374732f315840d49e6d89ad36d2a9bba3bb0ed322ded3e28a1d
+   31983675940224244e8cd945db2497de85a4e5b83bc32d54126eef78d105daa19f90
+   5b089d2634caa3fa6e13a8
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -750,12 +753,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         aa4043522d02b92a55d46448  #       "ª@CR-\x02¹*UÔdH"
-         5a6ddcbb7628b753ec4f5fa9  #       "ZmÜ»v(·SìO_©"
-         a9e5857514c569bcc50a37ea  #       "©å\x85u\x14Åi¼Å\x0a7ê"
-         ec3fc665700f8506d152071c  #       "ì?Æep\x0f\x85\x06ÑR\x07\x1c"
-         db667344a58edb80ae9c7a2f  #       "ÛfsD¥\x8eÛ\x80®\x9cz/"
-         12540e95                  #       "\x12T\x0e\x95"
+         d49e6d89ad36d2a9bba3bb0e  #       "Ô\x9em\x89\xad6Ò©»£»\x0e"
+         d322ded3e28a1d3198367594  #       "Ó"ÞÓâ\x8a\x1d1\x986u\x94"
+         0224244e8cd945db2497de85  #       "\x02$$N\x8cÙEÛ$\x97Þ\x85"
+         a4e5b83bc32d54126eef78d1  #       "¤å¸;Ã-T\x12nïxÑ"
+         05daa19f905b089d2634caa3  #       "\x05Ú¡\x9f\x90[\x08\x9d&4Ê£"
+         fa6e13a8                  #       "ún\x13¨"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
