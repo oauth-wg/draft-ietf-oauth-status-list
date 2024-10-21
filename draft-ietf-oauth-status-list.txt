@@ -89,6 +89,7 @@ Table of Contents
      8.1.  Status List Request
      8.2.  Status List Response
      8.3.  Validation Rules
+     8.4.  Historical resolution
    9.  Status List Aggregation
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
@@ -106,6 +107,7 @@ Table of Contents
      12.4.  Observability of Outsiders
      12.5.  Unlinkability
      12.6.  Third Party Hosting
+     12.7.  Historical Resolution
    13. Implementation Considerations
      13.1.  Token Lifecycle
      13.2.  Default Values and Double Allocation
@@ -573,9 +575,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58409b38caac66d7b3b67af41fd48cc02661c5978d898ba7235814
-   fe2753b94e88744fdefbb23d4d118f1a7d10df1b1df23e946b1b3cbd9dd2d167d1d1
-   b76ce820ed
+   b918000217015d5840eb11919a72e8ae9a720f8893db3352f8426d198f339b881829
+   e964a0478d0cd3c9e00bd9efe9fc85a8768dee358127240cd02ad35821a3cefa1877
+   f801de7dc2
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -597,12 +599,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      9b38caac66d7b3b67af41fd4  #       "\x9b8Ê¬f×³¶zô\x1fÔ"
-      8cc02661c5978d898ba72358  #       "\x8cÀ&aÅ\x97\x8d\x89\x8b§#X"
-      14fe2753b94e88744fdefbb2  #       "\x14þ'S¹N\x88tOÞû²"
-      3d4d118f1a7d10df1b1df23e  #       "=M\x11\x8f\x1a}\x10ß\x1b\x1dò>"
-      946b1b3cbd9dd2d167d1d1b7  #       "\x94k\x1b<½\x9dÒÑgÑÑ·"
-      6ce820ed                  #       "lè í"
+      eb11919a72e8ae9a720f8893  #       "ë\x11\x91\x9arè®\x9ar\x0f\x88\x93"
+      db3352f8426d198f339b8818  #       "Û3RøBm\x19\x8f3\x9b\x88\x18"
+      29e964a0478d0cd3c9e00bd9  #       ")éd\xa0G\x8d\x0cÓÉà\x0bÙ"
+      efe9fc85a8768dee35812724  #       "ïéü\x85¨v\x8dî5\x81'$"
+      0cd02ad35821a3cefa1877f8  #       "\x0cÐ*ÓX!£Îú\x18wø"
+      01de7dc2                  #       "\x01Þ}Â"
 
 6.  Referenced Token
 
@@ -748,37 +750,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840292878ecac7133a3497aa499223a30e9727061
-   13d90cc58207c61a977f18bcf51a2d52ab10b18909d0f931ad633cf1231b6c1bb0a4
-   5053fcbe068c5e544b61d7
+   7374617475736c697374732f315840586165ce86b9fb72ddb305067357fa23764f60
+   ccffd911dda0bbec01a3a495a02796535666a0f565b1e26c2af2eaf11e196cb65add
+   9a750ab3ed3553f9a305ff
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      292878ecac7133a3497aa499  #       ")(xì¬q3£Iz¤\x99"
-      223a30e972706113d90cc582  #       "":0érpa\x13Ù\x0cÅ\x82"
-      07c61a977f18bcf51a2d52ab  #       "\x07Æ\x1a\x97\x7f\x18¼õ\x1a-R«"
-      10b18909d0f931ad633cf123  #       "\x10±\x89\x09Ðù1\xadc<ñ#"
-      1b6c1bb0a45053fcbe068c5e  #       "\x1bl\x1b°¤PSü¾\x06\x8c^"
-      544b61d7                  #       "TKa×"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         586165ce86b9fb72ddb30506  #       "XaeÎ\x86¹ûrÝ³\x05\x06"
+         7357fa23764f60ccffd911dd  #       "sWú#vO`ÌÿÙ\x11Ý"
+         a0bbec01a3a495a027965356  #       "\xa0»ì\x01£¤\x95\xa0'\x96SV"
+         66a0f565b1e26c2af2eaf11e  #       "f\xa0õe±âl*òêñ\x1e"
+         196cb65add9a750ab3ed3553  #       "\x19l¶ZÝ\x9au\x0a³í5S"
+         f9a305ff                  #       "ù£\x05ÿ"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1002,6 +1004,23 @@ d2                              # tag(18)
    If the Relying Party does not send an Accept Header, the response
    type is assumed to be known implicit or out-of-band.
 
+   The following are non-normative examples for a request and response
+   for a status list with type application/statuslist+jwt:
+
+   GET /statuslists/1 HTTP/1.1
+   Host: example.com
+   Accept: application/statuslist+jwt
+
+   HTTP/1.1 200 OK
+   Content-Type: application/statuslist+jwt
+
+   eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
+   yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
+   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
+   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
+   nR0bCI6NDMyMDB9.f-0vJlTbe11EbvOT4LedgfVDeoq6A2_6hVju49ap8GdSJaH9wEIs
+   Ui8YAWT9SwhLjUBe-7c5PjOSZLkUcUPuMw
+
 8.2.  Status List Response
 
    In the successful response, the Status List Provider MUST use the
@@ -1092,6 +1111,61 @@ d2                              # tag(18)
    If any of these checks fails, no statement about the status of the
    Referenced Token can be made and the Referenced Token SHOULD be
    rejected.
+
+8.4.  Historical resolution
+
+   By default, the Status List mechanism defined in this specification
+   only conveys information about the state of Reference Tokens at the
+   time the Status List Token was issued.  The validity period for this
+   information, as defined by the issuer, is explicitly stated by the
+   iat (issued at) and exp (expiration time) claims for JWT, and their
+   corresponding ones for the CWT representation.  If support for
+   historical status information is required, this can be achieved by
+   extending the request for the Status List as defined in Section 8.1
+   with a timestamp.  This feature has additional privacy implications
+   as described in Section 12.7.
+
+   To obtain the Status List or Status List Token, the Relying Party
+   MUST send an HTTP GET request to the URI provided in the Referenced
+   Token with the additional query parameter time and its value being a
+   unix timestamp.  The response for a valid request SHOULD contain a
+   Status List that was valid for that specified time or an error for
+   the JWT and CWT variants and MUST contain a valid status list or an
+   error for the unsigned option.
+
+   If the Server does not support the additional query parameter, it
+   SHOULD return a status code of 501 (Not Implemented), or if the
+   requested time is not supported it SHOULD return a status code of 406
+   (Not Acceptable).  These status codes MUST be supported for the
+   unsigned option, where the client has not other way of checking when
+   the response was valid and SHOULD be supported for the signed
+   options.  A status list token might be served via static file hosting
+   (e.g., leveraging a Content Delivery Network), which would result in
+   the client not being able to retrieve those status codes.  Thus, the
+   client MUST verify support for this feature for the JWT and CWT
+   variants by checking that the requested timestamp is within the valid
+   time of the returned token signaled via iat (6 for CWT) and exp (4
+   for CWT).
+
+   The following is a non-normative example for a GET request using the
+   time query parameter:
+
+   GET /statuslists/1?time=1686925000 HTTP/1.1
+   Host: example.com
+   Accept: application/statuslist+jwt
+
+   The following is a non-normative example for a response for the above
+   Request:
+
+   HTTP/1.1 200 OK
+   Content-Type: application/statuslist+jwt
+
+   eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
+   yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
+   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
+   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
+   nR0bCI6NDMyMDB9.f-0vJlTbe11EbvOT4LedgfVDeoq6A2_6hVju49ap8GdSJaH9wEIs
+   Ui8YAWT9SwhLjUBe-7c5PjOSZLkUcUPuMw
 
 9.  Status List Aggregation
 
@@ -1301,10 +1375,6 @@ d2                              # tag(18)
    and unknown to the Holder, e.g. profiling the suspension of a driving
    license or checking the employment status of an employee credential.
 
-   TODO elaborate on status list only providing the up-to date/latest
-   status, no historical data, may be provided by the underlying hosting
-   architecture
-
    This behaviour could be mitigated by:
 
    *  regular re-issuance of the Referenced Token, see Section 13.1.
@@ -1320,7 +1390,7 @@ d2                              # tag(18)
 
    This behaviour could be mitigated by:
 
-   *  disable the historical data feature (TODO:link)
+   *  disable the historical data feature Section 8.4
 
    *  disable the Status List Aggregation Section 9
 
@@ -1367,6 +1437,26 @@ d2                              # tag(18)
    Third Party hosting may also allow for greater scalability, as the
    Status List Tokens may be served by operators with greater resources,
    like CDNs.
+
+12.7.  Historical Resolution
+
+   By default, this specification only supports providing status list
+   information for the most recent status information and does not allow
+   the lookup of historical information like a validity state at a
+   specific point in time.  There exists optional support for a query
+   parameter that allows these kind of historic lookups as described in
+   Section 8.4.  There are scenarios where such a functionality is
+   necessary, but this feature should only be implemented when the
+   scenario and the consequences of enabling historical resolution are
+   fully understood.
+
+   There are strong privacy concerns that have to be carefully taken
+   into considerations when providing a mechanism that allows historic
+   requests for status information - see Section 12.3 for more details.
+   Support for this functionality is optional and Implementers are
+   RECOMMENDED to not support historic requests unless there are strong
+   reasons to do so and after carefully considering the privacy
+   implications.
 
 13.  Implementation Considerations
 
@@ -2013,6 +2103,8 @@ Acknowledgments
 Document History
 
    -05
+
+   *  add optional support for historical requests
 
    *  update CBOR claim definitions
 
