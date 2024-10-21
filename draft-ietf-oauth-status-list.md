@@ -114,7 +114,7 @@ The following diagram depicts the relationship between the involved roles:
 
 ~~~
 
-An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer give updated status information to the Status Issuer, who creates a Status List (Token). The Status Issuer gives the Status List (Token) to the Status Provider, who serves the Status List (Token) on a public, resolvable endpoint. The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles.
+An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who creates a Status List (Token). The Status Issuer gives the Status List (Token) to the Status Provider, who serves the Status List (Token) on a public, resolvable endpoint. The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles.
 
 The following diagram depicts the relationship between the artifacts:
 
@@ -799,7 +799,7 @@ Additionally, the Issuer may analyse data from the HTTP request to identify the 
 This behaviour may be mitigated by:
 
 - private relay protocols or other mechanism hiding the original sender like {{RFC9458}}.
-- using Third Party Hosting, see [](#third-party-hosting).
+- using trusted Third Party Hosting, see [](#third-party-hosting).
 
 ## Malicious Issuers
 
@@ -841,9 +841,9 @@ To avoid further correlatable information by the values of `uri` and `index`, Is
 
 ## Third Party Hosting {#third-party-hosting}
 
-If the roles of the Issuer and the Status Provider are performed by two different entities, this may give additional privacy assurances as the Issuer has no means to identity the Relying Party or its request.
+If the roles of the Issuer and the Status Provider are performed by two different entities, this may give additional privacy assurances as the Issuer has no means to identify the Relying Party or its request.
 
-Third Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNS.
+Third Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs.
 
 # Implementation Considerations {#implementation}
 
