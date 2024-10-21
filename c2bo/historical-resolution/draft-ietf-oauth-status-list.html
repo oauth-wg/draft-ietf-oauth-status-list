@@ -1265,6 +1265,9 @@ The status list token data structures themselves are also represented as JWTs or
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.6">
                 <p id="section-toc.1-1.12.2.6.1"><a href="#section-12.6" class="auto internal xref">12.6</a>.  <a href="#name-third-party-hosting" class="internal xref">Third Party Hosting</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.7">
+                <p id="section-toc.1-1.12.2.7.1"><a href="#section-12.7" class="auto internal xref">12.7</a>.  <a href="#name-historical-resolution-2" class="internal xref">Historical Resolution</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
@@ -1737,9 +1740,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840482eff0b5de655b404ae4b65d4c1d4dccb7ab3b61077d2b1d2
-86c04febdd9a0d76ba073b49d3100d57ff9b4c95e7c41d4c458164cc26832905f2a4
-4d62db2496
+b918000217015d584024072d36b47171d74b60f7a02cee98f74ca9845137e58cadd3
+96539ac75a2d93a159d281250d8a0609421204ab47ddf6c4a890ac7d82ce11519465
+75f6b544c6
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1763,12 +1766,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      482eff0b5de655b404ae4b65  #       "H.ÿ\x0b]æU´\x04®Ke"
-      d4c1d4dccb7ab3b61077d2b1  #       "ÔÁÔÜËz³¶\x10wÒ±"
-      d286c04febdd9a0d76ba073b  #       "Ò\x86ÀOëÝ\x9a\x0dvº\x07;"
-      49d3100d57ff9b4c95e7c41d  #       "IÓ\x10\x0dWÿ\x9bL\x95çÄ\x1d"
-      4c458164cc26832905f2a44d  #       "LE\x81dÌ&amp;\x83)\x05ò¤M"
-      62db2496                  #       "bÛ$\x96"
+      24072d36b47171d74b60f7a0  #       "$\x07-6´qq×K`÷\xa0"
+      2cee98f74ca9845137e58cad  #       ",î\x98÷L©\x84Q7å\x8c\xad"
+      d396539ac75a2d93a159d281  #       "Ó\x96S\x9aÇZ-\x93¡YÒ\x81"
+      250d8a0609421204ab47ddf6  #       "%\x0d\x8a\x06\x09B\x12\x04«GÝö"
+      c4a890ac7d82ce1151946575  #       "Ä¨\x90¬}\x82Î\x11Q\x94eu"
+      f6b544c6                  #       "öµDÆ"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1910,9 +1913,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158406003ef3743f8576554f6cd7aef0b52c51794dc
-3efc0e72dfe610fda2b970162470adae0e8938f17d97d522847078d7fb0552abd865
-e88116d4dc44eb9e60dee8
+7374617475736c697374732f31584016ae7ea74cdf6c4009ac6636848405b61153eb
+6787fbdbf57bbb675a1683d866d094888f8824932bfd171327a1f709e91d27ab6db2
+d26f1979e922da324c35ea
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1937,12 +1940,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      6003ef3743f8576554f6cd7a  #       "`\x03ï7CøWeTöÍz"
-      ef0b52c51794dc3efc0e72df  #       "ï\x0bRÅ\x17\x94Ü&gt;ü\x0erß"
-      e610fda2b970162470adae0e  #       "æ\x10ý¢¹p\x16$p\xad®\x0e"
-      8938f17d97d522847078d7fb  #       "\x898ñ}\x97Õ"\x84px×û"
-      0552abd865e88116d4dc44eb  #       "\x05R«Øeè\x81\x16ÔÜDë"
-      9e60dee8                  #       "\x9e`Þè"
+      16ae7ea74cdf6c4009ac6636  #       "\x16®~§Lßl@\x09¬f6"
+      848405b61153eb6787fbdbf5  #       "\x84\x84\x05¶\x11Sëg\x87ûÛõ"
+      7bbb675a1683d866d094888f  #       "{»gZ\x16\x83ØfÐ\x94\x88\x8f"
+      8824932bfd171327a1f709e9  #       "\x88$\x93+ý\x17\x13'¡÷\x09é"
+      1d27ab6db2d26f1979e922da  #       "\x1d'«m²Òo\x19yé"Ú"
+      324c35ea                  #       "2L5ê"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2161,8 +2164,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.O3W3Hu4Zy_TMXEpamBhUTpIDNMyDJuXSmJ-0Ouf6OXdwUSbIkxmG
-JRsEMmrfU-hjKfigWT06TiIZ6EBK5vu7Vw
+nR0bCI6NDMyMDB9.rfv_B9KBW-EEwTTsYIfUC7cGu543r9Gbt3ggfXfJkBps5WqoOYSZ
+JmiNHYCybOtGq6gWo8SufHVEXUPwD0JobQ
 </pre><a href="#section-8.1-9" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2255,20 +2258,19 @@ As this is out of scope of this document, this validation is not be described he
         <h3 id="name-historical-resolution">
 <a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-historical-resolution" class="section-name selfRef">Historical resolution</a>
         </h3>
-<p id="section-8.4-1">By design, the Status List mechanism only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the <code>iat</code> (issued at) and <code>exp</code> (expiration time) claims for JWT, and their corresponding ones for the CWT representation.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
-<p id="section-8.4-2">If support for historical status information is needed, this can be achieved by extending the request for the Status List as defined in <a href="#status-list-request" class="auto internal xref">Section 8.1</a> with a timestamp. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see <a href="#privacy-relying-party" class="auto internal xref">Section 12.3</a> for more details. Support for this functionality is optional and Implementers are <span class="bcp14">RECOMMENDED</span> to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
-<p id="section-8.4-3">To obtain the Status List or Status List Token, the Relying Party <span class="bcp14">MUST</span> send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter <code>time</code> and its value being a unix timestamp. The response for a valid request <span class="bcp14">SHOULD</span> contain a Status List that was valid for that specified time or an error for the JWT and CWT variants and <span class="bcp14">MUST</span> contain a valid status list or an error for the unsigned option.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
-<p id="section-8.4-4">If the Server does not support the additional query parameter, it <span class="bcp14">SHOULD</span> return a status code of 501 (Not Implemented), or if the requested time is not supported it <span class="bcp14">SHOULD</span> return a status code of 406 (Not Acceptable). These status codes <span class="bcp14">MUST</span> be supported for the unsigned option, where the client has not other way of checking when the response was valid and <span class="bcp14">SHOULD</span> be supported for the signed options. A status list token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client <span class="bcp14">MUST</span> verify support for this feature for the JWT and CWT variants by checking that the requested timestamp is within the valid time of the returned token signaled via <code>iat</code> (<code>6</code> for CWT) and <code>exp</code> (<code>4</code> for CWT).<a href="#section-8.4-4" class="pilcrow">¶</a></p>
-<p id="section-8.4-5">The following is a non-normative example for a GET request using the <code>time</code> query parameter:<a href="#section-8.4-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-ascii-art art-text artwork" id="section-8.4-6">
+<p id="section-8.4-1">By default, the Status List mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the <code>iat</code> (issued at) and <code>exp</code> (expiration time) claims for JWT, and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List as defined in <a href="#status-list-request" class="auto internal xref">Section 8.1</a> with a timestamp. This feature has additional privacy implications as described in <a href="#privacy-historical" class="auto internal xref">Section 12.7</a>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-2">To obtain the Status List or Status List Token, the Relying Party <span class="bcp14">MUST</span> send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter <code>time</code> and its value being a unix timestamp. The response for a valid request <span class="bcp14">SHOULD</span> contain a Status List that was valid for that specified time or an error for the JWT and CWT variants and <span class="bcp14">MUST</span> contain a valid status list or an error for the unsigned option.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">If the Server does not support the additional query parameter, it <span class="bcp14">SHOULD</span> return a status code of 501 (Not Implemented), or if the requested time is not supported it <span class="bcp14">SHOULD</span> return a status code of 406 (Not Acceptable). These status codes <span class="bcp14">MUST</span> be supported for the unsigned option, where the client has not other way of checking when the response was valid and <span class="bcp14">SHOULD</span> be supported for the signed options. A status list token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client <span class="bcp14">MUST</span> verify support for this feature for the JWT and CWT variants by checking that the requested timestamp is within the valid time of the returned token signaled via <code>iat</code> (<code>6</code> for CWT) and <code>exp</code> (<code>4</code> for CWT).<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-4">The following is a non-normative example for a GET request using the <code>time</code> query parameter:<a href="#section-8.4-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-8.4-5">
 <pre>
 GET /statuslists/1?time=1686925000 HTTP/1.1
 Host: example.com
 Accept: application/statuslist+jwt
-</pre><a href="#section-8.4-6" class="pilcrow">¶</a>
+</pre><a href="#section-8.4-5" class="pilcrow">¶</a>
 </div>
-<p id="section-8.4-7">The following is a non-normative example for a response for the above Request:<a href="#section-8.4-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-ascii-art art-text artwork" id="section-8.4-8">
+<p id="section-8.4-6">The following is a non-normative example for a response for the above Request:<a href="#section-8.4-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-8.4-7">
 <pre>
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
@@ -2277,9 +2279,9 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.O3W3Hu4Zy_TMXEpamBhUTpIDNMyDJuXSmJ-0Ouf6OXdwUSbIkxmG
-JRsEMmrfU-hjKfigWT06TiIZ6EBK5vu7Vw
-</pre><a href="#section-8.4-8" class="pilcrow">¶</a>
+nR0bCI6NDMyMDB9.rfv_B9KBW-EEwTTsYIfUC7cGu543r9Gbt3ggfXfJkBps5WqoOYSZ
+JmiNHYCybOtGq6gWo8SufHVEXUPwD0JobQ
+</pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2477,7 +2479,6 @@ a fresh copy of the status list even if that status list is not expired.<a href=
             <p id="section-12.3-3.1.1">regular re-issuance of the Referenced Token, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>.<a href="#section-12.3-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-12.3-4">By default, this specification only supports providing status list information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in <a href="#historical-resolution" class="auto internal xref">Section 8.4</a>. There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.<a href="#section-12.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-outsider">
@@ -2535,6 +2536,15 @@ a fresh copy of the status list even if that status list is not expired.<a href=
 <p id="section-12.6-1">TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
 TODO evaluate definition of Status List Provider?
  An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.<a href="#section-12.6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="privacy-historical">
+<section id="section-12.7">
+        <h3 id="name-historical-resolution-2">
+<a href="#section-12.7" class="section-number selfRef">12.7. </a><a href="#name-historical-resolution-2" class="section-name selfRef">Historical Resolution</a>
+        </h3>
+<p id="section-12.7-1">By default, this specification only supports providing status list information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in <a href="#historical-resolution" class="auto internal xref">Section 8.4</a>. There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.<a href="#section-12.7-1" class="pilcrow">¶</a></p>
+<p id="section-12.7-2">There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see <a href="#privacy-relying-party" class="auto internal xref">Section 12.3</a> for more details. Support for this functionality is optional and Implementers are <span class="bcp14">RECOMMENDED</span> to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.<a href="#section-12.7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
