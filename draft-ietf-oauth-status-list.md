@@ -666,9 +666,7 @@ If any of these checks fails, no statement about the status of the Referenced To
 
 ## Historical resolution {#historical-resolution}
 
-By design, the Status List mechanism only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.
-
-If support for historical status information is needed, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
+By default, the Status List mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. This feature has additional privacy implications as described in [](#privacy-historical).
 
 To obtain the Status List or Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List that was valid for that specified time or an error for the JWT and CWT variants and MUST contain a valid status list or an error for the unsigned option.
 
@@ -826,8 +824,6 @@ This behaviour could be mitigated by:
 
 - regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
 
-By default, this specification only supports providing status list information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.
-
 ## Observability of Outsiders {#privacy-outsider}
 
 Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and his related business. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.
@@ -857,6 +853,12 @@ To avoid further correlatable information by the values of `uri` and `index`, Is
 TODO elaborate on increased privacy if the status list is hosted by a third party instead of the issuer reducing tracking possibilities
 TODO evaluate definition of Status List Provider?
  An entity that hosts the Status List as a resource for potential Relying Parties. The Status List Provider may be the issuer of the Status List but may also be outsourced to a trusted third party.
+
+## Historical Resolution {#privacy-historical}
+
+By default, this specification only supports providing status list information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.
+
+There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
 
 # Implementation Considerations {#implementation}
 
