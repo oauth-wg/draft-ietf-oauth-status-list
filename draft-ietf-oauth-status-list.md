@@ -599,19 +599,20 @@ The following is the CBOR Diagnostic Notation of the example above:
 
 # Status Types {#status-types}
 
-This document defines potential statuses of Referenced Tokens as Status Type values. If the Status List contains more than one bit per token (as defined by "bits" in the Status List), then the whole value of bits MUST describe one value. A Status List can not represent multiple statuses per Referenced Token.
+This document defines statuses of Referenced Tokens as Status Type values. A status describes the state, mode, condition or stage of an entity that is represented by the Referenced Token.
 
-The registry in this document describes the basic Status Type values required for the most common use cases.
-Additional values may defined for particular use cases.
+A Status List can not represent multiple statuses per Referenced Token. If the Status List contains more than one bit per token (as defined by `bits` in the Status List), then the whole value of bits MUST describe one value. Status Types MUST have a numeric value between 0 and 255 for their representation in the Status List. The issuer of the Status List MUST choose an adequate `bits` (bit size) to be able to describe the required Status Types for its application.
 
 ## Status Types Values
 
-A status describes the state, mode, condition or stage of an entity that is described by the Status List. Status Types MUST be numeric values between 0 and 255.
-Status types described by this specification comprise:
+This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. Additional values may defined for particular use cases. Status Types described by this document comprise:
 
- - 0x00 - "VALID" - The status of the Token is valid, correct or legal.
- - 0x01 - "INVALID" - The status of the Token is revoked, annulled, taken back, recalled or cancelled. This state is irreversible.
- - 0x02 - "SUSPENDED" - The status of the Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
+ - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
+ - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
+ - 0x02 - "SUSPENDED" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
+ - 0x03 - "APPLICATION_SPECIFIC_3" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
+ - 0x0E - "APPLICATION_SPECIFIC_14" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
+ - 0x0F - "APPLICATION_SPECIFIC_15" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
 
 The Status Issuer MUST choose an adequate `bits` (bit size) to be able to describe the required Status Types for the application.
 
@@ -654,8 +655,7 @@ The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
 ## Validation Rules
 
-Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature, expiration time.
-As this is out of scope of this document, this validation is not be described here, but is expected to be done according to the format of the Referenced Token.
+Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature, expiration time. The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope of this document, this validation is not be described here, but is expected to be done according to the format of the Referenced Token.
 
 If this validation was not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
 
@@ -897,7 +897,6 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 ## JWT Status Mechanism Methods Registry {#iana-registry}
 
-
 This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
 ### Registration Template
@@ -984,6 +983,83 @@ Specification Document(s):
 * Status Method Description: A status list containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
 * Specification Document(s): [](#referenced-token-cose) of this specification
+
+## Status Types Registry {#iana-status-types}
+
+This specification establishes the IANA "Status Types" registry for Status List values. The registry records the a human readable label, the bit representation and a common description for it.
+
+### Registration Template
+
+Status Type Name:
+
+  > The name is a human-readable case insensitive label for the Status Type that helps to talk about a Status of Referenced Token in common language.
+
+Status Type Description:
+
+  > Brief description of the Status Type and optional examples.
+
+Status Type value:
+
+  > The bit representation of the Status Type in a byte hex representation. Values are filled up with zeros if they have less than 8 bits.
+
+Change Controller:
+
+  > For Standards Track RFCs, list the "IESG".  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+
+Specification Document(s):
+
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+
+### Initial Registry Contents
+
+* Status Type Name: VALID
+* Status Type Description: The status of the Referenced Token is valid, correct or legal.
+* Status Type value: `0x00`
+* Change Controller: IETF
+* Specification Document(s): [](#status-types) of this specification
+
+<br/>
+
+* Status Type Name: INVALID
+* Status Type Description: The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
+* Status Type value: `0x01`
+* Change Controller: IETF
+* Specification Document(s): [](#status-types) of this specification
+
+<br/>
+
+* Status Type Name: SUSPENDED
+* Status Type Description: The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
+* Status Type value: `0x02`
+* Change Controller: IETF
+* Specification Document(s): [](#status-types) of this specification
+
+<br/>
+
+* Status Type Name: APPLICATION_SPECIFIC_3
+* Status Type Description: The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
+* Status Type value: `0x03`
+* Change Controller: IETF
+* Specification Document(s): [](#status-types) of this specification
+
+<br/>
+
+* Status Type Name: APPLICATION_SPECIFIC_14
+* Status Type Description: The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
+* Status Type value: `0x0E`
+* Change Controller: IETF
+* Specification Document(s): [](#status-types) of this specification
+
+<br/>
+
+* Status Type Name: APPLICATION_SPECIFIC_15
+* Status Type Description: The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
+* Status Type value: `0x0F`
+* Change Controller: IETF
+* Specification Document(s): [](#referenced-token-jose) of this specification
+
+<br/>
+
 
 ## Media Type Registration
 
@@ -1099,6 +1175,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -05
 
+* improve section on Status Types and introduce IANA registry for it
 * add Status Issuer and Status Provider role description to the introduction/terminology
 * add information on third party hosting to security consideration
 * remove constraint that Status List Token must not use a MAC
