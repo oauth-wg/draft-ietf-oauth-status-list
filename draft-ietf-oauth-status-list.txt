@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 12 April 2025                                                  
+Expires: 24 April 2025                                                  
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                          9 October 2024
+                                                         21 October 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2025.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
@@ -147,14 +147,14 @@ Table of Contents
    List.  Each Referenced Token is allocated an index during issuance
    that represents its position within this bit array.  The value of the
    bit(s) at this index correspond to the Referenced Token's status.  A
-   Status List may either be provided via HTTPS or be signed and
-   embedded into a Status List Token, whereas this document defines its
-   representations in JWT and CWT.  Status Lists may be composed for
-   expressing a range of Status Types.  This document defines basic
-   Status Types for the most common use cases as well as an
-   extensibility mechanism for custom Status Types.  The document also
-   defines how an issuer of a Referenced Token references a Status List
-   (Token).
+   Status List may either be provided via HTTPS or be protected within a
+   Status List Token by cryptographic signature or MAC, whereas this
+   document defines its representations in JWT and CWT.  Status Lists
+   may be composed for expressing a range of Status Types.  This
+   document defines basic Status Types for the most common use cases as
+   well as an extensibility mechanism for custom Status Types.  The
+   document also defines how an issuer of a Referenced Token references
+   a Status List (Token).
 
    An example for the usage of a Status List is to manage the status of
    issued access tokens as defined in section 1.4 of [RFC6749].  Token
@@ -446,16 +446,15 @@ Table of Contents
 
    1.  The JWT MAY contain other claims.
 
-   2.  The JWT MUST be digitally signed using an asymmetric
-       cryptographic algorithm.  Relying parties MUST reject the JWT if
-       it is using a Message Authentication Code (MAC) algorithm.
-       Relying parties MUST reject JWTs with an invalid signature.
+   2.  The JWT MUST be secured using a cryptographic signature or MAC
+       algorithm.  Relying Parties MUST reject JWTs with an invalid
+       signature.
 
    3.  Relying parties MUST reject JWTs that are not valid in all other
        respects per "JSON Web Token (JWT)" [RFC7519].
 
    4.  Application of additional restrictions and policy are at the
-       discretion of the verifying party.
+       discretion of the Relying Party.
 
    The following is a non-normative example for a Status List Token in
    JWT format:
@@ -508,16 +507,15 @@ Table of Contents
 
    1.  The CWT MAY contain other claims.
 
-   2.  The CWT MUST be digitally signed using an asymmetric
-       cryptographic algorithm.  Relying parties MUST reject the CWT if
-       it is using a Message Authentication Code (MAC) algorithm.
-       Relying parties MUST reject CWTs with an invalid signature.
+   2.  The CWT MUST be secured using a cryptographic signature or MAC
+       algorithm.  Relying Parties MUST reject CWTs with an invalid
+       signature.
 
    3.  Relying parties MUST reject CWTs that are not valid in all other
        respects per "CBOR Web Token (CWT)" [RFC8392].
 
    4.  Application of additional restrictions and policy are at the
-       discretion of the verifying party.
+       discretion of the Relying Party.
 
    The following is a non-normative example for a Status List Token in
    CWT format in Hex:
@@ -525,9 +523,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840f8119ebf017822e31c30b36de16ef0e931448f751c474f7228
-   1c8c243efde403d8df727a7d2e95ad64d98db3a6189eb6f24f3605d33b091cb0f22a
-   8815127bbf
+   b918000217015d584032f28c9b1febc485946b468605fb67c5caed86b71444489e1e
+   6828a50bb350c066b595c1f5941adf91248530e3244389ed77c42b5f1cfd9be79df5
+   bbad9882c5
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -549,12 +547,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      f8119ebf017822e31c30b36d  #       "ø\x11\x9e¿\x01x"ã\x1c0³m"
-      e16ef0e931448f751c474f72  #       "ánðé1D\x8fu\x1cGOr"
-      281c8c243efde403d8df727a  #       "(\x1c\x8c$>ýä\x03Øßrz"
-      7d2e95ad64d98db3a6189eb6  #       "}.\x95\xaddÙ\x8d³¦\x18\x9e¶"
-      f24f3605d33b091cb0f22a88  #       "òO6\x05Ó;\x09\x1c°ò*\x88"
-      15127bbf                  #       "\x15\x12{¿"
+      32f28c9b1febc485946b4686  #       "2ò\x8c\x9b\x1fëÄ\x85\x94kF\x86"
+      05fb67c5caed86b71444489e  #       "\x05ûgÅÊí\x86·\x14DH\x9e"
+      1e6828a50bb350c066b595c1  #       "\x1eh(¥\x0b³PÀfµ\x95Á"
+      f5941adf91248530e3244389  #       "õ\x94\x1aß\x91$\x850ã$C\x89"
+      ed77c42b5f1cfd9be79df5bb  #       "íwÄ+_\x1cý\x9bç\x9dõ»"
+      ad9882c5                  #       "\xad\x98\x82Å"
 
 6.  Referenced Token
 
@@ -692,9 +690,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840c8c11fecb721f3a32a0c2cf3ba44031eac4dac
-   a41974312702786a7570343b3e6093ce18c23acac7923d621d5e80b5d317a2e64a09
-   b434a84d43931156ca9962
+   7374617475736c697374732f315840e4c9381b685290188688b8614146c6bb58bdc1
+   9515ac925d42928cd3f9b2e8fc252ac58079cb2884172c8cf3ebe3bfbd51a3cff23e
+   512155297717f1695c0583
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -717,12 +715,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         c8c11fecb721f3a32a0c2cf3  #       "ÈÁ\x1fì·!ó£*\x0c,ó"
-         ba44031eac4daca419743127  #       "ºD\x03\x1e¬M¬¤\x19t1'"
-         02786a7570343b3e6093ce18  #       "\x02xjup4;>`\x93Î\x18"
-         c23acac7923d621d5e80b5d3  #       "Â:ÊÇ\x92=b\x1d^\x80µÓ"
-         17a2e64a09b434a84d439311  #       "\x17¢æJ\x09´4¨MC\x93\x11"
-         56ca9962                  #       "VÊ\x99b"
+         e4c9381b685290188688b861  #       "äÉ8\x1bhR\x90\x18\x86\x88¸a"
+         4146c6bb58bdc19515ac925d  #       "AFÆ»X½Á\x95\x15¬\x92]"
+         42928cd3f9b2e8fc252ac580  #       "B\x92\x8cÓù²èü%*Å\x80"
+         79cb2884172c8cf3ebe3bfbd  #       "yË(\x84\x17,\x8cóëã¿½"
+         51a3cff23e512155297717f1  #       "Q£Ïò>Q!U)w\x17ñ"
+         695c0583                  #       "i\\x05\x83"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1810,6 +1808,10 @@ Acknowledgments
    specification.
 
 Document History
+
+   -05
+
+   *  remove constraint that Status List Token must not use a MAC
 
    -04
 
