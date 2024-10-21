@@ -570,7 +570,7 @@ The following is the CBOR Diagnostic Notation of the example above:
 
 # Status Types {#status-types}
 
-This document defines statuses of Referenced Tokens as Status Type values. A status describes the state, mode, condition or stage of an entity that represented ny the Referenced Token.
+This document defines statuses of Referenced Tokens as Status Type values. A status describes the state, mode, condition or stage of an entity that is represented by the Referenced Token.
 
 A Status List can not represent multiple statuses per Referenced Token. If the Status List contains more than one bit per token (as defined by `bits` in the Status List), then the whole value of bits MUST describe one value. Status Types MUST have a numeric value between 0 and 255 for their representation in the Status List. The issuer of the Status List MUST choose an adequate `bits` (bit size) to be able to describe the required Status Types for its application.
 
