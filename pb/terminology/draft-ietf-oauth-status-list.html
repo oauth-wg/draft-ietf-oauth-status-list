@@ -1357,7 +1357,7 @@ The status list token data structures themselves are also represented as JWTs or
 <p id="section-1-2">This document defines a Status List and its representations in JSON and CBOR formats that describe the individual statuses of multiple Referenced Tokens, which themselves are JWTs or CWTs. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List may either be provided via HTTPS or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List (Token).<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>.
-The following diagram depicts the relationship between the involved roles:<a href="#section-1-4" class="pilcrow">¶</a></p>
+The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>):<a href="#section-1-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-1-5">
 <pre>
            issue                 present
@@ -1766,9 +1766,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d584068bfea457ab1d64c54d2513df0b76b3e53587209b93e834fde
-3353735322d787febd70753e5d270168795fbe8bba310fbe1ebfb27416b9904aeb5b
-3483b3550d
+b918000217015d5840f4888b797844e1dec424e7dae68c68cd756dbc2c86e2a160ae
+fbf0133d4bb3e9a7430192adeb3a1ce778201b9c4747d7cfd2b9b000cfd7ed4e6e99
+7820cda450
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1792,12 +1792,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      68bfea457ab1d64c54d2513d  #       "h¿êEz±ÖLTÒQ="
-      f0b76b3e53587209b93e834f  #       "ð·k&gt;SXr\x09¹&gt;\x83O"
-      de3353735322d787febd7075  #       "Þ3SsS"×\x87þ½pu"
-      3e5d270168795fbe8bba310f  #       "&gt;]'\x01hy_¾\x8bº1\x0f"
-      be1ebfb27416b9904aeb5b34  #       "¾\x1e¿²t\x16¹\x90Jë[4"
-      83b3550d                  #       "\x83³U\x0d"
+      f4888b797844e1dec424e7da  #       "ô\x88\x8byxDáÞÄ$çÚ"
+      e68c68cd756dbc2c86e2a160  #       "æ\x8chÍum¼,\x86â¡`"
+      aefbf0133d4bb3e9a7430192  #       "®ûð\x13=K³é§C\x01\x92"
+      adeb3a1ce778201b9c4747d7  #       "\xadë:\x1cçx \x1b\x9cGG×"
+      cfd2b9b000cfd7ed4e6e9978  #       "ÏÒ¹°\x00Ï×íNn\x99x"
+      20cda450                  #       " Í¤P"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1939,9 +1939,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840e25c8fe1a4e056e611e4c7de9a4686ba11c638
-dcf6f94ccdb08d4901a3d43220c3b68de44f5689e036b39bbc3792be2b841c01e498
-037d962525d40a888f9d00
+7374617475736c697374732f3158408ce7882c6dba88c9025b699e914accedb2354c
+9a4fb7c6bf7f352c421d25cbb87eb3643952985eedee11b7c6a29f7a09d153c6cc4b
+b74f203c0f4bddb53756a5
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1966,12 +1966,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      e25c8fe1a4e056e611e4c7de  #       "â\\x8fá¤àVæ\x11äÇÞ"
-      9a4686ba11c638dcf6f94ccd  #       "\x9aF\x86º\x11Æ8ÜöùLÍ"
-      b08d4901a3d43220c3b68de4  #       "°\x8dI\x01£Ô2 Ã¶\x8dä"
-      4f5689e036b39bbc3792be2b  #       "OV\x89à6³\x9b¼7\x92¾+"
-      841c01e498037d962525d40a  #       "\x84\x1c\x01ä\x98\x03}\x96%%Ô\x0a"
-      888f9d00                  #       "\x88\x8f\x9d\x00"
+      8ce7882c6dba88c9025b699e  #       "\x8cç\x88,mº\x88É\x02[i\x9e"
+      914accedb2354c9a4fb7c6bf  #       "\x91JÌí²5L\x9aO·Æ¿"
+      7f352c421d25cbb87eb36439  #       "\x7f5,B\x1d%Ë¸~³d9"
+      52985eedee11b7c6a29f7a09  #       "R\x98^íî\x11·Æ¢\x9fz\x09"
+      d153c6cc4bb74f203c0f4bdd  #       "ÑSÆÌK·O &lt;\x0fKÝ"
+      b53756a5                  #       "µ7V¥"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
