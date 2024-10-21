@@ -1063,6 +1063,9 @@ for their valuable contributions, discussions and feedback to this specification
 # Document History
 {:numbered="false"}
 
+-05
+* update CBOR claim definitions
+
 -04
 
 * add mDL example as Referenced Token and consolidate CWT and CBOR sections
