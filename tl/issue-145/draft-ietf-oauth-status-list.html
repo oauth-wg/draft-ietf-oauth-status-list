@@ -1030,7 +1030,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 22 April 2025</td>
+<td class="center">Expires 24 April 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-10-19" class="published">19 October 2024</time>
+<time datetime="2024-10-21" class="published">21 October 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-04-22">22 April 2025</time></dd>
+<dd class="expires"><time datetime="2025-04-24">24 April 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1101,7 +1101,7 @@ The status list token data structures themselves are also represented as JWTs or
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 24 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1639,7 +1639,7 @@ a2                              # map(2)
             <p id="section-5.1-5.3.1"><code>exp</code>: <span class="bcp14">OPTIONAL</span>. As generally defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. The <code>exp</code> (expiration time) claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by its issuer.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.4">
-            <p id="section-5.1-5.4.1"><code>ttl</code>: <span class="bcp14">OPTIONAL</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.4.1"><code>ttl</code>: <span class="bcp14">OPTIONAL</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number encoded in JSON as a number.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.5">
             <p id="section-5.1-5.5.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. The <code>status_list</code> (status list) claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-json" class="auto internal xref">Section 4.1</a>.<a href="#section-5.1-5.5.1" class="pilcrow">¶</a></p>
@@ -1707,7 +1707,7 @@ a2                              # map(2)
             <p id="section-5.2-5.3.1"><code>4</code> (expiration time): <span class="bcp14">OPTIONAL</span>. As generally defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The expiration time claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by its issuer.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.4">
-            <p id="section-5.2-5.4.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. The time to live claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.4.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. The time to live claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number encoded in CBOR as an unsigned integer (Major type 0).<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.5">
             <p id="section-5.2-5.5.1"><code>65533</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.2</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
@@ -1734,9 +1734,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840d4064fb9178501c5a08eaad3690cef261d15489c2ca4f8f51f
-3fcace478644c0310d239f615043601b1c5f96f052881e71353e2154e44ebd7aec38
-d35a30fea8
+b918000217015d584095444867eb8ae0d169ecaf25e8b6522e17133ddc0d67ebb088
+1fd0a48a446c2517b7c30409bb79279bfd7798165fe0b83fd2dc95eb278b61fccae9
+8e550877bd
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1760,12 +1760,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      d4064fb9178501c5a08eaad3  #       "Ô\x06O¹\x17\x85\x01Å\xa0\x8eªÓ"
-      690cef261d15489c2ca4f8f5  #       "i\x0cï&amp;\x1d\x15H\x9c,¤øõ"
-      1f3fcace478644c0310d239f  #       "\x1f?ÊÎG\x86DÀ1\x0d#\x9f"
-      615043601b1c5f96f052881e  #       "aPC`\x1b\x1c_\x96ðR\x88\x1e"
-      71353e2154e44ebd7aec38d3  #       "q5&gt;!TäN½zì8Ó"
-      5a30fea8                  #       "Z0þ¨"
+      95444867eb8ae0d169ecaf25  #       "\x95DHgë\x8aàÑiì¯%"
+      e8b6522e17133ddc0d67ebb0  #       "è¶R.\x17\x13=Ü\x0dgë°"
+      881fd0a48a446c2517b7c304  #       "\x88\x1fÐ¤\x8aDl%\x17·Ã\x04"
+      09bb79279bfd7798165fe0b8  #       "\x09»y'\x9býw\x98\x16_à¸"
+      3fd2dc95eb278b61fccae98e  #       "?ÒÜ\x95ë'\x8baüÊé\x8e"
+      550877bd                  #       "U\x08w½"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1890,10 +1890,10 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
                 <p id="section-6.3-3.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status list mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-3.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1.2.1.2.1">
-                    <p id="section-6.3-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>idx</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.3-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of <code>idx</code> <span class="bcp14">MUST</span> be a non-negative number, containing a value of zero or greater, encoded in CBOR as an unsigned integer (Major type 0).<a href="#section-6.3-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.3-3.1.2.1.2.2">
-                    <p id="section-6.3-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Same definition as <code>uri</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.3-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a String value that identifies the Status List or Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> encoded in CBOR as a text string (Major type 3).<a href="#section-6.3-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -1907,9 +1907,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840947a2d906f769ccfa7c143df1028e9ba0047a0
-b75103e43c45609c0a8df60629ddff9f3feea82a2ca969c746bb3b17e3c5a636a576
-d67acc3f337ed85bc9218e
+7374617475736c697374732f315840f63999e9a31d09cff641410e3b675ff2692e3a
+eda5fc7ba8dcdc51aece75a0a9339186c9d9a7a4d3fc406a26ecc96b3fd3f7856b9a
+b66f9723fb11fa3c349398
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -1934,12 +1934,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      947a2d906f769ccfa7c143df  #       "\x94z-\x90ov\x9cÏ§ÁCß"
-      1028e9ba0047a0b75103e43c  #       "\x10(éº\x00G\xa0·Q\x03ä&lt;"
-      45609c0a8df60629ddff9f3f  #       "E`\x9c\x0a\x8dö\x06)Ýÿ\x9f?"
-      eea82a2ca969c746bb3b17e3  #       "î¨*,©iÇF»;\x17ã"
-      c5a636a576d67acc3f337ed8  #       "Å¦6¥vÖzÌ?3~Ø"
-      5bc9218e                  #       "[É!\x8e"
+      f63999e9a31d09cff641410e  #       "ö9\x99é£\x1d\x09ÏöAA\x0e"
+      3b675ff2692e3aeda5fc7ba8  #       ";g_òi.:í¥ü{¨"
+      dcdc51aece75a0a9339186c9  #       "ÜÜQ®Îu\xa0©3\x91\x86É"
+      d9a7a4d3fc406a26ecc96b3f  #       "Ù§¤Óü@j&amp;ìÉk?"
+      d3f7856b9ab66f9723fb11fa  #       "Ó÷\x85k\x9a¶o\x97#û\x11ú"
+      3c349398                  #       "&lt;4\x93\x98"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>

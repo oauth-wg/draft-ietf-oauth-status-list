@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 22 April 2025                                                  
+Expires: 24 April 2025                                                  
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                         19 October 2024
+                                                         21 October 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 April 2025.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
@@ -438,7 +438,8 @@ Table of Contents
    *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST
       specify the maximum amount of time, in seconds, that the Status
       List Token can be cached by a consumer before a fresh copy SHOULD
-      be retrieved.  The value of the claim MUST be a positive number.
+      be retrieved.  The value of the claim MUST be a positive number
+      encoded in JSON as a number.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the rules outlined in
@@ -508,7 +509,8 @@ Table of Contents
       present, MUST specify the maximum amount of time, in seconds, that
       the Status List Token can be cached by a consumer before a fresh
       copy SHOULD be retrieved.  The value of the claim MUST be a
-      positive number.
+      positive number encoded in CBOR as an unsigned integer (Major type
+      0).
 
    *  65533 (status list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the rules outlined in Section 4.2.
@@ -534,9 +536,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840d4064fb9178501c5a08eaad3690cef261d15489c2ca4f8f51f
-   3fcace478644c0310d239f615043601b1c5f96f052881e71353e2154e44ebd7aec38
-   d35a30fea8
+   b918000217015d584095444867eb8ae0d169ecaf25e8b6522e17133ddc0d67ebb088
+   1fd0a48a446c2517b7c30409bb79279bfd7798165fe0b83fd2dc95eb278b61fccae9
+   8e550877bd
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -558,12 +560,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      d4064fb9178501c5a08eaad3  #       "Ô\x06O¹\x17\x85\x01Å\xa0\x8eªÓ"
-      690cef261d15489c2ca4f8f5  #       "i\x0cï&\x1d\x15H\x9c,¤øõ"
-      1f3fcace478644c0310d239f  #       "\x1f?ÊÎG\x86DÀ1\x0d#\x9f"
-      615043601b1c5f96f052881e  #       "aPC`\x1b\x1c_\x96ðR\x88\x1e"
-      71353e2154e44ebd7aec38d3  #       "q5>!TäN½zì8Ó"
-      5a30fea8                  #       "Z0þ¨"
+      95444867eb8ae0d169ecaf25  #       "\x95DHgë\x8aàÑiì¯%"
+      e8b6522e17133ddc0d67ebb0  #       "è¶R.\x17\x13=Ü\x0dgë°"
+      881fd0a48a446c2517b7c304  #       "\x88\x1fÐ¤\x8aDl%\x17·Ã\x04"
+      09bb79279bfd7798165fe0b8  #       "\x09»y'\x9býw\x98\x16_à¸"
+      3fd2dc95eb278b61fccae98e  #       "?ÒÜ\x95ë'\x8baüÊé\x8e"
+      550877bd                  #       "U\x08w½"
 
 6.  Referenced Token
 
@@ -688,9 +690,18 @@ d2                              # tag(18)
          MUST be encoded as a StatusListInfo CBOR structure with the
          following fields:
 
-         o  idx: REQUIRED.  Same definition as idx claim in Section 6.2.
+         o  idx: REQUIRED.  The idx (index) claim MUST specify an
+            Integer that represents the index to check for status
+            information in the Status List for the current Referenced
+            Token.  The value of idx MUST be a non-negative number,
+            containing a value of zero or greater, encoded in CBOR as an
+            unsigned integer (Major type 0).
 
-         o  uri: REQUIRED.  Same definition as uri claim in Section 6.2.
+         o  uri: REQUIRED.  The uri (URI) claim MUST specify a String
+            value that identifies the Status List or Status List Token
+            containing the status information for the Referenced Token.
+            The value of uri MUST be a URI conforming to [RFC3986]
+            encoded in CBOR as a text string (Major type 3).
 
    Application of additional restrictions and policy are at the
    discretion of the verifying party.
@@ -701,9 +712,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840947a2d906f769ccfa7c143df1028e9ba0047a0
-   b75103e43c45609c0a8df60629ddff9f3feea82a2ca969c746bb3b17e3c5a636a576
-   d67acc3f337ed85bc9218e
+   7374617475736c697374732f315840f63999e9a31d09cff641410e3b675ff2692e3a
+   eda5fc7ba8dcdc51aece75a0a9339186c9d9a7a4d3fc406a26ecc96b3fd3f7856b9a
+   b66f9723fb11fa3c349398
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -726,12 +737,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         947a2d906f769ccfa7c143df  #       "\x94z-\x90ov\x9cÏ§ÁCß"
-         1028e9ba0047a0b75103e43c  #       "\x10(éº\x00G\xa0·Q\x03ä<"
-         45609c0a8df60629ddff9f3f  #       "E`\x9c\x0a\x8dö\x06)Ýÿ\x9f?"
-         eea82a2ca969c746bb3b17e3  #       "î¨*,©iÇF»;\x17ã"
-         c5a636a576d67acc3f337ed8  #       "Å¦6¥vÖzÌ?3~Ø"
-         5bc9218e                  #       "[É!\x8e"
+         f63999e9a31d09cff641410e  #       "ö9\x99é£\x1d\x09ÏöAA\x0e"
+         3b675ff2692e3aeda5fc7ba8  #       ";g_òi.:í¥ü{¨"
+         dcdc51aece75a0a9339186c9  #       "ÜÜQ®Îu\xa0©3\x91\x86É"
+         d9a7a4d3fc406a26ecc96b3f  #       "Ù§¤Óü@j&ìÉk?"
+         d3f7856b9ab66f9723fb11fa  #       "Ó÷\x85k\x9a¶o\x97#û\x11ú"
+         3c349398                  #       "<4\x93\x98"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
