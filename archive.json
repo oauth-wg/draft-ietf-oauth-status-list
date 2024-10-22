@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T00:18:30.525344+00:00",
+  "timestamp": "2024-10-22T00:16:51.306420+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2668,7 +2668,7 @@
       "id": "I_kwDOJZ2aqs6AEhe9",
       "title": "Relax constraint on not allowing MAC for Status List Token?",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/111",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2679,8 +2679,8 @@
       ],
       "body": "As the similar requirement was relaxed on SD-JWT, I think we should consider the same.",
       "createdAt": "2024-02-22T09:58:08Z",
-      "updatedAt": "2024-10-16T06:27:02Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-21T18:10:09Z",
+      "closedAt": "2024-10-21T18:10:09Z",
       "comments": []
     },
     {
@@ -3227,7 +3227,7 @@
       "id": "I_kwDOJZ2aqs6IaERt",
       "title": "Support an optional feature for historical resolution",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/138",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "decentralgabe",
       "authorAssociation": "NONE",
       "assignees": [
@@ -3239,8 +3239,8 @@
       ],
       "body": "We have a use case, in the financial field, to determine the time when the status of a given credential has changed. This requirement comes from US financial compliance regulation and is non negotiable.\r\n\r\nThe spec already supports an optional TTL which helps, but does not directly solve this issue. With a validity window (TTL), and consistent fetching (at the windows expiry) of status lists one could determine that a bit had flipped within a given window, and be able to approximate a timestamp of a given status change. Of course, this approach is noisy and inefficient.\r\n\r\nTo build off this section -- https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-history -- we can make this type of query simpler. I would like to see language added to the spec that speaks to the (optional) capability of a status list server to support historical queries, or revisions of the document from a given time period. I believe this would maintain the privacy preserving characteristics of the specification while adding the ability for verifiers to approximate status change time, which is useful in a number of circumstances, especially as an optional-to-implement feature.\r\n\r\nI am also open to other solutions that are similarly privacy preserving that support either directly or indirectly discerning 'time of status change', to date I have only seen solutions that would be far less privacy preserving, such as requesting specific instances (losing herd privacy).",
       "createdAt": "2024-05-09T22:05:17Z",
-      "updatedAt": "2024-10-09T06:36:30Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-21T18:32:22Z",
+      "closedAt": "2024-10-21T18:32:21Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -3353,7 +3353,7 @@
       "id": "I_kwDOJZ2aqs6KbaHv",
       "title": "Be more elaborate on CBOR/CWT types and definitions",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/145",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -3364,8 +3364,8 @@
       ],
       "body": "This includes standalone seperate references for each of the claims rather then referencing the JWT based definition.",
       "createdAt": "2024-05-29T06:09:54Z",
-      "updatedAt": "2024-10-09T06:36:24Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-21T18:31:32Z",
+      "closedAt": "2024-10-21T18:31:32Z",
       "comments": []
     },
     {
@@ -3534,7 +3534,7 @@
       "id": "I_kwDOJZ2aqs6SMNsI",
       "title": "Explain Status List Provider and other roles in the introduction",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/158",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -3545,8 +3545,8 @@
       ],
       "body": "Something like this picutre used in the last IETF presentation:\r\n\r\n![image](https://github.com/user-attachments/assets/86e48867-0f3a-4715-8bce-a13e1514c814)\r\n",
       "createdAt": "2024-08-07T06:41:30Z",
-      "updatedAt": "2024-10-09T06:36:20Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-21T18:12:54Z",
+      "closedAt": "2024-10-21T18:12:54Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -3732,7 +3732,7 @@
       "id": "I_kwDOJZ2aqs6X0SqD",
       "title": "Missing IANA section for status types",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/177",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -3743,8 +3743,8 @@
       ],
       "body": "The section 7 explains how to setup the registry (https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-status-types) but we are missing a corresponding section in the IANA appendix ",
       "createdAt": "2024-09-25T06:34:55Z",
-      "updatedAt": "2024-10-09T06:36:15Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-21T18:18:05Z",
+      "closedAt": "2024-10-21T18:18:04Z",
       "comments": []
     },
     {
@@ -3752,15 +3752,15 @@
       "id": "I_kwDOJZ2aqs6Zjlec",
       "title": "Add Reserved For Private Use Range",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/181",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "OR13",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The first few entries are valid, revoked, suspended.\r\n\r\nThere may be future well defined values that issuers and verifiers want global interoperability around.\r\n\r\nThere may also be a need for private use of this space.\r\n\r\nThis document should describe the \"reserved for private use range\", and leave room for enough globally interoperable and registered status values",
       "createdAt": "2024-10-09T15:19:25Z",
-      "updatedAt": "2024-10-16T06:12:20Z",
-      "closedAt": null,
+      "updatedAt": "2024-10-21T18:18:05Z",
+      "closedAt": "2024-10-21T18:18:05Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -3786,6 +3786,38 @@
       "body": "",
       "createdAt": "2024-10-16T06:36:31Z",
       "updatedAt": "2024-10-16T06:37:09Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 188,
+      "id": "I_kwDOJZ2aqs6bLAiR",
+      "title": "Define Status List Response status code",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/188",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-21T18:32:35Z",
+      "updatedAt": "2024-10-21T18:32:35Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 189,
+      "id": "I_kwDOJZ2aqs6bLAjj",
+      "title": "Rewrite introduction",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/189",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "The spec creates a registry and claim for status mechanisms and 1 specific mechanism, the status list. We should",
+      "createdAt": "2024-10-21T18:32:37Z",
+      "updatedAt": "2024-10-21T18:32:38Z",
       "closedAt": null,
       "comments": []
     }
@@ -11618,24 +11650,26 @@
       "id": "PR_kwDOJZ2aqs59HqwV",
       "title": "add optional support for historical status resolution",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/178",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Adds support for historical resolution of status as an optional feature.\r\n\r\nCloses #138\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/historical-resolution/draft-ietf-oauth-status-list.html\r\n\r\nI will take another look at the wording / normative text and mark as ready for review when I am done.",
       "createdAt": "2024-09-30T13:27:29Z",
-      "updatedAt": "2024-10-19T07:56:40Z",
+      "updatedAt": "2024-10-21T18:32:20Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "d0dbf2753366d7193248223fe901561851434fca",
+      "baseRefOid": "604435b54e6274c6d04be78e88b5f3f0cd269c96",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/historical-resolution",
-      "headRefOid": "240c92785e7967fee52dd4eb4f1dce2458d314d9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f9217049232e26a67d5e3749e08349d5f9e47f78",
+      "closedAt": "2024-10-21T18:32:20Z",
+      "mergedAt": "2024-10-21T18:32:20Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "1ae169297c0781f33681498150c85610d631ab95"
+      },
       "comments": [
         {
           "author": "c2bo",
@@ -11643,6 +11677,13 @@
           "body": "todo: \r\n- fix the references to this in privacy considerations\r\n- fix some wording / language",
           "createdAt": "2024-10-09T08:08:20Z",
           "updatedAt": "2024-10-09T08:08:20Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> The whole text is in the Security Considerations section. I believe we should move the normative text to the section 8.\r\n\r\nGood point - I moved the whole part to the end of Section 8.",
+          "createdAt": "2024-10-21T08:38:45Z",
+          "updatedAt": "2024-10-21T08:38:54Z"
         }
       ],
       "reviews": [
@@ -11736,6 +11777,65 @@
               "updatedAt": "2024-10-19T06:38:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N5UFS",
+          "commit": {
+            "abbreviatedOid": "240c927"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "The whole text is in the Security Considerations section. I believe we should move the normative text to the section 8.",
+          "createdAt": "2024-10-20T17:09:17Z",
+          "updatedAt": "2024-10-20T17:09:17Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OAcfm",
+          "commit": {
+            "abbreviatedOid": "f364c9d"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T15:29:48Z",
+          "updatedAt": "2024-10-21T15:29:48Z",
+          "comments": [
+            {
+              "originalPosition": 40,
+              "body": "```suggestion\r\nBy default, the Status List mechanism only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation.\r\n```",
+              "createdAt": "2024-10-21T15:29:48Z",
+              "updatedAt": "2024-10-21T15:29:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCTIf",
+          "commit": {
+            "abbreviatedOid": "3496266"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:08:19Z",
+          "updatedAt": "2024-10-21T18:08:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OChnK",
+          "commit": {
+            "abbreviatedOid": "0e07ad8"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:32:04Z",
+          "updatedAt": "2024-10-21T18:32:04Z",
+          "comments": []
         }
       ]
     },
@@ -11998,13 +12098,13 @@
       "labels": [],
       "body": "closes #38\r\ncloses #168\r\ncloses #137\r\n\r\nRendered preview: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/mixing-formats/draft-ietf-oauth-status-list.html\r\n\r\nThis PR attempts to add a bit of language about mixing formats and also changes the content-type in the status list response to SHOULD and language around content type parsing that is similar to the language used in HTTP/1.1.\r\n\r\nI am happy to remove the media types part if we want a bit more discussion, but when I started writing this, it felt like right path so I decided to include it as a proposal.",
       "createdAt": "2024-10-17T09:15:17Z",
-      "updatedAt": "2024-10-19T07:58:01Z",
+      "updatedAt": "2024-10-20T19:08:02Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "d0dbf2753366d7193248223fe901561851434fca",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/mixing-formats",
-      "headRefOid": "d8286481ba2ce466ee44dd3689a2f8926dfca42b",
+      "headRefOid": "bbee3a82d1301da02359421ee77e6148b0b10611",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -12050,6 +12150,99 @@
               "updatedAt": "2024-10-19T06:35:22Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N5UeW",
+          "commit": {
+            "abbreviatedOid": "d828648"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-20T17:10:32Z",
+          "updatedAt": "2024-10-20T17:10:32Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Why is the reference called status-**types**-response?",
+              "createdAt": "2024-10-20T17:10:32Z",
+              "updatedAt": "2024-10-20T17:10:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N5Uin",
+          "commit": {
+            "abbreviatedOid": "d828648"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-20T17:12:29Z",
+          "updatedAt": "2024-10-20T17:12:30Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\nThis specification states no requirements to not mix different formats like a CBOR based Referenced Token using a JWT for the Status List, but the expectation is that within an ecosystem, a choice for specific formats is made.\r\n```",
+              "createdAt": "2024-10-20T17:12:29Z",
+              "updatedAt": "2024-10-20T17:12:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N5VIH",
+          "commit": {
+            "abbreviatedOid": "d828648"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I'm not feeling confident with the change of MUST -> SHOULD for media type return. Maybe \"MUST .. unless media type is known out-of-band\"?",
+          "createdAt": "2024-10-20T17:22:16Z",
+          "updatedAt": "2024-10-20T17:22:16Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N5evg",
+          "commit": {
+            "abbreviatedOid": "d828648"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-20T19:03:18Z",
+          "updatedAt": "2024-10-20T19:03:19Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "copy paste mistake - fixed it",
+              "createdAt": "2024-10-20T19:03:19Z",
+              "updatedAt": "2024-10-20T19:03:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N5e6d",
+          "commit": {
+            "abbreviatedOid": "bbee3a8"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-20T19:08:02Z",
+          "updatedAt": "2024-10-20T19:08:02Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Would this work for you @paulbastian?\r\n```suggestion\r\nIn the successful response, the Status List Provider MUST use the following content-type unless known out of band:\r\n```",
+              "createdAt": "2024-10-20T19:08:02Z",
+              "updatedAt": "2024-10-20T19:08:02Z"
+            }
+          ]
         }
       ]
     },
@@ -12058,25 +12251,42 @@
       "id": "PR_kwDOJZ2aqs5_KayE",
       "title": "fix: update cwt claim definitions",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/184",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #145 ",
       "createdAt": "2024-10-19T06:58:36Z",
-      "updatedAt": "2024-10-19T17:16:23Z",
+      "updatedAt": "2024-10-21T18:31:34Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "d0dbf2753366d7193248223fe901561851434fca",
+      "baseRefOid": "20b2526d0c752011c26bc46295362f669cb3117a",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "tl/issue-145",
-      "headRefOid": "57b3bb34b40998170ff03232eb85c885f62f7265",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "ac38b8b82ffe0cb81ea5e044448af771bfb41c0f",
+      "closedAt": "2024-10-21T18:31:31Z",
+      "mergedAt": "2024-10-21T18:31:31Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "604435b54e6274c6d04be78e88b5f3f0cd269c96"
+      },
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "please reference CBOR major types as we did for Status List object",
+          "createdAt": "2024-10-20T15:54:25Z",
+          "updatedAt": "2024-10-20T15:54:25Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Update based on feedback.",
+          "createdAt": "2024-10-21T08:52:00Z",
+          "updatedAt": "2024-10-21T08:52:00Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJZ2aqs6N1pB2",
@@ -12089,6 +12299,453 @@
           "body": "We should adjust adjust lines 415-417 as well",
           "createdAt": "2024-10-19T17:16:23Z",
           "updatedAt": "2024-10-19T17:16:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N5FLh",
+          "commit": {
+            "abbreviatedOid": "57b3bb3"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-20T15:53:28Z",
+          "updatedAt": "2024-10-20T15:53:28Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Should we talk about what CBOR type this is'? (Major Type 0)?",
+              "createdAt": "2024-10-20T15:53:28Z",
+              "updatedAt": "2024-10-20T15:53:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N_prE",
+          "commit": {
+            "abbreviatedOid": "f1dd2ad"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T14:20:24Z",
+          "updatedAt": "2024-10-21T14:46:12Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Should we refer to the same rules as exp ?\r\n```suggestion\r\n* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. Its value MUST be a positive number containing a NumericDate value as defined in Section 2 of {{RFC7519}}.\r\n```",
+              "createdAt": "2024-10-21T14:20:25Z",
+              "updatedAt": "2024-10-21T14:46:50Z"
+            },
+            {
+              "originalPosition": 26,
+              "body": "Same as above: Should we re-use the same data type as exp and iat?\r\n```suggestion\r\n* `65534` (time to live): OPTIONAL. The time to live claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a NumericDate, as defined in Section 2 of {{RFC8392}}\r\n```",
+              "createdAt": "2024-10-21T14:45:55Z",
+              "updatedAt": "2024-10-21T14:46:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OATbM",
+          "commit": {
+            "abbreviatedOid": "f1dd2ad"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T15:15:29Z",
+          "updatedAt": "2024-10-21T15:15:29Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "This language is a different style than what we did for the Status List, e.g.\r\n\r\n> bits: REQUIRED. Unsigned int (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for bits are 1, 2, 4 and 8.\r\n\r\nI would prefer starting the explanation with the type definition",
+              "createdAt": "2024-10-21T15:15:29Z",
+              "updatedAt": "2024-10-21T15:15:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCbe1",
+          "commit": {
+            "abbreviatedOid": "f1dd2ad"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T18:19:50Z",
+          "updatedAt": "2024-10-21T18:19:50Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "ttl is a time duration",
+              "createdAt": "2024-10-21T18:19:50Z",
+              "updatedAt": "2024-10-21T18:19:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCfDk",
+          "commit": {
+            "abbreviatedOid": "fbb9c17"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T18:27:23Z",
+          "updatedAt": "2024-10-21T18:27:24Z",
+          "comments": [
+            {
+              "originalPosition": 46,
+              "body": "```suggestion\r\n    * `uri`: REQUIRED. Text string (Major Type 3). The `uri` (URI) claim MUST specify a String value that identifies the Status List or Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.\r\n```",
+              "createdAt": "2024-10-21T18:27:23Z",
+              "updatedAt": "2024-10-21T18:27:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCg5H",
+          "commit": {
+            "abbreviatedOid": "ac38b8b"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:31:13Z",
+          "updatedAt": "2024-10-21T18:31:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCg7H",
+          "commit": {
+            "abbreviatedOid": "ac38b8b"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:31:17Z",
+          "updatedAt": "2024-10-21T18:31:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 185,
+      "id": "PR_kwDOJZ2aqs5_Onmv",
+      "title": "remove constraint that Status List Token must not use a MAC",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/185",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #111 ",
+      "createdAt": "2024-10-20T14:52:11Z",
+      "updatedAt": "2024-10-21T18:10:08Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "d0dbf2753366d7193248223fe901561851434fca",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/relax_mac",
+      "headRefOid": "e69b8ba0f277443ead063bd7791d3a422e15f3b2",
+      "closedAt": "2024-10-21T18:10:08Z",
+      "mergedAt": "2024-10-21T18:10:08Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "80df1bdbe79df6e562bc3365aad1f86fe4ce212e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6N5DpY",
+          "commit": {
+            "abbreviatedOid": "6ad3410"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "Document history entry is missing and I think we should also adjust line 90\r\n\r\n> A Status List may either be provided via HTTPS or be signed and embedded into a Status List Token, whereas this document defines its representations in JWT and CWT.",
+          "createdAt": "2024-10-20T15:30:13Z",
+          "updatedAt": "2024-10-20T15:30:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N5FOW",
+          "commit": {
+            "abbreviatedOid": "530e92b"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-20T15:54:42Z",
+          "updatedAt": "2024-10-20T15:54:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N8NNT",
+          "commit": {
+            "abbreviatedOid": "530e92b"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T08:54:23Z",
+          "updatedAt": "2024-10-21T08:54:24Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "```suggestion\r\n2. The CWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject CWTs with an invalid signature.\r\n```",
+              "createdAt": "2024-10-21T08:54:23Z",
+              "updatedAt": "2024-10-21T08:54:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6N8Ndw",
+          "commit": {
+            "abbreviatedOid": "530e92b"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "One typo otherwise looks good.",
+          "createdAt": "2024-10-21T08:54:50Z",
+          "updatedAt": "2024-10-21T08:55:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCUi3",
+          "commit": {
+            "abbreviatedOid": "e69b8ba"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:10:01Z",
+          "updatedAt": "2024-10-21T18:10:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 186,
+      "id": "PR_kwDOJZ2aqs5_OtD-",
+      "title": "improve section on Status Types and introduce IANA registry for it",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/186",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #177 \r\nCloses #181 ",
+      "createdAt": "2024-10-20T15:45:13Z",
+      "updatedAt": "2024-10-21T18:18:04Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "29f5e7f30537386a64fe38d5ef31d8ab73c3ac9b",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/iana_status_types",
+      "headRefOid": "fb584f7c69b65eaf689862e183d642db7e2fdda3",
+      "closedAt": "2024-10-21T18:18:03Z",
+      "mergedAt": "2024-10-21T18:18:03Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "20b2526d0c752011c26bc46295362f669cb3117a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6N8OHn",
+          "commit": {
+            "abbreviatedOid": "253abf2"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T08:55:54Z",
+          "updatedAt": "2024-10-21T08:55:55Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nThis document defines statuses of Referenced Tokens as Status Type values. A status describes the state, mode, condition or stage of an entity that is represented by the Referenced Token.\r\n```\r\n\r\nIs this what you meant?",
+              "createdAt": "2024-10-21T08:55:54Z",
+              "updatedAt": "2024-10-21T08:55:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCaEF",
+          "commit": {
+            "abbreviatedOid": "fb584f7"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:16:34Z",
+          "updatedAt": "2024-10-21T18:16:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCanX",
+          "commit": {
+            "abbreviatedOid": "fb584f7"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:17:50Z",
+          "updatedAt": "2024-10-21T18:17:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 187,
+      "id": "PR_kwDOJZ2aqs5_PK46",
+      "title": "Status Issuer and Status Provider role description to the introductio\u2026",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/187",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #158 ",
+      "createdAt": "2024-10-20T18:08:14Z",
+      "updatedAt": "2024-10-21T18:12:53Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "80df1bdbe79df6e562bc3365aad1f86fe4ce212e",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/terminology",
+      "headRefOid": "e65f52e80beb06737581a51d30dd2310f5a3f83a",
+      "closedAt": "2024-10-21T18:12:53Z",
+      "mergedAt": "2024-10-21T18:12:53Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "29f5e7f30537386a64fe38d5ef31d8ab73c3ac9b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6N8mzW",
+          "commit": {
+            "abbreviatedOid": "f63f5fa"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T09:36:19Z",
+          "updatedAt": "2024-10-21T14:16:42Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "This part is introduced as the Issuer-Holder-Verifier model and the ascii art then contains no Verifier. Would it make sense to Change \"Relying Party\" to \"Verifier/RP\" or perhaps better add a remark to the sentence introducing the 3 party model  that Verifier=RP here?",
+              "createdAt": "2024-10-21T09:36:19Z",
+              "updatedAt": "2024-10-21T14:16:42Z"
+            },
+            {
+              "originalPosition": 226,
+              "body": "```suggestion\r\nIf the roles of the Issuer and the Status Provider are performed by two different entities, this may give additional privacy assurances as the Issuer has no means to identify the Relying Party or its request.\r\n```",
+              "createdAt": "2024-10-21T14:11:31Z",
+              "updatedAt": "2024-10-21T14:16:42Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "```suggestion\r\nAn Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who creates a Status List (Token). The Status Issuer gives the Status List (Token) to the Status Provider, who serves the Status List (Token) on a public, resolvable endpoint. The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles.\r\n```",
+              "createdAt": "2024-10-21T14:13:47Z",
+              "updatedAt": "2024-10-21T14:16:42Z"
+            },
+            {
+              "originalPosition": 215,
+              "body": "Not sure about this one, but I guess we are talking about a trusted third party?\r\n```suggestion\r\n- using trusted Third Party Hosting, see [](#third-party-hosting).\r\n```",
+              "createdAt": "2024-10-21T14:16:18Z",
+              "updatedAt": "2024-10-21T14:16:42Z"
+            },
+            {
+              "originalPosition": 231,
+              "body": "```suggestion\r\nThird Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs.\r\n```",
+              "createdAt": "2024-10-21T14:16:34Z",
+              "updatedAt": "2024-10-21T14:16:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OAVjy",
+          "commit": {
+            "abbreviatedOid": "f63f5fa"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T15:18:59Z",
+          "updatedAt": "2024-10-21T15:18:59Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nThe following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of {{SD-JWT.VC}}):\r\n```",
+              "createdAt": "2024-10-21T15:18:59Z",
+              "updatedAt": "2024-10-21T15:18:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OAWxo",
+          "commit": {
+            "abbreviatedOid": "f63f5fa"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-10-21T15:20:57Z",
+          "updatedAt": "2024-10-21T15:20:57Z",
+          "comments": [
+            {
+              "originalPosition": 224,
+              "body": "Move this from privacy to implementers consideration?",
+              "createdAt": "2024-10-21T15:20:57Z",
+              "updatedAt": "2024-10-21T15:20:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCVbo",
+          "commit": {
+            "abbreviatedOid": "f39114d"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:11:05Z",
+          "updatedAt": "2024-10-21T18:11:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6OCVcM",
+          "commit": {
+            "abbreviatedOid": "f39114d"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T18:11:06Z",
+          "updatedAt": "2024-10-21T18:11:06Z",
           "comments": []
         }
       ]
