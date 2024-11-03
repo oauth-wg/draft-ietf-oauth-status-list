@@ -994,6 +994,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 * Claim Name: `status_list`
 * Claim Description: A status list containing up-to-date status information on multiple tokens.
+* JWT Claim Name: `status_list`
 * Claim Key: TBD (requested assignment 65533)
 * Claim Value Type: map
 * Change Controller: IETF
@@ -1003,6 +1004,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 * Claim Name: `ttl`
 * Claim Description: Time to Live
+* JWT Claim Name: `ttl`
 * Claim Key: TBD (requested assignment 65534)
 * Claim Value Type: unsigned integer
 * Change Controller: IETF
