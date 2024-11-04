@@ -1237,10 +1237,12 @@ for their valuable contributions, discussions and feedback to this specification
 # Document History
 {:numbered="false"}
 
+-06
+
+* add section about mixing status list formats and media type
 
 -05
 
-* add section about mixing status list formats and media type
 * add optional support for historical requests
 * update CBOR claim definitions
 * improve section on Status Types and introduce IANA registry for it
