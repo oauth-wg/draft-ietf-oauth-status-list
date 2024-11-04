@@ -657,7 +657,7 @@ Content-Type: application/statuslist+jwt
 
 ## Status List Response {#status-list-response}
 
-In the successful response, the Status List Provider SHOULD use the following content-type:
+In the successful response, the Status List Provider MUST use the following content-type unless known out of band:
 
 - "application/statuslist+json" for Status List in JSON format
 - "application/statuslist+jwt" for Status List in JWT format
