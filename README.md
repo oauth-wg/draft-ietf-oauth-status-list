@@ -30,7 +30,7 @@ Command line usage requires that you have the necessary software installed.  See
 
 # Implementations
 
-- TypeScript: [OWF sd-jwt-js](https://github.com/openwallet-foundation/sd-jwt-js/tree/main/packages/jwt-status-list)
+- TypeScript: [OWF sd-jwt-js](https://github.com/openwallet-foundation/sd-jwt-js)
 
 # Testing
 
