@@ -657,7 +657,7 @@ Content-Type: application/statuslist+jwt
 
 ## Status List Response {#status-list-response}
 
-In the successful response, the Status List Provider MUST use the following content-type unless known out of band:
+In the successful response, the Status List Provider MUST use the following content-type:
 
 - "application/statuslist+json" for Status List in JSON format
 - "application/statuslist+jwt" for Status List in JWT format
@@ -929,7 +929,6 @@ The Status List Issuer may chunk its Referenced Tokens into multiple Status List
 This specification states no requirements to not mix different formats like a CBOR based Referenced Token using a JWT for the Status List, but the expectation is that within an ecosystem, a choice for specific formats is made.
 Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.
 
-The return type of a status list should be signaled by media type as described in [](#status-list-response). If no media type was provided and the expected type is not clearly defined the ecosystem, implementations should be robust to parsing errors. In that case, a client MAY attempt to guess the media type via inspection of the response or name extension(s) of the URI.
 
 # IANA Considerations
 
