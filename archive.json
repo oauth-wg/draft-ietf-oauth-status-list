@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-12T00:16:19.205595+00:00",
+  "timestamp": "2024-11-14T00:16:39.782145+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2237,13 +2237,15 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [
         "discuss"
       ],
       "body": "",
       "createdAt": "2023-11-10T17:47:55Z",
-      "updatedAt": "2024-09-11T06:30:44Z",
+      "updatedAt": "2024-11-13T07:36:50Z",
       "closedAt": null,
       "comments": []
     },
@@ -2252,15 +2254,15 @@
       "id": "I_kwDOJZ2aqs52f8NB",
       "title": "IETF 118: Guidance for which contexts/usecases StatusList is a valuable revocation mechanism",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/84",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "George asks to describe under which circumstances / contexts the StatusList works best/is helpful compared to other mechanisms. David asks under which conditions this should not be used, expected revocation rates might be very high",
       "createdAt": "2023-11-10T17:51:23Z",
-      "updatedAt": "2024-09-11T06:39:37Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-13T07:37:25Z",
+      "closedAt": "2024-11-13T07:37:25Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -3020,12 +3022,12 @@
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
-        "paulbastian"
+        "c2bo"
       ],
       "labels": [],
       "body": "It may be a good idea to add guidance on the implications of not signing the status list to make the security trade-offs explicit.",
       "createdAt": "2024-03-21T00:13:11Z",
-      "updatedAt": "2024-08-07T08:24:14Z",
+      "updatedAt": "2024-11-13T07:39:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -3048,6 +3050,13 @@
           "body": "Linked to #147 ",
           "createdAt": "2024-08-07T08:24:13Z",
           "updatedAt": "2024-08-07T08:24:13Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- IETF decision to drop unsigned option\r\n- therefore, this issue will be resolved, as Status List Token will always be signed",
+          "createdAt": "2024-11-13T07:39:02Z",
+          "updatedAt": "2024-11-13T07:39:02Z"
         }
       ]
     },
@@ -3209,7 +3218,7 @@
       "id": "I_kwDOJZ2aqs6INCwr",
       "title": "Set content type to optional than must",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/137",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cre8",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -3218,9 +3227,17 @@
       ],
       "body": "Some CDNs like github repos/pages only provide static hosting and therefore no way to set the content-type to another value.\r\n\r\nFor the JOSE case I could publish a txt or json file.\r\nSo when it's a json file, it should be equal to `application/statuslist+json`, in case of a JWT it is `application/statuslist+jwt`.",
       "createdAt": "2024-05-08T09:22:15Z",
-      "updatedAt": "2024-09-05T06:39:29Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-11-13T07:40:15Z",
+      "closedAt": "2024-11-13T07:40:15Z",
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- there was an IETF decision to enforce Content-Type\r\n- will be solved by #183 ",
+          "createdAt": "2024-11-13T07:40:15Z",
+          "updatedAt": "2024-11-13T07:40:15Z"
+        }
+      ]
     },
     {
       "number": 138,
@@ -3305,13 +3322,15 @@
       "state": "OPEN",
       "author": "nynymike",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [
-        "discuss"
+        "ready-for-pr"
       ],
       "body": "If an OP wanted to publish the Token Status List JWT on an endpoint, perhaps something like `token_status_list_jwt` with `Content-Type: application/jwt` ... it would be nice to specify that in the spec.",
       "createdAt": "2024-05-21T19:33:46Z",
-      "updatedAt": "2024-09-05T06:36:35Z",
+      "updatedAt": "2024-11-13T07:47:57Z",
       "closedAt": null,
       "comments": [
         {
@@ -3327,6 +3346,13 @@
           "body": "Is this covered by #141 ?",
           "createdAt": "2024-06-06T06:41:40Z",
           "updatedAt": "2024-06-06T06:41:40Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- add [OAuth (AS) metadata](https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#authorization-server-metadata) that may link then to the Aggreation",
+          "createdAt": "2024-11-13T07:45:52Z",
+          "updatedAt": "2024-11-13T07:45:52Z"
         }
       ]
     },
@@ -3394,13 +3420,15 @@
       "state": "OPEN",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [
-        "discuss"
+        "ready-for-pr"
       ],
       "body": "The unsigned option hasn't shown any interest at all and complicates matters within the draft. Therefore, we consider to drop this feature again. Is anybody planning to use this?",
       "createdAt": "2024-05-29T06:43:18Z",
-      "updatedAt": "2024-09-05T06:34:33Z",
+      "updatedAt": "2024-11-13T07:48:04Z",
       "closedAt": null,
       "comments": [
         {
@@ -3416,6 +3444,13 @@
           "body": "Our aim should be to create specifications that are as consistent and compact as possible. Each additional endpoint or option also offers new attack vectors. \r\n\r\nWe also try to create a system that is as secure as possible. We have Trusted Verifier, Trusted Issuer etc. With this in mind, I see no benefit in using unsigned data. In this case, I cannot check the integrity and authenticity of the data on a terminal device at a later point in time. In addition, the data would then be transferred as raw data in the cluster. \r\n\r\nIn this sense, I would take up IDunion's suggestion and only offer the signed option and only offer this option. Clients who do not want to check the integrity of the data can simply do without validating the list/signature. This corresponds to the unsigned option (the amount of data is only one signature larger). \r\n\r\nFurthermore, in the offline use case, if I cache the data on a terminal device, I need the option of being able to check the data. In my view, this option should be prioritized. You should also generally consider whether I really want to omit the check in a status list. This is at least questionable in the majority of cases.",
           "createdAt": "2024-08-07T06:54:34Z",
           "updatedAt": "2024-08-07T06:54:34Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- decision at IETF 121 to drop the unsigned option",
+          "createdAt": "2024-11-13T07:46:40Z",
+          "updatedAt": "2024-11-13T07:46:40Z"
         }
       ]
     },
@@ -3480,13 +3515,10 @@
       "author": "cobward",
       "authorAssociation": "NONE",
       "assignees": [],
-      "labels": [
-        "ready-for-pr",
-        "discuss"
-      ],
+      "labels": [],
       "body": "I have some concerns about the complexity of the compression requirements:\r\n\r\n> \r\n>    3.  The byte array is compressed using DEFLATE [RFC1951] with the\r\n>        ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to\r\n>        use the highest compression level available.\r\n\r\nand\r\n\r\n> \r\n>    The HTTP response SHOULD use gzip Content-Encoding as defined in\r\n>    [RFC9110].\r\n\r\nThe first quoted requirement adds needless complexity and computation on the part of the issuer, as compression can happen at the HTTP level (as indicated by the second requirement), so an implementation following the recommendations of this specification would end up compressing twice at the highest available compression level. With the second requirement there is ambiguity with how it interacts with the requirements in RFC9110 with respect to handling the Accept-Encoding request header.\r\n\r\nMy proposal is to remove the requirement for DEFLATE compression on internal structure, and instead rely solely on compression of the entire response using the request/response mechanism defined in RFC9110, section 8.4.",
       "createdAt": "2024-07-08T09:57:47Z",
-      "updatedAt": "2024-10-16T06:24:56Z",
+      "updatedAt": "2024-11-13T07:47:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -3502,6 +3534,13 @@
           "body": "Editors Call:\r\n- create an compression_alg\r\n- create an IANA registry with zlib required\r\n- we are considering adding none, but it seems unclear if the added complexity/negotiation is worth it\r\n- serves as an extension point to enable better ZKP proofs lateron",
           "createdAt": "2024-10-16T06:24:02Z",
           "updatedAt": "2024-10-16T06:24:02Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- decision at IETF 121 OAuth working group call to not pursue this an simply the specification\r\n- pending close",
+          "createdAt": "2024-11-13T07:47:45Z",
+          "updatedAt": "2024-11-13T07:47:45Z"
         }
       ]
     },
@@ -3639,11 +3678,11 @@
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [
-        "discuss"
+        "ready-for-pr"
       ],
       "body": "As described in https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-03.html#section-8.1 content negotiation using the accept header is used when requesting a status list / status list token. This is used to request different formats depending on the needs of the caller using a single URI for the status list.\r\n\r\nThis mechanism in general is valid and follows the http standards. Implementing this works well when an application server is used to serve the status lists.\r\n\r\nNevertheless in practice this causes problems in some scenarios. Several CDNs and services that provide caches of other HTTP resources do not implement the required functionality correctly.\r\n\r\nFor example [cloudflare, does explicitly ignore the accept header even if the vary http response header is used](https://developers.cloudflare.com/cache/concepts/cache-control/#other). Some other services offer this functionality tough, for example Amazon CloudFront.\r\n\r\nIn addition nginx can not easily handle content negotiation using the accept header correctly. Using the a map section together with the Accept header allows to choose different resources based on the requested content type. This is only working for single value Accept headers though. More complex header values as `Accept: application/statuslist+*;q=0.5,application/statuslist+cwt` can not easily be handled. The current state of the standard does not mention such option but does not forbid them either. Apache2 has https://httpd.apache.org/docs/current/content-negotiation.html, that could solve this. I did not evaluate that further.\r\n\r\nSo even though the mechanism is good and simple as is and follows http standards, it might be difficult to implement when using a CDN to scale serving the status list.\r\n\r\nA possible solution would be to use distinct URIs to request the status list depending on the type (for example by appending extensions like jwt, cwt, json and cbor) instead of the request header. This seems to me as a workaround and a suboptimal solution though. As the specification as it is is totally valid IMHO it could as well been left as it is, which means the need for implementation of this functionality in the used components will arise and the usage of certain CDNs is not possible.\r\n\r\nRelated to #137 but addresses the request handling instead of response generation.",
       "createdAt": "2024-08-29T18:21:00Z",
-      "updatedAt": "2024-09-18T06:41:28Z",
+      "updatedAt": "2024-11-13T07:50:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -3666,6 +3705,13 @@
           "body": "Discussed on editors call tonight, one possible recommendation we could make to implementations is that if you are representing the same underlying status list in both CWT and JWT forms, use distinct URIs for these two different status list representations e.g JWT -> https:example.com/statuslists/jwt/1 CWT -> https:example.com/statuslists/cwt/1. The only draw back I see to this approach is that in effect the reference to the status list that is put in the reference token effectively sets the content type of the returned status list, rather then making it subject to negotiation via the Accept header. I don't believe in practise is an issue because generally the same securing approach that is being used for the reference token should be used for the status list e.g SD-JWT reference token -> JWT status list.",
           "createdAt": "2024-09-18T06:41:27Z",
           "updatedAt": "2024-09-18T06:41:27Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- decision at IETF 121 OAuth working group call to enforce HTTP Content-Type\r\n- pending close",
+          "createdAt": "2024-11-13T07:50:20Z",
+          "updatedAt": "2024-11-13T07:50:20Z"
         }
       ]
     },
@@ -3779,13 +3825,15 @@
       "state": "OPEN",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "tplooker"
+      ],
       "labels": [
         "ready-for-pr"
       ],
       "body": "",
       "createdAt": "2024-10-16T06:36:31Z",
-      "updatedAt": "2024-10-16T06:37:09Z",
+      "updatedAt": "2024-11-13T07:50:42Z",
       "closedAt": null,
       "comments": []
     },
@@ -3797,11 +3845,15 @@
       "state": "OPEN",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "c2bo"
+      ],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "",
       "createdAt": "2024-10-21T18:32:35Z",
-      "updatedAt": "2024-10-21T18:32:35Z",
+      "updatedAt": "2024-11-13T07:51:09Z",
       "closedAt": null,
       "comments": []
     },
@@ -3813,11 +3865,15 @@
       "state": "OPEN",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "paulbastian"
+      ],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "The spec creates a registry and claim for status mechanisms and 1 specific mechanism, the status list. We should adjust the introduction to reflect those changes.",
       "createdAt": "2024-10-21T18:32:37Z",
-      "updatedAt": "2024-11-09T07:42:52Z",
+      "updatedAt": "2024-11-13T07:51:41Z",
       "closedAt": null,
       "comments": []
     },
@@ -3826,16 +3882,59 @@
       "id": "I_kwDOJZ2aqs6d_PFO",
       "title": "Q. Can I add a link of openwallet foundation implementation for token status list in README?",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/192",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "lukasjhan",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Hi members of WG.\r\n\r\nI'm developing SD-JWT VC library for Typescript in OWF. I'm also developing token status list standard in my library as well.\r\nHere is the link: https://github.com/openwallet-foundation/sd-jwt-js\r\nand You can check the token status list library here: https://github.com/openwallet-foundation/sd-jwt-js/tree/main/packages/jwt-status-list\r\n\r\nSo I'd like to add a link of my implementation here. Is it okay?\r\n\r\n",
       "createdAt": "2024-11-11T23:03:30Z",
-      "updatedAt": "2024-11-11T23:06:07Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-11-13T15:41:34Z",
+      "closedAt": "2024-11-13T15:41:33Z",
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\r\n- we are fine to add this",
+          "createdAt": "2024-11-13T07:55:45Z",
+          "updatedAt": "2024-11-13T07:55:45Z"
+        },
+        {
+          "author": "lukasjhan",
+          "authorAssociation": "NONE",
+          "body": "@paulbastian Thank you :)",
+          "createdAt": "2024-11-13T08:18:34Z",
+          "updatedAt": "2024-11-13T08:18:34Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Maybe for clarifications, is this the client/wallet side or the server side or both?",
+          "createdAt": "2024-11-13T10:17:43Z",
+          "updatedAt": "2024-11-13T10:17:43Z"
+        },
+        {
+          "author": "lukasjhan",
+          "authorAssociation": "NONE",
+          "body": "> Maybe for clarifications, is this the client/wallet side or the server side or both?\r\n\r\nIt's for both.",
+          "createdAt": "2024-11-13T10:28:23Z",
+          "updatedAt": "2024-11-13T10:28:23Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > Maybe for clarifications, is this the client/wallet side or the server side or both?\n> \n> It's for both.\n\nAnd on the server side supporting issuer and verifier functionality?",
+          "createdAt": "2024-11-13T12:00:06Z",
+          "updatedAt": "2024-11-13T12:00:06Z"
+        },
+        {
+          "author": "lukasjhan",
+          "authorAssociation": "NONE",
+          "body": "> > > Maybe for clarifications, is this the client/wallet side or the server side or both?\r\n> > \r\n> > \r\n> > It's for both.\r\n> \r\n> And on the server side supporting issuer and verifier functionality?\r\n\r\nYes, we provide features to \r\n- create, encode & compress the list for issuers.\r\n- decode, decompress the list for verifiers and holders.\r\n\r\nAlso it's platform agnostic :)",
+          "createdAt": "2024-11-13T12:23:07Z",
+          "updatedAt": "2024-11-13T12:23:07Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -12114,13 +12213,13 @@
       "labels": [],
       "body": "closes #38\r\ncloses #168\r\ncloses #137\r\n\r\nRendered preview: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/mixing-formats/draft-ietf-oauth-status-list.html\r\n\r\nThis PR attempts to add a bit of language about mixing formats and also changes the content-type in the status list response to SHOULD and language around content type parsing that is similar to the language used in HTTP/1.1.\r\n\r\nI am happy to remove the media types part if we want a bit more discussion, but when I started writing this, it felt like right path so I decided to include it as a proposal.",
       "createdAt": "2024-10-17T09:15:17Z",
-      "updatedAt": "2024-11-04T14:18:43Z",
+      "updatedAt": "2024-11-13T15:43:59Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "1ae169297c0781f33681498150c85610d631ab95",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/mixing-formats",
-      "headRefOid": "48c244e0e9fd2c8ba7de68932c7919a7aa82be2f",
+      "headRefOid": "173728a99dff9e8e49651b98cb115a51e09bba50",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -12259,6 +12358,59 @@
               "updatedAt": "2024-10-20T19:08:02Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Q96xH",
+          "commit": {
+            "abbreviatedOid": "48c244e"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T07:33:55Z",
+          "updatedAt": "2024-11-13T07:33:56Z",
+          "comments": [
+            {
+              "originalPosition": 29,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2024-11-13T07:33:55Z",
+              "updatedAt": "2024-11-13T07:33:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Q97j2",
+          "commit": {
+            "abbreviatedOid": "48c244e"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T07:34:55Z",
+          "updatedAt": "2024-11-13T07:34:55Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nIn the successful response, the Status List Provider MUST use the following content-type:\r\n```",
+              "createdAt": "2024-11-13T07:34:55Z",
+              "updatedAt": "2024-11-13T07:34:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6RDorR",
+          "commit": {
+            "abbreviatedOid": "173728a"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-13T15:43:59Z",
+          "updatedAt": "2024-11-13T15:43:59Z",
+          "comments": []
         }
       ]
     },
@@ -12791,6 +12943,141 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 193,
+      "id": "PR_kwDOJZ2aqs6BvY0m",
+      "title": "Add implementations to README",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/193",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #192 ",
+      "createdAt": "2024-11-13T08:02:00Z",
+      "updatedAt": "2024-11-13T15:41:38Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "1ae169297c0781f33681498150c85610d631ab95",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "impls",
+      "headRefOid": "1e8a964f9767e38e57a5150efffe0bbc39b8fba0",
+      "closedAt": "2024-11-13T15:41:32Z",
+      "mergedAt": "2024-11-13T15:41:32Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "eff7aa82052336c352967113870b1dcda9f3f81b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6Q-pBa",
+          "commit": {
+            "abbreviatedOid": "e6e6fe9"
+          },
+          "author": "lukasjhan",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T08:55:40Z",
+          "updatedAt": "2024-11-13T08:55:40Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "In my point of view, the repo is would be better: https://github.com/openwallet-foundation/sd-jwt-js\r\nWhat do you guys think?",
+              "createdAt": "2024-11-13T08:55:40Z",
+              "updatedAt": "2024-11-13T08:55:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Q-2_l",
+          "commit": {
+            "abbreviatedOid": "e6e6fe9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T09:17:21Z",
+          "updatedAt": "2024-11-13T09:17:21Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "sure I don't mind",
+              "createdAt": "2024-11-13T09:17:21Z",
+              "updatedAt": "2024-11-13T09:17:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Q-3Li",
+          "commit": {
+            "abbreviatedOid": "e6e6fe9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T09:17:38Z",
+          "updatedAt": "2024-11-13T09:17:38Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\n- TypeScript: [OWF sd-jwt-js](https://github.com/openwallet-foundation/sd-jwt-js)\r\n```",
+              "createdAt": "2024-11-13T09:17:38Z",
+              "updatedAt": "2024-11-13T09:17:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Q_E0Z",
+          "commit": {
+            "abbreviatedOid": "ed8cf2a"
+          },
+          "author": "lukasjhan",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Thank you",
+          "createdAt": "2024-11-13T09:37:59Z",
+          "updatedAt": "2024-11-13T09:37:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6RCxM6",
+          "commit": {
+            "abbreviatedOid": "ed8cf2a"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-13T14:30:34Z",
+          "updatedAt": "2024-11-13T14:30:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6RDlKr",
+          "commit": {
+            "abbreviatedOid": "ed8cf2a"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-13T15:38:56Z",
+          "updatedAt": "2024-11-13T15:38:56Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\n| Project | Language | Issuer | Holder | Relying Party |\r\n|---|---|---|---|---|\r\n| [OWF sd-jwt-js](https://github.com/openwallet-foundation/sd-jwt-js) | TypeScript | yes | yes | yes |\r\n```",
+              "createdAt": "2024-11-13T15:38:56Z",
+              "updatedAt": "2024-11-13T15:39:52Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
