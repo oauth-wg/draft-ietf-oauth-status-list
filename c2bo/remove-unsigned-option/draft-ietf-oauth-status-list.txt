@@ -148,19 +148,19 @@ Table of Contents
 
    This document defines a Status List and its representations in JWT
    and CWT formats that describe the individual statuses of multiple
-   Referenced Tokens, which themselves are JWTs or CWTs.  The statuses
-   of all Referenced Tokens are conveyed via a bit array in the Status
-   List.  Each Referenced Token is allocated an index during issuance
-   that represents its position within this bit array.  The value of the
-   bit(s) at this index correspond to the Referenced Token's status.  A
-   Status List is provided within a Status List Token protected by
-   cryptographic signature or MAC and this document defines its
-   representations in JWT and CWT format.  Status Lists may be composed
-   for expressing a range of Status Types.  This document defines basic
-   Status Types for the most common use cases as well as an
-   extensibility mechanism for custom Status Types.  The document also
-   defines how an issuer of a Referenced Token references a Status List
-   Token.
+   Referenced Tokens, which themselves are most commonly data structures
+   secure by JOSE or COSE.  The statuses of all Referenced Tokens are
+   conveyed via a bit array in the Status List.  Each Referenced Token
+   is allocated an index during issuance that represents its position
+   within this bit array.  The value of the bit(s) at this index
+   correspond to the Referenced Token's status.  A Status List is
+   provided within a Status List Token protected by cryptographic
+   signature or MAC and this document defines its representations in JWT
+   and CWT format.  Status Lists may be composed for expressing a range
+   of Status Types.  This document defines basic Status Types for the
+   most common use cases as well as an extensibility mechanism for
+   custom Status Types.  The document also defines how an issuer of a
+   Referenced Token references a Status List Token.
 
    An example for the usage of a Status List is to manage the status of
    issued access tokens as defined in section 1.4 of [RFC6749].  Token
@@ -576,9 +576,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840554d54a7d2c92f8dcd69922616a02477e0c6ca3ff823ba70ef
-   b4d5b900f0d2b0e1a735bb19efe975c130ebf58cc9d27a1a227d7c660dccf1a51ae3
-   b13b943691
+   b918000217015d58403d6b90e76966f1145b59302c4abcedf36095de663925f94c64
+   533962ad4613e60e07161b9a9ff293959298c6fcea7577708cee604d4662224c2f31
+   afeca9e158
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -600,12 +600,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      554d54a7d2c92f8dcd699226  #       "UMT§ÒÉ/\x8dÍi\x92&"
-      16a02477e0c6ca3ff823ba70  #       "\x16\xa0$wàÆÊ?ø#ºp"
-      efb4d5b900f0d2b0e1a735bb  #       "ï´Õ¹\x00ðÒ°á§5»"
-      19efe975c130ebf58cc9d27a  #       "\x19ïéuÁ0ëõ\x8cÉÒz"
-      1a227d7c660dccf1a51ae3b1  #       "\x1a"}|f\x0dÌñ¥\x1aã±"
-      3b943691                  #       ";\x946\x91"
+      3d6b90e76966f1145b59302c  #       "=k\x90çifñ\x14[Y0,"
+      4abcedf36095de663925f94c  #       "J¼íó`\x95Þf9%ùL"
+      64533962ad4613e60e07161b  #       "dS9b\xadF\x13æ\x0e\x07\x16\x1b"
+      9a9ff293959298c6fcea7577  #       "\x9a\x9fò\x93\x95\x92\x98Æüêuw"
+      708cee604d4662224c2f31af  #       "p\x8cî`MFb"L/1¯"
+      eca9e158                  #       "ì©áX"
 
 6.  Referenced Token
 
@@ -751,9 +751,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158404982058fbdb10c4db96f64c3b581b0bf108996
-   792545519f2033bdbb6adff937db145fd930058570ec41d79d8afe689a03d0a9e08f
-   03055150c3e4efa7f130ac
+   7374617475736c697374732f315840317f46afc43538803fa41f5b429a980fd369f1
+   f9f136f52280dde1561c7ab38d603c8a34554df1a5fc50db97ee80d7868f47f93eac
+   d9997264c9ec27cf99033e
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -776,12 +776,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         4982058fbdb10c4db96f64c3  #       "I\x82\x05\x8f½±\x0cM¹odÃ"
-         b581b0bf108996792545519f  #       "µ\x81°¿\x10\x89\x96y%EQ\x9f"
-         2033bdbb6adff937db145fd9  #       " 3½»jßù7Û\x14_Ù"
-         30058570ec41d79d8afe689a  #       "0\x05\x85pìA×\x9d\x8aþh\x9a"
-         03d0a9e08f03055150c3e4ef  #       "\x03Ð©à\x8f\x03\x05QPÃäï"
-         a7f130ac                  #       "§ñ0¬"
+         317f46afc43538803fa41f5b  #       "1\x7fF¯Ä58\x80?¤\x1f["
+         429a980fd369f1f9f136f522  #       "B\x9a\x98\x0fÓiñùñ6õ""
+         80dde1561c7ab38d603c8a34  #       "\x80ÝáV\x1cz³\x8d`<\x8a4"
+         554df1a5fc50db97ee80d786  #       "UMñ¥üPÛ\x97î\x80×\x86"
+         8f47f93eacd9997264c9ec27  #       "\x8fGù>¬Ù\x99rdÉì'"
+         cf99033e                  #       "Ï\x99\x03>"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1008,8 +1008,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.iyULFYNe8JEJocAj05JTsNwwV6JXVb6tE61RQzD5qVTZkjFZvNCU
-   WTTcD9u9jU9E9PPh4I37piH6cS08wp2SSg
+   nR0bCI6NDMyMDB9.muqpjgpq_vd0dmuYsg_Kbc8bU569WaXkraKgs3AUHuDoyBocDsAi
+   vPX1LbvoQghEqPtRJJZlKpuVsNRlYdbLfA
 
 8.2.  Status List Response
 
@@ -1141,8 +1141,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.iyULFYNe8JEJocAj05JTsNwwV6JXVb6tE61RQzD5qVTZkjFZvNCU
-   WTTcD9u9jU9E9PPh4I37piH6cS08wp2SSg
+   nR0bCI6NDMyMDB9.muqpjgpq_vd0dmuYsg_Kbc8bU569WaXkraKgs3AUHuDoyBocDsAi
+   vPX1LbvoQghEqPtRJJZlKpuVsNRlYdbLfA
 
 9.  Status List Aggregation
 
