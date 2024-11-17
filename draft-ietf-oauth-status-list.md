@@ -655,7 +655,7 @@ Content-Type: application/statuslist+jwt
 {::include ./examples/status_list_jwt_raw}
 ~~~
 
-## Status List Response
+## Status List Response {#status-list-response}
 
 In the successful response, the Status List Provider MUST use the following content-type:
 
@@ -915,6 +915,20 @@ Implementations producing Status Lists are RECOMMENDED to prevent double allocat
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
 The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices.
+
+## Status List Formats
+
+ This specification defines 4 different formats of the status list:
+
+ - JSON
+ - JWT
+ - CBOR
+ - CWT
+
+
+This specification states no requirements to not mix different formats like a CBOR based Referenced Token using a JWT for the Status List, but the expectation is that within an ecosystem, a choice for specific formats is made.
+Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.
+
 
 # IANA Considerations
 
@@ -1230,6 +1244,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -06
 
+* add section about mixing status list formats and media type
 * fixes from IETF review
 
 -05
