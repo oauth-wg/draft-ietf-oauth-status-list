@@ -960,7 +960,7 @@ Status Method Description:
 
 Change Controller:
 
-  > For Standards Track RFCs, list the "IESG".  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
@@ -983,24 +983,30 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 <br/>
 
 * Claim Name: `status`
-* Claim Key: TBD (requested assignment 65535)
 * Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.
+* JWT Claim Name: `status`
+* Claim Key: TBD (requested assignment 65535)
+* Claim Value Type: map
 * Change Controller: IETF
-* Specification Document(s): [](#status-claim) of this specification
+* Reference: [](#status-claim) of this specification
 
 <br/>
 
 * Claim Name: `status_list`
-* Claim Key: TBD (requested assignment 65533)
 * Claim Description: A status list containing up-to-date status information on multiple tokens.
+* JWT Claim Name: `status_list`
+* Claim Key: TBD (requested assignment 65533)
+* Claim Value Type: map
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-cwt) of this specification
 
 <br/>
 
 * Claim Name: `ttl`
-* Claim Key: TBD (requested assignment 65534)
 * Claim Description: Time to Live
+* JWT Claim Name: `ttl`
+* Claim Key: TBD (requested assignment 65534)
+* Claim Value Type: unsigned integer
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-cwt) of this specification
 
@@ -1020,7 +1026,7 @@ Status Method Description:
 
 Change Controller:
 
-  > For Standards Track RFCs, list the "IESG".  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
@@ -1053,7 +1059,7 @@ Status Type value:
 
 Change Controller:
 
-  > For Standards Track RFCs, list the "IESG".  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
@@ -1221,6 +1227,10 @@ for their valuable contributions, discussions and feedback to this specification
 
 # Document History
 {:numbered="false"}
+
+-06
+
+* fixes from IETF review
 
 -05
 
