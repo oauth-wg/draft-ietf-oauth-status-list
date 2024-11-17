@@ -22,7 +22,7 @@ author:
  -
     fullname: Christian Bormann
     organization: Robert Bosch GmbH
-    email: christiancarl.bormann@bosch.com
+    email: chris.bormann@gmx.de
 
 normative:
   RFC1950: RFC1950
