@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-17T00:18:55.631233+00:00",
+  "timestamp": "2024-11-19T00:17:39.250332+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -989,7 +989,7 @@
       "id": "I_kwDOJZ2aqs5rLl0G",
       "title": "Mixing JSON and CBOR formats",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/38",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -1000,8 +1000,8 @@
       ],
       "body": "Is it allowed/recommended to have Status List Token in one format and the Referenced Token in another format?",
       "createdAt": "2023-07-11T06:25:53Z",
-      "updatedAt": "2024-10-09T06:36:38Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-17T14:27:34Z",
+      "closedAt": "2024-11-17T14:27:34Z",
       "comments": [
         {
           "author": "c2bo",
@@ -3673,7 +3673,7 @@
       "id": "I_kwDOJZ2aqs6Uunig",
       "title": "Support for content negotiation as denoted in the standard is limited for some CDNs and http servers",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/168",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "markuskreusch",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -3682,8 +3682,8 @@
       ],
       "body": "As described in https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-03.html#section-8.1 content negotiation using the accept header is used when requesting a status list / status list token. This is used to request different formats depending on the needs of the caller using a single URI for the status list.\r\n\r\nThis mechanism in general is valid and follows the http standards. Implementing this works well when an application server is used to serve the status lists.\r\n\r\nNevertheless in practice this causes problems in some scenarios. Several CDNs and services that provide caches of other HTTP resources do not implement the required functionality correctly.\r\n\r\nFor example [cloudflare, does explicitly ignore the accept header even if the vary http response header is used](https://developers.cloudflare.com/cache/concepts/cache-control/#other). Some other services offer this functionality tough, for example Amazon CloudFront.\r\n\r\nIn addition nginx can not easily handle content negotiation using the accept header correctly. Using the a map section together with the Accept header allows to choose different resources based on the requested content type. This is only working for single value Accept headers though. More complex header values as `Accept: application/statuslist+*;q=0.5,application/statuslist+cwt` can not easily be handled. The current state of the standard does not mention such option but does not forbid them either. Apache2 has https://httpd.apache.org/docs/current/content-negotiation.html, that could solve this. I did not evaluate that further.\r\n\r\nSo even though the mechanism is good and simple as is and follows http standards, it might be difficult to implement when using a CDN to scale serving the status list.\r\n\r\nA possible solution would be to use distinct URIs to request the status list depending on the type (for example by appending extensions like jwt, cwt, json and cbor) instead of the request header. This seems to me as a workaround and a suboptimal solution though. As the specification as it is is totally valid IMHO it could as well been left as it is, which means the need for implementation of this functionality in the used components will arise and the usage of certain CDNs is not possible.\r\n\r\nRelated to #137 but addresses the request handling instead of response generation.",
       "createdAt": "2024-08-29T18:21:00Z",
-      "updatedAt": "2024-11-13T07:50:20Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-17T14:27:34Z",
+      "closedAt": "2024-11-17T14:27:34Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -12222,24 +12222,26 @@
       "id": "PR_kwDOJZ2aqs5-8GeQ",
       "title": "mixing formats and media types",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/183",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "closes #38\r\ncloses #168\r\ncloses #137\r\n\r\nRendered preview: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/mixing-formats/draft-ietf-oauth-status-list.html\r\n\r\nThis PR attempts to add a bit of language about mixing formats and also changes the content-type in the status list response to SHOULD and language around content type parsing that is similar to the language used in HTTP/1.1.\r\n\r\nI am happy to remove the media types part if we want a bit more discussion, but when I started writing this, it felt like right path so I decided to include it as a proposal.",
       "createdAt": "2024-10-17T09:15:17Z",
-      "updatedAt": "2024-11-13T15:43:59Z",
+      "updatedAt": "2024-11-17T14:27:33Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "1ae169297c0781f33681498150c85610d631ab95",
+      "baseRefOid": "96d7bfd0ebbe8b652063b234b15d5f48ebb4d59d",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/mixing-formats",
-      "headRefOid": "173728a99dff9e8e49651b98cb115a51e09bba50",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "85144dffcfbb4ac371475354bb85b08ece11a901",
+      "closedAt": "2024-11-17T14:27:33Z",
+      "mergedAt": "2024-11-17T14:27:33Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "f2a651aba3fd5a429c51324050ef87b0868bed45"
+      },
       "comments": [],
       "reviews": [
         {
@@ -12939,24 +12941,26 @@
       "id": "PR_kwDOJZ2aqs6Au-dm",
       "title": "fixes from IETF review",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/190",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-11-03T21:04:00Z",
-      "updatedAt": "2024-11-14T23:11:48Z",
+      "updatedAt": "2024-11-17T14:25:36Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "1ae169297c0781f33681498150c85610d631ab95",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "ietf_review",
       "headRefOid": "2bf299013ec00ab77498a45e50119a8e820825f8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-17T14:25:36Z",
+      "mergedAt": "2024-11-17T14:25:36Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "96d7bfd0ebbe8b652063b234b15d5f48ebb4d59d"
+      },
       "comments": [],
       "reviews": [
         {
@@ -13104,6 +13108,61 @@
               "body": "```suggestion\r\n| Project | Language | Issuer | Holder | Relying Party |\r\n|---|---|---|---|---|\r\n| [OWF sd-jwt-js](https://github.com/openwallet-foundation/sd-jwt-js) | TypeScript | yes | yes | yes |\r\n```",
               "createdAt": "2024-11-13T15:38:56Z",
               "updatedAt": "2024-11-13T15:39:52Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 195,
+      "id": "PR_kwDOJZ2aqs6CKSzh",
+      "title": "Remove unsigned option",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/195",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Still needs some work. I've kept the overall document structure as it felt cleaner to me this way instead of moving status list data structures directly into the JWT/CWT sections.\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/remove-unsigned-option/draft-ietf-oauth-status-list.html",
+      "createdAt": "2024-11-17T15:40:44Z",
+      "updatedAt": "2024-11-17T22:27:24Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f2a651aba3fd5a429c51324050ef87b0868bed45",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/remove-unsigned-option",
+      "headRefOid": "a5f09e4d686d0774b714a9f95bfdb07f9e5b6b80",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looking good there is still some text in section 8.4 referring to the unsigned option that will need to be removed too.",
+          "createdAt": "2024-11-17T18:26:14Z",
+          "updatedAt": "2024-11-17T18:26:14Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6RgINF",
+          "commit": {
+            "abbreviatedOid": "67a85aa"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-17T18:19:52Z",
+          "updatedAt": "2024-11-17T18:19:52Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "```suggestion\r\nThis document defines a Status List and its representations in JWT and CWT formats that describe the individual statuses of multiple Referenced Tokens, which themselves are most commonly data structures secure by JOSE or COSE. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List Token.\r\n```\r\n\r\nNot sure if I like this language that much but we need to widen it a little given an mDoc isn't a CWT. ",
+              "createdAt": "2024-11-17T18:19:52Z",
+              "updatedAt": "2024-11-17T18:22:06Z"
             }
           ]
         }
