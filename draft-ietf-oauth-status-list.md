@@ -81,7 +81,7 @@ informative:
 --- abstract
 
 This specification defines status list data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption(COSE), such as JSON Web Tokens (JWTs), CBOR Web Tokens (CWTs) and ISO mdoc.
-The status list tokens themselves are represented as JWTs or CWTs.
+Status Lists are provided in the form of JWTs or CWTs.
 
 --- middle
 
@@ -89,7 +89,8 @@ The status list tokens themselves are represented as JWTs or CWTs.
 
 Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JSON Web Tokens (JWTs) {{RFC7519}}, CBOR Web Tokens (CWTs) {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token can change over time, which are important to be able to communicate to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer.
 
-This document defines a Status List and its representations in JWT and CWT formats that describe the individual statuses of multiple Referenced Tokens, which themselves are most commonly data structures secure by JOSE or COSE. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List Token.
+This document defines a Status List and its representations in JWT and CWT formats that describe the individual statuses of multiple Referenced Tokens, which themselves are most commonly data structures secured by JOSE or COSE. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status.
+A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format. Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types. The document also defines how an issuer of a Referenced Token references a Status List Token.
 
 An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.
 
@@ -1194,6 +1195,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -06
 
+* remove unsigned options (json/cbor) of status list
 * add section about mixing status list formats and media type
 * fixes from IETF review
 
