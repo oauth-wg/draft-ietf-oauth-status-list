@@ -177,7 +177,7 @@ Holder:
 : An entity that receives Referenced Tokens form the Issuer and presents them to Relying Parties.
 
 Relying Party:
-: An entity that relies on the Status List to validate the status of the Referenced Token. Also known as Verifier.
+: An entity that relies on the Status List Token to validate the status of the Referenced Token. Also known as Verifier.
 
 Status List:
 : An object in JSON or CBOR representation containing a bit array that lists the statuses of many Referenced Tokens.
@@ -354,7 +354,7 @@ The following is the CBOR Annotated Hex output of the example above:
 
 ## Status Claim {#status-claim}
 
-By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a status list as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
+By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a Status List Token as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
 ## Referenced Token in JOSE {#referenced-token-jose}
 
@@ -363,7 +363,7 @@ The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{R
 The following content applies to the JWT Claims Set:
 
 * `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains at least one reference to a status mechanism.
-  * `status_list`: REQUIRED when the status list mechanism defined in this specification is used. It contains a reference to a Status List Token. It MUST at least contain the following claims:
+  * `status_list`: REQUIRED when the status mechanism defined in this specification is used. It contains a reference to a Status List Token. It MUST at least contain the following claims:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
     * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
@@ -388,7 +388,7 @@ The following is a non-normative example for a decoded header and payload of a R
 }
 ~~~
 
-SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of Status List in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jose}}.
+SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of status mechanism in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jose}}.
 
 The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:
 
@@ -442,7 +442,7 @@ The Referenced Token MAY be encoded as a "COSE Web Token (CWT)" object according
 The following content applies to the CWT Claims Set:
 
 * `65535` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:
-  * `status_list` (status list): REQUIRED when the status list mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
+  * `status_list` (status list): REQUIRED when the status mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
     * `idx`: REQUIRED. Unsigned integer (Major Type 0) The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
     * `uri`: REQUIRED. Text string (Major Type 3). The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
@@ -629,12 +629,12 @@ The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS)
 
 The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:
 
-- "application/statuslist+jwt" for Status List in JWT format
-- "application/statuslist+cwt" for Status List in CWT format
+- "application/statuslist+jwt" for Status List Token in JWT format
+- "application/statuslist+cwt" for Status List Token in CWT format
 
 If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.
 
-The following are non-normative examples for a request and response for a status list with type `application/statuslist+jwt`:
+The following are non-normative examples for a request and response for a Status List Token with type `application/statuslist+jwt`:
 
 ~~~ ascii-art
 
@@ -654,10 +654,10 @@ Content-Type: application/statuslist+jwt
 
 ## Status List Response {#status-list-response}
 
-In the successful response, the Status List Provider MUST use the following content-type:
+In the successful response, the Status Provider MUST use the following content-type:
 
-- "application/statuslist+jwt" for Status List in JWT format
-- "application/statuslist+cwt" for Status List in CWT format
+- "application/statuslist+jwt" for Status List Token in JWT format
+- "application/statuslist+cwt" for Status List Token in CWT format
 
 In the case of "application/statuslist+jwt", the response MUST be of type JWT and follow the rules of [](#status-list-token-jwt).
 In the case of "application/statuslist+cwt", the response MUST be of type CWT and follow the rules of [](#status-list-token-cwt).
@@ -681,16 +681,16 @@ If this validation was not successful, the Referenced Token MUST be rejected. If
     3. If expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
     4. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
 5. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
-6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bound of the status list
+6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bound of the Status List
 7. Check the status value as described in [](#status-types)
 
 If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
 
 ## Historical resolution {#historical-resolution}
 
-By default, the Status List mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List as defined in [](#status-list-request) with a timestamp. This feature has additional privacy implications as described in [](#privacy-historical).
+By default, the status mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List Token as defined in [](#status-list-request) with a timestamp. This feature has additional privacy implications as described in [](#privacy-historical).
 
-To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List that was valid for that specified time or an error.
+To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List Token that was valid for that specified time or an error.
 
 If the Server does not support the additional query parameter, it SHOULD return a status code of 501 (Not Implemented), or if the requested time is not supported it SHOULD return a status code of 406 (Not Acceptable). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client MUST verify support for this feature by verifying that the requested timestamp is within the valid time of the returned token signaled via `iat` (`6` for CWT) and `exp` (`4` for CWT).
 
@@ -721,7 +721,7 @@ There are two options for a Relying Party to retrieve the Status List Aggregatio
 An Issuer MAY support any of these mechanisms:
 
 - Issuer metadata: The Issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
-- Status List Parameter: The Status Issuer includes an additional claim in the Status List (Token) that contains the Status List Aggregation URI.
+- Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.
 
 ## Issuer Metadata
 
@@ -737,7 +737,7 @@ The URI to the Status List Aggregation MAY be provided as the optional parameter
 
 This section defines the structure for a JSON-encoded Status List Aggregation:
 
-* `status_lists`: REQUIRED. JSON array of strings that contains URIs linking to Status List (Tokens).
+* `status_lists`: REQUIRED. JSON array of strings that contains URIs linking to Status List Tokens.
 
 The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return SHOULD be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
 
@@ -756,7 +756,7 @@ The following is a non-normative example for media type `application/json`:
 
 # Further Examples
 
-## Status List Token with 2-Bit Status Values in JWT format
+## Status List with 2-Bit Status Values in JSON format
 
 In this example, the Status List additionally includes the Status Type "SUSPENDED". As the Status Type value for "SUSPENDED" is 0x02 and does not fit into 1 bit, the "bits" is required to be 2.
 
@@ -795,7 +795,7 @@ index      3   2   1   0      7   6   5   4      11  10  9   8
 
 ~~~
 
-Resulting in the byte array and compressed/base64url-encoded status list:
+Resulting in the byte array and compressed/base64url-encoded Status List:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding2_json}
@@ -803,9 +803,9 @@ Resulting in the byte array and compressed/base64url-encoded status list:
 
 # Security Considerations {#Security}
 
-## Correct decoding and parsing of the encoded status list
+## Correct decoding and parsing of the encoded Status List
 
-Implementers should be particularly careful for the correct parsing and decoding of the status list. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.
+Implementers should be particularly careful for the correct parsing and decoding of the Status List. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.
 
 Implementations are RECOMMENDED to verify correctness using the test vectors given by this specification.
 
@@ -815,12 +815,12 @@ A Status List Token in the JWT format should follow the security considerations 
 
 A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
 
-## Cached and Stale status lists
+## Cached and Stale Status Lists
 
 When Relying Parties fetch the Status List, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
 in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
-a status list to a CDN or other distribution mechanism while giving guidance to consumers of the status list on how often they need to fetch
-a fresh copy of the status list even if that status list is not expired.
+a Status List to a CDN or other distribution mechanism while giving guidance to consumers of the Status List on how often they need to fetch
+a fresh copy of the Status List even if that Status List is not expired.
 
 # Privacy Considerations
 
@@ -911,7 +911,7 @@ The Status List Issuer may chunk its Referenced Tokens into multiple Status List
 
 ## Status List Formats
 
- This specification defines 2 different token formats of the status list:
+ This specification defines 2 different token formats of the Status List:
 
  - JWT
  - CWT
