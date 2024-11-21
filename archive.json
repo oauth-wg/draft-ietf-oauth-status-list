@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-19T00:17:39.250332+00:00",
+  "timestamp": "2024-11-21T00:17:41.147584+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -3018,7 +3018,7 @@
       "id": "I_kwDOJZ2aqs6DD21L",
       "title": "Add Security Consideration on signing status list",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/128",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "PieterKas",
       "authorAssociation": "NONE",
       "assignees": [
@@ -3027,8 +3027,8 @@
       "labels": [],
       "body": "It may be a good idea to add guidance on the implications of not signing the status list to make the security trade-offs explicit.",
       "createdAt": "2024-03-21T00:13:11Z",
-      "updatedAt": "2024-11-13T07:39:03Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-20T16:46:50Z",
+      "closedAt": "2024-11-20T16:46:50Z",
       "comments": [
         {
           "author": "c2bo",
@@ -3057,6 +3057,13 @@
           "body": "Editors Call:\r\n- IETF decision to drop unsigned option\r\n- therefore, this issue will be resolved, as Status List Token will always be signed",
           "createdAt": "2024-11-13T07:39:02Z",
           "updatedAt": "2024-11-13T07:39:02Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Closed with #195",
+          "createdAt": "2024-11-20T16:46:50Z",
+          "updatedAt": "2024-11-20T16:46:50Z"
         }
       ]
     },
@@ -3417,7 +3424,7 @@
       "id": "I_kwDOJZ2aqs6KboUm",
       "title": "Decide whether to drop the unsigned option",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/147",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -3428,8 +3435,8 @@
       ],
       "body": "The unsigned option hasn't shown any interest at all and complicates matters within the draft. Therefore, we consider to drop this feature again. Is anybody planning to use this?",
       "createdAt": "2024-05-29T06:43:18Z",
-      "updatedAt": "2024-11-13T07:48:04Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-20T16:46:13Z",
+      "closedAt": "2024-11-20T16:46:13Z",
       "comments": [
         {
           "author": "cre8",
@@ -3451,6 +3458,13 @@
           "body": "Editors Call:\r\n- decision at IETF 121 to drop the unsigned option",
           "createdAt": "2024-11-13T07:46:40Z",
           "updatedAt": "2024-11-13T07:46:40Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Closed with #195",
+          "createdAt": "2024-11-20T16:46:13Z",
+          "updatedAt": "2024-11-20T16:46:13Z"
         }
       ]
     },
@@ -3511,15 +3525,15 @@
       "id": "I_kwDOJZ2aqs6Ow62g",
       "title": "Simplifying compression requirements",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/156",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cobward",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "I have some concerns about the complexity of the compression requirements:\r\n\r\n> \r\n>    3.  The byte array is compressed using DEFLATE [RFC1951] with the\r\n>        ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to\r\n>        use the highest compression level available.\r\n\r\nand\r\n\r\n> \r\n>    The HTTP response SHOULD use gzip Content-Encoding as defined in\r\n>    [RFC9110].\r\n\r\nThe first quoted requirement adds needless complexity and computation on the part of the issuer, as compression can happen at the HTTP level (as indicated by the second requirement), so an implementation following the recommendations of this specification would end up compressing twice at the highest available compression level. With the second requirement there is ambiguity with how it interacts with the requirements in RFC9110 with respect to handling the Accept-Encoding request header.\r\n\r\nMy proposal is to remove the requirement for DEFLATE compression on internal structure, and instead rely solely on compression of the entire response using the request/response mechanism defined in RFC9110, section 8.4.",
       "createdAt": "2024-07-08T09:57:47Z",
-      "updatedAt": "2024-11-13T07:47:45Z",
-      "closedAt": null,
+      "updatedAt": "2024-11-20T16:55:27Z",
+      "closedAt": "2024-11-20T16:55:27Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -3840,7 +3854,7 @@
     {
       "number": 188,
       "id": "I_kwDOJZ2aqs6bLAiR",
-      "title": "Define Status List Response status code",
+      "title": "Define Status List Response status code & redirection behavior",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/188",
       "state": "OPEN",
       "author": "c2bo",
@@ -3851,9 +3865,9 @@
       "labels": [
         "ready-for-pr"
       ],
-      "body": "",
+      "body": "We do not define how to respond to a status list request but have status codes on examples\r\nWe might also need to add language for redirects?",
       "createdAt": "2024-10-21T18:32:35Z",
-      "updatedAt": "2024-11-13T07:51:09Z",
+      "updatedAt": "2024-11-20T17:20:04Z",
       "closedAt": null,
       "comments": []
     },
@@ -3944,11 +3958,67 @@
       "state": "OPEN",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
-      "assignees": [],
+      "assignees": [
+        "tplooker"
+      ],
       "labels": [],
       "body": "- Section 4 of RFC 8126 -> supply registration procedures for the registries\r\n- Define where these registries should be placed",
       "createdAt": "2024-11-14T23:08:58Z",
-      "updatedAt": "2024-11-14T23:09:56Z",
+      "updatedAt": "2024-11-20T17:19:17Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 196,
+      "id": "I_kwDOJZ2aqs6fhgok",
+      "title": "Move examples out of first introduction section",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/196",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "paulbastian"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-20T15:54:41Z",
+      "updatedAt": "2024-11-20T15:56:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 197,
+      "id": "I_kwDOJZ2aqs6fhhzS",
+      "title": "Add SD-JWT as example for Referenced Token to abstract and introduction",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/197",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "paulbastian"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-11-20T15:56:25Z",
+      "updatedAt": "2024-11-20T15:56:43Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 199,
+      "id": "I_kwDOJZ2aqs6fiCvr",
+      "title": "Re-work Security considerations",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/199",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "c2bo"
+      ],
+      "labels": [],
+      "body": "- Only cryptographically protected variants are considered --> adjust security considerations accordingly if necessary",
+      "createdAt": "2024-11-20T16:48:17Z",
+      "updatedAt": "2024-11-20T17:19:37Z",
       "closedAt": null,
       "comments": []
     }
@@ -13118,24 +13188,26 @@
       "id": "PR_kwDOJZ2aqs6CKSzh",
       "title": "Remove unsigned option",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/195",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Still needs some work. I've kept the overall document structure as it felt cleaner to me this way instead of moving status list data structures directly into the JWT/CWT sections.\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/remove-unsigned-option/draft-ietf-oauth-status-list.html",
       "createdAt": "2024-11-17T15:40:44Z",
-      "updatedAt": "2024-11-17T22:27:24Z",
+      "updatedAt": "2024-11-20T16:44:48Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f2a651aba3fd5a429c51324050ef87b0868bed45",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/remove-unsigned-option",
-      "headRefOid": "a5f09e4d686d0774b714a9f95bfdb07f9e5b6b80",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "65ad8df4a2de23d71b4652b80e21d605b7484b8d",
+      "closedAt": "2024-11-20T16:44:48Z",
+      "mergedAt": "2024-11-20T16:44:48Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "2c39902b601813cb6f6a2ba2ba7cc0e83565af06"
+      },
       "comments": [
         {
           "author": "tplooker",
@@ -13165,8 +13237,120 @@
               "updatedAt": "2024-11-17T18:22:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6R5qQ0",
+          "commit": {
+            "abbreviatedOid": "7bd59bf"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T08:11:34Z",
+          "updatedAt": "2024-11-20T08:11:34Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "```suggestion\r\nAn Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who creates a Status List Token. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint. The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles.\r\n```",
+              "createdAt": "2024-11-20T08:11:34Z",
+              "updatedAt": "2024-11-20T08:11:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6R5sYP",
+          "commit": {
+            "abbreviatedOid": "7bd59bf"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T08:15:14Z",
+          "updatedAt": "2024-11-20T08:15:14Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "Relying Party: Status List -> Status List Token",
+              "createdAt": "2024-11-20T08:15:14Z",
+              "updatedAt": "2024-11-20T08:15:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6R5t5r",
+          "commit": {
+            "abbreviatedOid": "7bd59bf"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-20T08:18:15Z",
+          "updatedAt": "2024-11-20T08:18:16Z",
+          "comments": [
+            {
+              "originalPosition": 100,
+              "body": "status list mechanism -> Status List mechanism",
+              "createdAt": "2024-11-20T08:18:16Z",
+              "updatedAt": "2024-11-20T08:18:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6R56AS",
+          "commit": {
+            "abbreviatedOid": "e1d1b4b"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-20T08:39:15Z",
+          "updatedAt": "2024-11-20T08:39:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6R-2hA",
+          "commit": {
+            "abbreviatedOid": "65ad8df"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-11-20T16:40:46Z",
+          "updatedAt": "2024-11-20T16:40:46Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 198,
+      "id": "PR_kwDOJZ2aqs6Cjs69",
+      "title": "rework the introduction",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/198",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #197 \r\nCloses #196 \r\nCloses #189 ",
+      "createdAt": "2024-11-20T16:45:58Z",
+      "updatedAt": "2024-11-20T16:46:32Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "2c39902b601813cb6f6a2ba2ba7cc0e83565af06",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/introduction2",
+      "headRefOid": "ffbefd170c96e899bfc878f71cb8bff587ffce1a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
