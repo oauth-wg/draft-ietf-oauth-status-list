@@ -1199,6 +1199,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -06
 
+* specify http status codes and allow redirects
 * remove unsigned options (json/cbor) of status list
 * add section about mixing status list formats and media type
 * fixes from IETF review
