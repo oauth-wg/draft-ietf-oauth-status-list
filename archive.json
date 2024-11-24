@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-21T00:17:41.147584+00:00",
+  "timestamp": "2024-11-24T00:18:58.757888+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -3337,7 +3337,7 @@
       ],
       "body": "If an OP wanted to publish the Token Status List JWT on an endpoint, perhaps something like `token_status_list_jwt` with `Content-Type: application/jwt` ... it would be nice to specify that in the spec.",
       "createdAt": "2024-05-21T19:33:46Z",
-      "updatedAt": "2024-11-13T07:47:57Z",
+      "updatedAt": "2024-11-21T16:23:56Z",
       "closedAt": null,
       "comments": [
         {
@@ -3360,6 +3360,13 @@
           "body": "Editors Call:\r\n- add [OAuth (AS) metadata](https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#authorization-server-metadata) that may link then to the Aggreation",
           "createdAt": "2024-11-13T07:45:52Z",
           "updatedAt": "2024-11-13T07:45:52Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@nynymike does the PR reflect your idea?",
+          "createdAt": "2024-11-21T16:23:55Z",
+          "updatedAt": "2024-11-21T16:23:55Z"
         }
       ]
     },
@@ -13351,6 +13358,61 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 200,
+      "id": "PR_kwDOJZ2aqs6Csei5",
+      "title": "add status_list_aggregation_endpoint OAuth metadata",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/200",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #143 ",
+      "createdAt": "2024-11-21T16:21:14Z",
+      "updatedAt": "2024-11-22T11:40:45Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "2c39902b601813cb6f6a2ba2ba7cc0e83565af06",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "oauth-metadata",
+      "headRefOid": "729b8710c54eb41549c18bd2219b9f5348e30fad",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "nynymike",
+          "authorAssociation": "NONE",
+          "body": "yes, `aggregation_uri` looks great.",
+          "createdAt": "2024-11-21T19:14:42Z",
+          "updatedAt": "2024-11-21T19:14:42Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6SSG4y",
+          "commit": {
+            "abbreviatedOid": "729b871"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-11-22T11:40:44Z",
+          "updatedAt": "2024-11-22T11:40:45Z",
+          "comments": [
+            {
+              "originalPosition": 71,
+              "body": "This sounds wrong to me?\r\n```suggestion\r\nThis specification requests registration of the following value in the IANA \"OAuth Authorization Server Metadata\" registry {{IANA.OAuth.Params}} established by {{RFC8414}}.\r\n```",
+              "createdAt": "2024-11-22T11:40:45Z",
+              "updatedAt": "2024-11-22T11:40:45Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
