@@ -1128,7 +1128,7 @@ Specification Document(s):
 
 ## OAuth Parameters Registration
 
-IANA has registered the following value in the "OAuth Authorization Server Metadata" registry [IANA.OAuth.Params] established by [RFC8414].
+This specification requests registration of the following value in the IANA "OAuth Authorization Server Metadata" registry {{IANA.OAuth.Params}} established by {{RFC8414}}.
 
 * Metadata Name: status_list_aggregation_endpoint
 * Metadata Description: URL of the Authorization Server aggregating OAuth Token Status List URLs for token status management.
