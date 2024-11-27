@@ -9,7 +9,7 @@
 <meta content="Paul Bastian" name="author">
 <meta content="Christian Bormann" name="author">
 <meta content="
-       This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for other status mechanisms. 
+       This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
     " name="description">
 <meta content="xml2rfc 3.24.0" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
@@ -1045,7 +1045,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 24 May 2025</td>
+<td class="center">Expires 31 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1058,12 +1058,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-20" class="published">20 November 2024</time>
+<time datetime="2024-11-27" class="published">27 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-05-24">24 May 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-31">31 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1083,7 +1083,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Token Status List</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for other status mechanisms.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1115,7 +1115,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1811,9 +1811,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840fc3720d23955b2ba3ac91a424d77e282da6023b1aadf3d3c3a
-285c61ff63b2a4d1bc80412d84c6f96ecb29c722b678f122dc0f0738d2ad19b52b0f
-a3daf41faa
+b918000217015d584009a3065702a8abe62ccbe3dff907702f2319a69dc933f87f62
+242c2d3832ed6ff67dd58dcd895deeda935ae69ef3e80f5a4da5ddd94b1f08d22f50
+199700c3f1
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1837,12 +1837,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      fc3720d23955b2ba3ac91a42  #       "ü7 Ò9U²º:É\x1aB"
-      4d77e282da6023b1aadf3d3c  #       "Mwâ\x82Ú`#±ªß=&lt;"
-      3a285c61ff63b2a4d1bc8041  #       ":(\aÿc²¤Ñ¼\x80A"
-      2d84c6f96ecb29c722b678f1  #       "-\x84ÆùnË)Ç"¶xñ"
-      22dc0f0738d2ad19b52b0fa3  #       ""Ü\x0f\x078Ò\xad\x19µ+\x0f£"
-      daf41faa                  #       "Úô\x1fª"
+      09a3065702a8abe62ccbe3df  #       "\x09£\x06W\x02¨«æ,Ëãß"
+      f907702f2319a69dc933f87f  #       "ù\x07p/#\x19¦\x9dÉ3ø\x7f"
+      62242c2d3832ed6ff67dd58d  #       "b$,-82íoö}Õ\x8d"
+      cd895deeda935ae69ef3e80f  #       "Í\x89]îÚ\x93Zæ\x9eóè\x0f"
+      5a4da5ddd94b1f08d22f5019  #       "ZM¥ÝÙK\x1f\x08Ò/P\x19"
+      9700c3f1                  #       "\x97\x00Ãñ"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1984,9 +1984,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840239ce528d082696dc788de4f8b3c2a240dbbf4
-a883d9419f84e24e77cb12734b05a459e2ceb2a197ee871b074ee1f4724bb0fd6047
-71df9219ae4a71a8b83902
+7374617475736c697374732f315840e824716b7a1d62a99352031eb3f91dc9afc343
+99112b3cd9eecd07da5af31086f202d79a06074505400d9ce3c491f83807b9901e3a
+24d05c64aa5d10247b7c90
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2011,12 +2011,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      239ce528d082696dc788de4f  #       "#\x9cå(Ð\x82imÇ\x88ÞO"
-      8b3c2a240dbbf4a883d9419f  #       "\x8b&lt;*$\x0d»ô¨\x83ÙA\x9f"
-      84e24e77cb12734b05a459e2  #       "\x84âNwË\x12sK\x05¤Yâ"
-      ceb2a197ee871b074ee1f472  #       "Î²¡\x97î\x87\x1b\x07Náôr"
-      4bb0fd604771df9219ae4a71  #       "K°ý`Gqß\x92\x19®Jq"
-      a8b83902                  #       "¨¸9\x02"
+      e824716b7a1d62a99352031e  #       "è$qkz\x1db©\x93R\x03\x1e"
+      b3f91dc9afc34399112b3cd9  #       "³ù\x1dÉ¯ÃC\x99\x11+&lt;Ù"
+      eecd07da5af31086f202d79a  #       "îÍ\x07ÚZó\x10\x86ò\x02×\x9a"
+      06074505400d9ce3c491f838  #       "\x06\x07E\x05@\x0d\x9cãÄ\x91ø8"
+      07b9901e3a24d05c64aa5d10  #       "\x07¹\x90\x1e:$Ð\dª]\x10"
+      247b7c90                  #       "${|\x90"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2235,8 +2235,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.rbEubTGGrxveMJsSu1--WwX_s_VcRKBZYRndZemUITqOpDHu1JiU
-rkX_tVRUJgO-WLhgxUsb7mxDYQ0D2CYYMA
+nR0bCI6NDMyMDB9.sibpWorRz1wOfiVGUMS55q6n7LpbvG06AXOLo91XzVJevZSuy8Xs
+mcsshpdQOBOsOMoRkQ4f2DUTUNEQsSAj9g
 </pre><a href="#section-8.1-8" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2341,8 +2341,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.rbEubTGGrxveMJsSu1--WwX_s_VcRKBZYRndZemUITqOpDHu1JiU
-rkX_tVRUJgO-WLhgxUsb7mxDYQ0D2CYYMA
+nR0bCI6NDMyMDB9.sibpWorRz1wOfiVGUMS55q6n7LpbvG06AXOLo91XzVJevZSuy8Xs
+mcsshpdQOBOsOMoRkQ4f2DUTUNEQsSAj9g
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
