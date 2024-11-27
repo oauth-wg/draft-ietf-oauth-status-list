@@ -80,7 +80,7 @@ informative:
 
 --- abstract
 
-This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for other status mechanisms.
+This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
 
 --- middle
 
@@ -1195,8 +1195,6 @@ for their valuable contributions, discussions and feedback to this specification
 
 # Document History
 {:numbered="false"}
-
-
 
 -06
 
