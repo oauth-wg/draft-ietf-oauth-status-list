@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 1 June 2025                                                    
+Expires: 2 June 2025                                                    
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                        28 November 2024
+                                                        29 November 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 June 2025.
+   This Internet-Draft will expire on 2 June 2025.
 
 Copyright Notice
 
@@ -577,9 +577,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840aeebd86824a662474b82c1c4160c59ea820a12367051f82347
-   ab0e59c675955f8b0f18d735e705190400c68374f06da6d06a6cf657d04a31588cda
-   30a8d94341
+   b918000217015d5840f5c5faa2b28a42c9108ec2eb997704c5303c45016daff07828
+   40b4eae5518a5deebea7e738217851126ef4afda8993183a7b7b7181036351468622
+   d910167aea
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -601,12 +601,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      aeebd86824a662474b82c1c4  #       "®ëØh$¦bGK\x82ÁÄ"
-      160c59ea820a12367051f823  #       "\x16\x0cYê\x82\x0a\x126pQø#"
-      47ab0e59c675955f8b0f18d7  #       "G«\x0eYÆu\x95_\x8b\x0f\x18×"
-      35e705190400c68374f06da6  #       "5ç\x05\x19\x04\x00Æ\x83tðm¦"
-      d06a6cf657d04a31588cda30  #       "ÐjlöWÐJ1X\x8cÚ0"
-      a8d94341                  #       "¨ÙCA"
+      f5c5faa2b28a42c9108ec2eb  #       "õÅú¢²\x8aBÉ\x10\x8eÂë"
+      997704c5303c45016daff078  #       "\x99w\x04Å0<E\x01m¯ðx"
+      2840b4eae5518a5deebea7e7  #       "(@´êåQ\x8a]î¾§ç"
+      38217851126ef4afda899318  #       "8!xQ\x12nô¯Ú\x89\x93\x18"
+      3a7b7b7181036351468622d9  #       ":{{q\x81\x03cQF\x86"Ù"
+      10167aea                  #       "\x10\x16zê"
 
 6.  Referenced Token
 
@@ -751,37 +751,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584043393e3a4f0af4ffb2fe0c8af5b12cdb405eb5
-   47a85713e62a56b754384eaa38a6083e2f6f35ac758d044644995add69cd4e8ef325
-   da9ce78470e56e6618ace8
+   7374617475736c697374732f3158405137cdbe2063af200c5a5457682254523d583b
+   bd3555f563502800d2148a24617c0f2fba2ca227161cd4336fbb62e5068101010a30
+   8b9102a399f6cb2d17974f
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         43393e3a4f0af4ffb2fe0c8a  #       "C9>:O\x0aôÿ²þ\x0c\x8a"
-         f5b12cdb405eb547a85713e6  #       "õ±,Û@^µG¨W\x13æ"
-         2a56b754384eaa38a6083e2f  #       "*V·T8Nª8¦\x08>/"
-         6f35ac758d044644995add69  #       "o5¬u\x8d\x04FD\x99ZÝi"
-         cd4e8ef325da9ce78470e56e  #       "ÍN\x8eó%Ú\x9cç\x84pån"
-         6618ace8                  #       "f\x18¬è"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      5137cdbe2063af200c5a5457  #       "Q7Í¾ c¯ \x0cZTW"
+      682254523d583bbd3555f563  #       "h"TR=X;½5Uõc"
+      502800d2148a24617c0f2fba  #       "P(\x00Ò\x14\x8a$a|\x0f/º"
+      2ca227161cd4336fbb62e506  #       ",¢'\x16\x1cÔ3o»bå\x06"
+      8101010a308b9102a399f6cb  #       "\x81\x01\x01\x0a0\x8b\x91\x02£\x99öË"
+      2d17974f                  #       "-\x17\x97O"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -995,8 +995,7 @@ d2                              # tag(18)
    type is assumed to be known implicit or out-of-band.
 
    A successful response that contains a Status List Token MUST use an
-   HTTP status code in the 2xx range.  If the Status List Token was not
-   found, the response MUST use the HTTP status code 404.
+   HTTP status code in the 2xx range.
 
    A response MAY also choose to redirect the client to another URI
    using a HTTP status code in the 3xx range, which clients SHOULD
@@ -1017,8 +1016,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.L77QNSG0x92SYXLmiLhwI5j4mQ0nKkpX6YKDSlmb99TrEmC8qYd_
-   vR4K_JrryFg8dFns4a2pI42YYoJBYESyYQ
+   nR0bCI6NDMyMDB9.1cnWofYUOaxm9WKQpSYhzx1mfptMFnRo2Qyvb-xpMFFN7Nc7Wfy8
+   K0YPGZTb_BuHyCr3MbM7HBWliCeI3yqe_Q
 
 8.2.  Status List Response
 
@@ -1150,8 +1149,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.L77QNSG0x92SYXLmiLhwI5j4mQ0nKkpX6YKDSlmb99TrEmC8qYd_
-   vR4K_JrryFg8dFns4a2pI42YYoJBYESyYQ
+   nR0bCI6NDMyMDB9.1cnWofYUOaxm9WKQpSYhzx1mfptMFnRo2Qyvb-xpMFFN7Nc7Wfy8
+   K0YPGZTb_BuHyCr3MbM7HBWliCeI3yqe_Q
 
 9.  Status List Aggregation
 
