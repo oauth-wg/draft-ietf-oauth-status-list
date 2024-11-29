@@ -578,9 +578,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58400c438e79e4cae80c915eed6b9d322fcb9795e69b8650e78c3e
-   ec73e5af3fa4fd9d976e3109b1e0d4959a1112636e353ca5eaa583b408ecfb6b8572
-   d92617b45a
+   b918000217015d5840c523fdb5e561e33c2ecb7bb87ad25ec5ed7d9d3d1e79e9ba2a
+   2dd516c1c7a9b4ec6dc73da3e6520d1e0fd9182ea237b0b33afbb328ebe98cc4a706
+   9ad699b353
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -602,12 +602,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      0c438e79e4cae80c915eed6b  #       "\x0cC\x8eyäÊè\x0c\x91^ík"
-      9d322fcb9795e69b8650e78c  #       "\x9d2/Ë\x97\x95æ\x9b\x86Pç\x8c"
-      3eec73e5af3fa4fd9d976e31  #       ">ìså¯?¤ý\x9d\x97n1"
-      09b1e0d4959a1112636e353c  #       "\x09±àÔ\x95\x9a\x11\x12cn5<"
-      a5eaa583b408ecfb6b8572d9  #       "¥ê¥\x83´\x08ìûk\x85rÙ"
-      2617b45a                  #       "&\x17´Z"
+      c523fdb5e561e33c2ecb7bb8  #       "Å#ýµåaã<.Ë{¸"
+      7ad25ec5ed7d9d3d1e79e9ba  #       "zÒ^Åí}\x9d=\x1eyéº"
+      2a2dd516c1c7a9b4ec6dc73d  #       "*-Õ\x16ÁÇ©´ìmÇ="
+      a3e6520d1e0fd9182ea237b0  #       "£æR\x0d\x1e\x0fÙ\x18.¢7°"
+      b33afbb328ebe98cc4a7069a  #       "³:û³(ëé\x8cÄ§\x06\x9a"
+      d699b353                  #       "Ö\x99³S"
 
 6.  Referenced Token
 
@@ -752,9 +752,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158407623c8a48f6fc31e9283ca04491eafbd214ce1
-   e5876f412174134f37c32a456f62d7dc35f37278d13a757ccdae006cfa401f9f9341
-   f44d823ddc08db17051a02
+   7374617475736c697374732f315840cabc682ad1bb76f6f085b318ab1d14e09cbb4a
+   b4a7b959f23000c3f3b2417e68a6a1ae3b55c97772f34561277fed846d82aa6cc32c
+   b815244124331c28f31361
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -777,12 +777,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         7623c8a48f6fc31e9283ca04  #       "v#È¤\x8foÃ\x1e\x92\x83Ê\x04"
-         491eafbd214ce1e5876f4121  #       "I\x1e¯½!Láå\x87oA!"
-         74134f37c32a456f62d7dc35  #       "t\x13O7Ã*Eob×Ü5"
-         f37278d13a757ccdae006cfa  #       "órxÑ:u|Í®\x00lú"
-         401f9f9341f44d823ddc08db  #       "@\x1f\x9f\x93AôM\x82=Ü\x08Û"
-         17051a02                  #       "\x17\x05\x1a\x02"
+         cabc682ad1bb76f6f085b318  #       "Ê¼h*Ñ»vöð\x85³\x18"
+         ab1d14e09cbb4ab4a7b959f2  #       "«\x1d\x14à\x9c»J´§¹Yò"
+         3000c3f3b2417e68a6a1ae3b  #       "0\x00Ãó²A~h¦¡®;"
+         55c97772f34561277fed846d  #       "UÉwróEa'\x7fí\x84m"
+         82aa6cc32cb815244124331c  #       "\x82ªlÃ,¸\x15$A$3\x1c"
+         28f31361                  #       "(ó\x13a"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -995,6 +995,14 @@ d2                              # tag(18)
    If the Relying Party does not send an Accept Header, the response
    type is assumed to be known implicit or out-of-band.
 
+   A successful response that contains a Status List Token MUST use an
+   HTTP status code in the 2xx range.
+
+   A response MAY also choose to redirect the client to another URI
+   using a HTTP status code in the 3xx range, which clients SHOULD
+   follow.  A client SHOULD detect and intervene in cyclical
+   redirections (i.e., "infinite" redirection loops).
+
    The following are non-normative examples for a request and response
    for a Status List Token with type application/statuslist+jwt:
 
@@ -1009,8 +1017,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.dc5urY9-L7ijMxte1nFCKsdFmr8-qOilpqiZc5U7NOeNYXdy6c2H
-   clA4HVLZABR52Ix5Ihq6b5fFTsfBZf4x2Q
+   nR0bCI6NDMyMDB9.e977GWfGdX8zDIEZXGfCdNJgJ7rk4nENsalnVRMEUbgcPuuuhR0w
+   kA1biB64JXIs2rt8RSbTKah2J3WA1vE7fA
 
 8.2.  Status List Response
 
@@ -1142,8 +1150,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.dc5urY9-L7ijMxte1nFCKsdFmr8-qOilpqiZc5U7NOeNYXdy6c2H
-   clA4HVLZABR52Ix5Ihq6b5fFTsfBZf4x2Q
+   nR0bCI6NDMyMDB9.e977GWfGdX8zDIEZXGfCdNJgJ7rk4nENsalnVRMEUbgcPuuuhR0w
+   kA1biB64JXIs2rt8RSbTKah2J3WA1vE7fA
 
 9.  Status List Aggregation
 
@@ -2060,6 +2068,8 @@ Acknowledgments
 Document History
 
    -06
+
+   *  specify http status codes and allow redirects
 
    *  add status_list_aggregation_endpoint OAuth metadata
 
