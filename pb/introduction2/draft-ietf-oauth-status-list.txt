@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 31 May 2025                                                    
+Expires: 2 June 2025                                                    
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                        27 November 2024
+                                                        29 November 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 May 2025.
+   This Internet-Draft will expire on 2 June 2025.
 
 Copyright Notice
 
@@ -128,7 +128,8 @@ Table of Contents
      14.5.  Status Types Registry
        14.5.1.  Registration Template
        14.5.2.  Initial Registry Contents
-     14.6.  Media Type Registration
+     14.6.  OAuth Parameters Registration
+     14.7.  Media Type Registration
    15. References
      15.1.  Normative References
      15.2.  Informative References
@@ -139,9 +140,8 @@ Table of Contents
 1.  Introduction
 
    Token formats secured by JOSE [IANA.JOSE] or COSE [RFC9052], such as
-   JSON Web Tokens (JWTs) [RFC7519], Selective Disclosure JSON Web Token
-   VCs (SD-JWT VCs) [SD-JWT.VC], CBOR Web Tokens (CWTs) [RFC8392] and
-   ISO mdoc [ISO.mdoc], have vast possible applications.  Some of these
+   JWTs [RFC7519], SD-JWT VCs [SD-JWT.VC], CWTs [RFC8392] and ISO mdoc
+   [ISO.mdoc], have vast possible applications.  Some of these
    applications can involve issuing a token whereby certain semantics
    about the token or its validity may change over time.  Communicating
    these changes to relying parties in an interoperable manner, such as
@@ -585,9 +585,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d584009a3065702a8abe62ccbe3dff907702f2319a69dc933f87f62
-   242c2d3832ed6ff67dd58dcd895deeda935ae69ef3e80f5a4da5ddd94b1f08d22f50
-   199700c3f1
+   b918000217015d5840f09b1376720d62f6f2607933c4e984f1699a02ad6174773f8b
+   783018fc9dbdd54145533d238838adf8dfa99f17d9d010a6121f16b3dd1fc2050fb6
+   1f8479f5c4
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -609,12 +609,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      09a3065702a8abe62ccbe3df  #       "\x09£\x06W\x02¨«æ,Ëãß"
-      f907702f2319a69dc933f87f  #       "ù\x07p/#\x19¦\x9dÉ3ø\x7f"
-      62242c2d3832ed6ff67dd58d  #       "b$,-82íoö}Õ\x8d"
-      cd895deeda935ae69ef3e80f  #       "Í\x89]îÚ\x93Zæ\x9eóè\x0f"
-      5a4da5ddd94b1f08d22f5019  #       "ZM¥ÝÙK\x1f\x08Ò/P\x19"
-      9700c3f1                  #       "\x97\x00Ãñ"
+      f09b1376720d62f6f2607933  #       "ð\x9b\x13vr\x0dböò`y3"
+      c4e984f1699a02ad6174773f  #       "Äé\x84ñi\x9a\x02\xadatw?"
+      8b783018fc9dbdd54145533d  #       "\x8bx0\x18ü\x9d½ÕAES="
+      238838adf8dfa99f17d9d010  #       "#\x888\xadøß©\x9f\x17ÙÐ\x10"
+      a6121f16b3dd1fc2050fb61f  #       "¦\x12\x1f\x16³Ý\x1fÂ\x05\x0f¶\x1f"
+      8479f5c4                  #       "\x84yõÄ"
 
 6.  Referenced Token
 
@@ -759,37 +759,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840e824716b7a1d62a99352031eb3f91dc9afc343
-   99112b3cd9eecd07da5af31086f202d79a06074505400d9ce3c491f83807b9901e3a
-   24d05c64aa5d10247b7c90
+   7374617475736c697374732f315840017a332bd2cbfc061b925cbe98f535f25f4c8d
+   b7d061982fd6bcda94c0552a70bee9b216b28c0fbc94d06069fe9a575388924ef4f7
+   40b29903797b0e4c6a3652
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      e824716b7a1d62a99352031e  #       "è$qkz\x1db©\x93R\x03\x1e"
-      b3f91dc9afc34399112b3cd9  #       "³ù\x1dÉ¯ÃC\x99\x11+<Ù"
-      eecd07da5af31086f202d79a  #       "îÍ\x07ÚZó\x10\x86ò\x02×\x9a"
-      06074505400d9ce3c491f838  #       "\x06\x07E\x05@\x0d\x9cãÄ\x91ø8"
-      07b9901e3a24d05c64aa5d10  #       "\x07¹\x90\x1e:$Ð\dª]\x10"
-      247b7c90                  #       "${|\x90"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         017a332bd2cbfc061b925cbe  #       "\x01z3+ÒËü\x06\x1b\x92\¾"
+         98f535f25f4c8db7d061982f  #       "\x98õ5ò_L\x8d·Ða\x98/"
+         d6bcda94c0552a70bee9b216  #       "Ö¼Ú\x94ÀU*p¾é²\x16"
+         b28c0fbc94d06069fe9a5753  #       "²\x8c\x0f¼\x94Ð`iþ\x9aWS"
+         88924ef4f740b29903797b0e  #       "\x88\x92Nô÷@²\x99\x03y{\x0e"
+         4c6a3652                  #       "Lj6R"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1002,6 +1002,14 @@ d2                              # tag(18)
    If the Relying Party does not send an Accept Header, the response
    type is assumed to be known implicit or out-of-band.
 
+   A successful response that contains a Status List Token MUST use an
+   HTTP status code in the 2xx range.
+
+   A response MAY also choose to redirect the client to another URI
+   using a HTTP status code in the 3xx range, which clients SHOULD
+   follow.  A client SHOULD detect and intervene in cyclical
+   redirections (i.e., "infinite" redirection loops).
+
    The following are non-normative examples for a request and response
    for a Status List Token with type application/statuslist+jwt:
 
@@ -1016,8 +1024,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.sibpWorRz1wOfiVGUMS55q6n7LpbvG06AXOLo91XzVJevZSuy8Xs
-   mcsshpdQOBOsOMoRkQ4f2DUTUNEQsSAj9g
+   nR0bCI6NDMyMDB9.MDyT5YwAeDYMuV-_fsgDrWyNKkZNfPIym1wu6UbdIUqP19lAd4to
+   TxwhLnUCrIxCi_t9Ug2xUaGKfxgF2CKXug
 
 8.2.  Status List Response
 
@@ -1149,8 +1157,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.sibpWorRz1wOfiVGUMS55q6n7LpbvG06AXOLo91XzVJevZSuy8Xs
-   mcsshpdQOBOsOMoRkQ4f2DUTUNEQsSAj9g
+   nR0bCI6NDMyMDB9.MDyT5YwAeDYMuV-_fsgDrWyNKkZNfPIym1wu6UbdIUqP19lAd4to
+   TxwhLnUCrIxCi_t9Ug2xUaGKfxgF2CKXug
 
 9.  Status List Aggregation
 
@@ -1160,6 +1168,11 @@ d2                              # tag(18)
    Issuer.  This mechanism is intended to support fetching and caching
    mechanisms and allow offline validation of the status of a reference
    token for a period of time.
+
+   If a Relying Party encounters an invalid Status List referenced in
+   the response from the Status List Aggregation endpoint, it SHOULD
+   continue processing the other valid Status Lists referenced in the
+   response.
 
    There are two options for a Relying Party to retrieve the Status List
    Aggregation.  An Issuer MAY support any of these mechanisms:
@@ -1177,7 +1190,10 @@ d2                              # tag(18)
    The Issuer MAY link to the Status List Aggregation URI in metadata
    that can be provided by different means like .well-known metadata as
    is used commonly in OAuth and OpenID, or via a VICAL extension for
-   ISO mDoc / mDL.
+   ISO mDoc / mDL.  If the Issuer is an OAuth Authorization Server
+   according to [RFC6749], it is RECOMMENDED to use
+   status_list_aggregation_endpoint for its metadata defined by
+   [RFC8414].
 
    The concrete specification on how this is implemented depends on the
    specific ecosystem and is out of scope of this specification.
@@ -1811,7 +1827,22 @@ d2                              # tag(18)
 
 
 
-14.6.  Media Type Registration
+14.6.  OAuth Parameters Registration
+
+   This specification requests registration of the following value in
+   the IANA "OAuth Authorization Server Metadata" registry
+   [IANA.OAuth.Params] established by [RFC8414].
+
+   *  Metadata Name: status_list_aggregation_endpoint
+
+   *  Metadata Description: URL of the Authorization Server aggregating
+      OAuth Token Status List URLs for token status management.
+
+   *  Change Controller: IETF
+
+   *  Reference: Section 9 of this specification
+
+14.7.  Media Type Registration
 
    This section requests registration of the following media types
    [RFC2046] in the "Media Types" registry [IANA.MediaTypes] in the
@@ -1915,6 +1946,11 @@ d2                              # tag(18)
               <https://www.iana.org/assignments/media-types/media-
               types.xhtml>.
 
+   [IANA.OAuth.Params]
+              IANA, "OAuth Authorization Server Metadata", n.d.,
+              <https://www.iana.org/assignments/oauth-parameters/oauth-
+              parameters.xhtml#authorization-server-metadata>.
+
    [RFC1950]  Deutsch, P. and J. Gailly, "ZLIB Compressed Data Format
               Specification version 3.3", RFC 1950,
               DOI 10.17487/RFC1950, May 1996,
@@ -2015,6 +2051,11 @@ d2                              # tag(18)
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/rfc/rfc7800>.
 
+   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata", RFC 8414,
+              DOI 10.17487/RFC8414, June 2018,
+              <https://www.rfc-editor.org/rfc/rfc8414>.
+
    [RFC9458]  Thomson, M. and C. A. Wood, "Oblivious HTTP", RFC 9458,
               DOI 10.17487/RFC9458, January 2024,
               <https://www.rfc-editor.org/rfc/rfc9458>.
@@ -2030,8 +2071,8 @@ Acknowledgments
 
    We would like to thank Brian Campbell, Filip Skokan, Francesco
    Marino, Guiseppe De Marco, Kristina Yasuda, Markus Kreusch, Martijn
-   Haring, Michael B.  Jones, Mike Prorock, Oliver Terbu, Orie Steele,
-   Timo Glastra and Torsten Lodderstedt
+   Haring, Michael B.  Jones, Michael Schwartz, Mike Prorock, Oliver
+   Terbu, Orie Steele, Timo Glastra and Torsten Lodderstedt
 
    for their valuable contributions, discussions and feedback to this
    specification.
@@ -2042,11 +2083,17 @@ Document History
 
    *  reworked and simplified introduction and abstract
 
+   *  specify http status codes and allow redirects
+
+   *  add status_list_aggregation_endpoint OAuth metadata
+
    *  remove unsigned options (json/cbor) of status list
 
    *  add section about mixing status list formats and media type
 
    *  fixes from IETF review
+
+   *  add guidance around aggregation endpoint
 
    -05
 
