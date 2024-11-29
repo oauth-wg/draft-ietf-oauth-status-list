@@ -16,12 +16,12 @@ Expires: 2 June 2025
 
 Abstract
 
-   This specification defines status list data structures and processing
-   rules for representing the status of tokens secured by JSON Object
-   Signing and Encryption (JOSE) or CBOR Object Signing and
-   Encryption(COSE), such as JSON Web Tokens (JWTs), CBOR Web Tokens
-   (CWTs) and ISO mdoc.  Status Lists are provided in the form of JWTs
-   or CWTs.
+   This specification defines a mechanism, data structures and
+   processing rules for representing the status of tokens secured by
+   JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and
+   Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO
+   mdoc.  It also defines an extension point and a registry for future
+   status mechanisms.
 
 About This Document
 
@@ -69,8 +69,9 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Rationale
-     1.2.  Design Considerations
+     1.1.  Example Use Cases
+     1.2.  Rationale
+     1.3.  Design Considerations
    2.  Conventions and Definitions
    3.  Terminology
    4.  Status List
@@ -127,7 +128,8 @@ Table of Contents
      14.5.  Status Types Registry
        14.5.1.  Registration Template
        14.5.2.  Initial Registry Contents
-     14.6.  Media Type Registration
+     14.6.  OAuth Parameters Registration
+     14.7.  Media Type Registration
    15. References
      15.1.  Normative References
      15.2.  Informative References
@@ -138,67 +140,26 @@ Table of Contents
 1.  Introduction
 
    Token formats secured by JOSE [IANA.JOSE] or COSE [RFC9052], such as
-   JSON Web Tokens (JWTs) [RFC7519], CBOR Web Tokens (CWTs) [RFC8392]
-   and ISO mdoc [ISO.mdoc], have vast possible applications.  Some of
-   these applications can involve issuing a token whereby certain
-   semantics about the token can change over time, which are important
-   to be able to communicate to relying parties in an interoperable
-   manner, such as whether the token is considered invalidated or
-   suspended by its issuer.
+   JWTs [RFC7519], SD-JWT VCs [SD-JWT.VC], CWTs [RFC8392] and ISO mdoc
+   [ISO.mdoc], have vast possible applications.  Some of these
+   applications can involve issuing a token whereby certain semantics
+   about the token or its validity may change over time.  Communicating
+   these changes to relying parties in an interoperable manner, such as
+   whether the token is considered invalidated or suspended by its
+   issuer, is important for many of these applications.
 
-   This document defines a Status List and its representations in JWT
-   and CWT formats that describe the individual statuses of multiple
-   Referenced Tokens, which themselves are most commonly data structures
-   secured by JOSE or COSE.  The statuses of all Referenced Tokens are
-   conveyed via a bit array in the Status List.  Each Referenced Token
-   is allocated an index during issuance that represents its position
-   within this bit array.  The value of the bit(s) at this index
-   correspond to the Referenced Token's status.  A Status List is
-   provided within a Status List Token protected by cryptographic
-   signature or MAC and this document defines its representations in JWT
-   and CWT format.  Status Lists may be composed for expressing a range
-   of Status Types.  This document defines basic Status Types for the
-   most common use cases as well as an extensibility mechanism for
-   custom Status Types.  The document also defines how an issuer of a
-   Referenced Token references a Status List Token.
-
-   An example for the usage of a Status List is to manage the status of
-   issued access tokens as defined in section 1.4 of [RFC6749].  Token
-   Introspection [RFC7662] defines another way to determine the status
-   of an issued access token, but it requires the party trying to
-   validate an access tokens status to directly contact the token
-   issuer, whereas the mechanism defined in this specification does not
-   have this limitation.
-
-   Another possible use case for the Status List is to express the
-   status of verifiable credentials (Referenced Tokens) issued by an
-   Issuer in the Issuer-Holder-Verifier model [SD-JWT.VC].  The
-   following diagram depicts the relationship between the involved roles
-   (Relying Party is equivalent to Verifier of [SD-JWT.VC]):
-
-              issue                 present
-              Referenced            Referenced
-   ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
-   │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
-   └─┬──────┘            └────────┘            └──┬────────────┘
-     ▼ update status                              │
-   ┌───────────────┐                              │
-   │ Status Issuer │                              │
-   └─┬─────────────┘                              │
-     ▼ provide Status List                        │
-   ┌─────────────────┐         fetch Status List  │
-   │ Status Provider │◄───────────────────────────┘
-   └─────────────────┘
-
-   An Issuer issues Referenced Tokens to a Holder, the Holder uses and
-   presents those Referenced Tokens to a Relying Party.  The Issuer
-   gives updated status information to the Status Issuer, who creates a
-   Status List Token.  The Status Issuer provides the Status List Token
-   to the Status Provider, who serves the Status List Token on a public,
-   resolvable endpoint.  The roles of the Issuer (of the Referenced
-   Token), the Status Issuer and the Status Provider may be fulfilled by
-   the same entity.  If not further specified, the term Issuer may refer
-   to an entity acting for all three roles.
+   This document defines a Status List data structure that describes the
+   individual statuses of multiple Referenced Tokens.  A Referenced
+   Token may be of any format, but is most commonly a data structures
+   secured by JOSE or COSE.  The Referenced Token is referenced by the
+   Status List, which described the status of the Referenced Token.  The
+   statuses of all Referenced Tokens are conveyed via a bit array in the
+   Status List.  Each Referenced Token is allocated an index during
+   issuance that represents its position within this bit array.  The
+   value of the bit(s) at this index correspond to the Referenced
+   Token's status.  A Status List is provided within a Status List Token
+   protected by cryptographic signature or MAC and this document defines
+   its representations in JWT and CWT format.
 
    The following diagram depicts the relationship between the artifacts:
 
@@ -214,11 +175,58 @@ Table of Contents
    │  (JWT or CWT)     │
    └───────────────────┘
 
-   The Referenced Token is referenced by the Status List, which
-   described the status of the Referenced Token.  The Status List is
-   embedded and secured within a Status List Token.
+   An Issuer issues Referenced Tokens to a Holder, the Holder uses and
+   presents those Referenced Tokens to a Relying Party.  The Issuer
+   gives updated status information to the Status Issuer, who creates a
+   Status List Token.  The Status Issuer provides the Status List Token
+   to the Status Provider, who serves the Status List Token on a public,
+   resolvable endpoint.  The roles of the Issuer (of the Referenced
+   Token), the Status Issuer and the Status Provider may be fulfilled by
+   the same entity.  If not further specified, the term Issuer may refer
+   to an entity acting for all three roles.  This document describes how
+   an Issuer references a Status List Token and how a Relying Party
+   fetches and validates Status Lists.
 
-1.1.  Rationale
+   The following diagram depicts the relationship between the involved
+   roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]):
+
+              issue                 present
+              Referenced            Referenced
+   ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
+   │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
+   └─┬──────┘            └────────┘            └──┬────────────┘
+     ▼ update status                              │
+   ┌───────────────┐                              │
+   │ Status Issuer │                              │
+   └─┬─────────────┘                              │
+     ▼ provide Status List                        │
+   ┌─────────────────┐         fetch Status List  │
+   │ Status Provider │◄───────────────────────────┘
+   └─────────────────┘
+
+   Status Lists may be composed for expressing a range of Status Types.
+   This document defines basic Status Types for the most common use
+   cases as well as an extensibility mechanism for custom Status Types.
+
+   Furthermore, the document defines an extension point that enables
+   other specifications to describe additional status mechanisms and
+   creates an IANA registry.
+
+1.1.  Example Use Cases
+
+   An example for the usage of a Status List is to manage the status of
+   issued access tokens as defined in section 1.4 of [RFC6749].  Token
+   Introspection [RFC7662] defines another way to determine the status
+   of an issued access token, but it requires the party trying to
+   validate an access tokens status to directly contact the token
+   issuer, whereas the mechanism defined in this specification does not
+   have this limitation.
+
+   Another possible use case for the Status List is to express the
+   status of verifiable credentials (Referenced Tokens) issued by an
+   Issuer in the Issuer-Holder-Verifier model [SD-JWT.VC].
+
+1.2.  Rationale
 
    Revocation mechanisms are an essential part for most identity
    ecosystems.  In the past, revocation of X.509 TLS certificates has
@@ -244,7 +252,7 @@ Table of Contents
    this specification.  Other specifications can register other members
    used for status retrieval.
 
-1.2.  Design Considerations
+1.3.  Design Considerations
 
    The decisions taken in this specification aim to achieve the
    following design goals:
@@ -577,9 +585,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58409d91aa691279de7bf019c7a612d39ebde883d5ef0af9323ea2
-   a969a9806b8ac5867ee05497a3fab1a1665994045a17665f594afd9fcef6cb04b29c
-   263bae49d2
+   b918000217015d58409a1f1ba71d6b3d668c1f1add3052ef46392f6c65d782e22c07
+   09a845dbb5287f51afcf961c9af9dac8ef72ad1706f16cc5028943f26d9bc07ecf68
+   35c6769930
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -601,12 +609,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      9d91aa691279de7bf019c7a6  #       "\x9d\x91ªi\x12yÞ{ð\x19Ç¦"
-      12d39ebde883d5ef0af9323e  #       "\x12Ó\x9e½è\x83Õï\x0aù2>"
-      a2a969a9806b8ac5867ee054  #       "¢©i©\x80k\x8aÅ\x86~àT"
-      97a3fab1a1665994045a1766  #       "\x97£ú±¡fY\x94\x04Z\x17f"
-      5f594afd9fcef6cb04b29c26  #       "_YJý\x9fÎöË\x04²\x9c&"
-      3bae49d2                  #       ";®IÒ"
+      9a1f1ba71d6b3d668c1f1add  #       "\x9a\x1f\x1b§\x1dk=f\x8c\x1f\x1aÝ"
+      3052ef46392f6c65d782e22c  #       "0RïF9/le×\x82â,"
+      0709a845dbb5287f51afcf96  #       "\x07\x09¨EÛµ(\x7fQ¯Ï\x96"
+      1c9af9dac8ef72ad1706f16c  #       "\x1c\x9aùÚÈïr\xad\x17\x06ñl"
+      c5028943f26d9bc07ecf6835  #       "Å\x02\x89Còm\x9bÀ~Ïh5"
+      c6769930                  #       "Æv\x990"
 
 6.  Referenced Token
 
@@ -751,9 +759,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840108333e0409a9871ded81538d2f4cbb83ba0d5
-   0096a2c6f74f027d7d9ace1f21616ea26020ed7678742a71a42bdd13403dcaed4afc
-   d72ac6f94f2c4fa5717f6f
+   7374617475736c697374732f3158400af62560b2fee2a1691ee6eea3af68b76df0d6
+   313c9a43640ab8ca6880c5d82e68d22bd9a992030cbe3fa2e77a231dcee66b325363
+   5bf9875a1e688f8cb2a019
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -776,12 +784,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         108333e0409a9871ded81538  #       "\x10\x833à@\x9a\x98qÞØ\x158"
-         d2f4cbb83ba0d50096a2c6f7  #       "ÒôË¸;\xa0Õ\x00\x96¢Æ÷"
-         4f027d7d9ace1f21616ea260  #       "O\x02}}\x9aÎ\x1f!an¢`"
-         20ed7678742a71a42bdd1340  #       " ívxt*q¤+Ý\x13@"
-         3dcaed4afcd72ac6f94f2c4f  #       "=ÊíJü×*ÆùO,O"
-         a5717f6f                  #       "¥q\x7fo"
+         0af62560b2fee2a1691ee6ee  #       "\x0aö%`²þâ¡i\x1eæî"
+         a3af68b76df0d6313c9a4364  #       "£¯h·mðÖ1<\x9aCd"
+         0ab8ca6880c5d82e68d22bd9  #       "\x0a¸Êh\x80ÅØ.hÒ+Ù"
+         a992030cbe3fa2e77a231dce  #       "©\x92\x03\x0c¾?¢çz#\x1dÎ"
+         e66b3253635bf9875a1e688f  #       "æk2Sc[ù\x87Z\x1eh\x8f"
+         8cb2a019                  #       "\x8c²\xa0\x19"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -994,6 +1002,14 @@ d2                              # tag(18)
    If the Relying Party does not send an Accept Header, the response
    type is assumed to be known implicit or out-of-band.
 
+   A successful response that contains a Status List Token MUST use an
+   HTTP status code in the 2xx range.
+
+   A response MAY also choose to redirect the client to another URI
+   using a HTTP status code in the 3xx range, which clients SHOULD
+   follow.  A client SHOULD detect and intervene in cyclical
+   redirections (i.e., "infinite" redirection loops).
+
    The following are non-normative examples for a request and response
    for a Status List Token with type application/statuslist+jwt:
 
@@ -1008,8 +1024,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.bVRyOs3fWOoeCO137KHr3uCbYB7JlRvl_RahJ74ojd4OzGl4Rq_M
-   vpYQ8XizPA184f6eNnd2fUfwzcE-lVhN0w
+   nR0bCI6NDMyMDB9.PDg2hbM2R1SNo-K4vZKcKQlqJ_JOeGnQprgbPiFmXGTd1_WUh-Lw
+   CzCss4DRZasz4aHRCMgDFKrRclxZj3G21Q
 
 8.2.  Status List Response
 
@@ -1145,8 +1161,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.bVRyOs3fWOoeCO137KHr3uCbYB7JlRvl_RahJ74ojd4OzGl4Rq_M
-   vpYQ8XizPA184f6eNnd2fUfwzcE-lVhN0w
+   nR0bCI6NDMyMDB9.PDg2hbM2R1SNo-K4vZKcKQlqJ_JOeGnQprgbPiFmXGTd1_WUh-Lw
+   CzCss4DRZasz4aHRCMgDFKrRclxZj3G21Q
 
 9.  Status List Aggregation
 
@@ -1156,6 +1172,11 @@ d2                              # tag(18)
    Issuer.  This mechanism is intended to support fetching and caching
    mechanisms and allow offline validation of the status of a reference
    token for a period of time.
+
+   If a Relying Party encounters an invalid Status List referenced in
+   the response from the Status List Aggregation endpoint, it SHOULD
+   continue processing the other valid Status Lists referenced in the
+   response.
 
    There are two options for a Relying Party to retrieve the Status List
    Aggregation.  An Issuer MAY support any of these mechanisms:
@@ -1173,7 +1194,10 @@ d2                              # tag(18)
    The Issuer MAY link to the Status List Aggregation URI in metadata
    that can be provided by different means like .well-known metadata as
    is used commonly in OAuth and OpenID, or via a VICAL extension for
-   ISO mDoc / mDL.
+   ISO mDoc / mDL.  If the Issuer is an OAuth Authorization Server
+   according to [RFC6749], it is RECOMMENDED to use
+   status_list_aggregation_endpoint for its metadata defined by
+   [RFC8414].
 
    The concrete specification on how this is implemented depends on the
    specific ecosystem and is out of scope of this specification.
@@ -1835,7 +1859,22 @@ d2                              # tag(18)
 
 
 
-14.6.  Media Type Registration
+14.6.  OAuth Parameters Registration
+
+   This specification requests registration of the following value in
+   the IANA "OAuth Authorization Server Metadata" registry
+   [IANA.OAuth.Params] established by [RFC8414].
+
+   *  Metadata Name: status_list_aggregation_endpoint
+
+   *  Metadata Description: URL of the Authorization Server aggregating
+      OAuth Token Status List URLs for token status management.
+
+   *  Change Controller: IETF
+
+   *  Reference: Section 9 of this specification
+
+14.7.  Media Type Registration
 
    This section requests registration of the following media types
    [RFC2046] in the "Media Types" registry [IANA.MediaTypes] in the
@@ -1939,6 +1978,11 @@ d2                              # tag(18)
               <https://www.iana.org/assignments/media-types/media-
               types.xhtml>.
 
+   [IANA.OAuth.Params]
+              IANA, "OAuth Authorization Server Metadata", n.d.,
+              <https://www.iana.org/assignments/oauth-parameters/oauth-
+              parameters.xhtml#authorization-server-metadata>.
+
    [RFC1950]  Deutsch, P. and J. Gailly, "ZLIB Compressed Data Format
               Specification version 3.3", RFC 1950,
               DOI 10.17487/RFC1950, May 1996,
@@ -2039,6 +2083,11 @@ d2                              # tag(18)
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/rfc/rfc7800>.
 
+   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata", RFC 8414,
+              DOI 10.17487/RFC8414, June 2018,
+              <https://www.rfc-editor.org/rfc/rfc8414>.
+
    [RFC9458]  Thomson, M. and C. A. Wood, "Oblivious HTTP", RFC 9458,
               DOI 10.17487/RFC9458, January 2024,
               <https://www.rfc-editor.org/rfc/rfc9458>.
@@ -2054,8 +2103,8 @@ Acknowledgments
 
    We would like to thank Brian Campbell, Filip Skokan, Francesco
    Marino, Guiseppe De Marco, Kristina Yasuda, Markus Kreusch, Martijn
-   Haring, Michael B.  Jones, Mike Prorock, Oliver Terbu, Orie Steele,
-   Timo Glastra and Torsten Lodderstedt
+   Haring, Michael B.  Jones, Michael Schwartz, Mike Prorock, Oliver
+   Terbu, Orie Steele, Timo Glastra and Torsten Lodderstedt
 
    for their valuable contributions, discussions and feedback to this
    specification.
@@ -2064,6 +2113,12 @@ Document History
 
    -06
 
+   *  reworked and simplified introduction and abstract
+
+   *  specify http status codes and allow redirects
+
+   *  add status_list_aggregation_endpoint OAuth metadata
+
    *  remove unsigned options (json/cbor) of status list
 
    *  add section about mixing status list formats and media type
@@ -2071,6 +2126,8 @@ Document History
    *  fixes from IETF review
 
    *  update guidance around ttl
+
+   *  add guidance around aggregation endpoint
 
    -05
 
