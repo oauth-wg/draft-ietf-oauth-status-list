@@ -60,6 +60,11 @@ normative:
       org: "IANA"
     title: "CBOR Web Token (CWT) Claims"
     target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
+  IANA.OAuth.Params:
+    author:
+      org: "IANA"
+    title: "OAuth Authorization Server Metadata"
+    target: "https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#authorization-server-metadata"
   CORS:
     author:
       org: "WHATWG"
@@ -70,6 +75,7 @@ informative:
   RFC6749: RFC6749
   RFC7662: RFC7662
   RFC7800: RFC7800
+  RFC8414: RFC8414
   RFC9458: RFC9458
   SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
   ISO.mdoc:
@@ -245,7 +251,7 @@ This section defines the data structure for a JSON-encoded Status List:
 * `status_list`: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded Status List as specified in [](#status-list).
-   * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
+   * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further detail.
 
 The following example illustrates the JSON representation of the Status List:
 
@@ -260,7 +266,7 @@ This section defines the data structure for a CBOR-encoded Status List:
 * The `StatusList` structure is a map (Major Type 5) and defines the following entries:
   * `bits`: REQUIRED. Unsigned integer (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list).
-  * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#batch-fetching) for further detail.
+  * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further detail.
 
 The following example illustrates the CBOR representation of the Status List in Hex:
 
@@ -717,7 +723,7 @@ Content-Type: application/statuslist+jwt
 {::include ./examples/status_list_jwt_raw}
 ~~~
 
-# Status List Aggregation {#batch-fetching}
+# Status List Aggregation {#aggregation}
 
 Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
 
@@ -729,7 +735,7 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL. If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
 
 The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
 
@@ -862,7 +868,7 @@ Outside actors may analyse the publicly available Status Lists to get informatio
 This behaviour could be mitigated by:
 
 - disable the historical data feature [](#historical-resolution)
-- disable the Status List Aggregation [](#batch-fetching)
+- disable the Status List Aggregation [](#aggregation)
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
 - choose to deploy and utilize multiple Status Lists simultaneously
@@ -1124,6 +1130,14 @@ Specification Document(s):
 
 <br/>
 
+## OAuth Parameters Registration
+
+This specification requests registration of the following value in the IANA "OAuth Authorization Server Metadata" registry {{IANA.OAuth.Params}} established by {{RFC8414}}.
+
+* Metadata Name: status_list_aggregation_endpoint
+* Metadata Description: URL of the Authorization Server aggregating OAuth Token Status List URLs for token status management.
+* Change Controller: IETF
+* Reference: [](#aggregation) of this specification
 
 ## Media Type Registration
 
@@ -1185,6 +1199,7 @@ Kristina Yasuda,
 Markus Kreusch,
 Martijn Haring,
 Michael B. Jones,
+Michael Schwartz,
 Mike Prorock,
 Oliver Terbu,
 Orie Steele,
@@ -1200,6 +1215,7 @@ for their valuable contributions, discussions and feedback to this specification
 -06
 
 * specify http status codes and allow redirects
+* add status_list_aggregation_endpoint OAuth metadata
 * remove unsigned options (json/cbor) of status list
 * add section about mixing status list formats and media type
 * fixes from IETF review
