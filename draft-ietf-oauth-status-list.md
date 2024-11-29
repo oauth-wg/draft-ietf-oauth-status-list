@@ -1218,6 +1218,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -06
 
+* explicitly mention that status list is expected to be contained in cryptographically secured containers
 * specify http status codes and allow redirects
 * add status_list_aggregation_endpoint OAuth metadata
 * remove unsigned options (json/cbor) of status list
