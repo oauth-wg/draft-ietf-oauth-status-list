@@ -819,7 +819,7 @@ A Status List Token in the CWT format should follow the security considerations 
 
 ## Status List Caching
 
-When fetching a Status List, Relying Parties must carefully evaluate how long a status list is cached for. Collectively the iat, exp and ttl claims when present in a status list communicate how long a status list should be cached for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.
+When fetching a Status List, Relying Parties must carefully evaluate how long a status list is cached for. Collectively the iat, exp and ttl claims when present in a Status List communicate how long a Status List should be cached for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.
 
 ~~~ ascii-art
 Time of fetching
@@ -843,6 +843,7 @@ Time of fetching
   │                                                               │
 ~~~
 
+It is essential to understand the distinct purposes of the ttl and exp claims. The ttl claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available. In contrast, the exp claim specifies an absolute timestamp, marking the exact moment when the Status List expires and can no longer be relied upon. Together, these claims provide guidance on when to check for updates (ttl claim) and when the Status List must be refreshed or replaced (exp claim).
 
 # Privacy Considerations
 
