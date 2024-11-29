@@ -127,7 +127,8 @@ Table of Contents
      14.5.  Status Types Registry
        14.5.1.  Registration Template
        14.5.2.  Initial Registry Contents
-     14.6.  Media Type Registration
+     14.6.  OAuth Parameters Registration
+     14.7.  Media Type Registration
    15. References
      15.1.  Normative References
      15.2.  Informative References
@@ -577,9 +578,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840f5c5faa2b28a42c9108ec2eb997704c5303c45016daff07828
-   40b4eae5518a5deebea7e738217851126ef4afda8993183a7b7b7181036351468622
-   d910167aea
+   b918000217015d5840673b13c1b1bcde38b1c64c764daf62dba60455450c3bd82bae
+   98c57f9727c1b9d90d6beed6900237536c2378dbd0d89046f3e5a7e02dd52866f31f
+   3cace6e98d
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -601,12 +602,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      f5c5faa2b28a42c9108ec2eb  #       "õÅú¢²\x8aBÉ\x10\x8eÂë"
-      997704c5303c45016daff078  #       "\x99w\x04Å0<E\x01m¯ðx"
-      2840b4eae5518a5deebea7e7  #       "(@´êåQ\x8a]î¾§ç"
-      38217851126ef4afda899318  #       "8!xQ\x12nô¯Ú\x89\x93\x18"
-      3a7b7b7181036351468622d9  #       ":{{q\x81\x03cQF\x86"Ù"
-      10167aea                  #       "\x10\x16zê"
+      673b13c1b1bcde38b1c64c76  #       "g;\x13Á±¼Þ8±ÆLv"
+      4daf62dba60455450c3bd82b  #       "M¯bÛ¦\x04UE\x0c;Ø+"
+      ae98c57f9727c1b9d90d6bee  #       "®\x98Å\x7f\x97'Á¹Ù\x0dkî"
+      d6900237536c2378dbd0d890  #       "Ö\x90\x027Sl#xÛÐØ\x90"
+      46f3e5a7e02dd52866f31f3c  #       "Fóå§à-Õ(fó\x1f<"
+      ace6e98d                  #       "¬æé\x8d"
 
 6.  Referenced Token
 
@@ -751,37 +752,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158405137cdbe2063af200c5a5457682254523d583b
-   bd3555f563502800d2148a24617c0f2fba2ca227161cd4336fbb62e5068101010a30
-   8b9102a399f6cb2d17974f
+   7374617475736c697374732f3158400e6963cb25ca1684d443a16e4bd309b6d37407
+   4fbea04329cd27c9e5b46aacc51b97e7bbcecbbd94f2ad37d347c5f3a2bc453a85d6
+   c8780f9d26f1197c395894
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      5137cdbe2063af200c5a5457  #       "Q7Í¾ c¯ \x0cZTW"
-      682254523d583bbd3555f563  #       "h"TR=X;½5Uõc"
-      502800d2148a24617c0f2fba  #       "P(\x00Ò\x14\x8a$a|\x0f/º"
-      2ca227161cd4336fbb62e506  #       ",¢'\x16\x1cÔ3o»bå\x06"
-      8101010a308b9102a399f6cb  #       "\x81\x01\x01\x0a0\x8b\x91\x02£\x99öË"
-      2d17974f                  #       "-\x17\x97O"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         0e6963cb25ca1684d443a16e  #       "\x0eicË%Ê\x16\x84ÔC¡n"
+         4bd309b6d374074fbea04329  #       "KÓ\x09¶Ót\x07O¾\xa0C)"
+         cd27c9e5b46aacc51b97e7bb  #       "Í'Éå´j¬Å\x1b\x97ç»"
+         cecbbd94f2ad37d347c5f3a2  #       "ÎË½\x94ò\xad7ÓGÅó¢"
+         bc453a85d6c8780f9d26f119  #       "¼E:\x85ÖÈx\x0f\x9d&ñ\x19"
+         7c395894                  #       "|9X\x94"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1016,8 +1017,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.1cnWofYUOaxm9WKQpSYhzx1mfptMFnRo2Qyvb-xpMFFN7Nc7Wfy8
-   K0YPGZTb_BuHyCr3MbM7HBWliCeI3yqe_Q
+   nR0bCI6NDMyMDB9.ASCW-sjEpuf8H8Bv-NQVoikZGuuqsdGqMCmX-37txuW6WkVh5EGz
+   zYHCv8Rs_HTPY2eiKUPmSBPwNjJ1FxkAig
 
 8.2.  Status List Response
 
@@ -1149,8 +1150,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.1cnWofYUOaxm9WKQpSYhzx1mfptMFnRo2Qyvb-xpMFFN7Nc7Wfy8
-   K0YPGZTb_BuHyCr3MbM7HBWliCeI3yqe_Q
+   nR0bCI6NDMyMDB9.ASCW-sjEpuf8H8Bv-NQVoikZGuuqsdGqMCmX-37txuW6WkVh5EGz
+   zYHCv8Rs_HTPY2eiKUPmSBPwNjJ1FxkAig
 
 9.  Status List Aggregation
 
@@ -1177,7 +1178,10 @@ d2                              # tag(18)
    The Issuer MAY link to the Status List Aggregation URI in metadata
    that can be provided by different means like .well-known metadata as
    is used commonly in OAuth and OpenID, or via a VICAL extension for
-   ISO mDoc / mDL.
+   ISO mDoc / mDL.  If the Issuer is an OAuth Authorization Server
+   according to [RFC6749], it is RECOMMENDED to use
+   status_list_aggregation_endpoint for its metadata defined by
+   [RFC8414].
 
    The concrete specification on how this is implemented depends on the
    specific ecosystem and is out of scope of this specification.
@@ -1811,7 +1815,22 @@ d2                              # tag(18)
 
 
 
-14.6.  Media Type Registration
+14.6.  OAuth Parameters Registration
+
+   This specification requests registration of the following value in
+   the IANA "OAuth Authorization Server Metadata" registry
+   [IANA.OAuth.Params] established by [RFC8414].
+
+   *  Metadata Name: status_list_aggregation_endpoint
+
+   *  Metadata Description: URL of the Authorization Server aggregating
+      OAuth Token Status List URLs for token status management.
+
+   *  Change Controller: IETF
+
+   *  Reference: Section 9 of this specification
+
+14.7.  Media Type Registration
 
    This section requests registration of the following media types
    [RFC2046] in the "Media Types" registry [IANA.MediaTypes] in the
@@ -1915,6 +1934,11 @@ d2                              # tag(18)
               <https://www.iana.org/assignments/media-types/media-
               types.xhtml>.
 
+   [IANA.OAuth.Params]
+              IANA, "OAuth Authorization Server Metadata", n.d.,
+              <https://www.iana.org/assignments/oauth-parameters/oauth-
+              parameters.xhtml#authorization-server-metadata>.
+
    [RFC1950]  Deutsch, P. and J. Gailly, "ZLIB Compressed Data Format
               Specification version 3.3", RFC 1950,
               DOI 10.17487/RFC1950, May 1996,
@@ -2015,6 +2039,11 @@ d2                              # tag(18)
               RFC 7800, DOI 10.17487/RFC7800, April 2016,
               <https://www.rfc-editor.org/rfc/rfc7800>.
 
+   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata", RFC 8414,
+              DOI 10.17487/RFC8414, June 2018,
+              <https://www.rfc-editor.org/rfc/rfc8414>.
+
    [RFC9458]  Thomson, M. and C. A. Wood, "Oblivious HTTP", RFC 9458,
               DOI 10.17487/RFC9458, January 2024,
               <https://www.rfc-editor.org/rfc/rfc9458>.
@@ -2030,8 +2059,8 @@ Acknowledgments
 
    We would like to thank Brian Campbell, Filip Skokan, Francesco
    Marino, Guiseppe De Marco, Kristina Yasuda, Markus Kreusch, Martijn
-   Haring, Michael B.  Jones, Mike Prorock, Oliver Terbu, Orie Steele,
-   Timo Glastra and Torsten Lodderstedt
+   Haring, Michael B.  Jones, Michael Schwartz, Mike Prorock, Oliver
+   Terbu, Orie Steele, Timo Glastra and Torsten Lodderstedt
 
    for their valuable contributions, discussions and feedback to this
    specification.
@@ -2041,6 +2070,8 @@ Document History
    -06
 
    *  specify http status codes and allow redirects
+
+   *  add status_list_aggregation_endpoint OAuth metadata
 
    *  remove unsigned options (json/cbor) of status list
 
