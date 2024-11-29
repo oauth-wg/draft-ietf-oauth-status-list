@@ -640,6 +640,10 @@ The Relying Party SHOULD send the following Accept-Header to indicate the reques
 
 If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.
 
+A successful response that contains a Status List Token MUST use an HTTP status code in the 2xx range.
+
+A response MAY also choose to redirect the client to another URI using a HTTP status code in the 3xx range, which clients SHOULD follow. A client SHOULD detect and intervene in cyclical redirections (i.e., "infinite" redirection loops).
+
 The following are non-normative examples for a request and response for a Status List Token with type `application/statuslist+jwt`:
 
 ~~~ ascii-art
@@ -1210,6 +1214,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -06
 
+* specify http status codes and allow redirects
 * add status_list_aggregation_endpoint OAuth metadata
 * remove unsigned options (json/cbor) of status list
 * add section about mixing status list formats and media type
