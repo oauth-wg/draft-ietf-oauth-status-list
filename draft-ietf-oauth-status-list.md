@@ -968,11 +968,12 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
-OAuth registration status mechanism names and descriptions are registered by Specification Required [RFC5226] after a two-week
-review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts.  However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
-specification will be published.
+JWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a two-week
+review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
+However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
+registration once they are satisfied that such a specification will be published.
 
-Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register OAuth Status Mechanism name: example").
+Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism Method: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
 to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
@@ -1046,6 +1047,18 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 This specification establishes the IANA "Status Mechanism Methods" registry for CWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
+CWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a two-week
+review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
+specification will be published.
+
+Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register OAuth Status Mechanism name: example").
+
+Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
+to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
+successful.
+
+IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
+
 ### Registration Template
 
 Status Method Value:
@@ -1074,6 +1087,18 @@ Specification Document(s):
 ## Status Types Registry {#iana-status-types}
 
 This specification establishes the IANA "Status Types" registry for Status List values. The registry records the a human readable label, the bit representation and a common description for it.
+
+Status Types are registered by Specification Required [RFC5226] after a two-week
+review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
+specification will be published.
+
+Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register Status Type name: example").
+
+Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
+to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
+successful.
+
+IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
 
 ### Registration Template
 
