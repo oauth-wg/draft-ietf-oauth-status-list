@@ -1051,7 +1051,7 @@ CWT Status Mechanism Methods are registered by Specification Required [RFC5226] 
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
-Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register OAuth Status Mechanism name: example").
+Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register CWT Status Mechanism Method: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
 to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
@@ -1256,6 +1256,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -06
 
+* iana registration text updated with update procedures
 * reworked and simplified introduction and abstract
 * specify http status codes and allow redirects
 * add status_list_aggregation_endpoint OAuth metadata
