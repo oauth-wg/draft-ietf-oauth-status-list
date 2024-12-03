@@ -818,7 +818,7 @@ Resulting in the byte array and compressed/base64url-encoded Status List:
 
 # Security Considerations {#Security}
 
-The Status List as defined in this specification only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other aspects like transport security (e.g., the web PKI).
+The Status List as defined in [](#status-list) only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other aspects like transport security (e.g., the web PKI).
 
 ## Correct decoding and parsing of the encoded Status List
 
