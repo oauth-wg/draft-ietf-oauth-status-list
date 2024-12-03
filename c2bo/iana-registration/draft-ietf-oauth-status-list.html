@@ -1257,7 +1257,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-security-guidance-for-jwt-a" class="internal xref">Security Guidance for JWT and CWT</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3">
-                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-cached-and-stale-status-lis" class="internal xref">Cached and Stale Status Lists</a></p>
+                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-status-list-caching" class="internal xref">Status List Caching</a></p>
 </li>
             </ul>
 </li>
@@ -1814,9 +1814,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840f8bff9874822980c3da0453ce92bfc9825cfed27bad0b6e840
-262a5954cfdbd757e93b168fce0294c7fbe9b6e70fe89ef11aae688811d7b7d15ae1
-6279156334
+b918000217015d5840d191fbb7a76b86b522b6dfccbf29f0335329f4430943270a9a
+6af264b997a6c94791cd1a64dca5ea565f8de57997fc2a1d3a75387c462ba049b7ff
+7bd3d3441a
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1840,12 +1840,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      f8bff9874822980c3da0453c  #       "ø¿ù\x87H"\x98\x0c=\xa0E&lt;"
-      e92bfc9825cfed27bad0b6e8  #       "é+ü\x98%Ïí'ºÐ¶è"
-      40262a5954cfdbd757e93b16  #       "@&amp;*YTÏÛ×Wé;\x16"
-      8fce0294c7fbe9b6e70fe89e  #       "\x8fÎ\x02\x94Çûé¶ç\x0fè\x9e"
-      f11aae688811d7b7d15ae162  #       "ñ\x1a®h\x88\x11×·ÑZáb"
-      79156334                  #       "y\x15c4"
+      d191fbb7a76b86b522b6dfcc  #       "Ñ\x91û·§k\x86µ"¶ßÌ"
+      bf29f0335329f4430943270a  #       "¿)ð3S)ôC\x09C'\x0a"
+      9a6af264b997a6c94791cd1a  #       "\x9ajòd¹\x97¦ÉG\x91Í\x1a"
+      64dca5ea565f8de57997fc2a  #       "dÜ¥êV_\x8dåy\x97ü*"
+      1d3a75387c462ba049b7ff7b  #       "\x1d:u8|F+\xa0I·ÿ{"
+      d3d3441a                  #       "ÓÓD\x1a"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1987,9 +1987,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158401be1213ad5d6539d1d82f6754f1bf72c6bbd60
-4f41b5d21719de0f71c64623037e7a9954f79061d0c9c8bce267d61b56017ec9d346
-de1c40369507b91ad4d257
+7374617475736c697374732f315840212d4e6191f9f277063158db127128a0e119f5
+2dc2c581fed618ac2e1d035a9caecfacd299a43c978703d37c2ac0b2433bc0725b3a
+448b7a9487eaed26076b18
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2014,12 +2014,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      1be1213ad5d6539d1d82f675  #       "\x1bá!:ÕÖS\x9d\x1d\x82öu"
-      4f1bf72c6bbd604f41b5d217  #       "O\x1b÷,k½`OAµÒ\x17"
-      19de0f71c64623037e7a9954  #       "\x19Þ\x0fqÆF#\x03~z\x99T"
-      f79061d0c9c8bce267d61b56  #       "÷\x90aÐÉÈ¼âgÖ\x1bV"
-      017ec9d346de1c40369507b9  #       "\x01~ÉÓFÞ\x1c@6\x95\x07¹"
-      1ad4d257                  #       "\x1aÔÒW"
+      212d4e6191f9f277063158db  #       "!-Na\x91ùòw\x061XÛ"
+      127128a0e119f52dc2c581fe  #       "\x12q(\xa0á\x19õ-ÂÅ\x81þ"
+      d618ac2e1d035a9caecfacd2  #       "Ö\x18¬.\x1d\x03Z\x9c®Ï¬Ò"
+      99a43c978703d37c2ac0b243  #       "\x99¤&lt;\x97\x87\x03Ó|*À²C"
+      3bc0725b3a448b7a9487eaed  #       ";Àr[:D\x8bz\x94\x87êí"
+      26076b18                  #       "&amp;\x07k\x18"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2240,8 +2240,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.WquMATZNKxPGk-_CbiC-HHexiSKIKfpk0EJbZfdEcAqkS4QcFcc_
-ejYYxzUs99KHQsAjK-nVkIWKQRLp24L4LA
+nR0bCI6NDMyMDB9.PA58XK2di8yT7SXKhciIxrH_n3ERV1Onj6MT-SjJ5rTr4A9k8Oez
+PbcmoP9dywLfkm25ilaETKnlvnIWT0-HKQ
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2263,6 +2263,7 @@ ejYYxzUs99KHQsAjK-nVkIWKQRLp24L4LA
 <p id="section-8.2-3">In the case of "application/statuslist+jwt", the response <span class="bcp14">MUST</span> be of type JWT and follow the rules of <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.
 In the case of "application/statuslist+cwt", the response <span class="bcp14">MUST</span> be of type CWT and follow the rules of <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a>.<a href="#section-8.2-3" class="pilcrow">¶</a></p>
 <p id="section-8.2-4">The HTTP response <span class="bcp14">SHOULD</span> use gzip Content-Encoding as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-8.2-4" class="pilcrow">¶</a></p>
+<p id="section-8.2-5">If caching-related HTTP headers are present in the HTTP response, Relying Parties <span class="bcp14">SHOULD</span> prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validation-rules">
@@ -2346,8 +2347,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.WquMATZNKxPGk-_CbiC-HHexiSKIKfpk0EJbZfdEcAqkS4QcFcc_
-ejYYxzUs99KHQsAjK-nVkIWKQRLp24L4LA
+nR0bCI6NDMyMDB9.PA58XK2di8yT7SXKhciIxrH_n3ERV1Onj6MT-SjJ5rTr4A9k8Oez
+PbcmoP9dywLfkm25ilaETKnlvnIWT0-HKQ
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2480,6 +2481,7 @@ encoded:
       <h2 id="name-security-considerations">
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
+<p id="section-11-1">The Status List as defined in <a href="#status-list" class="auto internal xref">Section 4</a> only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other aspects like transport security (e.g., the web PKI).<a href="#section-11-1" class="pilcrow">¶</a></p>
 <div id="correct-decoding-and-parsing-of-the-encoded-status-list">
 <section id="section-11.1">
         <h3 id="name-correct-decoding-and-parsin">
@@ -2498,15 +2500,36 @@ encoded:
 <p id="section-11.2-2">A Status List Token in the CWT format should follow the security considerations of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-11.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="cached-and-stale-status-lists">
+<div id="status-list-caching">
 <section id="section-11.3">
-        <h3 id="name-cached-and-stale-status-lis">
-<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-cached-and-stale-status-lis" class="section-name selfRef">Cached and Stale Status Lists</a>
+        <h3 id="name-status-list-caching">
+<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-status-list-caching" class="section-name selfRef">Status List Caching</a>
         </h3>
-<p id="section-11.3-1">When Relying Parties fetch the Status List, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
-in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
-a Status List to a CDN or other distribution mechanism while giving guidance to consumers of the Status List on how often they need to fetch
-a fresh copy of the Status List even if that Status List is not expired.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
+<p id="section-11.3-1">When fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the <code>iat</code>, <code>exp</code> and <code>ttl</code> claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-11.3-2">
+<pre>
+Time of fetching
+
+         │
+         │            Check for        Check for        Check for
+         │             updates          updates          updates
+         │
+ iat     │                │                │                │    exp
+         │                │                │                │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │      ttl       │      ttl       │      ttl       │     │
+  │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │                                                               │
+──┼───────────────────────────────────────────────────────────────┼─►
+  │                                                               │
+</pre><a href="#section-11.3-2" class="pilcrow">¶</a>
+</div>
+<p id="section-11.3-3">It is essential to understand the distinct purposes of the <code>ttl</code> and <code>exp</code> claims. The <code>ttl</code> claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available. In contrast, the <code>exp</code> claim specifies an absolute timestamp, marking the point in time when the Status List expires and <span class="bcp14">MUST NOT</span> be relied upon any longer. Together, these claims provide guidance on when to check for updates (<code>ttl</code> claim) and when the Status List must be refreshed or replaced (<code>exp</code> claim).<a href="#section-11.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3458,25 +3481,31 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
           <p id="appendix-B-2.1.1">iana registration text updated with update procedures<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">reworked and simplified introduction and abstract<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">explicitly mention that status list is expected to be contained in cryptographically secured containers<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">specify http status codes and allow redirects<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">reworked and simplified introduction and abstract<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">add status_list_aggregation_endpoint OAuth metadata<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">specify http status codes and allow redirects<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">remove unsigned options (json/cbor) of status list<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">add status_list_aggregation_endpoint OAuth metadata<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.6">
-          <p id="appendix-B-2.6.1">add section about mixing status list formats and media type<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.6.1">remove unsigned options (json/cbor) of status list<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.7">
-          <p id="appendix-B-2.7.1">fixes from IETF review<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.7.1">add section about mixing status list formats and media type<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.8">
-          <p id="appendix-B-2.8.1">add guidance around aggregation endpoint<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.8.1">fixes from IETF review<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.9">
+          <p id="appendix-B-2.9.1">update guidance around ttl<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.10">
+          <p id="appendix-B-2.10.1">add guidance around aggregation endpoint<a href="#appendix-B-2.10.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-05<a href="#appendix-B-3" class="pilcrow">¶</a></p>
