@@ -677,7 +677,7 @@ In the case of "application/statuslist+cwt", the response MUST be of type CWT an
 
 The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
-If caching-related HTTP headers are present in the response, Relying Parties SHOULD prioritize the exp and ttl claims within the Status List over the HTTP headers for determining caching behavior.
+If caching-related HTTP headers are present in the HTTP response, Relying Parties SHOULD prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.
 
 ## Validation Rules
 
