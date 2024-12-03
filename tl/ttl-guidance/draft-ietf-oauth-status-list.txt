@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 4 June 2025                                                    
+Expires: 6 June 2025                                                    
                                                               C. Bormann
                                                        Robert Bosch GmbH
-                                                         1 December 2024
+                                                         3 December 2024
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2025.
+   This Internet-Draft will expire on 6 June 2025.
 
 Copyright Notice
 
@@ -585,9 +585,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840d97181ca8eff4c27c0870255fb06710cf45776504b9db51105
-   ff703a5d4583e488aa8f8012abbb647354da8761702f445545aced7fecb915c4969b
-   9ea3a9319f
+   b918000217015d5840585d9196096b38e513209b49bec02417b1aea994a908e7fbcd
+   037f89edefac98dbe1d634f5a16462859f419500c94a9c0379d97b5469b67a613f33
+   9e2782c854
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -609,12 +609,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      d97181ca8eff4c27c0870255  #       "Ùq\x81Ê\x8eÿL'À\x87\x02U"
-      fb06710cf45776504b9db511  #       "û\x06q\x0côWvPK\x9dµ\x11"
-      05ff703a5d4583e488aa8f80  #       "\x05ÿp:]E\x83ä\x88ª\x8f\x80"
-      12abbb647354da8761702f44  #       "\x12«»dsTÚ\x87ap/D"
-      5545aced7fecb915c4969b9e  #       "UE¬í\x7fì¹\x15Ä\x96\x9b\x9e"
-      a3a9319f                  #       "£©1\x9f"
+      585d9196096b38e513209b49  #       "X]\x91\x96\x09k8å\x13 \x9bI"
+      bec02417b1aea994a908e7fb  #       "¾À$\x17±®©\x94©\x08çû"
+      cd037f89edefac98dbe1d634  #       "Í\x03\x7f\x89íï¬\x98ÛáÖ4"
+      f5a16462859f419500c94a9c  #       "õ¡db\x85\x9fA\x95\x00ÉJ\x9c"
+      0379d97b5469b67a613f339e  #       "\x03yÙ{Ti¶za?3\x9e"
+      2782c854                  #       "'\x82ÈT"
 
 6.  Referenced Token
 
@@ -759,37 +759,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840a049cd1069213ef0d4c8d52965e2dd50551197
-   3714f2add4bea2c80778029323c14e3ae0e5f7d45d721628b5f6a21f132bf39d6e38
-   4f3c715dc0e7f4d47874fb
+   7374617475736c697374732f3158405c73cbb58aa13cbe80fd622f2b957f9fcf5a7f
+   e0fad58fd32fb366d205e1bcc1d4727d9909ed12dfc16360bb5a33e3f4ad90fbf72b
+   8d75d89c05740f83360e30
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         a049cd1069213ef0d4c8d529  #       "\xa0IÍ\x10i!>ðÔÈÕ)"
-         65e2dd505511973714f2add4  #       "eâÝPU\x11\x977\x14ò\xadÔ"
-         bea2c80778029323c14e3ae0  #       "¾¢È\x07x\x02\x93#ÁN:à"
-         e5f7d45d721628b5f6a21f13  #       "å÷Ô]r\x16(µö¢\x1f\x13"
-         2bf39d6e384f3c715dc0e7f4  #       "+ó\x9dn8O<q]Àçô"
-         d47874fb                  #       "Ôxtû"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      5c73cbb58aa13cbe80fd622f  #       "\sËµ\x8a¡<¾\x80ýb/"
+      2b957f9fcf5a7fe0fad58fd3  #       "+\x95\x7f\x9fÏZ\x7fàúÕ\x8fÓ"
+      2fb366d205e1bcc1d4727d99  #       "/³fÒ\x05á¼ÁÔr}\x99"
+      09ed12dfc16360bb5a33e3f4  #       "\x09í\x12ßÁc`»Z3ãô"
+      ad90fbf72b8d75d89c05740f  #       "\xad\x90û÷+\x8duØ\x9c\x05t\x0f"
+      83360e30                  #       "\x836\x0e0"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1024,8 +1024,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.tVq58rS_zibGMooaoF8yeAezV4iPN3rXEHEDDOasDw0awcIurTf2
-   156xVtK828lCbWc0UK5FXQqwhVu4IDqkXA
+   nR0bCI6NDMyMDB9.gTSq9g5KK42_FRkSEToNRNmflUEvei2YWeqFuOPY6phOhoBrESvr
+   cS7Y3ish55ADWiV5vsupL-dRe0Pk_Iljnw
 
 8.2.  Status List Response
 
@@ -1044,9 +1044,10 @@ d2                              # tag(18)
    The HTTP response SHOULD use gzip Content-Encoding as defined in
    [RFC9110].
 
-   If caching-related HTTP headers are present in the response, Relying
-   Parties SHOULD prioritize the exp and ttl claims within the Status
-   List over the HTTP headers for determining caching behavior.
+   If caching-related HTTP headers are present in the HTTP response,
+   Relying Parties SHOULD prioritize the exp and ttl claims within the
+   Status List Token over the HTTP headers for determining caching
+   behavior.
 
 8.3.  Validation Rules
 
@@ -1161,8 +1162,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.tVq58rS_zibGMooaoF8yeAezV4iPN3rXEHEDDOasDw0awcIurTf2
-   156xVtK828lCbWc0UK5FXQqwhVu4IDqkXA
+   nR0bCI6NDMyMDB9.gTSq9g5KK42_FRkSEToNRNmflUEvei2YWeqFuOPY6phOhoBrESvr
+   cS7Y3ish55ADWiV5vsupL-dRe0Pk_Iljnw
 
 9.  Status List Aggregation
 
@@ -2095,9 +2096,9 @@ d2                              # tag(18)
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-06, 13 November
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-08, 3 December
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-06>.
+              oauth-sd-jwt-vc-08>.
 
 Acknowledgments
 
