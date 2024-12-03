@@ -968,7 +968,7 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
-JWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a two-week
+JWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.
@@ -1047,7 +1047,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 This specification establishes the IANA "Status Mechanism Methods" registry for CWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
 
-CWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a two-week
+CWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
