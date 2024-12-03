@@ -11,10 +11,10 @@
 <meta content="
        This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
     " name="description">
-<meta content="xml2rfc 3.24.0" name="generator">
+<meta content="xml2rfc 3.25.0" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.24.0
+  xml2rfc 3.25.0
     Python 3.12.7
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1041,11 +1041,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Token Status List</td>
-<td class="right">November 2024</td>
+<td class="right">December 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 2 June 2025</td>
+<td class="center">Expires 6 June 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1058,12 +1058,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-11-29" class="published">29 November 2024</time>
+<time datetime="2024-12-03" class="published">3 December 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-02">2 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-06-06">6 June 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1115,7 +1115,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1257,7 +1257,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.  <a href="#name-security-guidance-for-jwt-a" class="internal xref">Security Guidance for JWT and CWT</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.3">
-                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-cached-and-stale-status-lis" class="internal xref">Cached and Stale Status Lists</a></p>
+                <p id="section-toc.1-1.11.2.3.1"><a href="#section-11.3" class="auto internal xref">11.3</a>.  <a href="#name-status-list-caching" class="internal xref">Status List Caching</a></p>
 </li>
             </ul>
 </li>
@@ -1814,9 +1814,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d58405265e8abbf4ac60bad2ccbb234591659ca3403e20a02989ae7
-7e7c470ee44179e10ffc1ba6d7b658b24758ac0f2c03b507ca0cb0b26afd9a96c504
-a79b0afa17
+b918000217015d5840e4fa5904b9a21504986f824b5d5d34a34cf7de56a8dc294b0b
+4444e1fb00b4e73ef539953ed45315859c3607964700e50cc25bf594314bb11c279c
+abcbbd20e8
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1840,12 +1840,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      5265e8abbf4ac60bad2ccbb2  #       "Reè«¿JÆ\x0b\xad,Ë²"
-      34591659ca3403e20a02989a  #       "4Y\x16YÊ4\x03â\x0a\x02\x98\x9a"
-      e77e7c470ee44179e10ffc1b  #       "ç~|G\x0eäAyá\x0fü\x1b"
-      a6d7b658b24758ac0f2c03b5  #       "¦×¶X²GX¬\x0f,\x03µ"
-      07ca0cb0b26afd9a96c504a7  #       "\x07Ê\x0c°²jý\x9a\x96Å\x04§"
-      9b0afa17                  #       "\x9b\x0aú\x17"
+      e4fa5904b9a21504986f824b  #       "äúY\x04¹¢\x15\x04\x98o\x82K"
+      5d5d34a34cf7de56a8dc294b  #       "]]4£L÷ÞV¨Ü)K"
+      0b4444e1fb00b4e73ef53995  #       "\x0bDDáû\x00´ç&gt;õ9\x95"
+      3ed45315859c3607964700e5  #       "&gt;ÔS\x15\x85\x9c6\x07\x96G\x00å"
+      0cc25bf594314bb11c279cab  #       "\x0cÂ[õ\x941K±\x1c'\x9c«"
+      cbbd20e8                  #       "Ë½ è"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1987,9 +1987,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840d53ac999762f56c24b1cb7bc8b68c8995d6a7f
-1ddb18ed154571da117b83865fcf14eca2df70088bf62ec6a02638e7066ec6f66b9c
-b380372d2daa3b602cd7b0
+7374617475736c697374732f315840550a4763dbceec665af0d98404cf9f7c04ad18
+8224571fe520328f9464eb6ef0adf21591ffd5c43499a53ea09f4d371af0a1da1f50
+1ac0557e8a1d3e6ea7bb69
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2014,12 +2014,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      d53ac999762f56c24b1cb7bc  #       "Õ:É\x99v/VÂK\x1c·¼"
-      8b68c8995d6a7f1ddb18ed15  #       "\x8bhÈ\x99]j\x7f\x1dÛ\x18í\x15"
-      4571da117b83865fcf14eca2  #       "EqÚ\x11{\x83\x86_Ï\x14ì¢"
-      df70088bf62ec6a02638e706  #       "ßp\x08\x8bö.Æ\xa0&amp;8ç\x06"
-      6ec6f66b9cb380372d2daa3b  #       "nÆök\x9c³\x807--ª;"
-      602cd7b0                  #       "`,×°"
+      550a4763dbceec665af0d984  #       "U\x0aGcÛÎìfZðÙ\x84"
+      04cf9f7c04ad188224571fe5  #       "\x04Ï\x9f|\x04\xad\x18\x82$W\x1få"
+      20328f9464eb6ef0adf21591  #       " 2\x8f\x94dënð\xadò\x15\x91"
+      ffd5c43499a53ea09f4d371a  #       "ÿÕÄ4\x99¥&gt;\xa0\x9fM7\x1a"
+      f0a1da1f501ac0557e8a1d3e  #       "ð¡Ú\x1fP\x1aÀU~\x8a\x1d&gt;"
+      6ea7bb69                  #       "n§»i"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2240,8 +2240,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.-TXH7ENxa1azySwdyhI8W9SnKwB6aAaPWfoPgINprTtovtIMGBgs
-oL7h8mNJVjqsFIElyOCIwYpRVShYlpfL7A
+nR0bCI6NDMyMDB9.IT7kvFcAYr0KoPbqRvLU4YNh1tMgPJ4yRF-mtxYg9oEJ-plpauST
+53zv7m0Wz5NZv_UUSprBjHMAmavj3zefOw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2263,6 +2263,7 @@ oL7h8mNJVjqsFIElyOCIwYpRVShYlpfL7A
 <p id="section-8.2-3">In the case of "application/statuslist+jwt", the response <span class="bcp14">MUST</span> be of type JWT and follow the rules of <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.
 In the case of "application/statuslist+cwt", the response <span class="bcp14">MUST</span> be of type CWT and follow the rules of <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a>.<a href="#section-8.2-3" class="pilcrow">¶</a></p>
 <p id="section-8.2-4">The HTTP response <span class="bcp14">SHOULD</span> use gzip Content-Encoding as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-8.2-4" class="pilcrow">¶</a></p>
+<p id="section-8.2-5">If caching-related HTTP headers are present in the HTTP response, Relying Parties <span class="bcp14">SHOULD</span> prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validation-rules">
@@ -2346,8 +2347,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.-TXH7ENxa1azySwdyhI8W9SnKwB6aAaPWfoPgINprTtovtIMGBgs
-oL7h8mNJVjqsFIElyOCIwYpRVShYlpfL7A
+nR0bCI6NDMyMDB9.IT7kvFcAYr0KoPbqRvLU4YNh1tMgPJ4yRF-mtxYg9oEJ-plpauST
+53zv7m0Wz5NZv_UUSprBjHMAmavj3zefOw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2498,15 +2499,36 @@ encoded:
 <p id="section-11.2-2">A Status List Token in the CWT format should follow the security considerations of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-11.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="cached-and-stale-status-lists">
+<div id="status-list-caching">
 <section id="section-11.3">
-        <h3 id="name-cached-and-stale-status-lis">
-<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-cached-and-stale-status-lis" class="section-name selfRef">Cached and Stale Status Lists</a>
+        <h3 id="name-status-list-caching">
+<a href="#section-11.3" class="section-number selfRef">11.3. </a><a href="#name-status-list-caching" class="section-name selfRef">Status List Caching</a>
         </h3>
-<p id="section-11.3-1">When Relying Parties fetch the Status List, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
-in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
-a Status List to a CDN or other distribution mechanism while giving guidance to consumers of the Status List on how often they need to fetch
-a fresh copy of the Status List even if that Status List is not expired.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
+<p id="section-11.3-1">When fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the <code>iat</code>, <code>exp</code> and <code>ttl</code> claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-11.3-2">
+<pre>
+Time of fetching
+
+         │
+         │            Check for        Check for        Check for
+         │             updates          updates          updates
+         │
+ iat     │                │                │                │    exp
+         │                │                │                │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │      ttl       │      ttl       │      ttl       │     │
+  │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │                                                               │
+──┼───────────────────────────────────────────────────────────────┼─►
+  │                                                               │
+</pre><a href="#section-11.3-2" class="pilcrow">¶</a>
+</div>
+<p id="section-11.3-3">It is essential to understand the distinct purposes of the <code>ttl</code> and <code>exp</code> claims. The <code>ttl</code> claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available. In contrast, the <code>exp</code> claim specifies an absolute timestamp, marking the point in time when the Status List expires and <span class="bcp14">MUST NOT</span> be relied upon any longer. Together, these claims provide guidance on when to check for updates (<code>ttl</code> claim) and when the Status List must be refreshed or replaced (<code>exp</code> claim).<a href="#section-11.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3391,7 +3413,7 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <dd class="break"></dd>
 <dt id="SD-JWT.VC">[SD-JWT.VC]</dt>
       <dd>
-<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-06</span>, <time datetime="2024-11-13" class="refDate">13 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-06">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-08</span>, <time datetime="2024-12-03" class="refDate">3 December 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -3448,7 +3470,10 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
           <p id="appendix-B-2.6.1">fixes from IETF review<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.7">
-          <p id="appendix-B-2.7.1">add guidance around aggregation endpoint<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.7.1">update guidance around ttl<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.8">
+          <p id="appendix-B-2.8.1">add guidance around aggregation endpoint<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-05<a href="#appendix-B-3" class="pilcrow">¶</a></p>
