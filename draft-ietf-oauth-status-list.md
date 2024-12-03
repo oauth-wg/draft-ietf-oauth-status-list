@@ -677,6 +677,8 @@ In the case of "application/statuslist+cwt", the response MUST be of type CWT an
 
 The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
+If caching-related HTTP headers are present in the HTTP response, Relying Parties SHOULD prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.
+
 ## Validation Rules
 
 Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature, expiration time. The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope of this document, this validation is not be described here, but is expected to be done according to the format of the Referenced Token.
@@ -818,6 +820,8 @@ Resulting in the byte array and compressed/base64url-encoded Status List:
 
 # Security Considerations {#Security}
 
+The Status List as defined in [](#status-list) only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other aspects like transport security (e.g., the web PKI).
+
 ## Correct decoding and parsing of the encoded Status List
 
 Implementers should be particularly careful for the correct parsing and decoding of the Status List. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to write). Endianness does not apply here because each status value fits within a single byte.
@@ -830,12 +834,33 @@ A Status List Token in the JWT format should follow the security considerations 
 
 A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
 
-## Cached and Stale Status Lists
+## Status List Caching
 
-When Relying Parties fetch the Status List, they need to be aware of its up-to-date status. The 'ttl' (time-to-live) claim
-in the Status List Token provides one mechanism for setting a maximum cache time for the fetched data. This property permits distribution of
-a Status List to a CDN or other distribution mechanism while giving guidance to consumers of the Status List on how often they need to fetch
-a fresh copy of the Status List even if that Status List is not expired.
+When fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the `iat`, `exp` and `ttl` claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.
+
+~~~ ascii-art
+Time of fetching
+
+         │
+         │            Check for        Check for        Check for
+         │             updates          updates          updates
+         │
+ iat     │                │                │                │    exp
+         │                │                │                │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │      ttl       │      ttl       │      ttl       │     │
+  │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │                                                               │
+──┼───────────────────────────────────────────────────────────────┼─►
+  │                                                               │
+~~~
+
+It is essential to understand the distinct purposes of the `ttl` and `exp` claims. The `ttl` claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available. In contrast, the `exp` claim specifies an absolute timestamp, marking the point in time when the Status List expires and MUST NOT be relied upon any longer. Together, these claims provide guidance on when to check for updates (`ttl` claim) and when the Status List must be refreshed or replaced (`exp` claim).
 
 # Privacy Considerations
 
@@ -931,10 +956,8 @@ The Status List Issuer may chunk its Referenced Tokens into multiple Status List
  - JWT
  - CWT
 
-
 This specification states no requirements to not mix different formats like a CBOR based Referenced Token using a JWT for the Status List, but the expectation is that within an ecosystem, a choice for specific formats is made.
 Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.
-
 
 # IANA Considerations
 
@@ -1257,12 +1280,14 @@ for their valuable contributions, discussions and feedback to this specification
 -06
 
 * iana registration text updated with update procedures
+* explicitly mention that status list is expected to be contained in cryptographically secured containers
 * reworked and simplified introduction and abstract
 * specify http status codes and allow redirects
 * add status_list_aggregation_endpoint OAuth metadata
 * remove unsigned options (json/cbor) of status list
 * add section about mixing status list formats and media type
 * fixes from IETF review
+* update guidance around ttl
 * add guidance around aggregation endpoint
 
 -05
