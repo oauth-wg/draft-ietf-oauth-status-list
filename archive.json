@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-01T00:21:53.280317+00:00",
+  "timestamp": "2024-12-03T00:19:17.340521+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -13655,13 +13655,13 @@
       "labels": [],
       "body": "Resolves #107",
       "createdAt": "2024-11-29T04:43:49Z",
-      "updatedAt": "2024-11-29T20:06:57Z",
+      "updatedAt": "2024-12-01T23:24:11Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "2159cc0776bf8386bc3a9d052335f092b79f9285",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "tl/ttl-guidance",
-      "headRefOid": "6affe37fb69503be5fc350388b5d4b2857d2bad6",
+      "headRefOid": "91165403f13f8fccc11ce7f54507082754bd363c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -13695,6 +13695,99 @@
               "updatedAt": "2024-11-29T07:16:21Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6TT4sJ",
+          "commit": {
+            "abbreviatedOid": "6affe37"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-01T16:55:11Z",
+          "updatedAt": "2024-12-01T16:56:50Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nWhen fetching a Status List, Relying Parties must carefully evaluate how long a status list is cached for. Collectively the iat, exp and ttl claims when present in a Status List communicate how long a Status List should be cached and should be considered valid for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.\r\n```",
+              "createdAt": "2024-12-01T16:55:11Z",
+              "updatedAt": "2024-12-01T16:56:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6TUJO_",
+          "commit": {
+            "abbreviatedOid": "9116540"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-01T23:18:42Z",
+          "updatedAt": "2024-12-01T23:18:43Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nIf caching-related HTTP headers are present in the HTTP response, Relying Parties SHOULD prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.\r\n```",
+              "createdAt": "2024-12-01T23:18:42Z",
+              "updatedAt": "2024-12-01T23:18:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6TUJVS",
+          "commit": {
+            "abbreviatedOid": "9116540"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-01T23:20:26Z",
+          "updatedAt": "2024-12-01T23:20:26Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nWhen fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the `iat`, `exp` and `ttl` claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.\r\n```",
+              "createdAt": "2024-12-01T23:20:26Z",
+              "updatedAt": "2024-12-01T23:20:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6TUJjU",
+          "commit": {
+            "abbreviatedOid": "9116540"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-01T23:23:59Z",
+          "updatedAt": "2024-12-01T23:24:00Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "```suggestion\r\nIt is essential to understand the distinct purposes of the `ttl` and `exp` claims. The `ttl` claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available. In contrast, the `exp` claim specifies an absolute timestamp, marking the point in time when the Status List expires and MUST NOT be relied upon any longer. Together, these claims provide guidance on when to check for updates (`ttl` claim) and when the Status List must be refreshed or replaced (`exp` claim).\r\n```",
+              "createdAt": "2024-12-01T23:24:00Z",
+              "updatedAt": "2024-12-01T23:24:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6TUJj8",
+          "commit": {
+            "abbreviatedOid": "9116540"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-01T23:24:11Z",
+          "updatedAt": "2024-12-01T23:24:11Z",
+          "comments": []
         }
       ]
     },
@@ -13765,7 +13858,7 @@
       "labels": [],
       "body": "Closes #199",
       "createdAt": "2024-11-29T07:48:29Z",
-      "updatedAt": "2024-11-30T15:22:28Z",
+      "updatedAt": "2024-12-02T07:39:29Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "2159cc0776bf8386bc3a9d052335f092b79f9285",
@@ -13815,6 +13908,127 @@
               "body": "status list object currently (after the change) only exists in secured containers",
               "createdAt": "2024-11-30T15:22:28Z",
               "updatedAt": "2024-11-30T15:22:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6TUJKV",
+          "commit": {
+            "abbreviatedOid": "6575771"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-01T23:17:25Z",
+          "updatedAt": "2024-12-01T23:17:25Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "should we add reference to the section?",
+              "createdAt": "2024-12-01T23:17:25Z",
+              "updatedAt": "2024-12-01T23:17:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6TUJK2",
+          "commit": {
+            "abbreviatedOid": "6575771"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-01T23:17:33Z",
+          "updatedAt": "2024-12-01T23:17:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6TVtC1",
+          "commit": {
+            "abbreviatedOid": "6575771"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-02T07:39:29Z",
+          "updatedAt": "2024-12-02T07:39:29Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nThe Status List as defined in [](#status-list) only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other aspects like transport security (e.g., the web PKI).\r\n```",
+              "createdAt": "2024-12-02T07:39:29Z",
+              "updatedAt": "2024-12-02T07:39:30Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 206,
+      "id": "PR_kwDOJZ2aqs6DuOu4",
+      "title": "additional text for iana registry",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/206",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #194 \r\n\r\nWe would register:\r\nCWT Status Mechanisms registry in CWT \r\nJWT Status Mechanisms registry in JWT \r\nStatus Types registry in OAuth parameters\r\n\r\nAny ideas how we could simplify this?",
+      "createdAt": "2024-12-02T09:58:27Z",
+      "updatedAt": "2024-12-02T12:44:43Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "2159cc0776bf8386bc3a9d052335f092b79f9285",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/iana-registration",
+      "headRefOid": "e4504206213a33772804d928ab713bee6a286837",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "looks good to me in general. I would extend this to more than two weeks, if I look back how the current year went by. I think this is a good start for now, so we should merge this first and then evaluate afterwards if we can merge both status registries.",
+          "createdAt": "2024-12-02T10:23:19Z",
+          "updatedAt": "2024-12-02T10:23:19Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> looks good to me in general. I would extend this to more than two weeks, if I look back how the current year went by. I think this is a good start for now, so we should merge this first and then evaluate afterwards if we can merge both status registries.\r\n\r\nJWT/CWT registries use three week periods, the OAuth Parameter one uses two weeks. Should we just align with these registries for each one?",
+          "createdAt": "2024-12-02T12:38:54Z",
+          "updatedAt": "2024-12-02T12:38:54Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6TYKMO",
+          "commit": {
+            "abbreviatedOid": "e450420"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-12-02T12:37:35Z",
+          "updatedAt": "2024-12-02T12:39:38Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nJWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a three-week\r\n```",
+              "createdAt": "2024-12-02T12:37:35Z",
+              "updatedAt": "2024-12-02T12:39:38Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\nCWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a three-week\r\n```",
+              "createdAt": "2024-12-02T12:37:48Z",
+              "updatedAt": "2024-12-02T12:39:38Z"
             }
           ]
         }
