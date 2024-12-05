@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-03T00:19:17.340521+00:00",
+  "timestamp": "2024-12-05T00:18:15.578519+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2555,7 +2555,7 @@
       "id": "I_kwDOJZ2aqs5_xnZj",
       "title": "Add further implementation guidance around when and how to use ttl vs exp claim",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/107",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -2566,8 +2566,8 @@
       ],
       "body": "Also consider the application and usage of a mechanism like etag to allow a consuming party to determine whether their copy of a given status list is the latest.",
       "createdAt": "2024-02-20T07:31:30Z",
-      "updatedAt": "2024-10-09T06:36:34Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-03T20:15:30Z",
+      "closedAt": "2024-12-03T20:15:30Z",
       "comments": [
         {
           "author": "tplooker",
@@ -3962,7 +3962,7 @@
       "id": "I_kwDOJZ2aqs6ekQAA",
       "title": "IANA Registry",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/194",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -3971,8 +3971,8 @@
       "labels": [],
       "body": "- Section 4 of RFC 8126 -> supply registration procedures for the registries\r\n- Define where these registries should be placed",
       "createdAt": "2024-11-14T23:08:58Z",
-      "updatedAt": "2024-11-29T07:37:19Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-03T21:06:55Z",
+      "closedAt": "2024-12-03T21:06:55Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -4024,7 +4024,7 @@
       "id": "I_kwDOJZ2aqs6fiCvr",
       "title": "Re-work Security considerations",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/199",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -4033,8 +4033,8 @@
       "labels": [],
       "body": "- Only cryptographically protected variants are considered --> adjust security considerations accordingly if necessary",
       "createdAt": "2024-11-20T16:48:17Z",
-      "updatedAt": "2024-11-20T17:19:37Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-03T21:03:08Z",
+      "closedAt": "2024-12-03T21:03:08Z",
       "comments": []
     },
     {
@@ -4050,6 +4050,22 @@
       "body": "Re-check validation rules now that the unsigned option is gone and figure out if we can further simplify",
       "createdAt": "2024-11-29T07:50:26Z",
       "updatedAt": "2024-11-29T07:50:26Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 207,
+      "id": "I_kwDOJZ2aqs6iCPUI",
+      "title": "Proposed rewording of section 12.5.  Unlinkability",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/207",
+      "state": "OPEN",
+      "author": "Denisthemalice",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\r\nIt is proposed to include another section called : \r\n\r\n> 12.5.2  Alternative mechanism to the use of Token Status Lists\r\n\r\n\r\nBefore it, a section that will re-use the existing text will be called :\r\n\r\n> 12.5.1  Further recommendations to the use of Token Status Lists\r\n\r\nThe whole text would look as follows:\r\n\r\n**12.5.1  Further recommendations to the use of Token Status Lists**\r\n\r\n   To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED \r\n   that Issuers use batch issuance to issue multiple tokens, see Section 13.1.\r\n\r\n   To avoid further correlatable information by the values of uri and\r\n   index, Issuers are RECOMMENDED to:\r\n\r\n   *  choose non-sequential, pseudo-random or random indices\r\n\r\n   *  use decoy entries to obfuscate the real number of Referenced\r\n      Tokens within a Status List\r\n\r\n   *  choose to deploy and utilize multiple Status Lists simultaneously\r\n\r\n**12.5.2  Alternative mechanism to the use of Token Status Lists**\r\n\r\n   To avoid privacy risks for colluding Relying Parties, Issuers SHOULD \r\n   use batch issuance of multiple Tokens, but it is possible to use a \r\n   mechanism different from the use of Token Status Lists.   In such a \r\n   case, the cryptographically secured data structure derived from the \r\n   Token by the Holder does not contain a reference to a Token Status \r\n   List. \r\n      \r\n   This mechanism is only usable if the Issuer has been able to verify, \r\n   at the time of the issuance of a Token, that an appropriate application\r\n   running under a secure environment is supported by the Holder.\r\n\r\n   Instead of using a protocol for fetching token status lists from a \r\n   Status Issuer, it is possible to take advantage of another protocol \r\n   between an Holder and an Issuer, when that protocol is supported.\r\n\r\n   The fact that this other protocol is supported by an appropriate \r\n   application running under a secure environment can be indicated by \r\n   the Issuer to the Verifier by including into the Token, for example, \r\n   a security policy similar to the certificate policy from X.509 certificates \r\n   (RFC 5280). \r\n   See: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.4\r\n\r\n   When the Relying Party is able to know that this protocol between \r\n   an Holder and an Issuer is supported, it knows that the Issuer will \r\n   be able, when necessary, to either suspend or invalidate any Token \r\n   that is has issued. \r\n    \r\n   The protocol works as follows: \r\n\r\n   from time to time, the Holder queries each Issuer that has issued \r\n   a Token, and if a Token that it has issued needs to be suspended \r\n   or invalidated, the Issuer informs the Holder.   In that case, the \r\n   Holder will  immediately stop creating new cryptographically \r\n   secured data structures derived from suspended or invalidated \r\n   Tokens.\r\n\r\n   When a Token has been invalidated, the process cannot be reversed. \r\n   However, when a Token has been suspended, the process can be reversed.\r\n\r\n   If the Holder has been unable to contact an Issuer during a defined \r\n   period of time, e.g., 24 hours, the Holder will stop creating new \r\n   cryptographically secured data structures derived from Tokens issued\r\n   by that Issuer.\r\n\r\n   In this way, as long as the Holder is able to connect to each of the \r\n   Issuers from time to time, this mechanism can be used in an off-line \r\n   environment. \r\n\r\n   In order to check the suspension or the revocation status of a \r\n   cryptographically secured data structure, neither the Holder nor the \r\n   Verifier needs to fetch additional information.  When digital \r\n   credentials are used, the Holder and the Verifier can interact in a \r\n   proximity mode without using any on-line protocol.\r\n\r\n",
+      "createdAt": "2024-12-04T18:24:48Z",
+      "updatedAt": "2024-12-04T18:24:48Z",
       "closedAt": null,
       "comments": []
     }
@@ -13648,24 +13664,26 @@
       "id": "PR_kwDOJZ2aqs6DhutF",
       "title": "Add further guidance around ttl",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/202",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Resolves #107",
       "createdAt": "2024-11-29T04:43:49Z",
-      "updatedAt": "2024-12-01T23:24:11Z",
+      "updatedAt": "2024-12-03T20:15:29Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "2159cc0776bf8386bc3a9d052335f092b79f9285",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "tl/ttl-guidance",
-      "headRefOid": "91165403f13f8fccc11ce7f54507082754bd363c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "91ac82464f760e8869be020ad8c560e2246971d6",
+      "closedAt": "2024-12-03T20:15:29Z",
+      "mergedAt": "2024-12-03T20:15:29Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "bdc125ddd541cd678ab79f56ac501343c94bef6a"
+      },
       "comments": [
         {
           "author": "tplooker",
@@ -13851,24 +13869,26 @@
       "id": "PR_kwDOJZ2aqs6Dic3s",
       "title": "update security considerations",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/204",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #199",
       "createdAt": "2024-11-29T07:48:29Z",
-      "updatedAt": "2024-12-02T07:39:29Z",
+      "updatedAt": "2024-12-03T21:03:08Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "2159cc0776bf8386bc3a9d052335f092b79f9285",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/security-considerations",
-      "headRefOid": "65757714f5064f73e971e042bee00c11f6adc1ea",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "18c39b01b8d39f39d48d369559752d8218e4193e",
+      "closedAt": "2024-12-03T21:03:08Z",
+      "mergedAt": "2024-12-03T21:03:08Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "7426e72d8beb6afd6c37c4cb6cef10ee2f839bef"
+      },
       "comments": [],
       "reviews": [
         {
@@ -13963,6 +13983,19 @@
               "updatedAt": "2024-12-02T07:39:30Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ToCqP",
+          "commit": {
+            "abbreviatedOid": "18c39b0"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-03T21:02:54Z",
+          "updatedAt": "2024-12-03T21:02:54Z",
+          "comments": []
         }
       ]
     },
@@ -13971,24 +14004,26 @@
       "id": "PR_kwDOJZ2aqs6DuOu4",
       "title": "additional text for iana registry",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/206",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #194 \r\n\r\nWe would register:\r\nCWT Status Mechanisms registry in CWT \r\nJWT Status Mechanisms registry in JWT \r\nStatus Types registry in OAuth parameters\r\n\r\nAny ideas how we could simplify this?",
       "createdAt": "2024-12-02T09:58:27Z",
-      "updatedAt": "2024-12-02T12:44:43Z",
+      "updatedAt": "2024-12-03T21:07:00Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "2159cc0776bf8386bc3a9d052335f092b79f9285",
+      "baseRefOid": "7426e72d8beb6afd6c37c4cb6cef10ee2f839bef",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/iana-registration",
-      "headRefOid": "e4504206213a33772804d928ab713bee6a286837",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "47da5f59f54788e10b35423cafcb6139ade63655",
+      "closedAt": "2024-12-03T21:06:54Z",
+      "mergedAt": "2024-12-03T21:06:54Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "1f6cade632ed31ebea16aae0b0b37597c5818227"
+      },
       "comments": [
         {
           "author": "paulbastian",
@@ -14031,6 +14066,32 @@
               "updatedAt": "2024-12-02T12:39:38Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ToChJ",
+          "commit": {
+            "abbreviatedOid": "eb8996f"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-03T21:02:33Z",
+          "updatedAt": "2024-12-03T21:02:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ToDhq",
+          "commit": {
+            "abbreviatedOid": "eb8996f"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-03T21:05:04Z",
+          "updatedAt": "2024-12-03T21:05:04Z",
+          "comments": []
         }
       ]
     }
