@@ -989,7 +989,7 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 ## JWT Status Mechanism Methods Registry {#iana-registry}
 
-This specification establishes the IANA "Status Mechanism Methods" registry for JWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
+This specification establishes the IANA "JWT Status Mechanism Methods" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism method member and a reference to the specification that defines it.
 
 JWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
@@ -1068,7 +1068,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 ## CWT Status Mechanism Methods Registry {#cwt-iana-registry}
 
-This specification establishes the IANA "Status Mechanism Methods" registry for CWT "status" member values. The registry records the status mechanism method member and a reference to the specification that defines it.
+This specification establishes the IANA "CWT Status Mechanism Methods" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism method member and a reference to the specification that defines it.
 
 CWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
@@ -1107,9 +1107,9 @@ Specification Document(s):
 * Change Controller: IETF
 * Specification Document(s): [](#referenced-token-cose) of this specification
 
-## Status Types Registry {#iana-status-types}
+## OAuth Status Types Registry {#iana-status-types}
 
-This specification establishes the IANA "Status Types" registry for Status List values. The registry records the a human readable label, the bit representation and a common description for it.
+This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records the a human readable label, the bit representation and a common description for it.
 
 Status Types are registered by Specification Required [RFC5226] after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
@@ -1135,7 +1135,7 @@ Status Type Description:
 
 Status Type value:
 
-  > The bit representation of the Status Type in a byte hex representation. Values are filled up with zeros if they have less than 8 bits.
+  > The bit representation of the Status Type in a byte hex representation. Valid Status Type values range from 0x00-0xFF. Values are filled up with zeros if they have less than 8 bits.
 
 Change Controller:
 
@@ -1276,6 +1276,10 @@ for their valuable contributions, discussions and feedback to this specification
 
 # Document History
 {:numbered="false"}
+
+-07
+
+* changes as requested by IANA review
 
 -06
 
