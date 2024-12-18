@@ -911,7 +911,7 @@ The tuple of uri and index inside the Referenced Token are unique and therefore 
 
 ### Colluding Relying Parties
 
-Two or more colluding Relying Parties may link two transaction involving the same Referenced Tokens by comparing the status claims of received Referenced Tokens, and therefore determine that they have interacted with the same Holder.
+Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens, and therefore determine that they have interacted with the same Holder.
 
 To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers use batch issuance to issue multiple Referenced Tokens, see [](#implementation-lifecycle). To avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
 
