@@ -152,8 +152,6 @@ Revocation mechanisms are an essential part for most identity ecosystems. In the
 
 This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.
 
-This specification establishes the IANA "Status Mechanism Methods" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
-
 ## Design Considerations
 
 The decisions taken in this specification aim to achieve the following design goals:
@@ -166,6 +164,10 @@ The decisions taken in this specification aim to achieve the following design go
 * the specification shall support JSON and CBOR based tokens
 * the specification shall not specify key resolution or trust frameworks
 * the specification shall design an extension point to convey information about the status of a token that can be re-used by other mechanisms
+
+## Status Mechanism Registry
+
+This specification establishes the IANA "Status Mechanism Methods" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability adn complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
 
 # Conventions and Definitions
 
@@ -905,15 +907,21 @@ This behaviour could be mitigated by:
 
 ## Unlinkability
 
-Colluding Issuers and Relying Parties have the possibility to link two transactions, as the tuple of `uri` and `index` inside the Referenced Token are unique and therefore traceable data. By comparing the status claims of received Referenced Tokens, two colluding Relying Parties could determine that they have interacted with the same user or an Issuer could trace the usage of its issued Referenced Token by colluding with various Relying Parties. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
+The tuple of uri and index inside the Referenced Token are unique and therefore is traceable data.
 
-To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers use batch issuance to issue multiple tokens, see [](#implementation-lifecycle).
+### Colluding Relying Parties
 
-To avoid further correlatable information by the values of `uri` and `index`, Issuers are RECOMMENDED to:
+Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens, and therefore determine that they have interacted with the same Holder.
+
+To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers use batch issuance to issue multiple Referenced Tokens, see [](#implementation-lifecycle). To avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
 - choose to deploy and utilize multiple Status Lists simultaneously
+
+### Colluding Status Issuer and Relying Party
+
+A Status Issuer and a Relying Party Issuer may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token, and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
 ## Third Party Hosting {#third-party-hosting}
 
@@ -1280,6 +1288,8 @@ for their valuable contributions, discussions and feedback to this specification
 -07
 
 * changes as requested by IANA review
+* emphasize that security and privacy considerations only apply to Status List and no other status mechanisms
+* differentiate unlinkability between Issuer-RP and RP-RP
 
 -06
 
