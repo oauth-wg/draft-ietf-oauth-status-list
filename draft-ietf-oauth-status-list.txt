@@ -128,7 +128,7 @@ Table of Contents
      14.4.  CWT Status Mechanism Methods Registry
        14.4.1.  Registration Template
        14.4.2.  Initial Registry Contents
-     14.5.  Status Types Registry
+     14.5.  OAuth Status Types Registry
        14.5.1.  Registration Template
        14.5.2.  Initial Registry Contents
      14.6.  OAuth Parameters Registration
@@ -593,9 +593,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58400112d10d813742488c4849672f76dcb5e7fdbd0174d116dda1
-   99eb2b6bfe292490ca98ea3e916a6bda1c1057bed063c716e5178830ac6643e1d44f
-   4b780b3987
+   b918000217015d5840be65deff7cff81c67c06c493052b0248d885fa28779f00da36
+   8e9393b8de2fe4f8f88e4c0e42c7f66530fda6ede9ed8cbf9354ac49450c1b7895e3
+   d9e90a5fbe
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -617,12 +617,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      0112d10d813742488c484967  #       "\x01\x12Ñ\x0d\x817BH\x8cHIg"
-      2f76dcb5e7fdbd0174d116dd  #       "/vÜµçý½\x01tÑ\x16Ý"
-      a199eb2b6bfe292490ca98ea  #       "¡\x99ë+kþ)$\x90Ê\x98ê"
-      3e916a6bda1c1057bed063c7  #       ">\x91jkÚ\x1c\x10W¾ÐcÇ"
-      16e5178830ac6643e1d44f4b  #       "\x16å\x17\x880¬fCáÔOK"
-      780b3987                  #       "x\x0b9\x87"
+      be65deff7cff81c67c06c493  #       "¾eÞÿ|ÿ\x81Æ|\x06Ä\x93"
+      052b0248d885fa28779f00da  #       "\x05+\x02HØ\x85ú(w\x9f\x00Ú"
+      368e9393b8de2fe4f8f88e4c  #       "6\x8e\x93\x93¸Þ/äøø\x8eL"
+      0e42c7f66530fda6ede9ed8c  #       "\x0eBÇöe0ý¦íéí\x8c"
+      bf9354ac49450c1b7895e3d9  #       "¿\x93T¬IE\x0c\x1bx\x95ãÙ"
+      e90a5fbe                  #       "é\x0a_¾"
 
 6.  Referenced Token
 
@@ -767,9 +767,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158403f6b565540cdd47ccbfde680315f5cde848f29
-   1e10af4247b7aeaf0c390bb7e8600383f18d7a5b894fcacf327fce4a4392d05e2ccc
-   bac2313db9e6cd29fdff07
+   7374617475736c697374732f315840c308a9c7dab67deb02ba42eabf019190f724ef
+   a4b37ddd1eb7337c1f7865feb4b42dce4e6207a7a86fd423f8f1ad5ea51ae1037050
+   14112489e8b4bca2693434
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -792,12 +792,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         3f6b565540cdd47ccbfde680  #       "?kVU@ÍÔ|Ëýæ\x80"
-         315f5cde848f291e10af4247  #       "1_\Þ\x84\x8f)\x1e\x10¯BG"
-         b7aeaf0c390bb7e8600383f1  #       "·®¯\x0c9\x0b·è`\x03\x83ñ"
-         8d7a5b894fcacf327fce4a43  #       "\x8dz[\x89OÊÏ2\x7fÎJC"
-         92d05e2cccbac2313db9e6cd  #       "\x92Ð^,ÌºÂ1=¹æÍ"
-         29fdff07                  #       ")ýÿ\x07"
+         c308a9c7dab67deb02ba42ea  #       "Ã\x08©ÇÚ¶}ë\x02ºBê"
+         bf019190f724efa4b37ddd1e  #       "¿\x01\x91\x90÷$ï¤³}Ý\x1e"
+         b7337c1f7865feb4b42dce4e  #       "·3|\x1fxeþ´´-ÎN"
+         6207a7a86fd423f8f1ad5ea5  #       "b\x07§¨oÔ#øñ\xad^¥"
+         1ae103705014112489e8b4bc  #       "\x1aá\x03pP\x14\x11$\x89è´¼"
+         a2693434                  #       "¢i44"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1032,8 +1032,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.dIwYvz_MYujcMTbfDehtd20nVjRpvKZx8jfDEDtW-02gLRpL4g8K
-   GEWUG4cmYQozEj6YJkpEJbGvV-zGyOD_-Q
+   nR0bCI6NDMyMDB9.01BIp3TMMePctF9PuQJRyTC3t0fyH2LWOuI9uRjplBRWXlGHQHEg
+   bLa4Ai1dSn1tuzg22jErMMipl1k2Ktr0SA
 
 8.2.  Status List Response
 
@@ -1170,8 +1170,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.dIwYvz_MYujcMTbfDehtd20nVjRpvKZx8jfDEDtW-02gLRpL4g8K
-   GEWUG4cmYQozEj6YJkpEJbGvV-zGyOD_-Q
+   nR0bCI6NDMyMDB9.01BIp3TMMePctF9PuQJRyTC3t0fyH2LWOuI9uRjplBRWXlGHQHEg
+   bLa4Ai1dSn1tuzg22jErMMipl1k2Ktr0SA
 
 9.  Status List Aggregation
 
@@ -1616,8 +1616,10 @@ d2                              # tag(18)
 
 14.2.  JWT Status Mechanism Methods Registry
 
-   This specification establishes the IANA "Status Mechanism Methods"
-   registry for JWT "status" member values.  The registry records the
+   This specification establishes the IANA "JWT Status Mechanism
+   Methods" registry for JWT "status" member values and adds it to the
+   "JSON Web Token (JWT)" registry group at
+   https://www.iana.org/assignments/jwt.  The registry records the
    status mechanism method member and a reference to the specification
    that defines it.
 
@@ -1739,8 +1741,10 @@ d2                              # tag(18)
 
 14.4.  CWT Status Mechanism Methods Registry
 
-   This specification establishes the IANA "Status Mechanism Methods"
-   registry for CWT "status" member values.  The registry records the
+   This specification establishes the IANA "CWT Status Mechanism
+   Methods" registry for CWT "status" member values and adds it to the
+   "CBOR Web Token (CWT) Claims" registry group at
+   https://www.iana.org/assignments/cwt.  The registry records the
    status mechanism method member and a reference to the specification
    that defines it.
 
@@ -1802,11 +1806,13 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 6.3 of this specification
 
-14.5.  Status Types Registry
+14.5.  OAuth Status Types Registry
 
-   This specification establishes the IANA "Status Types" registry for
-   Status List values.  The registry records the a human readable label,
-   the bit representation and a common description for it.
+   This specification establishes the IANA "OAuth Status Types" registry
+   for Status List values and adds it to the "OAuth Parameters" registry
+   group at https://www.iana.org/assignments/oauth-parameters.  The
+   registry records the a human readable label, the bit representation
+   and a common description for it.
 
    Status Types are registered by Specification Required [RFC5226] after
    a two-week review period on the oauth-ext-review@ietf.org mailing
@@ -1844,8 +1850,8 @@ d2                              # tag(18)
    Status Type value:
 
       The bit representation of the Status Type in a byte hex
-      representation.  Values are filled up with zeros if they have less
-      than 8 bits.
+      representation.  Valid Status Type values range from 0x00-0xFF.
+      Values are filled up with zeros if they have less than 8 bits.
 
    Change Controller:
 
@@ -2197,6 +2203,8 @@ Acknowledgments
 Document History
 
    -07
+
+   *  changes as requested by IANA review
 
    *  emphasize that security and privacy considerations only apply to
       Status List and no other status mechanisms
