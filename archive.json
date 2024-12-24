@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-22T00:18:33.566362+00:00",
+  "timestamp": "2024-12-24T00:16:57.461995+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -4058,15 +4058,15 @@
       "id": "I_kwDOJZ2aqs6iCPUI",
       "title": "Proposed rewording of section 12.5.  Unlinkability",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/207",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "\r\nIt is proposed to include another section called : \r\n\r\n> 12.5.2  Alternative mechanism to the use of Token Status Lists\r\n\r\n\r\nBefore it, a section that will re-use the existing text will be called :\r\n\r\n> 12.5.1  Further recommendations to the use of Token Status Lists\r\n\r\nThe whole text would look as follows:\r\n\r\n**12.5.1  Further recommendations to the use of Token Status Lists**\r\n\r\n   To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED \r\n   that Issuers use batch issuance to issue multiple tokens, see Section 13.1.\r\n\r\n   To avoid further correlatable information by the values of uri and\r\n   index, Issuers are RECOMMENDED to:\r\n\r\n   *  choose non-sequential, pseudo-random or random indices\r\n\r\n   *  use decoy entries to obfuscate the real number of Referenced\r\n      Tokens within a Status List\r\n\r\n   *  choose to deploy and utilize multiple Status Lists simultaneously\r\n\r\n**12.5.2  Alternative mechanism to the use of Token Status Lists**\r\n\r\n   To avoid privacy risks for colluding Relying Parties, Issuers SHOULD \r\n   use batch issuance of multiple Tokens, but it is possible to use a \r\n   mechanism different from the use of Token Status Lists.   In such a \r\n   case, the cryptographically secured data structure derived from the \r\n   Token by the Holder does not contain a reference to a Token Status \r\n   List. \r\n      \r\n   This mechanism is only usable if the Issuer has been able to verify, \r\n   at the time of the issuance of a Token, that an appropriate application\r\n   running under a secure environment is supported by the Holder.\r\n\r\n   Instead of using a protocol for fetching token status lists from a \r\n   Status Issuer, it is possible to take advantage of another protocol \r\n   between an Holder and an Issuer, when that protocol is supported.\r\n\r\n   The fact that this other protocol is supported by an appropriate \r\n   application running under a secure environment can be indicated by \r\n   the Issuer to the Verifier by including into the Token, for example, \r\n   a security policy similar to the certificate policy from X.509 certificates \r\n   (RFC 5280). \r\n   See: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.4\r\n\r\n   When the Relying Party is able to know that this protocol between \r\n   an Holder and an Issuer is supported, it knows that the Issuer will \r\n   be able, when necessary, to either suspend or invalidate any Token \r\n   that is has issued. \r\n    \r\n   The protocol works as follows: \r\n\r\n   from time to time, the Holder queries each Issuer that has issued \r\n   a Token, and if a Token that it has issued needs to be suspended \r\n   or invalidated, the Issuer informs the Holder.   In that case, the \r\n   Holder will  immediately stop creating new cryptographically \r\n   secured data structures derived from suspended or invalidated \r\n   Tokens.\r\n\r\n   When a Token has been invalidated, the process cannot be reversed. \r\n   However, when a Token has been suspended, the process can be reversed.\r\n\r\n   If the Holder has been unable to contact an Issuer during a defined \r\n   period of time, e.g., 24 hours, the Holder will stop creating new \r\n   cryptographically secured data structures derived from Tokens issued\r\n   by that Issuer.\r\n\r\n   In this way, as long as the Holder is able to connect to each of the \r\n   Issuers from time to time, this mechanism can be used in an off-line \r\n   environment. \r\n\r\n   In order to check the suspension or the revocation status of a \r\n   cryptographically secured data structure, neither the Holder nor the \r\n   Verifier needs to fetch additional information.  When digital \r\n   credentials are used, the Holder and the Verifier can interact in a \r\n   proximity mode without using any on-line protocol.\r\n\r\n",
       "createdAt": "2024-12-04T18:24:48Z",
-      "updatedAt": "2024-12-13T12:53:37Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-22T23:56:15Z",
+      "closedAt": "2024-12-22T23:56:15Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -4159,15 +4159,15 @@
       "id": "I_kwDOJZ2aqs6jM65p",
       "title": "new Feedback from IANA Operations Manager",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/208",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "From email communication:\r\n\r\n\r\n> 1) It's not clear what the upper numeric boundary for the \"Value\" field is for the Status Type values in Section 14.5. Could you add a sentence like \"Assignable [valid?] Status Type values range from 0x00-0xFF\" [if that's accurate]?\r\n> \r\n> 2) Almost every registry at https://www.iana.org/assignments/oauth-parameters has a name that begins with the string  \"OAuth.\" Would it be appropriate to change the name of the \"Status Types\" registry to \"OAuth Status Types\"?\r\n> \r\n> 3) In the first paragraph of each subsection that describes a new registry, the registry name is presented in quotation marks, but it doesn't match the registry name that appears as the title of the subsection. It's missing the \"JWT\" or \"CWT\" (or \"OAuth\") prefix. \r\n> \r\n> 4) Locations: I see that you've listed a URL for each new registry below. Can you add both this and the registry group name to each subsection? \r\n> \r\n> To address #3 and #4, I can suggest this text:\r\n> \r\n> OLD: This specification establishes the IANA \"Status Mechanism Methods\" registry for JWT \"status\" member values. The registry records the status mechanism method member and a reference to the specification that defines it.\r\n> \r\n> NEW: This specification establishes the IANA \"JWT Status Mechanism Methods\" registry for JWT \"status\" member values and adds it to the \"JSON Web Token (JWT)\" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism method member and a reference to the specification that defines it.\r\n> \r\n> OLD: This specification establishes the IANA \"Status Mechanism Methods\" registry for CWT \"status\" member values. The registry records the status mechanism method member and a reference to the specification that defines it.\r\n> \r\n> NEW: This specification establishes the IANA \"CWT Status Mechanism Methods\" registry for CWT \"status\" member values and adds it to the \"CBOR Web Token (CWT) Claims\" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism method member and a reference to the specification that defines it.\r\n> \r\n> OLD: This specification establishes the IANA \"Status Types\" registry for Status List values. The registry records the a human readable label, the bit representation and a common description for it.\r\n> \r\n> NEW: This specification establishes the IANA \"OAuth Status Types\" registry for Status List values and adds it to the \"OAuth Parameters\" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records the a human readable label, the bit representation and a common description for it. Assignable Status Type values range from 0x00-0xFF [again, assuming this is correct]. \r\n> \r\n> Finally, one question, and I don't know whether this is at all relevant to your use case: would it be appropriate to reserve any values in the new Status Types registry, whether for Private Use, Experimental Use, or future extensibility? You can find definitions of the terms \"Reserved,\" \"Private Use,\" and \"Experimental Use\" in Section 6 of RFC 8126:\r\n> \r\n> https://www.rfc-editor.org/rfc/rfc8126.html\r\n> ",
       "createdAt": "2024-12-13T10:37:08Z",
-      "updatedAt": "2024-12-13T10:37:08Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-22T23:57:01Z",
+      "closedAt": "2024-12-22T23:57:01Z",
       "comments": []
     },
     {
@@ -4175,15 +4175,15 @@
       "id": "I_kwDOJZ2aqs6jN6D9",
       "title": "Revocation and suspension are not that complicated and there are easy tradeoffs",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/209",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "In #207, Paul wrote:\r\n\r\n> Revocation is complicated and there are no easy tradeoffs, we shouldn't let the reader believe this.\r\n\r\nWhat you write was true before smart phones existed, but the existence of smart phones offers new possibilities. \r\nIf / when trusted apps. can be used on a smart phone, then other status methods become possible.\r\n\r\n**Revocation and suspension of digital credentials**\r\n\r\nWhen a Holder is requesting a digital credential, it needs to know the url of the Issuer, while the Issuer needs to know the characteristics of the Holder, e.g., using attestations. This allows to establish a secure channel between them. That channel can then be used to support a \"status protocol\" between a Holder and an Issuer.\r\n\r\nIt is important to notice that this alternative method can support both SUSPENSION and revocation. \r\nAs soon as either a suspension or a revocation is decided by the Issuer, it can be taken into account either very quickly by the app. if the smartphone is connected to the Internet, e.g. within five minutes when the app. polls each Issuer every five minutes, or within 24 hours, if the smartphone is not connected to the Internet.\r\n\r\nIn addition, this alternative method natively supports the issuer-verifier unlinkability characteristic. \r\n\r\nIn terms of energy saving, it is \"green\", since no data centre needs to be used, e.g., to make available large numbers of Token Status Lists.\r\n\r\nUp to now, I didn't proposed a name to identify this alternative method. I propose: **status_protocol**\r\n\r\n   *  Status Method Value: status_protocol\r\n\r\n   *  Status Method Description: A protocol between a Holder and an Issuer where the Issuer instructs the Holder to revoke, \r\n      suspend or reactivate one or more tokens.\r\n\r\nTo close the loop, the **status_protocol** method can be considered to be an easy tradeoff. \r\n\r\n:-)\r\n\r\nMore seriously, it shifts the problem into two other areas: \r\n-\tthe downloading of wallet applications into smart phones by trusted wallets providers, and\r\n-\tthe development of a status protocol between an Holder and an Issuer. \r\n        In that case, the status protocol could be defined in a standard track RFC.\r\n\r\n\r\nR**evocation and suspension at once of all the digital credentials contained in a lost or stolen digital identity wallet**\r\n\r\nA similar approach can be used to address the case where the Holder is lost or stolen (in practice, when the smart phone is lost or stolen). Instead of placing the burden on the user to contact individually each Issuer that issued a digital credential, it is easier for the user to use a single point of contact: the Holder Provider (i.e., the app. provider).\r\n\r\nAn app. on a smart phone, already regularly connects to its provider, e.g., to check for software updates. \r\nAn additional protocol to revoke, suspend or reactivate all the digital credentials / tokens hosted by the Holder would be added. \r\n",
       "createdAt": "2024-12-13T12:52:35Z",
-      "updatedAt": "2024-12-14T17:40:07Z",
-      "closedAt": null,
+      "updatedAt": "2024-12-23T00:01:33Z",
+      "closedAt": "2024-12-22T23:56:16Z",
       "comments": [
         {
           "author": "c2bo",
@@ -4212,8 +4212,31 @@
           "body": "@ Paul:\r\n\r\nThis draft is only one part of a large puzzle that may be called a Framework or an Architecture and without a global view of this puzzle, it is difficult to identify the additional pieces of the puzzle that are needed.\r\n\r\nThere is no free lunch and they are two difficulties. Defining a status protocol between a Holder and an Issuer would not be that difficult. A major difficulty is the one you indicate below:\r\n\r\nYou wrote:\r\n\r\n> Here are a few points that you did not seem to consider:\r\n\r\n> \r\n\r\n> \u00b7\ttrusting the wallet/holder/smartphone is a difficult assumption and as Christian points out, your model doesn't seem to fit very well with Verifiable Credentials (or saying Referenced Tokens in the context of status mechanisms). Similar things have been done with EAC protocol in the German eID Card, which did not feature issuance and bringing this to the smartphone world revealed some significant challenges with the Secure Elements, which was part of the problem smart-eID project was discontinued. **_TEEs on today's smartphones are not open to deploying your own trusted applets either._**\r\n\r\nYour are last sentence is absolutely true.\r\n\r\nThere is a need to be able to download in the TEE (Trusted Execution Environment) of a smartphone one or more TAs that are **not** provided by the smartphone manufacturer or the device manager. The hardware is already there, the concepts and the architecture are already there as well, however the software to download from different trusted repositories (and then execute) multiple TAs in a TEE is not yet available.\r\n\r\nIn the Android environment, when using Trusty, currently multiple TAs cannot (yet) be downloaded into the TEE:\r\n\r\n> \"Currently all Trusty applications are developed by a single party and packaged with the Trusty kernel image. The entire image is signed and verified by the bootloader during boot. Third-party application development is not supported in Trusty at this time.\"\r\n\r\n**Source**: https://source.android.com/docs/security/features/trusty?hl=en#third-party_trusty_applications\r\n\r\nRFC 9397, which is an Informational RFC, describes a Trusted Execution Environment Provisioning (TEEP) Architecture. \r\nI don't know when / if Trusty will be extended to support some of the concepts described in this RFC.\r\n\r\nIf the specification and the development of the status_protocol method are done in parallel to the development of a TAM (Trusted Application Manager), the two developments might possibly end-up within the same time frame.\r\n\r\nYou wrote:\r\n\r\n> \u00b7\tyou put significant burdens in terms of scalability on issuers and holders, as all issuers need daily communication with all holders, which is much more traffic compared to status list. Also this puts significant availability requirements to all issuers.\r\n\r\nWell, the size of the messages that will need to be exchanged will be very small. There will be at least two orders of magnitude difference for the traffic between the two methods. Issuers only need to be online once a day. No response from an Issuer does not block the system: it only delays the moment when the suspension or the revocation will be enforced by the Holder. This is much better than the case when a Status Issuer is not available online: it blocks the system.\r\n\r\nYou wrote:\r\n\r\n> \u00b7\tyour latter approach is actually more reasonable and similar things are being considered in eIDAS already under the term Wallet Instance Attestation.\r\n\r\n\r\nI have not seen \"similar things are being considered in eIDAS already under the term Wallet Instance Attestation\". \r\nWould you have a pointer ?\r\n\r\n**MY OWN CONCLUSION**\r\n\r\nAt the moment, it might be quite hard for a reader to think that another status method can be used and that this method is capable to support functionality that is not supported by the status_list method: suspension can be supported while the Issuer-Verifier unlinkability is natively supported.\r\n\r\nI have provided a detailed description of this method by raising two issues. The goal was not to place this detailed description in the core of this document, but only to make it understandable.\r\n\r\nI propose that the draft should indicate in clause 12.5 (Unlinkability) that another method, based on a different principle, can be used, supporting additional functionality and to include a one page informative annex that gives a flavour of it.\r\n\r\nIf you agree in principle, I let you add in the core of the document a few sentences, to explain this and then I can provide the one page explanation.\r\n\r\n**One additional comment:**\r\n\r\nAlong this discussion, another topic has emerged: in case of the loss or the theft of the smartphone, the ability to revoke or suspend the Holder as a whole instead of revoking or suspending the digital credentials [Tokens] one by one by every Issuer.\r\nI believe that this should be mentioned \"somewhere\" in the draft.\r\n\r\nYou finally wrote:\r\n\r\n> I think you should either start your own draft or discuss this on OAuth/Spice mailing list.\r\n\r\nThe question is whether some WG members would be interested to participate to this effort, but the timing is not well chosen and I will wait until next year before initiating a discussion on this topic on the mailing lists.\r\n",
           "createdAt": "2024-12-14T17:40:06Z",
           "updatedAt": "2024-12-14T17:40:06Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "As you point out that using TEEs in the way you envision is currently not possible, I think its fair to say that tradeoffs have to be made in revocation. At least I'm only considering methods that are actually doable with today's technology and how it is deployed.\r\n\r\nBeside that I merged the suggestions you had and clarified that jother status mechnaisms have different tradeoffs and security and privacy consideration. I would refrain from adding text on the potential mechanisms, as I haven't seen this in other RFCs and naming a single one would be descriminating to other status ideas.",
+          "createdAt": "2024-12-23T00:01:32Z",
+          "updatedAt": "2024-12-23T00:01:32Z"
         }
       ]
+    },
+    {
+      "number": 212,
+      "id": "I_kwDOJZ2aqs6kNJnw",
+      "title": "Drop \"Methods\" from registry names",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/212",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "              I've seen that we currently say:\r\n\r\n> IANA \" JWT Status Mechanism Methods\" registry ...\r\n\r\nI was wondering if we should cut out \"Methods\"?\r\n\r\n_Originally posted by @paulbastian in https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/211#issuecomment-2544818677_\r\n            ",
+      "createdAt": "2024-12-22T23:55:53Z",
+      "updatedAt": "2024-12-22T23:55:53Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -14246,24 +14269,26 @@
       "id": "PR_kwDOJZ2aqs6FRcnD",
       "title": "changes as requested by IANA review",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/210",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #208 ",
       "createdAt": "2024-12-15T18:58:46Z",
-      "updatedAt": "2024-12-15T22:34:17Z",
+      "updatedAt": "2024-12-22T23:57:04Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "1f6cade632ed31ebea16aae0b0b37597c5818227",
+      "baseRefOid": "98bf4d54f84964fba2eec192cd1a77387ba22d71",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "iana_feedback_v2",
-      "headRefOid": "8ec49ea3a67eb18235571beae4f0fd42022738b5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "4eee4e2f6f23e3a450e920d0382938151142545b",
+      "closedAt": "2024-12-22T23:57:00Z",
+      "mergedAt": "2024-12-22T23:57:00Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "0d2827dd1720eabcd4c818900f098b1849311e67"
+      },
       "comments": [],
       "reviews": [
         {
@@ -14278,6 +14303,19 @@
           "createdAt": "2024-12-15T22:34:17Z",
           "updatedAt": "2024-12-15T22:34:17Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6WL37G",
+          "commit": {
+            "abbreviatedOid": "8ec49ea"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-22T20:33:34Z",
+          "updatedAt": "2024-12-22T20:33:34Z",
+          "comments": []
         }
       ]
     },
@@ -14286,24 +14324,26 @@
       "id": "PR_kwDOJZ2aqs6FRgt6",
       "title": "differentiate unlinkability between Issuer-RP and RP-RP",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/211",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #207 \r\nCloses #209 ",
       "createdAt": "2024-12-15T19:35:31Z",
-      "updatedAt": "2024-12-18T09:24:36Z",
+      "updatedAt": "2024-12-22T23:56:19Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "1f6cade632ed31ebea16aae0b0b37597c5818227",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "unlinability",
       "headRefOid": "a8c1b4417d309c45ac73cf2d9d5ece7da46ad97c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-12-22T23:56:15Z",
+      "mergedAt": "2024-12-22T23:56:15Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "98bf4d54f84964fba2eec192cd1a77387ba22d71"
+      },
       "comments": [
         {
           "author": "paulbastian",
@@ -14318,6 +14358,13 @@
           "body": "> I've seen that we currently say:\r\n> \r\n> > IANA \" JWT Status Mechanism Methods\" registry ...\r\n> \r\n> I was wondering if we should cut out \"Methods\"?\r\n\r\nHmm, Yeah I guess it is somewhat redundant - would be fine for me",
           "createdAt": "2024-12-18T09:21:16Z",
           "updatedAt": "2024-12-18T09:21:16Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Hmm, Yeah I guess it is somewhat redundant - would be fine for me\r\n\r\nYep I agree \"Methods\" in this context is redundant, so we should be able to drop.",
+          "createdAt": "2024-12-22T20:32:45Z",
+          "updatedAt": "2024-12-22T20:32:45Z"
         }
       ],
       "reviews": [
@@ -14352,6 +14399,19 @@
           "body": "",
           "createdAt": "2024-12-18T09:24:36Z",
           "updatedAt": "2024-12-18T09:24:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6WL358",
+          "commit": {
+            "abbreviatedOid": "a8c1b44"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-12-22T20:32:53Z",
+          "updatedAt": "2024-12-22T20:32:53Z",
           "comments": []
         }
       ]
