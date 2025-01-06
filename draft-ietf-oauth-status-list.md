@@ -167,7 +167,7 @@ The decisions taken in this specification aim to achieve the following design go
 
 ## Status Mechanism Registry
 
-This specification establishes the IANA "Status Mechanism Methods" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability adn complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
+This specification establishes the IANA "Status Mechanisms" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability adn complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
 
 # Conventions and Definitions
 
@@ -995,11 +995,11 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-jwt) of this specification
 
-## JWT Status Mechanism Methods Registry {#iana-registry}
+## JWT Status Mechanisms Registry {#iana-registry}
 
-This specification establishes the IANA "JWT Status Mechanism Methods" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism method member and a reference to the specification that defines it.
+This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism method member and a reference to the specification that defines it.
 
-JWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a three-week
+JWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.
@@ -1074,11 +1074,11 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-cwt) of this specification
 
-## CWT Status Mechanism Methods Registry {#cwt-iana-registry}
+## CWT Status Mechanisms Registry {#cwt-iana-registry}
 
-This specification establishes the IANA "CWT Status Mechanism Methods" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism method member and a reference to the specification that defines it.
+This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism method member and a reference to the specification that defines it.
 
-CWT Status Mechanism Methods are registered by Specification Required [RFC5226] after a three-week
+CWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
@@ -1287,6 +1287,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* rename Status Mechanism Methods registry to Status Mechanisms registry
 * changes as requested by IANA review
 * emphasize that security and privacy considerations only apply to Status List and no other status mechanisms
 * differentiate unlinkability between Issuer-RP and RP-RP
