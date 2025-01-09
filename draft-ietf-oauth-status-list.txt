@@ -120,12 +120,12 @@ Table of Contents
    14. IANA Considerations
      14.1.  JSON Web Token Claims Registration
        14.1.1.  Registry Contents
-     14.2.  JWT Status Mechanism Methods Registry
+     14.2.  JWT Status Mechanisms Registry
        14.2.1.  Registration Template
        14.2.2.  Initial Registry Contents
      14.3.  CBOR Web Token Claims Registration
        14.3.1.  Registry Contents
-     14.4.  CWT Status Mechanism Methods Registry
+     14.4.  CWT Status Mechanisms Registry
        14.4.1.  Registration Template
        14.4.2.  Initial Registry Contents
      14.5.  OAuth Status Types Registry
@@ -280,13 +280,13 @@ Table of Contents
 
 1.4.  Status Mechanism Registry
 
-   This specification establishes the IANA "Status Mechanism Methods"
-   registry for status mechanism and registers the members defined by
-   this specification.  Other specifications can register other members
-   used for status retrieval.  Other status mechanisms may have
-   different tradeoffs regarding security, privacy, scalability adn
-   complexity.  The privacy and security considerations in this document
-   only represent the properties of the Status List mechanism.
+   This specification establishes the IANA "Status Mechanisms" registry
+   for status mechanism and registers the members defined by this
+   specification.  Other specifications can register other members used
+   for status retrieval.  Other status mechanisms may have different
+   tradeoffs regarding security, privacy, scalability adn complexity.
+   The privacy and security considerations in this document only
+   represent the properties of the Status List mechanism.
 
 2.  Conventions and Definitions
 
@@ -593,9 +593,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840eb082585425084378aa988b0eb0074313265e4934a23717103
-   24fcede1e0fd6f509d159260de0fdb35c3bb63ab6945907e0bbbcdee4a98e51e37b7
-   78fc7fa76b
+   b918000217015d5840bf08e811610219f711a2dccbf0c6420f1ca74ff9254bc433d2
+   fe12e3fe291e541b4e2c918f8747088ccf8a5248e5c3c34ebc6ed77623f8e2aa3c35
+   e44453b09c
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -617,12 +617,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      eb082585425084378aa988b0  #       "ë\x08%\x85BP\x847\x8a©\x88°"
-      eb0074313265e4934a237171  #       "ë\x00t12eä\x93J#qq"
-      0324fcede1e0fd6f509d1592  #       "\x03$üíáàýoP\x9d\x15\x92"
-      60de0fdb35c3bb63ab694590  #       "`Þ\x0fÛ5Ã»c«iE\x90"
-      7e0bbbcdee4a98e51e37b778  #       "~\x0b»ÍîJ\x98å\x1e7·x"
-      fc7fa76b                  #       "ü\x7f§k"
+      bf08e811610219f711a2dccb  #       "¿\x08è\x11a\x02\x19÷\x11¢ÜË"
+      f0c6420f1ca74ff9254bc433  #       "ðÆB\x0f\x1c§Où%KÄ3"
+      d2fe12e3fe291e541b4e2c91  #       "Òþ\x12ãþ)\x1eT\x1bN,\x91"
+      8f8747088ccf8a5248e5c3c3  #       "\x8f\x87G\x08\x8cÏ\x8aRHåÃÃ"
+      4ebc6ed77623f8e2aa3c35e4  #       "N¼n×v#øâª<5ä"
+      4453b09c                  #       "DS°\x9c"
 
 6.  Referenced Token
 
@@ -767,9 +767,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840251dd131b5b24229db40e9611f3f882e9840be
-   d42f96b0bd0179004cf78187b59fba7623454c7fb9fc0d6a2a747e01db39d4b9ed6c
-   7ca13a42960490128413f0
+   7374617475736c697374732f315840f93230ccdf50b77532fafcbdc70ca40be54101
+   a37fa12c0245c2aa7bd5eb28e97074015e6285c4190f5e7ca354ca1db25d5e744806
+   71614a4df1546e2ff56d93
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -792,12 +792,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         251dd131b5b24229db40e961  #       "%\x1dÑ1µ²B)Û@éa"
-         1f3f882e9840bed42f96b0bd  #       "\x1f?\x88.\x98@¾Ô/\x96°½"
-         0179004cf78187b59fba7623  #       "\x01y\x00L÷\x81\x87µ\x9fºv#"
-         454c7fb9fc0d6a2a747e01db  #       "EL\x7f¹ü\x0dj*t~\x01Û"
-         39d4b9ed6c7ca13a42960490  #       "9Ô¹íl|¡:B\x96\x04\x90"
-         128413f0                  #       "\x12\x84\x13ð"
+         f93230ccdf50b77532fafcbd  #       "ù20ÌßP·u2úü½"
+         c70ca40be54101a37fa12c02  #       "Ç\x0c¤\x0båA\x01£\x7f¡,\x02"
+         45c2aa7bd5eb28e97074015e  #       "EÂª{Õë(épt\x01^"
+         6285c4190f5e7ca354ca1db2  #       "b\x85Ä\x19\x0f^|£TÊ\x1d²"
+         5d5e74480671614a4df1546e  #       "]^tH\x06qaJMñTn"
+         2ff56d93                  #       "/õm\x93"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1032,8 +1032,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.PgZE-D-6OSl1l9J1JjLLDmKCqVWyIc3YV2f9fax-60_WZf9lanN2
-   IQGHGWWeMMbedbsXnX_l725Jol0ryeyW-g
+   nR0bCI6NDMyMDB9.yzgeOFOaKAkm8c9HumjSqQ7vLLD-rbePdDiUm5W3GEEI-YnJrVFV
+   pXm2NKEZyJgPG1y6KV46kC7tDBBm6aGHNA
 
 8.2.  Status List Response
 
@@ -1170,8 +1170,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.PgZE-D-6OSl1l9J1JjLLDmKCqVWyIc3YV2f9fax-60_WZf9lanN2
-   IQGHGWWeMMbedbsXnX_l725Jol0ryeyW-g
+   nR0bCI6NDMyMDB9.yzgeOFOaKAkm8c9HumjSqQ7vLLD-rbePdDiUm5W3GEEI-YnJrVFV
+   pXm2NKEZyJgPG1y6KV46kC7tDBBm6aGHNA
 
 9.  Status List Aggregation
 
@@ -1614,16 +1614,15 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 5.1 of this specification
 
-14.2.  JWT Status Mechanism Methods Registry
+14.2.  JWT Status Mechanisms Registry
 
-   This specification establishes the IANA "JWT Status Mechanism
-   Methods" registry for JWT "status" member values and adds it to the
-   "JSON Web Token (JWT)" registry group at
-   https://www.iana.org/assignments/jwt.  The registry records the
-   status mechanism method member and a reference to the specification
-   that defines it.
+   This specification establishes the IANA "JWT Status Mechanisms"
+   registry for JWT "status" member values and adds it to the "JSON Web
+   Token (JWT)" registry group at https://www.iana.org/assignments/jwt.
+   The registry records the status mechanism member and a reference to
+   the specification that defines it.
 
-   JWT Status Mechanism Methods are registered by Specification Required
+   JWT Status Mechanisms are registered by Specification Required
    [RFC5226] after a three-week review period on the jwt-reg-
    review@ietf.org mailing list, on the advice of one or more Designated
    Experts.  However, to allow for the allocation of names prior to
@@ -1632,7 +1631,7 @@ d2                              # tag(18)
 
    Registration requests sent to the mailing list for review should use
    an appropriate subject (e.g., "Request to register JWT Status
-   Mechanism Method: example").
+   Mechanism: example").
 
    Within the review period, the Designated Expert(s) will either
    approve or deny the registration request, communicating this decision
@@ -1646,16 +1645,16 @@ d2                              # tag(18)
 
 14.2.1.  Registration Template
 
-   Status Method Value:
+   Status Mechanism Value:
 
       The name requested (e.g., "status_list").  The name is case
       sensitive.  Names may not match other registered names in a case-
       insensitive manner unless the Designated Experts state that there
       is a compelling reason to allow an exception.
 
-   Status Method Description:
+   Status Mechanism Description:
 
-      Brief description of the status mechanism method.
+      Brief description of the status mechanism.
 
    Change Controller:
 
@@ -1672,9 +1671,9 @@ d2                              # tag(18)
 
 14.2.2.  Initial Registry Contents
 
-   *  Status Method Value: status_list
+   *  Status Mechanism Value: status_list
 
-   *  Status Method Description: A status list containing up-to-date
+   *  Status Mechanism Description: A status list containing up-to-date
       status information on multiple tokens.
 
    *  Change Controller: IETF
@@ -1739,16 +1738,16 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 5.2 of this specification
 
-14.4.  CWT Status Mechanism Methods Registry
+14.4.  CWT Status Mechanisms Registry
 
-   This specification establishes the IANA "CWT Status Mechanism
-   Methods" registry for CWT "status" member values and adds it to the
-   "CBOR Web Token (CWT) Claims" registry group at
+   This specification establishes the IANA "CWT Status Mechanisms"
+   registry for CWT "status" member values and adds it to the "CBOR Web
+   Token (CWT) Claims" registry group at
    https://www.iana.org/assignments/cwt.  The registry records the
-   status mechanism method member and a reference to the specification
-   that defines it.
+   status mechanism member and a reference to the specification that
+   defines it.
 
-   CWT Status Mechanism Methods are registered by Specification Required
+   CWT Status Mechanisms are registered by Specification Required
    [RFC5226] after a three-week review period on the cwt-reg-
    review@ietf.org mailing list, on the advice of one or more Designated
    Experts.  However, to allow for the allocation of names prior to
@@ -1757,7 +1756,7 @@ d2                              # tag(18)
 
    Registration requests sent to the mailing list for review should use
    an appropriate subject (e.g., "Request to register CWT Status
-   Mechanism Method: example").
+   Mechanism: example").
 
    Within the review period, the Designated Expert(s) will either
    approve or deny the registration request, communicating this decision
@@ -1771,16 +1770,16 @@ d2                              # tag(18)
 
 14.4.1.  Registration Template
 
-   Status Method Value:
+   Status Mechanism Value:
 
       The name requested (e.g., "status_list").  The name is case
       sensitive.  Names may not match other registered names in a case-
       insensitive manner unless the Designated Experts state that there
       is a compelling reason to allow an exception.
 
-   Status Method Description:
+   Status Mechanism Description:
 
-      Brief description of the status mechanism method.
+      Brief description of the status mechanism.
 
    Change Controller:
 
@@ -1797,9 +1796,9 @@ d2                              # tag(18)
 
 14.4.2.  Initial Registry Contents
 
-   *  Status Method Value: status_list
+   *  Status Mechanism Value: status_list
 
-   *  Status Method Description: A status list containing up-to-date
+   *  Status Mechanism Description: A status list containing up-to-date
       status information on multiple tokens.
 
    *  Change Controller: IETF
@@ -2203,6 +2202,9 @@ Acknowledgments
 Document History
 
    -07
+
+   *  rename Status Mechanism Methods registry to Status Mechanisms
+      registry
 
    *  changes as requested by IANA review
 
