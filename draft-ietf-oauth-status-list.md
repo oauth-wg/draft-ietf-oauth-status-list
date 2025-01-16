@@ -21,7 +21,7 @@ author:
     email: paul.bastian@posteo.de
  -
     fullname: Christian Bormann
-    organization: Robert Bosch GmbH
+    organization: SPRIND
     email: chris.bormann@gmx.de
 
 normative:
