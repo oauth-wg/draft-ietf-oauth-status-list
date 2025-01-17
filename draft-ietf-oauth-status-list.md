@@ -104,6 +104,8 @@ informative:
     title: W3C Bitstring Status List v1.0
     target: "https://www.w3.org/TR/vc-bitstring-status-list/"
     date: "18.12.2024"
+
+
 --- abstract
 
 This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
