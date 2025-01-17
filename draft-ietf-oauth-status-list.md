@@ -1317,6 +1317,7 @@ for their valuable contributions, discussions and feedback to this specification
 * changes as requested by IANA review
 * emphasize that security and privacy considerations only apply to Status List and no other status mechanisms
 * differentiate unlinkability between Issuer-RP and RP-RP
+* add prior art
 
 -06
 
