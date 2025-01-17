@@ -29,7 +29,7 @@ normative:
   RFC1951: RFC1951
   RFC2046: RFC2046
   RFC3986: RFC3986
-  RFC6125: RFC6125
+  RFC5226: RFC5226
   RFC6838: RFC6838
   RFC7515: RFC7515
   RFC7519: RFC7519
@@ -82,8 +82,28 @@ informative:
     author:
       org: "ISO/IEC JTC 1/SC 17"
     title: "ISO/IEC 18013-5:2021 ISO-compliant driving licence"
-
-
+  smith2020let:
+    author:
+      - name: "Trevor Smith"
+        org: "Brigham Young University"
+      - name: "Luke Dickinson"
+        org: "Brigham Young University"
+      - name: "Kent Seamons"
+        org: "Brigham Young University"
+    title: "Let's revoke: Scalable global certificate revocation"
+    seriesinfo: "Network and Distributed Systems Security (NDSS) Symposium 2020"
+    target: "https://www.ndss-symposium.org/ndss-paper/lets-revoke-scalable-global-certificate-revocation/"
+  W3C.SL:
+    author:
+      - name: Dave Longley
+        org: Digital Bazaar
+      - name: Manu Sporny
+        org: Digital Bazaar
+      - name: Orie Steele
+        org: Transmute
+    title: W3C Bitstring Status List v1.0
+    target: "https://www.w3.org/TR/vc-bitstring-status-list/"
+    date: "18.12.2024"
 --- abstract
 
 This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
@@ -165,9 +185,15 @@ The decisions taken in this specification aim to achieve the following design go
 * the specification shall not specify key resolution or trust frameworks
 * the specification shall design an extension point to convey information about the status of a token that can be re-used by other mechanisms
 
+## Prior Work
+
+Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for status mechanisms such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
+
 ## Status Mechanism Registry
 
-This specification establishes the IANA "Status Mechanisms" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability adn complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
+This specification establishes the IANA "Status Mechanisms" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
+
+Other status mechanisms may have different tradeoffs regarding security, privacy, scalability adn complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
 
 # Conventions and Definitions
 
@@ -999,7 +1025,7 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
-JWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
+JWT Status Mechanisms are registered by Specification Required {{RFC5226}} after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.
@@ -1078,7 +1104,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
-CWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
+CWT Status Mechanisms are registered by Specification Required {{RFC5226}} after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
@@ -1119,7 +1145,7 @@ Specification Document(s):
 
 This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records the a human readable label, the bit representation and a common description for it.
 
-Status Types are registered by Specification Required [RFC5226] after a two-week
+Status Types are registered by Specification Required {{RFC5226}} after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
