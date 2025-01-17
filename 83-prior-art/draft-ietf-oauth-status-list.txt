@@ -73,7 +73,7 @@ Table of Contents
      1.2.  Rationale
      1.3.  Design Considerations
      1.4.  Prior Work
-     1.5.  Status Mechanism Registry
+     1.5.  Status Mechanisms Registry
    2.  Conventions and Definitions
    3.  Terminology
    4.  Status List
@@ -283,13 +283,13 @@ Table of Contents
 
    Representing a status with bits in array is a rather old and well-
    known concept in computer science and there has been prior work to
-   use this for status mechanisms such as a paper by Smith et al.
-   [smith2020let] that proposed a mechanism called Certificate
-   Revocation Vectors based on xz compressed bit vectors for each
-   expiration day and the W3C bit Status List [W3C.SL] that similarly
-   uses a compressed bit representation.
+   use this for revocation and status management such as a paper by
+   Smith et al. [smith2020let] that proposed a mechanism called
+   Certificate Revocation Vectors based on xz compressed bit vectors for
+   each expiration day and the W3C bit Status List [W3C.SL] that
+   similarly uses a compressed bit representation.
 
-1.5.  Status Mechanism Registry
+1.5.  Status Mechanisms Registry
 
    This specification establishes the IANA "Status Mechanisms" registry
    for status mechanism and registers the members defined by this
@@ -606,9 +606,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58403a5d1e34cbd09ceb1bb07d8d2351e27fa54f35b0aed5482f75
-   83235304c3b4ebb482ea38e7b6d7abe8ca40ef0c16413a231bb2fc8f1daf9bc7df2b
-   cf844b4fae
+   b918000217015d5840347aa45ed92a5e29b07e59603ccf22fc194a90112ffc06c491
+   a1681652e0d21ce41abe6b1b387f94b1bf38957e34febc566fad5450cb61a506036a
+   7800f9c7f0
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -630,12 +630,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3a5d1e34cbd09ceb1bb07d8d  #       ":]\x1e4ËÐ\x9cë\x1b°}\x8d"
-      2351e27fa54f35b0aed5482f  #       "#Qâ\x7f¥O5°®ÕH/"
-      7583235304c3b4ebb482ea38  #       "u\x83#S\x04Ã´ë´\x82ê8"
-      e7b6d7abe8ca40ef0c16413a  #       "ç¶×«èÊ@ï\x0c\x16A:"
-      231bb2fc8f1daf9bc7df2bcf  #       "#\x1b²ü\x8f\x1d¯\x9bÇß+Ï"
-      844b4fae                  #       "\x84KO®"
+      347aa45ed92a5e29b07e5960  #       "4z¤^Ù*^)°~Y`"
+      3ccf22fc194a90112ffc06c4  #       "<Ï"ü\x19J\x90\x11/ü\x06Ä"
+      91a1681652e0d21ce41abe6b  #       "\x91¡h\x16RàÒ\x1cä\x1a¾k"
+      1b387f94b1bf38957e34febc  #       "\x1b8\x7f\x94±¿8\x95~4þ¼"
+      566fad5450cb61a506036a78  #       "Vo\xadTPËa¥\x06\x03jx"
+      00f9c7f0                  #       "\x00ùÇð"
 
 6.  Referenced Token
 
@@ -780,37 +780,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840aae39cb18c8215edd8a47180043fc74aadf092
-   c107371fbb2de94b7565fcaaedd31b09d6cee4daf048a2ca8d170626e1a188e024c0
-   ec0d5325d764ac35963455
+   7374617475736c697374732f3158408bff906bd9fe2b3a459df3d0482660415dfc9a
+   0f5ed4c6908ce23ffc5ecd2de46fc075e841b6dd0d9a1d041e8ef85c1880fd86b542
+   6f5c5426d7249695dac26a
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         aae39cb18c8215edd8a47180  #       "ªã\x9c±\x8c\x82\x15íØ¤q\x80"
-         043fc74aadf092c107371fbb  #       "\x04?ÇJ\xadð\x92Á\x077\x1f»"
-         2de94b7565fcaaedd31b09d6  #       "-éKueüªíÓ\x1b\x09Ö"
-         cee4daf048a2ca8d170626e1  #       "ÎäÚðH¢Ê\x8d\x17\x06&á"
-         a188e024c0ec0d5325d764ac  #       "¡\x88à$Àì\x0dS%×d¬"
-         35963455                  #       "5\x964U"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      8bff906bd9fe2b3a459df3d0  #       "\x8bÿ\x90kÙþ+:E\x9dóÐ"
+      482660415dfc9a0f5ed4c690  #       "H&`A]ü\x9a\x0f^ÔÆ\x90"
+      8ce23ffc5ecd2de46fc075e8  #       "\x8câ?ü^Í-äoÀuè"
+      41b6dd0d9a1d041e8ef85c18  #       "A¶Ý\x0d\x9a\x1d\x04\x1e\x8eø\\x18"
+      80fd86b5426f5c5426d72496  #       "\x80ý\x86µBo\T&×$\x96"
+      95dac26a                  #       "\x95ÚÂj"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1045,8 +1045,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9._pDTRgkYBSRt5Uc-_dbiOn0dXZ8QOyDtHf7DgW-8GzhfwDxXrMBL
-   OZyB1iYUZKrgto0Xnz1oxwJTaZvE_pcnLQ
+   nR0bCI6NDMyMDB9.SCFjUyeeu_ikVi3gqdlI7l652zpeFomQSgtNtIJ4IdKBInJhCNW5
+   fZU7tcRsN0yxeRUFFAk5jGYpNy6NeJtmcg
 
 8.2.  Status List Response
 
@@ -1183,8 +1183,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9._pDTRgkYBSRt5Uc-_dbiOn0dXZ8QOyDtHf7DgW-8GzhfwDxXrMBL
-   OZyB1iYUZKrgto0Xnz1oxwJTaZvE_pcnLQ
+   nR0bCI6NDMyMDB9.SCFjUyeeu_ikVi3gqdlI7l652zpeFomQSgtNtIJ4IdKBInJhCNW5
+   fZU7tcRsN0yxeRUFFAk5jGYpNy6NeJtmcg
 
 9.  Status List Aggregation
 
