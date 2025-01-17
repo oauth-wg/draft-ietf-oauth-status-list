@@ -953,6 +953,11 @@ Implementations producing Status Lists are RECOMMENDED to prevent double allocat
 
 ## Status List Size
 
+The storage and transmission size of the Status Issuer's Status List Tokens depends on:
+- the size of the Status List, i.e. the number of Referenced Tokens
+- the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% create lowest sizes while revocation rates closer to 50% and random distribution create highest sizes)
+- the lifetime of Referenced Tokens (shorter lifetimes allows for earlier retirement of Status List Tokens)
+
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
 The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
@@ -1287,6 +1292,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* explain the Status List Token size dependencies
 * explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date 
 * add short-lived tokens in the Rationale
 * rename Status Mechanism Methods registry to Status Mechanisms registry
