@@ -189,9 +189,9 @@ The decisions taken in this specification aim to achieve the following design go
 
 ## Prior Work
 
-Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for status mechanisms such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
+Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
 
-## Status Mechanism Registry
+## Status Mechanisms Registry
 
 This specification establishes the IANA "Status Mechanisms" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
 
