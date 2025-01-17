@@ -1614,6 +1614,7 @@ Resulting encoded status list with bit-size 8 (256 possible values):
 * changes as requested by IANA review
 * emphasize that security and privacy considerations only apply to Status List and no other status mechanisms
 * differentiate unlinkability between Issuer-RP and RP-RP
+* add more test vectors for the status list encoding
 
 -06
 
