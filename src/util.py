@@ -32,7 +32,7 @@ def formatToken(input: str, key: jwk.JWK) -> str:
 def printJson(input: str) -> str:
     text = json.dumps(json.loads(input), sort_keys=True, indent=2, ensure_ascii=False)
     return fill(
-        text, width=MAX_LENGTH, break_on_hyphens=True, replace_whitespace=False, subsequent_indent='  '
+        text, width=MAX_LENGTH, break_on_hyphens=False, replace_whitespace=False, subsequent_indent=''
     )
 
 

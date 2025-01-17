@@ -53,7 +53,7 @@ def exampleStatusList2Bit() -> StatusList:
 
 
 def exampleStatusList2BitLong() -> StatusList:
-    status_list = StatusList(2**22, 2)
+    status_list = StatusList(2**20, 2)
     status_list.set(0, 1)
     status_list.set(1993, 2)
     status_list.set(25460, 1)
@@ -64,13 +64,12 @@ def exampleStatusList2BitLong() -> StatusList:
     status_list.set(723232, 1)
     status_list.set(854545, 1)
     status_list.set(934534, 2)
-    status_list.set(2000345, 3)
-    status_list.set(3598203, 3)
+    status_list.set(1000345, 3)
     return status_list
 
 
 def exampleStatusList4Bit() -> StatusList:
-    status_list = StatusList(2**22, 4)
+    status_list = StatusList(2**20, 4)
     status_list.set(0, 1)
     status_list.set(1993, 2)
     status_list.set(35460, 3)
@@ -79,13 +78,13 @@ def exampleStatusList4Bit() -> StatusList:
     status_list.set(754353, 6)
     status_list.set(845645, 7)
     status_list.set(923232, 8)
-    status_list.set(1054545, 9)
-    status_list.set(1134534, 10)
-    status_list.set(1334534, 11)
-    status_list.set(1500345, 12)
-    status_list.set(2090203, 13)
-    status_list.set(2090204, 14)
-    status_list.set(2090205, 15)
+    status_list.set(924445, 9)
+    status_list.set(934534, 10)
+    status_list.set(1004534, 11)
+    status_list.set(1000345, 12)
+    status_list.set(1030203, 13)
+    status_list.set(1030204, 14)
+    status_list.set(1030205, 15)
     return status_list
 
 
@@ -94,7 +93,7 @@ def exampleStatusList8Bit() -> StatusList:
     random.seed(42)
     for x in range(2**8 ):
         y = random.randint(0, 2 ** 20 - 1)
-        print(y,x)
+        # print("status[{}] = {}".format(y,x))
         status_list.set(y, x)
     return status_list
 
