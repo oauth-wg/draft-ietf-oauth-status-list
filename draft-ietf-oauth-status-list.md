@@ -1281,7 +1281,7 @@ for their valuable contributions, discussions and feedback to this specification
 # Test vectors for Status List encoding {#test-vectors}
 {:unnumbered}
 
-All examples here are given in the form of JSON payloads. That means that the compressed status list is base64url encoded as described in [](#status-list-json). 
+All examples here are given in the form of JSON payloads. That means that the compressed status list is base64url encoded as described in [](#status-list-json).
 
 All vales that are not mentioned for the examples below can be assumed to be 0 (VALID). All examples are initialized with a size of 2^20 entries.
 
@@ -1302,7 +1302,7 @@ status[934534]=2
 status[1000345]=3
 ~~~~~~~~~~
 
-Resulting encoded status list with bit-size 2 (4 possible values): 
+Resulting encoded status list with bit-size 2 (4 possible values):
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding2_long_json}
@@ -1329,7 +1329,7 @@ status[1030204]=14
 status[1030205]=15
 ~~~~~~~~~~
 
-Resulting encoded status list with bit-size 4 (16 possible values): 
+Resulting encoded status list with bit-size 4 (16 possible values):
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding4_json}
@@ -1597,7 +1597,7 @@ status[152133] = 254
 status[19535] = 255
 ~~~~~~~~~~
 
-Resulting encoded status list with bit-size 8 (256 possible values): 
+Resulting encoded status list with bit-size 8 (256 possible values):
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding8_json}
