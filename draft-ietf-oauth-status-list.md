@@ -937,9 +937,9 @@ There are strong privacy concerns that have to be carefully taken into considera
 
 # Implementation Considerations {#implementation}
 
-## Token Lifecycle {#implementation-lifecycle}
+## Referenced Token Lifecycle {#implementation-lifecycle}
 
-The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.
+The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token. 
 
 Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this becoming possible source of correlation.
 
@@ -955,7 +955,7 @@ Implementations producing Status Lists are RECOMMENDED to prevent double allocat
 
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
-The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices.
+The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
 
 ## Status List Formats
 
@@ -1287,6 +1287,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date 
 * add short-lived tokens in the Rationale
 * rename Status Mechanism Methods registry to Status Mechanisms registry
 * changes as requested by IANA review
