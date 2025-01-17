@@ -939,7 +939,7 @@ There are strong privacy concerns that have to be carefully taken into considera
 
 ## Referenced Token Lifecycle {#implementation-lifecycle}
 
-The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token. 
+The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.
 
 Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this becoming possible source of correlation.
 
@@ -1293,7 +1293,7 @@ for their valuable contributions, discussions and feedback to this specification
 -07
 
 * explain the Status List Token size dependencies
-* explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date 
+* explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date
 * add short-lived tokens in the Rationale
 * rename Status Mechanism Methods registry to Status Mechanisms registry
 * changes as requested by IANA review
