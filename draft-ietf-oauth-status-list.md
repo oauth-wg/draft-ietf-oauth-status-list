@@ -307,6 +307,8 @@ The following example illustrates the JSON representation of the Status List wit
 {::include ./examples/status_list_encoding2_json}
 ~~~~~~~~~~
 
+See section [](#test-vectors) for more test vectors.
+
 ## Status List in CBOR Format {#status-list-cbor}
 
 This section defines the data structure for a CBOR-encoded Status List:
@@ -327,6 +329,8 @@ The following is the CBOR Annotated Hex output of the example above:
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding_cbor_diag}
 ~~~~~~~~~~
+
+See section [](#test-vectors) for more test vectors.
 
 # Status List Token {#status-list-token}
 
