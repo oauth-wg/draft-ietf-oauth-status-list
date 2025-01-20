@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 21 July 2025                                                   
+Expires: 24 July 2025                                                   
                                                               C. Bormann
                                                                   SPRIND
-                                                         17 January 2025
+                                                         20 January 2025
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 July 2025.
+   This Internet-Draft will expire on 24 July 2025.
 
 Copyright Notice
 
@@ -467,6 +467,9 @@ Table of Contents
      "lst": "eNo76fITAAPfAgc"
    }
 
+   See section Appendix "Test vectors for Status List encoding" for more
+   test vectors.
+
 4.2.  Status List in CBOR Format
 
    This section defines the data structure for a CBOR-encoded Status
@@ -504,6 +507,9 @@ Table of Contents
        6c7374                      #     "lst"
      4a                            #   bytes(10)
        78dadbb918000217015d        #     "xÚÛ¹\x18\x00\x02\x17\x01]"
+
+   See section Appendix "Test vectors for Status List encoding" for more
+   test vectors.
 
 5.  Status List Token
 
@@ -639,9 +645,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58403412274ea82877d4d8c7df4ccf10739683fad683e20e216218
-   c2165b87f087d979d141b8dbc124c209831aee00533ae7927b28381e9f456244ac81
-   a7fc02e91d
+   b918000217015d5840b2b67d0892a93697a701483b39b00674c75073b0ec18690d1f
+   b72e9d649779dff5b336926b05480df1bb77df89141d69e31ad021fa5ae7a88822e9
+   097fbc9ade
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -663,12 +669,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3412274ea82877d4d8c7df4c  #       "4\x12'N¨(wÔØÇßL"
-      cf10739683fad683e20e2162  #       "Ï\x10s\x96\x83úÖ\x83â\x0e!b"
-      18c2165b87f087d979d141b8  #       "\x18Â\x16[\x87ð\x87ÙyÑA¸"
-      dbc124c209831aee00533ae7  #       "ÛÁ$Â\x09\x83\x1aî\x00S:ç"
-      927b28381e9f456244ac81a7  #       "\x92{(8\x1e\x9fEbD¬\x81§"
-      fc02e91d                  #       "ü\x02é\x1d"
+      b2b67d0892a93697a701483b  #       "²¶}\x08\x92©6\x97§\x01H;"
+      39b00674c75073b0ec18690d  #       "9°\x06tÇPs°ì\x18i\x0d"
+      1fb72e9d649779dff5b33692  #       "\x1f·.\x9dd\x97yßõ³6\x92"
+      6b05480df1bb77df89141d69  #       "k\x05H\x0dñ»wß\x89\x14\x1di"
+      e31ad021fa5ae7a88822e909  #       "ã\x1aÐ!úZç¨\x88"é\x09"
+      7fbc9ade                  #       "\x7f¼\x9aÞ"
 
 6.  Referenced Token
 
@@ -813,37 +819,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158408505b5c3f943435938043a43f99884289c64d3
-   fdb5169bafe7821a56c9b70636265ad5507770b4df54f99050e8943da753e22731f8
-   437fbf606cc032a1c721d5
+   7374617475736c697374732f315840afaf1641bceb33dab133d5b5ba6aede8830818
+   1678469f1cda4a78358e63dd70f5c090dafedaf1c652edaa97dcdfef04ebaa258040
+   7991f41c10dd4c283c2966
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         8505b5c3f943435938043a43  #       "\x85\x05µÃùCCY8\x04:C"
-         f99884289c64d3fdb5169baf  #       "ù\x98\x84(\x9cdÓýµ\x16\x9b¯"
-         e7821a56c9b70636265ad550  #       "ç\x82\x1aVÉ·\x066&ZÕP"
-         7770b4df54f99050e8943da7  #       "wp´ßTù\x90Pè\x94=§"
-         53e22731f8437fbf606cc032  #       "Sâ'1øC\x7f¿`lÀ2"
-         a1c721d5                  #       "¡Ç!Õ"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      afaf1641bceb33dab133d5b5  #       "¯¯\x16A¼ë3Ú±3Õµ"
+      ba6aede88308181678469f1c  #       "ºjíè\x83\x08\x18\x16xF\x9f\x1c"
+      da4a78358e63dd70f5c090da  #       "ÚJx5\x8ecÝpõÀ\x90Ú"
+      fedaf1c652edaa97dcdfef04  #       "þÚñÆRíª\x97Üßï\x04"
+      ebaa2580407991f41c10dd4c  #       "ëª%\x80@y\x91ô\x1c\x10ÝL"
+      283c2966                  #       "(<)f"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1078,8 +1084,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.D5_yUcoOWRSkokco7Bu04h5J3V0t1NnuQ4D4C8PGKtBv0kp5Xwxu
-   xoCabxQHIeYJEyl-x1ziTbYsHf_acoXx-w
+   nR0bCI6NDMyMDB9.4kivAiGnY9LX49aKYZKSzSzFE46tPEsm9KDIK3Wh038_VnmB0Yfg
+   KOSHPL5J3cgCHXI_TcDpYzUAZaRhV1SgNQ
 
 8.2.  Status List Response
 
@@ -1216,8 +1222,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.D5_yUcoOWRSkokco7Bu04h5J3V0t1NnuQ4D4C8PGKtBv0kp5Xwxu
-   xoCabxQHIeYJEyl-x1ziTbYsHf_acoXx-w
+   nR0bCI6NDMyMDB9.4kivAiGnY9LX49aKYZKSzSzFE46tPEsm9KDIK3Wh038_VnmB0Yfg
+   KOSHPL5J3cgCHXI_TcDpYzUAZaRhV1SgNQ
 
 9.  Status List Aggregation
 
@@ -2200,15 +2206,17 @@ Acknowledgments
 
 Test vectors for Status List encoding
 
-   All examples here are given in the form of JSON payloads.  That means
-   that the compressed status list is base64url encoded as described in
-   Section 4.1.
+   All examples here are given in the form of JSON or CBOR payloads.
+   The examples are encoded according to Section 4.1 for JSON and
+   Section 4.2 for CBOR.  The CBOR examples are displayed as hex values.
 
    All values that are not mentioned for the examples below can be
    assumed to be 0 (VALID).  All examples are initialized with a size of
    2^20 entries.
 
 2 bit Status List
+
+   The following example uses a 2 bit Status List (4 possible values):
 
    status[0]=1
    status[1993]=2
@@ -2222,7 +2230,7 @@ Test vectors for Status List encoding
    status[934534]=2
    status[1000345]=3
 
-   Resulting encoded status list with bit-size 2 (4 possible values):
+   JSON encoding:
 
    {
      "bits": 2,
@@ -2235,7 +2243,22 @@ Test vectors for Status List encoding
    AAAAAAAAAAACoYUoAAAAAAAAAAAAAAEBqH81gAQw"
    }
 
+   CBOR encoding:
+
+   a2646269747302636c737459013d78daeddb310d00211000412ea1a04004fe5520ed
+   357c28c81d3312b6df68bc65480000000000406e2101000000000000000000000000
+   0000000000000000000000000000000000000040795b020000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   0080f4ba0400000000000000000000000000406d764a000000000000000000000000
+   000000000000000000e0922101000000000000000000000000000000000000fc1312
+   00000000000000000000000000000000000000000000000000000000000000c0912e
+   01000000000000000000000000000000000000c07d4b020000000000000000000000
+   00000000a8614a0000000000000000000000406a1fcd60010c
+
 4 bit Status List
+
+   The following example uses a 4 bit Status List (16 possible values):
 
    status[0]=1
    status[1993]=2
@@ -2253,7 +2276,7 @@ Test vectors for Status List encoding
    status[1030204]=14
    status[1030205]=15
 
-   Resulting encoded status list with bit-size 4 (16 possible values):
+   JSON encoding:
 
    {
      "bits": 4,
@@ -2271,7 +2294,30 @@ Test vectors for Status List encoding
    AAABx3AoAgLpVAQAAAAAAAAAAAAAAwM89rwMAAAAAAAAAAAjsA9xMBMA"
    }
 
+   CBOR encoding:
+
+   a2646269747304636c737459024878daedd0410d8030100030081f0226908204244c
+   025290840414111cecb7e4b8b5123a0e40669b020000000000000000000000000000
+   0020b549010000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   0000000000400ebb0200000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   000000000000e8c5a100000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000082280a00000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000080ae9c0a
+   00000000000000000000000000000000000000000000000000000000000000000000
+   000000686a5640339702000000008865510000000000000000000000000000000000
+   00000000000000000000000000000071dc0a0080ba55010000000000000000000000
+   c0cf3daf03000000000000000008ec03dc4c04c0
+
 8 bit Status List
+
+   The following example uses a 8 bit Status List (256 possible values):
 
    status[233478] = 0
    status[52451] = 1
@@ -2530,7 +2576,7 @@ Test vectors for Status List encoding
    status[152133] = 254
    status[19535] = 255
 
-   Resulting encoded status list with bit-size 8 (256 possible values):
+   JSON encoding:
 
    {
      "bits": 8,
@@ -2574,6 +2620,68 @@ Test vectors for Status List encoding
    FJRIAAAAAkIaDJAAAAJryngQAAAAAAAAAAAA98oQEAAAAAAAAAEC2zpcgWY9LQKL2kwA
    gGK9IAAAAAPHaRQIAAAAAAAAAAADIxyoSAAAAAAAAAAAAAADQFotLAECz_gQ1PX-B"
    }
+
+   CBOR encoding:
+
+   a2646269747308636c73745907b078daedd1639033691886d1ac6ddbb66ddbb66ddb
+   b66ddbb66ddbb68d59d4d66cbe496626e94e5e9c53d57fbb9ef7ba2b158028ec2401
+   000090bae724000052b6a504000000000000b4deb0120004ef5409000000008af087
+   040000000001db400200000000000022f09004000000000000000000946857090000
+   80789c24010000000000000050bcbe240000005a62700900000000000008c0c01200
+   000074eb2c09a032900404697e09000000000000000000000000000000a8e74b0900
+   000000000000e89171240000000080024d2a0100006db79a04000000000040b0de95
+   0042f7a00400000000000000ddb84e02000000ca34af0400108b0f24a078ef480040
+   6fec2501108e372568c6d31264e77409000000e8d60d129098b7240000000000b2b0
+   b604406727480000000010a28525000048d799120081f94402202c1f4b0010b8fd25
+   2019934800004098ce91a0b6d3248012cc22010040217e970000000000006aba4f02
+   00000000000068997d4afbf304e2020055a69080607d280100000034e82b09000000
+   00000000d2b4af040000b4de00120000000000000000c558550200000032339a0440
+   031e96004230880400ddb85c020000000068ad312488dc151200408e1e9000e881eb
+   250000000000b23795040000291a55028ad6bf040000000000000090a46d24000000
+   00008026dc2c01746d7509000000a05d369180e0ec260100000000407a3694000000
+   00000000000000004af5b90400005d3a560200000000000000a8369e040010aa0324
+   00000000006881032500000000001af3b3040000108b0b2500000000000000000000
+   000032b3b204000089e92ffa172c6344a09dee90000000000020694b490000000000
+   000000000000000000000000000000f0b7ed3bbe3564000000803cbc2a0140504692
+   0000000092f7be040059d85c020000a011c34940e8d69400000088da8e120000599b
+   5e0200ba32bb040000fce719092067074b000010ba472500000000000000000080a6
+   cc2a010000000000000000000000000000409fb696000000000000000000000a7697
+   0400000000e4ee230900000000000000006a7b4d0202719b0411b84c02008050dd2a
+   01405c269600000000000000000000000000a00943047bd976c601000000a021874b
+   0000000000005080ef2400000000000000000000201a3349000000b95b4402008277
+   980400c46c31090000ea785202c8d905120000d11b590200000000689137240080c0
+   0d2a01404856928096985b02200fa748909ca12400000000002004fd4a00000074e9
+   7809000000000000f8cb641200006d7446dacf9bcfc200404c4e96000000000088d0
+   6012fccf94120000000040d83e950000202c8f48000000d09073250008c70f1200d0
+   b83d2500008070ec2d0100000040412e9600000080b8cd16cda5fd180b0080047c21
+   019466590900006881e32400a0b65b24000028cdbd12000000545b5f020000000000
+   00000000000000000000000000a0c3b7120000000055969300a0795b490000d080b1
+   2520274b4bd06a8748d05b2f480065f951020080446d24417366960080062c240100
+   00004076e69200000000000000000000a0587d4b000000000000358d98e4aba6316c
+   12869180329c17d435771b0400000000000000000000000080f67a49020000000000
+   000080284c2e0100000000000000a9995002c2b6a904000000000000f4e975090000
+   00a86f5b09000080b0fd22010000000000000000000000000000404d7b4800000000
+   00000000404f1d210100000094e66d0980387d2f01d06151090028d2021200e4e037
+   0982f38d04000000000000000000000000000000509c9d25f8d73c12000000000000
+   00000000000064e96c09000000000000000000000000a86f1409000080fa4e940000
+   200f37490000356c1cf47523180800000000000080bac69200000000000000000000
+   0000000000000000000000a872950400908f192500000000000000a047c694000000
+   0000204c1349407656940000b2b7bb04000000d0d974120000000000000000000040
+   fbcc2001000000000000a5384a02a052d94102000000000000000080c08c2f0104e7
+   59092027734a00891a5d82b04d2d010000d0bd752500000000000008d43a12000000
+   000000000000000064ea79090000000000000000000028cf121234eb270900000000
+   0000a872a40450b8152400000028c35312542a0b4a000000a9ba51020080d27d2601
+   00000000401b3c260140932e95000000000000000048d93512000000000000000000
+   00000000000000f08faf25a025869400000000007aefce327e3aa0aeb9594b0288cf
+   f01240afbd2c4195432580205d2d01000000000000000000b4c9f212000000000014
+   e34a0900000000000000e8adcd24000000000000803a8e9600000000000000000000
+   c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
+   006230ad0484640b09000068b9172500000000a0c3af12000000346e490980588c2b
+   0100000000007432870464ee1e090000000000000000206ad74a000094623d090000
+   0000000000000042739104b4c5251200000000908683240000009af29e0400000000
+   00000000003df284040000000000000040b6ce9720598f4b40a2f693002018af4800
+   000000f1da4502000000000000000000c8c72a120000000000000000000000d0168b
+   4b0040b3fe04353d7f81
 
 Document History
 
