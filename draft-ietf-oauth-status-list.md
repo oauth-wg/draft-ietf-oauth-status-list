@@ -1287,7 +1287,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 All examples here are given in the form of JSON or CBOR payloads. The examples are encoded according to [](#status-list-json) for JSON and [](#status-list-cbor) for CBOR. The CBOR examples are displayed as hex values.
 
-All vales that are not mentioned for the examples below can be assumed to be 0 (VALID). All examples are initialized with a size of 2^20 entries.
+All values that are not mentioned for the examples below can be assumed to be 0 (VALID). All examples are initialized with a size of 2^20 entries.
 
 ## 2 bit Status List
 {:unnumbered}
