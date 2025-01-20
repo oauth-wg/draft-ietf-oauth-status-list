@@ -91,8 +91,8 @@ def exampleStatusList4Bit() -> StatusList:
 def exampleStatusList8Bit() -> StatusList:
     status_list = StatusList(2**20, 8)
     random.seed(42)
-    for x in range(2**8 ):
-        y = random.randint(0, 2 ** 20 - 1)
+    for x in range(2**8):
+        y = random.randint(0, 2**20 - 1)
         # print("status[{}] = {}".format(y,x))
         status_list.set(y, x)
     return status_list
@@ -140,6 +140,16 @@ def statusListEncoding2BitLong():
     util.outputFile(folder + "status_list_encoding2_long_json", text)
 
 
+def statusListEncoding2BitLongCBOR():
+    status_list = exampleStatusList2BitLong()
+    encoded = status_list.encodeAsCBORRaw()
+    hex_encoded = encoded.hex()
+    text = "{}".format(
+        util.printText(hex_encoded)
+    )
+    util.outputFile(folder + "status_list_encoding2_long_cbor", text)
+
+
 def statusListEncoding4Bit():
     status_list = exampleStatusList4Bit()
     encoded = status_list.encodeAsJSON()
@@ -149,6 +159,16 @@ def statusListEncoding4Bit():
     util.outputFile(folder + "status_list_encoding4_json", text)
 
 
+def statusListEncoding4BitCBOR():
+    status_list = exampleStatusList4Bit()
+    encoded = status_list.encodeAsCBORRaw()
+    hex_encoded = encoded.hex()
+    text = "{}".format(
+        util.printText(hex_encoded)
+    )
+    util.outputFile(folder + "status_list_encoding4_cbor", text)
+
+
 def statusListEncoding8Bit():
     status_list = exampleStatusList8Bit()
     encoded = status_list.encodeAsJSON()
@@ -156,6 +176,15 @@ def statusListEncoding8Bit():
         util.printObject(encoded),
     )
     util.outputFile(folder + "status_list_encoding8_json", text)
+
+def statusListEncoding8BitCBOR():
+    status_list = exampleStatusList8Bit()
+    encoded = status_list.encodeAsCBORRaw()
+    hex_encoded = encoded.hex()
+    text = "{}".format(
+        util.printText(hex_encoded)
+    )
+    util.outputFile(folder + "status_list_encoding8_cbor", text)
 
 
 def statusListEncoding2BitCBOR():
@@ -237,8 +266,11 @@ if __name__ == "__main__":
     statusListEncoding1Bit()
     statusListEncoding2Bit()
     statusListEncoding2BitLong()
+    statusListEncoding2BitLongCBOR()
     statusListEncoding4Bit()
+    statusListEncoding4BitCBOR()
     statusListEncoding8Bit()
+    statusListEncoding8BitCBOR()
     statusListJWT()
     statusListJWTRaw()
     statusListEncoding1BitCBOR()

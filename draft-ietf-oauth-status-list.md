@@ -1281,12 +1281,14 @@ for their valuable contributions, discussions and feedback to this specification
 # Test vectors for Status List encoding {#test-vectors}
 {:unnumbered}
 
-All examples here are given in the form of JSON payloads. That means that the compressed status list is base64url encoded as described in [](#status-list-json).
+All examples here are given in the form of JSON or CBOR payloads. The examples are encoded according to [](#status-list-json) for JSON and [](#status-list-cbor) for CBOR. The CBOR examples are displayed as hex values.
 
 All vales that are not mentioned for the examples below can be assumed to be 0 (VALID). All examples are initialized with a size of 2^20 entries.
 
 ## 2 bit Status List
 {:unnumbered}
+
+The following example uses a 2 bit Status List (4 possible values):
 
 ~~~~~~~~~~
 status[0]=1
@@ -1302,14 +1304,22 @@ status[934534]=2
 status[1000345]=3
 ~~~~~~~~~~
 
-Resulting encoded status list with bit-size 2 (4 possible values):
+JSON encoding:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding2_long_json}
 ~~~~~~~~~~
 
+CBOR encoding:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding2_long_cbor}
+~~~~~~~~~~
+
 ## 4 bit Status List
 {:unnumbered}
+
+The following example uses a 4 bit Status List (16 possible values):
 
 ~~~~~~~~~~
 status[0]=1
@@ -1329,14 +1339,22 @@ status[1030204]=14
 status[1030205]=15
 ~~~~~~~~~~
 
-Resulting encoded status list with bit-size 4 (16 possible values):
+JSON encoding:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding4_json}
 ~~~~~~~~~~
 
+CBOR encoding:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding4_cbor}
+~~~~~~~~~~
+
 ## 8 bit Status List
 {:unnumbered}
+
+The following example uses a 8 bit Status List (256 possible values):
 
 ~~~~~~~~~~
 status[233478] = 0
@@ -1597,12 +1615,17 @@ status[152133] = 254
 status[19535] = 255
 ~~~~~~~~~~
 
-Resulting encoded status list with bit-size 8 (256 possible values):
+JSON encoding:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_encoding8_json}
 ~~~~~~~~~~
 
+CBOR encoding:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding8_cbor}
+~~~~~~~~~~
 
 
 # Document History
