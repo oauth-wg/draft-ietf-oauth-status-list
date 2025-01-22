@@ -1005,7 +1005,7 @@ registration once they are satisfied that such a specification will be published
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
+to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
 successful.
 
 IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
@@ -1022,11 +1022,11 @@ Status Mechanism Description:
 
 Change Controller:
 
-  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF. For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
-  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
 
 ### Initial Registry Contents
 
@@ -1083,7 +1083,7 @@ specification will be published.
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register CWT Status Mechanism: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
+to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
 successful.
 
 IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
@@ -1100,11 +1100,11 @@ Status Mechanism Description:
 
 Change Controller:
 
-  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF. For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
-  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
 
 ### Initial Registry Contents
 
@@ -1124,7 +1124,7 @@ specification will be published.
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register Status Type name: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
+to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
 successful.
 
 IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
@@ -1145,11 +1145,11 @@ Status Type value:
 
 Change Controller:
 
-  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF. For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
-  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
 
 ### Initial Registry Contents
 
