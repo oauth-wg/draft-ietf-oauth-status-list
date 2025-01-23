@@ -1161,7 +1161,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.  <a href="#name-design-considerations" class="internal xref">Design Considerations</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
-                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.  <a href="#name-status-mechanism-registry" class="internal xref">Status Mechanism Registry</a></p>
+                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.  <a href="#name-prior-work" class="internal xref">Prior Work</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5">
+                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.  <a href="#name-status-mechanisms-registry" class="internal xref">Status Mechanisms Registry</a></p>
 </li>
             </ul>
 </li>
@@ -1306,7 +1309,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="auto internal xref">13.1</a>.  <a href="#name-token-lifecycle" class="internal xref">Token Lifecycle</a></p>
+                <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="auto internal xref">13.1</a>.  <a href="#name-referenced-token-lifecycle" class="internal xref">Referenced Token Lifecycle</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
                 <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="auto internal xref">13.2</a>.  <a href="#name-default-values-and-double-a" class="internal xref">Default Values and Double Allocation</a></p>
@@ -1463,7 +1466,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-rationale">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-rationale" class="section-name selfRef">Rationale</a>
         </h3>
-<p id="section-1.2-1">Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1501,12 +1504,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </ul>
 </section>
 </div>
-<div id="status-mechanism-registry">
+<div id="prior-work">
 <section id="section-1.4">
-        <h3 id="name-status-mechanism-registry">
-<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-status-mechanism-registry" class="section-name selfRef">Status Mechanism Registry</a>
+        <h3 id="name-prior-work">
+<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-prior-work" class="section-name selfRef">Prior Work</a>
         </h3>
-<p id="section-1.4-1">This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-1">Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. <span>[<a href="#smith2020let" class="cite xref">smith2020let</a>]</span> that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List <span>[<a href="#W3C.SL" class="cite xref">W3C.SL</a>]</span> that similarly uses a compressed bit representation.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="status-mechanisms-registry">
+<section id="section-1.5">
+        <h3 id="name-status-mechanisms-registry">
+<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-status-mechanisms-registry" class="section-name selfRef">Status Mechanisms Registry</a>
+        </h3>
+<p id="section-1.5-1">This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.5-2">Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.<a href="#section-1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1836,9 +1848,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840fce6bba3e570a2ee3edf95493ab69c65ba9c15212ba0ee569e
-5f35bc41335a0709de3fb905de54af72f6ef99b705a6f790738bd2d278c05ee828c6
-222f6266af
+b918000217015d584096ee02f0660e630f10eb483b0ebaf734bead6508866faedc60
+1a9a1f43d1da69ebe6fa847e96f681b850e55c1ea6460173796342fb0b698da83593
+b867b94ea5
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1862,12 +1874,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      fce6bba3e570a2ee3edf9549  #       "üæ»£åp¢î&gt;ß\x95I"
-      3ab69c65ba9c15212ba0ee56  #       ":¶\x9ceº\x9c\x15!+\xa0îV"
-      9e5f35bc41335a0709de3fb9  #       "\x9e_5¼A3Z\x07\x09Þ?¹"
-      05de54af72f6ef99b705a6f7  #       "\x05ÞT¯röï\x99·\x05¦÷"
-      90738bd2d278c05ee828c622  #       "\x90s\x8bÒÒxÀ^è(Æ""
-      2f6266af                  #       "/bf¯"
+      96ee02f0660e630f10eb483b  #       "\x96î\x02ðf\x0ec\x0f\x10ëH;"
+      0ebaf734bead6508866faedc  #       "\x0eº÷4¾\xade\x08\x86o®Ü"
+      601a9a1f43d1da69ebe6fa84  #       "`\x1a\x9a\x1fCÑÚiëæú\x84"
+      7e96f681b850e55c1ea64601  #       "~\x96ö\x81¸På\\x1e¦F\x01"
+      73796342fb0b698da83593b8  #       "sycBû\x0bi\x8d¨5\x93¸"
+      67b94ea5                  #       "g¹N¥"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2009,9 +2021,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158408f46b042f689d9d6d2036269c8f7b5fe23bbb7
-d498f9a8c28fc89af9b11b9bb763fcdfc293b66c4565f517ed395cd190d4a72d0bf8
-2ddf0a780646a3f8df9569
+7374617475736c697374732f31584013538644afb4a55eaac3fa9bbe8a8875a0aa8d
+0e2e47f1e3f677d99125e33b7a458ec7266b6e2e03e3d8010ef0536cd8a06083fa79
+99a9697c0adc361eff9e1a
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2036,12 +2048,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      8f46b042f689d9d6d2036269  #       "\x8fF°Bö\x89ÙÖÒ\x03bi"
-      c8f7b5fe23bbb7d498f9a8c2  #       "È÷µþ#»·Ô\x98ù¨Â"
-      8fc89af9b11b9bb763fcdfc2  #       "\x8fÈ\x9aù±\x1b\x9b·cüßÂ"
-      93b66c4565f517ed395cd190  #       "\x93¶lEeõ\x17í9\Ñ\x90"
-      d4a72d0bf82ddf0a780646a3  #       "Ô§-\x0bø-ß\x0ax\x06F£"
-      f8df9569                  #       "øß\x95i"
+      13538644afb4a55eaac3fa9b  #       "\x13S\x86D¯´¥^ªÃú\x9b"
+      be8a8875a0aa8d0e2e47f1e3  #       "¾\x8a\x88u\xa0ª\x8d\x0e.Gñã"
+      f677d99125e33b7a458ec726  #       "öwÙ\x91%ã;zE\x8eÇ&amp;"
+      6b6e2e03e3d8010ef0536cd8  #       "kn.\x03ãØ\x01\x0eðSlØ"
+      a06083fa7999a9697c0adc36  #       "\xa0`\x83úy\x99©i|\x0aÜ6"
+      1eff9e1a                  #       "\x1eÿ\x9e\x1a"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2261,8 +2273,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.jvuNr8_cQ36dRYhC0ZE-IUfI8SV9SVG_NpskBuTu1HGCReBAvsYk
--fM6e3HsS0e9CuywICqUX5kO7-PPRqrLtQ
+nR0bCI6NDMyMDB9.5mtgzxmHj7xCt4CXiJFyBB_-IXGMtkGESBwuZRnygloPZYiCdsZb
+7BzgQ0rL9K9a_YVgRXPsP15KJwLjbLlDLA
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2368,8 +2380,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.jvuNr8_cQ36dRYhC0ZE-IUfI8SV9SVG_NpskBuTu1HGCReBAvsYk
--fM6e3HsS0e9CuywICqUX5kO7-PPRqrLtQ
+nR0bCI6NDMyMDB9.5mtgzxmHj7xCt4CXiJFyBB_-IXGMtkGESBwuZRnygloPZYiCdsZb
+7BzgQ0rL9K9a_YVgRXPsP15KJwLjbLlDLA
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2640,7 +2652,7 @@ Time of fetching
 <a href="#section-12.5.1" class="section-number selfRef">12.5.1. </a><a href="#name-colluding-relying-parties" class="section-name selfRef">Colluding Relying Parties</a>
           </h4>
 <p id="section-12.5.1-1">Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.<a href="#section-12.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-12.5.1-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple Referenced Tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>. To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Status Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-12.5.1-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a> to avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Status Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12.5.1-3.1">
               <p id="section-12.5.1-3.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.5.1-3.1.1" class="pilcrow">¶</a></p>
@@ -2691,8 +2703,8 @@ Time of fetching
       </h2>
 <div id="implementation-lifecycle">
 <section id="section-13.1">
-        <h3 id="name-token-lifecycle">
-<a href="#section-13.1" class="section-number selfRef">13.1. </a><a href="#name-token-lifecycle" class="section-name selfRef">Token Lifecycle</a>
+        <h3 id="name-referenced-token-lifecycle">
+<a href="#section-13.1" class="section-number selfRef">13.1. </a><a href="#name-referenced-token-lifecycle" class="section-name selfRef">Referenced Token Lifecycle</a>
         </h3>
 <p id="section-13.1-1">The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.<a href="#section-13.1-1" class="pilcrow">¶</a></p>
 <p id="section-13.1-2">Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token <span class="bcp14">MUST</span> have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.<a href="#section-13.1-2" class="pilcrow">¶</a></p>
@@ -2713,8 +2725,12 @@ Time of fetching
         <h3 id="name-status-list-size">
 <a href="#section-13.3" class="section-number selfRef">13.3. </a><a href="#name-status-list-size" class="section-name selfRef">Status List Size</a>
         </h3>
-<p id="section-13.3-1">The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is <span class="bcp14">RECOMMENDED</span> that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. <code>size-in-bits</code> % 8 = 0.<a href="#section-13.3-1" class="pilcrow">¶</a></p>
-<p id="section-13.3-2">The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices.<a href="#section-13.3-2" class="pilcrow">¶</a></p>
+<p id="section-13.3-1">The storage and transmission size of the Status Issuer's Status List Tokens depends on:
+- the size of the Status List, i.e. the number of Referenced Tokens
+- the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% create lowest sizes while revocation rates closer to 50% and random distribution create highest sizes)
+- the lifetime of Referenced Tokens (shorter lifetimes allows for earlier retirement of Status List Tokens)<a href="#section-13.3-1" class="pilcrow">¶</a></p>
+<p id="section-13.3-2">The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is <span class="bcp14">RECOMMENDED</span> that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. <code>size-in-bits</code> % 8 = 0.<a href="#section-13.3-2" class="pilcrow">¶</a></p>
+<p id="section-13.3-3">The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.<a href="#section-13.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="status-list-formats">
@@ -2808,7 +2824,7 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
 <a href="#section-14.2" class="section-number selfRef">14.2. </a><a href="#name-jwt-status-mechanisms-regis" class="section-name selfRef">JWT Status Mechanisms Registry</a>
         </h3>
 <p id="section-14.2-1">This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.<a href="#section-14.2-1" class="pilcrow">¶</a></p>
-<p id="section-14.2-2">JWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
+<p id="section-14.2-2">JWT Status Mechanisms are registered by Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.<a href="#section-14.2-2" class="pilcrow">¶</a></p>
@@ -2965,7 +2981,7 @@ IANA "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA.CWT" class="ci
 <a href="#section-14.4" class="section-number selfRef">14.4. </a><a href="#name-cwt-status-mechanisms-regis" class="section-name selfRef">CWT Status Mechanisms Registry</a>
         </h3>
 <p id="section-14.4-1">This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.<a href="#section-14.4-1" class="pilcrow">¶</a></p>
-<p id="section-14.4-2">CWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
+<p id="section-14.4-2">CWT Status Mechanisms are registered by Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.<a href="#section-14.4-2" class="pilcrow">¶</a></p>
 <p id="section-14.4-3">Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register CWT Status Mechanism: example").<a href="#section-14.4-3" class="pilcrow">¶</a></p>
@@ -3033,7 +3049,7 @@ successful.<a href="#section-14.4-4" class="pilcrow">¶</a></p>
 <a href="#section-14.5" class="section-number selfRef">14.5. </a><a href="#name-oauth-status-types-registry" class="section-name selfRef">OAuth Status Types Registry</a>
         </h3>
 <p id="section-14.5-1">This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human readable label, the bit representation and a common description for it.<a href="#section-14.5-1" class="pilcrow">¶</a></p>
-<p id="section-14.5-2">Status Types are registered by Specification Required [RFC5226] after a two-week
+<p id="section-14.5-2">Status Types are registered by Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.<a href="#section-14.5-2" class="pilcrow">¶</a></p>
 <p id="section-14.5-3">Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register Status Type name: example").<a href="#section-14.5-3" class="pilcrow">¶</a></p>
@@ -3392,9 +3408,9 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
         <dd>
 <span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC6125">[RFC6125]</dt>
+<dt id="RFC5226">[RFC5226]</dt>
         <dd>
-<span class="refAuthor">Saint-Andre, P.</span> and <span class="refAuthor">J. Hodges</span>, <span class="refTitle">"Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)"</span>, <span class="seriesInfo">RFC 6125</span>, <span class="seriesInfo">DOI 10.17487/RFC6125</span>, <time datetime="2011-03" class="refDate">March 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6125">https://www.rfc-editor.org/rfc/rfc6125</a>&gt;</span>. </dd>
+<span class="refAuthor">Narten, T.</span> and <span class="refAuthor">H. Alvestrand</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">RFC 5226</span>, <span class="seriesInfo">DOI 10.17487/RFC5226</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5226">https://www.rfc-editor.org/rfc/rfc5226</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6838">[RFC6838]</dt>
         <dd>
@@ -3474,8 +3490,16 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <span class="refAuthor">Thomson, M.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Oblivious HTTP"</span>, <span class="seriesInfo">RFC 9458</span>, <span class="seriesInfo">DOI 10.17487/RFC9458</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9458">https://www.rfc-editor.org/rfc/rfc9458</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SD-JWT.VC">[SD-JWT.VC]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-08</span>, <time datetime="2024-12-03" class="refDate">3 December 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="smith2020let">[smith2020let]</dt>
+        <dd>
+<span class="refAuthor">Smith, T.</span>, <span class="refAuthor">Dickinson, L.</span>, and <span class="refAuthor">K. Seamons</span>, <span class="refTitle">"Let's revoke: Scalable global certificate revocation"</span>, <span class="seriesInfo">Network and Distributed Systems Security (NDSS) Symposium 2020 </span>, <span>n.d.</span>, <span>&lt;<a href="https://www.ndss-symposium.org/ndss-paper/lets-revoke-scalable-global-certificate-revocation/">https://www.ndss-symposium.org/ndss-paper/lets-revoke-scalable-global-certificate-revocation/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="W3C.SL">[W3C.SL]</dt>
+      <dd>
+<span class="refAuthor">Longley, D.</span>, <span class="refAuthor">Sporny, M.</span>, and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"W3C Bitstring Status List v1.0"</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.w3.org/TR/vc-bitstring-status-list/">https://www.w3.org/TR/vc-bitstring-status-list/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -3514,16 +3538,31 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-07<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">rename Status Mechanism Methods registry to Status Mechanisms registry<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">clarify privacy consideration around one time use reference tokens<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">changes as requested by IANA review<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">explain the Status List Token size dependencies<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">emphasize that security and privacy considerations only apply to Status List and no other status mechanisms<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">add short-lived tokens in the Rationale<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.5">
+          <p id="appendix-B-2.5.1">rename Status Mechanism Methods registry to Status Mechanisms registry<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.6">
+          <p id="appendix-B-2.6.1">changes as requested by IANA review<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.7">
+          <p id="appendix-B-2.7.1">emphasize that security and privacy considerations only apply to Status List and no other status mechanisms<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.8">
+          <p id="appendix-B-2.8.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.9">
+          <p id="appendix-B-2.9.1">add prior art<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-06<a href="#appendix-B-3" class="pilcrow">¶</a></p>
