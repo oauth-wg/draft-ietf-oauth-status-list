@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-21T00:16:21.577138+00:00",
+  "timestamp": "2025-01-23T00:16:25.632389+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -4519,7 +4519,7 @@
       "labels": [],
       "body": "Let us make a parallel. When using CRLs if the serial number of a PKC is not in the list, the relying party knows that this PKC is neither revoked , nor suspended and hence that it is valid.\r\n\r\nWhen using this status list mechanism, the relying party can locate the appropriate bits (1, 2 or more) that describe the status of the Referenced Token, but the text does not say how to interpret them. Even when a single bit is used, the text does not say that 0 means valid and 1 means invalid.\r\n\r\nFirst, the draft should say that when all the appropriate bits are set to 0, it means that the Referenced Token is valid (no matter the number of bits that are used).\r\n\r\nAt the moment, section 10.1 (Status List with 2-Bit Status Values in JSON format) is only an example.\r\n\r\nIn order to be able to interoperate, the meaning of the bits in the cases of one bit and of 2 bits should be described in the document.\r\n\r\nThen, let us take a look at the other cases, i.e., 4 or 8 bits. When processing a Token Status List, currently the Relying Party has no way to interpret them.\r\n\r\nThere are various options to address this problem, e.g.,:\r\n\r\n1.  to say that the meaning for the 4 or 8 bits cases is out of the scope of this document.\r\n2.  to add another claim into the Token Status List that points to a URL managed by the Status Issuer that indicates the meaning of the 4 or 8 bits. This would not be fully automatic as a human being would be necessary to manually adapt the behavior of the implementation for each Status Issuer.\r\n3. to remove the 4 or 8 bits cases from the document.\r\n",
       "createdAt": "2025-01-14T12:02:18Z",
-      "updatedAt": "2025-01-16T07:35:34Z",
+      "updatedAt": "2025-01-22T12:59:29Z",
       "closedAt": null,
       "comments": [
         {
@@ -4542,6 +4542,20 @@
           "body": "Thank you for pointing to sections 7.1 and 14.5.2 (Initial Registry Contents)\r\n\r\nLet us pick one example. The text states:\r\n\r\n> 0x03 - \"APPLICATION_SPECIFIC_3\" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.\r\n\r\nThis text would need to be rewritten because.\r\n\r\n- The status cannot be \"implicitly given by the particular use case\", as the software interpreting the status is not aware of the \"particular use case\".\r\n- Furthermore, stating that the meaning of this value is known out-of-band does not provide sufficient guidance for that piece of software. It depends about the Issuer of the Token Status List (which, at the moment, implicitly seems to be the Issuer of the Referenced Token).\r\n\r\n\r\nSection 8.3 and section 14.5.2 (Initial Registry Contents) would need to be reworded.\r\n\r\nI propose the following change:\r\n\r\n> 0x03 - \"**ISSUER_SPECIFIC_3**\" - The status of the Referenced Token is dependant upon the Issuer of the Referenced Token. \r\nA different meaning can apply for each Issuer of Referenced Tokens. That meaning may be known using out-of-band means that are not described in this document.\r\n",
           "createdAt": "2025-01-15T10:39:13Z",
           "updatedAt": "2025-01-15T10:39:13Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "A whole ecosystem may define what such a value may, so it's not necessarily the choice of an Issuer. We could rename it to \"CONTEXT_SPECIFIC\" if that's more clear?",
+          "createdAt": "2025-01-22T12:50:53Z",
+          "updatedAt": "2025-01-22T12:50:53Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "I don't believe that \"CONTEXT_SPECIFIC\" would be appropriate. \n\nEach Issuer can define its own meaning independently from other Issuers.\n\nOf course, different Issuers may choose to use the same meaning, \nbut this will not be directly visible to the Relying Parties.",
+          "createdAt": "2025-01-22T12:59:27Z",
+          "updatedAt": "2025-01-22T12:59:27Z"
         }
       ]
     },
@@ -4625,7 +4639,7 @@
       "labels": [],
       "body": "This point was raised during the last video conference call.\r\n\r\nIn the case of CRLs, it can be estimated that about less than 5 % of the serial numbers of the end-entity PKCs would be present in a CRL. \r\nHowever, when using Token Status Lists, for each Referenced Token, a few bits (1, 2, 4 or 8) will always be present in a Token Status List.\r\n\r\nIn the Implementation considerations section, a section should be added to provide estimations about the size and the number of Token Status Lists that will need to be managed.\r\n\r\nThe text states:\r\n\r\n   *  the Status List shall scale up to millions of *tokens* to support large scale government or enterprise use cases\r\n\r\nHowever, when using one-time-use Referenced Tokens, the number of tokens is likely to be at least one order of magnitude higher than the number of users. It would thus be more appropriate to write:\r\n\r\n   *  the Status List shall scale up to millions of *users* to support large scale government or enterprise use cases\r\n\r\nUsing an example with a one million of users (not tokens) would be interesting.\r\n\r\nLet us assume that a set of Token Status Lists is issued everyday. \r\n\r\nIf one-time-use Referenced Tokens are used, the number of Referenced Tokens valid at an instant of time can be much larger than when each Referenced Token can be used multiple times during, e.g., one year.\r\n\r\nLet us assume that one-time-use Referenced Tokens with a validity period of one week are used. \r\n\r\nLet us assume that during two days each user consumes 20 Referenced Tokens that cannot be immediately renewed (e.g., because he uses them in a proximity mode and he has no Internet connection). 20 millions of Referenced Tokens should be issued the first day. These 20 Referenced Tokens issued for one user should be placed in (at least) 20 different Token Status Lists. \r\n\r\nIf two bits are used for each status information, this makes 2 millions bits, i.e. 250 Mb for each Token Status List with 20 different distribution points.\r\n\r\nFor 10 millions of users, these numbers do not scale linearly. For each Token Status List, the size of 250 Mb for each Token Status List should not increase, which means that 200 Token Status Lists should be issued everyday.\r\n\r\nAs of 1 January 2024, the population of the EU was around 449 million people. Source: https://en.wikipedia.org/wiki/Demographics_of_the_European_Union\r\n\r\nLet us assume that 30 % of this population will get and use EUDIWs.\r\nThis will make roughly 130 millions of users. 2600 Token Status Lists would need to be issued everyday.\r\n\r\nIt is up to the Issuer to know how many Status List Tokens (that will contain initially all zeros) need to be managed and, for every issued Reference Token, to choose (and remember) which index it will use and in which Status List Token. The Issuer also needs to consider the validity periods of each Referenced Token and of the Status List Tokens.  \r\n\r\nThe management of  Status List Tokens is far more complex than simply locating an index in a Status List Token.\r\nThis complexity and the various trade-offs are not explained at the moment. \r\n\r\nThe goal of this contribution is not to copy and paste the above text into the document but only to make the ball rolling. \r\nIn any case, some information will be useful.\r\n",
       "createdAt": "2025-01-15T11:12:03Z",
-      "updatedAt": "2025-01-20T09:36:32Z",
+      "updatedAt": "2025-01-22T13:14:35Z",
       "closedAt": null,
       "comments": [
         {
@@ -4641,6 +4655,20 @@
           "body": "Thank you for your reply which is bringing water to my mill.\r\n\r\nYou wrote:\r\n\r\n> A status list for 1 million tokens, bits=1 (which 90% of use cases will use) and a typical revocation rate of 1%, results in 25KB.\r\n\r\nSuch information would be useful if included into the draft.\r\n\r\n\r\n\r\n\r\n\r\n",
           "createdAt": "2025-01-20T09:36:31Z",
           "updatedAt": "2025-01-20T09:36:31Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Thank you for your reply which is bringing water to my mill.\n> \n> You wrote:\n> \n> > A status list for 1 million tokens, bits=1 (which 90% of use cases will use) and a typical revocation rate of 1%, results in 25KB.\n> \n> Such information would be useful if included into the draft.\n\nDo you have other RFCs as example, that do this?\nI don't think that RFC for CRL includes this data. ",
+          "createdAt": "2025-01-22T13:00:07Z",
+          "updatedAt": "2025-01-22T13:00:24Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "For CRLs, the computation depends upon the estimated pourcentage of revoked or suspended PKCs.\n\nThis is not the same for SLTs.\n\nI am unfamiliar with [RFC1951] and [RFC1950]. \n\nIt would be useful to provide some numbers so that implementers can know the size of the SLTs \nwhen downloaded and once expanded.\n\nIf a Relying Party caches \"n\" SLTs (e.g. 20), which amount of memory will be occupied ?\n\n\n\n\n",
+          "createdAt": "2025-01-22T13:14:33Z",
+          "updatedAt": "2025-01-22T13:14:33Z"
         }
       ]
     },
@@ -4656,7 +4684,7 @@
       "labels": [],
       "body": "In section 1.3, the text sates:\n\n> 1.3.  Design Considerations\n> \n>    The decisions taken in this specification aim to achieve the following design goals:\n> \n>    *  the specification shall not specify key resolution or trust frameworks\n\nIf this sentence remains, interoperability cannot be supported. This bullet should be removed.\n\n\nIn section 5.1. the text states:\n\n> The following additional rules apply:\n> \n> 2.  The JWT MUST be secured using a cryptographic signature or MAC algorithm.  Relying Parties MUST reject JWTs with an invalid signature.\n \nAs MAC algorithms are using secret keys, it is not believed that MAC algorithms are suitable. Remove \"or MAC algorithm\".\n\nReplace with:\n\n> The following additional rules apply:\n> \n> 2.  The JWT MUST be secured using a cryptographic signature algorithm.  Relying Parties MUST determine which public key shall be used to verify the signature of the JWT.  Relying Parties MUST verify that this public key is valid (e.g., its PKC is not revoked, nor suspended). Relying Parties MUST reject JWTs with an invalid signature.\n\nIn section 5.2, the text states:\n\n> The following additional rules apply:\n> \n> 2.  The CWT MUST be secured using a cryptographic signature or MAC algorithm.  Relying Parties MUST reject CWTs with an invalid signature\n\nThe same kind of change already proposed for section 5.1 is proposed for section 5.2 :\n\n> The following additional rules apply:\n> \n> 2.  The CWT MUST be secured using a cryptographic signature algorithm. Relying Parties MUST determine which public key shall be used to verify the signature of the CWT.  Relying Parties MUST verify that this public key is valid (e.g., its PKC is not revoked, nor suspended). Relying Parties MUST reject CWTs with an invalid signature.\n> ",
       "createdAt": "2025-01-20T10:11:32Z",
-      "updatedAt": "2025-01-20T16:39:48Z",
+      "updatedAt": "2025-01-22T08:52:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -4686,6 +4714,20 @@
           "body": "\nYou wrote:\n\n> (as all systems are part of the same entity and trusted)\n\n\nI cannot make the assumption that  all entities that are part of  a system will never be corrupted, nor successfully attacked.\n\nIf the secret key that is used by a single entity to verify Status List Tokens is compromised or extracted, \nthen the whole system would collapse.\n\nTrust is not sufficient. Security is necessary. \n\nA Status List Token is not a substitute for Token Introspection.\n\n",
           "createdAt": "2025-01-20T16:39:47Z",
           "updatedAt": "2025-01-20T16:39:47Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "The same argument would be true for any system using HMAC based Access Tokens, but those systems exist.\n\nThere was a rather long discussion during the last IETF meetings (I believe 120/121) about the different options that a status list could be provided as and we initially also included an unsigned option that after those WG discussions was removed. The consensus was to keep MAC, but remove unsigned.",
+          "createdAt": "2025-01-21T08:49:18Z",
+          "updatedAt": "2025-01-21T08:49:18Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "I am not familiar with HMAC based Access Tokens but I presume that the Access Token is targeted to a given Relying Party. In that case, if the secret key used to verify the Access Token is compromised,  it does not affect other Relying Parties. \n\nIf you really want to keep MAC algorithms, then warnings should be included into the Security Considerations section with a pointer to that text in sections 5.1 and 5.2.\n\n ",
+          "createdAt": "2025-01-22T08:52:01Z",
+          "updatedAt": "2025-01-22T08:52:01Z"
         }
       ]
     },
@@ -4701,9 +4743,24 @@
       "labels": [],
       "body": "In section 8.3 (Validation Rules), the text states:\n\n> 8.3.  Validation Rules\n> \n> The text states:\n> \n>    If the validation was successful, the Relying Party MUST\n>    perform the following validation steps to evaluate the status of the\n>    reference token:\n> \n>    (...)\n> \n>    3.  Validate the Status List Token:\n> \n>        1.  Validate the Status List Token by following the rules defined\n>            in section 7.2 of [RFC7519] for JWTs and section 7.2 of\n>            [RFC8392] for CWTs\n> \n\nSection 7.2 from RFC 7519 does not say which key SHALL be used to verify the signature of the Status List Token. Section 8.3 from this document is also silent. In order to be able to interoperate, additional information needs to be added into the document. \n\nThe simplest (and the less secure approach) is to use the same private key to sign Referenced Tokens and Status List Tokens. This corresponds to the case where the Status issuer is the Issuer.\n\nA more secure approach is to use of different private keys to sign Referenced Tokens and Status List Tokens. This corresponds to the case where the Status issuer is an entity that has been authorized by the Issuer to issue Status List Tokens. This approach should be RECOMMENDED.\n\nIn RFC 5280, a CRL issuer can be nominated by a CA by the issuance of a PKC that contains the cRLSign bit set in the key usage extension (Section 4.2.1.3 from RFC 5280). Since the role of a CRL issuer and of a Status issuer are different, the same bit cannot be used.\n\nIn the key usage extension of a PKC, it becomes necessary to define an additional bit that can apply to a Status issuer nominated by an Issuer and to register that additional bit at IANA.\n\nAt the moment, in RFC 5280, the following Object Identifier is defined:\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15)}\nOID dot notation: 2.5.29.15\n\n```\n      id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8) }\n\n```\nThe next usable bit is (9).\n\nThe following line should be happened to this list:\n\n`           sLTSign                 (9)`\n\n\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15) sLTSign(9)}\n\nOID dot notation: 2.5.29.15.9\n\nWith the following explanation:\n\n> The sLTSign bit is asserted when the subject public key can be used for verifying signatures on Status List Tokens.\n\nA specific section dedicated to this extension should be added so that it can be referenced in the IANA registration template.\n\nAfter these explanations, we can now come back to a text change proposal for section 8.3 (Validation Rules).\n\nText change proposal for section 8.3.\n\n> 8.3.  Validation Rules\n> \n> The text states:\n> \n>    If the validation was successful, the Relying Party MUST\n>    perform the following validation steps to evaluate the status of the\n>    reference token:\n> \n>    (...)\n> \n>    3.  Identify the public key to be used to verify the signature \n>        of Status List Token\n> \n> If no iss claim, nor an x5c claim, is present in the Status List Token and unless a specific local rule applies, the Relying Party MUST verify the Status List Token using the same key that has been used to verify the Referenced Token. This approach is NOT RECOMMENDED.\n> \n> If the iss claim is present in the JOSE Header, the JWT Claims, or the COSE Header, a Relying Party can use this parameter to obtain a JSON Web Key to use in the verification process. It should be noticed that, according to RFC 7519, the processing of this claim is generally application specific. Unless the processing of this claim is made in a specific environment or context, this approach is not interoperable.\n> \n> If the \"x5c\" claim is present in the JWT Claims, a Relying Party SHOULD use this parameter to obtain a JSON Web Key to use in the verification process. The \"x5c\" claim is an array of strings that contains an x.509 certificate chain, in order from the root certificate authority to the signing certificate.\n> \n> The last certificate of the chain can be either the certificate of the Issuer or of the Status Issuer. In the later case, the key usage extension (defined in section 4.2.1.3 from RFC 5280) MUST be present and MUST contain an additional bit defined in section 9 of this document. \n> \n> Once it has been verified that the whole chain is valid and that no certificate of the chain has been revoked, the public key from the last certificate of the chain MUST be used to validate the Status List Token. This approach is RECOMMENDED.\n> \n> \n> 2.  Validate the Status List Token by following the rules defined in section 7.2 of [RFC7519] for JWTs and section 7.2 of [RFC8392] for CWTs\n> \n> 3.  Check for the existence of the required claims as defined in Section 5.1 and Section 5.2 depending on token type\n\nA text proposal for defining the sLTSign bit is provided in a subsequent issue.\n",
       "createdAt": "2025-01-20T10:19:16Z",
-      "updatedAt": "2025-01-20T10:19:16Z",
+      "updatedAt": "2025-01-22T13:20:27Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Section 7.2 of RFC7519 refers to RFC7515 (JWS), which gives some possbilities to encode the public key, e.g. \"x5c\" or \"jwk\"",
+          "createdAt": "2025-01-22T12:58:50Z",
+          "updatedAt": "2025-01-22T12:58:50Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "This is not the point.\n\nRFC 5280 provides all the information that is necessary to allow interoperability \nwhen CRLs are being used and when the Issuer is different from the CRL issuer.\n\nI would like this document to include all the information that is necessary to allow interoperability \nwhen TSLs are being used and when the Issuer is different from the Status issuer. \n",
+          "createdAt": "2025-01-22T13:20:25Z",
+          "updatedAt": "2025-01-22T13:20:25Z"
+        }
+      ]
     },
     {
       "number": 235,
@@ -15342,7 +15399,7 @@
       "labels": [],
       "body": "Fixes #216 \r\n\r\nI've moved the existing 2 bit examples and ascii art up - we can revert that change, but it felt more consistent to me that way\r\nI am not exactly sure how to better displays the input (status values for specific positions) - any ideas?\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/216-test-vectors/draft-ietf-oauth-status-list.html",
       "createdAt": "2025-01-17T15:45:12Z",
-      "updatedAt": "2025-01-20T10:04:21Z",
+      "updatedAt": "2025-01-22T12:14:53Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "a4f70cfbbf560b859e897ac3b2eb64da77f50559",
@@ -15389,6 +15446,79 @@
               "updatedAt": "2025-01-17T15:58:48Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZAe3B",
+          "commit": {
+            "abbreviatedOid": "7e73837"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-22T12:14:53Z",
+          "updatedAt": "2025-01-22T12:14:53Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 239,
+      "id": "PR_kwDOJZ2aqs6Imvwo",
+      "title": "editorial fixes",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/239",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Trying to fix some obvious spelling mistakes and increase readability in general. Not sure about all of the minor / non-obvious changes.",
+      "createdAt": "2025-01-22T10:10:39Z",
+      "updatedAt": "2025-01-22T12:14:31Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "a4f70cfbbf560b859e897ac3b2eb64da77f50559",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/editorial-review",
+      "headRefOid": "40508285b7fa92cb5e7966d42f60ca7ad7885b39",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6ZAct7",
+          "commit": {
+            "abbreviatedOid": "4050828"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-22T12:11:00Z",
+          "updatedAt": "2025-01-22T12:11:00Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "not sure on this one",
+              "createdAt": "2025-01-22T12:11:00Z",
+              "updatedAt": "2025-01-22T12:11:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZAeqP",
+          "commit": {
+            "abbreviatedOid": "4050828"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "The only things I'm not sure is about putting a comma before \"and\"",
+          "createdAt": "2025-01-22T12:14:31Z",
+          "updatedAt": "2025-01-22T12:14:31Z",
+          "comments": []
         }
       ]
     }
