@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 26 July 2025                                                   
+Expires: 27 July 2025                                                   
                                                               C. Bormann
                                                                   SPRIND
-                                                         22 January 2025
+                                                         23 January 2025
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 July 2025.
+   This Internet-Draft will expire on 27 July 2025.
 
 Copyright Notice
 
@@ -339,15 +339,15 @@ Table of Contents
    algorithm:
 
    1.  Each status of a Referenced Token MUST be represented with a bit-
-       size of 1,2,4, or 8.  Therefore up to 2,4,16, or 256 statuses for
-       a Referenced Token are possible, depending on the bit-size.  This
+       size of 1,2,4 or 8.  Therefore up to 2,4,16 or 256 statuses for a
+       Referenced Token are possible, depending on the bit-size.  This
        limitation is intended to limit bit manipulation necessary to a
        single byte for every operation and thus keeping implementations
        simpler and less error-prone.
 
    2.  The overall Status List is encoded as a byte array.  Depending on
        the bit-size, each byte corresponds to 8/(#bit-size) statuses
-       (8,4,2, or 1).  The status of each Referenced Token is identified
+       (8,4,2 or 1).  The status of each Referenced Token is identified
        using the index that maps to one or more specific bits within the
        byte array.  The index starts counting at 0 and ends with "size"
        - 1 (being the last valid entry).  The bits within an array are
@@ -593,9 +593,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58408b21dea14523c37038fbe99ec39184fe8a47382dcb94daa1ef
-   dc71935485303cb6b6d3989827206d1ec20f19ce8cf01f364ce8e486dd6be29fd2c9
-   fa77ffb171
+   b918000217015d5840ccc8c96d60c32176b9b4088b0eba92c6157c0f80bba9f70fcd
+   94e78d302e774d9a3da4b58b4dec25fb3b40f078809cb4c846c0c90a5e0a16e5bf01
+   10d8129093
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -617,12 +617,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      8b21dea14523c37038fbe99e  #       "\x8b!Þ¡E#Ãp8ûé\x9e"
-      c39184fe8a47382dcb94daa1  #       "Ã\x91\x84þ\x8aG8-Ë\x94Ú¡"
-      efdc71935485303cb6b6d398  #       "ïÜq\x93T\x850<¶¶Ó\x98"
-      9827206d1ec20f19ce8cf01f  #       "\x98' m\x1eÂ\x0f\x19Î\x8cð\x1f"
-      364ce8e486dd6be29fd2c9fa  #       "6Lèä\x86Ýkâ\x9fÒÉú"
-      77ffb171                  #       "wÿ±q"
+      ccc8c96d60c32176b9b4088b  #       "ÌÈÉm`Ã!v¹´\x08\x8b"
+      0eba92c6157c0f80bba9f70f  #       "\x0eº\x92Æ\x15|\x0f\x80»©÷\x0f"
+      cd94e78d302e774d9a3da4b5  #       "Í\x94ç\x8d0.wM\x9a=¤µ"
+      8b4dec25fb3b40f078809cb4  #       "\x8bMì%û;@ðx\x80\x9c´"
+      c846c0c90a5e0a16e5bf0110  #       "ÈFÀÉ\x0a^\x0a\x16å¿\x01\x10"
+      d8129093                  #       "Ø\x12\x90\x93"
 
 6.  Referenced Token
 
@@ -767,9 +767,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840805f074d6822dc249c2349f7b7fe33e554bb04
-   aacd95ac7f6c247a21fba03960ef1f17be83e6a9951c9309db5e5f7ee8713f3cd0a2
-   2a202bcd98b0be18b9d465
+   7374617475736c697374732f315840dd0145f8194fbb612a72d399d5e9ad89124218
+   ae73b0347f95b80e4e405be93a281e09343eaa8b448ba3d289f88eeec8ab8d1396a4
+   e2294753deb719f46efd07
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -792,12 +792,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         805f074d6822dc249c2349f7  #       "\x80_\x07Mh"Ü$\x9c#I÷"
-         b7fe33e554bb04aacd95ac7f  #       "·þ3åT»\x04ªÍ\x95¬\x7f"
-         6c247a21fba03960ef1f17be  #       "l$z!û\xa09`ï\x1f\x17¾"
-         83e6a9951c9309db5e5f7ee8  #       "\x83æ©\x95\x1c\x93\x09Û^_~è"
-         713f3cd0a22a202bcd98b0be  #       "q?<Ð¢* +Í\x98°¾"
-         18b9d465                  #       "\x18¹Ôe"
+         dd0145f8194fbb612a72d399  #       "Ý\x01Eø\x19O»a*rÓ\x99"
+         d5e9ad89124218ae73b0347f  #       "Õé\xad\x89\x12B\x18®s°4\x7f"
+         95b80e4e405be93a281e0934  #       "\x95¸\x0eN@[é:(\x1e\x094"
+         3eaa8b448ba3d289f88eeec8  #       ">ª\x8bD\x8b£Ò\x89ø\x8eîÈ"
+         ab8d1396a4e2294753deb719  #       "«\x8d\x13\x96¤â)GSÞ·\x19"
+         f46efd07                  #       "ôný\x07"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -941,7 +941,7 @@ d2                              # tag(18)
 7.  Status Types
 
    This document defines the statuses of Referenced Tokens as Status
-   Type values.  A status describes the state, mode, condition, or stage
+   Type values.  A status describes the state, mode, condition or stage
    of an entity that is represented by the Referenced Token.
 
    A Status List can not represent multiple statuses per Referenced
@@ -964,7 +964,7 @@ d2                              # tag(18)
       correct or legal.
 
    *  0x01 - "INVALID" - The status of the Referenced Token is revoked,
-      annulled, taken back, recalled, or cancelled.
+      annulled, taken back, recalled or cancelled.
 
    *  0x02 - "SUSPENDED" - The status of the Referenced Token is
       temporarily invalid, hanging, debarred from privilege.  This state
@@ -1030,8 +1030,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Ej5eGn51Wh7MLQkFk4_Xe7MUfbxyqYb1sd9_KIHyA06BIPkj18mV
-   bOpXfJb0K_-2tUI_8m47MtuQe4gHp-vpRw
+   nR0bCI6NDMyMDB9.fmQi_djPKQETRBj1CFSnjEUBnp-uyFkl16Vl68-CjtiBImtfofwU
+   RCw5DGYkp9NZ4fFfvIW6DU_3Jx3kO1uDHw
 
 8.2.  Status List Response
 
@@ -1142,7 +1142,7 @@ d2                              # tag(18)
    that was valid for that specified time or an error.
 
    If the Server does not support the additional query parameter, it
-   SHOULD return a status code of 501 (Not Implemented), or if the
+   SHOULD return a status code of 501 (Not Implemented) or if the
    requested time is not supported it SHOULD return a status code of 406
    (Not Acceptable).  A Status List Token might be served via static
    file hosting (e.g., leveraging a Content Delivery Network), which
@@ -1168,8 +1168,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Ej5eGn51Wh7MLQkFk4_Xe7MUfbxyqYb1sd9_KIHyA06BIPkj18mV
-   bOpXfJb0K_-2tUI_8m47MtuQe4gHp-vpRw
+   nR0bCI6NDMyMDB9.fmQi_djPKQETRBj1CFSnjEUBnp-uyFkl16Vl68-CjtiBImtfofwU
+   RCw5DGYkp9NZ4fFfvIW6DU_3Jx3kO1uDHw
 
 9.  Status List Aggregation
 
@@ -1200,9 +1200,9 @@ d2                              # tag(18)
 
    The Issuer MAY link to the Status List Aggregation URI in metadata
    that can be provided by different means like .well-known metadata as
-   is used commonly in OAuth and OpenID, or via a VICAL extension for
-   ISO mDoc / mDL.  If the Issuer is an OAuth Authorization Server
-   according to [RFC6749], it is RECOMMENDED to use
+   is used commonly in OAuth and OpenID or via a VICAL extension for ISO
+   mDoc / mDL.  If the Issuer is an OAuth Authorization Server according
+   to [RFC6749], it is RECOMMENDED to use
    status_list_aggregation_endpoint for its metadata defined by
    [RFC8414].
 
@@ -1439,7 +1439,7 @@ d2                              # tag(18)
 
    *  disable the Status List Aggregation Section 9
 
-   *  choose non-sequential, pseudo-random, or random indices
+   *  choose non-sequential, pseudo-random or random indices
 
    *  use decoy entries to obfuscate the real number of Referenced
       Tokens within a Status List
@@ -1868,7 +1868,7 @@ d2                              # tag(18)
    *  Status Type Name: VALID
 
    *  Status Type Description: The status of the Referenced Token is
-      valid, correct, or legal.
+      valid, correct or legal.
 
    *  Status Type value: 0x00
 
@@ -1881,7 +1881,7 @@ d2                              # tag(18)
    *  Status Type Name: INVALID
 
    *  Status Type Description: The status of the Referenced Token is
-      revoked, annulled, taken back, recalled, or cancelled.
+      revoked, annulled, taken back, recalled or cancelled.
 
    *  Status Type value: 0x01
 
@@ -1894,7 +1894,7 @@ d2                              # tag(18)
    *  Status Type Name: SUSPENDED
 
    *  Status Type Description: The status of the Referenced Token is
-      temporarily invalid, hanging, or debarred from privilege.  This
+      temporarily invalid, hanging or debarred from privilege.  This
       state is reversible.
 
    *  Status Type value: 0x02
