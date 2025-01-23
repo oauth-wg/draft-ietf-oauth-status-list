@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - "draft-*"
+  workflow_dispatch:
+    inputs:
+      email:
+        description: "Submitter email"
+        default: ""
+        type: string
 
 jobs:
   build:
@@ -20,13 +26,6 @@ jobs:
     - name: "Setup"
       id: setup
       run: date -u "+date=%FT%T" >>"$GITHUB_OUTPUT"
-
-    - name: "Generate examples"
-      run: |
-        npm install -g cborg
-        python3 -m pip install --upgrade pip wheel setuptools
-        python3 -m pip install -r src/requirements.txt
-        python3 src/main.py
 
     - name: "Caching"
       uses: actions/cache@v4
@@ -49,8 +48,10 @@ jobs:
       uses: martinthomson/i-d-template@v1
       with:
         make: upload
+      env:
+        UPLOAD_EMAIL: ${{ inputs.email }}
 
     - name: "Archive Submitted Drafts"
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: "versioned/draft-*-[0-9][0-9].*"
