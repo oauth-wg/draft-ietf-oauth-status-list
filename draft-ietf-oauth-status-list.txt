@@ -5,10 +5,10 @@
 Network Working Group                                          T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 20 July 2025                                                   
+Expires: 27 July 2025                                                   
                                                               C. Bormann
                                                                   SPRIND
-                                                         16 January 2025
+                                                         23 January 2025
 
 
                            Token Status List
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2025.
+   This Internet-Draft will expire on 27 July 2025.
 
 Copyright Notice
 
@@ -113,7 +113,7 @@ Table of Contents
      12.6.  Third Party Hosting
      12.7.  Historical Resolution
    13. Implementation Considerations
-     13.1.  Token Lifecycle
+     13.1.  Referenced Token Lifecycle
      13.2.  Default Values and Double Allocation
      13.3.  Status List Size
      13.4.  Status List Formats
@@ -240,7 +240,9 @@ Table of Contents
    of these problems at the cost of less up-to-date data.  Modern
    approaches use accumulator-based revocation registries and Zero-
    Knowledge-Proofs to accommodate for this privacy gap, but face
-   scalability issues again.
+   scalability issues again.  Another alternative is short-lived
+   Referenced Tokens with regular re-issuance, but this puts additional
+   burden on the Issuer's infrastructure.
 
    This specification seeks to find a balance between scalability,
    security, and privacy by minimizing the status information to mere
@@ -593,9 +595,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d584072755920681d128f26fe641d82867b4894f564c7ac792f8eeb
-   78025e75591a8972089ed2155bac9d0b4af9a4a8574b5625a268a963a9f7eeafdcc8
-   7648d3cb2b
+   b918000217015d5840e8c4be80652cf391806127adfcb4e9720c822c60798db9c675
+   c15cf11d03957b06d254302cf23d437f1a64965165b5bc04c718aec050037642d269
+   ea4b3fb534
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -617,12 +619,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      72755920681d128f26fe641d  #       "ruY h\x1d\x12\x8f&þd\x1d"
-      82867b4894f564c7ac792f8e  #       "\x82\x86{H\x94õdÇ¬y/\x8e"
-      eb78025e75591a8972089ed2  #       "ëx\x02^uY\x1a\x89r\x08\x9eÒ"
-      155bac9d0b4af9a4a8574b56  #       "\x15[¬\x9d\x0bJù¤¨WKV"
-      25a268a963a9f7eeafdcc876  #       "%¢h©c©÷î¯ÜÈv"
-      48d3cb2b                  #       "HÓË+"
+      e8c4be80652cf391806127ad  #       "èÄ¾\x80e,ó\x91\x80a'\xad"
+      fcb4e9720c822c60798db9c6  #       "ü´ér\x0c\x82,`y\x8d¹Æ"
+      75c15cf11d03957b06d25430  #       "uÁ\ñ\x1d\x03\x95{\x06ÒT0"
+      2cf23d437f1a64965165b5bc  #       ",ò=C\x7f\x1ad\x96Qeµ¼"
+      04c718aec050037642d269ea  #       "\x04Ç\x18®ÀP\x03vBÒiê"
+      4b3fb534                  #       "K?µ4"
 
 6.  Referenced Token
 
@@ -767,9 +769,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158404dafe1e4f5c49601f9d371d7d243a9140a839b
-   1e9cd4b86d51baa05c3a282f8c8c1ee73b127b0f133beff754e142a70cf11eaa43ed
-   974fc22abde9aacc01c6d3
+   7374617475736c697374732f315840817a75bbc82d9140aa38d677c139749c9b55c2
+   499c416f2d72365f721aee4714a6d71ac602ca9aa74a8223560e0718be9799b037e5
+   73fc38754b740183c290a6
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -792,12 +794,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      4dafe1e4f5c49601f9d371d7  #       "M¯áäõÄ\x96\x01ùÓq×"
-      d243a9140a839b1e9cd4b86d  #       "ÒC©\x14\x0a\x83\x9b\x1e\x9cÔ¸m"
-      51baa05c3a282f8c8c1ee73b  #       "Qº\xa0\:(/\x8c\x8c\x1eç;"
-      127b0f133beff754e142a70c  #       "\x12{\x0f\x13;ï÷TáB§\x0c"
-      f11eaa43ed974fc22abde9aa  #       "ñ\x1eªCí\x97OÂ*½éª"
-      cc01c6d3                  #       "Ì\x01ÆÓ"
+      817a75bbc82d9140aa38d677  #       "\x81zu»È-\x91@ª8Öw"
+      c139749c9b55c2499c416f2d  #       "Á9t\x9c\x9bUÂI\x9cAo-"
+      72365f721aee4714a6d71ac6  #       "r6_r\x1aîG\x14¦×\x1aÆ"
+      02ca9aa74a8223560e0718be  #       "\x02Ê\x9a§J\x82#V\x0e\x07\x18¾"
+      9799b037e573fc38754b7401  #       "\x97\x99°7åsü8uKt\x01"
+      83c290a6                  #       "\x83Â\x90¦"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1032,8 +1034,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.0wgnsYyKe6SMfuEt538BSxK5Ulxb4PYSE2CqDbmdI9xUVNOaczhC
-   kQKSRSJHyHcJ6OqyN85YDgg-Jkz_dEaptQ
+   nR0bCI6NDMyMDB9.Mcf8gPLIRiD1Wjcr-Zzb_tDfNInN1S9XmDWxYz_ofTGNGeZtAgyp
+   BEIU-krfJTQao08zR1qm3HdoKaCW5jmcRA
 
 8.2.  Status List Response
 
@@ -1170,8 +1172,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.0wgnsYyKe6SMfuEt538BSxK5Ulxb4PYSE2CqDbmdI9xUVNOaczhC
-   kQKSRSJHyHcJ6OqyN85YDgg-Jkz_dEaptQ
+   nR0bCI6NDMyMDB9.Mcf8gPLIRiD1Wjcr-Zzb_tDfNInN1S9XmDWxYz_ofTGNGeZtAgyp
+   BEIU-krfJTQao08zR1qm3HdoKaCW5jmcRA
 
 9.  Status List Aggregation
 
@@ -1515,7 +1517,7 @@ d2                              # tag(18)
 
 13.  Implementation Considerations
 
-13.1.  Token Lifecycle
+13.1.  Referenced Token Lifecycle
 
    The lifetime of a Status List Token depends on the lifetime of its
    Referenced Tokens.  Once all Referenced Tokens are expired, the
@@ -1547,6 +1549,15 @@ d2                              # tag(18)
 
 13.3.  Status List Size
 
+   The storage and transmission size of the Status Issuer's Status List
+   Tokens depends on: - the size of the Status List, i.e. the number of
+   Referenced Tokens - the revocation rate and distribution of the
+   Status List data (due to compression, revocation rates close to 0% or
+   100% create lowest sizes while revocation rates closer to 50% and
+   random distribution create highest sizes) - the lifetime of
+   Referenced Tokens (shorter lifetimes allows for earlier retirement of
+   Status List Tokens)
+
    The Status List Issuer may increase the size of a Status List if it
    requires indices for additional Referenced Tokens.  It is RECOMMENDED
    that the size of a Status List in bits is divisible in bytes (8 bits)
@@ -1556,7 +1567,11 @@ d2                              # tag(18)
    Status Lists to reduce the transmission size of an individual Status
    List Token.  This may be useful for setups where some entities
    operate in constrained environments, e.g. for mobile internet or
-   embedded devices.
+   embedded devices.  The Status List Issuer may chunk the Status List
+   Tokens depending on the Referenced Token's expiry date to align their
+   lifecycles and allow for easier retiring of Status List Tokens,
+   however the Status Issuer must be aware of possible privacy risks due
+   to correlations.
 
 13.4.  Status List Formats
 
@@ -2202,6 +2217,13 @@ Acknowledgments
 Document History
 
    -07
+
+   *  explain the Status List Token size dependencies
+
+   *  explain possibility to chunk Status List Tokens depending on
+      Referenced Token's expiry date
+
+   *  add short-lived tokens in the Rationale
 
    *  rename Status Mechanism Methods registry to Status Mechanisms
       registry
