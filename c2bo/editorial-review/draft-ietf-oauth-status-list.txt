@@ -243,7 +243,7 @@ Table of Contents
    scalability issues again.
 
    This specification seeks to find a balance between scalability,
-   security, and privacy by minimizing the status information to mere
+   security and privacy by minimizing the status information to mere
    bits (often a single bit) and compressing the resulting binary data.
    Thereby, a Status List may contain statuses of many thousands or
    millions Referenced Tokens while remaining as small as possible.
@@ -258,7 +258,7 @@ Table of Contents
    *  the specification shall favor a simple and easy-to-understand
       concept
 
-   *  the specification shall be easy, fast, and secure to implement in
+   *  the specification shall be easy, fast and secure to implement in
       all major programming languages
 
    *  the specification shall be optimized to support the most common
@@ -284,7 +284,7 @@ Table of Contents
    for status mechanisms and registers the members defined by this
    specification.  Other specifications can register other members used
    for status retrieval.  Other status mechanisms may have different
-   tradeoffs regarding security, privacy, scalability, and complexity.
+   tradeoffs regarding security, privacy, scalability and complexity.
    The privacy and security considerations in this document only
    represent the properties of the Status List mechanism.
 
@@ -432,7 +432,7 @@ Table of Contents
 
       -  bits: REQUIRED.  Unsigned integer (Major Type 0) that contains
          the number of bits per Referenced Token in the Status List.
-         The allowed values for bits are 1, 2, 4, and 8.
+         The allowed values for bits are 1, 2, 4 and 8.
 
       -  lst: REQUIRED.  Byte string (Major Type 2) that contains the
          Status List as specified in Section 4.
@@ -593,9 +593,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840ccc8c96d60c32176b9b4088b0eba92c6157c0f80bba9f70fcd
-   94e78d302e774d9a3da4b58b4dec25fb3b40f078809cb4c846c0c90a5e0a16e5bf01
-   10d8129093
+   b918000217015d5840fce6bba3e570a2ee3edf95493ab69c65ba9c15212ba0ee569e
+   5f35bc41335a0709de3fb905de54af72f6ef99b705a6f790738bd2d278c05ee828c6
+   222f6266af
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -617,12 +617,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ccc8c96d60c32176b9b4088b  #       "ÌÈÉm`Ã!v¹´\x08\x8b"
-      0eba92c6157c0f80bba9f70f  #       "\x0eº\x92Æ\x15|\x0f\x80»©÷\x0f"
-      cd94e78d302e774d9a3da4b5  #       "Í\x94ç\x8d0.wM\x9a=¤µ"
-      8b4dec25fb3b40f078809cb4  #       "\x8bMì%û;@ðx\x80\x9c´"
-      c846c0c90a5e0a16e5bf0110  #       "ÈFÀÉ\x0a^\x0a\x16å¿\x01\x10"
-      d8129093                  #       "Ø\x12\x90\x93"
+      fce6bba3e570a2ee3edf9549  #       "üæ»£åp¢î>ß\x95I"
+      3ab69c65ba9c15212ba0ee56  #       ":¶\x9ceº\x9c\x15!+\xa0îV"
+      9e5f35bc41335a0709de3fb9  #       "\x9e_5¼A3Z\x07\x09Þ?¹"
+      05de54af72f6ef99b705a6f7  #       "\x05ÞT¯röï\x99·\x05¦÷"
+      90738bd2d278c05ee828c622  #       "\x90s\x8bÒÒxÀ^è(Æ""
+      2f6266af                  #       "/bf¯"
 
 6.  Referenced Token
 
@@ -737,7 +737,7 @@ d2                              # tag(18)
       to a status mechanism.  Each data item in the Status CBOR
       structure comprises a key-value pair, where the key must be a CBOR
       text string (Major Type 3) specifying the identifier of the status
-      mechanism, and the corresponding value defines its contents.  This
+      mechanism and the corresponding value defines its contents.  This
       specification defines the following data items:
 
       -  status_list (status list): REQUIRED when the status mechanism
@@ -767,9 +767,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840dd0145f8194fbb612a72d399d5e9ad89124218
-   ae73b0347f95b80e4e405be93a281e09343eaa8b448ba3d289f88eeec8ab8d1396a4
-   e2294753deb719f46efd07
+   7374617475736c697374732f3158408f46b042f689d9d6d2036269c8f7b5fe23bbb7
+   d498f9a8c28fc89af9b11b9bb763fcdfc293b66c4565f517ed395cd190d4a72d0bf8
+   2ddf0a780646a3f8df9569
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -792,12 +792,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         dd0145f8194fbb612a72d399  #       "Ý\x01Eø\x19O»a*rÓ\x99"
-         d5e9ad89124218ae73b0347f  #       "Õé\xad\x89\x12B\x18®s°4\x7f"
-         95b80e4e405be93a281e0934  #       "\x95¸\x0eN@[é:(\x1e\x094"
-         3eaa8b448ba3d289f88eeec8  #       ">ª\x8bD\x8b£Ò\x89ø\x8eîÈ"
-         ab8d1396a4e2294753deb719  #       "«\x8d\x13\x96¤â)GSÞ·\x19"
-         f46efd07                  #       "ôný\x07"
+         8f46b042f689d9d6d2036269  #       "\x8fF°Bö\x89ÙÖÒ\x03bi"
+         c8f7b5fe23bbb7d498f9a8c2  #       "È÷µþ#»·Ô\x98ù¨Â"
+         8fc89af9b11b9bb763fcdfc2  #       "\x8fÈ\x9aù±\x1b\x9b·cüßÂ"
+         93b66c4565f517ed395cd190  #       "\x93¶lEeõ\x17í9\Ñ\x90"
+         d4a72d0bf82ddf0a780646a3  #       "Ô§-\x0bø-ß\x0ax\x06F£"
+         f8df9569                  #       "øß\x95i"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1030,8 +1030,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.fmQi_djPKQETRBj1CFSnjEUBnp-uyFkl16Vl68-CjtiBImtfofwU
-   RCw5DGYkp9NZ4fFfvIW6DU_3Jx3kO1uDHw
+   nR0bCI6NDMyMDB9.jvuNr8_cQ36dRYhC0ZE-IUfI8SV9SVG_NpskBuTu1HGCReBAvsYk
+   -fM6e3HsS0e9CuywICqUX5kO7-PPRqrLtQ
 
 8.2.  Status List Response
 
@@ -1059,7 +1059,7 @@ d2                              # tag(18)
 
    Upon receiving a Referenced Token, a Relying Party MUST first perform
    the validation of the Referenced Token - e.g., checking for expected
-   attributes, valid signature, and expiration time.  The processing
+   attributes, valid signature and expiration time.  The processing
    rules for JWT or CWT precede any evaluation of a Referenced Token's
    status.  For example, if a token is evaluated as being expired
    through the "exp" (Expiration Time) but also has a status of 0x00
@@ -1128,7 +1128,7 @@ d2                              # tag(18)
    conveys information about the state of Reference Tokens at the time
    the Status List Token was issued.  The validity period for this
    information, as defined by the issuer, is explicitly stated by the
-   iat (issued at) and exp (expiration time) claims for JWT, and their
+   iat (issued at) and exp (expiration time) claims for JWT and their
    corresponding ones for the CWT representation.  If support for
    historical status information is required, this can be achieved by
    extending the request for the Status List Token as defined in
@@ -1168,8 +1168,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.fmQi_djPKQETRBj1CFSnjEUBnp-uyFkl16Vl68-CjtiBImtfofwU
-   RCw5DGYkp9NZ4fFfvIW6DU_3Jx3kO1uDHw
+   nR0bCI6NDMyMDB9.jvuNr8_cQ36dRYhC0ZE-IUfI8SV9SVG_NpskBuTu1HGCReBAvsYk
+   -fM6e3HsS0e9CuywICqUX5kO7-PPRqrLtQ
 
 9.  Status List Aggregation
 
@@ -1455,7 +1455,7 @@ d2                              # tag(18)
 
    Two or more colluding Relying Parties may link two transactions
    involving the same Referenced Token by comparing the status claims of
-   received Referenced Tokens, and therefore determine that they have
+   received Referenced Tokens and therefore determine that they have
    interacted with the same Holder.
 
    To avoid privacy risks for colluding Relying Parties, it is
@@ -1475,7 +1475,7 @@ d2                              # tag(18)
 
    A Status Issuer and a Relying Party Issuer may link two transaction
    involving the same Referenced Tokens by comparing the status claims
-   of the Referenced Token, and therefore determine that they have
+   of the Referenced Token and therefore determine that they have
    interacted with the same Holder.  It is therefore recommended to use
    Status Lists for Referenced Token formats that have similar
    unlinkability properties.

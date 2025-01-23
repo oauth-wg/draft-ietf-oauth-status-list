@@ -1464,7 +1464,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-rationale" class="section-name selfRef">Rationale</a>
         </h3>
 <p id="section-1.2-1">Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2-2">This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="design-considerations">
@@ -1478,7 +1478,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-1.3-2.1.1">the specification shall favor a simple and easy-to-understand concept<a href="#section-1.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.3-2.2">
-            <p id="section-1.3-2.2.1">the specification shall be easy, fast, and secure to implement in all major programming languages<a href="#section-1.3-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.3-2.2.1">the specification shall be easy, fast and secure to implement in all major programming languages<a href="#section-1.3-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.3-2.3">
             <p id="section-1.3-2.3.1">the specification shall be optimized to support the most common use cases and avoid unnecessary complexity of corner cases<a href="#section-1.3-2.3.1" class="pilcrow">¶</a></p>
@@ -1506,7 +1506,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-status-mechanism-registry">
 <a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-status-mechanism-registry" class="section-name selfRef">Status Mechanism Registry</a>
         </h3>
-<p id="section-1.4-1">This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability, and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-1">This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1674,7 +1674,7 @@ encoded:
             <p id="section-4.2-2.1.1">The <code>StatusList</code> structure is a map (Major Type 5) and defines the following entries:<a href="#section-4.2-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-2.1.2.1">
-                <p id="section-4.2-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for <code>bits</code> are 1, 2, 4, and 8.<a href="#section-4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-4.2-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (Major Type 0) that contains the number of bits per Referenced Token in the Status List. The allowed values for <code>bits</code> are 1, 2, 4 and 8.<a href="#section-4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.2-2.1.2.2">
                 <p id="section-4.2-2.1.2.2.1"><code>lst</code>: <span class="bcp14">REQUIRED</span>. Byte string (Major Type 2) that contains the Status List as specified in <a href="#status-list" class="auto internal xref">Section 4</a>.<a href="#section-4.2-2.1.2.2.1" class="pilcrow">¶</a></p>
@@ -1836,9 +1836,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840ccc8c96d60c32176b9b4088b0eba92c6157c0f80bba9f70fcd
-94e78d302e774d9a3da4b58b4dec25fb3b40f078809cb4c846c0c90a5e0a16e5bf01
-10d8129093
+b918000217015d5840fce6bba3e570a2ee3edf95493ab69c65ba9c15212ba0ee569e
+5f35bc41335a0709de3fb905de54af72f6ef99b705a6f790738bd2d278c05ee828c6
+222f6266af
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1862,12 +1862,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ccc8c96d60c32176b9b4088b  #       "ÌÈÉm`Ã!v¹´\x08\x8b"
-      0eba92c6157c0f80bba9f70f  #       "\x0eº\x92Æ\x15|\x0f\x80»©÷\x0f"
-      cd94e78d302e774d9a3da4b5  #       "Í\x94ç\x8d0.wM\x9a=¤µ"
-      8b4dec25fb3b40f078809cb4  #       "\x8bMì%û;@ðx\x80\x9c´"
-      c846c0c90a5e0a16e5bf0110  #       "ÈFÀÉ\x0a^\x0a\x16å¿\x01\x10"
-      d8129093                  #       "Ø\x12\x90\x93"
+      fce6bba3e570a2ee3edf9549  #       "üæ»£åp¢î&gt;ß\x95I"
+      3ab69c65ba9c15212ba0ee56  #       ":¶\x9ceº\x9c\x15!+\xa0îV"
+      9e5f35bc41335a0709de3fb9  #       "\x9e_5¼A3Z\x07\x09Þ?¹"
+      05de54af72f6ef99b705a6f7  #       "\x05ÞT¯röï\x99·\x05¦÷"
+      90738bd2d278c05ee828c622  #       "\x90s\x8bÒÒxÀ^è(Æ""
+      2f6266af                  #       "/bf¯"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -1986,7 +1986,7 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 <p id="section-6.3-2">The following content applies to the CWT Claims Set:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1">
-            <p id="section-6.3-3.1.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim is encoded as a <code>Status</code> CBOR structure and <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.3-3.1.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim is encoded as a <code>Status</code> CBOR structure and <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents. This specification defines the following data items:<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-3.1.2.1">
                 <p id="section-6.3-3.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-3.1.2.1.1" class="pilcrow">¶</a></p>
@@ -2009,9 +2009,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840dd0145f8194fbb612a72d399d5e9ad89124218
-ae73b0347f95b80e4e405be93a281e09343eaa8b448ba3d289f88eeec8ab8d1396a4
-e2294753deb719f46efd07
+7374617475736c697374732f3158408f46b042f689d9d6d2036269c8f7b5fe23bbb7
+d498f9a8c28fc89af9b11b9bb763fcdfc293b66c4565f517ed395cd190d4a72d0bf8
+2ddf0a780646a3f8df9569
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2036,12 +2036,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      dd0145f8194fbb612a72d399  #       "Ý\x01Eø\x19O»a*rÓ\x99"
-      d5e9ad89124218ae73b0347f  #       "Õé\xad\x89\x12B\x18®s°4\x7f"
-      95b80e4e405be93a281e0934  #       "\x95¸\x0eN@[é:(\x1e\x094"
-      3eaa8b448ba3d289f88eeec8  #       "&gt;ª\x8bD\x8b£Ò\x89ø\x8eîÈ"
-      ab8d1396a4e2294753deb719  #       "«\x8d\x13\x96¤â)GSÞ·\x19"
-      f46efd07                  #       "ôný\x07"
+      8f46b042f689d9d6d2036269  #       "\x8fF°Bö\x89ÙÖÒ\x03bi"
+      c8f7b5fe23bbb7d498f9a8c2  #       "È÷µþ#»·Ô\x98ù¨Â"
+      8fc89af9b11b9bb763fcdfc2  #       "\x8fÈ\x9aù±\x1b\x9b·cüßÂ"
+      93b66c4565f517ed395cd190  #       "\x93¶lEeõ\x17í9\Ñ\x90"
+      d4a72d0bf82ddf0a780646a3  #       "Ô§-\x0bø-ß\x0ax\x06F£"
+      f8df9569                  #       "øß\x95i"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2261,8 +2261,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.fmQi_djPKQETRBj1CFSnjEUBnp-uyFkl16Vl68-CjtiBImtfofwU
-RCw5DGYkp9NZ4fFfvIW6DU_3Jx3kO1uDHw
+nR0bCI6NDMyMDB9.jvuNr8_cQ36dRYhC0ZE-IUfI8SV9SVG_NpskBuTu1HGCReBAvsYk
+-fM6e3HsS0e9CuywICqUX5kO7-PPRqrLtQ
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2292,7 +2292,7 @@ In the case of "application/statuslist+cwt", the response <span class="bcp14">MU
         <h3 id="name-validation-rules">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-validation-rules" class="section-name selfRef">Validation Rules</a>
         </h3>
-<p id="section-8.3-1">Upon receiving a Referenced Token, a Relying Party <span class="bcp14">MUST</span> first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature, and expiration time. The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-1">Upon receiving a Referenced Token, a Relying Party <span class="bcp14">MUST</span> first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <p id="section-8.3-2">If this validation is not successful, the Referenced Token <span class="bcp14">MUST</span> be rejected. If the validation was successful, the Relying Party <span class="bcp14">MUST</span> perform the following validation steps to evaluate the status of the reference token:<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-8.3-3">
 <li id="section-8.3-3.1">
@@ -2347,7 +2347,7 @@ In the case of "application/statuslist+cwt", the response <span class="bcp14">MU
         <h3 id="name-historical-resolution">
 <a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-historical-resolution" class="section-name selfRef">Historical resolution</a>
         </h3>
-<p id="section-8.4-1">By default, the status mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the <code>iat</code> (issued at) and <code>exp</code> (expiration time) claims for JWT, and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List Token as defined in <a href="#status-list-request" class="auto internal xref">Section 8.1</a> with a timestamp. This feature has additional privacy implications as described in <a href="#privacy-historical" class="auto internal xref">Section 12.7</a>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-1">By default, the status mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the <code>iat</code> (issued at) and <code>exp</code> (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List Token as defined in <a href="#status-list-request" class="auto internal xref">Section 8.1</a> with a timestamp. This feature has additional privacy implications as described in <a href="#privacy-historical" class="auto internal xref">Section 12.7</a>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.4-2">To obtain the Status List Token, the Relying Party <span class="bcp14">MUST</span> send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter <code>time</code> and its value being a unix timestamp. The response for a valid request <span class="bcp14">SHOULD</span> contain a Status List Token that was valid for that specified time or an error.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
 <p id="section-8.4-3">If the Server does not support the additional query parameter, it <span class="bcp14">SHOULD</span> return a status code of 501 (Not Implemented) or if the requested time is not supported it <span class="bcp14">SHOULD</span> return a status code of 406 (Not Acceptable). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client <span class="bcp14">MUST</span> verify support for this feature by verifying that the requested timestamp is within the valid time of the returned token signaled via <code>iat</code> (<code>6</code> for CWT) and <code>exp</code> (<code>4</code> for CWT).<a href="#section-8.4-3" class="pilcrow">¶</a></p>
 <p id="section-8.4-4">The following is a non-normative example of a GET request using the <code>time</code> query parameter:<a href="#section-8.4-4" class="pilcrow">¶</a></p>
@@ -2368,8 +2368,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.fmQi_djPKQETRBj1CFSnjEUBnp-uyFkl16Vl68-CjtiBImtfofwU
-RCw5DGYkp9NZ4fFfvIW6DU_3Jx3kO1uDHw
+nR0bCI6NDMyMDB9.jvuNr8_cQ36dRYhC0ZE-IUfI8SV9SVG_NpskBuTu1HGCReBAvsYk
+-fM6e3HsS0e9CuywICqUX5kO7-PPRqrLtQ
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2639,7 +2639,7 @@ Time of fetching
           <h4 id="name-colluding-relying-parties">
 <a href="#section-12.5.1" class="section-number selfRef">12.5.1. </a><a href="#name-colluding-relying-parties" class="section-name selfRef">Colluding Relying Parties</a>
           </h4>
-<p id="section-12.5.1-1">Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens, and therefore determine that they have interacted with the same Holder.<a href="#section-12.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-12.5.1-1">Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.<a href="#section-12.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-12.5.1-2">To avoid privacy risks for colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers use batch issuance to issue multiple Referenced Tokens, see <a href="#implementation-lifecycle" class="auto internal xref">Section 13.1</a>. To avoid further correlatable information by the values of <code>uri</code> and <code>index</code>, Status Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12.5.1-3.1">
@@ -2659,7 +2659,7 @@ Time of fetching
           <h4 id="name-colluding-status-issuer-and">
 <a href="#section-12.5.2" class="section-number selfRef">12.5.2. </a><a href="#name-colluding-status-issuer-and" class="section-name selfRef">Colluding Status Issuer and Relying Party</a>
           </h4>
-<p id="section-12.5.2-1">A Status Issuer and a Relying Party Issuer may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token, and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.5.2-1" class="pilcrow">¶</a></p>
+<p id="section-12.5.2-1">A Status Issuer and a Relying Party Issuer may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
