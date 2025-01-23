@@ -114,9 +114,9 @@ This specification defines a mechanism, data structures and processing rules for
 
 # Introduction
 
-Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer, is important for many of these applications.
+Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
 
-This document defines a Status List data structure that describes the individual statuses of multiple Referenced Tokens. A Referenced Token may be of any format, but is most commonly a data structures secured by JOSE or COSE. The Referenced Token is referenced by the Status List, which described the status of the Referenced Token. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index correspond to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format.
+This document defines a Status List data structure that describes the individual statuses of multiple Referenced Tokens. A Referenced Token may be of any format, but is most commonly a data structures secured by JOSE or COSE. The Referenced Token is referenced by the Status List, which describes the status of the Referenced Token. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index corresponds to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format.
 
 The following diagram depicts the relationship between the artifacts:
 
@@ -158,30 +158,30 @@ The following diagram depicts the relationship between the involved roles (Relyi
 
 ~~~
 
-Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.
+Status Lists may be composed to express a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.
 
 Furthermore, the document defines an extension point that enables other specifications to describe additional status mechanisms and creates an IANA registry.
 
 ## Example Use Cases
 
-An example for the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate an access tokens status to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.
+An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.
 
 Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SD-JWT.VC}}.
 
 ## Rationale
 
-Revocation mechanisms are an essential part for most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
+Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
 
-This specification seeks to find a balance between scalability, security, and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.
+This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.
 
 ## Design Considerations
 
 The decisions taken in this specification aim to achieve the following design goals:
 
-* the specification shall favor a simple and easy to understand concept
+* the specification shall favor a simple and easy-to-understand concept
 * the specification shall be easy, fast and secure to implement in all major programming languages
 * the specification shall be optimized to support the most common use cases and avoid unnecessary complexity of corner cases
-* the Status List shall scale up to millions of tokens to support large scale government or enterprise use cases
+* the Status List shall scale up to millions of tokens to support large-scale government or enterprise use cases
 * the Status List shall enable caching policies and offline support
 * the specification shall support JSON and CBOR based tokens
 * the specification shall not specify key resolution or trust frameworks
@@ -193,9 +193,9 @@ Representing a status with bits in array is a rather old and well-known concept 
 
 ## Status Mechanisms Registry
 
-This specification establishes the IANA "Status Mechanisms" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
+This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
 
-Other status mechanisms may have different tradeoffs regarding security, privacy, scalability adn complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
+Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
 
 # Conventions and Definitions
 
@@ -213,7 +213,7 @@ Status Provider:
 : An entity that provides the Status List Token on a public endpoint. This role may be fulfilled by the Status Issuer.
 
 Holder:
-: An entity that receives Referenced Tokens form the Issuer and presents them to Relying Parties.
+: An entity that receives Referenced Tokens from the Issuer and presents them to Relying Parties.
 
 Relying Party:
 : An entity that relies on the Status List Token to validate the status of the Referenced Token. Also known as Verifier.
@@ -225,7 +225,7 @@ Status List Token:
 : A token in JWT or CWT representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A cryptographically secured data structure which contains a reference to a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. The information from the contained Status List gives the Relying Party additional information about the current status of the Referenced Token. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+: A cryptographically secured data structure that contains a reference to a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. The information from the contained Status List gives the Relying Party additional information about the current status of the Referenced Token. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
 
 base64url:
 : Denotes the URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
@@ -234,9 +234,9 @@ base64url:
 
 A Status List is a byte array that contains the statuses of many Referenced Tokens represented by one or multiple bits. A common representation of a Status List is composed by the following algorithm:
 
-1. Each status of a Referenced Token MUST be represented with a bit-size of 1,2,4, or 8. Therefore up to 2,4,16, or 256 statuses for a Referenced Token are possible, depending on the bit-size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error prone.
+1. Each status of a Referenced Token MUST be represented with a bit-size of 1,2,4 or 8. Therefore up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit-size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error-prone.
 
-2. The overall Status List is encoded as a byte array. Depending on the bit-size, each byte corresponds to 8/(#bit-size) statuses (8,4,2, or 1). The status of each Referenced Token is identified using the index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1 (being the last valid entry). The bits within an array are counted from least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
+2. The overall Status List is encoded as a byte array. Depending on the bit-size, each byte corresponds to 8/(#bit-size) statuses (8,4,2 or 1). The status of each Referenced Token is identified using the index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with "size" - 1 (being the last valid entry). The bits within an array are counted from the least significant bit "0" to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
 
 3. The byte array is compressed using DEFLATE {{RFC1951}} with the ZLIB {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.
 
@@ -284,7 +284,7 @@ This section defines the data structure for a JSON-encoded Status List:
 * `status_list`: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the Status List (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded Status List as specified in [](#status-list).
-   * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further detail.
+   * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further details.
 
 The following example illustrates the JSON representation of the Status List:
 
@@ -343,9 +343,9 @@ The following additional rules apply:
 
 3. Relying Parties MUST reject JWTs that are not valid in all other respects per "JSON Web Token (JWT)" {{RFC7519}}.
 
-4. Application of additional restrictions and policy are at the discretion of the Relying Party.
+4. Application of additional restrictions and policies are at the discretion of the Relying Party.
 
-The following is a non-normative example for a Status List Token in JWT format:
+The following is a non-normative example of a Status List Token in JWT format:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_jwt}
@@ -355,7 +355,7 @@ The following is a non-normative example for a Status List Token in JWT format:
 
 The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}.
 
-The following content applies to the CWT protected header:
+The following content applies to the protected header of the CWT:
 
 * `16` (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{RFC9596}}.
 
@@ -375,9 +375,9 @@ The following additional rules apply:
 
 3. Relying Parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
 
-4. Application of additional restrictions and policy are at the discretion of the Relying Party.
+4. Application of additional restrictions and policies are at the discretion of the Relying Party.
 
-The following is a non-normative example for a Status List Token in CWT format in Hex:
+The following is a non-normative example of a Status List Token in CWT format in Hex:
 
 ~~~~~~~~~~
 {::include ./examples/status_list_cwt}
@@ -406,9 +406,9 @@ The following content applies to the JWT Claims Set:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
     * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
-Application of additional restrictions and policy are at the discretion of the Relying Party.
+Application of additional restrictions and policies are at the discretion of the Relying Party.
 
-The following is a non-normative example for a decoded header and payload of a Referenced Token:
+The following is a non-normative example of a decoded header and payload of a Referenced Token:
 
 ~~~ ascii-art
 
@@ -427,9 +427,9 @@ The following is a non-normative example for a decoded header and payload of a R
 }
 ~~~
 
-SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of status mechanism in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jose}}.
+SD-JWT-based Verifiable Credentials {{SD-JWT.VC}} introduce the usage of a status mechanism in Section 3.2.2.2. The "status" object uses the same encoding as a JWT as defined in {{referenced-token-jose}}.
 
-The following is a non-normative example for a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:
+The following is a non-normative example of a Referenced Token in SD-JWT-VC serialized form as received from an Issuer:
 
 ~~~ ascii-art
 
@@ -452,7 +452,7 @@ GYzOVY4ZWlkeTFvVjNhM0gxRGEyTjBnODgiLCAiV045cjlkQ0JKOEhUQ3NTMmpLQVN4V
 GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 ~~~
 
-Resulting payload of the example above:
+The resulting payload of the example above:
 
 ~~~ ascii-art
 
@@ -480,12 +480,12 @@ The Referenced Token MAY be encoded as a "COSE Web Token (CWT)" object according
 
 The following content applies to the CWT Claims Set:
 
-* `65535` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism, and the corresponding value defines its contents. This specification defines the following data items:
+* `65535` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents. This specification defines the following data items:
   * `status_list` (status list): REQUIRED when the status mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
     * `idx`: REQUIRED. Unsigned integer (Major Type 0) The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.
     * `uri`: REQUIRED. Text string (Major Type 3). The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
-Application of additional restrictions and policy are at the discretion of the Relying Party.
+Application of additional restrictions and policies are at the discretion of the Relying Party.
 
 The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
@@ -503,9 +503,9 @@ ISO mdoc {{ISO.mdoc}} may utilize the Status List mechanism by introducing the `
 
 It is RECOMMENDED to use `status` for the label of the field that contains the `Status` CBOR structure.
 
-Application of additional restrictions and policy are at the discretion of the Relying Party.
+Application of additional restrictions and policies are at the discretion of the Relying Party.
 
-The following is a non-normative example for an IssuerAuth as specified in ISO mDL (also referred to as signed MSO) in Hex:
+The following is a non-normative example of an IssuerAuth as specified in ISO mDL (also referred to as signed MSO) in Hex:
 
 ~~~ ascii-art
 
@@ -639,9 +639,9 @@ The following is the CBOR Diagnostic Notation of the example above:
 
 # Status Types {#status-types}
 
-This document defines statuses of Referenced Tokens as Status Type values. A status describes the state, mode, condition or stage of an entity that is represented by the Referenced Token.
+This document defines the statuses of Referenced Tokens as Status Type values. A status describes the state, mode, condition or stage of an entity that is represented by the Referenced Token.
 
-A Status List can not represent multiple statuses per Referenced Token. If the Status List contains more than one bit per token (as defined by `bits` in the Status List), then the whole value of bits MUST describe one value. Status Types MUST have a numeric value between 0 and 255 for their representation in the Status List. The issuer of the Status List MUST choose an adequate `bits` (bit size) to be able to describe the required Status Types for its application.
+A Status List can not represent multiple statuses per Referenced Token. If the Status List contains more than one bit per token (as defined by `bits` in the Status List), then the whole value of bits MUST describe one value. Status Types MUST have a numeric value between 0 and 255 for their representation in the Status List. The issuer of the Status List MUST choose an adequate `bits` value (bit size) to be able to describe the required Status Types for its application.
 
 ## Status Types Values
 
@@ -654,8 +654,6 @@ This document creates a registry in [](#iana-status-types) that includes the mos
  - 0x0E - "APPLICATION_SPECIFIC_14" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
  - 0x0F - "APPLICATION_SPECIFIC_15" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
 
-The Status Issuer MUST choose an adequate `bits` (bit size) to be able to describe the required Status Types for the application.
-
 The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
 
 # Verification and Processing
@@ -664,20 +662,20 @@ The processing rules for JWT or CWT precede any evaluation of a Referenced Token
 
 To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.
 
-The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-Based clients to access it.
+The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-based clients to access it.
 
 The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:
 
 - "application/statuslist+jwt" for Status List Token in JWT format
 - "application/statuslist+cwt" for Status List Token in CWT format
 
-If the Relying Party does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.
+If the Relying Party does not send an Accept Header, the response type is assumed to be known implicitly or out-of-band.
 
 A successful response that contains a Status List Token MUST use an HTTP status code in the 2xx range.
 
-A response MAY also choose to redirect the client to another URI using a HTTP status code in the 3xx range, which clients SHOULD follow. A client SHOULD detect and intervene in cyclical redirections (i.e., "infinite" redirection loops).
+A response MAY also choose to redirect the client to another URI using an HTTP status code in the 3xx range, which clients SHOULD follow. A client SHOULD detect and intervene in cyclical redirections (i.e., "infinite" redirection loops).
 
-The following are non-normative examples for a request and response for a Status List Token with type `application/statuslist+jwt`:
+The following are non-normative examples of a request and response for a Status List Token with type `application/statuslist+jwt`:
 
 ~~~ ascii-art
 
@@ -711,35 +709,35 @@ If caching-related HTTP headers are present in the HTTP response, Relying Partie
 
 ## Validation Rules
 
-Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature, expiration time. The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope of this document, this validation is not be described here, but is expected to be done according to the format of the Referenced Token.
+Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.
 
-If this validation was not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
+If this validation is not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
 
 1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jose) for JWTs and [](#referenced-token-cose) for CWTs. This step can be overruled if defined within the Referenced Token Format natively
 2. Resolve the Status List Token from the provided URI
 3. Validate the Status List Token:
     1. Validate the Status List Token by following the rules defined in section 7.2 of {{RFC7519}} for JWTs and section 7.2 of {{RFC8392}} for CWTs
-    2. Check for the existence of the required claims as defined in [](#status-list-token-jwt) and [](#status-list-token-cwt) depending on token type
+    2. Check for the existence of the required claims as defined in [](#status-list-token-jwt) and [](#status-list-token-cwt) depending on the token type
 4. All existing claims in the Status List Token MUST be checked according to the rules in [](#status-list-token-jwt) and [](#status-list-token-cwt)
     1. The subject claim (`sub` or `2`) of the Status List Token MUST be equal to the `uri` claim in the `status_list` object of the Referenced Token
     2. If the Relying Party has custom policies regarding the freshness of the Status List Token, it SHOULD check the issued at claim (`iat` or `6`)
-    3. If expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
+    3. If the expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
     4. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
 5. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
-6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bound of the Status List
+6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bounds of the Status List
 7. Check the status value as described in [](#status-types)
 
 If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
 
 ## Historical resolution {#historical-resolution}
 
-By default, the status mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT, and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List Token as defined in [](#status-list-request) with a timestamp. This feature has additional privacy implications as described in [](#privacy-historical).
+By default, the status mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is required, this can be achieved by extending the request for the Status List Token as defined in [](#status-list-request) with a timestamp. This feature has additional privacy implications as described in [](#privacy-historical).
 
 To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List Token that was valid for that specified time or an error.
 
-If the Server does not support the additional query parameter, it SHOULD return a status code of 501 (Not Implemented), or if the requested time is not supported it SHOULD return a status code of 406 (Not Acceptable). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client MUST verify support for this feature by verifying that the requested timestamp is within the valid time of the returned token signaled via `iat` (`6` for CWT) and `exp` (`4` for CWT).
+If the Server does not support the additional query parameter, it SHOULD return a status code of 501 (Not Implemented) or if the requested time is not supported it SHOULD return a status code of 406 (Not Acceptable). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network), which would result in the client not being able to retrieve those status codes. Thus, the client MUST verify support for this feature by verifying that the requested timestamp is within the valid time of the returned token signaled via `iat` (`6` for CWT) and `exp` (`4` for CWT).
 
-The following is a non-normative example for a GET request using the `time` query parameter:
+The following is a non-normative example of a GET request using the `time` query parameter:
 
 ~~~ ascii-art
 
@@ -748,7 +746,7 @@ Host: example.com
 Accept: application/statuslist+jwt
 ~~~
 
-The following is a non-normative example for a response for the above Request:
+The following is a non-normative example of a response for the above Request:
 
 ~~~ ascii-art
 
@@ -772,13 +770,13 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID, or via a VICAL extension for ISO mDoc / mDL. If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or via a VICAL extension for ISO mDoc / mDL. If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
 
 The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
 
 ## Status List Parameter
 
-The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in[](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this URI to retrieve an up-to-date list of relevant Status Lists.
+The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in [](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this URI to retrieve an up-to-date list of relevant Status Lists.
 
 ## Status List Aggregation in JSON Format
 
@@ -906,7 +904,7 @@ Additionally, the Issuer may analyse data from the HTTP request to identify the 
 
 This behaviour may be mitigated by:
 
-- private relay protocols or other mechanism hiding the original sender like {{RFC9458}}.
+- private relay protocols or other mechanisms hiding the original sender like {{RFC9458}}.
 - using trusted Third Party Hosting, see [](#third-party-hosting).
 
 ## Malicious Issuers
@@ -915,7 +913,7 @@ A malicious Issuer could bypass the privacy benefits of the herd privacy by gene
 
 ## Observability of Relying Parties {#privacy-relying-party}
 
-Once the Relying Party receives the Referenced Token, this enables him to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
+Once the Relying Party receives the Referenced Token, this enables them to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
 This behaviour could be mitigated by:
 
@@ -939,7 +937,7 @@ The tuple of uri and index inside the Referenced Token are unique and therefore 
 
 ### Colluding Relying Parties
 
-Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens, and therefore determine that they have interacted with the same Holder.
+Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
 
 To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-lifecycle) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
 
@@ -949,19 +947,19 @@ To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Iss
 
 ### Colluding Status Issuer and Relying Party
 
-A Status Issuer and a Relying Party Issuer may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token, and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
+A Status Issuer and a Relying Party Issuer may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
-## Third Party Hosting {#third-party-hosting}
+## Third-Party Hosting {#third-party-hosting}
 
 If the roles of the Issuer and the Status Provider are performed by two different entities, this may give additional privacy assurances as the Issuer has no means to identify the Relying Party or its request.
 
-Third Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs.
+Third-Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs.
 
 ## Historical Resolution {#privacy-historical}
 
 By default, this specification only supports providing Status List information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.
 
-There are strong privacy concerns that have to be carefully taken into considerations when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
+There are strong privacy concerns that have to be carefully taken into consideration when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
 
 # Implementation Considerations {#implementation}
 
@@ -969,9 +967,9 @@ There are strong privacy concerns that have to be carefully taken into considera
 
 The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.
 
-Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this becoming possible source of correlation.
+Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.
 
-Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch issued Referenced Tokens might reveal this correlation later on.
+Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
 
 ## Default Values and Double Allocation
 
@@ -1040,7 +1038,7 @@ registration once they are satisfied that such a specification will be published
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
+to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
 successful.
 
 IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
@@ -1057,11 +1055,11 @@ Status Mechanism Description:
 
 Change Controller:
 
-  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF. For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
-  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
 
 ### Initial Registry Contents
 
@@ -1118,7 +1116,7 @@ specification will be published.
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register CWT Status Mechanism: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
+to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
 successful.
 
 IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
@@ -1135,11 +1133,11 @@ Status Mechanism Description:
 
 Change Controller:
 
-  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF. For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
-  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
 
 ### Initial Registry Contents
 
@@ -1150,7 +1148,7 @@ Specification Document(s):
 
 ## OAuth Status Types Registry {#iana-status-types}
 
-This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records the a human readable label, the bit representation and a common description for it.
+This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human readable label, the bit representation and a common description for it.
 
 Status Types are registered by Specification Required {{RFC5226}} after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
@@ -1159,7 +1157,7 @@ specification will be published.
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register Status Type name: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA.  Denials should include an explanation and, if applicable, suggestions as to how to make the request
+to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
 successful.
 
 IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
@@ -1168,7 +1166,7 @@ IANA must only accept registry updates from the Designated Expert(s) and should 
 
 Status Type Name:
 
-  > The name is a human-readable case insensitive label for the Status Type that helps to talk about a Status of Referenced Token in common language.
+  > The name is a human-readable case insensitive label for the Status Type that helps to talk about the status of Referenced Token in common language.
 
 Status Type Description:
 
@@ -1180,11 +1178,11 @@ Status Type value:
 
 Change Controller:
 
-  > For IETF Stream RFCs, list the IETF.  For others, give the name of the responsible party.  Other details (e.g., postal address, email address, home page URI) may also be included.
+  > For IETF Stream RFCs, list the IETF. For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
 
 Specification Document(s):
 
-  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents.  An indication of the relevant sections may also be included but is not required.
+  > Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
 
 ### Initial Registry Contents
 
@@ -1205,7 +1203,7 @@ Specification Document(s):
 <br/>
 
 * Status Type Name: SUSPENDED
-* Status Type Description: The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
+* Status Type Description: The status of the Referenced Token is temporarily invalid, hanging or debarred from privilege. This state is reversible.
 * Status Type value: `0x02`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
@@ -1238,7 +1236,7 @@ Specification Document(s):
 
 ## OAuth Parameters Registration
 
-This specification requests registration of the following value in the IANA "OAuth Authorization Server Metadata" registry {{IANA.OAuth.Params}} established by {{RFC8414}}.
+This specification requests registration of the following values in the IANA "OAuth Authorization Server Metadata" registry {{IANA.OAuth.Params}} established by {{RFC8414}}.
 
 * Metadata Name: status_list_aggregation_endpoint
 * Metadata Description: URL of the Authorization Server aggregating OAuth Token Status List URLs for token status management.
