@@ -1161,7 +1161,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.  <a href="#name-design-considerations" class="internal xref">Design Considerations</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
-                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.  <a href="#name-status-mechanism-registry" class="internal xref">Status Mechanism Registry</a></p>
+                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.  <a href="#name-prior-work" class="internal xref">Prior Work</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5">
+                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.  <a href="#name-status-mechanisms-registry" class="internal xref">Status Mechanisms Registry</a></p>
 </li>
             </ul>
 </li>
@@ -1501,12 +1504,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </ul>
 </section>
 </div>
-<div id="status-mechanism-registry">
+<div id="prior-work">
 <section id="section-1.4">
-        <h3 id="name-status-mechanism-registry">
-<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-status-mechanism-registry" class="section-name selfRef">Status Mechanism Registry</a>
+        <h3 id="name-prior-work">
+<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-prior-work" class="section-name selfRef">Prior Work</a>
         </h3>
-<p id="section-1.4-1">This specification establishes the IANA "Status Mechanisms" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability adn complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-1">Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. <span>[<a href="#smith2020let" class="cite xref">smith2020let</a>]</span> that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List <span>[<a href="#W3C.SL" class="cite xref">W3C.SL</a>]</span> that similarly uses a compressed bit representation.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="status-mechanisms-registry">
+<section id="section-1.5">
+        <h3 id="name-status-mechanisms-registry">
+<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-status-mechanisms-registry" class="section-name selfRef">Status Mechanisms Registry</a>
+        </h3>
+<p id="section-1.5-1">This specification establishes the IANA "Status Mechanisms" registry for status mechanism and registers the members defined by this specification. Other specifications can register other members used for status retrieval.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.5-2">Other status mechanisms may have different tradeoffs regarding security, privacy, scalability adn complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.<a href="#section-1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1836,9 +1848,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840e8c4be80652cf391806127adfcb4e9720c822c60798db9c675
-c15cf11d03957b06d254302cf23d437f1a64965165b5bc04c718aec050037642d269
-ea4b3fb534
+b918000217015d5840e69975b69afe88836921d0c891deb6520847f634ef8415e899
+a2e219d467831892b67c16f6ebafa1855755b7d55a324c8cef73c0f29283b4f9112f
+57d7d73167
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1862,12 +1874,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      e8c4be80652cf391806127ad  #       "èÄ¾\x80e,ó\x91\x80a'\xad"
-      fcb4e9720c822c60798db9c6  #       "ü´ér\x0c\x82,`y\x8d¹Æ"
-      75c15cf11d03957b06d25430  #       "uÁ\ñ\x1d\x03\x95{\x06ÒT0"
-      2cf23d437f1a64965165b5bc  #       ",ò=C\x7f\x1ad\x96Qeµ¼"
-      04c718aec050037642d269ea  #       "\x04Ç\x18®ÀP\x03vBÒiê"
-      4b3fb534                  #       "K?µ4"
+      e69975b69afe88836921d0c8  #       "æ\x99u¶\x9aþ\x88\x83i!ÐÈ"
+      91deb6520847f634ef8415e8  #       "\x91Þ¶R\x08Gö4ï\x84\x15è"
+      99a2e219d467831892b67c16  #       "\x99¢â\x19Ôg\x83\x18\x92¶|\x16"
+      f6ebafa1855755b7d55a324c  #       "öë¯¡\x85WU·ÕZ2L"
+      8cef73c0f29283b4f9112f57  #       "\x8cïsÀò\x92\x83´ù\x11/W"
+      d7d73167                  #       "××1g"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2009,9 +2021,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840817a75bbc82d9140aa38d677c139749c9b55c2
-499c416f2d72365f721aee4714a6d71ac602ca9aa74a8223560e0718be9799b037e5
-73fc38754b740183c290a6
+7374617475736c697374732f3158406e65684b320f21041c43d659d4919e3fb64fb9
+a85f114dfc19c1629c4f853f0e3cd46764c5f1b7ca2af26415395285ba5806b62bee
+b10f3725f35bcc933b6655
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2036,12 +2048,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      817a75bbc82d9140aa38d677  #       "\x81zu»È-\x91@ª8Öw"
-      c139749c9b55c2499c416f2d  #       "Á9t\x9c\x9bUÂI\x9cAo-"
-      72365f721aee4714a6d71ac6  #       "r6_r\x1aîG\x14¦×\x1aÆ"
-      02ca9aa74a8223560e0718be  #       "\x02Ê\x9a§J\x82#V\x0e\x07\x18¾"
-      9799b037e573fc38754b7401  #       "\x97\x99°7åsü8uKt\x01"
-      83c290a6                  #       "\x83Â\x90¦"
+      6e65684b320f21041c43d659  #       "nehK2\x0f!\x04\x1cCÖY"
+      d4919e3fb64fb9a85f114dfc  #       "Ô\x91\x9e?¶O¹¨_\x11Mü"
+      19c1629c4f853f0e3cd46764  #       "\x19Áb\x9cO\x85?\x0e&lt;Ôgd"
+      c5f1b7ca2af26415395285ba  #       "Åñ·Ê*òd\x159R\x85º"
+      5806b62beeb10f3725f35bcc  #       "X\x06¶+î±\x0f7%ó[Ì"
+      933b6655                  #       "\x93;fU"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2262,8 +2274,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.Mcf8gPLIRiD1Wjcr-Zzb_tDfNInN1S9XmDWxYz_ofTGNGeZtAgyp
-BEIU-krfJTQao08zR1qm3HdoKaCW5jmcRA
+nR0bCI6NDMyMDB9.R_anis2n1y31hQdhfxcCIHPal5a6Tzv1T0w07ZMHdfGAAndPToY8
+FeBJ9VT2P3t_rvisp2InR0UwLa1_Ho63Lw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2369,8 +2381,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.Mcf8gPLIRiD1Wjcr-Zzb_tDfNInN1S9XmDWxYz_ofTGNGeZtAgyp
-BEIU-krfJTQao08zR1qm3HdoKaCW5jmcRA
+nR0bCI6NDMyMDB9.R_anis2n1y31hQdhfxcCIHPal5a6Tzv1T0w07ZMHdfGAAndPToY8
+FeBJ9VT2P3t_rvisp2InR0UwLa1_Ho63Lw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2813,7 +2825,7 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
 <a href="#section-14.2" class="section-number selfRef">14.2. </a><a href="#name-jwt-status-mechanisms-regis" class="section-name selfRef">JWT Status Mechanisms Registry</a>
         </h3>
 <p id="section-14.2-1">This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.<a href="#section-14.2-1" class="pilcrow">¶</a></p>
-<p id="section-14.2-2">JWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
+<p id="section-14.2-2">JWT Status Mechanisms are registered by Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.<a href="#section-14.2-2" class="pilcrow">¶</a></p>
@@ -2970,7 +2982,7 @@ IANA "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA.CWT" class="ci
 <a href="#section-14.4" class="section-number selfRef">14.4. </a><a href="#name-cwt-status-mechanisms-regis" class="section-name selfRef">CWT Status Mechanisms Registry</a>
         </h3>
 <p id="section-14.4-1">This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.<a href="#section-14.4-1" class="pilcrow">¶</a></p>
-<p id="section-14.4-2">CWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
+<p id="section-14.4-2">CWT Status Mechanisms are registered by Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.<a href="#section-14.4-2" class="pilcrow">¶</a></p>
 <p id="section-14.4-3">Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register CWT Status Mechanism: example").<a href="#section-14.4-3" class="pilcrow">¶</a></p>
@@ -3038,7 +3050,7 @@ successful.<a href="#section-14.4-4" class="pilcrow">¶</a></p>
 <a href="#section-14.5" class="section-number selfRef">14.5. </a><a href="#name-oauth-status-types-registry" class="section-name selfRef">OAuth Status Types Registry</a>
         </h3>
 <p id="section-14.5-1">This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records the a human readable label, the bit representation and a common description for it.<a href="#section-14.5-1" class="pilcrow">¶</a></p>
-<p id="section-14.5-2">Status Types are registered by Specification Required [RFC5226] after a two-week
+<p id="section-14.5-2">Status Types are registered by Specification Required <span>[<a href="#RFC5226" class="cite xref">RFC5226</a>]</span> after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.<a href="#section-14.5-2" class="pilcrow">¶</a></p>
 <p id="section-14.5-3">Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register Status Type name: example").<a href="#section-14.5-3" class="pilcrow">¶</a></p>
@@ -3397,9 +3409,9 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
         <dd>
 <span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC6125">[RFC6125]</dt>
+<dt id="RFC5226">[RFC5226]</dt>
         <dd>
-<span class="refAuthor">Saint-Andre, P.</span> and <span class="refAuthor">J. Hodges</span>, <span class="refTitle">"Representation and Verification of Domain-Based Application Service Identity within Internet Public Key Infrastructure Using X.509 (PKIX) Certificates in the Context of Transport Layer Security (TLS)"</span>, <span class="seriesInfo">RFC 6125</span>, <span class="seriesInfo">DOI 10.17487/RFC6125</span>, <time datetime="2011-03" class="refDate">March 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6125">https://www.rfc-editor.org/rfc/rfc6125</a>&gt;</span>. </dd>
+<span class="refAuthor">Narten, T.</span> and <span class="refAuthor">H. Alvestrand</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">RFC 5226</span>, <span class="seriesInfo">DOI 10.17487/RFC5226</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5226">https://www.rfc-editor.org/rfc/rfc5226</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6838">[RFC6838]</dt>
         <dd>
@@ -3479,8 +3491,16 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <span class="refAuthor">Thomson, M.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Oblivious HTTP"</span>, <span class="seriesInfo">RFC 9458</span>, <span class="seriesInfo">DOI 10.17487/RFC9458</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9458">https://www.rfc-editor.org/rfc/rfc9458</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SD-JWT.VC">[SD-JWT.VC]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-oauth-sd-jwt-vc-08</span>, <time datetime="2024-12-03" class="refDate">3 December 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-08</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="smith2020let">[smith2020let]</dt>
+        <dd>
+<span class="refAuthor">Smith, T.</span>, <span class="refAuthor">Dickinson, L.</span>, and <span class="refAuthor">K. Seamons</span>, <span class="refTitle">"Let's revoke: Scalable global certificate revocation"</span>, <span class="seriesInfo">Network and Distributed Systems Security (NDSS) Symposium 2020 </span>, <span>n.d.</span>, <span>&lt;<a href="https://www.ndss-symposium.org/ndss-paper/lets-revoke-scalable-global-certificate-revocation/">https://www.ndss-symposium.org/ndss-paper/lets-revoke-scalable-global-certificate-revocation/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="W3C.SL">[W3C.SL]</dt>
+      <dd>
+<span class="refAuthor">Longley, D.</span>, <span class="refAuthor">Sporny, M.</span>, and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"W3C Bitstring Status List v1.0"</span>, <time datetime="2024-12" class="refDate">December 2024</time>, <span>&lt;<a href="https://www.w3.org/TR/vc-bitstring-status-list/">https://www.w3.org/TR/vc-bitstring-status-list/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -3538,6 +3558,9 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.7">
           <p id="appendix-B-2.7.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.8">
+          <p id="appendix-B-2.8.1">add prior art<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-06<a href="#appendix-B-3" class="pilcrow">¶</a></p>
