@@ -135,7 +135,7 @@ def statusListEncoding2BitLong():
     status_list = exampleStatusList2BitLong()
     encoded = status_list.encodeAsJSON()
     text = "{}".format(
-        util.printObject(encoded),
+        util.printLongJsonObject(encoded),
     )
     util.outputFile(folder + "status_list_encoding2_long_json", text)
 
@@ -154,7 +154,7 @@ def statusListEncoding4Bit():
     status_list = exampleStatusList4Bit()
     encoded = status_list.encodeAsJSON()
     text = "{}".format(
-        util.printObject(encoded),
+        util.printLongJsonObject(encoded),
     )
     util.outputFile(folder + "status_list_encoding4_json", text)
 
@@ -173,7 +173,7 @@ def statusListEncoding8Bit():
     status_list = exampleStatusList8Bit()
     encoded = status_list.encodeAsJSON()
     text = "{}".format(
-        util.printObject(encoded),
+        util.printLongJsonObject(encoded),
     )
     util.outputFile(folder + "status_list_encoding8_json", text)
 
