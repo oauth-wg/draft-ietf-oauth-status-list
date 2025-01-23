@@ -72,7 +72,8 @@ Table of Contents
      1.1.  Example Use Cases
      1.2.  Rationale
      1.3.  Design Considerations
-     1.4.  Status Mechanism Registry
+     1.4.  Prior Work
+     1.5.  Status Mechanisms Registry
    2.  Conventions and Definitions
    3.  Terminology
    4.  Status List
@@ -113,7 +114,7 @@ Table of Contents
      12.6.  Third Party Hosting
      12.7.  Historical Resolution
    13. Implementation Considerations
-     13.1.  Token Lifecycle
+     13.1.  Referenced Token Lifecycle
      13.2.  Default Values and Double Allocation
      13.3.  Status List Size
      13.4.  Status List Formats
@@ -240,7 +241,9 @@ Table of Contents
    of these problems at the cost of less up-to-date data.  Modern
    approaches use accumulator-based revocation registries and Zero-
    Knowledge-Proofs to accommodate for this privacy gap, but face
-   scalability issues again.
+   scalability issues again.  Another alternative is short-lived
+   Referenced Tokens with regular re-issuance, but this puts additional
+   burden on the Issuer's infrastructure.
 
    This specification seeks to find a balance between scalability,
    security, and privacy by minimizing the status information to mere
@@ -278,15 +281,27 @@ Table of Contents
       information about the status of a token that can be re-used by
       other mechanisms
 
-1.4.  Status Mechanism Registry
+1.4.  Prior Work
+
+   Representing a status with bits in array is a rather old and well-
+   known concept in computer science and there has been prior work to
+   use this for revocation and status management such as a paper by
+   Smith et al. [smith2020let] that proposed a mechanism called
+   Certificate Revocation Vectors based on xz compressed bit vectors for
+   each expiration day and the W3C bit Status List [W3C.SL] that
+   similarly uses a compressed bit representation.
+
+1.5.  Status Mechanisms Registry
 
    This specification establishes the IANA "Status Mechanisms" registry
    for status mechanism and registers the members defined by this
    specification.  Other specifications can register other members used
-   for status retrieval.  Other status mechanisms may have different
-   tradeoffs regarding security, privacy, scalability adn complexity.
-   The privacy and security considerations in this document only
-   represent the properties of the Status List mechanism.
+   for status retrieval.
+
+   Other status mechanisms may have different tradeoffs regarding
+   security, privacy, scalability adn complexity.  The privacy and
+   security considerations in this document only represent the
+   properties of the Status List mechanism.
 
 2.  Conventions and Definitions
 
@@ -593,9 +608,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58403a161b54501a3f151e411df67e8b7d34e5e9f6685a393ad1f2
-   a7e56a0c88a875e47b9120bf63378a93e5b2114c76440454a1f720573bf769364c5c
-   26f3b0d523
+   b918000217015d5840791aea78375e7bf1c56a7cc6756b8daf83b6b3628e4434e1d8
+   b56d89d90d9453515539c64dbe65f640ee8bccaafb4541c31ea21be75366584a30b3
+   f8ebffdd54
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -617,12 +632,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3a161b54501a3f151e411df6  #       ":\x16\x1bTP\x1a?\x15\x1eA\x1dö"
-      7e8b7d34e5e9f6685a393ad1  #       "~\x8b}4åéöhZ9:Ñ"
-      f2a7e56a0c88a875e47b9120  #       "ò§åj\x0c\x88¨uä{\x91 "
-      bf63378a93e5b2114c764404  #       "¿c7\x8a\x93å²\x11LvD\x04"
-      54a1f720573bf769364c5c26  #       "T¡÷ W;÷i6L\&"
-      f3b0d523                  #       "ó°Õ#"
+      791aea78375e7bf1c56a7cc6  #       "y\x1aêx7^{ñÅj|Æ"
+      756b8daf83b6b3628e4434e1  #       "uk\x8d¯\x83¶³b\x8eD4á"
+      d8b56d89d90d9453515539c6  #       "Øµm\x89Ù\x0d\x94SQU9Æ"
+      4dbe65f640ee8bccaafb4541  #       "M¾eö@î\x8bÌªûEA"
+      c31ea21be75366584a30b3f8  #       "Ã\x1e¢\x1bçSfXJ0³ø"
+      ebffdd54                  #       "ëÿÝT"
 
 6.  Referenced Token
 
@@ -767,9 +782,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840eab97c95d0a9ccf63132cab40f6fd3427341d7
-   f27fcbb7253dbc5e3c413833a10217580bc65109efc30a238cc9c854339aa5b4544f
-   97817185289e423de76423
+   7374617475736c697374732f315840052eb611239bf4f4f860dda0a057bf3f4b5812
+   ba0e31facea94d066ceb6d9cc9a733bcfab97deac62eb678b405ceb830aa3e359bb1
+   b9c992cab2c4ed461e05c6
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -792,12 +807,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         eab97c95d0a9ccf63132cab4  #       "ê¹|\x95Ð©Ìö12Ê´"
-         0f6fd3427341d7f27fcbb725  #       "\x0foÓBsA×ò\x7fË·%"
-         3dbc5e3c413833a10217580b  #       "=¼^<A83¡\x02\x17X\x0b"
-         c65109efc30a238cc9c85433  #       "ÆQ\x09ïÃ\x0a#\x8cÉÈT3"
-         9aa5b4544f97817185289e42  #       "\x9a¥´TO\x97\x81q\x85(\x9eB"
-         3de76423                  #       "=çd#"
+         052eb611239bf4f4f860dda0  #       "\x05.¶\x11#\x9bôôø`Ý\xa0"
+         a057bf3f4b5812ba0e31face  #       "\xa0W¿?KX\x12º\x0e1úÎ"
+         a94d066ceb6d9cc9a733bcfa  #       "©M\x06lëm\x9cÉ§3¼ú"
+         b97deac62eb678b405ceb830  #       "¹}êÆ.¶x´\x05Î¸0"
+         aa3e359bb1b9c992cab2c4ed  #       "ª>5\x9b±¹É\x92Ê²Äí"
+         461e05c6                  #       "F\x1e\x05Æ"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1032,8 +1047,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.OtQu1fXEwS4szujOkcel4mgX6hhBw2Um81-vsrs2jADd2Wxl37d6
-   idu76FQVhPnEDWvEaGR-nmZs7n4kv_NuzA
+   nR0bCI6NDMyMDB9.0eGcclKW8pLOmJSjxOcLs4UPjZcHqv4Y_xbu4N9LQJBk0cu3ecz-
+   y2smgiN5ffdZiD6MkIRwBV3CQJMIkYE1JA
 
 8.2.  Status List Response
 
@@ -1170,8 +1185,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.OtQu1fXEwS4szujOkcel4mgX6hhBw2Um81-vsrs2jADd2Wxl37d6
-   idu76FQVhPnEDWvEaGR-nmZs7n4kv_NuzA
+   nR0bCI6NDMyMDB9.0eGcclKW8pLOmJSjxOcLs4UPjZcHqv4Y_xbu4N9LQJBk0cu3ecz-
+   y2smgiN5ffdZiD6MkIRwBV3CQJMIkYE1JA
 
 9.  Status List Aggregation
 
@@ -1516,7 +1531,7 @@ d2                              # tag(18)
 
 13.  Implementation Considerations
 
-13.1.  Token Lifecycle
+13.1.  Referenced Token Lifecycle
 
    The lifetime of a Status List Token depends on the lifetime of its
    Referenced Tokens.  Once all Referenced Tokens are expired, the
@@ -1548,6 +1563,15 @@ d2                              # tag(18)
 
 13.3.  Status List Size
 
+   The storage and transmission size of the Status Issuer's Status List
+   Tokens depends on: - the size of the Status List, i.e. the number of
+   Referenced Tokens - the revocation rate and distribution of the
+   Status List data (due to compression, revocation rates close to 0% or
+   100% create lowest sizes while revocation rates closer to 50% and
+   random distribution create highest sizes) - the lifetime of
+   Referenced Tokens (shorter lifetimes allows for earlier retirement of
+   Status List Tokens)
+
    The Status List Issuer may increase the size of a Status List if it
    requires indices for additional Referenced Tokens.  It is RECOMMENDED
    that the size of a Status List in bits is divisible in bytes (8 bits)
@@ -1557,7 +1581,11 @@ d2                              # tag(18)
    Status Lists to reduce the transmission size of an individual Status
    List Token.  This may be useful for setups where some entities
    operate in constrained environments, e.g. for mobile internet or
-   embedded devices.
+   embedded devices.  The Status List Issuer may chunk the Status List
+   Tokens depending on the Referenced Token's expiry date to align their
+   lifecycles and allow for easier retiring of Status List Tokens,
+   however the Status Issuer must be aware of possible privacy risks due
+   to correlations.
 
 13.4.  Status List Formats
 
@@ -2098,12 +2126,10 @@ d2                              # tag(18)
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
               <https://www.rfc-editor.org/rfc/rfc3986>.
 
-   [RFC6125]  Saint-Andre, P. and J. Hodges, "Representation and
-              Verification of Domain-Based Application Service Identity
-              within Internet Public Key Infrastructure Using X.509
-              (PKIX) Certificates in the Context of Transport Layer
-              Security (TLS)", RFC 6125, DOI 10.17487/RFC6125, March
-              2011, <https://www.rfc-editor.org/rfc/rfc6125>.
+   [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", RFC 5226,
+              DOI 10.17487/RFC5226, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5226>.
 
    [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
               Specifications and Registration Procedures", BCP 13,
@@ -2190,6 +2216,17 @@ d2                              # tag(18)
               2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
               oauth-sd-jwt-vc-08>.
 
+   [smith2020let]
+              Smith, T., Dickinson, L., and K. Seamons, "Let's revoke:
+              Scalable global certificate revocation", Network and
+              Distributed Systems Security (NDSS) Symposium 2020 , n.d.,
+              <https://www.ndss-symposium.org/ndss-paper/lets-revoke-
+              scalable-global-certificate-revocation/>.
+
+   [W3C.SL]   Longley, D., Sporny, M., and O. Steele, "W3C Bitstring
+              Status List v1.0", December 2024,
+              <https://www.w3.org/TR/vc-bitstring-status-list/>.
+
 Acknowledgments
 
    We would like to thank Brian Campbell, Filip Skokan, Francesco
@@ -2206,6 +2243,13 @@ Document History
 
    *  clarify privacy consideration around one time use reference tokens
 
+   *  explain the Status List Token size dependencies
+
+   *  explain possibility to chunk Status List Tokens depending on
+      Referenced Token's expiry date
+
+   *  add short-lived tokens in the Rationale
+
    *  rename Status Mechanism Methods registry to Status Mechanisms
       registry
 
@@ -2215,6 +2259,8 @@ Document History
       Status List and no other status mechanisms
 
    *  differentiate unlinkability between Issuer-RP and RP-RP
+
+   *  add prior art
 
    -06
 
