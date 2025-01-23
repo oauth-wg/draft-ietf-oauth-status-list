@@ -913,7 +913,7 @@ The tuple of uri and index inside the Referenced Token are unique and therefore 
 
 Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens, and therefore determine that they have interacted with the same Holder.
 
-To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue one-time-use Referenced Tokens to enable holders to use in a single interaction with a relying party before discarding. See [](#implementation-lifecycle) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
+To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-lifecycle) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
