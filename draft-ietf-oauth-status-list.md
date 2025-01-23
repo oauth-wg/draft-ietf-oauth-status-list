@@ -1287,6 +1287,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* clarify privacy consideration around one time use reference tokens
 * rename Status Mechanism Methods registry to Status Mechanisms registry
 * changes as requested by IANA review
 * emphasize that security and privacy considerations only apply to Status List and no other status mechanisms
