@@ -124,7 +124,7 @@ The following diagram depicts the relationship between the artifacts:
 
 ┌────────────────┐  describes status ┌──────────────────┐
 │  Status List   ├──────────────────►│ Referenced Token │
-│ (JSON or CBOR) │◄──────────────────┤  (JOSE or COSE)  │
+│ (JSON or CBOR) │◄──────────────────┤ (JOSE, COSE, ..) │
 └─────┬──────────┘    references     └──────────────────┘
       │
       │ embedded in
@@ -185,7 +185,7 @@ The decisions taken in this specification aim to achieve the following design go
 * the Status List shall enable caching policies and offline support
 * the specification shall support JSON and CBOR based tokens
 * the specification shall not specify key resolution or trust frameworks
-* the specification shall design an extension point to convey information about the status of a token that can be re-used by other mechanisms
+* the specification shall define an extension point that enables other mechanisms to convey information about the status of a Referenced Token
 
 ## Prior Work
 
@@ -216,7 +216,7 @@ Holder:
 : An entity that receives Referenced Tokens from the Issuer and presents them to Relying Parties.
 
 Relying Party:
-: An entity that relies on the Status List Token to validate the status of the Referenced Token. Also known as Verifier.
+: An entity that relies on the Referenced Token and fetches the corresponding Status List Token to validate the status of that Referenced Token. Also known as Verifier.
 
 Status List:
 : An object in JSON or CBOR representation containing a bit array that lists the statuses of many Referenced Tokens.
@@ -654,7 +654,7 @@ This document creates a registry in [](#iana-status-types) that includes the mos
  - 0x0E - "APPLICATION_SPECIFIC_14" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
  - 0x0F - "APPLICATION_SPECIFIC_15" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
 
-The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
+The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
 
 # Verification and Processing
 
@@ -709,11 +709,11 @@ If caching-related HTTP headers are present in the HTTP response, Relying Partie
 
 ## Validation Rules
 
-Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.
+Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.
 
 If this validation is not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
 
-1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jose) for JWTs and [](#referenced-token-cose) for CWTs. This step can be overruled if defined within the Referenced Token Format natively
+1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jose) for JOSE-based Referenced Tokens and [](#referenced-token-cose) for COSE-based Referenced Tokens. Other formats of Referenced Tokens may define other encoding of the URI and index.
 2. Resolve the Status List Token from the provided URI
 3. Validate the Status List Token:
     1. Validate the Status List Token by following the rules defined in section 7.2 of {{RFC7519}} for JWTs and section 7.2 of {{RFC8392}} for CWTs
@@ -1318,6 +1318,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* editorial changes on terminology and Referenced Tokens
 * clarify privacy consideration around one time use reference tokens
 * explain the Status List Token size dependencies
 * explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date
