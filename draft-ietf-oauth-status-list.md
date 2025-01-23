@@ -29,7 +29,7 @@ normative:
   RFC1951: RFC1951
   RFC2046: RFC2046
   RFC3986: RFC3986
-  RFC6125: RFC6125
+  RFC5226: RFC5226
   RFC6838: RFC6838
   RFC7515: RFC7515
   RFC7519: RFC7519
@@ -82,6 +82,28 @@ informative:
     author:
       org: "ISO/IEC JTC 1/SC 17"
     title: "ISO/IEC 18013-5:2021 ISO-compliant driving licence"
+  smith2020let:
+    author:
+      - name: "Trevor Smith"
+        org: "Brigham Young University"
+      - name: "Luke Dickinson"
+        org: "Brigham Young University"
+      - name: "Kent Seamons"
+        org: "Brigham Young University"
+    title: "Let's revoke: Scalable global certificate revocation"
+    seriesinfo: "Network and Distributed Systems Security (NDSS) Symposium 2020"
+    target: "https://www.ndss-symposium.org/ndss-paper/lets-revoke-scalable-global-certificate-revocation/"
+  W3C.SL:
+    author:
+      - name: Dave Longley
+        org: Digital Bazaar
+      - name: Manu Sporny
+        org: Digital Bazaar
+      - name: Orie Steele
+        org: Transmute
+    title: W3C Bitstring Status List v1.0
+    target: "https://www.w3.org/TR/vc-bitstring-status-list/"
+    date: "18.12.2024"
 
 
 --- abstract
@@ -148,7 +170,7 @@ Another possible use case for the Status List is to express the status of verifi
 
 ## Rationale
 
-Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again.
+Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
 
 This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.
 
@@ -165,9 +187,15 @@ The decisions taken in this specification aim to achieve the following design go
 * the specification shall not specify key resolution or trust frameworks
 * the specification shall design an extension point to convey information about the status of a token that can be re-used by other mechanisms
 
-## Status Mechanism Registry
+## Prior Work
 
-This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval. Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
+Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
+
+## Status Mechanisms Registry
+
+This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
+
+Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
 
 # Conventions and Definitions
 
@@ -911,7 +939,7 @@ The tuple of uri and index inside the Referenced Token are unique and therefore 
 
 Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
 
-To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers use batch issuance to issue multiple Referenced Tokens, see [](#implementation-lifecycle). To avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
+To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-lifecycle) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
@@ -935,7 +963,7 @@ There are strong privacy concerns that have to be carefully taken into considera
 
 # Implementation Considerations {#implementation}
 
-## Token Lifecycle {#implementation-lifecycle}
+## Referenced Token Lifecycle {#implementation-lifecycle}
 
 The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.
 
@@ -951,9 +979,14 @@ Implementations producing Status Lists are RECOMMENDED to prevent double allocat
 
 ## Status List Size
 
+The storage and transmission size of the Status Issuer's Status List Tokens depends on:
+- the size of the Status List, i.e. the number of Referenced Tokens
+- the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% create lowest sizes while revocation rates closer to 50% and random distribution create highest sizes)
+- the lifetime of Referenced Tokens (shorter lifetimes allows for earlier retirement of Status List Tokens)
+
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
-The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices.
+The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
 
 ## Status List Formats
 
@@ -997,7 +1030,7 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
-JWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
+JWT Status Mechanisms are registered by Specification Required {{RFC5226}} after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.
@@ -1076,7 +1109,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
-CWT Status Mechanisms are registered by Specification Required [RFC5226] after a three-week
+CWT Status Mechanisms are registered by Specification Required {{RFC5226}} after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
@@ -1117,7 +1150,7 @@ Specification Document(s):
 
 This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human readable label, the bit representation and a common description for it.
 
-Status Types are registered by Specification Required [RFC5226] after a two-week
+Status Types are registered by Specification Required {{RFC5226}} after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
@@ -1285,10 +1318,15 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* clarify privacy consideration around one time use reference tokens
+* explain the Status List Token size dependencies
+* explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date
+* add short-lived tokens in the Rationale
 * rename Status Mechanism Methods registry to Status Mechanisms registry
 * changes as requested by IANA review
 * emphasize that security and privacy considerations only apply to Status List and no other status mechanisms
 * differentiate unlinkability between Issuer-RP and RP-RP
+* add prior art
 
 -06
 
