@@ -1320,6 +1320,37 @@ All examples here are given in the form of JSON or CBOR payloads. The examples a
 
 All values that are not mentioned for the examples below can be assumed to be 0 (VALID). All examples are initialized with a size of 2^20 entries.
 
+## 1 bit Status List
+{:unnumbered}
+
+The following example uses a 1 bit Status List (2 possible values):
+
+~~~~~~~~~~
+status[0]=1
+status[1993]=1
+status[25460]=1
+status[159495]=1
+status[495669]=1
+status[554353]=1
+status[645645]=1
+status[723232]=1
+status[854545]=1
+status[934534]=1
+status[1000345]=1
+~~~~~~~~~~
+
+JSON encoding:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding1_long_json}
+~~~~~~~~~~
+
+CBOR encoding:
+
+~~~~~~~~~~
+{::include ./examples/status_list_encoding1_long_cbor}
+~~~~~~~~~~
+
 ## 2 bit Status List
 {:unnumbered}
 

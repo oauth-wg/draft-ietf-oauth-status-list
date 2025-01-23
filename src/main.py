@@ -12,6 +12,7 @@ iat = datetime.fromtimestamp(1686920170, timezone.utc)
 exp = iat + timedelta(days=7000)
 ttl = timedelta(hours=12)
 folder = "./examples/"
+long_size = 2**20
 
 
 def exampleStatusList1Bit() -> StatusList:
@@ -52,8 +53,24 @@ def exampleStatusList2Bit() -> StatusList:
     return status_list
 
 
+def exampleStatusList1BitLong() -> StatusList:
+    status_list = StatusList(long_size, 2)
+    status_list.set(0, 1)
+    status_list.set(1993, 1)
+    status_list.set(25460, 1)
+    status_list.set(159495, 1)
+    status_list.set(495669, 1)
+    status_list.set(554353, 1)
+    status_list.set(645645, 1)
+    status_list.set(723232, 1)
+    status_list.set(854545, 1)
+    status_list.set(934534, 1)
+    status_list.set(1000345, 1)
+    return status_list
+
+
 def exampleStatusList2BitLong() -> StatusList:
-    status_list = StatusList(2**20, 2)
+    status_list = StatusList(long_size, 2)
     status_list.set(0, 1)
     status_list.set(1993, 2)
     status_list.set(25460, 1)
@@ -69,7 +86,7 @@ def exampleStatusList2BitLong() -> StatusList:
 
 
 def exampleStatusList4Bit() -> StatusList:
-    status_list = StatusList(2**20, 4)
+    status_list = StatusList(long_size, 4)
     status_list.set(0, 1)
     status_list.set(1993, 2)
     status_list.set(35460, 3)
@@ -89,10 +106,10 @@ def exampleStatusList4Bit() -> StatusList:
 
 
 def exampleStatusList8Bit() -> StatusList:
-    status_list = StatusList(2**20, 8)
+    status_list = StatusList(long_size, 8)
     random.seed(42)
     for x in range(2**8):
-        y = random.randint(0, 2**20 - 1)
+        y = random.randint(0, long_size - 1)
         # print("status[{}] = {}".format(y,x))
         status_list.set(y, x)
     return status_list
@@ -107,6 +124,15 @@ def statusListEncoding1Bit():
     util.outputFile(folder + "status_list_encoding_json", text)
 
 
+def statusListEncoding1BitLong():
+    status_list = exampleStatusList1BitLong()
+    encoded = status_list.encodeAsJSON()
+    text = "{}".format(
+        util.printLongJsonObject(encoded),
+    )
+    util.outputFile(folder + "status_list_encoding1_long_json", text)
+
+
 def statusListEncoding1BitCBOR():
     status_list = exampleStatusList1Bit()
     encoded = status_list.encodeAsCBORRaw()
@@ -117,6 +143,14 @@ def statusListEncoding1BitCBOR():
     util.outputFile(folder + "status_list_encoding_cbor", text)
     diag = util.printCBORDiagnostics(encoded)
     util.outputFile(folder + "status_list_encoding_cbor_diag", diag)
+
+
+def statusListEncoding1BitLongCBOR():
+    status_list = exampleStatusList1BitLong()
+    encoded = status_list.encodeAsCBORRaw()
+    hex_encoded = encoded.hex()
+    text = "{}".format(util.printText(hex_encoded))
+    util.outputFile(folder + "status_list_encoding1_long_cbor", text)
 
 
 def statusListEncoding2Bit():
@@ -144,9 +178,7 @@ def statusListEncoding2BitLongCBOR():
     status_list = exampleStatusList2BitLong()
     encoded = status_list.encodeAsCBORRaw()
     hex_encoded = encoded.hex()
-    text = "{}".format(
-        util.printText(hex_encoded)
-    )
+    text = "{}".format(util.printText(hex_encoded))
     util.outputFile(folder + "status_list_encoding2_long_cbor", text)
 
 
@@ -163,9 +195,7 @@ def statusListEncoding4BitCBOR():
     status_list = exampleStatusList4Bit()
     encoded = status_list.encodeAsCBORRaw()
     hex_encoded = encoded.hex()
-    text = "{}".format(
-        util.printText(hex_encoded)
-    )
+    text = "{}".format(util.printText(hex_encoded))
     util.outputFile(folder + "status_list_encoding4_cbor", text)
 
 
@@ -177,13 +207,12 @@ def statusListEncoding8Bit():
     )
     util.outputFile(folder + "status_list_encoding8_json", text)
 
+
 def statusListEncoding8BitCBOR():
     status_list = exampleStatusList8Bit()
     encoded = status_list.encodeAsCBORRaw()
     hex_encoded = encoded.hex()
-    text = "{}".format(
-        util.printText(hex_encoded)
-    )
+    text = "{}".format(util.printText(hex_encoded))
     util.outputFile(folder + "status_list_encoding8_cbor", text)
 
 
@@ -264,6 +293,8 @@ if __name__ == "__main__":
     if not os.path.exists(folder):
         os.makedirs(folder)
     statusListEncoding1Bit()
+    statusListEncoding1BitLong()
+    statusListEncoding1BitLongCBOR()
     statusListEncoding2Bit()
     statusListEncoding2BitLong()
     statusListEncoding2BitLongCBOR()
@@ -276,4 +307,5 @@ if __name__ == "__main__":
     statusListEncoding1BitCBOR()
     statusListEncoding2BitCBOR()
     statusListCWT()
+    referencedTokenCWT()
     referencedTokenCWT()

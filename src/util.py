@@ -40,7 +40,11 @@ def printObject(input: Dict) -> str:
 def printLongJsonObject(input: Dict) -> str:
     text = printJson(json.dumps(input))
     return fill(
-        text, width=MAX_LENGTH, break_on_hyphens=False, replace_whitespace=False, subsequent_indent='  '
+        text,
+        width=MAX_LENGTH,
+        break_on_hyphens=False,
+        replace_whitespace=False,
+        subsequent_indent="  ",
     )
 
 

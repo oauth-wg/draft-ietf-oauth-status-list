@@ -1,6 +1,7 @@
+import zlib
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 from typing import Dict
-import zlib
+
 from cbor2 import dumps, loads
 
 
@@ -72,4 +73,5 @@ class StatusList:
         val = ""
         for x in range(0, self.size):
             val = val + format(self.get(x), "x")
+        return val
         return val
