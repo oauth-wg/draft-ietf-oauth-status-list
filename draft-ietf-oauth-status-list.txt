@@ -2,13 +2,13 @@
 
 
 
-Network Working Group                                          T. Looker
+Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 27 July 2025                                                   
+Expires: 28 July 2025                                                   
                                                               C. Bormann
                                                                   SPRIND
-                                                         23 January 2025
+                                                         24 January 2025
 
 
                            Token Status List
@@ -32,6 +32,11 @@ About This Document
    list.html.  Status information for this document may be found at
    https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/.
 
+   Discussion of this document takes place on the Web Authorization
+   Protocol Working Group mailing list (mailto:oauth@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/oauth/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/oauth/.
+
    Source for this draft and an issue tracker can be found at
    https://github.com/oauth-wg/draft-ietf-oauth-status-list.
 
@@ -50,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 July 2025.
+   This Internet-Draft will expire on 28 July 2025.
 
 Copyright Notice
 
@@ -608,9 +613,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840fb114b68e1d5811184e8325e545ad4cdb445e1657ed313de22
-   f52309d632430593c3e8312f48477f98e9e20cf4877ab228433d3d315e7a1a551260
-   065252c7c9
+   b918000217015d584085b4f89a8ef4304879f48b2b7e7b49077a793c3fd41a1f1d0e
+   42c14d4f2ea5823a57c977e945631e3262e746d878e4269aadacb3628aa3c1c64201
+   36a715460d
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -632,12 +637,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      fb114b68e1d5811184e8325e  #       "û\x11KháÕ\x81\x11\x84è2^"
-      545ad4cdb445e1657ed313de  #       "TZÔÍ´Eáe~Ó\x13Þ"
-      22f52309d632430593c3e831  #       ""õ#\x09Ö2C\x05\x93Ãè1"
-      2f48477f98e9e20cf4877ab2  #       "/HG\x7f\x98éâ\x0cô\x87z²"
-      28433d3d315e7a1a55126006  #       "(C==1^z\x1aU\x12`\x06"
-      5252c7c9                  #       "RRÇÉ"
+      85b4f89a8ef4304879f48b2b  #       "\x85´ø\x9a\x8eô0Hyô\x8b+"
+      7e7b49077a793c3fd41a1f1d  #       "~{I\x07zy<?Ô\x1a\x1f\x1d"
+      0e42c14d4f2ea5823a57c977  #       "\x0eBÁMO.¥\x82:WÉw"
+      e945631e3262e746d878e426  #       "éEc\x1e2bçFØxä&"
+      9aadacb3628aa3c1c6420136  #       "\x9a\xad¬³b\x8a£ÁÆB\x016"
+      a715460d                  #       "§\x15F\x0d"
 
 6.  Referenced Token
 
@@ -782,37 +787,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840ebc8da9e2325e47ec0b16e098d6e039761e06e
-   08a7d876901a0fd23d5d6a82b9111e670fa918106bed25aab105bb28a2291f8a8d9c
-   2fafc14057e7847d006c84
+   7374617475736c697374732f3158402aba4e260479034433b465d9e8b45bef5d2eda
+   a9aa8b2f8cfdb7c14e9284f774c92eb53374cb7d0eae2e7a8757de05d0a884dba156
+   cf45cda7ddf303a94c1101
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      ebc8da9e2325e47ec0b16e09  #       "ëÈÚ\x9e#%ä~À±n\x09"
-      8d6e039761e06e08a7d87690  #       "\x8dn\x03\x97aàn\x08§Øv\x90"
-      1a0fd23d5d6a82b9111e670f  #       "\x1a\x0fÒ=]j\x82¹\x11\x1eg\x0f"
-      a918106bed25aab105bb28a2  #       "©\x18\x10kí%ª±\x05»(¢"
-      291f8a8d9c2fafc14057e784  #       ")\x1f\x8a\x8d\x9c/¯Á@Wç\x84"
-      7d006c84                  #       "}\x00l\x84"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         2aba4e260479034433b465d9  #       "*ºN&\x04y\x03D3´eÙ"
+         e8b45bef5d2edaa9aa8b2f8c  #       "è´[ï].Ú©ª\x8b/\x8c"
+         fdb7c14e9284f774c92eb533  #       "ý·ÁN\x92\x84÷tÉ.µ3"
+         74cb7d0eae2e7a8757de05d0  #       "tË}\x0e®.z\x87WÞ\x05Ð"
+         a884dba156cf45cda7ddf303  #       "¨\x84Û¡VÏEÍ§Ýó\x03"
+         a94c1101                  #       "©L\x11\x01"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1045,8 +1050,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Jpr1qyLj-kjvX1gCaXPDRqcgiTfJgOTYOA0aRm85B5F5n8jL8mwb
-   Ar9SaxDfCzMQDcVRBSt-LPAzepqwRqQCsA
+   nR0bCI6NDMyMDB9.W8t8kO9Kt1S6Lhc-ISqQ6ZvViVhzykQbWrJf3j1SOB1a9-XTaDQm
+   QHgdcoVviy4nQRY4MtnzbZGPyjfUJpdI8g
 
 8.2.  Status List Response
 
@@ -1183,8 +1188,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Jpr1qyLj-kjvX1gCaXPDRqcgiTfJgOTYOA0aRm85B5F5n8jL8mwb
-   Ar9SaxDfCzMQDcVRBSt-LPAzepqwRqQCsA
+   nR0bCI6NDMyMDB9.W8t8kO9Kt1S6Lhc-ISqQ6ZvViVhzykQbWrJf3j1SOB1a9-XTaDQm
+   QHgdcoVviy4nQRY4MtnzbZGPyjfUJpdI8g
 
 9.  Status List Aggregation
 
