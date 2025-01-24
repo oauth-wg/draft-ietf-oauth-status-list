@@ -1,13 +1,22 @@
 ---
 title: "Token Status List"
 category: info
+lang: en
 
 docname: draft-ietf-oauth-status-list-latest
 submissiontype: IETF  # also: "IETF", "IAB", or "IRTF"
+area: "Security"
+workgroup: "Web Authorization Protocol"
+ipr: trust200902
+
 number:
 date:
 v: 3
 venue:
+  group: "Web Authorization Protocol"
+  type: "Working Group"
+  mail: "oauth@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/oauth/"
   github: "oauth-wg/draft-ietf-oauth-status-list"
   latest: "https://oauth-wg.github.io/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html"
 
