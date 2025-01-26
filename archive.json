@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-23T00:16:25.632389+00:00",
+  "timestamp": "2025-01-26T00:16:30.871015+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -2234,7 +2234,7 @@
       "id": "I_kwDOJZ2aqs52f7K4",
       "title": "IETF 118: Mention prior art",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/83",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -2245,8 +2245,8 @@
       ],
       "body": "",
       "createdAt": "2023-11-10T17:47:55Z",
-      "updatedAt": "2025-01-16T07:25:41Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-23T07:07:16Z",
+      "closedAt": "2025-01-23T07:07:16Z",
       "comments": [
         {
           "author": "c2bo",
@@ -4299,7 +4299,7 @@
       "id": "I_kwDOJZ2aqs6l9F4T",
       "title": "Comments on section 12.5.1 Unlinkability",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/217",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4308,8 +4308,8 @@
       "labels": [],
       "body": "The text states:\r\n\r\n> \r\n> 12.5.1. Colluding Relying Parties \r\n> \r\n> Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens, and therefore determine that they have interacted with the same Holder.\r\n> \r\n> To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers use batch issuance to issue multiple Referenced Tokens, see Section 13.1. \r\n\r\n\"Batch issuance\" of Referenced Tokens, does not implies \"one-time-use \"Referenced Tokens. \r\nTherefore the wording \"one-time-use Referenced Tokens\" is preferred and used.\r\n\r\nChange into:\r\n\r\n> 12.5.1. Colluding Relying Parties \r\n> \r\n> Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens, and therefore determine that they have interacted with the same Holder. \r\n> \r\n> To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers issue one-time-use Referenced Tokens, see Section 13.1. The status of every one-time-use Referenced Token SHOULD be placed in a Token Status List chosen at random.\r\n> \r\n> After Verification, Relying Parties SHOULD NOT store the Referenced Token. It may be sufficient to store the result of the verification and any user data that is needed for the application.\r\n> \r\n\r\nThe text continues with:\r\n\r\n> To avoid further correlatable information by the values of uri and index, Status Issuers are RECOMMENDED to: \r\n> - choose non-sequential, pseudo-random or random indices\r\n> - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List\r\n> - choose to deploy and utilize multiple Status Lists simultaneously\r\n\r\nBecause this text is about implementation considerations, it should be removed from section 12.5.1 and placed into section 13 (Implementation Considerations) and more precisely section 13.1 (13.1.  Token Lifecycle). \r\n\r\nHowever, while this text has been considered, it has not been reused verbatim. See the text proposals done when considering section 13.1.\r\n",
       "createdAt": "2025-01-13T15:04:47Z",
-      "updatedAt": "2025-01-16T07:30:11Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-23T07:20:58Z",
+      "closedAt": "2025-01-23T07:20:58Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -4317,6 +4317,13 @@
           "body": "Editors Call:\r\n- add \"one-time usage to batch-issued\r\n- in general, we don't want to talk much about Referenced Token\r\n- if Referenced Token is not needed by the RP, e.g. for audit trail, then RP may remove it, or its status list part, or be aware of the linkable nature of the Referneced Token",
           "createdAt": "2025-01-16T07:30:10Z",
           "updatedAt": "2025-01-16T07:30:10Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have raised #240. With regard to the request to shift this section, its fine for privacy considerations to also include implementation guidance so long as the guidance pertains to privacy, therefore I dont think we should move it.",
+          "createdAt": "2025-01-23T06:58:44Z",
+          "updatedAt": "2025-01-23T06:58:44Z"
         }
       ]
     },
@@ -4409,7 +4416,7 @@
       "id": "I_kwDOJZ2aqs6l_nnJ",
       "title": "Reduce the statuses to 2 and 1 bit",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/221",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4418,8 +4425,8 @@
       "labels": [],
       "body": "In section 4 (Status List) the text states:\r\n\r\n>    2.  The overall Status List is encoded as a byte array.  Depending on\r\n>        the bit-size, each byte corresponds to 8/(#bit-size) statuses\r\n>        (8,4,2, or 1). \r\n\r\nI really wonder whether 8 bits will ever be needed.\r\n\r\nI believe that, 2 and 1 bits will be enough. \r\nThe ability to support suspension is critically important.\r\n\r\nTest vectors should only be provided for 2 bits.\r\n",
       "createdAt": "2025-01-13T18:27:23Z",
-      "updatedAt": "2025-01-16T17:58:15Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-23T07:29:22Z",
+      "closedAt": "2025-01-23T07:29:20Z",
       "comments": [
         {
           "author": "c2bo",
@@ -4434,6 +4441,13 @@
           "body": "I think there is very little effort for implementers to do 4+8bits if they do 2+1. There is potential limitation is we have a total of 4 possible status type values. I'm not okay with removing support for 4+8 bits.",
           "createdAt": "2025-01-16T17:58:13Z",
           "updatedAt": "2025-01-16T17:58:13Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\n- we don't think this suggestion has a good impact on the draft for the given reasons",
+          "createdAt": "2025-01-23T07:29:20Z",
+          "updatedAt": "2025-01-23T07:29:20Z"
         }
       ]
     },
@@ -4449,7 +4463,7 @@
       "labels": [],
       "body": "In the  OAuth Interims Call on 13. Jan 2025, feedback occured towards the pre-defined Status Types.\r\n\r\nCurrently we define only 3 Status Types:\r\n- 0x00 VALID\r\n- 0x01 INVALID\r\n- 0x02 SUSPENDED\r\n- the rest is undefined or application-specific\r\n\r\nThere was no objection towards 0x00 and 0x01 and people agreed that for security reasons its best to have those important ones fixed in the specification. Towards 0x02 (suspended) there were different opinions and suggestions. The summarized options are:\r\n\r\n## Option A\r\nKeep 0x02 (suspended) as pre-defined but add additional text in the draft that explains potential privacy issues of it (leaking more information than necessary when used with natural persons) but also explains potential use cases (suspended may signal different actions for the Relying Party and avoid deletion of an account or similar)\r\n\r\n## Option B\r\nRemove 0x02 (suspended) and have this as an application-specific, ecosystem-depended value, if needed. \r\n\r\n## Option C\r\nLeave 0x00 and 0x01 as pre-defined in the draft and add context-specific values and descriptions for the other ones in the Status List Token, see initial thoughts on this in #1 ",
       "createdAt": "2025-01-14T07:18:33Z",
-      "updatedAt": "2025-01-16T07:21:28Z",
+      "updatedAt": "2025-01-23T07:36:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -4458,6 +4472,13 @@
           "body": "Editor's call: Preference to keep suspended in the pre-defined values (with additional section explaining its risk).\r\nWe also might want to reserve certain ranges of status type values for further usage.",
           "createdAt": "2025-01-16T07:21:27Z",
           "updatedAt": "2025-01-16T07:21:27Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\n-  possible other status type for OUT_OF_DATE\n- make clear that all other values that are not APPLICATION_SPECIFIC are reserved for future use/registration",
+          "createdAt": "2025-01-23T07:36:42Z",
+          "updatedAt": "2025-01-23T07:36:42Z"
         }
       ]
     },
@@ -4466,7 +4487,7 @@
       "id": "I_kwDOJZ2aqs6mFcGu",
       "title": "Interims Feedback: Short-lived credentials",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/223",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -4475,8 +4496,8 @@
       "labels": [],
       "body": "Encourage more explicitly the usage of short-lived credentials and also its benefits of being able to stop serving an old status list once all referenced tokens have expired.\r\n- In rationale: short-lived credentials as an alternative to revocation\r\n- In implementation considerations: Size and lifetime of status lists that have to be served is dependant on life-time of referenced tokens",
       "createdAt": "2025-01-14T07:26:37Z",
-      "updatedAt": "2025-01-16T08:31:45Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-23T07:06:50Z",
+      "closedAt": "2025-01-23T07:06:50Z",
       "comments": []
     },
     {
@@ -4519,7 +4540,7 @@
       "labels": [],
       "body": "Let us make a parallel. When using CRLs if the serial number of a PKC is not in the list, the relying party knows that this PKC is neither revoked , nor suspended and hence that it is valid.\r\n\r\nWhen using this status list mechanism, the relying party can locate the appropriate bits (1, 2 or more) that describe the status of the Referenced Token, but the text does not say how to interpret them. Even when a single bit is used, the text does not say that 0 means valid and 1 means invalid.\r\n\r\nFirst, the draft should say that when all the appropriate bits are set to 0, it means that the Referenced Token is valid (no matter the number of bits that are used).\r\n\r\nAt the moment, section 10.1 (Status List with 2-Bit Status Values in JSON format) is only an example.\r\n\r\nIn order to be able to interoperate, the meaning of the bits in the cases of one bit and of 2 bits should be described in the document.\r\n\r\nThen, let us take a look at the other cases, i.e., 4 or 8 bits. When processing a Token Status List, currently the Relying Party has no way to interpret them.\r\n\r\nThere are various options to address this problem, e.g.,:\r\n\r\n1.  to say that the meaning for the 4 or 8 bits cases is out of the scope of this document.\r\n2.  to add another claim into the Token Status List that points to a URL managed by the Status Issuer that indicates the meaning of the 4 or 8 bits. This would not be fully automatic as a human being would be necessary to manually adapt the behavior of the implementation for each Status Issuer.\r\n3. to remove the 4 or 8 bits cases from the document.\r\n",
       "createdAt": "2025-01-14T12:02:18Z",
-      "updatedAt": "2025-01-22T12:59:29Z",
+      "updatedAt": "2025-01-23T08:44:52Z",
       "closedAt": null,
       "comments": [
         {
@@ -4556,6 +4577,27 @@
           "body": "I don't believe that \"CONTEXT_SPECIFIC\" would be appropriate. \n\nEach Issuer can define its own meaning independently from other Issuers.\n\nOf course, different Issuers may choose to use the same meaning, \nbut this will not be directly visible to the Relying Parties.",
           "createdAt": "2025-01-22T12:59:27Z",
           "updatedAt": "2025-01-22T12:59:27Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The phrase \"application specific\" is well understood in industry as to its implied meaning, which is how it is being used here. One such relevant reference that comes to mind is RFC 7519 - JSON Web Tokens which uses this phrase extensively.",
+          "createdAt": "2025-01-23T07:42:10Z",
+          "updatedAt": "2025-01-23T07:42:10Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors call:\n- pending close, we don't believe that \"APPLICATION_SPECIFIC\" can be miss-interpreted",
+          "createdAt": "2025-01-23T07:46:00Z",
+          "updatedAt": "2025-01-23T07:46:00Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "When an Issuer A is using bit 4 in a Status List that contains 8 bits per Referenced Token to mean something about the status of the Referenced Tokens, that meaning can have nothing to do with the meaning that an Issuer B (also using bit 4 in a Status that also contains 8 bits per Referenced Token) will give that bit.\n\nThe only way to know what bit 4 means the same thing is to take a look at the practice statements (or the policy) of the Issuer A and then to take another look at the practice statements (or the policy) of the Issuer B and it might happen that the meaning will be the same, but there is no guarantee that the meaning will be the same. A human brain will be needed to come that a conclusion. Each Issuer is free to choose its own interpretation for every ISSUER_SPECIFIC bit, when its meaning is not explicitly defined in this document.\n\nAn application-specific method is the point of view of the Relying Party that uses a local rule to process a field. \nThis meaning is used extensively in RFC 7519 - JSON Web Tokens.\n\nAn Issuer-specific method is the point of view of the Issuer. The treatment by the Relying Party will be dependant upon the semantics of each status bit, as defined by each Issuer. \n\nUsing \"APPLICATION_SPECIFIC\" would lead to miss-interpretations. Using \" ISSUER_SPECIFIC\" cannot be miss-interpreted.\n",
+          "createdAt": "2025-01-23T08:44:50Z",
+          "updatedAt": "2025-01-23T08:44:50Z"
         }
       ]
     },
@@ -4630,7 +4672,7 @@
       "id": "I_kwDOJZ2aqs6mRJor",
       "title": "Add a section to provide estimations about the size and the number of Token Status Lists",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/229",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4639,8 +4681,8 @@
       "labels": [],
       "body": "This point was raised during the last video conference call.\r\n\r\nIn the case of CRLs, it can be estimated that about less than 5 % of the serial numbers of the end-entity PKCs would be present in a CRL. \r\nHowever, when using Token Status Lists, for each Referenced Token, a few bits (1, 2, 4 or 8) will always be present in a Token Status List.\r\n\r\nIn the Implementation considerations section, a section should be added to provide estimations about the size and the number of Token Status Lists that will need to be managed.\r\n\r\nThe text states:\r\n\r\n   *  the Status List shall scale up to millions of *tokens* to support large scale government or enterprise use cases\r\n\r\nHowever, when using one-time-use Referenced Tokens, the number of tokens is likely to be at least one order of magnitude higher than the number of users. It would thus be more appropriate to write:\r\n\r\n   *  the Status List shall scale up to millions of *users* to support large scale government or enterprise use cases\r\n\r\nUsing an example with a one million of users (not tokens) would be interesting.\r\n\r\nLet us assume that a set of Token Status Lists is issued everyday. \r\n\r\nIf one-time-use Referenced Tokens are used, the number of Referenced Tokens valid at an instant of time can be much larger than when each Referenced Token can be used multiple times during, e.g., one year.\r\n\r\nLet us assume that one-time-use Referenced Tokens with a validity period of one week are used. \r\n\r\nLet us assume that during two days each user consumes 20 Referenced Tokens that cannot be immediately renewed (e.g., because he uses them in a proximity mode and he has no Internet connection). 20 millions of Referenced Tokens should be issued the first day. These 20 Referenced Tokens issued for one user should be placed in (at least) 20 different Token Status Lists. \r\n\r\nIf two bits are used for each status information, this makes 2 millions bits, i.e. 250 Mb for each Token Status List with 20 different distribution points.\r\n\r\nFor 10 millions of users, these numbers do not scale linearly. For each Token Status List, the size of 250 Mb for each Token Status List should not increase, which means that 200 Token Status Lists should be issued everyday.\r\n\r\nAs of 1 January 2024, the population of the EU was around 449 million people. Source: https://en.wikipedia.org/wiki/Demographics_of_the_European_Union\r\n\r\nLet us assume that 30 % of this population will get and use EUDIWs.\r\nThis will make roughly 130 millions of users. 2600 Token Status Lists would need to be issued everyday.\r\n\r\nIt is up to the Issuer to know how many Status List Tokens (that will contain initially all zeros) need to be managed and, for every issued Reference Token, to choose (and remember) which index it will use and in which Status List Token. The Issuer also needs to consider the validity periods of each Referenced Token and of the Status List Tokens.  \r\n\r\nThe management of  Status List Tokens is far more complex than simply locating an index in a Status List Token.\r\nThis complexity and the various trade-offs are not explained at the moment. \r\n\r\nThe goal of this contribution is not to copy and paste the above text into the document but only to make the ball rolling. \r\nIn any case, some information will be useful.\r\n",
       "createdAt": "2025-01-15T11:12:03Z",
-      "updatedAt": "2025-01-22T13:14:35Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-23T07:06:50Z",
+      "closedAt": "2025-01-23T07:06:50Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -4680,11 +4722,15 @@
       "state": "OPEN",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
-      "assignees": [],
-      "labels": [],
+      "assignees": [
+        "c2bo"
+      ],
+      "labels": [
+        "ready-for-pr"
+      ],
       "body": "In section 1.3, the text sates:\n\n> 1.3.  Design Considerations\n> \n>    The decisions taken in this specification aim to achieve the following design goals:\n> \n>    *  the specification shall not specify key resolution or trust frameworks\n\nIf this sentence remains, interoperability cannot be supported. This bullet should be removed.\n\n\nIn section 5.1. the text states:\n\n> The following additional rules apply:\n> \n> 2.  The JWT MUST be secured using a cryptographic signature or MAC algorithm.  Relying Parties MUST reject JWTs with an invalid signature.\n \nAs MAC algorithms are using secret keys, it is not believed that MAC algorithms are suitable. Remove \"or MAC algorithm\".\n\nReplace with:\n\n> The following additional rules apply:\n> \n> 2.  The JWT MUST be secured using a cryptographic signature algorithm.  Relying Parties MUST determine which public key shall be used to verify the signature of the JWT.  Relying Parties MUST verify that this public key is valid (e.g., its PKC is not revoked, nor suspended). Relying Parties MUST reject JWTs with an invalid signature.\n\nIn section 5.2, the text states:\n\n> The following additional rules apply:\n> \n> 2.  The CWT MUST be secured using a cryptographic signature or MAC algorithm.  Relying Parties MUST reject CWTs with an invalid signature\n\nThe same kind of change already proposed for section 5.1 is proposed for section 5.2 :\n\n> The following additional rules apply:\n> \n> 2.  The CWT MUST be secured using a cryptographic signature algorithm. Relying Parties MUST determine which public key shall be used to verify the signature of the CWT.  Relying Parties MUST verify that this public key is valid (e.g., its PKC is not revoked, nor suspended). Relying Parties MUST reject CWTs with an invalid signature.\n> ",
       "createdAt": "2025-01-20T10:11:32Z",
-      "updatedAt": "2025-01-22T08:52:02Z",
+      "updatedAt": "2025-01-23T07:53:18Z",
       "closedAt": null,
       "comments": [
         {
@@ -4728,6 +4774,13 @@
           "body": "I am not familiar with HMAC based Access Tokens but I presume that the Access Token is targeted to a given Relying Party. In that case, if the secret key used to verify the Access Token is compromised,  it does not affect other Relying Parties. \n\nIf you really want to keep MAC algorithms, then warnings should be included into the Security Considerations section with a pointer to that text in sections 5.1 and 5.2.\n\n ",
           "createdAt": "2025-01-22T08:52:01Z",
           "updatedAt": "2025-01-22T08:52:01Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\n- there are use cases like access tokens explicitly requested by the working group as example use cases for status list, where it is very common to use HMAC\n- add a small security consideration",
+          "createdAt": "2025-01-23T07:52:39Z",
+          "updatedAt": "2025-01-23T07:52:39Z"
         }
       ]
     },
@@ -4774,9 +4827,17 @@
       "labels": [],
       "body": "It is proposed to add a new section 9.\n\n**Status List Token signature bit of a key usage extension in a PKC (sLTSign)**\n\nThe key usage extension of a PKC (Public Key Certificate) defines the purpose of the public key contained in the PKC  In RFC 5280, section 4.2.1.3, the text states that \"conforming CAs MUST include this extension in certificates that contain public keys that are used to validate digital signatures or other public key certificates or CRLs.  When present, conforming CAs SHOULD mark this extension as critical\". At the time RFC 5280 was written and published (2008), the concept of a Status Issuer did not existed.\n\nThis document states that conforming CAs MUST include this extension in certificates that contain public keys that are used to validate digital signatures or other public key certificates, CRLs or Status List Tokens.  When present, conforming CAs SHOULD mark this extension as critical.\n\nIn RFC 5280, the following Object Identifier has been defined:\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15)}. OID dot notation: 2.5.29.15\n\n ```\n     id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8) }\n\n```\nIn order to allow an Issuer to designate a Status Issuer, an additional bit in the key usage extension is needed. The next usable bit is (9).\n\nThe following line is happened to this list:\n\n           sLTSign                 (9)\n\nwith the following meaning:\n\nThe sLTSign bit is asserted when the subject public key can be used for verifying signatures on Status List Tokens.\n\nThe id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 } then becomes:\n\n ```\n     id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8),\n           sLTSign                 (9) }\n\n```\n\nUsing the text previously proposed, a section 14.8 (Key Usage extension for Status issuer certificates) should be added into section 14 (IANA Considerations).\n",
       "createdAt": "2025-01-20T10:29:16Z",
-      "updatedAt": "2025-01-20T10:29:16Z",
+      "updatedAt": "2025-01-23T08:03:09Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\n- if we were to define something, we would define extended key usage identifiers and define an OID for that\n- continue to discuss",
+          "createdAt": "2025-01-23T08:03:08Z",
+          "updatedAt": "2025-01-23T08:03:08Z"
+        }
+      ]
     },
     {
       "number": 236,
@@ -4830,7 +4891,31 @@
       "labels": [],
       "body": "In Section 1.3 (Design Considerations), the text states:\n\n>    *  the specification shall design an extension point to convey information about the status of a token that can be re-used by other mechanisms\n\nChange into:\n\n>    *  the specification defines a \"status\" claim in a Reference Token that can be used by other mechanisms to convey information about the status of a Reference Token.\n\nIn section 3 (Terminology) the text defines the term as Relying Party as:\n\n> Relying Party:  An entity that relies on the Status List Token to validate the status of the Referenced Token.  Also known as Verifier.\n\nChange into:\n\n> Relying Party:  An entity that relies on a \"status\" claim that is present in a Reference Token and can fetch a Status List Token or obtain it from the Holder to validate the status of that Referenced Token.  Also known as Verifier.\n\nIn section 3 (Terminology) the text defines the term Referenced Token as:\n\n> Referenced Token:  A cryptographically secured data structure which contains a reference to a Status List Token. (...)\n\nChange into:\n\n> Referenced Token:  A cryptographically secured data structure which contains a \"status\" claim that allows to discover how the status of a Referenced Token can be known.  In the context of this document, the \"status\" claim contains one or more references to Status List Tokens and an index specific to that Referenced Token. (...)\n",
       "createdAt": "2025-01-20T11:01:47Z",
-      "updatedAt": "2025-01-20T11:01:47Z",
+      "updatedAt": "2025-01-23T18:12:03Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I used some of the suggestions in #241 , I think some are too detailed for the terminology section.",
+          "createdAt": "2025-01-23T18:12:01Z",
+          "updatedAt": "2025-01-23T18:12:01Z"
+        }
+      ]
+    },
+    {
+      "number": 243,
+      "id": "I_kwDOJZ2aqs6ndRSE",
+      "title": "Extension Token Status List to x509",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/243",
+      "state": "OPEN",
+      "author": "steffenschwalm",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Currently Token Status List  not useable for revocation x509 credentials which is critical in context of eIDAS where \n\na) each QEAA has to be signed with xqualified signature or seal based on x509 certificates\nb) credentials in x509 legally possible and covered in ETSI TS 119 472-1 [Token Status List ]\n(https://docbox.etsi.org/esi/Open/Latest_Drafts/ETSI%20DRAFT%20TS_119_472-1v0.0.6-public.pdf)\n\nto avoid that trust service providers have to provide 2 different approaches for revocation, so 1 for credential 1 for its signature x509 shall be covered by Token Status List Spec. As mentioned by @paulbastian  in brief discussion it could be possible to define an X.509 extension in ASN.1, analogous to the CRL Distribution Endpoint:\n\nTokenStatusListDisitrubionEndpoint ::= SEQUENCE {\n        uri                    [0]     RelativeDistinguishedName,\n        index                   [1]     INTEGER }\n\nFurthermore, minimal adjustments to the Validation Logic section would be necessary.",
+      "createdAt": "2025-01-24T13:30:59Z",
+      "updatedAt": "2025-01-24T13:30:59Z",
       "closedAt": null,
       "comments": []
     }
@@ -15252,24 +15337,26 @@
       "id": "PR_kwDOJZ2aqs6IIQoc",
       "title": "interims feedback #1",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/230",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #229 \r\nCloses #223 ",
       "createdAt": "2025-01-17T09:29:00Z",
-      "updatedAt": "2025-01-17T11:38:07Z",
+      "updatedAt": "2025-01-23T07:06:49Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "a4f70cfbbf560b859e897ac3b2eb64da77f50559",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/interims_feedback1",
       "headRefOid": "308828979870a54f62bd8c6611bc8917aff0a6d5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-23T07:06:49Z",
+      "mergedAt": "2025-01-23T07:06:49Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "3f2d7141ecd52a8e57481b681691bd4dc06cd1d5"
+      },
       "comments": [],
       "reviews": [
         {
@@ -15304,6 +15391,19 @@
           "createdAt": "2025-01-17T11:38:07Z",
           "updatedAt": "2025-01-17T11:38:07Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZH3S_",
+          "commit": {
+            "abbreviatedOid": "3088289"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-23T06:30:13Z",
+          "updatedAt": "2025-01-23T06:30:13Z",
+          "comments": []
         }
       ]
     },
@@ -15312,24 +15412,26 @@
       "id": "PR_kwDOJZ2aqs6IJ914",
       "title": "Mention prior art",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/231",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Close #83 \r\n\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/83-prior-art/draft-ietf-oauth-status-list.html",
       "createdAt": "2025-01-17T13:19:53Z",
-      "updatedAt": "2025-01-17T14:33:17Z",
+      "updatedAt": "2025-01-23T07:07:15Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "a4f70cfbbf560b859e897ac3b2eb64da77f50559",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "83-prior-art",
       "headRefOid": "119eda2bd67f65d205f6d8dd09808ad2ba8f5b5d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-23T07:07:15Z",
+      "mergedAt": "2025-01-23T07:07:15Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "8bf6633b37077904ccaaadd657a70dea18c331be"
+      },
       "comments": [],
       "reviews": [
         {
@@ -15384,6 +15486,19 @@
           "createdAt": "2025-01-17T14:31:51Z",
           "updatedAt": "2025-01-17T14:31:51Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZH3nF",
+          "commit": {
+            "abbreviatedOid": "119eda2"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-23T06:31:06Z",
+          "updatedAt": "2025-01-23T06:31:06Z",
+          "comments": []
         }
       ]
     },
@@ -15399,13 +15514,13 @@
       "labels": [],
       "body": "Fixes #216 \r\n\r\nI've moved the existing 2 bit examples and ascii art up - we can revert that change, but it felt more consistent to me that way\r\nI am not exactly sure how to better displays the input (status values for specific positions) - any ideas?\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/216-test-vectors/draft-ietf-oauth-status-list.html",
       "createdAt": "2025-01-17T15:45:12Z",
-      "updatedAt": "2025-01-22T12:14:53Z",
+      "updatedAt": "2025-01-24T09:26:34Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "a4f70cfbbf560b859e897ac3b2eb64da77f50559",
+      "baseRefOid": "53bfe1f752ecbc4cacbdea27be5570af046c8e54",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "216-test-vectors",
-      "headRefOid": "7e738373244cdde7ee1c61aa495f8e56b1fd8d7a",
+      "headRefOid": "d1ed18b3863b6e77ddb7951a720f45f36adbb0b0",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -15424,6 +15539,27 @@
           "body": "> I like it! I initially proposed to move the 2 bit acsii art up there, so that's fine for me :) I think we require the CWT examples as well in the test vectors, having them for the same input values would be good.\r\n\r\nHmm, so we would provide the results in CBOR and JSON (we can easily re-use the same values)? ",
           "createdAt": "2025-01-17T16:07:04Z",
           "updatedAt": "2025-01-17T16:07:04Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "todo:\r\n- status list token JWT rendering\r\n- verifying test vectors inpendently wiht implementations",
+          "createdAt": "2025-01-23T07:10:36Z",
+          "updatedAt": "2025-01-23T07:10:36Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I've got the feedback that it may be irritating to not have dedicated 1-bit test vectors in the appendix",
+          "createdAt": "2025-01-23T14:02:07Z",
+          "updatedAt": "2025-01-23T14:02:07Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "I will create a longer 1 bit example then",
+          "createdAt": "2025-01-23T14:18:41Z",
+          "updatedAt": "2025-01-23T14:18:41Z"
         }
       ],
       "reviews": [
@@ -15467,25 +15603,35 @@
       "id": "PR_kwDOJZ2aqs6Imvwo",
       "title": "editorial fixes",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/239",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Trying to fix some obvious spelling mistakes and increase readability in general. Not sure about all of the minor / non-obvious changes.",
       "createdAt": "2025-01-22T10:10:39Z",
-      "updatedAt": "2025-01-22T12:14:31Z",
+      "updatedAt": "2025-01-23T08:13:14Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "a4f70cfbbf560b859e897ac3b2eb64da77f50559",
+      "baseRefOid": "5bc7b4ef4e0e42193f801f53b5e5bf7daf2cda02",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/editorial-review",
-      "headRefOid": "40508285b7fa92cb5e7966d42f60ca7ad7885b39",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "dff2e318bc5d7f4252dca88e880a8dbde91703d0",
+      "closedAt": "2025-01-23T08:13:14Z",
+      "mergedAt": "2025-01-23T08:13:14Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "9222058f1f181886506e131bc313629c524e7c4e"
+      },
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "todo:\r\n- remove oxford comma\r\n- merge afterwards",
+          "createdAt": "2025-01-23T07:12:46Z",
+          "updatedAt": "2025-01-23T07:12:46Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJZ2aqs6ZAct7",
@@ -15518,6 +15664,256 @@
           "body": "The only things I'm not sure is about putting a comma before \"and\"",
           "createdAt": "2025-01-22T12:14:31Z",
           "updatedAt": "2025-01-22T12:14:31Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZH8eJ",
+          "commit": {
+            "abbreviatedOid": "4050828"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-23T06:45:21Z",
+          "updatedAt": "2025-01-23T06:45:21Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "Yeah we aren't using oxford comma's consistently so I wouldn't.",
+              "createdAt": "2025-01-23T06:45:21Z",
+              "updatedAt": "2025-01-23T06:45:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZH8qf",
+          "commit": {
+            "abbreviatedOid": "4050828"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-23T06:45:53Z",
+          "updatedAt": "2025-01-23T06:45:53Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "Same here we either need to use oxford comma's consistently or not, I would suggest not.",
+              "createdAt": "2025-01-23T06:45:53Z",
+              "updatedAt": "2025-01-23T06:45:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZH8-8",
+          "commit": {
+            "abbreviatedOid": "4050828"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-23T06:46:54Z",
+          "updatedAt": "2025-01-23T06:46:55Z",
+          "comments": [
+            {
+              "originalPosition": 198,
+              "body": "Same comment r.e oxford comma's",
+              "createdAt": "2025-01-23T06:46:55Z",
+              "updatedAt": "2025-01-23T06:46:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZIDx9",
+          "commit": {
+            "abbreviatedOid": "4050828"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-23T07:06:44Z",
+          "updatedAt": "2025-01-23T07:06:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 240,
+      "id": "PR_kwDOJZ2aqs6It_Bh",
+      "title": "Minor editorial change to address issue 217",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/240",
+      "state": "MERGED",
+      "author": "tplooker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #217",
+      "createdAt": "2025-01-23T06:57:16Z",
+      "updatedAt": "2025-01-23T07:21:02Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "8bf6633b37077904ccaaadd657a70dea18c331be",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "tl/issue-217",
+      "headRefOid": "ac2063824fcbc5d9f57c21633c779ba886da4ce6",
+      "closedAt": "2025-01-23T07:20:58Z",
+      "mergedAt": "2025-01-23T07:20:58Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "5bc7b4ef4e0e42193f801f53b5e5bf7daf2cda02"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6ZIHst",
+          "commit": {
+            "abbreviatedOid": "1b6075a"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-23T07:17:09Z",
+          "updatedAt": "2025-01-23T07:17:10Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nTo avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-lifecycle) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:\r\n```",
+              "createdAt": "2025-01-23T07:17:09Z",
+              "updatedAt": "2025-01-23T07:17:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZIIta",
+          "commit": {
+            "abbreviatedOid": "ac20638"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-23T07:19:48Z",
+          "updatedAt": "2025-01-23T07:19:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZIItf",
+          "commit": {
+            "abbreviatedOid": "98fe013"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-23T07:19:48Z",
+          "updatedAt": "2025-01-23T07:19:48Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 241,
+      "id": "PR_kwDOJZ2aqs6IzJiN",
+      "title": "editorial changes on terminology and Referenced Tokens",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/241",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #238 ",
+      "createdAt": "2025-01-23T18:11:14Z",
+      "updatedAt": "2025-01-24T19:12:35Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "9222058f1f181886506e131bc313629c524e7c4e",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/interims_feedback2",
+      "headRefOid": "29639bacbd39af034a9ea9686df6e759bf221fef",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6ZYwyX",
+          "commit": {
+            "abbreviatedOid": "29639ba"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-24T19:12:35Z",
+          "updatedAt": "2025-01-24T19:12:35Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 242,
+      "id": "PR_kwDOJZ2aqs6Izddi",
+      "title": "update templates",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/242",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-23T18:56:35Z",
+      "updatedAt": "2025-01-24T09:25:52Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "9222058f1f181886506e131bc313629c524e7c4e",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "c2bo/update-templates",
+      "headRefOid": "19ce918a1bf582d1e015db1f1c0b0f1fa417c5d4",
+      "closedAt": "2025-01-24T09:25:52Z",
+      "mergedAt": "2025-01-24T09:25:52Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "53bfe1f752ecbc4cacbdea27be5570af046c8e54"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6ZOwZR",
+          "commit": {
+            "abbreviatedOid": "5ba614e"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-23T19:01:13Z",
+          "updatedAt": "2025-01-23T19:01:13Z",
+          "comments": [
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\nYou may use this [Cyberchef script](https://gchq.github.io/CyberChef/#recipe=JWT_Decode()JPath_expression('status_list.lst','%5C%5Cn')From_Base64('A-Za-z0-9-_',true,false)Zlib_Inflate(0,0,'Adaptive',false,false)To_Binary('Line%20feed',8)Add_line_numbers()) to quickly analyze a Token Status List in JWT format.\r\n\r\n```",
+              "createdAt": "2025-01-23T19:01:13Z",
+              "updatedAt": "2025-01-23T19:01:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZTOV3",
+          "commit": {
+            "abbreviatedOid": "19ce918"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-24T07:54:37Z",
+          "updatedAt": "2025-01-24T07:54:37Z",
           "comments": []
         }
       ]
