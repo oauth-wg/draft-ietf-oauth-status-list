@@ -613,9 +613,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840981875595057121f014a99bc99f8605cc9683908f109b9144e
-   a2757baa080ac2647ec96e01959fb45c2bf3a809c7bb1045052dbfa0702e761ff7a2
-   db9b6d6473
+   b918000217015d5840e2fb3b79680bdd592bae1c04539ec68fbfd453173016432bd5
+   e44a9acc88c71955896308473f3bb17f82e07d20d0160b702829ee7de05c1960de73
+   8534d92938
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -637,12 +637,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      981875595057121f014a99bc  #       "\x98\x18uYPW\x12\x1f\x01J\x99¼"
-      99f8605cc9683908f109b914  #       "\x99ø`\Éh9\x08ñ\x09¹\x14"
-      4ea2757baa080ac2647ec96e  #       "N¢u{ª\x08\x0aÂd~Én"
-      01959fb45c2bf3a809c7bb10  #       "\x01\x95\x9f´\+ó¨\x09Ç»\x10"
-      45052dbfa0702e761ff7a2db  #       "E\x05-¿\xa0p.v\x1f÷¢Û"
-      9b6d6473                  #       "\x9bmds"
+      e2fb3b79680bdd592bae1c04  #       "âû;yh\x0bÝY+®\x1c\x04"
+      539ec68fbfd453173016432b  #       "S\x9eÆ\x8f¿ÔS\x170\x16C+"
+      d5e44a9acc88c71955896308  #       "ÕäJ\x9aÌ\x88Ç\x19U\x89c\x08"
+      473f3bb17f82e07d20d0160b  #       "G?;±\x7f\x82à} Ð\x16\x0b"
+      702829ee7de05c1960de7385  #       "p()î}à\\x19`Þs\x85"
+      34d92938                  #       "4Ù)8"
 
 6.  Referenced Token
 
@@ -787,9 +787,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840a8ce5221f07aa2bde3b38074939a224d128c8d
-   bb82eac6f0f7c1590851860cc7db7e66a4f436f63aa77e5e51544e6455661b0adb74
-   b31a7c45d96e4992ef48e8
+   7374617475736c697374732f315840c62333f8d69c06d9d2d574ec806dd0b72d1ca9
+   851cb68a3522a30068ef2ec5c0d3c3a5dbe9955c495af8e0b7ea7197e36f8d02d570
+   83f617421b0b745727ebcd
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -812,12 +812,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      a8ce5221f07aa2bde3b38074  #       "¨ÎR!ðz¢½ã³\x80t"
-      939a224d128c8dbb82eac6f0  #       "\x93\x9a"M\x12\x8c\x8d»\x82êÆð"
-      f7c1590851860cc7db7e66a4  #       "÷ÁY\x08Q\x86\x0cÇÛ~f¤"
-      f436f63aa77e5e51544e6455  #       "ô6ö:§~^QTNdU"
-      661b0adb74b31a7c45d96e49  #       "f\x1b\x0aÛt³\x1a|EÙnI"
-      92ef48e8                  #       "\x92ïHè"
+      c62333f8d69c06d9d2d574ec  #       "Æ#3øÖ\x9c\x06ÙÒÕtì"
+      806dd0b72d1ca9851cb68a35  #       "\x80mÐ·-\x1c©\x85\x1c¶\x8a5"
+      22a30068ef2ec5c0d3c3a5db  #       ""£\x00hï.ÅÀÓÃ¥Û"
+      e9955c495af8e0b7ea7197e3  #       "é\x95\IZøà·êq\x97ã"
+      6f8d02d57083f617421b0b74  #       "o\x8d\x02Õp\x83ö\x17B\x1b\x0bt"
+      5727ebcd                  #       "W'ëÍ"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -990,17 +990,11 @@ d2                              # tag(18)
       temporarily invalid, hanging, debarred from privilege.  This state
       is reversible.
 
-   *  0x03 - "APPLICATION_SPECIFIC_3" - The status of the Referenced
-      Token is implicitly given by the particular use case and the
-      meaning of this value is known out-of-band.
-
-   *  0x0E - "APPLICATION_SPECIFIC_14" - The status of the Referenced
-      Token is implicitly given by the particular use case and the
-      meaning of this value is known out-of-band.
-
-   *  0x0F - "APPLICATION_SPECIFIC_15" - The status of the Referenced
-      Token is implicitly given by the particular use case and the
-      meaning of this value is known out-of-band.
+   The Status Type value 0x03 and Status Type values in the range 0x0B
+   until 0x0F are permanently reserved as application specific.  Meaning
+   the processing of Status Types using these values is application
+   specific.  All other Status Type values are reserved for future
+   registration.
 
    The processing rules for Referenced Tokens (such as JWT or CWT)
    precede any evaluation of a Referenced Token's status.  For example,
@@ -1051,8 +1045,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.mJX208c0g5OtFYG9OwcynaSAn1vC067fZq2Nd-Q7oNnVTW-ICC5W
-   LaVE_u6dkCctRuZzPSzMpNt7BUSorcwe_w
+   nR0bCI6NDMyMDB9.7Ka8OhvYnvxO_y-ej6wsfBQRXAPr45h-vaatjCsD_t4ZdsDqtOzw
+   _OCiZz9rSFwmsPR9FLWryELV8Mxzl6P4LQ
 
 8.2.  Status List Response
 
@@ -1190,8 +1184,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.mJX208c0g5OtFYG9OwcynaSAn1vC067fZq2Nd-Q7oNnVTW-ICC5W
-   LaVE_u6dkCctRuZzPSzMpNt7BUSorcwe_w
+   nR0bCI6NDMyMDB9.7Ka8OhvYnvxO_y-ej6wsfBQRXAPr45h-vaatjCsD_t4ZdsDqtOzw
+   _OCiZz9rSFwmsPR9FLWryELV8Mxzl6P4LQ
 
 9.  Status List Aggregation
 
@@ -1941,11 +1935,10 @@ d2                              # tag(18)
 
 
 
-   *  Status Type Name: APPLICATION_SPECIFIC_3
+   *  Status Type Name: APPLICATION_SPECIFIC
 
    *  Status Type Description: The status of the Referenced Token is
-      implicitly given by the particular use case and the meaning of
-      this value is known out-of-band.
+      application specific.
 
    *  Status Type value: 0x03
 
@@ -1955,31 +1948,16 @@ d2                              # tag(18)
 
 
 
-   *  Status Type Name: APPLICATION_SPECIFIC_14
+   *  Status Type Name: APPLICATION_SPECIFIC
 
    *  Status Type Description: The status of the Referenced Token is
-      implicitly given by the particular use case and the meaning of
-      this value is known out-of-band.
+      application specific.
 
-   *  Status Type value: 0x0E
+   *  Status Type value: 0x0B-0xOF
 
    *  Change Controller: IETF
 
    *  Specification Document(s): Section 7 of this specification
-
-
-
-   *  Status Type Name: APPLICATION_SPECIFIC_15
-
-   *  Status Type Description: The status of the Referenced Token is
-      implicitly given by the particular use case and the meaning of
-      this value is known out-of-band.
-
-   *  Status Type value: 0x0F
-
-   *  Change Controller: IETF
-
-   *  Specification Document(s): Section 6.2 of this specification
 
 
 
@@ -2268,6 +2246,9 @@ Document History
    *  differentiate unlinkability between Issuer-RP and RP-RP
 
    *  add prior art
+
+   *  updated language around application specific status type values
+      and assigned ranges for application specific usage
 
    -06
 
