@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 28 July 2025                                                   
+Expires: 31 July 2025                                                   
                                                               C. Bormann
                                                                   SPRIND
-                                                         24 January 2025
+                                                         27 January 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 July 2025.
+   This Internet-Draft will expire on 31 July 2025.
 
 Copyright Notice
 
@@ -174,7 +174,7 @@ Table of Contents
 
    ┌────────────────┐  describes status ┌──────────────────┐
    │  Status List   ├──────────────────►│ Referenced Token │
-   │ (JSON or CBOR) │◄──────────────────┤  (JOSE or COSE)  │
+   │ (JSON or CBOR) │◄──────────────────┤ (JOSE, COSE, ..) │
    └─────┬──────────┘    references     └──────────────────┘
          │
          │ embedded in
@@ -282,9 +282,9 @@ Table of Contents
    *  the specification shall not specify key resolution or trust
       frameworks
 
-   *  the specification shall design an extension point to convey
-      information about the status of a token that can be re-used by
-      other mechanisms
+   *  the specification shall define an extension point that enables
+      other mechanisms to convey information about the status of a
+      Referenced Token
 
 1.4.  Prior Work
 
@@ -330,9 +330,9 @@ Table of Contents
    Holder:  An entity that receives Referenced Tokens from the Issuer
       and presents them to Relying Parties.
 
-   Relying Party:  An entity that relies on the Status List Token to
-      validate the status of the Referenced Token.  Also known as
-      Verifier.
+   Relying Party:  An entity that relies on the Referenced Token and
+      fetches the corresponding Status List Token to validate the status
+      of that Referenced Token.  Also known as Verifier.
 
    Status List:  An object in JSON or CBOR representation containing a
       bit array that lists the statuses of many Referenced Tokens.
@@ -613,9 +613,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d584085b4f89a8ef4304879f48b2b7e7b49077a793c3fd41a1f1d0e
-   42c14d4f2ea5823a57c977e945631e3262e746d878e4269aadacb3628aa3c1c64201
-   36a715460d
+   b918000217015d5840981875595057121f014a99bc99f8605cc9683908f109b9144e
+   a2757baa080ac2647ec96e01959fb45c2bf3a809c7bb1045052dbfa0702e761ff7a2
+   db9b6d6473
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -637,12 +637,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      85b4f89a8ef4304879f48b2b  #       "\x85´ø\x9a\x8eô0Hyô\x8b+"
-      7e7b49077a793c3fd41a1f1d  #       "~{I\x07zy<?Ô\x1a\x1f\x1d"
-      0e42c14d4f2ea5823a57c977  #       "\x0eBÁMO.¥\x82:WÉw"
-      e945631e3262e746d878e426  #       "éEc\x1e2bçFØxä&"
-      9aadacb3628aa3c1c6420136  #       "\x9a\xad¬³b\x8a£ÁÆB\x016"
-      a715460d                  #       "§\x15F\x0d"
+      981875595057121f014a99bc  #       "\x98\x18uYPW\x12\x1f\x01J\x99¼"
+      99f8605cc9683908f109b914  #       "\x99ø`\Éh9\x08ñ\x09¹\x14"
+      4ea2757baa080ac2647ec96e  #       "N¢u{ª\x08\x0aÂd~Én"
+      01959fb45c2bf3a809c7bb10  #       "\x01\x95\x9f´\+ó¨\x09Ç»\x10"
+      45052dbfa0702e761ff7a2db  #       "E\x05-¿\xa0p.v\x1f÷¢Û"
+      9b6d6473                  #       "\x9bmds"
 
 6.  Referenced Token
 
@@ -787,37 +787,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158402aba4e260479034433b465d9e8b45bef5d2eda
-   a9aa8b2f8cfdb7c14e9284f774c92eb53374cb7d0eae2e7a8757de05d0a884dba156
-   cf45cda7ddf303a94c1101
+   7374617475736c697374732f315840a8ce5221f07aa2bde3b38074939a224d128c8d
+   bb82eac6f0f7c1590851860cc7db7e66a4f436f63aa77e5e51544e6455661b0adb74
+   b31a7c45d96e4992ef48e8
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         2aba4e260479034433b465d9  #       "*ºN&\x04y\x03D3´eÙ"
-         e8b45bef5d2edaa9aa8b2f8c  #       "è´[ï].Ú©ª\x8b/\x8c"
-         fdb7c14e9284f774c92eb533  #       "ý·ÁN\x92\x84÷tÉ.µ3"
-         74cb7d0eae2e7a8757de05d0  #       "tË}\x0e®.z\x87WÞ\x05Ð"
-         a884dba156cf45cda7ddf303  #       "¨\x84Û¡VÏEÍ§Ýó\x03"
-         a94c1101                  #       "©L\x11\x01"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      a8ce5221f07aa2bde3b38074  #       "¨ÎR!ðz¢½ã³\x80t"
+      939a224d128c8dbb82eac6f0  #       "\x93\x9a"M\x12\x8c\x8d»\x82êÆð"
+      f7c1590851860cc7db7e66a4  #       "÷ÁY\x08Q\x86\x0cÇÛ~f¤"
+      f436f63aa77e5e51544e6455  #       "ô6ö:§~^QTNdU"
+      661b0adb74b31a7c45d96e49  #       "f\x1b\x0aÛt³\x1a|EÙnI"
+      92ef48e8                  #       "\x92ïHè"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1002,10 +1002,11 @@ d2                              # tag(18)
       Token is implicitly given by the particular use case and the
       meaning of this value is known out-of-band.
 
-   The processing rules for JWT or CWT precede any evaluation of a
-   Referenced Token's status.  For example, if a token is evaluated as
-   being expired through the "exp" (Expiration Time) but also has a
-   status of 0x00 ("VALID"), the token is considered expired.
+   The processing rules for Referenced Tokens (such as JWT or CWT)
+   precede any evaluation of a Referenced Token's status.  For example,
+   if a token is evaluated as being expired through the "exp"
+   (Expiration Time) but also has a status of 0x00 ("VALID"), the token
+   is considered expired.
 
 8.  Verification and Processing
 
@@ -1050,8 +1051,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.W8t8kO9Kt1S6Lhc-ISqQ6ZvViVhzykQbWrJf3j1SOB1a9-XTaDQm
-   QHgdcoVviy4nQRY4MtnzbZGPyjfUJpdI8g
+   nR0bCI6NDMyMDB9.mJX208c0g5OtFYG9OwcynaSAn1vC067fZq2Nd-Q7oNnVTW-ICC5W
+   LaVE_u6dkCctRuZzPSzMpNt7BUSorcwe_w
 
 8.2.  Status List Response
 
@@ -1080,12 +1081,13 @@ d2                              # tag(18)
    Upon receiving a Referenced Token, a Relying Party MUST first perform
    the validation of the Referenced Token - e.g., checking for expected
    attributes, valid signature and expiration time.  The processing
-   rules for JWT or CWT precede any evaluation of a Referenced Token's
-   status.  For example, if a token is evaluated as being expired
-   through the "exp" (Expiration Time) but also has a status of 0x00
-   ("VALID"), the token is considered expired.  As this is out of scope
-   for this document, this validation is not described here, but is
-   expected to be done according to the format of the Referenced Token.
+   rules for Referenced Tokens (such as JWT or CWT) precede any
+   evaluation of a Referenced Token's status.  For example, if a token
+   is evaluated as being expired through the "exp" (Expiration Time) but
+   also has a status of 0x00 ("VALID"), the token is considered expired.
+   As this is out of scope for this document, this validation is not
+   described here, but is expected to be done according to the format of
+   the Referenced Token.
 
    If this validation is not successful, the Referenced Token MUST be
    rejected.  If the validation was successful, the Relying Party MUST
@@ -1095,9 +1097,9 @@ d2                              # tag(18)
    1.  Check for the existence of a status claim, check for the
        existence of a status_list claim within the status claim and
        validate that the content of status_list adheres to the rules
-       defined in Section 6.2 for JWTs and Section 6.3 for CWTs.  This
-       step can be overruled if defined within the Referenced Token
-       Format natively
+       defined in Section 6.2 for JOSE-based Referenced Tokens and
+       Section 6.3 for COSE-based Referenced Tokens.  Other formats of
+       Referenced Tokens may define other encoding of the URI and index.
 
    2.  Resolve the Status List Token from the provided URI
 
@@ -1188,8 +1190,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.W8t8kO9Kt1S6Lhc-ISqQ6ZvViVhzykQbWrJf3j1SOB1a9-XTaDQm
-   QHgdcoVviy4nQRY4MtnzbZGPyjfUJpdI8g
+   nR0bCI6NDMyMDB9.mJX208c0g5OtFYG9OwcynaSAn1vC067fZq2Nd-Q7oNnVTW-ICC5W
+   LaVE_u6dkCctRuZzPSzMpNt7BUSorcwe_w
 
 9.  Status List Aggregation
 
@@ -2243,6 +2245,8 @@ Acknowledgments
 Document History
 
    -07
+
+   *  editorial changes on terminology and Referenced Tokens
 
    *  clarify privacy consideration around one time use reference tokens
 

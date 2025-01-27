@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 28 July 2025</td>
+<td class="center">Expires 31 July 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-01-24" class="published">24 January 2025</time>
+<time datetime="2025-01-27" class="published">27 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-07-28">28 July 2025</time></dd>
+<dd class="expires"><time datetime="2025-07-31">31 July 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1124,7 +1124,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 July 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1423,7 +1423,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <pre>
 ┌────────────────┐  describes status ┌──────────────────┐
 │  Status List   ├──────────────────►│ Referenced Token │
-│ (JSON or CBOR) │◄──────────────────┤  (JOSE or COSE)  │
+│ (JSON or CBOR) │◄──────────────────┤ (JOSE, COSE, ..) │
 └─────┬──────────┘    references     └──────────────────┘
       │
       │ embedded in
@@ -1504,7 +1504,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-1.3-2.7.1">the specification shall not specify key resolution or trust frameworks<a href="#section-1.3-2.7.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.3-2.8">
-            <p id="section-1.3-2.8.1">the specification shall design an extension point to convey information about the status of a token that can be re-used by other mechanisms<a href="#section-1.3-2.8.1" class="pilcrow">¶</a></p>
+            <p id="section-1.3-2.8.1">the specification shall define an extension point that enables other mechanisms to convey information about the status of a Referenced Token<a href="#section-1.3-2.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1567,7 +1567,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 <dt id="section-3-1.9">Relying Party:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.10">
-          <p id="section-3-1.10.1">An entity that relies on the Status List Token to validate the status of the Referenced Token. Also known as Verifier.<a href="#section-3-1.10.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.10.1">An entity that relies on the Referenced Token and fetches the corresponding Status List Token to validate the status of that Referenced Token. Also known as Verifier.<a href="#section-3-1.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-1.11">Status List:</dt>
@@ -1853,9 +1853,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d584085b4f89a8ef4304879f48b2b7e7b49077a793c3fd41a1f1d0e
-42c14d4f2ea5823a57c977e945631e3262e746d878e4269aadacb3628aa3c1c64201
-36a715460d
+b918000217015d5840981875595057121f014a99bc99f8605cc9683908f109b9144e
+a2757baa080ac2647ec96e01959fb45c2bf3a809c7bb1045052dbfa0702e761ff7a2
+db9b6d6473
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1879,12 +1879,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      85b4f89a8ef4304879f48b2b  #       "\x85´ø\x9a\x8eô0Hyô\x8b+"
-      7e7b49077a793c3fd41a1f1d  #       "~{I\x07zy&lt;?Ô\x1a\x1f\x1d"
-      0e42c14d4f2ea5823a57c977  #       "\x0eBÁMO.¥\x82:WÉw"
-      e945631e3262e746d878e426  #       "éEc\x1e2bçFØxä&amp;"
-      9aadacb3628aa3c1c6420136  #       "\x9a\xad¬³b\x8a£ÁÆB\x016"
-      a715460d                  #       "§\x15F\x0d"
+      981875595057121f014a99bc  #       "\x98\x18uYPW\x12\x1f\x01J\x99¼"
+      99f8605cc9683908f109b914  #       "\x99ø`\Éh9\x08ñ\x09¹\x14"
+      4ea2757baa080ac2647ec96e  #       "N¢u{ª\x08\x0aÂd~Én"
+      01959fb45c2bf3a809c7bb10  #       "\x01\x95\x9f´\+ó¨\x09Ç»\x10"
+      45052dbfa0702e761ff7a2db  #       "E\x05-¿\xa0p.v\x1f÷¢Û"
+      9b6d6473                  #       "\x9bmds"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2026,9 +2026,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158402aba4e260479034433b465d9e8b45bef5d2eda
-a9aa8b2f8cfdb7c14e9284f774c92eb53374cb7d0eae2e7a8757de05d0a884dba156
-cf45cda7ddf303a94c1101
+7374617475736c697374732f315840a8ce5221f07aa2bde3b38074939a224d128c8d
+bb82eac6f0f7c1590851860cc7db7e66a4f436f63aa77e5e51544e6455661b0adb74
+b31a7c45d96e4992ef48e8
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2053,12 +2053,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      2aba4e260479034433b465d9  #       "*ºN&amp;\x04y\x03D3´eÙ"
-      e8b45bef5d2edaa9aa8b2f8c  #       "è´[ï].Ú©ª\x8b/\x8c"
-      fdb7c14e9284f774c92eb533  #       "ý·ÁN\x92\x84÷tÉ.µ3"
-      74cb7d0eae2e7a8757de05d0  #       "tË}\x0e®.z\x87WÞ\x05Ð"
-      a884dba156cf45cda7ddf303  #       "¨\x84Û¡VÏEÍ§Ýó\x03"
-      a94c1101                  #       "©L\x11\x01"
+      a8ce5221f07aa2bde3b38074  #       "¨ÎR!ðz¢½ã³\x80t"
+      939a224d128c8dbb82eac6f0  #       "\x93\x9a"M\x12\x8c\x8d»\x82êÆð"
+      f7c1590851860cc7db7e66a4  #       "÷ÁY\x08Q\x86\x0cÇÛ~f¤"
+      f436f63aa77e5e51544e6455  #       "ô6ö:§~^QTNdU"
+      661b0adb74b31a7c45d96e49  #       "f\x1b\x0aÛt³\x1a|EÙnI"
+      92ef48e8                  #       "\x92ïHè"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2232,7 +2232,7 @@ fe8a1c4cafe
             <p id="section-7.1-2.6.1">0x0F - "APPLICATION_SPECIFIC_15" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.<a href="#section-7.1-2.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-7.1-3">The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2278,8 +2278,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.W8t8kO9Kt1S6Lhc-ISqQ6ZvViVhzykQbWrJf3j1SOB1a9-XTaDQm
-QHgdcoVviy4nQRY4MtnzbZGPyjfUJpdI8g
+nR0bCI6NDMyMDB9.mJX208c0g5OtFYG9OwcynaSAn1vC067fZq2Nd-Q7oNnVTW-ICC5W
+LaVE_u6dkCctRuZzPSzMpNt7BUSorcwe_w
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2309,11 +2309,11 @@ In the case of "application/statuslist+cwt", the response <span class="bcp14">MU
         <h3 id="name-validation-rules">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-validation-rules" class="section-name selfRef">Validation Rules</a>
         </h3>
-<p id="section-8.3-1">Upon receiving a Referenced Token, a Relying Party <span class="bcp14">MUST</span> first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for JWT or CWT precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-1">Upon receiving a Referenced Token, a Relying Party <span class="bcp14">MUST</span> first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <p id="section-8.3-2">If this validation is not successful, the Referenced Token <span class="bcp14">MUST</span> be rejected. If the validation was successful, the Relying Party <span class="bcp14">MUST</span> perform the following validation steps to evaluate the status of the reference token:<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-8.3-3">
 <li id="section-8.3-3.1">
-            <p id="section-8.3-3.1.1">Check for the existence of a <code>status</code> claim, check for the existence of a <code>status_list</code> claim within the <code>status</code> claim and validate that the content of <code>status_list</code> adheres to the rules defined in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> for JWTs and <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a> for CWTs. This step can be overruled if defined within the Referenced Token Format natively<a href="#section-8.3-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-3.1.1">Check for the existence of a <code>status</code> claim, check for the existence of a <code>status_list</code> claim within the <code>status</code> claim and validate that the content of <code>status_list</code> adheres to the rules defined in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> for JOSE-based Referenced Tokens and <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a> for COSE-based Referenced Tokens. Other formats of Referenced Tokens may define other encoding of the URI and index.<a href="#section-8.3-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-8.3-3.2">
             <p id="section-8.3-3.2.1">Resolve the Status List Token from the provided URI<a href="#section-8.3-3.2.1" class="pilcrow">¶</a></p>
@@ -2385,8 +2385,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.W8t8kO9Kt1S6Lhc-ISqQ6ZvViVhzykQbWrJf3j1SOB1a9-XTaDQm
-QHgdcoVviy4nQRY4MtnzbZGPyjfUJpdI8g
+nR0bCI6NDMyMDB9.mJX208c0g5OtFYG9OwcynaSAn1vC067fZq2Nd-Q7oNnVTW-ICC5W
+LaVE_u6dkCctRuZzPSzMpNt7BUSorcwe_w
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3543,31 +3543,34 @@ Torsten Lodderstedt<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-1">-07<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-B-2.1">
-          <p id="appendix-B-2.1.1">clarify privacy consideration around one time use reference tokens<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.1.1">editorial changes on terminology and Referenced Tokens<a href="#appendix-B-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.2">
-          <p id="appendix-B-2.2.1">explain the Status List Token size dependencies<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.2.1">clarify privacy consideration around one time use reference tokens<a href="#appendix-B-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.3">
-          <p id="appendix-B-2.3.1">explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.3.1">explain the Status List Token size dependencies<a href="#appendix-B-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.4">
-          <p id="appendix-B-2.4.1">add short-lived tokens in the Rationale<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.4.1">explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date<a href="#appendix-B-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.5">
-          <p id="appendix-B-2.5.1">rename Status Mechanism Methods registry to Status Mechanisms registry<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.5.1">add short-lived tokens in the Rationale<a href="#appendix-B-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.6">
-          <p id="appendix-B-2.6.1">changes as requested by IANA review<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.6.1">rename Status Mechanism Methods registry to Status Mechanisms registry<a href="#appendix-B-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.7">
-          <p id="appendix-B-2.7.1">emphasize that security and privacy considerations only apply to Status List and no other status mechanisms<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.7.1">changes as requested by IANA review<a href="#appendix-B-2.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.8">
-          <p id="appendix-B-2.8.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.8.1">emphasize that security and privacy considerations only apply to Status List and no other status mechanisms<a href="#appendix-B-2.8.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-B-2.9">
-          <p id="appendix-B-2.9.1">add prior art<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-B-2.9.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-B-2.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-2.10">
+          <p id="appendix-B-2.10.1">add prior art<a href="#appendix-B-2.10.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-B-3">-06<a href="#appendix-B-3" class="pilcrow">¶</a></p>
