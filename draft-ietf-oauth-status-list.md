@@ -873,6 +873,7 @@ A Status List Token in the CWT format should follow the security considerations 
 ## MAC based Deployments
 
 This specification allows for both cryptographic signatures and message authentication codes (MAC) to secure a Status List Token. Implementers are RECOMMENDED to match the mechanism used for the Status List Token with the one used for its Referenced Tokens. For (H)MAC based deployments, the security implications of a shared secret should be understood and should match the general security considerations of the deployment.
+There usually exists a stronger relationship between RP and Issuer for such deployments and they have the capability to securely distribute a shared secret ouf of band.
 
 ## Status List Caching
 
