@@ -659,9 +659,8 @@ This document creates a registry in [](#iana-status-types) that includes the mos
  - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
  - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
  - 0x02 - "SUSPENDED" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
- - 0x03 - "APPLICATION_SPECIFIC_3" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
- - 0x0E - "APPLICATION_SPECIFIC_14" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
- - 0x0F - "APPLICATION_SPECIFIC_15" - The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
+
+ The Status Type value 0x03 and Status Type values in the range 0x0B until 0x0F are permanently reserved as application specific. Meaning the processing of Status Types using these values is application specific. All other Status Type values are reserved for future registration.
 
 The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
 
@@ -1219,27 +1218,19 @@ Specification Document(s):
 
 <br/>
 
-* Status Type Name: APPLICATION_SPECIFIC_3
-* Status Type Description: The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
+* Status Type Name: APPLICATION_SPECIFIC
+* Status Type Description: The status of the Referenced Token is application specific.
 * Status Type value: `0x03`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
 
 <br/>
 
-* Status Type Name: APPLICATION_SPECIFIC_14
-* Status Type Description: The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
-* Status Type value: `0x0E`
+* Status Type Name: APPLICATION_SPECIFIC
+* Status Type Description: The status of the Referenced Token is application specific.
+* Status Type value: `0x0B-0xOF`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
-
-<br/>
-
-* Status Type Name: APPLICATION_SPECIFIC_15
-* Status Type Description: The status of the Referenced Token is implicitly given by the particular use case and the meaning of this value is known out-of-band.
-* Status Type value: `0x0F`
-* Change Controller: IETF
-* Specification Document(s): [](#referenced-token-jose) of this specification
 
 <br/>
 
@@ -1337,6 +1328,7 @@ for their valuable contributions, discussions and feedback to this specification
 * emphasize that security and privacy considerations only apply to Status List and no other status mechanisms
 * differentiate unlinkability between Issuer-RP and RP-RP
 * add prior art
+* updated language around application specific status type values and assigned ranges for application specific usage
 
 -06
 
