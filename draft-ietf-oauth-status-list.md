@@ -48,6 +48,7 @@ normative:
   RFC8949: RFC8949
   RFC9052: RFC9052
   RFC9110: RFC9110
+  RFC5280: RFC5280
   RFC9596: RFC9596
   IANA.MediaTypes:
     author:
@@ -807,6 +808,22 @@ The following is a non-normative example for media type `application/json`:
 }
 ~~~
 
+# X.509 Certificate Extensions
+
+## Extended Key Purpose Extension {#eku}
+
+{{RFC5280}} specifies the EKU X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.
+
+The following OID is defined for usage in the EKU extension
+
+```
+   id-kp  OBJECT IDENTIFIER  ::=
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) 3 }
+
+   id-kp-oauthStatusListSigning             OBJECT IDENTIFIER ::= { id-kp TBD }
+```
+
 # Further Examples
 
 ## Status List with 2-Bit Status Values in JSON format
@@ -1292,6 +1309,10 @@ To indicate that the content is an CWT-based Status List:
   * Author: Paul Bastian, paul.bastian@posteo.de
   * Change controller: IETF
   * Provisional registration? No
+
+## X.509 Certificate Extended Key Purpose OID Registration
+
+IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section [](#eku).
 
 --- back
 
