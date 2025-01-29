@@ -870,6 +870,10 @@ A Status List Token in the JWT format should follow the security considerations 
 
 A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
 
+## MAC-secured Status Lists
+
+This specification allows for both cryptographic signatures and message authentication codes (MAC) to secure a Status List Token. For (H)MAC based deployments, the security implications of a shared secret should be understood and should match the general security considerations of the deployment. There usually exists a stronger relationship between RP and Issuer for such deployments and they have the capability to securely distribute a shared secret ouf of band.
+
 ## Status List Caching
 
 When fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the `iat`, `exp` and `ttl` claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.
@@ -1329,6 +1333,7 @@ for their valuable contributions, discussions and feedback to this specification
 * differentiate unlinkability between Issuer-RP and RP-RP
 * add prior art
 * updated language around application specific status type values and assigned ranges for application specific usage
+* add short security considerations section for mac based deployments
 
 -06
 
