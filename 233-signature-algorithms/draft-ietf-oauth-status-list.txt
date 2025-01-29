@@ -107,7 +107,7 @@ Table of Contents
    11. Security Considerations
      11.1.  Correct decoding and parsing of the encoded Status List
      11.2.  Security Guidance for JWT and CWT
-     11.3.  MAC based Deployments
+     11.3.  MAC-secured Status Lists
      11.4.  Status List Caching
    12. Privacy Considerations
      12.1.  Observability of Issuers
@@ -614,9 +614,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58402610fcfdcd32fed8a02e1f49f518b9ec1a31773faab3d2adfb
-   c9a7b11381998bb8fc3003bc12842e32f7b4a865a7177d27e6fd1cf65e5e696cc112
-   a5934a60ef
+   b918000217015d5840d645f9fdf4e120168a2d980ac73179285781aa7b2083cab76a
+   1794d32f1b7990687bd32afacb59ade0ea143f3f3b2c137609ec05f90027e97a5d84
+   3694d69681
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -638,12 +638,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      2610fcfdcd32fed8a02e1f49  #       "&\x10üýÍ2þØ\xa0.\x1fI"
-      f518b9ec1a31773faab3d2ad  #       "õ\x18¹ì\x1a1w?ª³Ò\xad"
-      fbc9a7b11381998bb8fc3003  #       "ûÉ§±\x13\x81\x99\x8b¸ü0\x03"
-      bc12842e32f7b4a865a7177d  #       "¼\x12\x84.2÷´¨e§\x17}"
-      27e6fd1cf65e5e696cc112a5  #       "'æý\x1cö^^ilÁ\x12¥"
-      934a60ef                  #       "\x93J`ï"
+      d645f9fdf4e120168a2d980a  #       "ÖEùýôá \x16\x8a-\x98\x0a"
+      c73179285781aa7b2083cab7  #       "Ç1y(W\x81ª{ \x83Ê·"
+      6a1794d32f1b7990687bd32a  #       "j\x17\x94Ó/\x1by\x90h{Ó*"
+      facb59ade0ea143f3f3b2c13  #       "úËY\xadàê\x14??;,\x13"
+      7609ec05f90027e97a5d8436  #       "v\x09ì\x05ù\x00'éz]\x846"
+      94d69681                  #       "\x94Ö\x96\x81"
 
 6.  Referenced Token
 
@@ -788,37 +788,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158408fdecd65ff02fe10f68826765d9807e35cacc5
-   7612e546cc7ab355384c7ed4a9b7cb3adc32285cad75ad8e0367cd0840ede7281066
-   cb7843b72d2a6197fbe80f
+   7374617475736c697374732f315840cc8959af7f0e6171e5df206f7239b09c9cbe93
+   5c86c1b826986c21423bb363c3a089b35a80dd03fe56be060b6714aad77f1790c23a
+   45331788a18a30a9cb2b2e
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         8fdecd65ff02fe10f6882676  #       "\x8fÞÍeÿ\x02þ\x10ö\x88&v"
-         5d9807e35cacc57612e546cc  #       "]\x98\x07ã\¬Åv\x12åFÌ"
-         7ab355384c7ed4a9b7cb3adc  #       "z³U8L~Ô©·Ë:Ü"
-         32285cad75ad8e0367cd0840  #       "2(\\xadu\xad\x8e\x03gÍ\x08@"
-         ede7281066cb7843b72d2a61  #       "íç(\x10fËxC·-*a"
-         97fbe80f                  #       "\x97ûè\x0f"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      cc8959af7f0e6171e5df206f  #       "Ì\x89Y¯\x7f\x0eaqåß o"
+      7239b09c9cbe935c86c1b826  #       "r9°\x9c\x9c¾\x93\\x86Á¸&"
+      986c21423bb363c3a089b35a  #       "\x98l!B;³cÃ\xa0\x89³Z"
+      80dd03fe56be060b6714aad7  #       "\x80Ý\x03þV¾\x06\x0bg\x14ª×"
+      7f1790c23a45331788a18a30  #       "\x7f\x17\x90Â:E3\x17\x88¡\x8a0"
+      a9cb2b2e                  #       "©Ë+."
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1046,8 +1046,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Q-tlYVGWoqSF14HkJSgYmFE-KxAnnrUDWkjofeNgktlc9wbYGRPH
-   LrX-chBJlASs7RS1SauNIStbjx0V4EF2gg
+   nR0bCI6NDMyMDB9.2tCq6ewLpFnarC48wtAQoU8znubb7-LkUDUZdbadJMy9RZc381_U
+   BQPU46rqUfBmjjL2vkMtEMeiofQ085hKHw
 
 8.2.  Status List Response
 
@@ -1185,8 +1185,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Q-tlYVGWoqSF14HkJSgYmFE-KxAnnrUDWkjofeNgktlc9wbYGRPH
-   LrX-chBJlASs7RS1SauNIStbjx0V4EF2gg
+   nR0bCI6NDMyMDB9.2tCq6ewLpFnarC48wtAQoU8znubb7-LkUDUZdbadJMy9RZc381_U
+   BQPU46rqUfBmjjL2vkMtEMeiofQ085hKHw
 
 9.  Status List Aggregation
 
@@ -1338,7 +1338,7 @@ d2                              # tag(18)
    A Status List Token in the CWT format should follow the security
    considerations of [RFC8392].
 
-11.3.  MAC based Deployments
+11.3.  MAC-secured Status Lists
 
    This specification allows for both cryptographic signatures and
    message authentication codes (MAC) to secure a Status List Token.
