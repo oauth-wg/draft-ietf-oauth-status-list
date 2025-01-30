@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-28T00:16:48.082891+00:00",
+  "timestamp": "2025-01-30T00:16:14.298375+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -72,6 +72,11 @@
       "name": "editorial",
       "description": "",
       "color": "DAF986"
+    },
+    {
+      "name": "pending-close",
+      "description": null,
+      "color": "aaaaaa"
     }
   ],
   "issues": [
@@ -4054,10 +4059,12 @@
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "pending-close"
+      ],
       "body": "Re-check validation rules now that the unsigned option is gone and figure out if we can further simplify",
       "createdAt": "2024-11-29T07:50:26Z",
-      "updatedAt": "2024-11-29T07:50:26Z",
+      "updatedAt": "2025-01-29T07:25:11Z",
       "closedAt": null,
       "comments": []
     },
@@ -4338,12 +4345,22 @@
       "assignees": [
         "tplooker"
       ],
-      "labels": [],
+      "labels": [
+        "pending-close"
+      ],
       "body": "The text states:\r\n\r\n> 12.5.2. Colluding Status Issuer and Relying Party\r\n> \r\n> A Status Issuer and a Relying Party [Issuer ??] may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token, and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for\r\n\r\n>  Referenced Token formats that have similar unlinkability properties.\r\n\r\nThe last sentence is not implementable and should be removed. \r\n\r\nAs a Status Issuer is believed to be trusted, hence speaking of a \"colluding issuer\" would not be fair.  However, a Status Issuer may be coerced to perform some actions with the goal to reveal the identity of the user (the linkage of accesses is not the concern).\r\n\r\nChange into:\r\n\r\n> 12.5.2. Coerced Referenced Token Issuers and Relying Parties\r\n> \r\n> To reduce privacy risks for coerced Referenced Token Issuers and Relying Parties, it is RECOMMENDED that Referenced Tokens Issuers issue one-time-use Referenced Tokens, see Section 13.1. \r\n\r\n> For each issued Referenced Token, the Referenced Token Issuer needs to remember the tuple of uri and index inside the Referenced Token. \r\n> \r\n> If the Relying Party memorizes the Referenced Tokens that it receives, then some authority might coerce a Relying Party to reveal  the tuple of uri and index inside the Referenced Token and, then after, might also coerce the Issuer of these Referenced Tokens to reveal the identity of the End-Users. If the Relying Party does not memorize the content of a Referenced Token that it receives, then the risk can be avoided.\r\n> \r\n> After Verification, Relying Parties SHOULD NOT store the Referenced Token. It may be sufficient to store the result of the verification and any user data that is needed for the application.\r\n> \r\n> If a Relying Party does not store Reference Tokens, then the tuple of uri and index which is present inside the Referenced Token cannot be used anymore to reveal the identity of the user.\r\n> ",
       "createdAt": "2025-01-13T15:19:29Z",
-      "updatedAt": "2025-01-16T07:26:14Z",
+      "updatedAt": "2025-01-29T07:00:03Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi @Denisthemalice I'm unable to understand which sentence you are referring to is un-implementable, I don't see any normative guidance hence unable to understand what you are referring to.\n\nI dont follow your rationale for why \"collusion\" isn't an accurate description of what is occuring here. This privacy consideration is describing when the RP and status issuer elect to collude and the possible privacy harms of that.\n\nMarking the issue pending close without further clarification. ",
+          "createdAt": "2025-01-29T06:59:54Z",
+          "updatedAt": "2025-01-29T06:59:54Z"
+        }
+      ]
     },
     {
       "number": 219,
@@ -4382,10 +4399,12 @@
       "assignees": [
         "paulbastian"
       ],
-      "labels": [],
+      "labels": [
+        "pending-close"
+      ],
       "body": "On page 3, the text states:\r\n\r\n> If not further specified, the term Issuer may refer to an entity acting for all three roles.  \r\n\r\nThis sentence should be removed.\r\n\r\nThe role of the Issuer and of the Status Issuer should be kept separate in the whole document.\r\nA Status Issuer does not have access to the data that has been provided when the user was enrolled by the Issuer. \r\n\r\nAs a consequence, the following sentence should be reconsidered:\r\n\r\n>    If the roles of the Issuer and the Status Provider are performed by\r\n>    two different entities, this may give additional privacy assurances\r\n>    as the Issuer has no means to identify the Relying Party or its\r\n>    request.\r\n\r\nThese \"additional privacy assurances\" exist as soon as the role of the Issuer and of the Status Issuer are kept separate. \r\n",
       "createdAt": "2025-01-13T18:24:16Z",
-      "updatedAt": "2025-01-27T07:21:47Z",
+      "updatedAt": "2025-01-29T07:34:06Z",
       "closedAt": null,
       "comments": [
         {
@@ -4467,12 +4486,12 @@
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
-        "tplooker"
+        "c2bo"
       ],
       "labels": [],
       "body": "In the  OAuth Interims Call on 13. Jan 2025, feedback occured towards the pre-defined Status Types.\r\n\r\nCurrently we define only 3 Status Types:\r\n- 0x00 VALID\r\n- 0x01 INVALID\r\n- 0x02 SUSPENDED\r\n- the rest is undefined or application-specific\r\n\r\nThere was no objection towards 0x00 and 0x01 and people agreed that for security reasons its best to have those important ones fixed in the specification. Towards 0x02 (suspended) there were different opinions and suggestions. The summarized options are:\r\n\r\n## Option A\r\nKeep 0x02 (suspended) as pre-defined but add additional text in the draft that explains potential privacy issues of it (leaking more information than necessary when used with natural persons) but also explains potential use cases (suspended may signal different actions for the Relying Party and avoid deletion of an account or similar)\r\n\r\n## Option B\r\nRemove 0x02 (suspended) and have this as an application-specific, ecosystem-depended value, if needed. \r\n\r\n## Option C\r\nLeave 0x00 and 0x01 as pre-defined in the draft and add context-specific values and descriptions for the other ones in the Status List Token, see initial thoughts on this in #1 ",
       "createdAt": "2025-01-14T07:18:33Z",
-      "updatedAt": "2025-01-27T07:28:08Z",
+      "updatedAt": "2025-01-29T07:51:42Z",
       "closedAt": null,
       "comments": [
         {
@@ -4488,6 +4507,13 @@
           "body": "Editors Call:\n-  possible other status type for OUT_OF_DATE\n- make clear that all other values that are not APPLICATION_SPECIFIC are reserved for future use/registration",
           "createdAt": "2025-01-23T07:36:42Z",
           "updatedAt": "2025-01-23T07:36:42Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "todo: Propose Privacy Considerations for Suspended status",
+          "createdAt": "2025-01-29T07:51:41Z",
+          "updatedAt": "2025-01-29T07:51:41Z"
         }
       ]
     },
@@ -4749,7 +4775,7 @@
       "id": "I_kwDOJZ2aqs6m0nOA",
       "title": "Cryptographic signature algorithms",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/233",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4760,8 +4786,8 @@
       ],
       "body": "In section 1.3, the text sates:\n\n> 1.3.  Design Considerations\n> \n>    The decisions taken in this specification aim to achieve the following design goals:\n> \n>    *  the specification shall not specify key resolution or trust frameworks\n\nIf this sentence remains, interoperability cannot be supported. This bullet should be removed.\n\n\nIn section 5.1. the text states:\n\n> The following additional rules apply:\n> \n> 2.  The JWT MUST be secured using a cryptographic signature or MAC algorithm.  Relying Parties MUST reject JWTs with an invalid signature.\n \nAs MAC algorithms are using secret keys, it is not believed that MAC algorithms are suitable. Remove \"or MAC algorithm\".\n\nReplace with:\n\n> The following additional rules apply:\n> \n> 2.  The JWT MUST be secured using a cryptographic signature algorithm.  Relying Parties MUST determine which public key shall be used to verify the signature of the JWT.  Relying Parties MUST verify that this public key is valid (e.g., its PKC is not revoked, nor suspended). Relying Parties MUST reject JWTs with an invalid signature.\n\nIn section 5.2, the text states:\n\n> The following additional rules apply:\n> \n> 2.  The CWT MUST be secured using a cryptographic signature or MAC algorithm.  Relying Parties MUST reject CWTs with an invalid signature\n\nThe same kind of change already proposed for section 5.1 is proposed for section 5.2 :\n\n> The following additional rules apply:\n> \n> 2.  The CWT MUST be secured using a cryptographic signature algorithm. Relying Parties MUST determine which public key shall be used to verify the signature of the CWT.  Relying Parties MUST verify that this public key is valid (e.g., its PKC is not revoked, nor suspended). Relying Parties MUST reject CWTs with an invalid signature.\n> ",
       "createdAt": "2025-01-20T10:11:32Z",
-      "updatedAt": "2025-01-23T07:53:18Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-29T07:11:19Z",
+      "closedAt": "2025-01-29T07:11:19Z",
       "comments": [
         {
           "author": "c2bo",
@@ -4826,7 +4852,7 @@
       "labels": [],
       "body": "In section 8.3 (Validation Rules), the text states:\n\n> 8.3.  Validation Rules\n> \n> The text states:\n> \n>    If the validation was successful, the Relying Party MUST\n>    perform the following validation steps to evaluate the status of the\n>    reference token:\n> \n>    (...)\n> \n>    3.  Validate the Status List Token:\n> \n>        1.  Validate the Status List Token by following the rules defined\n>            in section 7.2 of [RFC7519] for JWTs and section 7.2 of\n>            [RFC8392] for CWTs\n> \n\nSection 7.2 from RFC 7519 does not say which key SHALL be used to verify the signature of the Status List Token. Section 8.3 from this document is also silent. In order to be able to interoperate, additional information needs to be added into the document. \n\nThe simplest (and the less secure approach) is to use the same private key to sign Referenced Tokens and Status List Tokens. This corresponds to the case where the Status issuer is the Issuer.\n\nA more secure approach is to use of different private keys to sign Referenced Tokens and Status List Tokens. This corresponds to the case where the Status issuer is an entity that has been authorized by the Issuer to issue Status List Tokens. This approach should be RECOMMENDED.\n\nIn RFC 5280, a CRL issuer can be nominated by a CA by the issuance of a PKC that contains the cRLSign bit set in the key usage extension (Section 4.2.1.3 from RFC 5280). Since the role of a CRL issuer and of a Status issuer are different, the same bit cannot be used.\n\nIn the key usage extension of a PKC, it becomes necessary to define an additional bit that can apply to a Status issuer nominated by an Issuer and to register that additional bit at IANA.\n\nAt the moment, in RFC 5280, the following Object Identifier is defined:\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15)}\nOID dot notation: 2.5.29.15\n\n```\n      id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8) }\n\n```\nThe next usable bit is (9).\n\nThe following line should be happened to this list:\n\n`           sLTSign                 (9)`\n\n\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15) sLTSign(9)}\n\nOID dot notation: 2.5.29.15.9\n\nWith the following explanation:\n\n> The sLTSign bit is asserted when the subject public key can be used for verifying signatures on Status List Tokens.\n\nA specific section dedicated to this extension should be added so that it can be referenced in the IANA registration template.\n\nAfter these explanations, we can now come back to a text change proposal for section 8.3 (Validation Rules).\n\nText change proposal for section 8.3.\n\n> 8.3.  Validation Rules\n> \n> The text states:\n> \n>    If the validation was successful, the Relying Party MUST\n>    perform the following validation steps to evaluate the status of the\n>    reference token:\n> \n>    (...)\n> \n>    3.  Identify the public key to be used to verify the signature \n>        of Status List Token\n> \n> If no iss claim, nor an x5c claim, is present in the Status List Token and unless a specific local rule applies, the Relying Party MUST verify the Status List Token using the same key that has been used to verify the Referenced Token. This approach is NOT RECOMMENDED.\n> \n> If the iss claim is present in the JOSE Header, the JWT Claims, or the COSE Header, a Relying Party can use this parameter to obtain a JSON Web Key to use in the verification process. It should be noticed that, according to RFC 7519, the processing of this claim is generally application specific. Unless the processing of this claim is made in a specific environment or context, this approach is not interoperable.\n> \n> If the \"x5c\" claim is present in the JWT Claims, a Relying Party SHOULD use this parameter to obtain a JSON Web Key to use in the verification process. The \"x5c\" claim is an array of strings that contains an x.509 certificate chain, in order from the root certificate authority to the signing certificate.\n> \n> The last certificate of the chain can be either the certificate of the Issuer or of the Status Issuer. In the later case, the key usage extension (defined in section 4.2.1.3 from RFC 5280) MUST be present and MUST contain an additional bit defined in section 9 of this document. \n> \n> Once it has been verified that the whole chain is valid and that no certificate of the chain has been revoked, the public key from the last certificate of the chain MUST be used to validate the Status List Token. This approach is RECOMMENDED.\n> \n> \n> 2.  Validate the Status List Token by following the rules defined in section 7.2 of [RFC7519] for JWTs and section 7.2 of [RFC8392] for CWTs\n> \n> 3.  Check for the existence of the required claims as defined in Section 5.1 and Section 5.2 depending on token type\n\nA text proposal for defining the sLTSign bit is provided in a subsequent issue.\n",
       "createdAt": "2025-01-20T10:19:16Z",
-      "updatedAt": "2025-01-22T13:20:27Z",
+      "updatedAt": "2025-01-29T07:47:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -4842,6 +4868,13 @@
           "body": "This is not the point.\n\nRFC 5280 provides all the information that is necessary to allow interoperability \nwhen CRLs are being used and when the Issuer is different from the CRL issuer.\n\nI would like this document to include all the information that is necessary to allow interoperability \nwhen TSLs are being used and when the Issuer is different from the Status issuer. \n",
           "createdAt": "2025-01-22T13:20:25Z",
           "updatedAt": "2025-01-22T13:20:25Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Is there any difference in this issue to #235 ?",
+          "createdAt": "2025-01-29T07:47:40Z",
+          "updatedAt": "2025-01-29T07:47:40Z"
         }
       ]
     },
@@ -4853,11 +4886,13 @@
       "state": "OPEN",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "tplooker"
+      ],
       "labels": [],
       "body": "It is proposed to add a new section 9.\n\n**Status List Token signature bit of a key usage extension in a PKC (sLTSign)**\n\nThe key usage extension of a PKC (Public Key Certificate) defines the purpose of the public key contained in the PKC  In RFC 5280, section 4.2.1.3, the text states that \"conforming CAs MUST include this extension in certificates that contain public keys that are used to validate digital signatures or other public key certificates or CRLs.  When present, conforming CAs SHOULD mark this extension as critical\". At the time RFC 5280 was written and published (2008), the concept of a Status Issuer did not existed.\n\nThis document states that conforming CAs MUST include this extension in certificates that contain public keys that are used to validate digital signatures or other public key certificates, CRLs or Status List Tokens.  When present, conforming CAs SHOULD mark this extension as critical.\n\nIn RFC 5280, the following Object Identifier has been defined:\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15)}. OID dot notation: 2.5.29.15\n\n ```\n     id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8) }\n\n```\nIn order to allow an Issuer to designate a Status Issuer, an additional bit in the key usage extension is needed. The next usable bit is (9).\n\nThe following line is happened to this list:\n\n           sLTSign                 (9)\n\nwith the following meaning:\n\nThe sLTSign bit is asserted when the subject public key can be used for verifying signatures on Status List Tokens.\n\nThe id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 } then becomes:\n\n ```\n     id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8),\n           sLTSign                 (9) }\n\n```\n\nUsing the text previously proposed, a section 14.8 (Key Usage extension for Status issuer certificates) should be added into section 14 (IANA Considerations).\n",
       "createdAt": "2025-01-20T10:29:16Z",
-      "updatedAt": "2025-01-23T08:03:09Z",
+      "updatedAt": "2025-01-29T07:55:04Z",
       "closedAt": null,
       "comments": [
         {
@@ -4866,6 +4901,13 @@
           "body": "Editors Call:\n- if we were to define something, we would define extended key usage identifiers and define an OID for that\n- continue to discuss",
           "createdAt": "2025-01-23T08:03:08Z",
           "updatedAt": "2025-01-23T08:03:08Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I have opened #246 where we are proposing to define an a new OID for use with EKU X.509 certificate extension because the KU extension you propose is really only suppose to be used to define basic cryptographic operations that the subject public key should be used for.",
+          "createdAt": "2025-01-29T07:55:03Z",
+          "updatedAt": "2025-01-29T07:55:03Z"
         }
       ]
     },
@@ -4912,9 +4954,17 @@
       "labels": [],
       "body": "The content of section 13.1 (Token Lifecycle) does not contain sufficient guidance.\n\nThe following guidance is rather vague:\n\n>    The lifetime of a Status List Token depends on the lifetime of its eferenced Tokens.\n\nSince the exp (expiration time) claim in a Status List Token is OPTIONAL, it is hard to understand how this sentence can be used.\n\nThe three paragraphs do not provide sufficient information\n\nProposed text replacement:\n\n> The Issuer and the Status issuer SHALL initially agree on the following set of parameters:\n> \n> -\tthe number of bits that indicates the status of each Referenced Token,\n> -\tthe number of entries in a Status List,\n> -\tthe number of Status Lists initially available,\n> -  one or more absolute uris where the Status List Tokens will be made available by the Status issuer,\n> -\ta relative uri associated with each Status List (that can also be used to reference a given Status List).\n> \n> The Issuer CAN communicate to the Status issuer the \"time to live\" which is the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved ('ttl' claim). If the \"time to live\" is communicated, then the Status issuer SHALL include it into each Status List Token.\n> \n> For every Status List, the Issuer SHALL communicate to the Status issuer the date when each Status List will cease to be updated by the Issuer. \n> For every Status List, the Issuer CAN communicate to the Status issuer the time at which the Status List Token will be considered expired. If the expiration time is communicated, then the Status issuer SHALL include the 'exp' claim into the Status List Token.\n> \n> At any time, the Status issuer and the Issuer may agree to use a new set of parameters. For every Status List already agreed, the agreed parameters remain applicable until the date when the Status List will cease to be updated by the Issuer is reached.\n> \n> The Status issuer SHOULD issue and distribute Status List Tokens before the first Referenced Token is issued by the Issuer.\n> \n> The status of Referenced Tokens with close expiration times should be grouped together into Status Lists so the corresponding Status List Tokens can be no longer issued and distributed once all the Referenced Tokens referenced in it have expired.\n> \n\nThe text continues with :\n\n>    Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties.  In this case, every re-issued\n>    Referenced Token MUST have a fresh Status List entry in order to  prevent this becoming possible source of correlation.\n\nThe concept of Referenced Tokens that would be regularly re-issued means a same content with a different validity period.\n\nThe following sentence looks odd:\n\n>    Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties.  \n\nSince the content of the referenced Token is nearly the same, linkability can easily be achieved and a re-issuance of Referenced Tokens will be unable \"to mitigate linkability of presentations to Relying Parties\". \n\nThese two sentences should be removed.\n\nThe text ends-up with :\n\n>    Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction.  In this case, every\n>    Referenced Token MUST have a dedicated Status List entry.  Revoking batch issued Referenced Tokens might reveal this correlation later\n>    on.\n> \n\nThe right wording is not \"batch issuance of Referenced Tokens\" but \"one-time-use Referenced Tokens\"\nThe second sentence has nothing to do with a consequence of the previous sentence as it applies to every Referenced Token, whether or not it is a one-time-use Referenced Token.\n\nThese three sentences should be removed.\n\nProposed text replacement:\n\n> One-time-use Referenced Tokens may also be issued in batches, such that Holders can use a different Referenced Token for every transaction.  In this case, the status of every one-time-use Referenced Token SHOULD be handled in a different Status list so that a global revocation of these one-time-use Referenced Tokens cannot be used to reveal a correlation later on.\n\n",
       "createdAt": "2025-01-20T10:50:00Z",
-      "updatedAt": "2025-01-20T10:50:00Z",
+      "updatedAt": "2025-01-29T07:46:26Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\n- agree to add implementation guidance what needs to be negotiated between Issuer and Status Issuer\n- don't agree with the other recommendations in this issue, i.e. no privacy gains",
+          "createdAt": "2025-01-29T07:46:25Z",
+          "updatedAt": "2025-01-29T07:46:25Z"
+        }
+      ]
     },
     {
       "number": 238,
@@ -4951,10 +5001,43 @@
       "assignees": [
         "tplooker"
       ],
-      "labels": [],
+      "labels": [
+        "pending-close"
+      ],
       "body": "Currently Token Status List  not useable for revocation x509 credentials which is critical in context of eIDAS where \n\na) each QEAA has to be signed with xqualified signature or seal based on x509 certificates\nb) credentials in x509 legally possible and covered in ETSI TS 119 472-1 [Token Status List ]\n(https://docbox.etsi.org/esi/Open/Latest_Drafts/ETSI%20DRAFT%20TS_119_472-1v0.0.6-public.pdf)\n\nto avoid that trust service providers have to provide 2 different approaches for revocation, so 1 for credential 1 for its signature x509 shall be covered by Token Status List Spec. As mentioned by @paulbastian  in brief discussion it could be possible to define an X.509 extension in ASN.1, analogous to the CRL Distribution Endpoint:\n\nTokenStatusListDisitrubionEndpoint ::= SEQUENCE {\n        uri                    [0]     RelativeDistinguishedName,\n        index                   [1]     INTEGER }\n\nFurthermore, minimal adjustments to the Validation Logic section would be necessary.",
       "createdAt": "2025-01-24T13:30:59Z",
-      "updatedAt": "2025-01-27T07:17:12Z",
+      "updatedAt": "2025-01-29T17:36:46Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Hi @steffenschwalm \n\nThanks for the suggestion.\n\nConsidering X.509 infrastructure is pre-existing, two approaches to revocation is where one is based on CRL for the certificates while the other based on this draft for the reference tokens is un-avoidable.\n\nSecondly many implementers that are using X.509 certificates as the basis of trust for digital credentials issued under eIDAS are looking to use pre-existing X.509 libraries and PKI without modification and this proposal would require all this infrastructure / code libraries be updated for little benefit.\n\nThirdly the basis of this draft from the beginning was about catering to reference tokens in the JOSE and COSE formats and not other data structures such as X.509 certificates. The draft is already quite significant (in terms of length) and our preference as editors is that if implementation interest emerges for this that we could define an extension specification later that fulfils this need. For those reasons we're going to mark this issue pending close as its out of scope for our draft.",
+          "createdAt": "2025-01-29T06:55:24Z",
+          "updatedAt": "2025-01-29T06:55:24Z"
+        },
+        {
+          "author": "steffenschwalm",
+          "authorAssociation": "NONE",
+          "body": "@tplooker thanks for your comment.\n\n1) it`s not unavoidable as shown, especially not if you use signatures for JWT\n2) that`s wrong as it would mean for QTSP to provide 2 different revocations for same subject:\n- QEAA require QES(QSeal acc. annex V eIDAS regulation\n- in case StatusToken List used for attestation itself your great approach would mean: 1 revocation for attestation, 1 for its signature and both have to be correlated, certified etc. acc. to ETSI TS 119 471, 472-1 etc. The only one who appreciate this are consultants and Conformity Assessment Bodies  but not the trust service providers who have to deal with it\n-\n3) This was birth defect from beginning especially after eIDAS 2.0 was published. Now is chance to change it\n\nRecommend that decision done by Working Group and not editors of which no one is QTSP who have to deal with your specification. Means if you close I`ll open again and request decision by WG",
+          "createdAt": "2025-01-29T17:36:18Z",
+          "updatedAt": "2025-01-29T17:36:46Z"
+        }
+      ]
+    },
+    {
+      "number": 247,
+      "id": "I_kwDOJZ2aqs6n9EpC",
+      "title": "About claim \"aggregation_uri\"",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/247",
+      "state": "OPEN",
+      "author": "Denisthemalice",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In #228, C2bo wrote:\n\n> The claim \"aggregation_uri\" is meant as a way to allow efficient caching for RPs, not for alternative URIs - it points to all relevant status lists for an issuer or specific referenced token type.\n\n\"aggregation_uri\" is defined in 4.1 as:\n\n> aggregation_uri: OPTIONAL.  JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. \n See section Section 9 for further detail.\n\nSection 9 (Status List Aggregation) states:\n\n> Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch \nall relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThese two descriptions are not aligned with section 4.1, as in section 9, the sentence mentions:\n> all relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThe case of the Issuer is not mentioned in section 4.1.\n\nThen comes some questions.\n\nHow can the Relying Party retrieve either: \n> a) all relevant Status Lists for a specific [type of] Referenced Token, or\n> b) all relevant Status Lists for an Issuer ?\n\nIn the first case, how long should \"all relevant Status Lists\" for a specific type of Referenced Token be accessible ? \nSame question for \"all relevant Status Lists\" for an Issuer.\n\nThere should be some additional text to warn the Issuers about some consequences when this claim is supported.\n\n\"All relevant Status Lists for an Issuer\" allows a Relying Party to know how many Referenced Tokens have been issued by an Issuer and are either valid, suspended or revoked at an instant of time. This reveals the number of entities that have been registered. Some Issuers  might not like to disclose that information and should be warned of the consequences before choosing to support this optional claim.\n\nFinally, I still have difficulties to understand the usefulness of this optional claim for a Referenced Token. \nCaching is pretty well supported by the ttl claim:\n\n> *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, \nthat the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. \n\n\n\n\n\n\n\n",
+      "createdAt": "2025-01-29T10:29:15Z",
+      "updatedAt": "2025-01-29T10:29:15Z",
       "closedAt": null,
       "comments": []
     }
@@ -16039,24 +16122,26 @@
       "id": "PR_kwDOJZ2aqs6JDmnw",
       "title": "security consideration for signature/mac",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/245",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #233 ",
       "createdAt": "2025-01-27T09:24:25Z",
-      "updatedAt": "2025-01-27T12:51:38Z",
+      "updatedAt": "2025-01-29T07:11:18Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "e653b05e83ffed532cef7516ffd0ced79001547d",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "233-signature-algorithms",
-      "headRefOid": "25b48136035afece9ed88e6000fc19fa40f3380d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "36d8bfea5d814622a7eee386e6138dfe9d60d2ac",
+      "closedAt": "2025-01-29T07:11:18Z",
+      "mergedAt": "2025-01-29T07:11:18Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "94a4d385748e075d06af8530b9f734c32e576b05"
+      },
       "comments": [],
       "reviews": [
         {
@@ -16098,8 +16183,120 @@
               "updatedAt": "2025-01-27T12:33:17Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Zyktk",
+          "commit": {
+            "abbreviatedOid": "25b4813"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-29T07:07:49Z",
+          "updatedAt": "2025-01-29T07:07:49Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nThis specification allows for both cryptographic signatures and message authentication codes (MAC) to secure a Status List Token. For (H)MAC based deployments, the security implications of a shared secret should be understood and should match the general security considerations of the deployment.\r\n```",
+              "createdAt": "2025-01-29T07:07:49Z",
+              "updatedAt": "2025-01-29T07:07:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZylAS",
+          "commit": {
+            "abbreviatedOid": "60e08a7"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-29T07:08:45Z",
+          "updatedAt": "2025-01-29T07:08:45Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\n## MAC-secured Status Lists\r\n```",
+              "createdAt": "2025-01-29T07:08:45Z",
+              "updatedAt": "2025-01-29T07:08:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Zylat",
+          "commit": {
+            "abbreviatedOid": "60e08a7"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-29T07:10:06Z",
+          "updatedAt": "2025-01-29T07:10:06Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nThis specification allows for both cryptographic signatures and message authentication codes (MAC) to secure a Status List Token. For (H)MAC based deployments, the security implications of a shared secret should be understood and should match the general security considerations of the deployment. There usually exists a stronger relationship between RP and Issuer for such deployments and they have the capability to securely distribute a shared secret ouf of band.\r\n```",
+              "createdAt": "2025-01-29T07:10:06Z",
+              "updatedAt": "2025-01-29T07:10:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6ZylrW",
+          "commit": {
+            "abbreviatedOid": "36d8bfe"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-29T07:10:49Z",
+          "updatedAt": "2025-01-29T07:10:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6Zylzd",
+          "commit": {
+            "abbreviatedOid": "36d8bfe"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-29T07:11:12Z",
+          "updatedAt": "2025-01-29T07:11:12Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 246,
+      "id": "PR_kwDOJZ2aqs6JUpbO",
+      "title": "Adds an EKU based X.509 certificate extension",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/246",
+      "state": "OPEN",
+      "author": "tplooker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As in the title.",
+      "createdAt": "2025-01-29T07:51:38Z",
+      "updatedAt": "2025-01-29T07:51:39Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "94a4d385748e075d06af8530b9f734c32e576b05",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "tl/eku-certificate-extension",
+      "headRefOid": "0b2d845ee4e763b4f9cea07039e2ef0807f120d7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
