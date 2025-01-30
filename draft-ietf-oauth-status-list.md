@@ -887,7 +887,7 @@ A Status List Token in the JWT format should follow the security considerations 
 
 A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
 
-## Key Resolution and Trust Management
+## Key Resolution and Trust Management {#key-management}
 
 This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made:
 
@@ -1006,11 +1006,11 @@ To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Iss
 
 A Status Issuer and a Relying Party Issuer may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
-## Third-Party Hosting {#third-party-hosting}
+## External Status Provider for Privacy {#third-party-hosting}
 
-If the roles of the Issuer and the Status Provider are performed by two different entities, this may give additional privacy assurances as the Issuer has no means to identify the Relying Party or its request.
+If the roles of the Status Issuer and the Status Provider are performed by different entities, this may give additional privacy assurances as the Issuer has no means to identify the Relying Party or its request.
 
-Third-Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs.
+Third-Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs, while still ensuring authenticity and integrity of Token Status List, as it is signed by the Status Issuer.
 
 ## Historical Resolution {#privacy-historical}
 
@@ -1044,6 +1044,14 @@ The storage and transmission size of the Status Issuer's Status List Tokens depe
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
 The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
+
+## External Status Issuer
+
+If the roles of the Issuer of the Referenced Token and the Status Issuer are performed by different entities, they must align on the key and trust management as described in [](#key-management). This scenario may be necessary or useful if a use case requires that revocations of Referenced Tokens are managed by a different entities, e.g. for regulatory or privacy reasons.
+
+## External Status Provider for Scalability
+
+If the roles of the Status Issuer and the Status Provider are performed by different entities, this may allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs. At the same time the authenticity and integrity of Token Status List is still guaranteed, as it is signed by the Status Issuer.
 
 ## Status List Formats
 
@@ -1371,6 +1379,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* add considerations about External Status Issuer or Status Provider
 * add recommendations for Key Resolution and Trust Management
 * editorial changes on terminology and Referenced Tokens
 * clarify privacy consideration around one time use reference tokens
