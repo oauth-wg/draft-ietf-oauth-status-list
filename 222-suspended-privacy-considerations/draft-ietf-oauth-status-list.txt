@@ -119,7 +119,7 @@ Table of Contents
        12.5.2.  Colluding Status Issuer and Relying Party
      12.6.  Third-Party Hosting
      12.7.  Historical Resolution
-     12.8.  Other Status Types
+     12.8.  Status Types
    13. Implementation Considerations
      13.1.  Referenced Token Lifecycle
      13.2.  Default Values and Double Allocation
@@ -615,9 +615,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58400926354c49b182a2e203034c50e296030e1177e8d8380be014
-   bfa1c696469b2fa456e2f191ab6ed44fccf050f074e52013e2d2877fd970d8ad4b73
-   8db01f942e
+   b918000217015d58402135486b1e9dead0fe641f61474c950d9a727b9cb86b09ec7a
+   f48cd0b1a882b3d70ae8c2a195e42ef0e26bec58f23c0b711ea6aaed8fa7c8b61c9d
+   27fad1e8b0
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -639,12 +639,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      0926354c49b182a2e203034c  #       "\x09&5LI±\x82¢â\x03\x03L"
-      50e296030e1177e8d8380be0  #       "Pâ\x96\x03\x0e\x11wèØ8\x0bà"
-      14bfa1c696469b2fa456e2f1  #       "\x14¿¡Æ\x96F\x9b/¤Vâñ"
-      91ab6ed44fccf050f074e520  #       "\x91«nÔOÌðPðtå "
-      13e2d2877fd970d8ad4b738d  #       "\x13âÒ\x87\x7fÙpØ\xadKs\x8d"
-      b01f942e                  #       "°\x1f\x94."
+      2135486b1e9dead0fe641f61  #       "!5Hk\x1e\x9dêÐþd\x1fa"
+      474c950d9a727b9cb86b09ec  #       "GL\x95\x0d\x9ar{\x9c¸k\x09ì"
+      7af48cd0b1a882b3d70ae8c2  #       "zô\x8cÐ±¨\x82³×\x0aèÂ"
+      a195e42ef0e26bec58f23c0b  #       "¡\x95ä.ðâkìXò<\x0b"
+      711ea6aaed8fa7c8b61c9d27  #       "q\x1e¦ªí\x8f§È¶\x1c\x9d'"
+      fad1e8b0                  #       "úÑè°"
 
 6.  Referenced Token
 
@@ -789,9 +789,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584080dd28f6190db96a769b6a258a6273e7e1b68d
-   5cac03b144bef26e2e8cbc69a692ee32a74123b71d4f016be20a02a145a7144ca4c6
-   3b9c2b33c56117f1cd32c4
+   7374617475736c697374732f315840caf2aa36cc1f2e2bda113cadb8e3f001c034b2
+   21146b4146553dd838517f82152ad36cba9b82b22411e05f682af0ce5738fc47955c
+   0e4ca2696837273bc0f91c
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -814,12 +814,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         80dd28f6190db96a769b6a25  #       "\x80Ý(ö\x19\x0d¹jv\x9bj%"
-         8a6273e7e1b68d5cac03b144  #       "\x8absçá¶\x8d\¬\x03±D"
-         bef26e2e8cbc69a692ee32a7  #       "¾òn.\x8c¼i¦\x92î2§"
-         4123b71d4f016be20a02a145  #       "A#·\x1dO\x01kâ\x0a\x02¡E"
-         a7144ca4c63b9c2b33c56117  #       "§\x14L¤Æ;\x9c+3Åa\x17"
-         f1cd32c4                  #       "ñÍ2Ä"
+         caf2aa36cc1f2e2bda113cad  #       "Êòª6Ì\x1f.+Ú\x11<\xad"
+         b8e3f001c034b221146b4146  #       "¸ãð\x01À4²!\x14kAF"
+         553dd838517f82152ad36cba  #       "U=Ø8Q\x7f\x82\x15*Ólº"
+         9b82b22411e05f682af0ce57  #       "\x9b\x82²$\x11à_h*ðÎW"
+         38fc47955c0e4ca269683727  #       "8üG\x95\\x0eL¢ih7'"
+         3bc0f91c                  #       ";Àù\x1c"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1004,6 +1004,8 @@ d2                              # tag(18)
    (Expiration Time) but also has a status of 0x00 ("VALID"), the token
    is considered expired.
 
+   See Section 12.8 for privacy considerations on status types.
+
 8.  Verification and Processing
 
 8.1.  Status List Request
@@ -1047,8 +1049,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.eBXUtWOBswXG3P5Ou9vDAUU2CSRQEmTE3xSFHWnDYLfqCTDHCf4s
-   0hPZ8_LxZHZWnti5TKBE5aphkf4sA99WLQ
+   nR0bCI6NDMyMDB9.hY5OVb-F79wU62js971HSDBQ7PMqKi6G7vtmEOyOEDqaZTKFkQ5F
+   _HwPyN3hpMWd4ocn_MXQksNAD0x5fbOPFQ
 
 8.2.  Status List Response
 
@@ -1186,8 +1188,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.eBXUtWOBswXG3P5Ou9vDAUU2CSRQEmTE3xSFHWnDYLfqCTDHCf4s
-   0hPZ8_LxZHZWnti5TKBE5aphkf4sA99WLQ
+   nR0bCI6NDMyMDB9.hY5OVb-F79wU62js971HSDBQ7PMqKi6G7vtmEOyOEDqaZTKFkQ5F
+   _HwPyN3hpMWd4ocn_MXQksNAD0x5fbOPFQ
 
 9.  Status List Aggregation
 
@@ -1540,7 +1542,7 @@ d2                              # tag(18)
    reasons to do so and after carefully considering the privacy
    implications.
 
-12.8.  Other Status Types
+12.8.  Status Types
 
    As previously explained, there is the danger of observability of
    Relying Parties and Outsiders.  That means that any Status Type that
@@ -1565,7 +1567,8 @@ d2                              # tag(18)
 
    Ecosystems that want to use other Status Types than "VALID" and
    "INVALID" should consider the possible leakage of data and profiling
-   possibilities before doing so.
+   possibilities before doing so and evaluate if revocation and re-
+   issuance might a better fit for their use-case.
 
 13.  Implementation Considerations
 
