@@ -1342,6 +1342,7 @@ for their valuable contributions, discussions and feedback to this specification
 * add prior art
 * updated language around application specific status type values and assigned ranges for application specific usage
 * add short security considerations section for mac based deployments
+* privacy considerations for other status types like suspended
 
 -06
 
