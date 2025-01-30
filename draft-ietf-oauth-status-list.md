@@ -870,6 +870,38 @@ A Status List Token in the JWT format should follow the security considerations 
 
 A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
 
+## Key Resolution and Trust Management
+
+This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made:
+
+If the Issuer of the Referenced Token is the same entity as the Status Issuer, then the same key that is embedded into the Referenced Token may be used for the Status List Token. In this case the Status List Token may use:
+- the same `x5c` value or an `x5t`, `x5t#S256` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
+- the same `x5chain` value or an `x5t` or `kid` parameter referencing to the same key as used in the Referenced Token for COSE.
+
+Alternatively, the Status Issuer may use the same web-based key resolution that is used for the Referenced Token. In this case the Status List Token may use:
+- an `x5u`, `jwks`, `jwks_uri` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
+- an `x5u` or `kid` parameter referencing to the same key as used in the Referenced Token for COSE.
+
+If the Issuer of the Referenced Token is a different entity than the Status Issuer, then the keys used for the Status List Token may be cryptographically linked, e.g. by an Certificate Authority through an x.509 PKI. The certificate of the Issuer for the Referenced Token and the Status Issuer should be issued by the same Certificate Authority and the Status Issuer's certificate should utilize [extended key usage](#eku).
+
+~~~ ascii-art
+┌───────────────────────┐   
+│ Certificate Authority │   
+└─┬─────────────────────┘   
+  │ authorize               
+  │  ┌────────┐             
+  ├─►│ Issuer │             
+  │  └─┬──────┘             
+  │    ▼ update status      
+  │  ┌───────────────┐      
+  └─►│ Status Issuer │      
+     └─┬─────────────┘      
+       ▼ provide Status List
+     ┌─────────────────┐    
+     │ Status Provider │    
+     └─────────────────┘    
+~~~
+
 ## Status List Caching
 
 When fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the `iat`, `exp` and `ttl` claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.
@@ -1318,6 +1350,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* add recommendations for Key Resolution and Trust Management
 * editorial changes on terminology and Referenced Tokens
 * clarify privacy consideration around one time use reference tokens
 * explain the Status List Token size dependencies
