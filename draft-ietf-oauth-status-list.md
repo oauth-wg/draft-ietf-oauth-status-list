@@ -1047,7 +1047,12 @@ The Status List Issuer may chunk its Referenced Tokens into multiple Status List
 
 ## External Status Issuer
 
-If the roles of the Issuer of the Referenced Token and the Status Issuer are performed by different entities, they must align on the key and trust management as described in [](#key-management). This scenario may be necessary or useful if a use case requires that revocations of Referenced Tokens are managed by a different entities, e.g. for regulatory or privacy reasons.
+If the roles of the Issuer of the Referenced Token and the Status Issuer are performed by different entities, this may allow for use case that require revocations of Referenced Tokens to be managed by a different entities, e.g. for regulatory or privacy reasons. In this scenario both parties must align on:
+
+- the key and trust management as described in [](#key-management)
+- parameters for the Status List
+  - number of `bits` for the Status Type as described in [](#status-list)
+  - update cycle of the Issuer used for `ttl` in the Status List Token as described in [](#status-list-token)
 
 ## External Status Provider for Scalability
 
