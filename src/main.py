@@ -54,7 +54,7 @@ def exampleStatusList2Bit() -> StatusList:
 
 
 def exampleStatusList1BitLong() -> StatusList:
-    status_list = StatusList(long_size, 2)
+    status_list = StatusList(long_size, 1)
     status_list.set(0, 1)
     status_list.set(1993, 1)
     status_list.set(25460, 1)
