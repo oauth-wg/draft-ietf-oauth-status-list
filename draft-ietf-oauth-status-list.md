@@ -973,6 +973,14 @@ By default, this specification only supports providing Status List information f
 
 There are strong privacy concerns that have to be carefully taken into consideration when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
 
+## Other Status Types
+
+As previously explained, there is the danger of observability of Relying Parties and Outsiders. That means that any Status Type that transports special information about a Token can leak information to other parties. This documents defines one additional Status Type with "SUSPENDED" that conveys such additional information. Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, but the token itself is still valid.
+
+A concrete example would be a driver's license, where the digital driver's license might still be useful to prove other information about its holder, but suspended could signal that it should not be considered valid in the scope of being allowed to drive a car. This case could be solved by either introducing a special status type, or by revoking the Token and re-issuing with changed attributes. For such a case, the status type suspended might be dangerous as it would leak the information of a suspended driver's license even if the driver's license is used as a mean of identification and not in the context of driving a car. This could also allow for the unwanted collection of statistical data on the status of driver's licenses.
+
+Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so.
+
 # Implementation Considerations {#implementation}
 
 ## Referenced Token Lifecycle {#implementation-lifecycle}
