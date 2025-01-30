@@ -119,13 +119,15 @@ Table of Contents
      13.5.  Unlinkability
        13.5.1.  Colluding Relying Parties
        13.5.2.  Colluding Status Issuer and Relying Party
-     13.6.  Third-Party Hosting
+     13.6.  External Status Provider for Privacy
      13.7.  Historical Resolution
    14. Implementation Considerations
      14.1.  Referenced Token Lifecycle
      14.2.  Default Values and Double Allocation
      14.3.  Status List Size
-     14.4.  Status List Formats
+     14.4.  External Status Issuer
+     14.5.  External Status Provider for Scalability
+     14.6.  Status List Formats
    15. IANA Considerations
      15.1.  JSON Web Token Claims Registration
        15.1.1.  Registry Contents
@@ -617,9 +619,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58400c2208ff6feb661607e5cfb56770c5178701d791b366d80fb3
-   688565089bab954bbe742715b1fffce99c9fce6e18d9ba6e55cc9f62f48bc7fc1a75
-   ba1864f0db
+   b918000217015d584029a54ab3db0740e5b6eaa55b346f5df6cca6ad601a61299be2
+   b56b4529ad21df4455b193f60726a8297c2e2861ba28e80993be5f49fd950d88a386
+   1b6a599c9f
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -641,12 +643,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      0c2208ff6feb661607e5cfb5  #       "\x0c"\x08ÿoëf\x16\x07åÏµ"
-      6770c5178701d791b366d80f  #       "gpÅ\x17\x87\x01×\x91³fØ\x0f"
-      b3688565089bab954bbe7427  #       "³h\x85e\x08\x9b«\x95K¾t'"
-      15b1fffce99c9fce6e18d9ba  #       "\x15±ÿüé\x9c\x9fÎn\x18Ùº"
-      6e55cc9f62f48bc7fc1a75ba  #       "nUÌ\x9fbô\x8bÇü\x1auº"
-      1864f0db                  #       "\x18dðÛ"
+      29a54ab3db0740e5b6eaa55b  #       ")¥J³Û\x07@å¶ê¥["
+      346f5df6cca6ad601a61299b  #       "4o]öÌ¦\xad`\x1aa)\x9b"
+      e2b56b4529ad21df4455b193  #       "âµkE)\xad!ßDU±\x93"
+      f60726a8297c2e2861ba28e8  #       "ö\x07&¨)|.(aº(è"
+      0993be5f49fd950d88a3861b  #       "\x09\x93¾_Iý\x95\x0d\x88£\x86\x1b"
+      6a599c9f                  #       "jY\x9c\x9f"
 
 6.  Referenced Token
 
@@ -791,37 +793,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584094ba0948b903c2032f5243c7813a8d7f8e4177
-   950e220dc5e2fa8f769dcc67a797f5ca01a6a1b20c8ddbb14e5b937189443bd71080
-   0f794489c426b1f11fd65e
+   7374617475736c697374732f315840fbd02607dc1495b1a0f9dd5bd561ff0116725d
+   fee43ae22d9e02aed23a67fc61bc84fea4dff34d284603875a60cdea7b99c5d2b407
+   d528cfbcecf5e06d1f8d1c
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      94ba0948b903c2032f5243c7  #       "\x94º\x09H¹\x03Â\x03/RCÇ"
-      813a8d7f8e4177950e220dc5  #       "\x81:\x8d\x7f\x8eAw\x95\x0e"\x0dÅ"
-      e2fa8f769dcc67a797f5ca01  #       "âú\x8fv\x9dÌg§\x97õÊ\x01"
-      a6a1b20c8ddbb14e5b937189  #       "¦¡²\x0c\x8dÛ±N[\x93q\x89"
-      443bd710800f794489c426b1  #       "D;×\x10\x80\x0fyD\x89Ä&±"
-      f11fd65e                  #       "ñ\x1fÖ^"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         fbd02607dc1495b1a0f9dd5b  #       "ûÐ&\x07Ü\x14\x95±\xa0ùÝ["
+         d561ff0116725dfee43ae22d  #       "Õaÿ\x01\x16r]þä:â-"
+         9e02aed23a67fc61bc84fea4  #       "\x9e\x02®Ò:güa¼\x84þ¤"
+         dff34d284603875a60cdea7b  #       "ßóM(F\x03\x87Z`Íê{"
+         99c5d2b407d528cfbcecf5e0  #       "\x99ÅÒ´\x07Õ(Ï¼ìõà"
+         6d1f8d1c                  #       "m\x1f\x8d\x1c"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1049,8 +1051,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.dnsGr2hBkOlCg6e-sUCeUH2ImGfYrUscj8GIO7B-HKZSQiMG-OzN
-   MLOZbe8yX8K2aCSRWM3-SxHBjRYkvEifbw
+   nR0bCI6NDMyMDB9.CUUX1t8Dh9PyOsKBpQs0pOvh-GSseKFrwXN3EDU8ylAAyNPToelp
+   A_UlYXETPljxL1jwJpYUc_3WUYLeqLjzDw
 
 8.2.  Status List Response
 
@@ -1188,8 +1190,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.dnsGr2hBkOlCg6e-sUCeUH2ImGfYrUscj8GIO7B-HKZSQiMG-OzN
-   MLOZbe8yX8K2aCSRWM3-SxHBjRYkvEifbw
+   nR0bCI6NDMyMDB9.CUUX1t8Dh9PyOsKBpQs0pOvh-GSseKFrwXN3EDU8ylAAyNPToelp
+   A_UlYXETPljxL1jwJpYUc_3WUYLeqLjzDw
 
 9.  Status List Aggregation
 
@@ -1564,16 +1566,17 @@ d2                              # tag(18)
    Status Lists for Referenced Token formats that have similar
    unlinkability properties.
 
-13.6.  Third-Party Hosting
+13.6.  External Status Provider for Privacy
 
-   If the roles of the Issuer and the Status Provider are performed by
-   two different entities, this may give additional privacy assurances
-   as the Issuer has no means to identify the Relying Party or its
-   request.
+   If the roles of the Status Issuer and the Status Provider are
+   performed by different entities, this may give additional privacy
+   assurances as the Issuer has no means to identify the Relying Party
+   or its request.
 
    Third-Party hosting may also allow for greater scalability, as the
    Status List Tokens may be served by operators with greater resources,
-   like CDNs.
+   like CDNs, while still ensuring authenticity and integrity of Token
+   Status List, as it is signed by the Status Issuer.
 
 13.7.  Historical Resolution
 
@@ -1653,7 +1656,25 @@ d2                              # tag(18)
    however the Status Issuer must be aware of possible privacy risks due
    to correlations.
 
-14.4.  Status List Formats
+14.4.  External Status Issuer
+
+   If the roles of the Issuer of the Referenced Token and the Status
+   Issuer are performed by different entities, they must align on the
+   key and trust management as described in Section 12.3.  This scenario
+   may be necessary or useful if a use case requires that revocations of
+   Referenced Tokens are managed by a different entities, e.g. for
+   regulatory or privacy reasons.
+
+14.5.  External Status Provider for Scalability
+
+   If the roles of the Status Issuer and the Status Provider are
+   performed by different entities, this may allow for greater
+   scalability, as the Status List Tokens may be served by operators
+   with greater resources, like CDNs.  At the same time the authenticity
+   and integrity of Token Status List is still guaranteed, as it is
+   signed by the Status Issuer.
+
+14.6.  Status List Formats
 
    This specification defines 2 different token formats of the Status
    List:
@@ -2303,6 +2324,8 @@ Acknowledgments
 Document History
 
    -07
+
+   *  add considerations about External Status Issuer or Status Provider
 
    *  add recommendations for Key Resolution and Trust Management
 
