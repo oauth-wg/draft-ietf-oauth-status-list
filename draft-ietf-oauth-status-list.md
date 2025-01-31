@@ -899,6 +899,19 @@ Alternatively, the Status Issuer may use the same web-based key resolution that 
 - an `x5u`, `jwks`, `jwks_uri` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
 - an `x5u` or `kid` parameter referencing to the same key as used in the Referenced Token for COSE.
 
+~~~ ascii-art
+┌────────┐  host keys  ┌──────────────────────┐
+│ Issuer ├────────┬───►│ .well-known metadata │
+└─┬──────┘        │    └──────────────────────┘
+  ▼ update status │                           
+┌───────────────┐ │                           
+│ Status Issuer ├─┘                           
+└─┬─────────────┘                             
+  ▼ provide Status List                       
+┌─────────────────┐                           
+│ Status Provider │                           
+└─────────────────┘                           
+~~~
 If the Issuer of the Referenced Token is a different entity than the Status Issuer, then the keys used for the Status List Token may be cryptographically linked, e.g. by an Certificate Authority through an x.509 PKI. The certificate of the Issuer for the Referenced Token and the Status Issuer should be issued by the same Certificate Authority and the Status Issuer's certificate should utilize [extended key usage](#eku).
 
 ~~~ ascii-art
