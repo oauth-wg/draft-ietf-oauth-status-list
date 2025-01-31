@@ -1399,6 +1399,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 * add considerations about External Status Issuer or Status Provider
 * add recommendations for Key Resolution and Trust Management
+* add extended key usage extensions for x509
 * editorial changes on terminology and Referenced Tokens
 * clarify privacy consideration around one time use reference tokens
 * explain the Status List Token size dependencies
