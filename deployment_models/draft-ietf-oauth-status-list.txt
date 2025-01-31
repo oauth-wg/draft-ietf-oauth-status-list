@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Informational                                P. Bastian
-Expires: 3 August 2025                                                  
+Expires: 4 August 2025                                                  
                                                               C. Bormann
                                                                   SPRIND
-                                                         30 January 2025
+                                                         31 January 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 August 2025.
+   This Internet-Draft will expire on 4 August 2025.
 
 Copyright Notice
 
@@ -619,9 +619,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d58401fb8c6d8e68481035cbe4881594f2ed0ccc7c0dde0c602b9ef
-   a55835efdda9729cfe3db17e375108de11b0d142c740952b7308cc8129393bd631e5
-   f15465c30b
+   b918000217015d584025daa2eff59d7b2289859bfcf3d173c2ec88f2506dc13386e0
+   57a269ca10526430fe4554edad81d809969c8a6f0d007cc182186249b834b29e6762
+   a9bd438cf0
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -643,12 +643,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      1fb8c6d8e68481035cbe4881  #       "\x1f¸ÆØæ\x84\x81\x03\¾H\x81"
-      594f2ed0ccc7c0dde0c602b9  #       "YO.ÐÌÇÀÝàÆ\x02¹"
-      efa55835efdda9729cfe3db1  #       "ï¥X5ïÝ©r\x9cþ=±"
-      7e375108de11b0d142c74095  #       "~7Q\x08Þ\x11°ÑBÇ@\x95"
-      2b7308cc8129393bd631e5f1  #       "+s\x08Ì\x81)9;Ö1åñ"
-      5465c30b                  #       "TeÃ\x0b"
+      25daa2eff59d7b2289859bfc  #       "%Ú¢ïõ\x9d{"\x89\x85\x9bü"
+      f3d173c2ec88f2506dc13386  #       "óÑsÂì\x88òPmÁ3\x86"
+      e057a269ca10526430fe4554  #       "àW¢iÊ\x10Rd0þET"
+      edad81d809969c8a6f0d007c  #       "í\xad\x81Ø\x09\x96\x9c\x8ao\x0d\x00|"
+      c182186249b834b29e6762a9  #       "Á\x82\x18bI¸4²\x9egb©"
+      bd438cf0                  #       "½C\x8cð"
 
 6.  Referenced Token
 
@@ -793,37 +793,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584022d30225d60fdc0fc00564fff83cb6334354cf
-   a1802ac3b41d90a077059585da8965116938a8a56a000e958d17a2ff3b5c544283ad
-   5ff86070330a7f8d3a2ac0
+   7374617475736c697374732f315840f3c14d11a9876f52dff80f2d545433444bb67e
+   5c97011476d4cf5ef33b1252638d9946fe538439b5cc98536577844ee7f96488b0fc
+   34a5660891d7314db88fc7
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      22d30225d60fdc0fc00564ff  #       ""Ó\x02%Ö\x0fÜ\x0fÀ\x05dÿ"
-      f83cb6334354cfa1802ac3b4  #       "ø<¶3CTÏ¡\x80*Ã´"
-      1d90a077059585da89651169  #       "\x1d\x90\xa0w\x05\x95\x85Ú\x89e\x11i"
-      38a8a56a000e958d17a2ff3b  #       "8¨¥j\x00\x0e\x95\x8d\x17¢ÿ;"
-      5c544283ad5ff86070330a7f  #       "\TB\x83\xad_ø`p3\x0a\x7f"
-      8d3a2ac0                  #       "\x8d:*À"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         f3c14d11a9876f52dff80f2d  #       "óÁM\x11©\x87oRßø\x0f-"
+         545433444bb67e5c97011476  #       "TT3DK¶~\\x97\x01\x14v"
+         d4cf5ef33b1252638d9946fe  #       "ÔÏ^ó;\x12Rc\x8d\x99Fþ"
+         538439b5cc98536577844ee7  #       "S\x849µÌ\x98Sew\x84Nç"
+         f96488b0fc34a5660891d731  #       "ùd\x88°ü4¥f\x08\x91×1"
+         4db88fc7                  #       "M¸\x8fÇ"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1051,8 +1051,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.W6ycYdp0CWbcDTIPQhsBkmplacGMB1LqqoNY4WNjM-KBPoFPa3bo
-   _8F01jsygWo-UYwz9IkixORjcOUNnzkI8g
+   nR0bCI6NDMyMDB9.dXvN3Au6gBZr-dvKnTvORwfK0YmI8OsZkED2AeGqa6Iu2R6PSpOi
+   W168qrlbroi2KLN1BLuNg7rcKVidffQtSA
 
 8.2.  Status List Response
 
@@ -1190,8 +1190,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.W6ycYdp0CWbcDTIPQhsBkmplacGMB1LqqoNY4WNjM-KBPoFPa3bo
-   _8F01jsygWo-UYwz9IkixORjcOUNnzkI8g
+   nR0bCI6NDMyMDB9.dXvN3Au6gBZr-dvKnTvORwfK0YmI8OsZkED2AeGqa6Iu2R6PSpOi
+   W168qrlbroi2KLN1BLuNg7rcKVidffQtSA
 
 9.  Status List Aggregation
 
@@ -1378,9 +1378,22 @@ d2                              # tag(18)
    Alternatively, the Status Issuer may use the same web-based key
    resolution that is used for the Referenced Token.  In this case the
    Status List Token may use: - an x5u, jwks, jwks_uri or kid parameter
-   referencing to the same key as used in the Referenced Token for JOSE.
-   - an x5u or kid parameter referencing to the same key as used in the
+   referencing to a key using the same web-based resolution as used in
+   the Referenced Token for JOSE. - an x5u or kid parameter referencing
+   to a key using the same web-based resolution as used in the
    Referenced Token for COSE.
+
+   ┌────────┐  host keys  ┌──────────────────────┐
+   │ Issuer ├────────┬───►│ .well-known metadata │
+   └─┬──────┘        │    └──────────────────────┘
+     ▼ update status │
+   ┌───────────────┐ │
+   │ Status Issuer ├─┘
+   └─┬─────────────┘
+     ▼ provide Status List
+   ┌─────────────────┐
+   │ Status Provider │
+   └─────────────────┘
 
    If the Issuer of the Referenced Token is a different entity than the
    Status Issuer, then the keys used for the Status List Token may be
