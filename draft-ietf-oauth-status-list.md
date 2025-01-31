@@ -810,9 +810,9 @@ The following is a non-normative example for media type `application/json`:
 
 # X.509 Certificate Extensions
 
-## Extended Key Purpose Extension {#eku}
+## Extended Key Usage Extension {#eku}
 
-{{RFC5280}} specifies the EKU X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.
+{{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.
 
 The following OID is defined for usage in the EKU extension
 
