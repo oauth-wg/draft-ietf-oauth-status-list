@@ -896,8 +896,8 @@ If the Issuer of the Referenced Token is the same entity as the Status Issuer, t
 - the same `x5chain` value or an `x5t` or `kid` parameter referencing to the same key as used in the Referenced Token for COSE.
 
 Alternatively, the Status Issuer may use the same web-based key resolution that is used for the Referenced Token. In this case the Status List Token may use:
-- an `x5u`, `jwks`, `jwks_uri` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
-- an `x5u` or `kid` parameter referencing to the same key as used in the Referenced Token for COSE.
+- an `x5u`, `jwks`, `jwks_uri` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for JOSE.
+- an `x5u` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for COSE.
 
 ~~~ ascii-art
 ┌────────┐  host keys  ┌──────────────────────┐
