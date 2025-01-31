@@ -1258,7 +1258,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-x509-certificate-extensions" class="internal xref">X.509 Certificate Extensions</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-extended-key-purpose-extens" class="internal xref">Extended Key Purpose Extension</a></p>
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-extended-key-usage-extensio" class="internal xref">Extended Key Usage Extension</a></p>
 </li>
             </ul>
 </li>
@@ -1873,9 +1873,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840b9669e4a645a96b90361228d81c065eeaba9ff4bafc91fd1b1
-7b3f33f0a841950a5d887886dc963038887b8b058ae074b0cfccaf2e246e7b7b1df5
-74e0283fde
+b918000217015d5840f87258f99da0efe01255eee25264a15c16a52318a8f9983bc5
+fb2e67cd28072d24a85934d3f76ac89d4cbc52ccfcb9127b1d6b6db620810b8cd779
+44b80818d7
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1899,12 +1899,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      b9669e4a645a96b90361228d  #       "¹f\x9eJdZ\x96¹\x03a"\x8d"
-      81c065eeaba9ff4bafc91fd1  #       "\x81Àeî«©ÿK¯É\x1fÑ"
-      b17b3f33f0a841950a5d8878  #       "±{?3ð¨A\x95\x0a]\x88x"
-      86dc963038887b8b058ae074  #       "\x86Ü\x9608\x88{\x8b\x05\x8aàt"
-      b0cfccaf2e246e7b7b1df574  #       "°ÏÌ¯.$n{{\x1dõt"
-      e0283fde                  #       "à(?Þ"
+      f87258f99da0efe01255eee2  #       "ørXù\x9d\xa0ïà\x12Uîâ"
+      5264a15c16a52318a8f9983b  #       "Rd¡\\x16¥#\x18¨ù\x98;"
+      c5fb2e67cd28072d24a85934  #       "Åû.gÍ(\x07-$¨Y4"
+      d3f76ac89d4cbc52ccfcb912  #       "Ó÷jÈ\x9dL¼RÌü¹\x12"
+      7b1d6b6db620810b8cd77944  #       "{\x1dkm¶ \x81\x0b\x8c×yD"
+      b80818d7                  #       "¸\x08\x18×"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2046,9 +2046,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840843e1d10d0128f5d586b5a48211045306cd651
-c8a1ad78c588b67c6c8aa6e20fcb7500a6f80a9a60518094868e7aa45ead0c5da6c3
-0e450dda60adebba6ba53d
+7374617475736c697374732f315840e268f213269877537b574393c7622dd3eabbdb
+01d79386c86f30b8d4099d2e8c54f21bfad2ecdbfc93379a5286177b22dc937cc3f1
+b10985a04d96af2654693c
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2073,12 +2073,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      843e1d10d0128f5d586b5a48  #       "\x84&gt;\x1d\x10Ð\x12\x8f]XkZH"
-      211045306cd651c8a1ad78c5  #       "!\x10E0lÖQÈ¡\xadxÅ"
-      88b67c6c8aa6e20fcb7500a6  #       "\x88¶|l\x8a¦â\x0fËu\x00¦"
-      f80a9a60518094868e7aa45e  #       "ø\x0a\x9a`Q\x80\x94\x86\x8ez¤^"
-      ad0c5da6c30e450dda60adeb  #       "\xad\x0c]¦Ã\x0eE\x0dÚ`\xadë"
-      ba6ba53d                  #       "ºk¥="
+      e268f213269877537b574393  #       "âhò\x13&amp;\x98wS{WC\x93"
+      c7622dd3eabbdb01d79386c8  #       "Çb-Óê»Û\x01×\x93\x86È"
+      6f30b8d4099d2e8c54f21bfa  #       "o0¸Ô\x09\x9d.\x8cTò\x1bú"
+      d2ecdbfc93379a5286177b22  #       "ÒìÛü\x937\x9aR\x86\x17{""
+      dc937cc3f1b10985a04d96af  #       "Ü\x93|Ãñ±\x09\x85\xa0M\x96¯"
+      2654693c                  #       "&amp;Ti&lt;"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2290,8 +2290,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.dKrjBU1X8UnEMkafaR-8qcMqYsfggYGczjCiNg24oINFUtbQDjgF
-XFUgjRJsSTlo1RuGKmdZLSSqXIPdd0XQUQ
+nR0bCI6NDMyMDB9.PKxkO9COXNYKNIOeJW7iL1EeNGdf-AMBsMlxH-g-LLyA-ndhaATB
+ZHOZe8h_xOyhwzTdIrqLeN8LSLuZ1eyTgQ
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2397,8 +2397,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.dKrjBU1X8UnEMkafaR-8qcMqYsfggYGczjCiNg24oINFUtbQDjgF
-XFUgjRJsSTlo1RuGKmdZLSSqXIPdd0XQUQ
+nR0bCI6NDMyMDB9.PKxkO9COXNYKNIOeJW7iL1EeNGdf-AMBsMlxH-g-LLyA-ndhaATB
+ZHOZe8h_xOyhwzTdIrqLeN8LSLuZ1eyTgQ
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2474,10 +2474,10 @@ An Issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
       </h2>
 <div id="eku">
 <section id="section-10.1">
-        <h3 id="name-extended-key-purpose-extens">
-<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-extended-key-purpose-extens" class="section-name selfRef">Extended Key Purpose Extension</a>
+        <h3 id="name-extended-key-usage-extensio">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-extended-key-usage-extensio" class="section-name selfRef">Extended Key Usage Extension</a>
         </h3>
-<p id="section-10.1-1"><span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> specifies the EKU X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+<p id="section-10.1-1"><span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.1-2">The following OID is defined for usage in the EKU extension<a href="#section-10.1-2" class="pilcrow">¶</a></p>
 <p id="section-10.1-3">```
    id-kp  OBJECT IDENTIFIER  ::=
