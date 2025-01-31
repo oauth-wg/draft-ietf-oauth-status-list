@@ -1000,6 +1000,15 @@ The Status List Issuer may increase the size of a Status List if it requires ind
 
 The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
 
+## Relying Parties avoiding correlatable Information
+
+If the Relying Party does not require the Referenced Token and the Status List Token after the presentation, e.g. for subsequent status checks or audit trail, it is RECOMMENDED to delete correlatable information, in particular:
+
+- the `status` claim in the Referenced Token
+- the Status List Token itself
+
+The Relying Party should instead only keep the relevant payload from the Referenced Token.
+
 ## Status List Formats
 
  This specification defines 2 different token formats of the Status List:
@@ -1322,6 +1331,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 -07
 
+* Relying Parties avoiding correlatable Information
 * editorial changes on terminology and Referenced Tokens
 * clarify privacy consideration around one time use reference tokens
 * explain the Status List Token size dependencies
