@@ -30,12 +30,22 @@ def formatToken(input: str, key: jwk.JWK) -> str:
 
 
 def printJson(input: str) -> str:
-    text = json.dumps(json.loads(input), sort_keys=True, indent=2, ensure_ascii=False)
-    return text
+    return json.dumps(json.loads(input), sort_keys=True, indent=2, ensure_ascii=False)
 
 
 def printObject(input: Dict) -> str:
     return printJson(json.dumps(input))
+
+
+def printLongJsonObject(input: Dict) -> str:
+    text = printJson(json.dumps(input))
+    return fill(
+        text,
+        width=MAX_LENGTH,
+        break_on_hyphens=False,
+        replace_whitespace=False,
+        subsequent_indent="  ",
+    )
 
 
 def printText(input: str) -> str:
