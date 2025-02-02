@@ -121,7 +121,8 @@ Table of Contents
      12.1.  Referenced Token Lifecycle
      12.2.  Default Values and Double Allocation
      12.3.  Status List Size
-     12.4.  Status List Formats
+     12.4.  Relying Parties avoiding correlatable Information
+     12.5.  Status List Formats
    13. IANA Considerations
      13.1.  JSON Web Token Claims Registration
        13.1.1.  Registry Contents
@@ -667,9 +668,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840596778601be2736cf91b6a339e7af07c86d8b3fe6fd9e888ad
-   79274f7f3a8614993485bdefa73154e6f6e616fb93d659096b362069df328d3b8fdf
-   bf0ae7a54e
+   b918000217015d5840ed93696a4e1d4e8129d9f8b27ffe18d9d22fee784a5d8c5645
+   81d6addb391923bc7b9bbaef44330ff57ed95a5b34f77b8844c86a8a1b88cb013e0d
+   3b25e2586c
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -691,12 +692,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      596778601be2736cf91b6a33  #       "Ygx`\x1bâslù\x1bj3"
-      9e7af07c86d8b3fe6fd9e888  #       "\x9ezð|\x86Ø³þoÙè\x88"
-      ad79274f7f3a8614993485bd  #       "\xady'O\x7f:\x86\x14\x994\x85½"
-      efa73154e6f6e616fb93d659  #       "ï§1Tæöæ\x16û\x93ÖY"
-      096b362069df328d3b8fdfbf  #       "\x09k6 iß2\x8d;\x8fß¿"
-      0ae7a54e                  #       "\x0aç¥N"
+      ed93696a4e1d4e8129d9f8b2  #       "í\x93ijN\x1dN\x81)Ùø²"
+      7ffe18d9d22fee784a5d8c56  #       "\x7fþ\x18ÙÒ/îxJ]\x8cV"
+      4581d6addb391923bc7b9bba  #       "E\x81Ö\xadÛ9\x19#¼{\x9bº"
+      ef44330ff57ed95a5b34f77b  #       "ïD3\x0fõ~ÙZ[4÷{"
+      8844c86a8a1b88cb013e0d3b  #       "\x88DÈj\x8a\x1b\x88Ë\x01>\x0d;"
+      25e2586c                  #       "%âXl"
 
 6.  Referenced Token
 
@@ -841,9 +842,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158405cbf931d10de0840733fd5b442e554e7523220
-   b57cbe964a42cdc71a653937c9de6d12b673a2372360fbf2ddac268376a0a503cd32
-   e48b4a77b3c238a6932c1c
+   7374617475736c697374732f315840b6bf4762a392b7f8578289de4fc33a227209c6
+   5373aaa58c49ab8130faf2789ed3618daf26736971874ba22bfe933b440c32e1c1e7
+   a2bb5d01af7b7797936967
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -866,12 +867,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         5cbf931d10de0840733fd5b4  #       "\¿\x93\x1d\x10Þ\x08@s?Õ´"
-         42e554e7523220b57cbe964a  #       "BåTçR2 µ|¾\x96J"
-         42cdc71a653937c9de6d12b6  #       "BÍÇ\x1ae97ÉÞm\x12¶"
-         73a2372360fbf2ddac268376  #       "s¢7#`ûòÝ¬&\x83v"
-         a0a503cd32e48b4a77b3c238  #       "\xa0¥\x03Í2ä\x8bJw³Â8"
-         a6932c1c                  #       "¦\x93,\x1c"
+         b6bf4762a392b7f8578289de  #       "¶¿Gb£\x92·øW\x82\x89Þ"
+         4fc33a227209c65373aaa58c  #       "OÃ:"r\x09ÆSsª¥\x8c"
+         49ab8130faf2789ed3618daf  #       "I«\x810úòx\x9eÓa\x8d¯"
+         26736971874ba22bfe933b44  #       "&siq\x87K¢+þ\x93;D"
+         0c32e1c1e7a2bb5d01af7b77  #       "\x0c2áÁç¢»]\x01¯{w"
+         97936967                  #       "\x97\x93ig"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1099,8 +1100,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.1DzTGrdVzU6w6OZISun5-n_41BLD776KNguX4w2u4Fo48wEHZhlV
-   tTiNBPG6WhXL-bk9UNsle1fNXW0M_ox01w
+   nR0bCI6NDMyMDB9.rE01Y3NW1alwG5uzmb5DF4bkBFZUucyBl6t5HYmD4nAd2MpVIpVk
+   p5bvJl4v8t-apLbV2ufkxota0gTtxDP-Cw
 
 8.2.  Status List Response
 
@@ -1238,8 +1239,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.1DzTGrdVzU6w6OZISun5-n_41BLD776KNguX4w2u4Fo48wEHZhlV
-   tTiNBPG6WhXL-bk9UNsle1fNXW0M_ox01w
+   nR0bCI6NDMyMDB9.rE01Y3NW1alwG5uzmb5DF4bkBFZUucyBl6t5HYmD4nAd2MpVIpVk
+   p5bvJl4v8t-apLbV2ufkxota0gTtxDP-Cw
 
 9.  Status List Aggregation
 
@@ -1603,7 +1604,21 @@ d2                              # tag(18)
    however the Status Issuer must be aware of possible privacy risks due
    to correlations.
 
-12.4.  Status List Formats
+12.4.  Relying Parties avoiding correlatable Information
+
+   If the Relying Party does not require the Referenced Token and the
+   Status List Token after the presentation, e.g. for subsequent status
+   checks or audit trail, it is RECOMMENDED to delete correlatable
+   information, in particular:
+
+   *  the status claim in the Referenced Token
+
+   *  the Status List Token itself
+
+   The Relying Party should instead only keep the relevant payload from
+   the Referenced Token.
+
+12.5.  Status List Formats
 
    This specification defines 2 different token formats of the Status
    List:
@@ -2758,6 +2773,8 @@ Test vectors for Status List encoding
 Document History
 
    -07
+
+   *  Relying Parties avoiding correlatable Information
 
    *  editorial changes on terminology and Referenced Tokens
 

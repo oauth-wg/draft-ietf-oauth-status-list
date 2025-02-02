@@ -1318,7 +1318,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-status-list-size" class="internal xref">Status List Size</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.4">
-                <p id="section-toc.1-1.12.2.4.1"><a href="#section-12.4" class="auto internal xref">12.4</a>.  <a href="#name-status-list-formats" class="internal xref">Status List Formats</a></p>
+                <p id="section-toc.1-1.12.2.4.1"><a href="#section-12.4" class="auto internal xref">12.4</a>.  <a href="#name-relying-parties-avoiding-co" class="internal xref">Relying Parties avoiding correlatable Information</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5">
+                <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-status-list-formats" class="internal xref">Status List Formats</a></p>
 </li>
             </ul>
 </li>
@@ -1912,9 +1915,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d5840596778601be2736cf91b6a339e7af07c86d8b3fe6fd9e888ad
-79274f7f3a8614993485bdefa73154e6f6e616fb93d659096b362069df328d3b8fdf
-bf0ae7a54e
+b918000217015d5840ed93696a4e1d4e8129d9f8b27ffe18d9d22fee784a5d8c5645
+81d6addb391923bc7b9bbaef44330ff57ed95a5b34f77b8844c86a8a1b88cb013e0d
+3b25e2586c
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1938,12 +1941,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      596778601be2736cf91b6a33  #       "Ygx`\x1bâslù\x1bj3"
-      9e7af07c86d8b3fe6fd9e888  #       "\x9ezð|\x86Ø³þoÙè\x88"
-      ad79274f7f3a8614993485bd  #       "\xady'O\x7f:\x86\x14\x994\x85½"
-      efa73154e6f6e616fb93d659  #       "ï§1Tæöæ\x16û\x93ÖY"
-      096b362069df328d3b8fdfbf  #       "\x09k6 iß2\x8d;\x8fß¿"
-      0ae7a54e                  #       "\x0aç¥N"
+      ed93696a4e1d4e8129d9f8b2  #       "í\x93ijN\x1dN\x81)Ùø²"
+      7ffe18d9d22fee784a5d8c56  #       "\x7fþ\x18ÙÒ/îxJ]\x8cV"
+      4581d6addb391923bc7b9bba  #       "E\x81Ö\xadÛ9\x19#¼{\x9bº"
+      ef44330ff57ed95a5b34f77b  #       "ïD3\x0fõ~ÙZ[4÷{"
+      8844c86a8a1b88cb013e0d3b  #       "\x88DÈj\x8a\x1b\x88Ë\x01&gt;\x0d;"
+      25e2586c                  #       "%âXl"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2085,9 +2088,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158405cbf931d10de0840733fd5b442e554e7523220
-b57cbe964a42cdc71a653937c9de6d12b673a2372360fbf2ddac268376a0a503cd32
-e48b4a77b3c238a6932c1c
+7374617475736c697374732f315840b6bf4762a392b7f8578289de4fc33a227209c6
+5373aaa58c49ab8130faf2789ed3618daf26736971874ba22bfe933b440c32e1c1e7
+a2bb5d01af7b7797936967
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2112,12 +2115,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      5cbf931d10de0840733fd5b4  #       "\¿\x93\x1d\x10Þ\x08@s?Õ´"
-      42e554e7523220b57cbe964a  #       "BåTçR2 µ|¾\x96J"
-      42cdc71a653937c9de6d12b6  #       "BÍÇ\x1ae97ÉÞm\x12¶"
-      73a2372360fbf2ddac268376  #       "s¢7#`ûòÝ¬&amp;\x83v"
-      a0a503cd32e48b4a77b3c238  #       "\xa0¥\x03Í2ä\x8bJw³Â8"
-      a6932c1c                  #       "¦\x93,\x1c"
+      b6bf4762a392b7f8578289de  #       "¶¿Gb£\x92·øW\x82\x89Þ"
+      4fc33a227209c65373aaa58c  #       "OÃ:"r\x09ÆSsª¥\x8c"
+      49ab8130faf2789ed3618daf  #       "I«\x810úòx\x9eÓa\x8d¯"
+      26736971874ba22bfe933b44  #       "&amp;siq\x87K¢+þ\x93;D"
+      0c32e1c1e7a2bb5d01af7b77  #       "\x0c2áÁç¢»]\x01¯{w"
+      97936967                  #       "\x97\x93ig"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2329,8 +2332,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.1DzTGrdVzU6w6OZISun5-n_41BLD776KNguX4w2u4Fo48wEHZhlV
-tTiNBPG6WhXL-bk9UNsle1fNXW0M_ox01w
+nR0bCI6NDMyMDB9.rE01Y3NW1alwG5uzmb5DF4bkBFZUucyBl6t5HYmD4nAd2MpVIpVk
+p5bvJl4v8t-apLbV2ufkxota0gTtxDP-Cw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2436,8 +2439,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.1DzTGrdVzU6w6OZISun5-n_41BLD776KNguX4w2u4Fo48wEHZhlV
-tTiNBPG6WhXL-bk9UNsle1fNXW0M_ox01w
+nR0bCI6NDMyMDB9.rE01Y3NW1alwG5uzmb5DF4bkBFZUucyBl6t5HYmD4nAd2MpVIpVk
+p5bvJl4v8t-apLbV2ufkxota0gTtxDP-Cw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2738,22 +2741,39 @@ Time of fetching
 <p id="section-12.3-3">The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.<a href="#section-12.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="status-list-formats">
+<div id="relying-parties-avoiding-correlatable-information">
 <section id="section-12.4">
-        <h3 id="name-status-list-formats">
-<a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-status-list-formats" class="section-name selfRef">Status List Formats</a>
+        <h3 id="name-relying-parties-avoiding-co">
+<a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-relying-parties-avoiding-co" class="section-name selfRef">Relying Parties avoiding correlatable Information</a>
         </h3>
-<p id="section-12.4-1">This specification defines 2 different token formats of the Status List:<a href="#section-12.4-1" class="pilcrow">¶</a></p>
+<p id="section-12.4-1">If the Relying Party does not require the Referenced Token and the Status List Token after the presentation, e.g. for subsequent status checks or audit trail, it is <span class="bcp14">RECOMMENDED</span> to delete correlatable information, in particular:<a href="#section-12.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12.4-2.1">
-            <p id="section-12.4-2.1.1">JWT<a href="#section-12.4-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-12.4-2.1.1">the <code>status</code> claim in the Referenced Token<a href="#section-12.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-12.4-2.2">
-            <p id="section-12.4-2.2.1">CWT<a href="#section-12.4-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-12.4-2.2.1">the Status List Token itself<a href="#section-12.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-12.4-3">This specification states no requirements to not mix different formats like a CBOR based Referenced Token using a JWT for the Status List, but the expectation is that within an ecosystem, a choice for specific formats is made.
-Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.<a href="#section-12.4-3" class="pilcrow">¶</a></p>
+<p id="section-12.4-3">The Relying Party should instead only keep the relevant payload from the Referenced Token.<a href="#section-12.4-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="status-list-formats">
+<section id="section-12.5">
+        <h3 id="name-status-list-formats">
+<a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-status-list-formats" class="section-name selfRef">Status List Formats</a>
+        </h3>
+<p id="section-12.5-1">This specification defines 2 different token formats of the Status List:<a href="#section-12.5-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-12.5-2.1">
+            <p id="section-12.5-2.1.1">JWT<a href="#section-12.5-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-12.5-2.2">
+            <p id="section-12.5-2.2.1">CWT<a href="#section-12.5-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-12.5-3">This specification states no requirements to not mix different formats like a CBOR based Referenced Token using a JWT for the Status List, but the expectation is that within an ecosystem, a choice for specific formats is made.
+Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.<a href="#section-12.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4086,46 +4106,49 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <p id="appendix-C-1">-07<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-C-2.1">
-          <p id="appendix-C-2.1.1">editorial changes on terminology and Referenced Tokens<a href="#appendix-C-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.1.1">Relying Parties avoiding correlatable Information<a href="#appendix-C-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.2">
-          <p id="appendix-C-2.2.1">clarify privacy consideration around one time use reference tokens<a href="#appendix-C-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.2.1">editorial changes on terminology and Referenced Tokens<a href="#appendix-C-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.3">
-          <p id="appendix-C-2.3.1">explain the Status List Token size dependencies<a href="#appendix-C-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.3.1">clarify privacy consideration around one time use reference tokens<a href="#appendix-C-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.4">
-          <p id="appendix-C-2.4.1">explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date<a href="#appendix-C-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.4.1">explain the Status List Token size dependencies<a href="#appendix-C-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.5">
-          <p id="appendix-C-2.5.1">add short-lived tokens in the Rationale<a href="#appendix-C-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.5.1">explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date<a href="#appendix-C-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.6">
-          <p id="appendix-C-2.6.1">rename Status Mechanism Methods registry to Status Mechanisms registry<a href="#appendix-C-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.6.1">add short-lived tokens in the Rationale<a href="#appendix-C-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.7">
-          <p id="appendix-C-2.7.1">changes as requested by IANA review<a href="#appendix-C-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.7.1">rename Status Mechanism Methods registry to Status Mechanisms registry<a href="#appendix-C-2.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.8">
-          <p id="appendix-C-2.8.1">emphasize that security and privacy considerations only apply to Status List and no other status mechanisms<a href="#appendix-C-2.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.8.1">changes as requested by IANA review<a href="#appendix-C-2.8.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.9">
-          <p id="appendix-C-2.9.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-C-2.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.9.1">emphasize that security and privacy considerations only apply to Status List and no other status mechanisms<a href="#appendix-C-2.9.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.10">
-          <p id="appendix-C-2.10.1">add more test vectors for the status list encoding<a href="#appendix-C-2.10.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.10.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-C-2.10.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.11">
-          <p id="appendix-C-2.11.1">add prior art<a href="#appendix-C-2.11.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.11.1">add more test vectors for the status list encoding<a href="#appendix-C-2.11.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.12">
-          <p id="appendix-C-2.12.1">updated language around application specific status type values and assigned ranges for application specific usage<a href="#appendix-C-2.12.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.12.1">add prior art<a href="#appendix-C-2.12.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.13">
-          <p id="appendix-C-2.13.1">add short security considerations section for mac based deployments<a href="#appendix-C-2.13.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.13.1">updated language around application specific status type values and assigned ranges for application specific usage<a href="#appendix-C-2.13.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.14">
-          <p id="appendix-C-2.14.1">fix aggregation_uri text in referenced token<a href="#appendix-C-2.14.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.14.1">add short security considerations section for mac based deployments<a href="#appendix-C-2.14.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.15">
+          <p id="appendix-C-2.15.1">fix aggregation_uri text in referenced token<a href="#appendix-C-2.15.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-C-3">-06<a href="#appendix-C-3" class="pilcrow">¶</a></p>
