@@ -871,53 +871,6 @@ The following OID is defined for usage in the EKU extension
    id-kp-oauthStatusListSigning             OBJECT IDENTIFIER ::= { id-kp TBD }
 ```
 
-# Further Examples
-
-## Status List with 2-Bit Status Values in JSON format
-
-In this example, the Status List additionally includes the Status Type "SUSPENDED". As the Status Type value for "SUSPENDED" is 0x02 and does not fit into 1 bit, the "bits" is required to be 2.
-
-This example Status List represents the status of 12 Referenced Tokens, requiring 24 bits (3 bytes) of status.
-
-~~~ ascii-art
-
-status[0] = 1
-status[1] = 2
-status[2] = 0
-status[3] = 3
-status[4] = 0
-status[5] = 1
-status[6] = 0
-status[7] = 1
-status[8] = 1
-status[9] = 2
-status[10] = 3
-status[11] = 3
-~~~
-
-These bits are concatenated:
-
-~~~ ascii-art
-
-byte             0                  1                  2
-bit       7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
-         +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-values   |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
-         +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-          \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
-status     3   0   2   1      1   0   1   0      3   3   2   1
-index      3   2   1   0      7   6   5   4      11  10  9   8
-           \___________/      \___________/      \___________/
-                0xC9               0x44               0xF9
-
-~~~
-
-Resulting in the byte array and compressed/base64url-encoded Status List:
-
-~~~~~~~~~~
-{::include ./examples/status_list_encoding2_json}
-~~~~~~~~~~
-
 # Security Considerations {#Security}
 
 The Status List as defined in [](#status-list) only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other aspects like transport security (e.g., the web PKI).
