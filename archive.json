@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:16:14.298375+00:00",
+  "timestamp": "2025-02-02T00:17:50.428876+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -4058,15 +4058,25 @@
       "state": "OPEN",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [
         "pending-close"
       ],
       "body": "Re-check validation rules now that the unsigned option is gone and figure out if we can further simplify",
       "createdAt": "2024-11-29T07:50:26Z",
-      "updatedAt": "2025-01-29T07:25:11Z",
+      "updatedAt": "2025-01-31T13:51:12Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "maybe mention key resolution now that we have a small section",
+          "createdAt": "2025-01-31T13:28:50Z",
+          "updatedAt": "2025-01-31T13:28:50Z"
+        }
+      ]
     },
     {
       "number": 207,
@@ -4339,7 +4349,7 @@
       "id": "I_kwDOJZ2aqs6l9SkJ",
       "title": "Comments on section 12.5.2 Unlinkability",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/218",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4350,8 +4360,8 @@
       ],
       "body": "The text states:\r\n\r\n> 12.5.2. Colluding Status Issuer and Relying Party\r\n> \r\n> A Status Issuer and a Relying Party [Issuer ??] may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token, and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for\r\n\r\n>  Referenced Token formats that have similar unlinkability properties.\r\n\r\nThe last sentence is not implementable and should be removed. \r\n\r\nAs a Status Issuer is believed to be trusted, hence speaking of a \"colluding issuer\" would not be fair.  However, a Status Issuer may be coerced to perform some actions with the goal to reveal the identity of the user (the linkage of accesses is not the concern).\r\n\r\nChange into:\r\n\r\n> 12.5.2. Coerced Referenced Token Issuers and Relying Parties\r\n> \r\n> To reduce privacy risks for coerced Referenced Token Issuers and Relying Parties, it is RECOMMENDED that Referenced Tokens Issuers issue one-time-use Referenced Tokens, see Section 13.1. \r\n\r\n> For each issued Referenced Token, the Referenced Token Issuer needs to remember the tuple of uri and index inside the Referenced Token. \r\n> \r\n> If the Relying Party memorizes the Referenced Tokens that it receives, then some authority might coerce a Relying Party to reveal  the tuple of uri and index inside the Referenced Token and, then after, might also coerce the Issuer of these Referenced Tokens to reveal the identity of the End-Users. If the Relying Party does not memorize the content of a Referenced Token that it receives, then the risk can be avoided.\r\n> \r\n> After Verification, Relying Parties SHOULD NOT store the Referenced Token. It may be sufficient to store the result of the verification and any user data that is needed for the application.\r\n> \r\n> If a Relying Party does not store Reference Tokens, then the tuple of uri and index which is present inside the Referenced Token cannot be used anymore to reveal the identity of the user.\r\n> ",
       "createdAt": "2025-01-13T15:19:29Z",
-      "updatedAt": "2025-01-29T07:00:03Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-31T14:01:20Z",
+      "closedAt": "2025-01-31T14:01:18Z",
       "comments": [
         {
           "author": "tplooker",
@@ -4359,6 +4369,13 @@
           "body": "Hi @Denisthemalice I'm unable to understand which sentence you are referring to is un-implementable, I don't see any normative guidance hence unable to understand what you are referring to.\n\nI dont follow your rationale for why \"collusion\" isn't an accurate description of what is occuring here. This privacy consideration is describing when the RP and status issuer elect to collude and the possible privacy harms of that.\n\nMarking the issue pending close without further clarification. ",
           "createdAt": "2025-01-29T06:59:54Z",
           "updatedAt": "2025-01-29T06:59:54Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Linkability (RP + RP) and Traceability (RP + IdP) are common criteria for the privacy properties of credential systems.\nThere is imho value in that section/scenario.\n\nTrying to match the privacy properties of status mechanism and the credential format makes sense and I am not sure how that is not implementable - it is a privacy consideration.\n\nAlso: This document is about the Status List / Status mechanism, not about the referenced token, we cannot give guidance on those within the scope of this document.",
+          "createdAt": "2025-01-31T14:01:18Z",
+          "updatedAt": "2025-01-31T14:01:18Z"
         }
       ]
     },
@@ -4367,7 +4384,7 @@
       "id": "I_kwDOJZ2aqs6l9ZZ1",
       "title": "Proposed replacement for 13.1, 13.2 and 13.3 placed under section 13 (Implementation Considerations)",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/219",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4376,8 +4393,8 @@
       "labels": [],
       "body": "Proposed replacement for 13.1, 13.2 and 13.3\r\n\r\n> 13.1.  Status List Token Lifecycle\r\n> \r\n> Status List Tokens should be issued in advance, even if the Issuer of the Referenced Tokens has not yet issued a single Referenced Token.\r\n> \r\n> The number of Status List Tokens that will be needed between two updates should be estimated by the Referenced Token Issuer and for every newly issued Referenced Token, the tuple of uri and index should be chosen at random to correspond to a location within one of these Status List Tokens.\r\n> \r\n> The size and the number of the Status List Tokens will be highly dependent whether one-time use Referenced Tokens will be used or not.  \r\n> \r\n> For one-time use Referenced Tokens, in order to reduce the number of Status List Tokens that will need to be maintained by the Status List Issuer, it is RECOMMENDED to use short-lived Referenced Tokens, e.g., valid during a week or a month at most. The renewal of the Referenced Tokens SHOULD be done automatically by the Holder as soon as the Holder will be able to connect to the Issuer of the Referenced Tokens it manages.\r\n> \r\n> The Referenced Token Issuer should group Referenced Tokens that expire in the same time frame in Status List Tokens that do not need to be maintained when all the Referenced Tokens have expired. As long as all the Referenced Tokens that are referenced in a Status List Token have not expired, the Status List Token Issuer shall continue issuing the Status List Token. Once all Referenced Tokens have expired, the Referenced Token Issuer SHOULD inform the Status List Issuer, that the uri does not need to be maintained anymore. It is then up to the Status List Token Issuer to stop issuing Status List Tokens.\r\n> ",
       "createdAt": "2025-01-13T15:26:43Z",
-      "updatedAt": "2025-01-16T07:45:07Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-31T14:04:05Z",
+      "closedAt": "2025-01-31T14:04:04Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -4385,6 +4402,13 @@
           "body": "Editors Call:\r\n- your suggestions strips off a lot of existing information in these sections, so it's not acceptable\r\n- @tplooker will make a PR on the suggestions in the other unlinkability issues",
           "createdAt": "2025-01-16T07:45:06Z",
           "updatedAt": "2025-01-16T07:45:06Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Proposed replacement for 13.1, 13.2 and 13.3\n> \n> > 13.1.  Status List Token Lifecycle\n> > Status List Tokens should be issued in advance, even if the Issuer of the Referenced Tokens has not yet issued a single Referenced Token.\n> > The number of Status List Tokens that will be needed between two updates should be estimated by the Referenced Token Issuer and for every newly issued Referenced Token, the tuple of uri and index should be chosen at random to correspond to a location within one of these Status List Tokens.\n\nThis recommendation is already present.\n\n> > The size and the number of the Status List Tokens will be highly dependent whether one-time use Referenced Tokens will be used or not.\n> > For one-time use Referenced Tokens, in order to reduce the number of Status List Tokens that will need to be maintained by the Status List Issuer, it is RECOMMENDED to use short-lived Referenced Tokens, e.g., valid during a week or a month at most. The renewal of the Referenced Tokens SHOULD be done automatically by the Holder as soon as the Holder will be able to connect to the Issuer of the Referenced Tokens it manages.\n\nWe will not make any guidance for the Referenced Tokens, as this is not the focus of this draft.\n\n> > The Referenced Token Issuer should group Referenced Tokens that expire in the same time frame in Status List Tokens that do not need to be maintained when all the Referenced Tokens have expired. As long as all the Referenced Tokens that are referenced in a Status List Token have not expired, the Status List Token Issuer shall continue issuing the Status List Token. Once all Referenced Tokens have expired, the Referenced Token Issuer SHOULD inform the Status List Issuer, that the uri does not need to be maintained anymore. It is then up to the Status List Token Issuer to stop issuing Status List Tokens.\n\nThis recommendation is already present.",
+          "createdAt": "2025-01-31T14:04:04Z",
+          "updatedAt": "2025-01-31T14:04:04Z"
         }
       ]
     },
@@ -4393,7 +4417,7 @@
       "id": "I_kwDOJZ2aqs6l_k5q",
       "title": "The term Issuer SHOULD NOT be used to refer to an entity acting \"for all three roles\"",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/220",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4404,8 +4428,8 @@
       ],
       "body": "On page 3, the text states:\r\n\r\n> If not further specified, the term Issuer may refer to an entity acting for all three roles.  \r\n\r\nThis sentence should be removed.\r\n\r\nThe role of the Issuer and of the Status Issuer should be kept separate in the whole document.\r\nA Status Issuer does not have access to the data that has been provided when the user was enrolled by the Issuer. \r\n\r\nAs a consequence, the following sentence should be reconsidered:\r\n\r\n>    If the roles of the Issuer and the Status Provider are performed by\r\n>    two different entities, this may give additional privacy assurances\r\n>    as the Issuer has no means to identify the Relying Party or its\r\n>    request.\r\n\r\nThese \"additional privacy assurances\" exist as soon as the role of the Issuer and of the Status Issuer are kept separate. \r\n",
       "createdAt": "2025-01-13T18:24:16Z",
-      "updatedAt": "2025-01-29T07:34:06Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-31T13:43:35Z",
+      "closedAt": "2025-01-31T13:43:35Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -4434,6 +4458,13 @@
           "body": "Editors Call:\n- pending close unless specific line references to the draft are given on this issue",
           "createdAt": "2025-01-27T07:21:46Z",
           "updatedAt": "2025-01-27T07:21:46Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The issues from #227 are being resolved in #248 ",
+          "createdAt": "2025-01-30T15:35:07Z",
+          "updatedAt": "2025-01-30T15:35:07Z"
         }
       ]
     },
@@ -5001,12 +5032,10 @@
       "assignees": [
         "tplooker"
       ],
-      "labels": [
-        "pending-close"
-      ],
+      "labels": [],
       "body": "Currently Token Status List  not useable for revocation x509 credentials which is critical in context of eIDAS where \n\na) each QEAA has to be signed with xqualified signature or seal based on x509 certificates\nb) credentials in x509 legally possible and covered in ETSI TS 119 472-1 [Token Status List ]\n(https://docbox.etsi.org/esi/Open/Latest_Drafts/ETSI%20DRAFT%20TS_119_472-1v0.0.6-public.pdf)\n\nto avoid that trust service providers have to provide 2 different approaches for revocation, so 1 for credential 1 for its signature x509 shall be covered by Token Status List Spec. As mentioned by @paulbastian  in brief discussion it could be possible to define an X.509 extension in ASN.1, analogous to the CRL Distribution Endpoint:\n\nTokenStatusListDisitrubionEndpoint ::= SEQUENCE {\n        uri                    [0]     RelativeDistinguishedName,\n        index                   [1]     INTEGER }\n\nFurthermore, minimal adjustments to the Validation Logic section would be necessary.",
       "createdAt": "2025-01-24T13:30:59Z",
-      "updatedAt": "2025-01-29T17:36:46Z",
+      "updatedAt": "2025-01-31T14:45:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -5022,6 +5051,13 @@
           "body": "@tplooker thanks for your comment.\n\n1) it`s not unavoidable as shown, especially not if you use signatures for JWT\n2) that`s wrong as it would mean for QTSP to provide 2 different revocations for same subject:\n- QEAA require QES(QSeal acc. annex V eIDAS regulation\n- in case StatusToken List used for attestation itself your great approach would mean: 1 revocation for attestation, 1 for its signature and both have to be correlated, certified etc. acc. to ETSI TS 119 471, 472-1 etc. The only one who appreciate this are consultants and Conformity Assessment Bodies  but not the trust service providers who have to deal with it\n-\n3) This was birth defect from beginning especially after eIDAS 2.0 was published. Now is chance to change it\n\nRecommend that decision done by Working Group and not editors of which no one is QTSP who have to deal with your specification. Means if you close I`ll open again and request decision by WG",
           "createdAt": "2025-01-29T17:36:18Z",
           "updatedAt": "2025-01-29T17:36:46Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I would not agree that the draft was always centered to cater only for JOSE and COSE-based Referenced Tokens, but that it should be open to all formats of Referenced Tokens. Instead, the limitation was that the Status List Token format was about JWT and CWT to limit the complexity at this level. \n\nI agree that there are potential advantages:\n- if X509 is your trust layer signing SD-JWT/mdoc, then you may have only one revocation mechanism (although I think this advantage is very limited for the reasons given by Tobias)\n- if X509 is an EAA format, then you may benefit from the better scaling of Status List against CRL (I think this scenario is more of an actual advantage, however I don't know how realisitic it is, as the ARF doesn't mention it yet)\n\nHowever, we may overstep the responsibilities of the OAuth WG, as X509 is not its core topic and we would probably leverage expertise from LAMPS.\n\nWe will write to the OAuth Mailinglist to proceed on this topic.",
+          "createdAt": "2025-01-31T14:45:02Z",
+          "updatedAt": "2025-01-31T14:45:02Z"
         }
       ]
     },
@@ -5030,16 +5066,26 @@
       "id": "I_kwDOJZ2aqs6n9EpC",
       "title": "About claim \"aggregation_uri\"",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/247",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [],
       "body": "In #228, C2bo wrote:\n\n> The claim \"aggregation_uri\" is meant as a way to allow efficient caching for RPs, not for alternative URIs - it points to all relevant status lists for an issuer or specific referenced token type.\n\n\"aggregation_uri\" is defined in 4.1 as:\n\n> aggregation_uri: OPTIONAL.  JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. \n See section Section 9 for further detail.\n\nSection 9 (Status List Aggregation) states:\n\n> Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch \nall relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThese two descriptions are not aligned with section 4.1, as in section 9, the sentence mentions:\n> all relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThe case of the Issuer is not mentioned in section 4.1.\n\nThen comes some questions.\n\nHow can the Relying Party retrieve either: \n> a) all relevant Status Lists for a specific [type of] Referenced Token, or\n> b) all relevant Status Lists for an Issuer ?\n\nIn the first case, how long should \"all relevant Status Lists\" for a specific type of Referenced Token be accessible ? \nSame question for \"all relevant Status Lists\" for an Issuer.\n\nThere should be some additional text to warn the Issuers about some consequences when this claim is supported.\n\n\"All relevant Status Lists for an Issuer\" allows a Relying Party to know how many Referenced Tokens have been issued by an Issuer and are either valid, suspended or revoked at an instant of time. This reveals the number of entities that have been registered. Some Issuers  might not like to disclose that information and should be warned of the consequences before choosing to support this optional claim.\n\nFinally, I still have difficulties to understand the usefulness of this optional claim for a Referenced Token. \nCaching is pretty well supported by the ttl claim:\n\n> *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, \nthat the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. \n\n\n\n\n\n\n\n",
       "createdAt": "2025-01-29T10:29:15Z",
-      "updatedAt": "2025-01-29T10:29:15Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-01-31T13:49:42Z",
+      "closedAt": "2025-01-31T13:49:42Z",
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call:\n-  we will fix Section 4 to add \".. or Issuer\"\n- the privacy consideration that you mention is already present in the draft: https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#section-12.4",
+          "createdAt": "2025-01-31T13:41:44Z",
+          "updatedAt": "2025-01-31T13:41:44Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -15636,13 +15682,13 @@
       "labels": [],
       "body": "Fixes #216 \r\n\r\nI've moved the existing 2 bit examples and ascii art up - we can revert that change, but it felt more consistent to me that way\r\nI am not exactly sure how to better displays the input (status values for specific positions) - any ideas?\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/216-test-vectors/draft-ietf-oauth-status-list.html",
       "createdAt": "2025-01-17T15:45:12Z",
-      "updatedAt": "2025-01-27T08:43:06Z",
+      "updatedAt": "2025-01-30T14:19:27Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "53bfe1f752ecbc4cacbdea27be5570af046c8e54",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "216-test-vectors",
-      "headRefOid": "d1ed18b3863b6e77ddb7951a720f45f36adbb0b0",
+      "headRefOid": "c6bf98d20ab99860d62288fa16e176f75c9233a9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -15689,6 +15735,27 @@
           "body": "Todo: Wait for feedback on test vectors (check with at least one alternative implementation)",
           "createdAt": "2025-01-27T08:43:05Z",
           "updatedAt": "2025-01-27T08:43:05Z"
+        },
+        {
+          "author": "markuskreusch-bdr",
+          "authorAssociation": "NONE",
+          "body": "I checked the test vectors by\r\n- Defining the status[*] = * entries in the code (copy paste + search replace)\r\n- Parsing the JSON and CBOR from the document with our library\r\n- Checking in automated testcases, that all status entries have the expected value (0 for the ones not mentioned and the given value for the ones mentioned in the test vectors)\r\n\r\nVerification was successful for all values.\r\n\r\nNevertheless I noticed, that **the samples (CBOR and JSON) for the one bit status list have 2 instead of 1 bits**.",
+          "createdAt": "2025-01-30T12:06:30Z",
+          "updatedAt": "2025-01-30T12:07:24Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> I checked the test vectors by\r\n> \r\n> * Defining the status[*] = * entries in the code (copy paste + search replace)\r\n> * Parsing the JSON and CBOR from the document with our library\r\n> * Checking in automated testcases, that all status entries have the expected value (0 for the ones not mentioned and the given value for the ones mentioned in the test vectors)\r\n> \r\n> Verification was successful for all values.\r\n> \r\n> Nevertheless I noticed, that **the samples (CBOR and JSON) for the one bit status list have 2 instead of 1 bits**.\r\n\r\nThank you for catching that! That was a copy/paste mistake on my side and should be fixed now. \r\nCould you re-check if everything looks fine now?",
+          "createdAt": "2025-01-30T13:32:55Z",
+          "updatedAt": "2025-01-30T13:32:55Z"
+        },
+        {
+          "author": "markuskreusch-bdr",
+          "authorAssociation": "NONE",
+          "body": "> Thank you for catching that! That was a copy/paste mistake on my side and should be fixed now. Could you re-check if everything looks fine now?\r\n\r\nEverything is fine now.",
+          "createdAt": "2025-01-30T14:18:56Z",
+          "updatedAt": "2025-01-30T14:19:27Z"
         }
       ],
       "reviews": [
@@ -16277,26 +16344,411 @@
       "id": "PR_kwDOJZ2aqs6JUpbO",
       "title": "Adds an EKU based X.509 certificate extension",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/246",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "As in the title.",
+      "body": "Closes #234 \r\nCloses #235 ",
       "createdAt": "2025-01-29T07:51:38Z",
-      "updatedAt": "2025-01-29T07:51:39Z",
+      "updatedAt": "2025-01-31T13:30:38Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "94a4d385748e075d06af8530b9f734c32e576b05",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "tl/eku-certificate-extension",
       "headRefOid": "0b2d845ee4e763b4f9cea07039e2ef0807f120d7",
+      "closedAt": "2025-01-31T13:30:38Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "superseded by #248 \r\n\r\nI made comments in that PR",
+          "createdAt": "2025-01-31T08:48:14Z",
+          "updatedAt": "2025-01-31T09:09:30Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Close in favor of #248 (change included there)",
+          "createdAt": "2025-01-31T13:30:38Z",
+          "updatedAt": "2025-01-31T13:30:38Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 248,
+      "id": "PR_kwDOJZ2aqs6JhAiO",
+      "title": "add recommendations for Key Resolution and Trust Management",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/248",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #237 \r\nCloses #235\r\nCloses #234 \r\nCloses #227 \r\nCloses #224 ",
+      "createdAt": "2025-01-30T15:23:59Z",
+      "updatedAt": "2025-01-31T13:33:19Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "94a4d385748e075d06af8530b9f734c32e576b05",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "deployment_models",
+      "headRefOid": "6255be31c9bd1590d453c7d3d55c97958c9f89dc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6aINLG",
+          "commit": {
+            "abbreviatedOid": "4351b33"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T07:14:49Z",
+          "updatedAt": "2025-01-31T07:17:37Z",
+          "comments": [
+            {
+              "originalPosition": 47,
+              "body": "```suggestion\r\n- an `x5u`, `jwks`, `jwks_uri` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for JOSE.\r\n- an `x5u` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for COSE.\r\n```",
+              "createdAt": "2025-01-31T07:14:49Z",
+              "updatedAt": "2025-01-31T07:17:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aISJM",
+          "commit": {
+            "abbreviatedOid": "4351b33"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T07:26:45Z",
+          "updatedAt": "2025-01-31T07:26:46Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\n\r\n~~~ ascii-art\r\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 resolve key \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\r\n\u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u25ba\u2502 well-known metadata \u2502\r\n\u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518        \u2502    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\r\n  \u25bc update status \u2502                           \r\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502                           \r\n\u2502 Status Issuer \u251c\u2500\u2518                           \r\n\u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                             \r\n  \u25bc provide Status List                       \r\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                           \r\n\u2502 Status Provider \u2502                           \r\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                           \r\n~~~\r\n```",
+              "createdAt": "2025-01-31T07:26:46Z",
+              "updatedAt": "2025-01-31T07:26:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aI2Af",
+          "commit": {
+            "abbreviatedOid": "4351b33"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T08:46:40Z",
+          "updatedAt": "2025-01-31T08:46:40Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\n\r\n~~~ ascii-art\r\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  host keys  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\r\n\u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u25ba\u2502 .well-known metadata \u2502\r\n\u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518        \u2502    \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\r\n  \u25bc update status \u2502                           \r\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502                           \r\n\u2502 Status Issuer \u251c\u2500\u2518                           \r\n\u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                             \r\n  \u25bc provide Status List                       \r\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                           \r\n\u2502 Status Provider \u2502                           \r\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                           \r\n~~~\r\n```",
+              "createdAt": "2025-01-31T08:46:40Z",
+              "updatedAt": "2025-01-31T08:47:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aI3NK",
+          "commit": {
+            "abbreviatedOid": "4351b33"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T08:49:24Z",
+          "updatedAt": "2025-01-31T08:49:24Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\n{{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.\r\n```",
+              "createdAt": "2025-01-31T08:49:24Z",
+              "updatedAt": "2025-01-31T08:49:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aI3lR",
+          "commit": {
+            "abbreviatedOid": "4351b33"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T08:50:11Z",
+          "updatedAt": "2025-01-31T08:50:12Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\n## Extended Key Usage Extension {#eku}\r\n```",
+              "createdAt": "2025-01-31T08:50:12Z",
+              "updatedAt": "2025-01-31T08:50:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aLwGM",
+          "commit": {
+            "abbreviatedOid": "c7e1ea7"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T13:32:17Z",
+          "updatedAt": "2025-01-31T13:32:17Z",
+          "comments": [
+            {
+              "originalPosition": 135,
+              "body": "```suggestion\r\n* add recommendations for Key Resolution and Trust Management\r\n* add extended key usage extensions for x509\r\n```",
+              "createdAt": "2025-01-31T13:32:17Z",
+              "updatedAt": "2025-01-31T13:32:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aLwp3",
+          "commit": {
+            "abbreviatedOid": "be75cd4"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-31T13:33:19Z",
+          "updatedAt": "2025-01-31T13:33:19Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 249,
+      "id": "PR_kwDOJZ2aqs6Jip6G",
+      "title": "222 suspended privacy considerations",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/249",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #222 \r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/222-suspended-privacy-considerations/draft-ietf-oauth-status-list.html",
+      "createdAt": "2025-01-30T19:08:21Z",
+      "updatedAt": "2025-01-31T07:19:33Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "94a4d385748e075d06af8530b9f734c32e576b05",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "222-suspended-privacy-considerations",
+      "headRefOid": "d58828486d74e76dc674fe1b2403f9f66b8c7d9f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6aFmpj",
+          "commit": {
+            "abbreviatedOid": "ee0e8e1"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-30T22:09:15Z",
+          "updatedAt": "2025-01-30T22:09:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aINO7",
+          "commit": {
+            "abbreviatedOid": "ee0e8e1"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T07:15:01Z",
+          "updatedAt": "2025-01-31T07:15:01Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\r\nAs previously explained, there is the potential risk of observability by Relying Parties and Outsiders. That means that any Status Type that transports special information about a Token can leak information to other parties. This documents defines one additional Status Type with \"SUSPENDED\" that conveys such additional information. Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, but the token itself is still valid.\r\n```",
+              "createdAt": "2025-01-31T07:15:01Z",
+              "updatedAt": "2025-01-31T07:15:01Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 250,
+      "id": "PR_kwDOJZ2aqs6JpK7s",
+      "title": "aggregation uri text",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/250",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "fixes #247 ",
+      "createdAt": "2025-01-31T13:45:43Z",
+      "updatedAt": "2025-01-31T13:49:41Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "94a4d385748e075d06af8530b9f734c32e576b05",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "247-aggregation-uri",
+      "headRefOid": "f7bded5005069c270aa59d45a7157e74ff7381df",
+      "closedAt": "2025-01-31T13:49:41Z",
+      "mergedAt": "2025-01-31T13:49:41Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "f181925ffa8b7c9bb3e978c3922faa7032da6850"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6aL4-_",
+          "commit": {
+            "abbreviatedOid": "8231621"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-31T13:46:47Z",
+          "updatedAt": "2025-01-31T13:46:48Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n   * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer. See section [](#aggregation) for further details.\r\n```",
+              "createdAt": "2025-01-31T13:46:47Z",
+              "updatedAt": "2025-01-31T13:46:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aL5JC",
+          "commit": {
+            "abbreviatedOid": "f7bded5"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-31T13:46:58Z",
+          "updatedAt": "2025-01-31T13:46:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 251,
+      "id": "PR_kwDOJZ2aqs6JpheC",
+      "title": "Relying Parties avoiding correlatable Information",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/251",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-01-31T14:25:33Z",
+      "updatedAt": "2025-01-31T14:27:04Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f181925ffa8b7c9bb3e978c3922faa7032da6850",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "Relying-Parties-avoiding-correlatable-Information",
+      "headRefOid": "14be2ba5dd38b5efcac25f4b5c80fa57ac7e7a78",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6aMXXF",
+          "commit": {
+            "abbreviatedOid": "14be2ba"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-31T14:27:04Z",
+          "updatedAt": "2025-01-31T14:27:04Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 252,
+      "id": "PR_kwDOJZ2aqs6JqjDW",
+      "title": "mention key resolution in the validation rules section",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/252",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #205 \r\n\r\nDepends on #248",
+      "createdAt": "2025-01-31T16:37:38Z",
+      "updatedAt": "2025-01-31T16:51:56Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f181925ffa8b7c9bb3e978c3922faa7032da6850",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "205-validation-rules",
+      "headRefOid": "5d435dd6ace2b90e71c662cc28796cb4defa2bc7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "#248 must be merged first to solve the checks",
+          "createdAt": "2025-01-31T16:51:55Z",
+          "updatedAt": "2025-01-31T16:51:55Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6aNtQg",
+          "commit": {
+            "abbreviatedOid": "5d435dd"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-31T16:50:31Z",
+          "updatedAt": "2025-01-31T16:50:31Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
