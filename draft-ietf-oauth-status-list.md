@@ -48,6 +48,7 @@ normative:
   RFC8949: RFC8949
   RFC9052: RFC9052
   RFC9110: RFC9110
+  RFC5280: RFC5280
   RFC9596: RFC9596
   IANA.MediaTypes:
     author:
@@ -854,6 +855,22 @@ The following is a non-normative example for media type `application/json`:
 }
 ~~~
 
+# X.509 Certificate Extensions
+
+## Extended Key Usage Extension {#eku}
+
+{{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.
+
+The following OID is defined for usage in the EKU extension
+
+```
+   id-kp  OBJECT IDENTIFIER  ::=
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) 3 }
+
+   id-kp-oauthStatusListSigning             OBJECT IDENTIFIER ::= { id-kp TBD }
+```
+
 # Security Considerations {#Security}
 
 The Status List as defined in [](#status-list) only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other aspects like transport security (e.g., the web PKI).
@@ -870,9 +887,50 @@ A Status List Token in the JWT format should follow the security considerations 
 
 A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
 
-## MAC-secured Status Lists
+## Key Resolution and Trust Management {#key-management}
 
-This specification allows for both cryptographic signatures and message authentication codes (MAC) to secure a Status List Token. For (H)MAC based deployments, the security implications of a shared secret should be understood and should match the general security considerations of the deployment. There usually exists a stronger relationship between RP and Issuer for such deployments and they have the capability to securely distribute a shared secret ouf of band.
+This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made:
+
+If the Issuer of the Referenced Token is the same entity as the Status Issuer, then the same key that is embedded into the Referenced Token may be used for the Status List Token. In this case the Status List Token may use:
+- the same `x5c` value or an `x5t`, `x5t#S256` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
+- the same `x5chain` value or an `x5t` or `kid` parameter referencing to the same key as used in the Referenced Token for COSE.
+
+Alternatively, the Status Issuer may use the same web-based key resolution that is used for the Referenced Token. In this case the Status List Token may use:
+- an `x5u`, `jwks`, `jwks_uri` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for JOSE.
+- an `x5u` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for COSE.
+
+~~~ ascii-art
+┌────────┐  host keys  ┌──────────────────────┐
+│ Issuer ├────────┬───►│ .well-known metadata │
+└─┬──────┘        │    └──────────────────────┘
+  ▼ update status │
+┌───────────────┐ │
+│ Status Issuer ├─┘
+└─┬─────────────┘
+  ▼ provide Status List
+┌─────────────────┐
+│ Status Provider │
+└─────────────────┘
+~~~
+If the Issuer of the Referenced Token is a different entity than the Status Issuer, then the keys used for the Status List Token may be cryptographically linked, e.g. by an Certificate Authority through an x.509 PKI. The certificate of the Issuer for the Referenced Token and the Status Issuer should be issued by the same Certificate Authority and the Status Issuer's certificate should utilize [extended key usage](#eku).
+
+~~~ ascii-art
+┌───────────────────────┐
+│ Certificate Authority │
+└─┬─────────────────────┘
+  │ authorize
+  │  ┌────────┐
+  ├─►│ Issuer │
+  │  └─┬──────┘
+  │    ▼ update status
+  │  ┌───────────────┐
+  └─►│ Status Issuer │
+     └─┬─────────────┘
+       ▼ provide Status List
+     ┌─────────────────┐
+     │ Status Provider │
+     └─────────────────┘
+~~~
 
 ## Status List Caching
 
@@ -961,11 +1019,11 @@ To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Iss
 
 A Status Issuer and a Relying Party Issuer may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
-## Third-Party Hosting {#third-party-hosting}
+## External Status Provider for Privacy {#third-party-hosting}
 
-If the roles of the Issuer and the Status Provider are performed by two different entities, this may give additional privacy assurances as the Issuer has no means to identify the Relying Party or its request.
+If the roles of the Status Issuer and the Status Provider are performed by different entities, this may give additional privacy assurances as the Issuer has no means to identify the Relying Party or its request.
 
-Third-Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs.
+Third-Party hosting may also allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs, while still ensuring authenticity and integrity of Token Status List, as it is signed by the Status Issuer.
 
 ## Historical Resolution {#privacy-historical}
 
@@ -999,6 +1057,19 @@ The storage and transmission size of the Status Issuer's Status List Tokens depe
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
 The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
+
+## External Status Issuer
+
+If the roles of the Issuer of the Referenced Token and the Status Issuer are performed by different entities, this may allow for use case that require revocations of Referenced Tokens to be managed by a different entities, e.g. for regulatory or privacy reasons. In this scenario both parties must align on:
+
+- the key and trust management as described in [](#key-management)
+- parameters for the Status List
+  - number of `bits` for the Status Type as described in [](#status-list)
+  - update cycle of the Issuer used for `ttl` in the Status List Token as described in [](#status-list-token)
+
+## External Status Provider for Scalability
+
+If the roles of the Status Issuer and the Status Provider are performed by different entities, this may allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs. At the same time the authenticity and integrity of Token Status List is still guaranteed, as it is signed by the Status Issuer.
 
 ## Relying Parties avoiding correlatable Information
 
@@ -1301,6 +1372,10 @@ To indicate that the content is an CWT-based Status List:
   * Author: Paul Bastian, paul.bastian@posteo.de
   * Change controller: IETF
   * Provisional registration? No
+
+## X.509 Certificate Extended Key Purpose OID Registration
+
+IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section [](#eku).
 
 --- back
 
@@ -1712,6 +1787,9 @@ CBOR encoding:
 
 -07
 
+* add considerations about External Status Issuer or Status Provider
+* add recommendations for Key Resolution and Trust Management
+* add extended key usage extensions for x509
 * Relying Parties avoiding correlatable Information
 * editorial changes on terminology and Referenced Tokens
 * clarify privacy consideration around one time use reference tokens
