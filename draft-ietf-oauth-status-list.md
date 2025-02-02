@@ -712,6 +712,8 @@ This document creates a registry in [](#iana-status-types) that includes the mos
 
 The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
 
+See [](#privacy-status-types) for privacy considerations on status types.
+
 # Verification and Processing
 
 ## Status List Request {#status-list-request}
@@ -1030,6 +1032,14 @@ Third-Party hosting may also allow for greater scalability, as the Status List T
 By default, this specification only supports providing Status List information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.
 
 There are strong privacy concerns that have to be carefully taken into consideration when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
+
+## Status Types {#privacy-status-types}
+
+As previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports special information about a Token can leak information to other parties. This documents defines one additional Status Type with "SUSPENDED" that conveys such additional information. Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, but the token itself is still valid.
+
+A concrete example would be a driver's license, where the digital driver's license might still be useful to prove other information about its holder, but suspended could signal that it should not be considered valid in the scope of being allowed to drive a car. This case could be solved by either introducing a special status type, or by revoking the Token and re-issuing with changed attributes. For such a case, the status type suspended might be dangerous as it would leak the information of a suspended driver's license even if the driver's license is used as a mean of identification and not in the context of driving a car. This could also allow for the unwanted collection of statistical data on the status of driver's licenses.
+
+Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might a better fit for their use-case.
 
 # Implementation Considerations {#implementation}
 
@@ -1804,6 +1814,7 @@ CBOR encoding:
 * add prior art
 * updated language around application specific status type values and assigned ranges for application specific usage
 * add short security considerations section for mac based deployments
+* privacy considerations for other status types like suspended
 * fix aggregation_uri text in referenced token
 * mention key resolution in validation rules
 
