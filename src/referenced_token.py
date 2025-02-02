@@ -1,6 +1,7 @@
-from cbor2 import dumps
-from cwt import COSE, COSEHeaders, COSEKey, CWTClaims, COSEAlgs
 from datetime import datetime
+
+from cbor2 import dumps
+from cwt import COSE, COSEAlgs, COSEHeaders, COSEKey, CWTClaims
 from jwcrypto import jwk
 
 
@@ -41,4 +42,5 @@ def CWT(
         dumps(claims), key, protected=protected_header, unprotected=unprotected_header
     )
 
+    return encoded
     return encoded
