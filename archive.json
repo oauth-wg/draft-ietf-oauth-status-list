@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-02T00:17:50.428876+00:00",
+  "timestamp": "2025-02-04T00:16:35.438387+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -4055,7 +4055,7 @@
       "id": "I_kwDOJZ2aqs6hL8Ik",
       "title": "Validation Rules",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/205",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -4066,8 +4066,8 @@
       ],
       "body": "Re-check validation rules now that the unsigned option is gone and figure out if we can further simplify",
       "createdAt": "2024-11-29T07:50:26Z",
-      "updatedAt": "2025-01-31T13:51:12Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-02T13:51:05Z",
+      "closedAt": "2025-02-02T13:51:05Z",
       "comments": [
         {
           "author": "c2bo",
@@ -4283,7 +4283,7 @@
       "id": "I_kwDOJZ2aqs6lherb",
       "title": "Test vectors",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/216",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -4292,8 +4292,8 @@
       "labels": [],
       "body": "- Move [section 10 ](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#section-10)[Further Examples](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-further-examples) before IANA section and rename to Test vectors\r\n- add examples for 4 and 8 bit with longer lists in general",
       "createdAt": "2025-01-09T07:18:36Z",
-      "updatedAt": "2025-01-14T12:43:42Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-02T09:37:10Z",
+      "closedAt": "2025-02-02T09:37:10Z",
       "comments": [
         {
           "author": "c2bo",
@@ -4428,7 +4428,7 @@
       ],
       "body": "On page 3, the text states:\r\n\r\n> If not further specified, the term Issuer may refer to an entity acting for all three roles.  \r\n\r\nThis sentence should be removed.\r\n\r\nThe role of the Issuer and of the Status Issuer should be kept separate in the whole document.\r\nA Status Issuer does not have access to the data that has been provided when the user was enrolled by the Issuer. \r\n\r\nAs a consequence, the following sentence should be reconsidered:\r\n\r\n>    If the roles of the Issuer and the Status Provider are performed by\r\n>    two different entities, this may give additional privacy assurances\r\n>    as the Issuer has no means to identify the Relying Party or its\r\n>    request.\r\n\r\nThese \"additional privacy assurances\" exist as soon as the role of the Issuer and of the Status Issuer are kept separate. \r\n",
       "createdAt": "2025-01-13T18:24:16Z",
-      "updatedAt": "2025-01-31T13:43:35Z",
+      "updatedAt": "2025-02-03T09:39:36Z",
       "closedAt": "2025-01-31T13:43:35Z",
       "comments": [
         {
@@ -4465,6 +4465,13 @@
           "body": "The issues from #227 are being resolved in #248 ",
           "createdAt": "2025-01-30T15:35:07Z",
           "updatedAt": "2025-01-30T15:35:07Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "The sentence which is incorrect is:\n\n> If not further specified, the term Issuer may refer to an entity acting for all three roles.\n\nThis sentence should be removed\n\nSection 3 (Terminology) states: \n\n> Issuer: An entity that issues the Referenced Token.\n> \n> Status Issuer: An entity that issues the Status List Token about the status information of the Referenced Token. This role may be fulfilled by the Issuer.\n> \n> Status Provider: An entity that provides the Status List Token on a public endpoint. This role may be fulfilled by the \"Status Issuer\".\n> \n\nI am still not convinced that the role of a \"Status Provider\" needs to be considered as separate from the role of the Status Issuer.\n\nIn RFC 5280, the role of the \"CRL issuer\" is recognized, but the role for a \"CRL Provider\" does not exist. \nAs CRLs and Status List Tokens are similar, I don't see for which reason we should introduce the role of a \"Status Provider\". \n\nA Status Provider should also use a single \"distribution point\". I noticed that only one \"distribution point\" is being used, \nbut it would not hurt to use the plural: a CRL issuer can use several  \"distribution points\". Why should it be otherwise for a Status Issuer ? \n\nIMO, the definition of a \"Status Provider\" should be removed.\n\nThe definition of a Status Issuer should be replaced by:\n\n> Status Issuer: An entity that issues Status List Tokens about status information of Referenced Tokens using distribution points. \nThis role may be fulfilled by the Issuer.\n\nThe first definition would be better when using the plural:\n\n> Issuer: An entity that issues Referenced Tokens. \n\nIn section 6.2, the text states:\n\n> 6.2.  Referenced Token in JOSE\n> \n> (...)\n> \n>    The following content applies to the JWT Claims Set:\n> \n>          (...)\n> \n>          o  uri: REQUIRED.  The uri (URI) claim MUST specify a String\n>             value that identifies the Status List Token containing the\n>             status information for the Referenced Token.  The value of\n>             uri MUST be a URI conforming to [RFC3986].\n\nChange into:\n\n>          o  uris: REQUIRED.  JSON array of strings that contains URIs \n>             that identify one or more Status List Tokens containing the status \n>             information for the Referenced Token.  The value of each uri \n>             MUST be a URI conforming to [RFC3986].\n\nPerform the same type of change for section 6.3(Referenced Token in COSE)\n",
+          "createdAt": "2025-02-03T09:39:34Z",
+          "updatedAt": "2025-02-03T09:39:34Z"
         }
       ]
     },
@@ -4513,7 +4520,7 @@
       "id": "I_kwDOJZ2aqs6mFZIz",
       "title": "Interims Feedback: Discussion around Suspended Status Type",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/222",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -4522,8 +4529,8 @@
       "labels": [],
       "body": "In the  OAuth Interims Call on 13. Jan 2025, feedback occured towards the pre-defined Status Types.\r\n\r\nCurrently we define only 3 Status Types:\r\n- 0x00 VALID\r\n- 0x01 INVALID\r\n- 0x02 SUSPENDED\r\n- the rest is undefined or application-specific\r\n\r\nThere was no objection towards 0x00 and 0x01 and people agreed that for security reasons its best to have those important ones fixed in the specification. Towards 0x02 (suspended) there were different opinions and suggestions. The summarized options are:\r\n\r\n## Option A\r\nKeep 0x02 (suspended) as pre-defined but add additional text in the draft that explains potential privacy issues of it (leaking more information than necessary when used with natural persons) but also explains potential use cases (suspended may signal different actions for the Relying Party and avoid deletion of an account or similar)\r\n\r\n## Option B\r\nRemove 0x02 (suspended) and have this as an application-specific, ecosystem-depended value, if needed. \r\n\r\n## Option C\r\nLeave 0x00 and 0x01 as pre-defined in the draft and add context-specific values and descriptions for the other ones in the Status List Token, see initial thoughts on this in #1 ",
       "createdAt": "2025-01-14T07:18:33Z",
-      "updatedAt": "2025-01-29T07:51:42Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-02T19:26:04Z",
+      "closedAt": "2025-02-02T19:26:04Z",
       "comments": [
         {
           "author": "c2bo",
@@ -4571,7 +4578,7 @@
       "id": "I_kwDOJZ2aqs6mFc8i",
       "title": "Interims Feedback: Explain motivation to split issuer / status list issuer / status list provider",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/224",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -4580,8 +4587,8 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-01-14T07:29:10Z",
-      "updatedAt": "2025-01-27T07:32:40Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-02T13:47:54Z",
+      "closedAt": "2025-02-02T13:47:54Z",
       "comments": [
         {
           "author": "Denisthemalice",
@@ -4686,7 +4693,7 @@
       "id": "I_kwDOJZ2aqs6mQ9NE",
       "title": "Which keys should be used to sign and verify Status List Tokens ?",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/227",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4695,8 +4702,8 @@
       "labels": [],
       "body": "In section 5 (Status List Token) the text states:\r\n\r\n> A Status List Token embeds the Status List into a token that is cryptographically signed and protects the integrity of the Status List.\r\n\r\nThis sentence does not state which key should be used to sign or to verity the Status List Token.\r\n\r\nUsing JOSE, the \"iss\" (issuer) claim identifies the principal that issued the JWT. The iss\" claim is not present in the list of claims from section 5.1 (Status List Token in JWT Format).\r\n\r\nSection 8.3 which is about \"Validation Rules\" states:\r\n\r\n>    3.  Validate the Status List Token:\r\n> \r\n>        1.  Validate the Status List Token by following the rules defined\r\n>            in section 7.2 of [RFC7519] for JWTs\r\n\r\n\r\nHowever, in section 7.2 from RFC 7519, the single \"occurrence of \"iss\" is in the following sentence:\r\n\r\n> Some applications may include case-insensitive information in a case-sensitive value, such as including a DNS name as part of the \"iss\" (issuer) claim value.\r\n\r\nThe text does not say that the content of \"iss\" claim shall be used and does not specific against which value it shall match.\r\n\r\nLet us make a parallel with OCSP, section 4.2.2.2 from RFC 6960 which states:\r\n\r\n> 4.2.2.2.  Authorized Responders\r\n> The key that signs a certificate's status information need not be the same key that signed the certificate.  It is necessary, however, to ensure that the entity signing this information is authorized to do so.  Therefore, a certificate's issuer MUST do one of the following:\r\n>    - sign the OCSP responses itself, or\r\n>    - explicitly designate this authority to another entity\r\n\r\nThere is no similar text in the draft. It is thus assumed that the signer of the Status List Tokens are the Issuers and not the List Issuers. \r\n\r\nFrom a security point of view, using two different entities is better because the key used by the Issuer to issue Referenced Tokens does not need to be communicated or exposed to the Status Issuer. If the Status Issuer sends to the Issuer hash values to be signed by the Issuer, the risk would be that the hash value to be signed does not correspond to a Status List Token but to Referenced Token.\r\n\r\nRFC 2560 has been replaced by RFC 6960 precisely to solve the issue of using the same key for two different purposes.\r\n\r\nIf the keys are different, this indeed complexiflies the PKI, but this path has already be opened when drafting OCSP in particular by defining id-kp-OCSPSigning in an extended key usage certificate extension.\r\n\r\nIf the List Issuer would use its own key to sign, then it makes sense to consider it as an entity which is different from the Issuer, otherwise it doesn't.\r\n\r\nThere would be other consequences to consider like [4.2.2.2.1](https://datatracker.ietf.org/doc/html/rfc6960#section-4.2.2.2.1).  Revocation Checking of an Authorized Responder.\r\nWhat about an extended key usage certificate extension that would be called id-kp-TSLSigning ?",
       "createdAt": "2025-01-15T10:49:51Z",
-      "updatedAt": "2025-01-27T07:56:42Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-02T13:47:54Z",
+      "closedAt": "2025-02-02T13:47:54Z",
       "comments": [
         {
           "author": "c2bo",
@@ -4876,15 +4883,15 @@
       "id": "I_kwDOJZ2aqs6m0r6r",
       "title": "Validation Rules (section 8.3)",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/234",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "In section 8.3 (Validation Rules), the text states:\n\n> 8.3.  Validation Rules\n> \n> The text states:\n> \n>    If the validation was successful, the Relying Party MUST\n>    perform the following validation steps to evaluate the status of the\n>    reference token:\n> \n>    (...)\n> \n>    3.  Validate the Status List Token:\n> \n>        1.  Validate the Status List Token by following the rules defined\n>            in section 7.2 of [RFC7519] for JWTs and section 7.2 of\n>            [RFC8392] for CWTs\n> \n\nSection 7.2 from RFC 7519 does not say which key SHALL be used to verify the signature of the Status List Token. Section 8.3 from this document is also silent. In order to be able to interoperate, additional information needs to be added into the document. \n\nThe simplest (and the less secure approach) is to use the same private key to sign Referenced Tokens and Status List Tokens. This corresponds to the case where the Status issuer is the Issuer.\n\nA more secure approach is to use of different private keys to sign Referenced Tokens and Status List Tokens. This corresponds to the case where the Status issuer is an entity that has been authorized by the Issuer to issue Status List Tokens. This approach should be RECOMMENDED.\n\nIn RFC 5280, a CRL issuer can be nominated by a CA by the issuance of a PKC that contains the cRLSign bit set in the key usage extension (Section 4.2.1.3 from RFC 5280). Since the role of a CRL issuer and of a Status issuer are different, the same bit cannot be used.\n\nIn the key usage extension of a PKC, it becomes necessary to define an additional bit that can apply to a Status issuer nominated by an Issuer and to register that additional bit at IANA.\n\nAt the moment, in RFC 5280, the following Object Identifier is defined:\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15)}\nOID dot notation: 2.5.29.15\n\n```\n      id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8) }\n\n```\nThe next usable bit is (9).\n\nThe following line should be happened to this list:\n\n`           sLTSign                 (9)`\n\n\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15) sLTSign(9)}\n\nOID dot notation: 2.5.29.15.9\n\nWith the following explanation:\n\n> The sLTSign bit is asserted when the subject public key can be used for verifying signatures on Status List Tokens.\n\nA specific section dedicated to this extension should be added so that it can be referenced in the IANA registration template.\n\nAfter these explanations, we can now come back to a text change proposal for section 8.3 (Validation Rules).\n\nText change proposal for section 8.3.\n\n> 8.3.  Validation Rules\n> \n> The text states:\n> \n>    If the validation was successful, the Relying Party MUST\n>    perform the following validation steps to evaluate the status of the\n>    reference token:\n> \n>    (...)\n> \n>    3.  Identify the public key to be used to verify the signature \n>        of Status List Token\n> \n> If no iss claim, nor an x5c claim, is present in the Status List Token and unless a specific local rule applies, the Relying Party MUST verify the Status List Token using the same key that has been used to verify the Referenced Token. This approach is NOT RECOMMENDED.\n> \n> If the iss claim is present in the JOSE Header, the JWT Claims, or the COSE Header, a Relying Party can use this parameter to obtain a JSON Web Key to use in the verification process. It should be noticed that, according to RFC 7519, the processing of this claim is generally application specific. Unless the processing of this claim is made in a specific environment or context, this approach is not interoperable.\n> \n> If the \"x5c\" claim is present in the JWT Claims, a Relying Party SHOULD use this parameter to obtain a JSON Web Key to use in the verification process. The \"x5c\" claim is an array of strings that contains an x.509 certificate chain, in order from the root certificate authority to the signing certificate.\n> \n> The last certificate of the chain can be either the certificate of the Issuer or of the Status Issuer. In the later case, the key usage extension (defined in section 4.2.1.3 from RFC 5280) MUST be present and MUST contain an additional bit defined in section 9 of this document. \n> \n> Once it has been verified that the whole chain is valid and that no certificate of the chain has been revoked, the public key from the last certificate of the chain MUST be used to validate the Status List Token. This approach is RECOMMENDED.\n> \n> \n> 2.  Validate the Status List Token by following the rules defined in section 7.2 of [RFC7519] for JWTs and section 7.2 of [RFC8392] for CWTs\n> \n> 3.  Check for the existence of the required claims as defined in Section 5.1 and Section 5.2 depending on token type\n\nA text proposal for defining the sLTSign bit is provided in a subsequent issue.\n",
       "createdAt": "2025-01-20T10:19:16Z",
-      "updatedAt": "2025-01-29T07:47:41Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-02T13:47:54Z",
+      "closedAt": "2025-02-02T13:47:54Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -4914,7 +4921,7 @@
       "id": "I_kwDOJZ2aqs6m0yj-",
       "title": "New section to define the sLTSign bit of a key usage extension in a PKC",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/235",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -4923,8 +4930,8 @@
       "labels": [],
       "body": "It is proposed to add a new section 9.\n\n**Status List Token signature bit of a key usage extension in a PKC (sLTSign)**\n\nThe key usage extension of a PKC (Public Key Certificate) defines the purpose of the public key contained in the PKC  In RFC 5280, section 4.2.1.3, the text states that \"conforming CAs MUST include this extension in certificates that contain public keys that are used to validate digital signatures or other public key certificates or CRLs.  When present, conforming CAs SHOULD mark this extension as critical\". At the time RFC 5280 was written and published (2008), the concept of a Status Issuer did not existed.\n\nThis document states that conforming CAs MUST include this extension in certificates that contain public keys that are used to validate digital signatures or other public key certificates, CRLs or Status List Tokens.  When present, conforming CAs SHOULD mark this extension as critical.\n\nIn RFC 5280, the following Object Identifier has been defined:\n{joint-iso-itu-t(2) ds(5) certificateExtension(29) keyUsage(15)}. OID dot notation: 2.5.29.15\n\n ```\n     id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8) }\n\n```\nIn order to allow an Issuer to designate a Status Issuer, an additional bit in the key usage extension is needed. The next usable bit is (9).\n\nThe following line is happened to this list:\n\n           sLTSign                 (9)\n\nwith the following meaning:\n\nThe sLTSign bit is asserted when the subject public key can be used for verifying signatures on Status List Tokens.\n\nThe id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 } then becomes:\n\n ```\n     id-ce-keyUsage OBJECT IDENTIFIER ::=  { id-ce 15 }\n      KeyUsage ::= BIT STRING {\n           digitalSignature        (0),\n           nonRepudiation          (1), -- recent editions of X.509 have\n                                -- renamed this bit to contentCommitment\n           keyEncipherment         (2),\n           dataEncipherment        (3),\n           keyAgreement            (4),\n           keyCertSign             (5),\n           cRLSign                 (6),\n           encipherOnly            (7),\n           decipherOnly            (8),\n           sLTSign                 (9) }\n\n```\n\nUsing the text previously proposed, a section 14.8 (Key Usage extension for Status issuer certificates) should be added into section 14 (IANA Considerations).\n",
       "createdAt": "2025-01-20T10:29:16Z",
-      "updatedAt": "2025-01-29T07:55:04Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-02T13:47:54Z",
+      "closedAt": "2025-02-02T13:47:53Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -4978,15 +4985,15 @@
       "id": "I_kwDOJZ2aqs6m0_dO",
       "title": "Token Lifecycle",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/237",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The content of section 13.1 (Token Lifecycle) does not contain sufficient guidance.\n\nThe following guidance is rather vague:\n\n>    The lifetime of a Status List Token depends on the lifetime of its eferenced Tokens.\n\nSince the exp (expiration time) claim in a Status List Token is OPTIONAL, it is hard to understand how this sentence can be used.\n\nThe three paragraphs do not provide sufficient information\n\nProposed text replacement:\n\n> The Issuer and the Status issuer SHALL initially agree on the following set of parameters:\n> \n> -\tthe number of bits that indicates the status of each Referenced Token,\n> -\tthe number of entries in a Status List,\n> -\tthe number of Status Lists initially available,\n> -  one or more absolute uris where the Status List Tokens will be made available by the Status issuer,\n> -\ta relative uri associated with each Status List (that can also be used to reference a given Status List).\n> \n> The Issuer CAN communicate to the Status issuer the \"time to live\" which is the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved ('ttl' claim). If the \"time to live\" is communicated, then the Status issuer SHALL include it into each Status List Token.\n> \n> For every Status List, the Issuer SHALL communicate to the Status issuer the date when each Status List will cease to be updated by the Issuer. \n> For every Status List, the Issuer CAN communicate to the Status issuer the time at which the Status List Token will be considered expired. If the expiration time is communicated, then the Status issuer SHALL include the 'exp' claim into the Status List Token.\n> \n> At any time, the Status issuer and the Issuer may agree to use a new set of parameters. For every Status List already agreed, the agreed parameters remain applicable until the date when the Status List will cease to be updated by the Issuer is reached.\n> \n> The Status issuer SHOULD issue and distribute Status List Tokens before the first Referenced Token is issued by the Issuer.\n> \n> The status of Referenced Tokens with close expiration times should be grouped together into Status Lists so the corresponding Status List Tokens can be no longer issued and distributed once all the Referenced Tokens referenced in it have expired.\n> \n\nThe text continues with :\n\n>    Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties.  In this case, every re-issued\n>    Referenced Token MUST have a fresh Status List entry in order to  prevent this becoming possible source of correlation.\n\nThe concept of Referenced Tokens that would be regularly re-issued means a same content with a different validity period.\n\nThe following sentence looks odd:\n\n>    Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties.  \n\nSince the content of the referenced Token is nearly the same, linkability can easily be achieved and a re-issuance of Referenced Tokens will be unable \"to mitigate linkability of presentations to Relying Parties\". \n\nThese two sentences should be removed.\n\nThe text ends-up with :\n\n>    Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction.  In this case, every\n>    Referenced Token MUST have a dedicated Status List entry.  Revoking batch issued Referenced Tokens might reveal this correlation later\n>    on.\n> \n\nThe right wording is not \"batch issuance of Referenced Tokens\" but \"one-time-use Referenced Tokens\"\nThe second sentence has nothing to do with a consequence of the previous sentence as it applies to every Referenced Token, whether or not it is a one-time-use Referenced Token.\n\nThese three sentences should be removed.\n\nProposed text replacement:\n\n> One-time-use Referenced Tokens may also be issued in batches, such that Holders can use a different Referenced Token for every transaction.  In this case, the status of every one-time-use Referenced Token SHOULD be handled in a different Status list so that a global revocation of these one-time-use Referenced Tokens cannot be used to reveal a correlation later on.\n\n",
       "createdAt": "2025-01-20T10:50:00Z",
-      "updatedAt": "2025-01-29T07:46:26Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-02T13:47:53Z",
+      "closedAt": "2025-02-02T13:47:53Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -5086,6 +5093,80 @@
           "updatedAt": "2025-01-31T13:41:44Z"
         }
       ]
+    },
+    {
+      "number": 253,
+      "id": "I_kwDOJZ2aqs6ogC_j",
+      "title": "Change proposals for the definition of the terms \"Referenced Token\" and \" Status List Token\"",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/253",
+      "state": "OPEN",
+      "author": "Denisthemalice",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The current definition of a Referenced Token is:\n\n> Referenced Token:\n> A cryptographically secured data structure that contains a reference to a Status List Token. It is RECOMMENDED to use JSON [[RFC8259](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC8259)] with JOSE as defined in [[RFC7515](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC7515)] or CBOR [[RFC8949](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC8949)] with COSE as defined in [[RFC9052](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC9052)]. The information from the contained Status List gives the Relying Party additional information about the current status of the Referenced Token. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.\n\nThis definition does not match with the definition of a status claim which is:\n\n> 6.1. Status Claim \n> \n> By including a \"status\" claim in a Referenced Token, the Issuer is **referencing a mechanism** to retrieve status information \nabout this Referenced Token. \n\n> The claim contains members used to reference to a Status List Token as defined in this specification. Other members of the \"status\" object may be defined by other specifications. This is analogous to \"cnf\" claim in Section 3.1 of [RFC7800] in which different authenticity confirmation methods can be included.\n> \n\nIt is proposed to change this definition into:\n\n> Referenced Token: A cryptographically secured data structure that includes a \"status\" claim that is referencing a mechanism to retrieve status information about this Referenced Token. \n> While several mechanisms are possible, this document documents a single mechanism where the \"status\" claim contains both a reference to a Status List Token and an index specific to the Referenced Token that allows a Relying Party to check for status information in the Status List Token for the current Referenced Token. Examples of Referenced Tokens are X.509 PKCs, SD-JWT VC and ISO mdoc.\n\n\nAt the moment \"Status List Token\" is defined as:\n\n> A token in JWT or CWT representation that contains a cryptographically secured Status List.\n\nThis is correct. However some text that is present in the definition of \"Referenced Token\" should be moved afterwards.\n\nText change proposal:\n\n> Status List Token : A token in JWT or CWT representation that contains a cryptographically secured Status List. \nIt is RECOMMENDED to use JSON [[RFC8259](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC8259)] with JOSE as defined in [[RFC7515](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC7515)] or CBOR [[RFC8949](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC8949)] with COSE as defined in [[RFC9052](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC9052)].",
+      "createdAt": "2025-02-03T09:42:06Z",
+      "updatedAt": "2025-02-03T09:42:06Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 254,
+      "id": "I_kwDOJZ2aqs6ogF2B",
+      "title": "Status List Tokens can be fetched either by the Relying Party or by the Holder",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/254",
+      "state": "OPEN",
+      "author": "Denisthemalice",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Only the first case is described and illustrated. Both cases should be described and illustrated.\n\nThe current text from section 1 (Introduction) is:\n\n> An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party.  The Issuer gives updated status information to the Status Issuer, who creates a Status List Token.  The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint.  The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity.  If not further specified, the term Issuer may refer to an entity acting for all three roles.  This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.\n\n> The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]):\n\n```\n\n              issue                 present\n              Referenced            Referenced\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc update status                              \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                              \u2502\n   \u2502 Status Issuer \u2502                              \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                              \u2502\n     \u25bc provide Status List                        \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510         fetch Status List  \u2502\n   \u2502 Status Provider \u2502\u25c4\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n```\n\n> Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.\n\nText change proposal:\n\n> An Issuer of Referenced Tokens which is called an Issuer, issues Referenced Tokens to Holders. An Holder then uses and presents those Referenced Tokens to a Relying Party. \n> \n> Status Issuers issue Status List Tokens. The Status issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens.\n> \n> The Status Issuer issues Status List Tokens using one or more distribution points.\n> \n> The Status Issuer creates Status List Tokens initially indicating that all the Referenced Tokens then can be referenced in it are valid. In case a status change is required, the Issuer provides status information to the Status Issuer so that it can modify the content of one of the Status Lists that has been created. The modification will be taken into account at the next issuance of the Status List Token where the Referenced Token is referenced.\n> \n> This document describes how a Status List Token is created, how an Issuer references a Status List Token and how a Relying Party fetches and validates Status List Tokens.\n> \n> The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]) when Status List Tokens are fetched by the Relying Party:\n> \n```\n\n              issues                  presents\n              Referenced              Referenced\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   Token           \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc updates status                                          \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                                           \u2502\n   \u2502 Status Issuer \u2502                                           \u2502\n   \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                                           \u2502\n        \u2502 issues Status List Tokens using a Distribution point \u2502\n        \u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                             \u2502\n        \u2514\u2500\u25ba\u2502  Status List Token  \u2502  fetches Status List Token  \u2502\n           \u2502  Distribution Point \u2502\u25c4\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n           \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n> Diagram 2: This diagram depicts the case where the Status List Token is fetched by the Relying Party. \n> \n> Before presenting the Referenced Token to the Relying Party, the Holder may choose to fetch the Status List Token and to present together to the Relying Party both the Referenced Token and the corresponding Status list Token. This can avoid the Relying Party to fetch the corresponding Status List Token.\n\n```\n\n                                             presents \n                                             Referenced Token and\n               issues                        Status List Token\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  Referenced Token   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510          \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518                     \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2518          \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc updates status                  \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                   \u2502\n   \u2502 Status Issuer \u2502                   \u2502\n   \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                   \u2502\n        \u2502 issues Status List Tokens    \u2502\n        \u2502 using a Distribution point   \u2502\n        \u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510     \u2502\n        \u2514\u2500\u25ba\u2502  Status List Token  \u2502     \u2502 fetches Status List Token\n           \u2502  Distribution point \u2502\u25c4\u2500\u2500\u2500\u2500\u2518\n           \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\nDiagram 3: This diagram depicts the case where the Status List Token is fetched by the Holder. \n\nText in section 8.1 should be changed to support the use case of the Diagram 3 where the Status List Token is fetched by the Holder.\n\nIn section 8.1, the text states:\n\n> 8.1.  Status List Request\n> \n> To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.\n\n Since Status List Tokens can also be fetched by the Holder, this sentence should be modified.\n\nChange into:\n\n> The URI provided in the Referenced Token can be used either by the Relying Party or by the Holder to fetch the Status List Token that contains the status of the Referenced Token. To obtain this Status List Token, either the Relying Party or the Holder MUST send an HTTP GET request to the URI provided in the Referenced Token.\n\nThe following sentences should be modified to accommodate the two cases:\n\n>    The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:\n> \n>    *  \"application/statuslist+jwt\" for Status List Token in JWT format\n> \n>    *  \"application/statuslist+cwt\" for Status List Token in CWT format\n> \n>    If the Relying Party does not send an Accept Header, the response\n>    type is assumed to be known implicit or out-of-band.\n\nChange into:\n\n> Either the Relying Party or the Holder SHOULD send the following Accept-Header to indicate the requested response type:\n> \n>    *  \"application/statuslist+jwt\" for Status List Token in JWT format\n> \n>    *  \"application/statuslist+cwt\" for Status List Token in CWT format\n> \n> If the Relying Party or the Holder does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.\n> ",
+      "createdAt": "2025-02-03T09:45:30Z",
+      "updatedAt": "2025-02-03T09:45:30Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 255,
+      "id": "I_kwDOJZ2aqs6ogGPh",
+      "title": "About claim \"aggregation_uri\"",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/255",
+      "state": "OPEN",
+      "author": "Denisthemalice",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "pending-close"
+      ],
+      "body": "In #228, C2bo wrote:\n\n> The claim \"aggregation_uri\" is meant as a way to allow efficient caching for RPs, not for alternative URIs \n> - it points to all relevant status lists for an issuer or specific referenced token type.\n\n\"aggregation_uri\" is defined in 4.1 as:\n\n> aggregation_uri: OPTIONAL.  JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token.  \nSee section 9 for further detail.\n\nSection 9 (Status List Aggregation) states:\n\n> Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThese two descriptions are not aligned with section 4.1. **The case of the Issuer is not mentioned in section 4.1**.\nHowever, in section 9, the sentence mentions: \n> all relevant Status Lists for a specific type of Referenced Token **or Issuer**.  \n\n Then comes some questions.\n\nHow can the Relying party retrieve either: \n\na) all relevant Status Lists for a specific [type of] Referenced Token, or\nb) all relevant Status Lists for an Issuer ?\n\nIn the first case, how long should \"all relevant Status Lists\" for a specific type of Referenced Token be accessible ? \nSame question for \"all relevant Status Lists\" for an Issuer.\n\nIf the case of the \"Issuer\" is indeed supported, there should be some additional text to warn the Issuers about some consequences when this claim is supported. For example:\n\n> \"All relevant Status Lists for an Issuer\" allows a Relying Party to know how many Referenced Tokens have been issued by an Issuer and are either valid, suspended or revoked at an instant of time. This can reveal also the number of entities that have been registered. Issuers should be warned of the consequences before choosing to support this optional claim.\n\n\nFinally, the argument is that this claim is \"meant as a way to allow efficient caching for RPs\". However, I still have difficulties to understand the usefulness of this optional claim when the JSON String contains a URI to retrieve the Status List Aggregation for this Referenced Token.\nCaching is pretty well supported by the ttl claim:\n\n> *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. \n\n",
+      "createdAt": "2025-02-03T09:45:58Z",
+      "updatedAt": "2025-02-03T10:17:26Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "- Your first point was already fixed in the newest version\n- its up to the Issuer/Status List Provider how long he provides these, no need for any normative text\n- your reference to the privacy is also mentioned in the current draft already, you posted this already twice now, so I'm repeating my answer here: https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-observability-of-outsiders\n- the `ttl` claim usage is already well explained in the draft: https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-status-list-caching\n\nPending close as there are no new issues reported.",
+          "createdAt": "2025-02-03T10:17:17Z",
+          "updatedAt": "2025-02-03T10:17:17Z"
+        }
+      ]
+    },
+    {
+      "number": 256,
+      "id": "I_kwDOJZ2aqs6ogHLf",
+      "title": "Section 13.1 should not be about \"Referenced Token Lifecycle\" but about \"Status List Token Lifecycle\"",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/256",
+      "state": "OPEN",
+      "author": "Denisthemalice",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "In version -06, the title of section 13.1 was: \"13.1. Token Lifecycle\"\n\nIn version -07, the title of section 13.1 has been changed into:  \"13.1. Referenced Token Lifecycle\"\n\nSince the first sentence of this section starts with \"The lifetime of a Status List Token (...)\" \nthis means that none of these two titles is correct. \n\nThis section should be renamed:\n\n> 13.1 Status List Token  Lifecycle \n\nThe content of section 13.1 does not contain enough guidance. The following guidance is insufficient:\n\n> The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens.\n\nSince the exp (expiration time) claim in a Status List Token is OPTIONAL, it is hard to understand how this sentence can be used.\n\nThe three paragraphs do not provide sufficient information.\n\nProposed text replacement:\n\n> The Issuer and the Status issuer SHALL initially agree on the following set of parameters:\n> \n> -\tone or more absolute uris where the Status List Tokens will be made available by the Status issuer,\n> -\tthe number of bits that indicates the status of each Referenced Token,\n> -\tthe number of entries in a Status List,\n> -   the date when each Status List corresponding to a Status List Token will cease to be updated by the Issuer.\n> \n> The Issuer CAN communicate to the Status issuer the \"time to live\" which is the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved ('ttl' claim). If the \"time to live\" is communicated, then the Status issuer SHALL include it into each Status List Token.\n> \n> For every Status List, the Issuer CAN communicate to the Status issuer the time at which the Status List Token will be considered expired ('exp' claim). If the expiration time is communicated, then the Status issuer SHALL include it into each Status List Token.\n> \n> At any time, the Status issuer and the Issuer may agree to use a new set of parameters. For every Status List already agreed, the agreed parameters remain applicable until the date when the Status List will cease to be updated by the Issuer is reached.\n> \n> The Status issuer SHOULD issue and distribute Status List Tokens before the first Referenced Token is issued by the Issuer.\n> \n> The status of Referenced Tokens with close expiration times should be grouped together into Status Lists so the corresponding Status List Tokens can be no longer issued and distributed once all the Referenced Tokens referenced in it have expired.\n> \n\nThe text continues with :\n\n>    Referenced Tokens may be regularly re-issued to mitigate linkability\n>    of presentations to Relying Parties.  In this case, every re-issued\n>    Referenced Token MUST have a fresh Status List entry in order to\n>    prevent this becoming possible source of correlation.\n\nThe concept of Referenced Tokens that would be regularly re-issued means a same content with a different validity period.\n\nThe following sentence looks odd:\n\n   \n\n> Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties.\n\nSince the content of the referenced Token is nearly the same, linkability can easily be achieved and a re-issuance of Referenced Tokens will be unable \"to mitigate linkability of presentations to Relying Parties\". \n\nThese two sentences should be removed.\n\nThe text ends-up with :\n\n>    Referenced Tokens may also be issued in batches, such that Holders\n>    can use individual tokens for every transaction.  In this case, every\n>    Referenced Token MUST have a dedicated Status List entry.  Revoking\n>    batch issued Referenced Tokens might reveal this correlation later\n>    on.\n\nThe right wording is not \"batch issuance of Referenced Tokens\" but \"one-time-use Referenced Tokens\"\nThe second sentence has nothing to do with a consequence of the previous sentence as it applies to every Referenced Token, whether or not it is a one-time-use Referenced Token.\n\nThese three sentences should be removed.\n\nProposed text replacement:\n\n> One-time-use Referenced Tokens may also be issued in batches, such that Holders can use a different Referenced Token for every transaction.  In this case, the status of every one-time-use Referenced Token SHOULD be handled in a different Status list so that a global revocation of these one-time-use Referenced Tokens cannot be used to reveal a correlation later on.\n",
+      "createdAt": "2025-02-03T09:46:58Z",
+      "updatedAt": "2025-02-03T09:46:58Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -15675,24 +15756,26 @@
       "id": "PR_kwDOJZ2aqs6ILAtT",
       "title": "More test vectors",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/232",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Fixes #216 \r\n\r\nI've moved the existing 2 bit examples and ascii art up - we can revert that change, but it felt more consistent to me that way\r\nI am not exactly sure how to better displays the input (status values for specific positions) - any ideas?\r\n\r\nRendered version: https://drafts.oauth.net/draft-ietf-oauth-status-list/216-test-vectors/draft-ietf-oauth-status-list.html",
       "createdAt": "2025-01-17T15:45:12Z",
-      "updatedAt": "2025-01-30T14:19:27Z",
+      "updatedAt": "2025-02-02T09:37:09Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "53bfe1f752ecbc4cacbdea27be5570af046c8e54",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "216-test-vectors",
       "headRefOid": "c6bf98d20ab99860d62288fa16e176f75c9233a9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-02T09:37:09Z",
+      "mergedAt": "2025-02-02T09:37:09Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "4d43c670eddd71fba284e653f71e6659aeab7c0f"
+      },
       "comments": [
         {
           "author": "paulbastian",
@@ -15790,6 +15873,19 @@
           "body": "",
           "createdAt": "2025-01-22T12:14:53Z",
           "updatedAt": "2025-01-22T12:14:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aSX9a",
+          "commit": {
+            "abbreviatedOid": "c6bf98d"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-02T09:37:01Z",
+          "updatedAt": "2025-02-02T09:37:01Z",
           "comments": []
         }
       ]
@@ -16196,7 +16292,7 @@
       "labels": [],
       "body": "Closes #233 ",
       "createdAt": "2025-01-27T09:24:25Z",
-      "updatedAt": "2025-01-29T07:11:18Z",
+      "updatedAt": "2025-02-03T09:46:07Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "e653b05e83ffed532cef7516ffd0ced79001547d",
@@ -16209,7 +16305,15 @@
       "mergeCommit": {
         "oid": "94a4d385748e075d06af8530b9f734c32e576b05"
       },
-      "comments": [],
+      "comments": [
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "The text states:\r\n\r\n> For (H)MAC based deployments, the security implications of a shared secret should be understood and should match the general security considerations of the deployment.\r\n\r\nThis text is too vague.\r\n\r\nReplace by:\r\n\r\n> For (H)MAC based deployments, it should be understood that any Relying Party able to use a secret key to verify a (H)MAC will be in a position to forge Status List Tokens. This means that the system will be secure only if the Relying Parties can trust each other of not doing it.\r\n\r\n\r\n",
+          "createdAt": "2025-02-03T09:46:06Z",
+          "updatedAt": "2025-02-03T09:46:06Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJZ2aqs6Zf-Ij",
@@ -16351,7 +16455,7 @@
       "labels": [],
       "body": "Closes #234 \r\nCloses #235 ",
       "createdAt": "2025-01-29T07:51:38Z",
-      "updatedAt": "2025-01-31T13:30:38Z",
+      "updatedAt": "2025-02-03T09:46:42Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "94a4d385748e075d06af8530b9f734c32e576b05",
@@ -16376,6 +16480,13 @@
           "body": "Close in favor of #248 (change included there)",
           "createdAt": "2025-01-31T13:30:38Z",
           "updatedAt": "2025-01-31T13:30:38Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "Instead of using the Key Usage extension (Section 4.2.1. from RFC 5280) as initially proposed, \r\nit has been noticed that the current proposal is to use the Extended Key Usage Extension (Section 4.2.1.12 from RFC 5280).\r\n\r\nSection 4.2.1.12 (Extended Key Usage Extension) from RFC 5280 states:\r\n\r\n> This extension indicates one or more purposes for which the certified public key may be used, in addition to or in place of the basic purposes indicated in the key usage extension. In general, this extension will appear only in end entity certificates.\r\n\r\nAs the text states, this extension will not appear in a CA certificate. This means that the public key can be used for verifying Status List Tokens, but not for verifying end entity certificates. This is a better choice as it is more secure: the key from the CA and the key from the Status Issuer will be different.\r\n\r\nSection 2.6 (OCSP Signature Authority Delegation) from RFC 6960 states:\r\n\r\n> A certificate's issuer explicitly delegates OCSP signing authority by issuing a certificate containing a unique value for the extended key usage extension (defined in [RFC5280], Section 4.2.1.12).\r\n\r\nThe new text states:\r\n\r\n> 10. X.509 Certificate Extensions\r\n> \r\n> 10.1. Extended Key Usage Extension \r\n> \r\n> [RFC5280] specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.\r\n> \r\n> The following OID is defined for usage in the EKU extension``` id-kp OBJECT IDENTIFIER ::= { iso(1) identified-organization(3) dod(6) internet(1) security(5) mechanisms(5) pkix(7) 3 } id-kp-oauthStatusListSigning OBJECT IDENTIFIER ::= { id-kp TBD }\r\n> \r\n\r\nThe text is not sufficiently descriptive. It is proposed to use the following text instead:\r\n\r\n> 10. X.509 Certificate Extensions\r\n> \r\n> 10.1. Extended Key Usage Extension \r\n> \r\n> [RFC5280] specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. A certificate's issuer explicitly delegates Status List Token signing authority by issuing a certificate containing a unique value for the extended key usage extension (originally defined in [RFC5280], Section 4.2.1.12).\r\n> \r\n> The following additional key usage purpose is defined under the id-kp OBJECT IDENTIFIER ::= { id-pkix 3 } defined in RFC5280:\r\n> \r\n> id-kp-StatusListTokenSigning            OBJECT IDENTIFIER ::= { id-kp 10 }\r\n> -- The StatusListSigning OID is used when the subject public key can be used\r\n> -- for verifying Status List Tokens.\r\n\r\nLet us now take a look, at section 9 (IANA Considerations) from RFC 5280. It states:\r\n\r\n>    Extensions in certificates and CRLs are identified using object\r\n>    identifiers.  The objects are defined in an arc delegated by IANA to \r\n>    the PKIX Working Group.  No further action by IANA is necessary for\r\n>    this document or any anticipated updates.\r\n\r\nHowever, the OAuth WG is not the PKIX WG. If another WG would pick { id-kp 10 } for another purpose, there would be a collision.\r\n\r\nThis means that a sub-section should be added into section 14 (IANA Considerations).\r\n",
+          "createdAt": "2025-02-03T09:46:40Z",
+          "updatedAt": "2025-02-03T09:46:40Z"
         }
       ],
       "reviews": []
@@ -16385,24 +16496,26 @@
       "id": "PR_kwDOJZ2aqs6JhAiO",
       "title": "add recommendations for Key Resolution and Trust Management",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/248",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #237 \r\nCloses #235\r\nCloses #234 \r\nCloses #227 \r\nCloses #224 ",
       "createdAt": "2025-01-30T15:23:59Z",
-      "updatedAt": "2025-01-31T13:33:19Z",
+      "updatedAt": "2025-02-02T13:47:52Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "94a4d385748e075d06af8530b9f734c32e576b05",
+      "baseRefOid": "4aa9d6480a8451124122cb70e74070939b43e96f",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "deployment_models",
-      "headRefOid": "6255be31c9bd1590d453c7d3d55c97958c9f89dc",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f2d027143f875e141b34e763c5f2227919a11d93",
+      "closedAt": "2025-02-02T13:47:52Z",
+      "mergedAt": "2025-02-02T13:47:52Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "b9565523552cc77801171a7f52cd6a6c54900371"
+      },
       "comments": [],
       "reviews": [
         {
@@ -16537,6 +16650,39 @@
           "createdAt": "2025-01-31T13:33:19Z",
           "updatedAt": "2025-01-31T13:33:19Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aSYF3",
+          "commit": {
+            "abbreviatedOid": "6255be3"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-02T09:39:34Z",
+          "updatedAt": "2025-02-02T09:39:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aSkKN",
+          "commit": {
+            "abbreviatedOid": "3d90219"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-02T13:45:52Z",
+          "updatedAt": "2025-02-02T13:45:52Z",
+          "comments": [
+            {
+              "originalPosition": 74,
+              "body": "```suggestion\r\n```",
+              "createdAt": "2025-02-02T13:45:52Z",
+              "updatedAt": "2025-02-02T13:45:52Z"
+            }
+          ]
         }
       ]
     },
@@ -16545,24 +16691,26 @@
       "id": "PR_kwDOJZ2aqs6Jip6G",
       "title": "222 suspended privacy considerations",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/249",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #222 \r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/222-suspended-privacy-considerations/draft-ietf-oauth-status-list.html",
       "createdAt": "2025-01-30T19:08:21Z",
-      "updatedAt": "2025-01-31T07:19:33Z",
+      "updatedAt": "2025-02-02T19:26:03Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "94a4d385748e075d06af8530b9f734c32e576b05",
+      "baseRefOid": "ef4ee62d8732352d7d5c22fe09d44aadfad1ed66",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "222-suspended-privacy-considerations",
-      "headRefOid": "d58828486d74e76dc674fe1b2403f9f66b8c7d9f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "04bd6abeb6eb8bf785c2220e291004a3ea298a89",
+      "closedAt": "2025-02-02T19:26:03Z",
+      "mergedAt": "2025-02-02T19:26:03Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "cebd437915a9caddffdd9954716192bd1a64fd62"
+      },
       "comments": [],
       "reviews": [
         {
@@ -16597,6 +16745,59 @@
               "updatedAt": "2025-01-31T07:15:01Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aSYLL",
+          "commit": {
+            "abbreviatedOid": "d588284"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-02T09:40:47Z",
+          "updatedAt": "2025-02-02T09:40:47Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Maybe we should be specific around where this is \"previous explained\" e.g by linking to a section.",
+              "createdAt": "2025-02-02T09:40:47Z",
+              "updatedAt": "2025-02-02T09:40:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aSkhU",
+          "commit": {
+            "abbreviatedOid": "d588284"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-02T13:52:59Z",
+          "updatedAt": "2025-02-02T13:52:59Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Would that be fine for you @tplooker \r\n```suggestion\r\nAs previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports special information about a Token can leak information to other parties. This documents defines one additional Status Type with \"SUSPENDED\" that conveys such additional information. Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, but the token itself is still valid.\r\n```",
+              "createdAt": "2025-02-02T13:52:59Z",
+              "updatedAt": "2025-02-02T13:53:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aSzHi",
+          "commit": {
+            "abbreviatedOid": "04bd6ab"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-02T19:25:56Z",
+          "updatedAt": "2025-02-02T19:25:56Z",
+          "comments": []
         }
       ]
     },
@@ -16667,24 +16868,26 @@
       "id": "PR_kwDOJZ2aqs6JpheC",
       "title": "Relying Parties avoiding correlatable Information",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/251",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-01-31T14:25:33Z",
-      "updatedAt": "2025-01-31T14:27:04Z",
+      "updatedAt": "2025-02-02T13:40:01Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "f181925ffa8b7c9bb3e978c3922faa7032da6850",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "Relying-Parties-avoiding-correlatable-Information",
       "headRefOid": "14be2ba5dd38b5efcac25f4b5c80fa57ac7e7a78",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-02T13:40:01Z",
+      "mergedAt": "2025-02-02T13:40:01Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "4aa9d6480a8451124122cb70e74070939b43e96f"
+      },
       "comments": [],
       "reviews": [
         {
@@ -16699,6 +16902,19 @@
           "createdAt": "2025-01-31T14:27:04Z",
           "updatedAt": "2025-01-31T14:27:04Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aSYOR",
+          "commit": {
+            "abbreviatedOid": "14be2ba"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-02T09:41:46Z",
+          "updatedAt": "2025-02-02T09:41:46Z",
+          "comments": []
         }
       ]
     },
@@ -16707,24 +16923,26 @@
       "id": "PR_kwDOJZ2aqs6JqjDW",
       "title": "mention key resolution in the validation rules section",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/252",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #205 \r\n\r\nDepends on #248",
       "createdAt": "2025-01-31T16:37:38Z",
-      "updatedAt": "2025-01-31T16:51:56Z",
+      "updatedAt": "2025-02-02T13:51:04Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "f181925ffa8b7c9bb3e978c3922faa7032da6850",
+      "baseRefOid": "b9565523552cc77801171a7f52cd6a6c54900371",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "205-validation-rules",
-      "headRefOid": "5d435dd6ace2b90e71c662cc28796cb4defa2bc7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "efcf1e77c06e5dab4c976f80acfb4dbc0f9fbf73",
+      "closedAt": "2025-02-02T13:51:04Z",
+      "mergedAt": "2025-02-02T13:51:04Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "ef4ee62d8732352d7d5c22fe09d44aadfad1ed66"
+      },
       "comments": [
         {
           "author": "paulbastian",
@@ -16738,14 +16956,27 @@
         {
           "id": "PRR_kwDOJZ2aqs6aNtQg",
           "commit": {
-            "abbreviatedOid": "5d435dd"
+            "abbreviatedOid": "efcf1e7"
           },
           "author": "paulbastian",
           "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2025-01-31T16:50:31Z",
-          "updatedAt": "2025-01-31T16:50:31Z",
+          "updatedAt": "2025-02-02T13:48:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6aSYPu",
+          "commit": {
+            "abbreviatedOid": "efcf1e7"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-02T09:42:13Z",
+          "updatedAt": "2025-02-02T13:48:44Z",
           "comments": []
         }
       ]
