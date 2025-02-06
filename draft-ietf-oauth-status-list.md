@@ -1,6 +1,6 @@
 ---
 title: "Token Status List"
-category: info
+category: std
 lang: en
 
 docname: draft-ietf-oauth-status-list-latest
