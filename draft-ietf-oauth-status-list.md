@@ -1043,13 +1043,13 @@ Ecosystems that want to use other Status Types than "VALID" and "INVALID" should
 
 # Implementation Considerations {#implementation}
 
-## Referenced Token Lifecycle {#implementation-lifecycle}
+## Token Lifecycle {#implementation-lifecycle}
 
 The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.
 
 Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.
 
-Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
+Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status Lists. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
 
 ## Default Values and Double Allocation
 
