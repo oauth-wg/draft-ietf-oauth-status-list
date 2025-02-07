@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 10 August 2025                                                 
+Expires: 11 August 2025                                                 
                                                               C. Bormann
                                                                   SPRIND
-                                                         6 February 2025
+                                                         7 February 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 August 2025.
+   This Internet-Draft will expire on 11 August 2025.
 
 Copyright Notice
 
@@ -197,15 +197,20 @@ Table of Contents
 
    An Issuer issues Referenced Tokens to a Holder, the Holder uses and
    presents those Referenced Tokens to a Relying Party.  The Issuer
-   gives updated status information to the Status Issuer, who creates a
-   Status List Token.  The Status Issuer provides the Status List Token
-   to the Status Provider, who serves the Status List Token on a public,
-   resolvable endpoint.  The roles of the Issuer (of the Referenced
-   Token), the Status Issuer and the Status Provider may be fulfilled by
-   the same entity.  If not further specified, the term Issuer may refer
-   to an entity acting for all three roles.  This document describes how
-   an Issuer references a Status List Token and how a Relying Party
-   fetches and validates Status Lists.
+   gives updated status information to the Status Issuer, who issues a
+   Status List Token.  The Status issuer can be either the Issuer or an
+   entity that has been authorized by the Issuer to issue Status List
+   Tokens.  The Status Issuer provides the Status List Token to the
+   Status Provider, who serves the Status List Token on a public,
+   resolvable endpoint.  The Relying Party or the Holder may fetch the
+   Status List Token to retrieve the status of the Referenced Token.
+
+   The roles of the Issuer (of the Referenced Token), the Status Issuer
+   and the Status Provider may be fulfilled by the same entity.  If not
+   further specified, the term Issuer may refer to an entity acting for
+   all three roles.  This document describes how an Issuer references a
+   Status List Token and how a Relying Party fetches and validates
+   Status Lists.
 
    The following diagram depicts the relationship between the involved
    roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]):
@@ -214,15 +219,15 @@ Table of Contents
               Referenced            Referenced
    ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
    │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
-   └─┬──────┘            └────────┘            └──┬────────────┘
-     ▼ update status                              │
-   ┌───────────────┐                              │
-   │ Status Issuer │                              │
-   └─┬─────────────┘                              │
-     ▼ provide Status List                        │
-   ┌─────────────────┐         fetch Status List  │
-   │ Status Provider │◄───────────────────────────┘
-   └─────────────────┘
+   └─┬──────┘            └───┬────┘            └──┬────────────┘
+     ▼ update status         │                    │
+   ┌───────────────┐         │                    │
+   │ Status Issuer │         │                    │
+   └─┬─────────────┘         │                    │
+     ▼ provide Status List   │                    │
+   ┌─────────────────┐       │                    │
+   │ Status Provider │◄──────┴────────────────────┘
+   └─────────────────┘     fetch Status List Token
 
    Status Lists may be composed to express a range of Status Types.
    This document defines basic Status Types for the most common use
@@ -674,9 +679,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d584081c08d6605b3d1ac10d27e4b649a80dd705b8c55c39a556225
-   811bb5ff013f1399c73b4dd9bc57f047fd10907e794a20d386bd8fc9cd5102423042
-   b9845b7ad5
+   b918000217015d58403bd8a0ac810a23958ae4e0bf65bae0ac6e28506ce687ae1101
+   7d74268a3bd4c4a536aecd132f8d2bacc7ba4ef7f0d8887741be0c3f3ca46d8a079f
+   ff07329f64
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -698,12 +703,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      81c08d6605b3d1ac10d27e4b  #       "\x81À\x8df\x05³Ñ¬\x10Ò~K"
-      649a80dd705b8c55c39a5562  #       "d\x9a\x80Ýp[\x8cUÃ\x9aUb"
-      25811bb5ff013f1399c73b4d  #       "%\x81\x1bµÿ\x01?\x13\x99Ç;M"
-      d9bc57f047fd10907e794a20  #       "Ù¼WðGý\x10\x90~yJ "
-      d386bd8fc9cd5102423042b9  #       "Ó\x86½\x8fÉÍQ\x02B0B¹"
-      845b7ad5                  #       "\x84[zÕ"
+      3bd8a0ac810a23958ae4e0bf  #       ";Ø\xa0¬\x81\x0a#\x95\x8aäà¿"
+      65bae0ac6e28506ce687ae11  #       "eºà¬n(Plæ\x87®\x11"
+      017d74268a3bd4c4a536aecd  #       "\x01}t&\x8a;ÔÄ¥6®Í"
+      132f8d2bacc7ba4ef7f0d888  #       "\x13/\x8d+¬ÇºN÷ðØ\x88"
+      7741be0c3f3ca46d8a079fff  #       "wA¾\x0c?<¤m\x8a\x07\x9fÿ"
+      07329f64                  #       "\x072\x9fd"
 
 6.  Referenced Token
 
@@ -848,9 +853,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158405948198e39a64e8cf541fe0a57f3b175fb2688
-   63805837c0be0efe8a36addfb29caf8e252ac27155869fc2cbdc625f3fd417858844
-   78301ea500e1ab525901f5
+   7374617475736c697374732f315840b24c1b7b69c7173a8463796ba3bd36ffd2fda9
+   76fc5a1bcd5c816ef3640ff48819f6c4afc7a78149d5e5f714e778f845b147807bd0
+   c376226cbce8ce6d67bfe1
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -873,12 +878,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         5948198e39a64e8cf541fe0a  #       "YH\x19\x8e9¦N\x8cõAþ\x0a"
-         57f3b175fb268863805837c0  #       "Wó±uû&\x88c\x80X7À"
-         be0efe8a36addfb29caf8e25  #       "¾\x0eþ\x8a6\xadß²\x9c¯\x8e%"
-         2ac27155869fc2cbdc625f3f  #       "*ÂqU\x86\x9fÂËÜb_?"
-         d41785884478301ea500e1ab  #       "Ô\x17\x85\x88Dx0\x1e¥\x00á«"
-         525901f5                  #       "RY\x01õ"
+         b24c1b7b69c7173a8463796b  #       "²L\x1b{iÇ\x17:\x84cyk"
+         a3bd36ffd2fda976fc5a1bcd  #       "£½6ÿÒý©vüZ\x1bÍ"
+         5c816ef3640ff48819f6c4af  #       "\\x81nód\x0fô\x88\x19öÄ¯"
+         c7a78149d5e5f714e778f845  #       "Ç§\x81IÕå÷\x14çxøE"
+         b147807bd0c376226cbce8ce  #       "±G\x80{ÐÃv"l¼èÎ"
+         6d67bfe1                  #       "mg¿á"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1067,6 +1072,11 @@ d2                              # tag(18)
 
 8.  Verification and Processing
 
+   The fetching, processing and verifying of a Status List Token may be
+   done by either the Holder or the Relying Party.  In the following
+   section is described from the role of the Relying Party, however the
+   same rules would also apply for the Holder.
+
 8.1.  Status List Request
 
    To obtain the Status List Token, the Relying Party MUST send an HTTP
@@ -1108,8 +1118,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.yjK6o16MQEnE0odlPS23ZFIE4dmoPSLm5_9ZxhYPZb1p8t9tGFgG
-   zvx89WcFVLIXMLiKJ_xxz_CY7VY3cPWbQw
+   nR0bCI6NDMyMDB9.2uz50WRQFqOrM7TbYP3W4SD1dSJN43wCIxcw9Ztmh7KyvXx1TBFW
+   O1iajOC_z7FnJchDh_tojls8JUs6-ubcsA
 
 8.2.  Status List Response
 
@@ -1248,8 +1258,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.yjK6o16MQEnE0odlPS23ZFIE4dmoPSLm5_9ZxhYPZb1p8t9tGFgG
-   zvx89WcFVLIXMLiKJ_xxz_CY7VY3cPWbQw
+   nR0bCI6NDMyMDB9.2uz50WRQFqOrM7TbYP3W4SD1dSJN43wCIxcw9Ztmh7KyvXx1TBFW
+   O1iajOC_z7FnJchDh_tojls8JUs6-ubcsA
 
 9.  Status List Aggregation
 
@@ -2915,6 +2925,10 @@ Test vectors for Status List encoding
    4b0040b3fe04353d7f81
 
 Document History
+
+   -08
+
+   *  Holders may also fetch and verify Status List Tokens
 
    -07
 
