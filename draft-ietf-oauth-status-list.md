@@ -414,7 +414,7 @@ The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {
 
 The following content applies to the protected header of the CWT:
 
-* `16` (type): REQUIRED. The type of the CWT MUST be `statuslist+cwt` as defined in {{RFC9596}}.
+* `16` (type): REQUIRED. The type of the CWT MUST be `application/statuslist+cwt` as defined in {{RFC9596}}.
 
 The following content applies to the CWT Claims Set:
 
