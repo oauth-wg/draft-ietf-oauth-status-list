@@ -1795,6 +1795,10 @@ CBOR encoding:
 # Document History
 {:numbered="false"}
 
+-08
+
+ * Fix cwt typ value to full media type
+
 -07
 
 * add considerations about External Status Issuer or Status Provider
