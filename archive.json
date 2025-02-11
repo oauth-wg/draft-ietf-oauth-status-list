@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-09T00:18:14.658154+00:00",
+  "timestamp": "2025-02-11T00:16:42.786570+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5237,15 +5237,15 @@
       "labels": [],
       "body": "The draft says:\n```\n16 (type): REQUIRED. The type of the CWT MUST be statuslist+cwt as defined in \n[[RFC9596](https://www.rfc-editor.org/rfc/rfc9596)].\n```\n\nRFC9596 states:\n```\nThis specification adds the equivalent of the JOSE \"typ\" (type) header parameter to COSE so that the benefits of \nexplicit typing can be brought to COSE objects. The syntax of the COSE type header parameter value is the \nsame as the existing COSE content type header parameter, \nallowing both unsigned integers as registered in the \"CoAP Content-Formats\" registry\n[[CoAP.ContentFormats](https://www.rfc-editor.org/rfc/rfc9596#CoAP.ContentFormats)]\n and string media type values [[MediaTypes](https://www.rfc-editor.org/rfc/rfc9596#MediaTypes)] to be used.\n```\n\nWhich refers to https://www.iana.org/assignments/media-types but there is no statuslist content type registered (yet?).\n\nI was wondering about the value. Is statuslist+cwt the final value as to be registered with the iana? Or is this a work in progress?\nI was expecting typ to be in the form of <type-name>/<subtype-name>.\n\nThe lib I used for the implementation expects this format as well (see https://github.com/veraison/go-cose/issues/211)",
       "createdAt": "2025-02-08T18:10:17Z",
-      "updatedAt": "2025-02-08T18:59:26Z",
+      "updatedAt": "2025-02-09T07:43:36Z",
       "closedAt": null,
       "comments": [
         {
           "author": "c2bo",
           "authorAssociation": "MEMBER",
-          "body": "That sounds like a mistake on our side - and weird inconsistency with how JOSE typ work.\n\n\"typ\" for the JOSE header is defines as:\n> To keep messages compact in common situations, it is RECOMMENDED that\n   producers omit an \"application/\" prefix of a media type value in a\n   \"typ\" Header Parameter when no other '/' appears in the media type\n   value.  A recipient using the media type value MUST treat it as if\n   \"application/\" were prepended to any \"typ\" value not containing a\n   '/'.  For instance, a \"typ\" value of \"example\" SHOULD be used to\n   represent the \"application/example\" media type, whereas the media\n   type \"application/example;part=\"1/2\"\" cannot be shortened to\n   \"example;part=\"1/2\"\".\n\nThe `statuslist+jwt` for the JOSE header is consistent with the media type we are registering (`application/statuslist+jwt`) and it appears we didn't notice the different behavior for CWT. We are requesting the registration of media type `application/statuslist+cwt` and from re-reading the CWT typ RFC, we should use the full one then for the COSE typ header parameter.",
+          "body": "That sounds like a mistake on our side - and weird inconsistency with how JOSE typ works.\n\n\"typ\" for the JOSE header is defines as:\n> To keep messages compact in common situations, it is RECOMMENDED that\n   producers omit an \"application/\" prefix of a media type value in a\n   \"typ\" Header Parameter when no other '/' appears in the media type\n   value.  A recipient using the media type value MUST treat it as if\n   \"application/\" were prepended to any \"typ\" value not containing a\n   '/'.  For instance, a \"typ\" value of \"example\" SHOULD be used to\n   represent the \"application/example\" media type, whereas the media\n   type \"application/example;part=\"1/2\"\" cannot be shortened to\n   \"example;part=\"1/2\"\".\n\nThe `statuslist+jwt` for the JOSE header is consistent with the media type we are registering (`application/statuslist+jwt`) and it appears we didn't notice the different behavior for CWT. We are requesting the registration of media type `application/statuslist+cwt` and from re-reading the CWT typ RFC, we should use the full one then for the COSE typ header parameter.",
           "createdAt": "2025-02-08T18:59:23Z",
-          "updatedAt": "2025-02-08T18:59:23Z"
+          "updatedAt": "2025-02-09T07:43:36Z"
         }
       ]
     }
@@ -15901,7 +15901,7 @@
           "updatedAt": "2025-01-27T08:43:05Z"
         },
         {
-          "author": "markuskreusch-bdr",
+          "author": null,
           "authorAssociation": "NONE",
           "body": "I checked the test vectors by\r\n- Defining the status[*] = * entries in the code (copy paste + search replace)\r\n- Parsing the JSON and CBOR from the document with our library\r\n- Checking in automated testcases, that all status entries have the expected value (0 for the ones not mentioned and the given value for the ones mentioned in the test vectors)\r\n\r\nVerification was successful for all values.\r\n\r\nNevertheless I noticed, that **the samples (CBOR and JSON) for the one bit status list have 2 instead of 1 bits**.",
           "createdAt": "2025-01-30T12:06:30Z",
@@ -15915,7 +15915,7 @@
           "updatedAt": "2025-01-30T13:32:55Z"
         },
         {
-          "author": "markuskreusch-bdr",
+          "author": null,
           "authorAssociation": "NONE",
           "body": "> Thank you for catching that! That was a copy/paste mistake on my side and should be fixed now. Could you re-check if everything looks fine now?\r\n\r\nEverything is fine now.",
           "createdAt": "2025-01-30T14:18:56Z",
@@ -17268,6 +17268,72 @@
           "body": "",
           "createdAt": "2025-02-08T18:23:23Z",
           "updatedAt": "2025-02-08T18:23:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 263,
+      "id": "PR_kwDOJZ2aqs6Ki2-r",
+      "title": "fix cwt typ to use full media type",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/263",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #262 \r\n\r\nCOSE/CWT typ behaves a bit differently than JOSE/JWT typ and requires the full media type.",
+      "createdAt": "2025-02-09T09:03:59Z",
+      "updatedAt": "2025-02-09T13:36:49Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "549d9e0c5e7b19a386a563e1e6fd4c7588ea30b7",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "262-cwt-typ",
+      "headRefOid": "4c65fa521564e6d78f3f2c6d6117302a41c66f50",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 264,
+      "id": "PR_kwDOJZ2aqs6Kjjky",
+      "title": "fix referenced token terminology",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/264",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #253 ",
+      "createdAt": "2025-02-09T15:08:22Z",
+      "updatedAt": "2025-02-09T16:32:40Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "549d9e0c5e7b19a386a563e1e6fd4c7588ea30b7",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "253-referenced-token",
+      "headRefOid": "735a272ca785dc8053782697f9eed9bfb6baae54",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6bOpx3",
+          "commit": {
+            "abbreviatedOid": "735a272"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-09T16:32:40Z",
+          "updatedAt": "2025-02-09T16:32:40Z",
           "comments": []
         }
       ]
