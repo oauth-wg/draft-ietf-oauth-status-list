@@ -232,10 +232,10 @@ Status List:
 : An object in JSON or CBOR representation containing a bit array that lists the statuses of many Referenced Tokens.
 
 Status List Token:
-: A token in JWT or CWT representation that contains a cryptographically secured Status List.
+: A token in JWT (as defined in {{RFC7519}}) or CWT (as defined in {{RFC8392}}) representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A cryptographically secured data structure that contains a reference to a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. The information from the contained Status List gives the Relying Party additional information about the current status of the Referenced Token. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+: A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
 
 base64url:
 : Denotes the URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
@@ -1794,6 +1794,10 @@ CBOR encoding:
 
 # Document History
 {:numbered="false"}
+
+-08
+
+* Update terminology for referenced token and Status List Token
 
 -07
 
