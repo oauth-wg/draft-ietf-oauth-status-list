@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 11 August 2025                                                 
+Expires: 16 August 2025                                                 
                                                               C. Bormann
                                                                   SPRIND
-                                                         7 February 2025
+                                                        12 February 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 August 2025.
+   This Internet-Draft will expire on 16 August 2025.
 
 Copyright Notice
 
@@ -348,16 +348,19 @@ Table of Contents
    Status List:  An object in JSON or CBOR representation containing a
       bit array that lists the statuses of many Referenced Tokens.
 
-   Status List Token:  A token in JWT or CWT representation that
-      contains a cryptographically secured Status List.
+   Status List Token:  A token in JWT (as defined in [RFC7519]) or CWT
+      (as defined in [RFC8392]) representation that contains a
+      cryptographically secured Status List.
 
    Referenced Token:  A cryptographically secured data structure that
-      contains a reference to a Status List Token.  It is RECOMMENDED to
-      use JSON [RFC8259] with JOSE as defined in [RFC7515] or CBOR
-      [RFC8949] with COSE as defined in [RFC9052].  The information from
-      the contained Status List gives the Relying Party additional
-      information about the current status of the Referenced Token.
-      Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+      contains a "status" claim that is referencing a mechanism to
+      retrieve status information about this Referenced Token.  This
+      document defines the Status List mechanism in which case the
+      Referenced Token contains a reference to an entry in a Status List
+      Token.  It is RECOMMENDED to use JSON [RFC8259] with JOSE as
+      defined in [RFC7515] or CBOR [RFC8949] with COSE as defined in
+      [RFC9052].  Examples for Referenced Tokens are SD-JWT VC and ISO
+      mdoc.
 
    base64url:  Denotes the URL-safe base64 encoding without padding as
       defined in Section 2 of [RFC7515] as "Base64url Encoding".
@@ -674,9 +677,9 @@ Table of Contents
    d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
    747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
    648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d584097d5c04221d45c1e536f2df855c31bcbdb4e32d0a198ab0f11
-   42e1e275f9e8782f2b48fed618d674bd4004866ba1c6f232d4ad015c94f74cbd8080
-   9a3d50c100
+   b918000217015d58400f570ad2e400c2c8958428a008c7059096be5e2aa57eb6d80c
+   51193463d32efe4d1c29d84abce435be217e00515c6c4033b4067b93054a1428d602
+   58ef23f259
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -698,12 +701,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      97d5c04221d45c1e536f2df8  #       "\x97ÕÀB!Ô\\x1eSo-ø"
-      55c31bcbdb4e32d0a198ab0f  #       "UÃ\x1bËÛN2Ð¡\x98«\x0f"
-      1142e1e275f9e8782f2b48fe  #       "\x11Báâuùèx/+Hþ"
-      d618d674bd4004866ba1c6f2  #       "Ö\x18Öt½@\x04\x86k¡Æò"
-      32d4ad015c94f74cbd80809a  #       "2Ô\xad\x01\\x94÷L½\x80\x80\x9a"
-      3d50c100                  #       "=PÁ\x00"
+      0f570ad2e400c2c8958428a0  #       "\x0fW\x0aÒä\x00ÂÈ\x95\x84(\xa0"
+      08c7059096be5e2aa57eb6d8  #       "\x08Ç\x05\x90\x96¾^*¥~¶Ø"
+      0c51193463d32efe4d1c29d8  #       "\x0cQ\x194cÓ.þM\x1c)Ø"
+      4abce435be217e00515c6c40  #       "J¼ä5¾!~\x00Q\l@"
+      33b4067b93054a1428d60258  #       "3´\x06{\x93\x05J\x14(Ö\x02X"
+      ef23f259                  #       "ï#òY"
 
 6.  Referenced Token
 
@@ -848,9 +851,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840680d57a76c84c22e2c2cbfb97910f6bdd5589d
-   668e1a36830096d2ed38a49300ae1e4154c04df9e0894b6a13a12b1102141f89dc2c
-   c1631d73756a8f130b58f7
+   7374617475736c697374732f3158402bd483cf45ab76c4144f11327dd58ac38b1930
+   1faea7d3eec213bbb9cf2e4b86a5153a18ef3cfd9fbbc4cc41784524ae822611a7f3
+   e62416bc734ac35f720c64
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -873,12 +876,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         680d57a76c84c22e2c2cbfb9  #       "h\x0dW§l\x84Â.,,¿¹"
-         7910f6bdd5589d668e1a3683  #       "y\x10ö½ÕX\x9df\x8e\x1a6\x83"
-         0096d2ed38a49300ae1e4154  #       "\x00\x96Òí8¤\x93\x00®\x1eAT"
-         c04df9e0894b6a13a12b1102  #       "ÀMùà\x89Kj\x13¡+\x11\x02"
-         141f89dc2cc1631d73756a8f  #       "\x14\x1f\x89Ü,Ác\x1dsuj\x8f"
-         130b58f7                  #       "\x13\x0bX÷"
+         2bd483cf45ab76c4144f1132  #       "+Ô\x83ÏE«vÄ\x14O\x112"
+         7dd58ac38b19301faea7d3ee  #       "}Õ\x8aÃ\x8b\x190\x1f®§Óî"
+         c213bbb9cf2e4b86a5153a18  #       "Â\x13»¹Ï.K\x86¥\x15:\x18"
+         ef3cfd9fbbc4cc41784524ae  #       "ï<ý\x9f»ÄÌAxE$®"
+         822611a7f3e62416bc734ac3  #       "\x82&\x11§óæ$\x16¼sJÃ"
+         5f720c64                  #       "_r\x0cd"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1108,8 +1111,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.iKJNYVgectVV3KKvix6uO-2FJNgEeAD5q4LXWxNrKM7sqyDt9SBY
-   x5wwmfSTywA0lA1naMNH3ynf32wMXtvRQw
+   nR0bCI6NDMyMDB9.WESKrrTpplsZT_A6usJzWzI9DCD8e1y_LyCTLp-ZKpabDMoBSzTp
+   BJogFR5AICT2wSTbr4F4tqdBR4o_rHJMnA
 
 8.2.  Status List Response
 
@@ -1248,8 +1251,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.iKJNYVgectVV3KKvix6uO-2FJNgEeAD5q4LXWxNrKM7sqyDt9SBY
-   x5wwmfSTywA0lA1naMNH3ynf32wMXtvRQw
+   nR0bCI6NDMyMDB9.WESKrrTpplsZT_A6usJzWzI9DCD8e1y_LyCTLp-ZKpabDMoBSzTp
+   BJogFR5AICT2wSTbr4F4tqdBR4o_rHJMnA
 
 9.  Status List Aggregation
 
@@ -2915,6 +2918,10 @@ Test vectors for Status List encoding
    4b0040b3fe04353d7f81
 
 Document History
+
+   -08
+
+   *  Update terminology for referenced token and Status List Token
 
    -07
 
