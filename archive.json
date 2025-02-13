@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-11T00:16:42.786570+00:00",
+  "timestamp": "2025-02-13T00:16:57.867264+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5106,7 +5106,7 @@
       "id": "I_kwDOJZ2aqs6ogC_j",
       "title": "Change proposals for the definition of the terms \"Referenced Token\" and \" Status List Token\"",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/253",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -5115,8 +5115,8 @@
       "labels": [],
       "body": "The current definition of a Referenced Token is:\n\n> Referenced Token:\n> A cryptographically secured data structure that contains a reference to a Status List Token. It is RECOMMENDED to use JSON [[RFC8259](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC8259)] with JOSE as defined in [[RFC7515](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC7515)] or CBOR [[RFC8949](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC8949)] with COSE as defined in [[RFC9052](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC9052)]. The information from the contained Status List gives the Relying Party additional information about the current status of the Referenced Token. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.\n\nThis definition does not match with the definition of a status claim which is:\n\n> 6.1. Status Claim \n> \n> By including a \"status\" claim in a Referenced Token, the Issuer is **referencing a mechanism** to retrieve status information \nabout this Referenced Token. \n\n> The claim contains members used to reference to a Status List Token as defined in this specification. Other members of the \"status\" object may be defined by other specifications. This is analogous to \"cnf\" claim in Section 3.1 of [RFC7800] in which different authenticity confirmation methods can be included.\n> \n\nIt is proposed to change this definition into:\n\n> Referenced Token: A cryptographically secured data structure that includes a \"status\" claim that is referencing a mechanism to retrieve status information about this Referenced Token. \n> While several mechanisms are possible, this document documents a single mechanism where the \"status\" claim contains both a reference to a Status List Token and an index specific to the Referenced Token that allows a Relying Party to check for status information in the Status List Token for the current Referenced Token. Examples of Referenced Tokens are X.509 PKCs, SD-JWT VC and ISO mdoc.\n\n\nAt the moment \"Status List Token\" is defined as:\n\n> A token in JWT or CWT representation that contains a cryptographically secured Status List.\n\nThis is correct. However some text that is present in the definition of \"Referenced Token\" should be moved afterwards.\n\nText change proposal:\n\n> Status List Token : A token in JWT or CWT representation that contains a cryptographically secured Status List. \nIt is RECOMMENDED to use JSON [[RFC8259](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC8259)] with JOSE as defined in [[RFC7515](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC7515)] or CBOR [[RFC8949](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC8949)] with COSE as defined in [[RFC9052](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#RFC9052)].",
       "createdAt": "2025-02-03T09:42:06Z",
-      "updatedAt": "2025-02-07T14:42:55Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-12T19:02:09Z",
+      "closedAt": "2025-02-12T19:02:09Z",
       "comments": []
     },
     {
@@ -5133,7 +5133,7 @@
       "labels": [],
       "body": "Only the first case is described and illustrated. Both cases should be described and illustrated.\n\nThe current text from section 1 (Introduction) is:\n\n> An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party.  The Issuer gives updated status information to the Status Issuer, who creates a Status List Token.  The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint.  The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity.  If not further specified, the term Issuer may refer to an entity acting for all three roles.  This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.\n\n> The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]):\n\n```\n\n              issue                 present\n              Referenced            Referenced\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc update status                              \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                              \u2502\n   \u2502 Status Issuer \u2502                              \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                              \u2502\n     \u25bc provide Status List                        \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510         fetch Status List  \u2502\n   \u2502 Status Provider \u2502\u25c4\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n```\n\n> Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.\n\nText change proposal:\n\n> An Issuer of Referenced Tokens which is called an Issuer, issues Referenced Tokens to Holders. An Holder then uses and presents those Referenced Tokens to a Relying Party. \n> \n> Status Issuers issue Status List Tokens. The Status issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens.\n> \n> The Status Issuer issues Status List Tokens using one or more distribution points.\n> \n> The Status Issuer creates Status List Tokens initially indicating that all the Referenced Tokens then can be referenced in it are valid. In case a status change is required, the Issuer provides status information to the Status Issuer so that it can modify the content of one of the Status Lists that has been created. The modification will be taken into account at the next issuance of the Status List Token where the Referenced Token is referenced.\n> \n> This document describes how a Status List Token is created, how an Issuer references a Status List Token and how a Relying Party fetches and validates Status List Tokens.\n> \n> The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]) when Status List Tokens are fetched by the Relying Party:\n> \n```\n\n              issues                  presents\n              Referenced              Referenced\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   Token           \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc updates status                                          \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                                           \u2502\n   \u2502 Status Issuer \u2502                                           \u2502\n   \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                                           \u2502\n        \u2502 issues Status List Tokens using a Distribution point \u2502\n        \u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                             \u2502\n        \u2514\u2500\u25ba\u2502  Status List Token  \u2502  fetches Status List Token  \u2502\n           \u2502  Distribution Point \u2502\u25c4\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n           \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n> Diagram 2: This diagram depicts the case where the Status List Token is fetched by the Relying Party. \n> \n> Before presenting the Referenced Token to the Relying Party, the Holder may choose to fetch the Status List Token and to present together to the Relying Party both the Referenced Token and the corresponding Status list Token. This can avoid the Relying Party to fetch the corresponding Status List Token.\n\n```\n\n                                             presents \n                                             Referenced Token and\n               issues                        Status List Token\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  Referenced Token   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510          \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518                     \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2518          \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc updates status                  \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                   \u2502\n   \u2502 Status Issuer \u2502                   \u2502\n   \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                   \u2502\n        \u2502 issues Status List Tokens    \u2502\n        \u2502 using a Distribution point   \u2502\n        \u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510     \u2502\n        \u2514\u2500\u25ba\u2502  Status List Token  \u2502     \u2502 fetches Status List Token\n           \u2502  Distribution point \u2502\u25c4\u2500\u2500\u2500\u2500\u2518\n           \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\nDiagram 3: This diagram depicts the case where the Status List Token is fetched by the Holder. \n\nText in section 8.1 should be changed to support the use case of the Diagram 3 where the Status List Token is fetched by the Holder.\n\nIn section 8.1, the text states:\n\n> 8.1.  Status List Request\n> \n> To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.\n\n Since Status List Tokens can also be fetched by the Holder, this sentence should be modified.\n\nChange into:\n\n> The URI provided in the Referenced Token can be used either by the Relying Party or by the Holder to fetch the Status List Token that contains the status of the Referenced Token. To obtain this Status List Token, either the Relying Party or the Holder MUST send an HTTP GET request to the URI provided in the Referenced Token.\n\nThe following sentences should be modified to accommodate the two cases:\n\n>    The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:\n> \n>    *  \"application/statuslist+jwt\" for Status List Token in JWT format\n> \n>    *  \"application/statuslist+cwt\" for Status List Token in CWT format\n> \n>    If the Relying Party does not send an Accept Header, the response\n>    type is assumed to be known implicit or out-of-band.\n\nChange into:\n\n> Either the Relying Party or the Holder SHOULD send the following Accept-Header to indicate the requested response type:\n> \n>    *  \"application/statuslist+jwt\" for Status List Token in JWT format\n> \n>    *  \"application/statuslist+cwt\" for Status List Token in CWT format\n> \n> If the Relying Party or the Holder does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.\n> ",
       "createdAt": "2025-02-03T09:45:30Z",
-      "updatedAt": "2025-02-07T16:41:35Z",
+      "updatedAt": "2025-02-12T17:27:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -5142,6 +5142,13 @@
           "body": "I think there is a valid point, that it may make sense for the Holder to request the status list, such that a wallet could display the status of credentials.",
           "createdAt": "2025-02-07T14:45:15Z",
           "updatedAt": "2025-02-07T14:45:15Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "I am sorry but I can't see which changes have been done. \nI downloaded the Editor's copy but it is dated 7 February 2025.\n\nIf you were able to copy and paste below the text that has been changed, it would be possible for me to see it. \n",
+          "createdAt": "2025-02-12T17:27:21Z",
+          "updatedAt": "2025-02-12T17:27:21Z"
         }
       ]
     },
@@ -5159,7 +5166,7 @@
       ],
       "body": "In #228, C2bo wrote:\n\n> The claim \"aggregation_uri\" is meant as a way to allow efficient caching for RPs, not for alternative URIs \n> - it points to all relevant status lists for an issuer or specific referenced token type.\n\n\"aggregation_uri\" is defined in 4.1 as:\n\n> aggregation_uri: OPTIONAL.  JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token.  \nSee section 9 for further detail.\n\nSection 9 (Status List Aggregation) states:\n\n> Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThese two descriptions are not aligned with section 4.1. **The case of the Issuer is not mentioned in section 4.1**.\nHowever, in section 9, the sentence mentions: \n> all relevant Status Lists for a specific type of Referenced Token **or Issuer**.  \n\n Then comes some questions.\n\nHow can the Relying party retrieve either: \n\na) all relevant Status Lists for a specific [type of] Referenced Token, or\nb) all relevant Status Lists for an Issuer ?\n\nIn the first case, how long should \"all relevant Status Lists\" for a specific type of Referenced Token be accessible ? \nSame question for \"all relevant Status Lists\" for an Issuer.\n\nIf the case of the \"Issuer\" is indeed supported, there should be some additional text to warn the Issuers about some consequences when this claim is supported. For example:\n\n> \"All relevant Status Lists for an Issuer\" allows a Relying Party to know how many Referenced Tokens have been issued by an Issuer and are either valid, suspended or revoked at an instant of time. This can reveal also the number of entities that have been registered. Issuers should be warned of the consequences before choosing to support this optional claim.\n\n\nFinally, the argument is that this claim is \"meant as a way to allow efficient caching for RPs\". However, I still have difficulties to understand the usefulness of this optional claim when the JSON String contains a URI to retrieve the Status List Aggregation for this Referenced Token.\nCaching is pretty well supported by the ttl claim:\n\n> *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. \n\n",
       "createdAt": "2025-02-03T09:45:58Z",
-      "updatedAt": "2025-02-07T17:03:47Z",
+      "updatedAt": "2025-02-12T17:28:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -5182,6 +5189,13 @@
           "body": "Imagine that a Relying Party doesn't want to pull the Status List Token ad-hoc during presentation but already wants it ready to use and regularly pull all of the necessary ones together. This may be beneficial for performance and for offline capability. A police officer may want to fetch all mDL status lists in the morning if he may drive in an area without internet connectivity.",
           "createdAt": "2025-02-07T17:03:45Z",
           "updatedAt": "2025-02-07T17:03:45Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "No response has been provided to my question which was:\n\n> How can a Relying Party retrieve :\n> (a) either all relevant Status Lists for a specific [type of] Referenced Token,\n> (b) or all relevant Status Lists for an Issuer ?\n\nI understand the case (b) but not the case (a).\n\nI can't understand the rational for this sentence (and I believe that this topic is related to my previous comment about the case (a)):\n\n>    If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint, \n>    it SHOULD continue processing the other valid Status Lists referenced in the response.\n\nThere should be one and only one SLT which contains the status of the Referenced Token. \nSo why continue to processing the other valid Status Lists referenced in the response ?\n\nLet us now suppose that mDLs has been issued by a country to 20 millions of drivers. \nHow many SLTs would need to be referenced ? Quite a lot. \n\nIn issue #220, I wrote: \n> a \"CRL issuer\" can use several \"distribution points\". Why should it be otherwise for a \"Status Issuer\" ?\n\nThe mDL is a nice example to illustrate the fact that, at least, two URIs should be made available. \nThe Police can use a private address to fetch the appropriate SLT on a network that is not open to the public, \nwhile commercial web servers can use a different (public) address to fetch the same the appropriate SLT.\n If an issuing country is a member of the EU, it can provide a URI in the domain name of the country, e.g. de or fr, \nas well as in the domain mane of the eu. \n\nIf more that one SLT distribution point is available, this number will be multiplied by the number of SLT distribution points.  \nThis can overload the SLTs. However, if one or more base URIs are negotiated between the Issuer and the Status Issuer \nfor each SLT distribution point, these base URIs can be included into the aggregation_uri. \n\nThen, each base URI will contain a list of relative URIs for each SLT. \n\nA further advantage is the fact that the content of the aggregation_uri extension will remain the same, even when a new SLT is added.\n\nTo summarize, the idea would be to issue all SLTs under a set of base URIs where each SLT will be placed under a single \n(and same) relative URI.\n\nI am conscious that this would be an important change to the current content of the draft, but it would provide major benefits.",
+          "createdAt": "2025-02-12T17:28:41Z",
+          "updatedAt": "2025-02-12T17:28:41Z"
         }
       ]
     },
@@ -5197,7 +5211,7 @@
       "labels": [],
       "body": "In version -06, the title of section 13.1 was: \"13.1. Token Lifecycle\"\n\nIn version -07, the title of section 13.1 has been changed into:  \"13.1. Referenced Token Lifecycle\"\n\nSince the first sentence of this section starts with \"The lifetime of a Status List Token (...)\" \nthis means that none of these two titles is correct. \n\nThis section should be renamed:\n\n> 13.1 Status List Token  Lifecycle \n\nThe content of section 13.1 does not contain enough guidance. The following guidance is insufficient:\n\n> The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens.\n\nSince the exp (expiration time) claim in a Status List Token is OPTIONAL, it is hard to understand how this sentence can be used.\n\nThe three paragraphs do not provide sufficient information.\n\nProposed text replacement:\n\n> The Issuer and the Status issuer SHALL initially agree on the following set of parameters:\n> \n> -\tone or more absolute uris where the Status List Tokens will be made available by the Status issuer,\n> -\tthe number of bits that indicates the status of each Referenced Token,\n> -\tthe number of entries in a Status List,\n> -   the date when each Status List corresponding to a Status List Token will cease to be updated by the Issuer.\n> \n> The Issuer CAN communicate to the Status issuer the \"time to live\" which is the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved ('ttl' claim). If the \"time to live\" is communicated, then the Status issuer SHALL include it into each Status List Token.\n> \n> For every Status List, the Issuer CAN communicate to the Status issuer the time at which the Status List Token will be considered expired ('exp' claim). If the expiration time is communicated, then the Status issuer SHALL include it into each Status List Token.\n> \n> At any time, the Status issuer and the Issuer may agree to use a new set of parameters. For every Status List already agreed, the agreed parameters remain applicable until the date when the Status List will cease to be updated by the Issuer is reached.\n> \n> The Status issuer SHOULD issue and distribute Status List Tokens before the first Referenced Token is issued by the Issuer.\n> \n> The status of Referenced Tokens with close expiration times should be grouped together into Status Lists so the corresponding Status List Tokens can be no longer issued and distributed once all the Referenced Tokens referenced in it have expired.\n> \n\nThe text continues with :\n\n>    Referenced Tokens may be regularly re-issued to mitigate linkability\n>    of presentations to Relying Parties.  In this case, every re-issued\n>    Referenced Token MUST have a fresh Status List entry in order to\n>    prevent this becoming possible source of correlation.\n\nThe concept of Referenced Tokens that would be regularly re-issued means a same content with a different validity period.\n\nThe following sentence looks odd:\n\n   \n\n> Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties.\n\nSince the content of the referenced Token is nearly the same, linkability can easily be achieved and a re-issuance of Referenced Tokens will be unable \"to mitigate linkability of presentations to Relying Parties\". \n\nThese two sentences should be removed.\n\nThe text ends-up with :\n\n>    Referenced Tokens may also be issued in batches, such that Holders\n>    can use individual tokens for every transaction.  In this case, every\n>    Referenced Token MUST have a dedicated Status List entry.  Revoking\n>    batch issued Referenced Tokens might reveal this correlation later\n>    on.\n\nThe right wording is not \"batch issuance of Referenced Tokens\" but \"one-time-use Referenced Tokens\"\nThe second sentence has nothing to do with a consequence of the previous sentence as it applies to every Referenced Token, whether or not it is a one-time-use Referenced Token.\n\nThese three sentences should be removed.\n\nProposed text replacement:\n\n> One-time-use Referenced Tokens may also be issued in batches, such that Holders can use a different Referenced Token for every transaction.  In this case, the status of every one-time-use Referenced Token SHOULD be handled in a different Status list so that a global revocation of these one-time-use Referenced Tokens cannot be used to reveal a correlation later on.\n",
       "createdAt": "2025-02-03T09:46:58Z",
-      "updatedAt": "2025-02-07T17:01:00Z",
+      "updatedAt": "2025-02-12T17:28:38Z",
       "closedAt": null,
       "comments": [
         {
@@ -5220,6 +5234,13 @@
           "body": "> In version -06, the title of section 13.1 was: \"13.1. Token Lifecycle\"\n> \n> In version -07, the title of section 13.1 has been changed into: \"13.1. Referenced Token Lifecycle\"\n> \n> Since the first sentence of this section starts with \"The lifetime of a Status List Token (...)\" this means that none of these two titles is correct.\n> \n> This section should be renamed:\n> \n> > 13.1 Status List Token  Lifecycle\n> \n> The content of section 13.1 does not contain enough guidance. The following guidance is insufficient:\n> \n> > The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens.\n> \n> Since the exp (expiration time) claim in a Status List Token is OPTIONAL, it is hard to understand how this sentence can be used.\n> \n> The three paragraphs do not provide sufficient information.\n> \n> Proposed text replacement:\n> \n> > The Issuer and the Status issuer SHALL initially agree on the following set of parameters:\n> > \n> > * one or more absolute uris where the Status List Tokens will be made available by the Status issuer,\n> > * the number of bits that indicates the status of each Referenced Token,\n> > * the number of entries in a Status List,\n> > * the date when each Status List corresponding to a Status List Token will cease to be updated by the Issuer.\n> > \n> > The Issuer CAN communicate to the Status issuer the \"time to live\" which is the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved ('ttl' claim). If the \"time to live\" is communicated, then the Status issuer SHALL include it into each Status List Token.\n> > For every Status List, the Issuer CAN communicate to the Status issuer the time at which the Status List Token will be considered expired ('exp' claim). If the expiration time is communicated, then the Status issuer SHALL include it into each Status List Token.\n> > At any time, the Status issuer and the Issuer may agree to use a new set of parameters. For every Status List already agreed, the agreed parameters remain applicable until the date when the Status List will cease to be updated by the Issuer is reached.\n> > The Status issuer SHOULD issue and distribute Status List Tokens before the first Referenced Token is issued by the Issuer.\n> > The status of Referenced Tokens with close expiration times should be grouped together into Status Lists so the corresponding Status List Tokens can be no longer issued and distributed once all the Referenced Tokens referenced in it have expired.\n\nWe have added text [here](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-external-status-issuer) that already incorporated your ideas on what needs to be negotiated between Referenced Token Issuer and Status Issuer. I would expect that you look at the latest changes and the referenced PRs before you re-raise the same points.\n\n> \n> The text continues with :\n> \n> > Referenced Tokens may be regularly re-issued to mitigate linkability\n> > of presentations to Relying Parties.  In this case, every re-issued\n> > Referenced Token MUST have a fresh Status List entry in order to\n> > prevent this becoming possible source of correlation.\n> \n> The concept of Referenced Tokens that would be regularly re-issued means a same content with a different validity period.\n> \n> The following sentence looks odd:\n> \n> > Referenced Tokens may be regularly re-issued to mitigate linkability of presentations to Relying Parties.\n> \n> Since the content of the referenced Token is nearly the same, linkability can easily be achieved and a re-issuance of Referenced Tokens will be unable \"to mitigate linkability of presentations to Relying Parties\".\n> \n> These two sentences should be removed.\n\nThe issue of linkability has been extensively discussed within SD-JWT and the points are very clear. We don't need to and will not reiterate this here, as this draft is about Status Lists and not about the Referenced Tokens. The details of Referenced Tokens is out of scope for this draft. The section above clearly states that Status List is only able to achieve RP-RP unlinkability and there is nothing to add to this.\n\n> \n> The text ends-up with :\n> \n> > Referenced Tokens may also be issued in batches, such that Holders\n> > can use individual tokens for every transaction.  In this case, every\n> > Referenced Token MUST have a dedicated Status List entry.  Revoking\n> > batch issued Referenced Tokens might reveal this correlation later\n> > on.\n> \n> The right wording is not \"batch issuance of Referenced Tokens\" but \"one-time-use Referenced Tokens\" The second sentence has nothing to do with a consequence of the previous sentence as it applies to every Referenced Token, whether or not it is a one-time-use Referenced Token.\n> \n> These three sentences should be removed.\n> \n> Proposed text replacement:\n> \n> > One-time-use Referenced Tokens may also be issued in batches, such that Holders can use a different Referenced Token for every transaction.  In this case, the status of every one-time-use Referenced Token SHOULD be handled in a different Status list so that a global revocation of these one-time-use Referenced Tokens cannot be used to reveal a correlation later on.\n\nI don't think your suggestions provide much benefit but I tried to extract as much as possible in #261\n",
           "createdAt": "2025-02-07T17:00:58Z",
           "updatedAt": "2025-02-07T17:00:58Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "I am sorry but I can't see which changes have been done. \nI downloaded the Editor's copy but it is dated 7 February 2025.\n\nIf you were able to copy and paste below the text that has been changed, it would be possible for me to see it. \n\nhttps://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/261 is not understandable for me.",
+          "createdAt": "2025-02-12T17:28:36Z",
+          "updatedAt": "2025-02-12T17:28:36Z"
         }
       ]
     },
@@ -17129,7 +17150,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-02-07T14:36:49Z",
-      "updatedAt": "2025-02-07T16:25:52Z",
+      "updatedAt": "2025-02-12T19:05:43Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "379f5233f64ad98b25af96b7184bb7d3cc5a70ef",
@@ -17154,6 +17175,46 @@
           "createdAt": "2025-02-07T14:40:52Z",
           "updatedAt": "2025-02-07T14:40:52Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6bvmCe",
+          "commit": {
+            "abbreviatedOid": "b1d0dd6"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-12T19:05:23Z",
+          "updatedAt": "2025-02-12T19:05:23Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n{{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used. A certificate's issuer explicitly delegates Status List Token signing authority by issuing a certificate containing a the following value in the extended key usage extension.\r\n```",
+              "createdAt": "2025-02-12T19:05:23Z",
+              "updatedAt": "2025-02-12T19:05:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6bvmSU",
+          "commit": {
+            "abbreviatedOid": "b1d0dd6"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-12T19:05:43Z",
+          "updatedAt": "2025-02-12T19:05:43Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I think we need to tie the value used to the below definition right?",
+              "createdAt": "2025-02-12T19:05:43Z",
+              "updatedAt": "2025-02-12T19:05:43Z"
+            }
+          ]
         }
       ]
     },
@@ -17244,7 +17305,7 @@
       "labels": [],
       "body": "Closes #256 ",
       "createdAt": "2025-02-07T16:58:41Z",
-      "updatedAt": "2025-02-08T18:23:23Z",
+      "updatedAt": "2025-02-12T19:03:01Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "549d9e0c5e7b19a386a563e1e6fd4c7588ea30b7",
@@ -17269,6 +17330,19 @@
           "createdAt": "2025-02-08T18:23:23Z",
           "updatedAt": "2025-02-08T18:23:23Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6bvj8K",
+          "commit": {
+            "abbreviatedOid": "9b3746f"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-12T19:03:01Z",
+          "updatedAt": "2025-02-12T19:03:01Z",
+          "comments": []
         }
       ]
     },
@@ -17284,7 +17358,7 @@
       "labels": [],
       "body": "Closes #262 \r\n\r\nCOSE/CWT typ behaves a bit differently than JOSE/JWT typ and requires the full media type.",
       "createdAt": "2025-02-09T09:03:59Z",
-      "updatedAt": "2025-02-09T13:36:49Z",
+      "updatedAt": "2025-02-12T19:02:25Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "549d9e0c5e7b19a386a563e1e6fd4c7588ea30b7",
@@ -17296,32 +17370,56 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6bvjjn",
+          "commit": {
+            "abbreviatedOid": "4c65fa5"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-12T19:02:25Z",
+          "updatedAt": "2025-02-12T19:02:25Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 264,
       "id": "PR_kwDOJZ2aqs6Kjjky",
       "title": "fix referenced token terminology",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/264",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #253 ",
       "createdAt": "2025-02-09T15:08:22Z",
-      "updatedAt": "2025-02-09T16:32:40Z",
+      "updatedAt": "2025-02-12T19:02:08Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "549d9e0c5e7b19a386a563e1e6fd4c7588ea30b7",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "253-referenced-token",
       "headRefOid": "735a272ca785dc8053782697f9eed9bfb6baae54",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2025-02-12T19:02:08Z",
+      "mergedAt": "2025-02-12T19:02:08Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "407682f26445edf4f09b21448e72ad00c64c439b"
+      },
+      "comments": [
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "I am sorry but I can't see which changes have been done.\r\nI downloaded the Editor's copy but it is dated 7 February 2025.\r\n\r\nIf you were able to copy and paste below the text that has been changed, it would be possible for me to see it.",
+          "createdAt": "2025-02-12T17:29:55Z",
+          "updatedAt": "2025-02-12T17:29:55Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJZ2aqs6bOpx3",
@@ -17334,6 +17432,19 @@
           "body": "",
           "createdAt": "2025-02-09T16:32:40Z",
           "updatedAt": "2025-02-09T16:32:40Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6bvjNK",
+          "commit": {
+            "abbreviatedOid": "735a272"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-12T19:02:02Z",
+          "updatedAt": "2025-02-12T19:02:02Z",
           "comments": []
         }
       ]
