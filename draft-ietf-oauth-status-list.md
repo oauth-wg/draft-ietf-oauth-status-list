@@ -232,10 +232,10 @@ Status List:
 : An object in JSON or CBOR representation containing a bit array that lists the statuses of many Referenced Tokens.
 
 Status List Token:
-: A token in JWT or CWT representation that contains a cryptographically secured Status List.
+: A token in JWT (as defined in {{RFC7519}}) or CWT (as defined in {{RFC8392}}) representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A cryptographically secured data structure that contains a reference to a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. The information from the contained Status List gives the Relying Party additional information about the current status of the Referenced Token. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+: A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
 
 base64url:
 : Denotes the URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
@@ -1043,13 +1043,13 @@ Ecosystems that want to use other Status Types than "VALID" and "INVALID" should
 
 # Implementation Considerations {#implementation}
 
-## Referenced Token Lifecycle {#implementation-lifecycle}
+## Token Lifecycle {#implementation-lifecycle}
 
 The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.
 
 Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.
 
-Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token MUST have a dedicated Status List entry. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
+Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status Lists. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
 
 ## Default Values and Double Allocation
 
@@ -1797,7 +1797,8 @@ CBOR encoding:
 
 -08
 
- * Fix cwt typ value to full media type
+* Fix cwt typ value to full media type
+* Update terminology for referenced token and Status List Token
 
 -07
 
