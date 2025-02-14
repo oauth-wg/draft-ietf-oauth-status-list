@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 13 August 2025                                                 
+Expires: 18 August 2025                                                 
                                                               C. Bormann
                                                                   SPRIND
-                                                         9 February 2025
+                                                        14 February 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 August 2025.
+   This Internet-Draft will expire on 18 August 2025.
 
 Copyright Notice
 
@@ -121,7 +121,7 @@ Table of Contents
      12.7.  Historical Resolution
      12.8.  Status Types
    13. Implementation Considerations
-     13.1.  Referenced Token Lifecycle
+     13.1.  Token Lifecycle
      13.2.  Default Values and Double Allocation
      13.3.  Status List Size
      13.4.  External Status Issuer
@@ -348,16 +348,19 @@ Table of Contents
    Status List:  An object in JSON or CBOR representation containing a
       bit array that lists the statuses of many Referenced Tokens.
 
-   Status List Token:  A token in JWT or CWT representation that
-      contains a cryptographically secured Status List.
+   Status List Token:  A token in JWT (as defined in [RFC7519]) or CWT
+      (as defined in [RFC8392]) representation that contains a
+      cryptographically secured Status List.
 
    Referenced Token:  A cryptographically secured data structure that
-      contains a reference to a Status List Token.  It is RECOMMENDED to
-      use JSON [RFC8259] with JOSE as defined in [RFC7515] or CBOR
-      [RFC8949] with COSE as defined in [RFC9052].  The information from
-      the contained Status List gives the Relying Party additional
-      information about the current status of the Referenced Token.
-      Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+      contains a "status" claim that is referencing a mechanism to
+      retrieve status information about this Referenced Token.  This
+      document defines the Status List mechanism in which case the
+      Referenced Token contains a reference to an entry in a Status List
+      Token.  It is RECOMMENDED to use JSON [RFC8259] with JOSE as
+      defined in [RFC7515] or CBOR [RFC8949] with COSE as defined in
+      [RFC9052].  Examples for Referenced Tokens are SD-JWT VC and ISO
+      mdoc.
 
    base64url:  Denotes the URL-safe base64 encoding without padding as
       defined in Section 2 of [RFC7515] as "Base64url Encoding".
@@ -674,9 +677,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d58406cee0a2e87f2c486b167fa
-   2fbf59bd7a90dee1e35b3b227f3e041c7b97aa22a988271ee0da66475bc64bf52fb1
-   31be57aa37bf46df3d8d1f91037ec58f48fefb
+   646269747301636c73744a78dadbb918000217015d5840989ac537851f95d8413252
+   951412078b683ee84ad85d2528164955c99f4d5d9252a0ee6f9510506f737f288c9e
+   6859e2f4d88bc22f82e04754436455c9f099b8
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -699,12 +702,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      6cee0a2e87f2c486b167fa2f  #       "lî\x0a.\x87òÄ\x86±gú/"
-      bf59bd7a90dee1e35b3b227f  #       "¿Y½z\x90Þáã[;"\x7f"
-      3e041c7b97aa22a988271ee0  #       ">\x04\x1c{\x97ª"©\x88'\x1eà"
-      da66475bc64bf52fb131be57  #       "ÚfG[ÆKõ/±1¾W"
-      aa37bf46df3d8d1f91037ec5  #       "ª7¿Fß=\x8d\x1f\x91\x03~Å"
-      8f48fefb                  #       "\x8fHþû"
+      989ac537851f95d841325295  #       "\x98\x9aÅ7\x85\x1f\x95ØA2R\x95"
+      1412078b683ee84ad85d2528  #       "\x14\x12\x07\x8bh>èJØ]%("
+      164955c99f4d5d9252a0ee6f  #       "\x16IUÉ\x9fM]\x92R\xa0îo"
+      9510506f737f288c9e6859e2  #       "\x95\x10Pos\x7f(\x8c\x9ehYâ"
+      f4d88bc22f82e04754436455  #       "ôØ\x8bÂ/\x82àGTCdU"
+      c9f099b8                  #       "Éð\x99¸"
 
 6.  Referenced Token
 
@@ -849,9 +852,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840311c403a1882d16ae6399e6e69ce49b55e27dd
-   6df1b19e49b9b01b15a80ad845605fff2750b502590854966056a5fc0429a758bf7c
-   df85595a4208f5c56ddafe
+   7374617475736c697374732f3158406661cdb35f3c8993ca53d1d9dc517e8f4cd869
+   e302bfd4bba04da51073ad7e25bf255e3fb1c7d11801dee0ec2ec7f908c73bf8b761
+   26717f7e9a3c592217aa6b
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -874,12 +877,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         311c403a1882d16ae6399e6e  #       "1\x1c@:\x18\x82Ñjæ9\x9en"
-         69ce49b55e27dd6df1b19e49  #       "iÎIµ^'Ýmñ±\x9eI"
-         b9b01b15a80ad845605fff27  #       "¹°\x1b\x15¨\x0aØE`_ÿ'"
-         50b502590854966056a5fc04  #       "Pµ\x02Y\x08T\x96`V¥ü\x04"
-         29a758bf7cdf85595a4208f5  #       ")§X¿|ß\x85YZB\x08õ"
-         c56ddafe                  #       "ÅmÚþ"
+         6661cdb35f3c8993ca53d1d9  #       "faÍ³_<\x89\x93ÊSÑÙ"
+         dc517e8f4cd869e302bfd4bb  #       "ÜQ~\x8fLØiã\x02¿Ô»"
+         a04da51073ad7e25bf255e3f  #       "\xa0M¥\x10s\xad~%¿%^?"
+         b1c7d11801dee0ec2ec7f908  #       "±ÇÑ\x18\x01Þàì.Çù\x08"
+         c73bf8b76126717f7e9a3c59  #       "Ç;ø·a&q\x7f~\x9a<Y"
+         2217aa6b                  #       ""\x17ªk"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1109,8 +1112,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.6-TiBppmYgdecRZRpUYuG7rQ2hp823aogERrJYPfpByumN4nlSDG
-   LDqCMtKPMlIO_His7e7OIdKDcr4nFJ50AA
+   nR0bCI6NDMyMDB9.i2eAFqDt1Yi1zK4uLV19HfcfInxQhmwFoMS1KmWnl4E0d-VOAfpi
+   D6pPPL8Tjf2u3zE5446KJRfehz1T70iThg
 
 8.2.  Status List Response
 
@@ -1249,8 +1252,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.6-TiBppmYgdecRZRpUYuG7rQ2hp823aogERrJYPfpByumN4nlSDG
-   LDqCMtKPMlIO_His7e7OIdKDcr4nFJ50AA
+   nR0bCI6NDMyMDB9.i2eAFqDt1Yi1zK4uLV19HfcfInxQhmwFoMS1KmWnl4E0d-VOAfpi
+   D6pPPL8Tjf2u3zE5446KJRfehz1T70iThg
 
 9.  Status List Aggregation
 
@@ -1654,7 +1657,7 @@ d2                              # tag(18)
 
 13.  Implementation Considerations
 
-13.1.  Referenced Token Lifecycle
+13.1.  Token Lifecycle
 
    The lifetime of a Status List Token depends on the lifetime of its
    Referenced Tokens.  Once all Referenced Tokens are expired, the
@@ -1665,11 +1668,11 @@ d2                              # tag(18)
    re-issued Referenced Token MUST have a fresh Status List entry in
    order to prevent this from becoming a possible source of correlation.
 
-   Referenced Tokens may also be issued in batches, such that Holders
-   can use individual tokens for every transaction.  In this case, every
-   Referenced Token MUST have a dedicated Status List entry.  Revoking
-   batch-issued Referenced Tokens might reveal this correlation later
-   on.
+   Referenced Tokens may also be issued in batches and be presented by
+   Holders in a one-time-use policy to avoid linkability.  In this case,
+   every Referenced Token MUST have a dedicated Status List entry and
+   MAY be spread across multiple Status Lists.  Revoking batch-issued
+   Referenced Tokens might reveal this correlation later on.
 
 13.2.  Default Values and Double Allocation
 
@@ -2920,6 +2923,8 @@ Document History
    -08
 
    *  Fix cwt typ value to full media type
+
+   *  Update terminology for referenced token and Status List Token
 
    -07
 
