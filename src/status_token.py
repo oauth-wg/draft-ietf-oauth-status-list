@@ -10,7 +10,7 @@ from status_list import StatusList
 
 DEFAULT_ALG = "ES256"
 STATUS_LIST_TYP_JWT = "statuslist+jwt"
-STATUS_LIST_TYP_CWT = "statuslist+cwt"
+STATUS_LIST_TYP_CWT = "application/statuslist+cwt"
 
 
 class StatusListToken:
