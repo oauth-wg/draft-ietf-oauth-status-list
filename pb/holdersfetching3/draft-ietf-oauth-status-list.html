@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 12 August 2025</td>
+<td class="center">Expires 21 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-02-08" class="published">8 February 2025</time>
+<time datetime="2025-02-17" class="published">17 February 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-08-12">12 August 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-21">21 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1124,7 +1124,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1320,7 +1320,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="auto internal xref">13.1</a>.  <a href="#name-referenced-token-lifecycle" class="internal xref">Referenced Token Lifecycle</a></p>
+                <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="auto internal xref">13.1</a>.  <a href="#name-token-lifecycle" class="internal xref">Token Lifecycle</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
                 <p id="section-toc.1-1.13.2.2.1"><a href="#section-13.2" class="auto internal xref">13.2</a>.  <a href="#name-default-values-and-double-a" class="internal xref">Default Values and Double Allocation</a></p>
@@ -1613,12 +1613,12 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 <dt id="section-3-1.13">Status List Token:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.14">
-          <p id="section-3-1.14.1">A token in JWT or CWT representation that contains a cryptographically secured Status List.<a href="#section-3-1.14.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.14.1">A token in JWT (as defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>) or CWT (as defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>) representation that contains a cryptographically secured Status List.<a href="#section-3-1.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-1.15">Referenced Token:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.16">
-          <p id="section-3-1.16.1">A cryptographically secured data structure that contains a reference to a Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> with JOSE as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> with COSE as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. The information from the contained Status List gives the Relying Party additional information about the current status of the Referenced Token. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.<a href="#section-3-1.16.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.16.1">A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> with JOSE as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> with COSE as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.<a href="#section-3-1.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-1.17">base64url:</dt>
@@ -1936,9 +1936,9 @@ a2                              # map(2)
 d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
 747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
 648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-b918000217015d58407543f32fff1bb5e6d01065afe8107c17993ef747b6bbe28abc
-cbff5f37225b2c967f343fead3606a164095e809f5e71f444ce4ed72e60dd27ee66c
-6395d2b781
+b918000217015d5840b0d4e42725611b9eaf88498f745235db09b431ce1bd24ab67d
+ced24ba9cad1396db60b6c1d0da626210a1a3fa0515d327a8f09be57cca5a74ce123
+9eed233aa4
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1962,12 +1962,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      7543f32fff1bb5e6d01065af  #       "uCó/ÿ\x1bµæÐ\x10e¯"
-      e8107c17993ef747b6bbe28a  #       "è\x10|\x17\x99&gt;÷G¶»â\x8a"
-      bccbff5f37225b2c967f343f  #       "¼Ëÿ_7"[,\x96\x7f4?"
-      ead3606a164095e809f5e71f  #       "êÓ`j\x16@\x95è\x09õç\x1f"
-      444ce4ed72e60dd27ee66c63  #       "DLäíræ\x0dÒ~ælc"
-      95d2b781                  #       "\x95Ò·\x81"
+      b0d4e42725611b9eaf88498f  #       "°Ôä'%a\x1b\x9e¯\x88I\x8f"
+      745235db09b431ce1bd24ab6  #       "tR5Û\x09´1Î\x1bÒJ¶"
+      7dced24ba9cad1396db60b6c  #       "}ÎÒK©ÊÑ9m¶\x0bl"
+      1d0da626210a1a3fa0515d32  #       "\x1d\x0d¦&amp;!\x0a\x1a?\xa0Q]2"
+      7a8f09be57cca5a74ce1239e  #       "z\x8f\x09¾WÌ¥§Lá#\x9e"
+      ed233aa4                  #       "í#:¤"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2109,9 +2109,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840c030b6f6051f9dbce111963c45c9e2299cd185
-831bb6f835ade0770b1a1b9e332d1773287707824ee15e8ca87826834a7e57cf8390
-21376ba37f99e05ff759d5
+7374617475736c697374732f3158405efc7b1b81aafd0c089e53a93644c65aff919a
+490925f577b507c481150824d1c76c99215a23cab11ea4af9bf0b112107d0f41a80d
+2dd8211767f4ce1e450364
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2136,12 +2136,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      c030b6f6051f9dbce111963c  #       "À0¶ö\x05\x1f\x9d¼á\x11\x96&lt;"
-      45c9e2299cd185831bb6f835  #       "EÉâ)\x9cÑ\x85\x83\x1b¶ø5"
-      ade0770b1a1b9e332d177328  #       "\xadàw\x0b\x1a\x1b\x9e3-\x17s("
-      7707824ee15e8ca87826834a  #       "w\x07\x82Ná^\x8c¨x&amp;\x83J"
-      7e57cf839021376ba37f99e0  #       "~WÏ\x83\x90!7k£\x7f\x99à"
-      5ff759d5                  #       "_÷YÕ"
+      5efc7b1b81aafd0c089e53a9  #       "^ü{\x1b\x81ªý\x0c\x08\x9eS©"
+      3644c65aff919a490925f577  #       "6DÆZÿ\x91\x9aI\x09%õw"
+      b507c481150824d1c76c9921  #       "µ\x07Ä\x81\x15\x08$ÑÇl\x99!"
+      5a23cab11ea4af9bf0b11210  #       "Z#Ê±\x1e¤¯\x9bð±\x12\x10"
+      7d0f41a80d2dd8211767f4ce  #       "}\x0fA¨\x0d-Ø!\x17gôÎ"
+      1e450364                  #       "\x1eE\x03d"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2355,8 +2355,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.uRWL0-Eit-iKVnq8WIILTsKZkWZVNVRVXiONJEnTqtx0NuAQ-Bvr
-0F2fL6cUGKA6Pp-BY426O9QC5tspev-xHw
+nR0bCI6NDMyMDB9.clFyLzUxpyy1nrfFEe48QDjgbYcJvEb7VvxG9Os3AW4RWJsdMHoY
+kl05e_DE3e5juKL4RduJyz2zPwuSErCV3g
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2462,8 +2462,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.uRWL0-Eit-iKVnq8WIILTsKZkWZVNVRVXiONJEnTqtx0NuAQ-Bvr
-0F2fL6cUGKA6Pp-BY426O9QC5tspev-xHw
+nR0bCI6NDMyMDB9.clFyLzUxpyy1nrfFEe48QDjgbYcJvEb7VvxG9Os3AW4RWJsdMHoY
+kl05e_DE3e5juKL4RduJyz2zPwuSErCV3g
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2542,7 +2542,7 @@ An Issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
         <h3 id="name-extended-key-usage-extensio">
 <a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-extended-key-usage-extensio" class="section-name selfRef">Extended Key Usage Extension</a>
         </h3>
-<p id="section-10.1-1"><span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+<p id="section-10.1-1"><span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used. A certificate's issuer explicitly delegates Status List Token signing authority by issuing a X.509 certificate containing the KeyPurposeId defined below in the extended key usage extension.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.1-2">The following OID is defined for usage in the EKU extension<a href="#section-10.1-2" class="pilcrow">¶</a></p>
 <p id="section-10.1-3">```
    id-kp  OBJECT IDENTIFIER  ::=
@@ -2807,12 +2807,12 @@ Time of fetching
       </h2>
 <div id="implementation-lifecycle">
 <section id="section-13.1">
-        <h3 id="name-referenced-token-lifecycle">
-<a href="#section-13.1" class="section-number selfRef">13.1. </a><a href="#name-referenced-token-lifecycle" class="section-name selfRef">Referenced Token Lifecycle</a>
+        <h3 id="name-token-lifecycle">
+<a href="#section-13.1" class="section-number selfRef">13.1. </a><a href="#name-token-lifecycle" class="section-name selfRef">Token Lifecycle</a>
         </h3>
 <p id="section-13.1-1">The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.<a href="#section-13.1-1" class="pilcrow">¶</a></p>
 <p id="section-13.1-2">Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token <span class="bcp14">MUST</span> have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.<a href="#section-13.1-2" class="pilcrow">¶</a></p>
-<p id="section-13.1-3">Referenced Tokens may also be issued in batches, such that Holders can use individual tokens for every transaction. In this case, every Referenced Token <span class="bcp14">MUST</span> have a dedicated Status List entry. Revoking batch-issued Referenced Tokens might reveal this correlation later on.<a href="#section-13.1-3" class="pilcrow">¶</a></p>
+<p id="section-13.1-3">Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token <span class="bcp14">MUST</span> have a dedicated Status List entry and <span class="bcp14">MAY</span> be spread across multiple Status Lists. Revoking batch-issued Referenced Tokens might reveal this correlation later on.<a href="#section-13.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="default-values-and-double-allocation">
@@ -4247,6 +4247,9 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <ul class="normal">
 <li class="normal" id="appendix-C-2.1">
           <p id="appendix-C-2.1.1">Holders may also fetch and verify Status List Tokens<a href="#appendix-C-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.2">
+          <p id="appendix-C-2.2.1">Update terminology for referenced token and Status List Token<a href="#appendix-C-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-C-3">-07<a href="#appendix-C-3" class="pilcrow">¶</a></p>
