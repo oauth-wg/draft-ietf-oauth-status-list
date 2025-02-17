@@ -146,7 +146,9 @@ The following diagram depicts the relationship between the artifacts:
 
 ~~~
 
-An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who creates a Status List Token. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint. The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles. This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.
+An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who issues a Status List Token. The Status Issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint. The Relying Party or the Holder may fetch the Status List Token to retrieve the status of the Referenced Token.
+
+The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles. This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.
 
 The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of {{SD-JWT.VC}}):
 
@@ -156,15 +158,15 @@ The following diagram depicts the relationship between the involved roles (Relyi
            Referenced            Referenced
 ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
 │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
-└─┬──────┘            └────────┘            └──┬────────────┘
-  ▼ update status                              │
-┌───────────────┐                              │
-│ Status Issuer │                              │
-└─┬─────────────┘                              │
-  ▼ provide Status List                        │
-┌─────────────────┐         fetch Status List  │
-│ Status Provider │◄───────────────────────────┘
-└─────────────────┘
+└─┬──────┘            └───┬────┘            └──┬────────────┘
+  ▼ update status         │                    │
+┌───────────────┐         │                    │
+│ Status Issuer │         │                    │
+└─┬─────────────┘         │                    │
+  ▼ provide Status List   │                    │
+┌─────────────────┐       │                    │
+│ Status Provider │◄──────┴────────────────────┘
+└─────────────────┘     fetch Status List Token
 
 ~~~
 
@@ -715,6 +717,8 @@ The processing rules for Referenced Tokens (such as JWT or CWT) precede any eval
 See [](#privacy-status-types) for privacy considerations on status types.
 
 # Verification and Processing
+
+The fetching, processing and verifying of a Status List Token may be done by either the Holder or the Relying Party. In the following section is described from the role of the Relying Party, however the same rules would also apply for the Holder.
 
 ## Status List Request {#status-list-request}
 
@@ -1797,6 +1801,7 @@ CBOR encoding:
 
 -08
 
+* Holders may also fetch and verify Status List Tokens
 * Update terminology for referenced token and Status List Token
 
 -07
