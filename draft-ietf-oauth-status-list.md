@@ -146,7 +146,9 @@ The following diagram depicts the relationship between the artifacts:
 
 ~~~
 
-An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who creates a Status List Token. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint. The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles. This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.
+An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who issues a Status List Token. The Status Issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint. The Relying Party or the Holder may fetch the Status List Token to retrieve the status of the Referenced Token.
+
+The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles. This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.
 
 The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of {{SD-JWT.VC}}):
 
@@ -156,15 +158,15 @@ The following diagram depicts the relationship between the involved roles (Relyi
            Referenced            Referenced
 ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
 │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
-└─┬──────┘            └────────┘            └──┬────────────┘
-  ▼ update status                              │
-┌───────────────┐                              │
-│ Status Issuer │                              │
-└─┬─────────────┘                              │
-  ▼ provide Status List                        │
-┌─────────────────┐         fetch Status List  │
-│ Status Provider │◄───────────────────────────┘
-└─────────────────┘
+└─┬──────┘            └───┬────┘            └──┬────────────┘
+  ▼ update status         │                    │
+┌───────────────┐         │                    │
+│ Status Issuer │         │                    │
+└─┬─────────────┘         │                    │
+  ▼ provide Status List   │                    │
+┌─────────────────┐       │                    │
+│ Status Provider │◄──────┴────────────────────┘
+└─────────────────┘     fetch Status List Token
 
 ~~~
 
@@ -716,6 +718,8 @@ See [](#privacy-status-types) for privacy considerations on status types.
 
 # Verification and Processing
 
+The fetching, processing and verifying of a Status List Token may be done by either the Holder or the Relying Party. In the following section is described from the role of the Relying Party, however the same rules would also apply for the Holder.
+
 ## Status List Request {#status-list-request}
 
 To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.
@@ -861,7 +865,7 @@ The following is a non-normative example for media type `application/json`:
 
 ## Extended Key Usage Extension {#eku}
 
-{{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used.
+{{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used. A certificate's issuer explicitly delegates Status List Token signing authority by issuing a X.509 certificate containing the KeyPurposeId defined below in the extended key usage extension.
 
 The following OID is defined for usage in the EKU extension
 
@@ -891,7 +895,7 @@ A Status List Token in the CWT format should follow the security considerations 
 
 ## Key Resolution and Trust Management {#key-management}
 
-This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made:
+This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made for specifications, profiles, or ecosystems that are planning ot make use of the Status List mechanism:
 
 If the Issuer of the Referenced Token is the same entity as the Status Issuer, then the same key that is embedded into the Referenced Token may be used for the Status List Token. In this case the Status List Token may use:
 - the same `x5c` value or an `x5t`, `x5t#S256` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
@@ -1798,6 +1802,7 @@ CBOR encoding:
 -08
 
 * Fix cwt typ value to full media type
+* Holders may also fetch and verify Status List Tokens
 * Update terminology for referenced token and Status List Token
 
 -07
