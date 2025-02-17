@@ -635,8 +635,8 @@ Table of Contents
 
    The following content applies to the protected header of the CWT:
 
-   *  16 (type): REQUIRED.  The type of the CWT MUST be statuslist+cwt
-      as defined in [RFC9596].
+   *  16 (type): REQUIRED.  The type of the CWT MUST be application/
+      statuslist+cwt as defined in [RFC9596].
 
    The following content applies to the CWT Claims Set:
 
@@ -679,20 +679,21 @@ Table of Contents
    The following is a non-normative example of a Status List Token in
    CWT format in Hex:
 
-   d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
-   747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
-   648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840a1dd2fc0490ca0cf3145ad2c33b26b94fcdadb74491619adec
-   468c9eaa41af4461ef254230fcabd4e9ee787491ed254903a4379854bf65a2da5835
-   a2d4596623
+   d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
+   7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
+   74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
+   646269747301636c73744a78dadbb918000217015d5840358517881e1929be33f09b
+   94f120a9f86aac2f059ff896bb622a4d1514fb9794a36c59a0928fab6f32786b4e43
+   1aced3bd03d2d13b30bb52a59449f381e73566
 
    The following is the CBOR Annotated Hex output of the example above:
 
 d2                              # tag(18)
   84                            #   array(4)
-    53                          #     bytes(19)
-      a20126106e7374617475736c  #       "¢\x01&\x10nstatusl"
-      6973742b637774            #       "ist+cwt"
+    58 20                       #     bytes(32)
+      a2012610781a6170706c6963  #       "¢\x01&\x10x\x1aapplic"
+      6174696f6e2f737461747573  #       "ation/status"
+      6c6973742b637774          #       "list+cwt"
     a1                          #     map(1)
       04                        #       uint(4)
       42                        #       bytes(2)
@@ -706,12 +707,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      a1dd2fc0490ca0cf3145ad2c  #       "¡Ý/ÀI\x0c\xa0Ï1E\xad,"
-      33b26b94fcdadb74491619ad  #       "3²k\x94üÚÛtI\x16\x19\xad"
-      ec468c9eaa41af4461ef2542  #       "ìF\x8c\x9eªA¯Daï%B"
-      30fcabd4e9ee787491ed2549  #       "0ü«Ôéîxt\x91í%I"
-      03a4379854bf65a2da5835a2  #       "\x03¤7\x98T¿e¢ÚX5¢"
-      d4596623                  #       "ÔYf#"
+      358517881e1929be33f09b94  #       "5\x85\x17\x88\x1e\x19)¾3ð\x9b\x94"
+      f120a9f86aac2f059ff896bb  #       "ñ ©øj¬/\x05\x9fø\x96»"
+      622a4d1514fb9794a36c59a0  #       "b*M\x15\x14û\x97\x94£lY\xa0"
+      928fab6f32786b4e431aced3  #       "\x92\x8f«o2xkNC\x1aÎÓ"
+      bd03d2d13b30bb52a59449f3  #       "½\x03ÒÑ;0»R¥\x94Ió"
+      81e73566                  #       "\x81ç5f"
 
 6.  Referenced Token
 
@@ -856,37 +857,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158402f44a8f32e3b677308a769e1cd02753e13830e
-   ae673d04d2136a9b25b5ee8c1dc9d20111f1543c1c1241321a8546077bc704e43bb2
-   b08703190737e72c502213
+   7374617475736c697374732f315840ee737f60544905fedd70dab2b794fcad452738
+   991215bc270b9778c6fd2de0fb8e07cdc5f63b7648f1eae309f7493f4d51921a75e4
+   9fcec0c2796b59a8995fda
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      2f44a8f32e3b677308a769e1  #       "/D¨ó.;gs\x08§iá"
-      cd02753e13830eae673d04d2  #       "Í\x02u>\x13\x83\x0e®g=\x04Ò"
-      136a9b25b5ee8c1dc9d20111  #       "\x13j\x9b%µî\x8c\x1dÉÒ\x01\x11"
-      f1543c1c1241321a8546077b  #       "ñT<\x1c\x12A2\x1a\x85F\x07{"
-      c704e43bb2b08703190737e7  #       "Ç\x04ä;²°\x87\x03\x19\x077ç"
-      2c502213                  #       ",P"\x13"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         ee737f60544905fedd70dab2  #       "îs\x7f`TI\x05þÝpÚ²"
+         b794fcad452738991215bc27  #       "·\x94ü\xadE'8\x99\x12\x15¼'"
+         0b9778c6fd2de0fb8e07cdc5  #       "\x0b\x97xÆý-àû\x8e\x07ÍÅ"
+         f63b7648f1eae309f7493f4d  #       "ö;vHñêã\x09÷I?M"
+         51921a75e49fcec0c2796b59  #       "Q\x92\x1auä\x9fÎÀÂykY"
+         a8995fda                  #       "¨\x99_Ú"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1121,8 +1122,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.EtI53toOoDEnp2n3Ng-8lKw_DuM0Cfm9FFyTFhVRi4Dmhv0lApoY
-   H6Dkkh2M8biL0tTQS2BgZ24fJ7LGZoqvIw
+   nR0bCI6NDMyMDB9.OKTIv_I0cG6HC4bv-g2AJYR2zRCrWHVnO7p5O-5iuJ0iKZl1o-ff
+   uXiK3J3breM7RExxJHJcSWzO33mGXHs9GQ
 
 8.2.  Status List Response
 
@@ -1261,8 +1262,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.EtI53toOoDEnp2n3Ng-8lKw_DuM0Cfm9FFyTFhVRi4Dmhv0lApoY
-   H6Dkkh2M8biL0tTQS2BgZ24fJ7LGZoqvIw
+   nR0bCI6NDMyMDB9.OKTIv_I0cG6HC4bv-g2AJYR2zRCrWHVnO7p5O-5iuJ0iKZl1o-ff
+   uXiK3J3breM7RExxJHJcSWzO33mGXHs9GQ
 
 9.  Status List Aggregation
 
@@ -2934,6 +2935,8 @@ Test vectors for Status List encoding
 Document History
 
    -08
+
+   *  Fix cwt typ value to full media type
 
    *  Holders may also fetch and verify Status List Tokens
 
