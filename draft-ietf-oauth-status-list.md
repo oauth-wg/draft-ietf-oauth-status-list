@@ -895,7 +895,7 @@ A Status List Token in the CWT format should follow the security considerations 
 
 ## Key Resolution and Trust Management {#key-management}
 
-This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made:
+This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made for specifications, profiles, or ecosystems that are planning ot make use of the Status List mechanism:
 
 If the Issuer of the Referenced Token is the same entity as the Status Issuer, then the same key that is embedded into the Referenced Token may be used for the Status List Token. In this case the Status List Token may use:
 - the same `x5c` value or an `x5t`, `x5t#S256` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
