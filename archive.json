@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-16T00:18:28.929618+00:00",
+  "timestamp": "2025-02-18T00:16:46.809248+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5042,7 +5042,7 @@
       "labels": [],
       "body": "Currently Token Status List  not useable for revocation x509 credentials which is critical in context of eIDAS where \n\na) each QEAA has to be signed with xqualified signature or seal based on x509 certificates\nb) credentials in x509 legally possible and covered in ETSI TS 119 472-1 [Token Status List ]\n(https://docbox.etsi.org/esi/Open/Latest_Drafts/ETSI%20DRAFT%20TS_119_472-1v0.0.6-public.pdf)\n\nto avoid that trust service providers have to provide 2 different approaches for revocation, so 1 for credential 1 for its signature x509 shall be covered by Token Status List Spec. As mentioned by @paulbastian  in brief discussion it could be possible to define an X.509 extension in ASN.1, analogous to the CRL Distribution Endpoint:\n\nTokenStatusListDisitrubionEndpoint ::= SEQUENCE {\n        uri                    [0]     RelativeDistinguishedName,\n        index                   [1]     INTEGER }\n\nFurthermore, minimal adjustments to the Validation Logic section would be necessary.",
       "createdAt": "2025-01-24T13:30:59Z",
-      "updatedAt": "2025-02-14T11:56:24Z",
+      "updatedAt": "2025-02-17T20:58:19Z",
       "closedAt": null,
       "comments": [
         {
@@ -5135,6 +5135,13 @@
           "body": "> > ISO 18013 would also benefit from x509 as they're already using x509 for trust management and having revocation in the same format, but more compact, would be beneficial also for them.\n> \n> At least the people we spoke to from that (ISO) WG don't seem to think that way - rather keep existing X.509 implementations untouched as Tobias already mentioned.\n\nBeauty of the proposal is that the existing x509 implementations remain untouched. However, set of their options is extended by the novel approach introduced in this specification. Use cases, that suffer from CRL size issue incurred by the current CRL approach can now implement a super-efficient bit-string status list as x509. There are many (un?)successful attempts to make CRL sizes smaller (https://blog.mozilla.org/security/2020/01/09/crlite-part-1-all-web-pki-revocations-compressed/) and Let's Encrypt moving back to CRL https://letsencrypt.org/2024/12/05/ending-ocsp/, IMO this represents an amazing opportunity for this specification to thrive.",
           "createdAt": "2025-02-14T11:55:37Z",
           "updatedAt": "2025-02-14T11:56:24Z"
+        },
+        {
+          "author": "steffenschwalm",
+          "authorAssociation": "NONE",
+          "body": "@paulbastian @tplooker @c2bo the avoidance to put profile for using TokenStatusList for the QES/QSeal of certain QEAA in the IETF Specification seems: As you define in 12.1 of the spec the idea is to avoid that \" Issuer creates a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.\". In case for the QEA/QSeal of QEAA no TokenStatusList used we have following issue:\n\n- Attestation = TokenStatus List --> privacy solved\n- QES/Seal of attestation = OCSP because x509 --> as QES/QSeal is referenced and linked to belonging attestation the tracking of Holder of given QEAA is possible\n\nMeans: if not in both cases attestation and its signature TokenStatusList used, the requirement of 12.1 of the TokenStatusList specification seems compromiseable I guess.\n\n\nTogether with @cre8 I would like to contribute a concrete Solution for the proposed Extenstion of Token Status List (TSL) draft to support X.509 certificates. May you please kindly help us how we can contribute this the best?",
+          "createdAt": "2025-02-17T17:37:32Z",
+          "updatedAt": "2025-02-17T20:58:19Z"
         }
       ]
     },
@@ -5187,7 +5194,7 @@
       "id": "I_kwDOJZ2aqs6ogF2B",
       "title": "Status List Tokens can be fetched either by the Relying Party or by the Holder",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/254",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -5196,8 +5203,8 @@
       "labels": [],
       "body": "Only the first case is described and illustrated. Both cases should be described and illustrated.\n\nThe current text from section 1 (Introduction) is:\n\n> An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party.  The Issuer gives updated status information to the Status Issuer, who creates a Status List Token.  The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint.  The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity.  If not further specified, the term Issuer may refer to an entity acting for all three roles.  This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.\n\n> The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]):\n\n```\n\n              issue                 present\n              Referenced            Referenced\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc update status                              \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                              \u2502\n   \u2502 Status Issuer \u2502                              \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                              \u2502\n     \u25bc provide Status List                        \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510         fetch Status List  \u2502\n   \u2502 Status Provider \u2502\u25c4\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n```\n\n> Status Lists may be composed for expressing a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.\n\nText change proposal:\n\n> An Issuer of Referenced Tokens which is called an Issuer, issues Referenced Tokens to Holders. An Holder then uses and presents those Referenced Tokens to a Relying Party. \n> \n> Status Issuers issue Status List Tokens. The Status issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens.\n> \n> The Status Issuer issues Status List Tokens using one or more distribution points.\n> \n> The Status Issuer creates Status List Tokens initially indicating that all the Referenced Tokens then can be referenced in it are valid. In case a status change is required, the Issuer provides status information to the Status Issuer so that it can modify the content of one of the Status Lists that has been created. The modification will be taken into account at the next issuance of the Status List Token where the Referenced Token is referenced.\n> \n> This document describes how a Status List Token is created, how an Issuer references a Status List Token and how a Relying Party fetches and validates Status List Tokens.\n> \n> The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]) when Status List Tokens are fetched by the Relying Party:\n> \n```\n\n              issues                  presents\n              Referenced              Referenced\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 Token      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   Token           \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518            \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc updates status                                          \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                                           \u2502\n   \u2502 Status Issuer \u2502                                           \u2502\n   \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                                           \u2502\n        \u2502 issues Status List Tokens using a Distribution point \u2502\n        \u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                             \u2502\n        \u2514\u2500\u25ba\u2502  Status List Token  \u2502  fetches Status List Token  \u2502\n           \u2502  Distribution Point \u2502\u25c4\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n           \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n> Diagram 2: This diagram depicts the case where the Status List Token is fetched by the Relying Party. \n> \n> Before presenting the Referenced Token to the Relying Party, the Holder may choose to fetch the Status List Token and to present together to the Relying Party both the Referenced Token and the corresponding Status list Token. This can avoid the Relying Party to fetch the corresponding Status List Token.\n\n```\n\n                                             presents \n                                             Referenced Token and\n               issues                        Status List Token\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  Referenced Token   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510          \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n   \u2502 Issuer \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Holder \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u25ba\u2502 Relying Party \u2502\n   \u2514\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2518                     \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2518          \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n     \u25bc updates status                  \u2502\n   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510                   \u2502\n   \u2502 Status Issuer \u2502                   \u2502\n   \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518                   \u2502\n        \u2502 issues Status List Tokens    \u2502\n        \u2502 using a Distribution point   \u2502\n        \u2502  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510     \u2502\n        \u2514\u2500\u25ba\u2502  Status List Token  \u2502     \u2502 fetches Status List Token\n           \u2502  Distribution point \u2502\u25c4\u2500\u2500\u2500\u2500\u2518\n           \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\nDiagram 3: This diagram depicts the case where the Status List Token is fetched by the Holder. \n\nText in section 8.1 should be changed to support the use case of the Diagram 3 where the Status List Token is fetched by the Holder.\n\nIn section 8.1, the text states:\n\n> 8.1.  Status List Request\n> \n> To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.\n\n Since Status List Tokens can also be fetched by the Holder, this sentence should be modified.\n\nChange into:\n\n> The URI provided in the Referenced Token can be used either by the Relying Party or by the Holder to fetch the Status List Token that contains the status of the Referenced Token. To obtain this Status List Token, either the Relying Party or the Holder MUST send an HTTP GET request to the URI provided in the Referenced Token.\n\nThe following sentences should be modified to accommodate the two cases:\n\n>    The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:\n> \n>    *  \"application/statuslist+jwt\" for Status List Token in JWT format\n> \n>    *  \"application/statuslist+cwt\" for Status List Token in CWT format\n> \n>    If the Relying Party does not send an Accept Header, the response\n>    type is assumed to be known implicit or out-of-band.\n\nChange into:\n\n> Either the Relying Party or the Holder SHOULD send the following Accept-Header to indicate the requested response type:\n> \n>    *  \"application/statuslist+jwt\" for Status List Token in JWT format\n> \n>    *  \"application/statuslist+cwt\" for Status List Token in CWT format\n> \n> If the Relying Party or the Holder does not send an Accept Header, the response type is assumed to be known implicit or out-of-band.\n> ",
       "createdAt": "2025-02-03T09:45:30Z",
-      "updatedAt": "2025-02-12T17:27:24Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-17T00:29:15Z",
+      "closedAt": "2025-02-17T00:29:15Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -5229,7 +5236,7 @@
       ],
       "body": "In #228, C2bo wrote:\n\n> The claim \"aggregation_uri\" is meant as a way to allow efficient caching for RPs, not for alternative URIs \n> - it points to all relevant status lists for an issuer or specific referenced token type.\n\n\"aggregation_uri\" is defined in 4.1 as:\n\n> aggregation_uri: OPTIONAL.  JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token.  \nSee section 9 for further detail.\n\nSection 9 (Status List Aggregation) states:\n\n> Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThese two descriptions are not aligned with section 4.1. **The case of the Issuer is not mentioned in section 4.1**.\nHowever, in section 9, the sentence mentions: \n> all relevant Status Lists for a specific type of Referenced Token **or Issuer**.  \n\n Then comes some questions.\n\nHow can the Relying party retrieve either: \n\na) all relevant Status Lists for a specific [type of] Referenced Token, or\nb) all relevant Status Lists for an Issuer ?\n\nIn the first case, how long should \"all relevant Status Lists\" for a specific type of Referenced Token be accessible ? \nSame question for \"all relevant Status Lists\" for an Issuer.\n\nIf the case of the \"Issuer\" is indeed supported, there should be some additional text to warn the Issuers about some consequences when this claim is supported. For example:\n\n> \"All relevant Status Lists for an Issuer\" allows a Relying Party to know how many Referenced Tokens have been issued by an Issuer and are either valid, suspended or revoked at an instant of time. This can reveal also the number of entities that have been registered. Issuers should be warned of the consequences before choosing to support this optional claim.\n\n\nFinally, the argument is that this claim is \"meant as a way to allow efficient caching for RPs\". However, I still have difficulties to understand the usefulness of this optional claim when the JSON String contains a URI to retrieve the Status List Aggregation for this Referenced Token.\nCaching is pretty well supported by the ttl claim:\n\n> *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. \n\n",
       "createdAt": "2025-02-03T09:45:58Z",
-      "updatedAt": "2025-02-14T11:19:26Z",
+      "updatedAt": "2025-02-17T13:49:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -5266,6 +5273,13 @@
           "body": "> > If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint,\n> > it SHOULD continue processing the other valid Status Lists referenced in the response.\n> \n> There should be one and only one SLT which contains the status of the Referenced Token. So why continue to processing the other valid Status Lists referenced in the response ?\n\nTo provide a bit of context for that section: \"This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.\"\n\nThe intention of \n\n> If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response.\n\nis that RPs that want to cache Status List Tokens (e.g., because they want to have them available for offline usage later), should continue to parse entries in the aggregation_uri if they encounter an error - don't fail and terminate all parsing, but keep on fetching and verifying the other entries.\n\n----\n\n> This can overload the SLTs. However, if one or more base URIs are negotiated between the Issuer and the Status Issuer\nfor each SLT distribution point, these base URIs can be included into the aggregation_uri.\n\nMost modern systems deal with that deployment complexity afaik not by providing more URLs, but by load balancing via DNS: the same DNS entry resolves depending on load and geographical(/network) proximity to other IPs (or other deployments/clusters). That is at least my experience and the main reason why I don't think it is necessary to add the complexity of having more than one entry in the aggregation_uri.\n\nWe also allow for redirects when resolving Status List Tokens, which would easily allow to shift traffic to another URL if it becomes necessary (outages etc).\n\n----\n\n> The mDL is a nice example to illustrate the fact that, at least, two URIs should be made available. The Police can use a private address to fetch the appropriate SLT on a network that is not open to the public, while commercial web servers can use a different (public) address to fetch the same the appropriate SLT. If an issuing country is a member of the EU, it can provide a URI in the domain name of the country, e.g. de or fr, as well as in the domain mane of the eu.\n\nThere is no reason for the private address to be visible anywhere publicly in that example is there? In that example I would see the public aggregation_uri as the one URI that is made publicly available and any other system can provide its own mechanism for distribution (e.g., via a private network etc), but there is no reason to include that information somewhere publicly. ",
           "createdAt": "2025-02-14T11:19:24Z",
           "updatedAt": "2025-02-14T11:19:24Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "C2bo wrote: \n\n> If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response.\n\nis that RPs that want to cache Status List Tokens (e.g., because they want to have them available for offline usage later), should continue to parse entries in the aggregation_uri if they encounter an error - don't fail and terminate all parsing, but keep on fetching and verifying the other entries.\n\n===================================================================================\n\nI am sorry, but I still don't understand. What do you mean by \" if they encounter an error\" ? The normal way is to use the uri that is contained in the Referenced Token and then to use the index to get the appropriate status. Since there is one distribution point there can only be a single SLT which will be the more up-to-date. \n\n===================================================================================\n\nC2bo also wrote: \n\n> This can overload the SLTs. However, if one or more base URIs are negotiated between the Issuer and the Status Issuer\nfor each SLT distribution point, these base URIs can be included into the aggregation_uri.\n\nMost modern systems deal with that deployment complexity afaik not by providing more URLs, but by load balancing via DNS: the same DNS entry resolves depending on load and geographical(/network) proximity to other IPs (or other deployments/clusters). That is at least my experience and the main reason why I don't think it is necessary to add the complexity of having more than one entry in the aggregation_uri.\n\n===================================================================================\nSection 9 (Status List Aggregation) starts with:\n\n> Status List Aggregation is an optional mechanism to retrieve **_a list of URIs_** (...)\n\nThis means that aggregation_uri can contain several entries.\n\nHowever, this is in contradiction with section 4.1 which states:\n\n> aggregation_uri: OPTIONAL. JSON String that **_contains a URI_** to retrieve the Status List Aggregation for this type of Referenced Token or Issuer.\n\nWhy are there two cases, i.e., \"this type of Referenced Token or Issuer\" ? \n\nI still don't understand the first case.\n\nI can understand the second case, where the Relying Party would like to cache in advance all the SLTs from a given Issuer \nas soon as it got a Referenced Token. But in that case, it would be a single **_base uri_** (instead of a list of uris). \n\n===================================================================================\n\n> The mDL is a nice example to illustrate the fact that, at least, two URIs should be made available. The Police can use a private address to fetch the appropriate SLT on a network that is not open to the public, while commercial web servers can use a different (public) address to fetch the same the appropriate SLT. (...)\n\nC2bo wrote: \n\n> There is no reason for the private address to be visible anywhere publicly in that example is there? In that example I would see the public aggregation_uri as the one URI that is made publicly available and any other system can provide its own mechanism for distribution (e.g., via a private network etc), but there is no reason to include that information somewhere publicly.\n\nThank you for the explanations and for the rational. Your last sentence allowed me to bounce. \nLet us continue to use the mDL example. Two distribution points would be used:\n-\ta public distribution point for the public, and\n-\ta private distribution point for the police.\n\nThe private distribution point for the police would no be included into the Referenced Token, but is only known by the police. \n\nThe public distribution point can contain a uri with a SLT with 2 bits.\nThe private distribution point can contain a uri with a SLT with 8 bits.\n\nIn the second case, the police can know various statuses of the mDL (but not the public). For example:\n\n- this mDL allows to drive cars,\n- this mDL allows to drive trucks,\n- this mDL allows to drive school buses,\n- this mDL has been suspended because the driver got 12 or more penalty points.\n- this mDL has been invalidated following a decision of the police or of a court\n\nTo summarize : \n\nThe Status Issuer can use several distribution points, but a single public distribution point will be indicated in the Referenced Token.\nEach SLT can use a different number of bits (1, 2, 4 or 8 bits)\n\n",
+          "createdAt": "2025-02-17T13:49:00Z",
+          "updatedAt": "2025-02-17T13:49:00Z"
         }
       ]
     },
@@ -5319,7 +5333,7 @@
       "id": "I_kwDOJZ2aqs6pSd1A",
       "title": "Status List Token in CWT Format / typ value",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/262",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "sschulz-t",
       "authorAssociation": "NONE",
       "assignees": [
@@ -5328,8 +5342,8 @@
       "labels": [],
       "body": "The draft says:\n```\n16 (type): REQUIRED. The type of the CWT MUST be statuslist+cwt as defined in \n[[RFC9596](https://www.rfc-editor.org/rfc/rfc9596)].\n```\n\nRFC9596 states:\n```\nThis specification adds the equivalent of the JOSE \"typ\" (type) header parameter to COSE so that the benefits of \nexplicit typing can be brought to COSE objects. The syntax of the COSE type header parameter value is the \nsame as the existing COSE content type header parameter, \nallowing both unsigned integers as registered in the \"CoAP Content-Formats\" registry\n[[CoAP.ContentFormats](https://www.rfc-editor.org/rfc/rfc9596#CoAP.ContentFormats)]\n and string media type values [[MediaTypes](https://www.rfc-editor.org/rfc/rfc9596#MediaTypes)] to be used.\n```\n\nWhich refers to https://www.iana.org/assignments/media-types but there is no statuslist content type registered (yet?).\n\nI was wondering about the value. Is statuslist+cwt the final value as to be registered with the iana? Or is this a work in progress?\nI was expecting typ to be in the form of <type-name>/<subtype-name>.\n\nThe lib I used for the implementation expects this format as well (see https://github.com/veraison/go-cose/issues/211)",
       "createdAt": "2025-02-08T18:10:17Z",
-      "updatedAt": "2025-02-09T07:43:36Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-17T09:21:15Z",
+      "closedAt": "2025-02-17T09:21:15Z",
       "comments": [
         {
           "author": "c2bo",
@@ -5345,7 +5359,7 @@
       "id": "I_kwDOJZ2aqs6qGoQS",
       "title": "Recommendations for key resolution section",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/265",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -5354,8 +5368,8 @@
       "labels": [],
       "body": "We should be more clear in the text that this section (11.3) is aimed at other specifications or profiles building on top of status list - not something that is recommended for the RP.\n\nOne sentence in the introduction should be fine.",
       "createdAt": "2025-02-14T14:26:30Z",
-      "updatedAt": "2025-02-14T14:26:39Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-17T09:08:45Z",
+      "closedAt": "2025-02-17T09:08:45Z",
       "comments": []
     }
   ],
@@ -17231,24 +17245,26 @@
       "id": "PR_kwDOJZ2aqs6KbW20",
       "title": "EKU guidance",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/258",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-02-07T14:36:49Z",
-      "updatedAt": "2025-02-14T14:19:55Z",
+      "updatedAt": "2025-02-17T00:27:52Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "379f5233f64ad98b25af96b7184bb7d3cc5a70ef",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/eku",
-      "headRefOid": "b1d0dd668602a7d0fa7334efb1a6993803a62333",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "b231e3490ff4d958c40443e3f7844fdc78e3ba8e",
+      "closedAt": "2025-02-17T00:27:52Z",
+      "mergedAt": "2025-02-17T00:27:52Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "55b08dfceb819087590d464e97b7ca3c8d34eeda"
+      },
       "comments": [],
       "reviews": [
         {
@@ -17343,6 +17359,19 @@
               "updatedAt": "2025-02-14T14:19:55Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6cJoS2",
+          "commit": {
+            "abbreviatedOid": "b231e34"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-17T00:27:22Z",
+          "updatedAt": "2025-02-17T00:27:22Z",
+          "comments": []
         }
       ]
     },
@@ -17379,24 +17408,26 @@
       "id": "PR_kwDOJZ2aqs6KcVZL",
       "title": "Holders may also fetch and verify Status List Tokens",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/260",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #254",
       "createdAt": "2025-02-07T16:41:16Z",
-      "updatedAt": "2025-02-08T22:05:28Z",
+      "updatedAt": "2025-02-17T00:29:14Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "549d9e0c5e7b19a386a563e1e6fd4c7588ea30b7",
+      "baseRefOid": "55b08dfceb819087590d464e97b7ca3c8d34eeda",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/holdersfetching3",
-      "headRefOid": "5592ba6c1ba45c0f5eb4d4c09657d5d66cc85f8f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "199cc82829cf12c7e18c81940f5abec40fe6a4ab",
+      "closedAt": "2025-02-17T00:29:14Z",
+      "mergedAt": "2025-02-17T00:29:14Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "4b51b5138491cd990e8327149cc703202d49e998"
+      },
       "comments": [],
       "reviews": [
         {
@@ -17418,6 +17449,19 @@
               "updatedAt": "2025-02-08T18:22:46Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6cJoIs",
+          "commit": {
+            "abbreviatedOid": "5592ba6"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-17T00:25:58Z",
+          "updatedAt": "2025-02-17T00:25:58Z",
+          "comments": []
         }
       ]
     },
@@ -17481,24 +17525,26 @@
       "id": "PR_kwDOJZ2aqs6Ki2-r",
       "title": "fix cwt typ to use full media type",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/263",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #262 \r\n\r\nCOSE/CWT typ behaves a bit differently than JOSE/JWT typ and requires the full media type.",
       "createdAt": "2025-02-09T09:03:59Z",
-      "updatedAt": "2025-02-14T14:19:20Z",
+      "updatedAt": "2025-02-17T09:21:14Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "9130e8c23ce4569a4c2bca1a239c0edba53e4f53",
+      "baseRefOid": "8dc4f7e51fe9f6bc62d9c6008e7fc6f3d95f1f7f",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "262-cwt-typ",
-      "headRefOid": "893029c0350f9b8404e0b12c009164a3f3708442",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "6e75d266a612a8565f1d7998d0152339904a8911",
+      "closedAt": "2025-02-17T09:21:14Z",
+      "mergedAt": "2025-02-17T09:21:14Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "9459928c2eeb7a8edef727137bcb0b4c4c8159b2"
+      },
       "comments": [],
       "reviews": [
         {
@@ -17512,6 +17558,19 @@
           "body": "",
           "createdAt": "2025-02-12T19:02:25Z",
           "updatedAt": "2025-02-12T19:02:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6cML0s",
+          "commit": {
+            "abbreviatedOid": "893029c"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-17T09:09:26Z",
+          "updatedAt": "2025-02-17T09:09:26Z",
           "comments": []
         }
       ]
@@ -17584,26 +17643,55 @@
       "id": "PR_kwDOJZ2aqs6LWf2G",
       "title": "clarification on recommendations for key resolution",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/266",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #265 ",
       "createdAt": "2025-02-15T21:49:42Z",
-      "updatedAt": "2025-02-15T21:49:56Z",
+      "updatedAt": "2025-02-17T09:08:44Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "9130e8c23ce4569a4c2bca1a239c0edba53e4f53",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "265-key-resolution-recommendations",
       "headRefOid": "c87da71856f5b5162866ed172df766d511c7bb21",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-17T09:08:44Z",
+      "mergedAt": "2025-02-17T09:08:44Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "8dc4f7e51fe9f6bc62d9c6008e7fc6f3d95f1f7f"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6cJoC9",
+          "commit": {
+            "abbreviatedOid": "c87da71"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-17T00:25:13Z",
+          "updatedAt": "2025-02-17T00:25:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6cMLTt",
+          "commit": {
+            "abbreviatedOid": "c87da71"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-17T09:08:35Z",
+          "updatedAt": "2025-02-17T09:08:35Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
