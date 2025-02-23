@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-20T00:17:04.754299+00:00",
+  "timestamp": "2025-02-23T00:18:31.035772+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5236,7 +5236,7 @@
       ],
       "body": "In #228, C2bo wrote:\n\n> The claim \"aggregation_uri\" is meant as a way to allow efficient caching for RPs, not for alternative URIs \n> - it points to all relevant status lists for an issuer or specific referenced token type.\n\n\"aggregation_uri\" is defined in 4.1 as:\n\n> aggregation_uri: OPTIONAL.  JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token.  \nSee section 9 for further detail.\n\nSection 9 (Status List Aggregation) states:\n\n> Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThese two descriptions are not aligned with section 4.1. **The case of the Issuer is not mentioned in section 4.1**.\nHowever, in section 9, the sentence mentions: \n> all relevant Status Lists for a specific type of Referenced Token **or Issuer**.  \n\n Then comes some questions.\n\nHow can the Relying party retrieve either: \n\na) all relevant Status Lists for a specific [type of] Referenced Token, or\nb) all relevant Status Lists for an Issuer ?\n\nIn the first case, how long should \"all relevant Status Lists\" for a specific type of Referenced Token be accessible ? \nSame question for \"all relevant Status Lists\" for an Issuer.\n\nIf the case of the \"Issuer\" is indeed supported, there should be some additional text to warn the Issuers about some consequences when this claim is supported. For example:\n\n> \"All relevant Status Lists for an Issuer\" allows a Relying Party to know how many Referenced Tokens have been issued by an Issuer and are either valid, suspended or revoked at an instant of time. This can reveal also the number of entities that have been registered. Issuers should be warned of the consequences before choosing to support this optional claim.\n\n\nFinally, the argument is that this claim is \"meant as a way to allow efficient caching for RPs\". However, I still have difficulties to understand the usefulness of this optional claim when the JSON String contains a URI to retrieve the Status List Aggregation for this Referenced Token.\nCaching is pretty well supported by the ttl claim:\n\n> *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. \n\n",
       "createdAt": "2025-02-03T09:45:58Z",
-      "updatedAt": "2025-02-17T13:49:02Z",
+      "updatedAt": "2025-02-21T18:41:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -5280,6 +5280,20 @@
           "body": "C2bo wrote: \n\n> If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response.\n\nis that RPs that want to cache Status List Tokens (e.g., because they want to have them available for offline usage later), should continue to parse entries in the aggregation_uri if they encounter an error - don't fail and terminate all parsing, but keep on fetching and verifying the other entries.\n\n===================================================================================\n\nI am sorry, but I still don't understand. What do you mean by \" if they encounter an error\" ? The normal way is to use the uri that is contained in the Referenced Token and then to use the index to get the appropriate status. Since there is one distribution point there can only be a single SLT which will be the more up-to-date. \n\n===================================================================================\n\nC2bo also wrote: \n\n> This can overload the SLTs. However, if one or more base URIs are negotiated between the Issuer and the Status Issuer\nfor each SLT distribution point, these base URIs can be included into the aggregation_uri.\n\nMost modern systems deal with that deployment complexity afaik not by providing more URLs, but by load balancing via DNS: the same DNS entry resolves depending on load and geographical(/network) proximity to other IPs (or other deployments/clusters). That is at least my experience and the main reason why I don't think it is necessary to add the complexity of having more than one entry in the aggregation_uri.\n\n===================================================================================\nSection 9 (Status List Aggregation) starts with:\n\n> Status List Aggregation is an optional mechanism to retrieve **_a list of URIs_** (...)\n\nThis means that aggregation_uri can contain several entries.\n\nHowever, this is in contradiction with section 4.1 which states:\n\n> aggregation_uri: OPTIONAL. JSON String that **_contains a URI_** to retrieve the Status List Aggregation for this type of Referenced Token or Issuer.\n\nWhy are there two cases, i.e., \"this type of Referenced Token or Issuer\" ? \n\nI still don't understand the first case.\n\nI can understand the second case, where the Relying Party would like to cache in advance all the SLTs from a given Issuer \nas soon as it got a Referenced Token. But in that case, it would be a single **_base uri_** (instead of a list of uris). \n\n===================================================================================\n\n> The mDL is a nice example to illustrate the fact that, at least, two URIs should be made available. The Police can use a private address to fetch the appropriate SLT on a network that is not open to the public, while commercial web servers can use a different (public) address to fetch the same the appropriate SLT. (...)\n\nC2bo wrote: \n\n> There is no reason for the private address to be visible anywhere publicly in that example is there? In that example I would see the public aggregation_uri as the one URI that is made publicly available and any other system can provide its own mechanism for distribution (e.g., via a private network etc), but there is no reason to include that information somewhere publicly.\n\nThank you for the explanations and for the rational. Your last sentence allowed me to bounce. \nLet us continue to use the mDL example. Two distribution points would be used:\n-\ta public distribution point for the public, and\n-\ta private distribution point for the police.\n\nThe private distribution point for the police would no be included into the Referenced Token, but is only known by the police. \n\nThe public distribution point can contain a uri with a SLT with 2 bits.\nThe private distribution point can contain a uri with a SLT with 8 bits.\n\nIn the second case, the police can know various statuses of the mDL (but not the public). For example:\n\n- this mDL allows to drive cars,\n- this mDL allows to drive trucks,\n- this mDL allows to drive school buses,\n- this mDL has been suspended because the driver got 12 or more penalty points.\n- this mDL has been invalidated following a decision of the police or of a court\n\nTo summarize : \n\nThe Status Issuer can use several distribution points, but a single public distribution point will be indicated in the Referenced Token.\nEach SLT can use a different number of bits (1, 2, 4 or 8 bits)\n\n",
           "createdAt": "2025-02-17T13:49:00Z",
           "updatedAt": "2025-02-17T13:49:00Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "I think there is some misunderstanding on how the `aggregation_uri` currently works:\nIt is a uri that is provided either by metadata (.well-known etc) or within a Status List Token itself. When resolved, it contains a JSON array with a list of URLs to Status List Tokens. Those are the relevant Status List Tokens within that scope (either all Status List Tokens that the issuer is serving, or all Status List Tokens relevant for that credential type). \n\nFrom that context:\n> If they encounter an error ...\n\nThe aggregation_uri contains a list of Status List Tokens - if fetching or validating one of them fails, the others should still be processed\n\n> I can understand the second case, where the Relying Party would like to cache in advance all the SLTs from a given Issuer\nas soon as it got a Referenced Token. But in that case, it would be a single base uri (instead of a list of uris).\n\nDepending on size, there could be more than 1 Status List Token for a credential (referenced token) type, so `aggregation_uri` even if scoped to one referenced token type could point to a list. \n\nThe idea of embedding `aggregation_uri` also in the Status List Token itself is to provide an option to ecosystems that do not (or do not want to) use other ways of metadata like .well-known - that way it is sort of self-contained without other dependencies: a RP can always fetch one Status List Token after receiving a Referenced Token and get `aggregation_uri` from there to cache all relevant Status List Tokens.",
+          "createdAt": "2025-02-20T07:38:15Z",
+          "updatedAt": "2025-02-20T07:38:15Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "> I think there is some misunderstanding on how the aggregation_uri currently works:\n> It is a uri that is provided either by metadata (.well-known etc) or within a Status List Token itself. \n> When resolved, it contains a JSON array with a list of URLs to Status List Tokens. \n\nThis now becomes understandable, but this is not what the text was saying:\n\n> JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer.\n\n> Those are the relevant Status List Tokens within that scope (either all Status List Tokens that the issuer is serving, \nor all Status List Tokens relevant for that credential type).`\n\nThe term \"credential type\" is not present in the draft. This is still not understandable. There is no means to understand what the \"scope\" is. \n\n> The aggregation_uri contains a list of Status List Tokens - if fetching or validating one of them fails, \n> the others should still be processed\n\nThis is still not understandable to me. The status of a Referenced Token is provided by the latest published SLT. \nAt a given point of time and for a given Referenced Token, only the latest SLT is published. \nIf the SLT has been malformed or is not correctly signed, then this is a fatal error. \nIf the SLT cannot be retrieved, then trying more times is likely to succeed.\n\n> Depending on size, there could be more than 1 Status List Token for a credential (referenced token) type, \nso aggregation_uri even if scoped to one referenced token type could point to a list.\n\nDepending of the size of \"what\" ? \n\n> \"there could be more than 1 Status List Token\". \n\nThis statement would need to be explained in details.\n\nWhat is a \"credential type\" ?\n\n> ... so aggregation_uri even if scoped to one referenced token type could point to a list.\n\nThe end of this sentence is not understandable to me.\n",
+          "createdAt": "2025-02-21T18:41:44Z",
+          "updatedAt": "2025-02-21T18:41:44Z"
         }
       ]
     },
@@ -5370,6 +5384,42 @@
       "createdAt": "2025-02-14T14:26:30Z",
       "updatedAt": "2025-02-17T09:08:45Z",
       "closedAt": "2025-02-17T09:08:45Z",
+      "comments": []
+    },
+    {
+      "number": 267,
+      "id": "I_kwDOJZ2aqs6qyWtk",
+      "title": "CDDL for CBOR",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/267",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "c2bo"
+      ],
+      "labels": [],
+      "body": "Rohan Mahy suggested on the mailing list:\n\n8. There should be a CDDL snippet for the CBOR. I would be happy to provide one once points 6 and 7 are addressed.",
+      "createdAt": "2025-02-20T07:36:49Z",
+      "updatedAt": "2025-02-20T07:56:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 268,
+      "id": "I_kwDOJZ2aqs6qyYfO",
+      "title": "Clarify whether Status List refers to the uncompressed or compressed byte array",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/268",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "paulbastian"
+      ],
+      "labels": [],
+      "body": "Rohan Maly wrote on the mailing list:\n\n> 3. The document uses status_list (JSON object) and StatusList (CBOR map) to refer to the map, but Status List seems to be used to refer to both the compressed byte string (in Section 5) and the uncompressed byte array of status values (in Section 4 step 2, and Section 4.1 2nd sentence).\n\nOur response: This is correct, we will separate, the parts of section 4 that talk about the the uncompressed byte array into its own subsection and not use the wording Status List for this. Otherwise, through out the rest of the document, Status List refers to the compressed byte array as defined in the terminology.",
+      "createdAt": "2025-02-20T07:40:41Z",
+      "updatedAt": "2025-02-20T07:56:19Z",
+      "closedAt": null,
       "comments": []
     }
   ],
