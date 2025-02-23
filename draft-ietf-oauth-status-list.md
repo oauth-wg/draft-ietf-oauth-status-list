@@ -292,7 +292,7 @@ values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|  |0|...
 index       7 6 5 4 3 2 1 0   15   ...  10 9 8   23
            \_______________/  \_______________/
 byte value       0xB9               0xA3
- 
+
 ~~~
 
 In the following example, the Status List additionally includes the Status Type "SUSPENDED". As the Status Type value for "SUSPENDED" is 0x02 and does not fit into 1 bit, the `bits` is required to be 2. This example illustrates the byte array of a Status List that represents the statuses of 12 Referenced Tokens with a `bits` of 2, requiring 3 bytes (24 bits) for the uncompressed byte array:
