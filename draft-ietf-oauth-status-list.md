@@ -362,7 +362,7 @@ The following is the CDDL definition of the StatusList structure:
 
 ~~~ cddl
 StatusList = {
-    bits: int, ; The amount of bits used per Referenced Token
+    bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token
     lst: bstr, ; Byte string that contains the Status List
     ? aggregation_uri: tstr, ; link to the Status List Aggregation
 }
