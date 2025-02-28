@@ -4,11 +4,11 @@
 
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
-Intended status: Informational                                P. Bastian
-Expires: 31 July 2025                                                   
+Intended status: Standards Track                              P. Bastian
+Expires: 1 September 2025                                               
                                                               C. Bormann
                                                                   SPRIND
-                                                         27 January 2025
+                                                        28 February 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 July 2025.
+   This Internet-Draft will expire on 1 September 2025.
 
 Copyright Notice
 
@@ -102,12 +102,13 @@ Table of Contents
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
      9.3.  Status List Aggregation in JSON Format
-   10. Further Examples
-     10.1.  Status List with 2-Bit Status Values in JSON format
+   10. X.509 Certificate Extensions
+     10.1.  Extended Key Usage Extension
    11. Security Considerations
      11.1.  Correct decoding and parsing of the encoded Status List
      11.2.  Security Guidance for JWT and CWT
-     11.3.  Status List Caching
+     11.3.  Key Resolution and Trust Management
+     11.4.  Status List Caching
    12. Privacy Considerations
      12.1.  Observability of Issuers
      12.2.  Malicious Issuers
@@ -116,13 +117,17 @@ Table of Contents
      12.5.  Unlinkability
        12.5.1.  Colluding Relying Parties
        12.5.2.  Colluding Status Issuer and Relying Party
-     12.6.  Third-Party Hosting
+     12.6.  External Status Provider for Privacy
      12.7.  Historical Resolution
+     12.8.  Status Types
    13. Implementation Considerations
-     13.1.  Referenced Token Lifecycle
+     13.1.  Token Lifecycle
      13.2.  Default Values and Double Allocation
      13.3.  Status List Size
-     13.4.  Status List Formats
+     13.4.  External Status Issuer
+     13.5.  External Status Provider for Scalability
+     13.6.  Relying Parties avoiding correlatable Information
+     13.7.  Status List Formats
    14. IANA Considerations
      14.1.  JSON Web Token Claims Registration
        14.1.1.  Registry Contents
@@ -139,10 +144,16 @@ Table of Contents
        14.5.2.  Initial Registry Contents
      14.6.  OAuth Parameters Registration
      14.7.  Media Type Registration
+     14.8.  X.509 Certificate Extended Key Purpose OID Registration
    15. References
      15.1.  Normative References
      15.2.  Informative References
    Acknowledgments
+   Test vectors for Status List encoding
+     1 bit Status List
+     2 bit Status List
+     4 bit Status List
+     8 bit Status List
    Document History
    Authors' Addresses
 
@@ -186,15 +197,20 @@ Table of Contents
 
    An Issuer issues Referenced Tokens to a Holder, the Holder uses and
    presents those Referenced Tokens to a Relying Party.  The Issuer
-   gives updated status information to the Status Issuer, who creates a
-   Status List Token.  The Status Issuer provides the Status List Token
-   to the Status Provider, who serves the Status List Token on a public,
-   resolvable endpoint.  The roles of the Issuer (of the Referenced
-   Token), the Status Issuer and the Status Provider may be fulfilled by
-   the same entity.  If not further specified, the term Issuer may refer
-   to an entity acting for all three roles.  This document describes how
-   an Issuer references a Status List Token and how a Relying Party
-   fetches and validates Status Lists.
+   gives updated status information to the Status Issuer, who issues a
+   Status List Token.  The Status Issuer can be either the Issuer or an
+   entity that has been authorized by the Issuer to issue Status List
+   Tokens.  The Status Issuer provides the Status List Token to the
+   Status Provider, who serves the Status List Token on a public,
+   resolvable endpoint.  The Relying Party or the Holder may fetch the
+   Status List Token to retrieve the status of the Referenced Token.
+
+   The roles of the Issuer (of the Referenced Token), the Status Issuer
+   and the Status Provider may be fulfilled by the same entity.  If not
+   further specified, the term Issuer may refer to an entity acting for
+   all three roles.  This document describes how an Issuer references a
+   Status List Token and how a Relying Party fetches and validates
+   Status Lists.
 
    The following diagram depicts the relationship between the involved
    roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]):
@@ -203,15 +219,15 @@ Table of Contents
               Referenced            Referenced
    ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
    │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
-   └─┬──────┘            └────────┘            └──┬────────────┘
-     ▼ update status                              │
-   ┌───────────────┐                              │
-   │ Status Issuer │                              │
-   └─┬─────────────┘                              │
-     ▼ provide Status List                        │
-   ┌─────────────────┐         fetch Status List  │
-   │ Status Provider │◄───────────────────────────┘
-   └─────────────────┘
+   └─┬──────┘            └───┬────┘            └──┬────────────┘
+     ▼ update status         │                    │
+   ┌───────────────┐         │                    │
+   │ Status Issuer │         │                    │
+   └─┬─────────────┘         │                    │
+     ▼ provide Status List   │                    │
+   ┌─────────────────┐       │                    │
+   │ Status Provider │◄──────┴────────────────────┘
+   └─────────────────┘     fetch Status List Token
 
    Status Lists may be composed to express a range of Status Types.
    This document defines basic Status Types for the most common use
@@ -337,16 +353,19 @@ Table of Contents
    Status List:  An object in JSON or CBOR representation containing a
       bit array that lists the statuses of many Referenced Tokens.
 
-   Status List Token:  A token in JWT or CWT representation that
-      contains a cryptographically secured Status List.
+   Status List Token:  A token in JWT (as defined in [RFC7519]) or CWT
+      (as defined in [RFC8392]) representation that contains a
+      cryptographically secured Status List.
 
    Referenced Token:  A cryptographically secured data structure that
-      contains a reference to a Status List Token.  It is RECOMMENDED to
-      use JSON [RFC8259] with JOSE as defined in [RFC7515] or CBOR
-      [RFC8949] with COSE as defined in [RFC9052].  The information from
-      the contained Status List gives the Relying Party additional
-      information about the current status of the Referenced Token.
-      Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+      contains a "status" claim that is referencing a mechanism to
+      retrieve status information about this Referenced Token.  This
+      document defines the Status List mechanism in which case the
+      Referenced Token contains a reference to an entry in a Status List
+      Token.  It is RECOMMENDED to use JSON [RFC8259] with JOSE as
+      defined in [RFC7515] or CBOR [RFC8949] with COSE as defined in
+      [RFC9052].  Examples for Referenced Tokens are SD-JWT VC and ISO
+      mdoc.
 
    base64url:  Denotes the URL-safe base64 encoding without padding as
       defined in Section 2 of [RFC7515] as "Base64url Encoding".
@@ -381,7 +400,7 @@ Table of Contents
 
    The following example illustrates a Status List that represents the
    statuses of 16 Referenced Tokens, requiring 16 bits (2 bytes) for the
-   uncompressed byte array:
+   uncompressed byte array (1 bit status):
 
    status[0] = 1
    status[1] = 0
@@ -411,6 +430,39 @@ Table of Contents
             \_______________/  \_______________/
                    0xB9               0xA3
 
+   In this example, the Status List additionally includes the Status
+   Type "SUSPENDED".  As the Status Type value for "SUSPENDED" is 0x02
+   and does not fit into 1 bit, the "bits" is required to be 2.
+
+   This example Status List represents the status of 12 Referenced
+   Tokens, requiring 24 bits (3 bytes) of status (2 bit status):
+
+   status[0] = 1
+   status[1] = 2
+   status[2] = 0
+   status[3] = 3
+   status[4] = 0
+   status[5] = 1
+   status[6] = 0
+   status[7] = 1
+   status[8] = 1
+   status[9] = 2
+   status[10] = 3
+   status[11] = 3
+
+   These bits are concatenated:
+
+   byte             0                  1                  2
+   bit       7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
+            +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+   values   |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
+            +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+             \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
+   status     3   0   2   1      1   0   1   0      3   3   2   1
+   index      3   2   1   0      7   6   5   4      11  10  9   8
+              \___________/      \___________/      \___________/
+                   0xC9               0x44               0xF9
+
 4.1.  Status List in JSON Format
 
    This section defines the data structure for a JSON-encoded Status
@@ -430,10 +482,11 @@ Table of Contents
 
       -  aggregation_uri: OPTIONAL.  JSON String that contains a URI to
          retrieve the Status List Aggregation for this type of
-         Referenced Token.  See section Section 9 for further details.
+         Referenced Token or Issuer.  See section Section 9 for further
+         details.
 
    The following example illustrates the JSON representation of the
-   Status List:
+   Status List with bit-size 1 from the example above:
 
    byte_array = [0xb9, 0xa3]
    encoded:
@@ -441,6 +494,19 @@ Table of Contents
      "bits": 1,
      "lst": "eNrbuRgAAhcBXQ"
    }
+
+   The following example illustrates the JSON representation of the
+   Status List with bit-size 2 from the example above:
+
+   byte_array = [0xc9, 0x44, 0xf9]
+   encoded:
+   {
+     "bits": 2,
+     "lst": "eNo76fITAAPfAgc"
+   }
+
+   See section Appendix "Test vectors for Status List encoding" for more
+   test vectors.
 
 4.2.  Status List in CBOR Format
 
@@ -462,6 +528,14 @@ Table of Contents
          type of Referenced Token.  See section Section 9 for further
          detail.
 
+   The following is the CDDL definition of the StatusList structure:
+
+   StatusList = {
+       bits: int, ; The amount of bits used per Referenced Token
+       lst: bstr, ; Byte string that contains the Status List
+       ? aggregation_uri: tstr, ; link to the Status List Aggregation
+   }
+
    The following example illustrates the CBOR representation of the
    Status List in Hex:
 
@@ -479,6 +553,9 @@ Table of Contents
        6c7374                      #     "lst"
      4a                            #   bytes(10)
        78dadbb918000217015d        #     "xÚÛ¹\x18\x00\x02\x17\x01]"
+
+   See section Appendix "Test vectors for Status List encoding" for more
+   test vectors.
 
 5.  Status List Token
 
@@ -566,8 +643,8 @@ Table of Contents
 
    The following content applies to the protected header of the CWT:
 
-   *  16 (type): REQUIRED.  The type of the CWT MUST be statuslist+cwt
-      as defined in [RFC9596].
+   *  16 (type): REQUIRED.  The type of the CWT MUST be application/
+      statuslist+cwt as defined in [RFC9596].
 
    The following content applies to the CWT Claims Set:
 
@@ -610,20 +687,21 @@ Table of Contents
    The following is a non-normative example of a Status List Token in
    CWT format in Hex:
 
-   d28453a20126106e7374617475736c6973742b637774a1044231325850a502782168
-   747470733a2f2f6578616d706c652e636f6d2f7374617475736c697374732f31061a
-   648c5bea041a8898dfea19fffe19a8c019fffda2646269747301636c73744a78dadb
-   b918000217015d5840ba7886882a4e647a9edefc9dc41b69c0169b9d350e3ed8f3fa
-   c12d05d2c77a364f5b8e04d752d5befc53346415d642890d3fc61c1c2890f4fd95a7
-   700b741cc6
+   d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
+   7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
+   74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
+   646269747301636c73744a78dadbb918000217015d5840ab6460fe3b9dfc450b7b29
+   2224cd778f0d686dcfe35877d55f41180b669a6255cd58b20df1b03cff2cc5478ba3
+   d722b27e0d65d40bd71bfc5cfc14d3b53f336c
 
    The following is the CBOR Annotated Hex output of the example above:
 
 d2                              # tag(18)
   84                            #   array(4)
-    53                          #     bytes(19)
-      a20126106e7374617475736c  #       "¢\x01&\x10nstatusl"
-      6973742b637774            #       "ist+cwt"
+    58 20                       #     bytes(32)
+      a2012610781a6170706c6963  #       "¢\x01&\x10x\x1aapplic"
+      6174696f6e2f737461747573  #       "ation/status"
+      6c6973742b637774          #       "list+cwt"
     a1                          #     map(1)
       04                        #       uint(4)
       42                        #       bytes(2)
@@ -637,12 +715,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ba7886882a4e647a9edefc9d  #       "ºx\x86\x88*Ndz\x9eÞü\x9d"
-      c41b69c0169b9d350e3ed8f3  #       "Ä\x1biÀ\x16\x9b\x9d5\x0e>Øó"
-      fac12d05d2c77a364f5b8e04  #       "úÁ-\x05ÒÇz6O[\x8e\x04"
-      d752d5befc53346415d64289  #       "×RÕ¾üS4d\x15ÖB\x89"
-      0d3fc61c1c2890f4fd95a770  #       "\x0d?Æ\x1c\x1c(\x90ôý\x95§p"
-      0b741cc6                  #       "\x0bt\x1cÆ"
+      ab6460fe3b9dfc450b7b2922  #       "«d`þ;\x9düE\x0b{)""
+      24cd778f0d686dcfe35877d5  #       "$Íw\x8f\x0dhmÏãXwÕ"
+      5f41180b669a6255cd58b20d  #       "_A\x18\x0bf\x9abUÍX²\x0d"
+      f1b03cff2cc5478ba3d722b2  #       "ñ°<ÿ,ÅG\x8b£×"²"
+      7e0d65d40bd71bfc5cfc14d3  #       "~\x0deÔ\x0b×\x1bü\ü\x14Ó"
+      b53f336c                  #       "µ?3l"
 
 6.  Referenced Token
 
@@ -787,9 +865,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840edb04ff8811230c83eec186b5574bd03f1d4e0
-   0f349ea1f02e6e67d0d4938698fca85ed1c300ea4477b6a0bd2bdfc3d78ebc81ee91
-   07e4768a8340cdd73d4bc5
+   7374617475736c697374732f3158408c89a51b4811a8ace7b4121a6a32b0aea5b8f0
+   07133544e1d8e9dc926abca148a513b5b6ce548d693653143d3a7a17ef7bcc9dbed6
+   d59f7d58bfa92674383d0f
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -812,12 +890,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      edb04ff8811230c83eec186b  #       "í°Oø\x81\x120È>ì\x18k"
-      5574bd03f1d4e00f349ea1f0  #       "Ut½\x03ñÔà\x0f4\x9e¡ð"
-      2e6e67d0d4938698fca85ed1  #       ".ngÐÔ\x93\x86\x98ü¨^Ñ"
-      c300ea4477b6a0bd2bdfc3d7  #       "Ã\x00êDw¶\xa0½+ßÃ×"
-      8ebc81ee9107e4768a8340cd  #       "\x8e¼\x81î\x91\x07äv\x8a\x83@Í"
-      d73d4bc5                  #       "×=KÅ"
+      8c89a51b4811a8ace7b4121a  #       "\x8c\x89¥\x1bH\x11¨¬ç´\x12\x1a"
+      6a32b0aea5b8f007133544e1  #       "j2°®¥¸ð\x07\x135Dá"
+      d8e9dc926abca148a513b5b6  #       "ØéÜ\x92j¼¡H¥\x13µ¶"
+      ce548d693653143d3a7a17ef  #       "ÎT\x8di6S\x14=:z\x17ï"
+      7bcc9dbed6d59f7d58bfa926  #       "{Ì\x9d¾ÖÕ\x9f}X¿©&"
+      74383d0f                  #       "t8=\x0f"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1002,7 +1080,14 @@ d2                              # tag(18)
    (Expiration Time) but also has a status of 0x00 ("VALID"), the token
    is considered expired.
 
+   See Section 12.8 for privacy considerations on status types.
+
 8.  Verification and Processing
+
+   The fetching, processing and verifying of a Status List Token may be
+   done by either the Holder or the Relying Party.  In the following
+   section is described from the role of the Relying Party, however the
+   same rules would also apply for the Holder.
 
 8.1.  Status List Request
 
@@ -1045,8 +1130,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.6AsclBcbDdwMJCP2lFWujgPrH5e5YI1rcDtcXiUq6z5jQ8MnC4dr
-   1zDMfxCOC5nJG2rc4GwuQkIHHhG6c0A_HA
+   nR0bCI6NDMyMDB9.LXt2QXamM3OugjoKN-CEqof7j1NLb6kmerg5QEMKQ5ItTmNH5e5e
+   CxHpgM327_I4oXsnvE2fzUI43n5LsaqNaQ
 
 8.2.  Status List Response
 
@@ -1101,7 +1186,8 @@ d2                              # tag(18)
 
        1.  Validate the Status List Token by following the rules defined
            in section 7.2 of [RFC7519] for JWTs and section 7.2 of
-           [RFC8392] for CWTs
+           [RFC8392] for CWTs.  This step might require the resolution
+           of a public key as described in Section 11.3.
 
        2.  Check for the existence of the required claims as defined in
            Section 5.1 and Section 5.2 depending on the token type
@@ -1184,8 +1270,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.6AsclBcbDdwMJCP2lFWujgPrH5e5YI1rcDtcXiUq6z5jQ8MnC4dr
-   1zDMfxCOC5nJG2rc4GwuQkIHHhG6c0A_HA
+   nR0bCI6NDMyMDB9.LXt2QXamM3OugjoKN-CEqof7j1NLb6kmerg5QEMKQ5ItTmNH5e5e
+   CxHpgM327_I4oXsnvE2fzUI43n5LsaqNaQ
 
 9.  Status List Aggregation
 
@@ -1258,52 +1344,26 @@ d2                              # tag(18)
       ]
    }
 
-10.  Further Examples
+10.  X.509 Certificate Extensions
 
-10.1.  Status List with 2-Bit Status Values in JSON format
+10.1.  Extended Key Usage Extension
 
-   In this example, the Status List additionally includes the Status
-   Type "SUSPENDED".  As the Status Type value for "SUSPENDED" is 0x02
-   and does not fit into 1 bit, the "bits" is required to be 2.
+   [RFC5280] specifies the Extended Key Usage (EKU) X.509 certificate
+   extension for use on end entity certificates.  The extension
+   indicates one or more purposes for which the certified public key is
+   valid.  The EKU extension can be used in conjunction with the Key
+   Usage (KU) extension, which indicates the set of basic cryptographic
+   operations for which the certified key may be used.  A certificate's
+   issuer explicitly delegates Status List Token signing authority by
+   issuing a X.509 certificate containing the KeyPurposeId defined below
+   in the extended key usage extension.
 
-   This example Status List represents the status of 12 Referenced
-   Tokens, requiring 24 bits (3 bytes) of status.
+   The following OID is defined for usage in the EKU extension
 
-   status[0] = 1
-   status[1] = 2
-   status[2] = 0
-   status[3] = 3
-   status[4] = 0
-   status[5] = 1
-   status[6] = 0
-   status[7] = 1
-   status[8] = 1
-   status[9] = 2
-   status[10] = 3
-   status[11] = 3
+   ``` id-kp OBJECT IDENTIFIER ::= { iso(1) identified-organization(3)
+   dod(6) internet(1) security(5) mechanisms(5) pkix(7) 3 }
 
-   These bits are concatenated:
-
-   byte             0                  1                  2
-   bit       7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
-            +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-   values   |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
-            +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-             \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
-   status     3   0   2   1      1   0   1   0      3   3   2   1
-   index      3   2   1   0      7   6   5   4      11  10  9   8
-              \___________/      \___________/      \___________/
-                   0xC9               0x44               0xF9
-
-   Resulting in the byte array and compressed/base64url-encoded Status
-   List:
-
-   byte_array = [0xc9, 0x44, 0xf9]
-   encoded:
-   {
-     "bits": 2,
-     "lst": "eNo76fITAAPfAgc"
-   }
+   id-kp-oauthStatusListSigning OBJECT IDENTIFIER ::= { id-kp TBD } ```
 
 11.  Security Considerations
 
@@ -1337,7 +1397,66 @@ d2                              # tag(18)
    A Status List Token in the CWT format should follow the security
    considerations of [RFC8392].
 
-11.3.  Status List Caching
+11.3.  Key Resolution and Trust Management
+
+   This specification does not mandate specific methods for key
+   resolution and trust management, however the following
+   recommendations are made for specifications, profiles, or ecosystems
+   that are planning ot make use of the Status List mechanism:
+
+   If the Issuer of the Referenced Token is the same entity as the
+   Status Issuer, then the same key that is embedded into the Referenced
+   Token may be used for the Status List Token.  In this case the Status
+   List Token may use: - the same x5c value or an x5t, x5t#S256 or kid
+   parameter referencing to the same key as used in the Referenced Token
+   for JOSE. - the same x5chain value or an x5t or kid parameter
+   referencing to the same key as used in the Referenced Token for COSE.
+
+   Alternatively, the Status Issuer may use the same web-based key
+   resolution that is used for the Referenced Token.  In this case the
+   Status List Token may use: - an x5u, jwks, jwks_uri or kid parameter
+   referencing to a key using the same web-based resolution as used in
+   the Referenced Token for JOSE. - an x5u or kid parameter referencing
+   to a key using the same web-based resolution as used in the
+   Referenced Token for COSE.
+
+   ┌────────┐  host keys  ┌──────────────────────┐
+   │ Issuer ├────────┬───►│ .well-known metadata │
+   └─┬──────┘        │    └──────────────────────┘
+     ▼ update status │
+   ┌───────────────┐ │
+   │ Status Issuer ├─┘
+   └─┬─────────────┘
+     ▼ provide Status List
+   ┌─────────────────┐
+   │ Status Provider │
+   └─────────────────┘
+
+   If the Issuer of the Referenced Token is a different entity than the
+   Status Issuer, then the keys used for the Status List Token may be
+   cryptographically linked, e.g. by an Certificate Authority through an
+   x.509 PKI.  The certificate of the Issuer for the Referenced Token
+   and the Status Issuer should be issued by the same Certificate
+   Authority and the Status Issuer's certificate should utilize extended
+   key usage (Section 10.1).
+
+   ┌───────────────────────┐
+   │ Certificate Authority │
+   └─┬─────────────────────┘
+     │ authorize
+     │  ┌────────┐
+     ├─►│ Issuer │
+     │  └─┬──────┘
+     │    ▼ update status
+     │  ┌───────────────┐
+     └─►│ Status Issuer │
+        └─┬─────────────┘
+          ▼ provide Status List
+        ┌─────────────────┐
+        │ Status Provider │
+        └─────────────────┘
+
+11.4.  Status List Caching
 
    When fetching a Status List Token, Relying Parties must carefully
    evaluate how long a Status List is cached for.  Collectively the iat,
@@ -1497,16 +1616,17 @@ d2                              # tag(18)
    Status Lists for Referenced Token formats that have similar
    unlinkability properties.
 
-12.6.  Third-Party Hosting
+12.6.  External Status Provider for Privacy
 
-   If the roles of the Issuer and the Status Provider are performed by
-   two different entities, this may give additional privacy assurances
-   as the Issuer has no means to identify the Relying Party or its
-   request.
+   If the roles of the Status Issuer and the Status Provider are
+   performed by different entities, this may give additional privacy
+   assurances as the Issuer has no means to identify the Relying Party
+   or its request.
 
    Third-Party hosting may also allow for greater scalability, as the
    Status List Tokens may be served by operators with greater resources,
-   like CDNs.
+   like CDNs, while still ensuring authenticity and integrity of Token
+   Status List, as it is signed by the Status Issuer.
 
 12.7.  Historical Resolution
 
@@ -1528,9 +1648,38 @@ d2                              # tag(18)
    reasons to do so and after carefully considering the privacy
    implications.
 
+12.8.  Status Types
+
+   As previously explained, there is the potential risk of observability
+   by Relying Parties (see Section 12.3) and Outsiders (see
+   Section 12.4).  That means that any Status Type that transports
+   special information about a Token can leak information to other
+   parties.  This documents defines one additional Status Type with
+   "SUSPENDED" that conveys such additional information.  Depending on
+   the use-case, suspended could for example provide information that an
+   authorization in the Token is suspended, but the token itself is
+   still valid.
+
+   A concrete example would be a driver's license, where the digital
+   driver's license might still be useful to prove other information
+   about its holder, but suspended could signal that it should not be
+   considered valid in the scope of being allowed to drive a car.  This
+   case could be solved by either introducing a special status type, or
+   by revoking the Token and re-issuing with changed attributes.  For
+   such a case, the status type suspended might be dangerous as it would
+   leak the information of a suspended driver's license even if the
+   driver's license is used as a mean of identification and not in the
+   context of driving a car.  This could also allow for the unwanted
+   collection of statistical data on the status of driver's licenses.
+
+   Ecosystems that want to use other Status Types than "VALID" and
+   "INVALID" should consider the possible leakage of data and profiling
+   possibilities before doing so and evaluate if revocation and re-
+   issuance might a better fit for their use-case.
+
 13.  Implementation Considerations
 
-13.1.  Referenced Token Lifecycle
+13.1.  Token Lifecycle
 
    The lifetime of a Status List Token depends on the lifetime of its
    Referenced Tokens.  Once all Referenced Tokens are expired, the
@@ -1541,11 +1690,11 @@ d2                              # tag(18)
    re-issued Referenced Token MUST have a fresh Status List entry in
    order to prevent this from becoming a possible source of correlation.
 
-   Referenced Tokens may also be issued in batches, such that Holders
-   can use individual tokens for every transaction.  In this case, every
-   Referenced Token MUST have a dedicated Status List entry.  Revoking
-   batch-issued Referenced Tokens might reveal this correlation later
-   on.
+   Referenced Tokens may also be issued in batches and be presented by
+   Holders in a one-time-use policy to avoid linkability.  In this case,
+   every Referenced Token MUST have a dedicated Status List entry and
+   MAY be spread across multiple Status Lists.  Revoking batch-issued
+   Referenced Tokens might reveal this correlation later on.
 
 13.2.  Default Values and Double Allocation
 
@@ -1586,7 +1735,47 @@ d2                              # tag(18)
    however the Status Issuer must be aware of possible privacy risks due
    to correlations.
 
-13.4.  Status List Formats
+13.4.  External Status Issuer
+
+   If the roles of the Issuer of the Referenced Token and the Status
+   Issuer are performed by different entities, this may allow for use
+   case that require revocations of Referenced Tokens to be managed by a
+   different entities, e.g. for regulatory or privacy reasons.  In this
+   scenario both parties must align on:
+
+   *  the key and trust management as described in Section 11.3
+
+   *  parameters for the Status List
+
+      -  number of bits for the Status Type as described in Section 4
+
+      -  update cycle of the Issuer used for ttl in the Status List
+         Token as described in Section 5
+
+13.5.  External Status Provider for Scalability
+
+   If the roles of the Status Issuer and the Status Provider are
+   performed by different entities, this may allow for greater
+   scalability, as the Status List Tokens may be served by operators
+   with greater resources, like CDNs.  At the same time the authenticity
+   and integrity of Token Status List is still guaranteed, as it is
+   signed by the Status Issuer.
+
+13.6.  Relying Parties avoiding correlatable Information
+
+   If the Relying Party does not require the Referenced Token and the
+   Status List Token after the presentation, e.g. for subsequent status
+   checks or audit trail, it is RECOMMENDED to delete correlatable
+   information, in particular:
+
+   *  the status claim in the Referenced Token
+
+   *  the Status List Token itself
+
+   The Relying Party should instead only keep the relevant payload from
+   the Referenced Token.
+
+13.7.  Status List Formats
 
    This specification defines 2 different token formats of the Status
    List:
@@ -2058,6 +2247,13 @@ d2                              # tag(18)
 
    *  Provisional registration?  No
 
+14.8.  X.509 Certificate Extended Key Purpose OID Registration
+
+   IANA is also requested to register the following OID
+   "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key
+   Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section
+   Section 10.1.
+
 15.  References
 
 15.1.  Normative References
@@ -2113,6 +2309,12 @@ d2                              # tag(18)
               IANA Considerations Section in RFCs", RFC 5226,
               DOI 10.17487/RFC5226, May 2008,
               <https://www.rfc-editor.org/rfc/rfc5226>.
+
+   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5280>.
 
    [RFC6838]  Freed, N., Klensin, J., and T. Hansen, "Media Type
               Specifications and Registration Procedures", BCP 13,
@@ -2220,9 +2422,545 @@ Acknowledgments
    for their valuable contributions, discussions and feedback to this
    specification.
 
+Test vectors for Status List encoding
+
+   All examples here are given in the form of JSON or CBOR payloads.
+   The examples are encoded according to Section 4.1 for JSON and
+   Section 4.2 for CBOR.  The CBOR examples are displayed as hex values.
+
+   All values that are not mentioned for the examples below can be
+   assumed to be 0 (VALID).  All examples are initialized with a size of
+   2^20 entries.
+
+1 bit Status List
+
+   The following example uses a 1 bit Status List (2 possible values):
+
+   status[0]=1
+   status[1993]=1
+   status[25460]=1
+   status[159495]=1
+   status[495669]=1
+   status[554353]=1
+   status[645645]=1
+   status[723232]=1
+   status[854545]=1
+   status[934534]=1
+   status[1000345]=1
+
+   JSON encoding:
+
+   {
+     "bits": 1,
+     "lst": "eNrt3AENwCAMAEGogklACtKQPg9LugC9k_ACvreiogE
+     AAKkeCQAAAAAAAAAAAAAAAAAAAIBylgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAXG9IAAAAAAAAAPwsJAAAAAAAAAAAAAAAvhsSAAAAAAAAAAA
+     A7KpLAAAAAAAAAAAAAAAAAAAAAJsLCQAAAAAAAAAAADjelAAAAAAAAAAAKjDMAQAAA
+     ACAZC8L2AEb"
+   }
+
+   CBOR encoding:
+
+   a2646269747301636c737458bd78daeddc010dc0200c0041a88249400ad2903e0f4b
+   ba00bd93f002beb7a2a2010000a91e09000000000000000000000000000000807296
+   04000000000000000000000000000000000000000000000000000000000000000000
+   000000000000005c6f4800000000000000fc2c240000000000000000000000be1b12
+   000000000000000000ecaa4b000000000000000000000000000000009b0b09000000
+   00000000000038de9400000000000000002a30cc010000000080642f0bd8011b
+
+2 bit Status List
+
+   The following example uses a 2 bit Status List (4 possible values):
+
+   status[0]=1
+   status[1993]=2
+   status[25460]=1
+   status[159495]=3
+   status[495669]=1
+   status[554353]=1
+   status[645645]=2
+   status[723232]=1
+   status[854545]=1
+   status[934534]=2
+   status[1000345]=3
+
+   JSON encoding:
+
+   {
+     "bits": 2,
+     "lst": "eNrt2zENACEQAEEuoaBABP5VIO01fCjIHTMStt9ovGV
+     IAAAAAABAbiEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEB5WwIAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAID0ugQAAAAAAAAAAAAAAAAAQG12SgAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAOCSIQEAAAAAAAAAAAAAAAAAAAAAAAD8ExIAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwJEuAQAAAAAAAAAAAAAAAAAAAAAAAMB9S
+     wIAAAAAAAAAAAAAAAAAAACoYUoAAAAAAAAAAAAAAEBqH81gAQw"
+   }
+
+   CBOR encoding:
+
+   a2646269747302636c737459013d78daeddb310d00211000412ea1a04004fe5520ed
+   357c28c81d3312b6df68bc65480000000000406e2101000000000000000000000000
+   0000000000000000000000000000000000000040795b020000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   0080f4ba0400000000000000000000000000406d764a000000000000000000000000
+   000000000000000000e0922101000000000000000000000000000000000000fc1312
+   00000000000000000000000000000000000000000000000000000000000000c0912e
+   01000000000000000000000000000000000000c07d4b020000000000000000000000
+   00000000a8614a0000000000000000000000406a1fcd60010c
+
+4 bit Status List
+
+   The following example uses a 4 bit Status List (16 possible values):
+
+   status[0]=1
+   status[1993]=2
+   status[35460]=3
+   status[459495]=4
+   status[595669]=5
+   status[754353]=6
+   status[845645]=7
+   status[923232]=8
+   status[924445]=9
+   status[934534]=10
+   status[1004534]=11
+   status[1000345]=12
+   status[1030203]=13
+   status[1030204]=14
+   status[1030205]=15
+
+   JSON encoding:
+
+   {
+     "bits": 4,
+     "lst": "eNrt0EENgDAQADAIHwImkIIEJEwCUpCEBBQRHOy35Li
+     1EjoOQGabAgAAAAAAAAAAAAAAAAAAACC1SQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADrsCAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAADoxaEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIIoCgAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACArpwKAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAGhqVkAzlwIAAAAAiGVRAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAABx3AoAgLpVAQAAAAAAAAAAAAAAwM89rwMAAAAAAAAAA
+     AjsA9xMBMA"
+   }
+
+   CBOR encoding:
+
+   a2646269747304636c737459024878daedd0410d8030100030081f0226908204244c
+   025290840414111cecb7e4b8b5123a0e40669b020000000000000000000000000000
+   0020b549010000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   0000000000400ebb0200000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   000000000000e8c5a100000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000000000000
+   00000000000000000000000000000000000082280a00000000000000000000000000
+   00000000000000000000000000000000000000000000000000000000000080ae9c0a
+   00000000000000000000000000000000000000000000000000000000000000000000
+   000000686a5640339702000000008865510000000000000000000000000000000000
+   00000000000000000000000000000071dc0a0080ba55010000000000000000000000
+   c0cf3daf03000000000000000008ec03dc4c04c0
+
+8 bit Status List
+
+   The following example uses a 8 bit Status List (256 possible values):
+
+   status[233478] = 0
+   status[52451] = 1
+   status[576778] = 2
+   status[513575] = 3
+   status[468106] = 4
+   status[292632] = 5
+   status[214947] = 6
+   status[182323] = 7
+   status[884834] = 8
+   status[66653] = 9
+   status[62489] = 10
+   status[196493] = 11
+   status[458517] = 12
+   status[487925] = 13
+   status[55649] = 14
+   status[416992] = 15
+   status[879796] = 16
+   status[462297] = 17
+   status[942059] = 18
+   status[583408] = 19
+   status[13628] = 20
+   status[334829] = 21
+   status[886286] = 22
+   status[713557] = 23
+   status[582738] = 24
+   status[326064] = 25
+   status[451545] = 26
+   status[705889] = 27
+   status[214350] = 28
+   status[194502] = 29
+   status[796765] = 30
+   status[202828] = 31
+   status[752834] = 32
+   status[721327] = 33
+   status[554740] = 34
+   status[91122] = 35
+   status[963483] = 36
+   status[261779] = 37
+   status[793844] = 38
+   status[165255] = 39
+   status[614839] = 40
+   status[758403] = 41
+   status[403258] = 42
+   status[145867] = 43
+   status[96100] = 44
+   status[477937] = 45
+   status[606890] = 46
+   status[167335] = 47
+   status[488197] = 48
+   status[211815] = 49
+   status[797182] = 50
+   status[582952] = 51
+   status[950870] = 52
+   status[765108] = 53
+   status[341110] = 54
+   status[776325] = 55
+   status[745056] = 56
+   status[439368] = 57
+   status[559893] = 58
+   status[149741] = 59
+   status[358903] = 60
+   status[513405] = 61
+   status[342679] = 62
+   status[969429] = 63
+   status[795775] = 64
+   status[566121] = 65
+   status[460566] = 66
+   status[680070] = 67
+   status[117310] = 68
+   status[480348] = 69
+   status[67319] = 70
+   status[661552] = 71
+   status[841303] = 72
+   status[561493] = 73
+   status[138807] = 74
+   status[442463] = 75
+   status[659927] = 76
+   status[445910] = 77
+   status[1046963] = 78
+   status[829700] = 79
+   status[962282] = 80
+   status[299623] = 81
+   status[555493] = 82
+   status[292826] = 83
+   status[517215] = 84
+   status[551009] = 85
+   status[898490] = 86
+   status[837603] = 87
+   status[759161] = 88
+   status[459948] = 89
+   status[290102] = 90
+   status[1034977] = 91
+   status[190650] = 92
+   status[98810] = 93
+   status[229950] = 94
+   status[320531] = 95
+   status[335506] = 96
+   status[885333] = 97
+   status[133227] = 98
+   status[806915] = 99
+   status[800313] = 100
+   status[981571] = 101
+   status[527253] = 102
+   status[24077] = 103
+   status[240232] = 104
+   status[559572] = 105
+   status[713399] = 106
+   status[233941] = 107
+   status[615514] = 108
+   status[911768] = 109
+   status[331680] = 110
+   status[951527] = 111
+   status[6805] = 112
+   status[552366] = 113
+   status[374660] = 114
+   status[223159] = 115
+   status[625884] = 116
+   status[417146] = 117
+   status[320527] = 118
+   status[784154] = 119
+   status[338792] = 120
+   status[1199] = 121
+   status[679804] = 122
+   status[1024680] = 123
+   status[40845] = 124
+   status[234603] = 125
+   status[761225] = 126
+   status[644903] = 127
+   status[502167] = 128
+   status[121477] = 129
+   status[505144] = 130
+   status[165165] = 131
+   status[179628] = 132
+   status[1019195] = 133
+   status[145149] = 134
+   status[263738] = 135
+   status[269256] = 136
+   status[996739] = 137
+   status[346296] = 138
+   status[555864] = 139
+   status[887384] = 140
+   status[444173] = 141
+   status[421844] = 142
+   status[653716] = 143
+   status[836747] = 144
+   status[783119] = 145
+   status[918762] = 146
+   status[946835] = 147
+   status[253764] = 148
+   status[519895] = 149
+   status[471224] = 150
+   status[134272] = 151
+   status[709016] = 152
+   status[44112] = 153
+   status[482585] = 154
+   status[461829] = 155
+   status[15080] = 156
+   status[148883] = 157
+   status[123467] = 158
+   status[480125] = 159
+   status[141348] = 160
+   status[65877] = 161
+   status[692958] = 162
+   status[148598] = 163
+   status[499131] = 164
+   status[584009] = 165
+   status[1017987] = 166
+   status[449287] = 167
+   status[277478] = 168
+   status[991262] = 169
+   status[509602] = 170
+   status[991896] = 171
+   status[853666] = 172
+   status[399318] = 173
+   status[197815] = 174
+   status[203278] = 175
+   status[903979] = 176
+   status[743015] = 177
+   status[888308] = 178
+   status[862143] = 179
+   status[979421] = 180
+   status[113605] = 181
+   status[206397] = 182
+   status[127113] = 183
+   status[844358] = 184
+   status[711569] = 185
+   status[229153] = 186
+   status[521470] = 187
+   status[401793] = 188
+   status[398896] = 189
+   status[940810] = 190
+   status[293983] = 191
+   status[884749] = 192
+   status[384802] = 193
+   status[584151] = 194
+   status[970201] = 195
+   status[523882] = 196
+   status[158093] = 197
+   status[929312] = 198
+   status[205329] = 199
+   status[106091] = 200
+   status[30949] = 201
+   status[195586] = 202
+   status[495723] = 203
+   status[348779] = 204
+   status[852312] = 205
+   status[1018463] = 206
+   status[1009481] = 207
+   status[448260] = 208
+   status[841042] = 209
+   status[122967] = 210
+   status[345269] = 211
+   status[794764] = 212
+   status[4520] = 213
+   status[818773] = 214
+   status[556171] = 215
+   status[954221] = 216
+   status[598210] = 217
+   status[887110] = 218
+   status[1020623] = 219
+   status[324632] = 220
+   status[398244] = 221
+   status[622241] = 222
+   status[456551] = 223
+   status[122648] = 224
+   status[127837] = 225
+   status[657676] = 226
+   status[119884] = 227
+   status[105156] = 228
+   status[999897] = 229
+   status[330160] = 230
+   status[119285] = 231
+   status[168005] = 232
+   status[389703] = 233
+   status[143699] = 234
+   status[142524] = 235
+   status[493258] = 236
+   status[846778] = 237
+   status[251420] = 238
+   status[516351] = 239
+   status[83344] = 240
+   status[171931] = 241
+   status[879178] = 242
+   status[663475] = 243
+   status[546865] = 244
+   status[428362] = 245
+   status[658891] = 246
+   status[500560] = 247
+   status[557034] = 248
+   status[830023] = 249
+   status[274471] = 250
+   status[629139] = 251
+   status[958869] = 252
+   status[663071] = 253
+   status[152133] = 254
+   status[19535] = 255
+
+   JSON encoding:
+
+   {
+     "bits": 8,
+     "lst": "eNrt0WOQM2kYhtGsbdu2bdu2bdu2bdu2bdu2jVnU1my
+     -SWYm6U5enFPVf7ue97orFYAo7CQBAACQuuckAABStqUEAAAAAAAAtN6wEgAE71QJA
+     AAAAIrwhwQAAAAAAdtAAgAAAAAAACLwkAQAAAAAAAAAAACUaFcJAACAeJwkAQAAAAA
+     AAABQvL4kAAAAWmJwCQAAAAAAAAjAwBIAAAB06ywJoDKQBARpfgkAAAAAAAAAAAAAA
+     AAAAACo50sJAAAAAAAAAOiRcSQAAAAAgAJNKgEAAG23mgQAAAAAAECw3pUAQvegBAA
+     AAAAAAADduE4CAAAAyjSvBAAQiw8koHjvSABAb-wlARCONyVoxtMSZOd0CQAAAOjWD
+     RKQmLckAAAAAACysLYEQGcnSAAAAAAQooUlAABI15kSAIH5RAIgLB9LABC4_SUgGZN
+     IAABAmM6RoLbTJIASzCIBAEAhfpcAAAAAAABquk8CAAAAAAAAaJl9SvvzBOICAFWmk
+     IBgfSgBAAAANOgrCQAAAAAAAADStK8EAAC03gASAAAAAAAAAADFWFUCAAAAMjOaBEA
+     DHpYAQjCIBADduFwCAAAAAGitMSSI3BUSAECOHpAA6IHrJQAAAAAAsjeVBAAAKRpVA
+     orWvwQAAAAAAAAAkKRtJAAAAAAAgCbcLAF0bXUJAAAAoF02kYDg7CYBAAAAAEB6NpQ
+     AAAAAAAAAAAAAAEr1uQQAAF06VgIAAAAAAAAAqDaeBAAQqgMkAAAAAABogQMlAAAAA
+     AAa87MEAAAQiwslAAAAAAAAAAAAAAAAMrOyBAAAiekv-hcsY0Sgne6QAAAAAAAgaUt
+     JAAAAAAAAAAAAAAAAAAAAAAAAAADwt-07vjVkAAAAgDy8KgFAUEaSAAAAAJL3vgQAW
+     dhcAgAAoBHDSUDo1pQAAACI2o4SAABZm14CALoyuwQAAPznGQkgZwdLAAAQukclAAA
+     AAAAAAAAAgKbMKgEAAAAAAAAAAAAAAAAAAECftpYAAAAAAAAAAAAACnaXBAAAAADk7
+     iMJAAAAAAAAAABqe00CAnGbBBG4TAIAgFDdKgFAXCaWAAAAAAAAAAAAAAAAAKAJQwR
+     72XbGAQAAAKAhh0sAAAAAAABQgO8kAAAAAAAAAAAAACAaM0kAAAC5W0QCAIJ3mAQAx
+     GwxCQAA6nhSAsjZBRIAANEbWQIAAAAAaJE3JACAwA0qAUBIVpKAlphbAiAPp0iQnKE
+     kAAAAAAAgBP1KAAAAdOl4CQAAAAAAAPjLZBIAAG10RtrPm8_CAEBMTpYAAAAAAIjQY
+     BL8z5QSAAAAAEDYPpUAACAsj0gAAADQkHMlAAjHDxIA0Lg9JQAAgHDsLQEAAABAQS6
+     WAAAAgLjNFs2l_RgLAIAEfCEBlGZZCQAAaIHjJACgtlskAAAozb0SAAAAVFtfAgAAA
+     AAAAAAAAAAAAAAAAAAAAKDDtxIAAAAAVZaTAKB5W0kAANCAsSUgJ0tL0GqHSNBbL0g
+     AZflRAgCARG0kQXNmlgCABiwkAQAAAEB25pIAAAAAAAAAAAAAoFh9SwAAAAAAADWNm
+     OSrpjFsEoaRgDKcF9Q1dxsEAAAAAAAAAAAAAAAAgPZ6SQIAAAAAAAAAgChMLgEAAAA
+     AAAAAqZlQAsK2qQQAAAAAAAD06XUJAAAAqG9bCQAAgLD9IgEAAAAAAAAAAAAAAAAAA
+     EBNe0gAAAAAAAAAAEBPHSEBAAAAlOZtCYA4fS8B0GFRCQAo0gISAOTgNwmC840EAAA
+     AAAAAAAAAAAAAAAAAUJydJfjXPBIAAAAAAAAAAAAAAABk6WwJAAAAAAAAAAAAAAAAq
+     G8UCQAAgPpOlAAAIA83SQAANWwc9HUjGAgAAAAAAACAusaSAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAqHKVBACQjxklAAAAAAAAAKBHxpQAAAAAACBME0lAdlaUAACyt7sEAAAA0
+     Nl0EgAAAAAAAAAAAABA-8wgAQAAAAAAAKU4SgKgUtlBAgAAAAAAAAAAgMCMLwEE51k
+     JICdzSgCJGl2CsE0tAQAA0L11JQAAAAAAAAjUOhIAAAAAAAAAAAAAAGTqeQkAAAAAA
+     AAAAAAAKM8SEjTrJwkAAAAAAACocqQEULgVJAAAACjDUxJUKgtKAAAAqbpRAgCA0n0
+     mAQAAAABAGzwmAUCTLpUAAAAAAAAAAEjZNRIAAAAAAAAAAAAAAAAAAAAA8I-vJaAlh
+     pQAAAAAAHrvzjJ-OqCuuVlLAojP8BJAr70sQZVDJYAgXS0BAAAAAAAAAAAAtMnyEgA
+     AAAAAFONKCQAAAAAAAADorc0kAAAAAAAAgDqOlgAAAAAAAAAAAADIwv0SAAAAAAAAA
+     AAAAADBuV0CIFVDSwAAAABAAI6RAAAAAGIwrQSEZAsJAABouRclAAAAAKDDrxIAAAA
+     0bkkJgFiMKwEAAAAAAHQyhwRk7h4JAAAAAAAAAAAgatdKAACUYj0JAAAAAAAAAAAAQ
+     nORBLTFJRIAAAAAkIaDJAAAAJryngQAAAAAAAAAAAA98oQEAAAAAAAAAEC2zpcgWY9
+     LQKL2kwAgGK9IAAAAAPHaRQIAAAAAAAAAAADIxyoSAAAAAAAAAAAAAADQFotLAECz_
+     gQ1PX-B"
+   }
+
+   CBOR encoding:
+
+   a2646269747308636c73745907b078daedd1639033691886d1ac6ddbb66ddbb66ddb
+   b66ddbb66ddbb68d59d4d66cbe496626e94e5e9c53d57fbb9ef7ba2b158028ec2401
+   000090bae724000052b6a504000000000000b4deb0120004ef5409000000008af087
+   040000000001db400200000000000022f09004000000000000000000946857090000
+   80789c24010000000000000050bcbe240000005a62700900000000000008c0c01200
+   000074eb2c09a032900404697e09000000000000000000000000000000a8e74b0900
+   000000000000e89171240000000080024d2a0100006db79a04000000000040b0de95
+   0042f7a00400000000000000ddb84e02000000ca34af0400108b0f24a078ef480040
+   6fec2501108e372568c6d31264e77409000000e8d60d129098b7240000000000b2b0
+   b604406727480000000010a28525000048d799120081f94402202c1f4b0010b8fd25
+   2019934800004098ce91a0b6d3248012cc22010040217e970000000000006aba4f02
+   00000000000068997d4afbf304e2020055a69080607d280100000034e82b09000000
+   00000000d2b4af040000b4de00120000000000000000c558550200000032339a0440
+   031e96004230880400ddb85c020000000068ad312488dc151200408e1e9000e881eb
+   250000000000b23795040000291a55028ad6bf040000000000000090a46d24000000
+   00008026dc2c01746d7509000000a05d369180e0ec260100000000407a3694000000
+   00000000000000004af5b90400005d3a560200000000000000a8369e040010aa0324
+   00000000006881032500000000001af3b3040000108b0b2500000000000000000000
+   000032b3b204000089e92ffa172c6344a09dee90000000000020694b490000000000
+   000000000000000000000000000000f0b7ed3bbe3564000000803cbc2a0140504692
+   0000000092f7be040059d85c020000a011c34940e8d69400000088da8e120000599b
+   5e0200ba32bb040000fce719092067074b000010ba472500000000000000000080a6
+   cc2a010000000000000000000000000000409fb696000000000000000000000a7697
+   0400000000e4ee230900000000000000006a7b4d0202719b0411b84c02008050dd2a
+   01405c269600000000000000000000000000a00943047bd976c601000000a021874b
+   0000000000005080ef2400000000000000000000201a3349000000b95b4402008277
+   980400c46c31090000ea785202c8d905120000d11b590200000000689137240080c0
+   0d2a01404856928096985b02200fa748909ca12400000000002004fd4a00000074e9
+   7809000000000000f8cb641200006d7446dacf9bcfc200404c4e96000000000088d0
+   6012fccf94120000000040d83e950000202c8f48000000d09073250008c70f1200d0
+   b83d2500008070ec2d0100000040412e9600000080b8cd16cda5fd180b0080047c21
+   019466590900006881e32400a0b65b24000028cdbd12000000545b5f020000000000
+   00000000000000000000000000a0c3b7120000000055969300a0795b490000d080b1
+   2520274b4bd06a8748d05b2f480065f951020080446d24417366960080062c240100
+   00004076e69200000000000000000000a0587d4b000000000000358d98e4aba6316c
+   12869180329c17d435771b0400000000000000000000000080f67a49020000000000
+   000080284c2e0100000000000000a9995002c2b6a904000000000000f4e975090000
+   00a86f5b09000080b0fd22010000000000000000000000000000404d7b4800000000
+   00000000404f1d210100000094e66d0980387d2f01d06151090028d2021200e4e037
+   0982f38d04000000000000000000000000000000509c9d25f8d73c12000000000000
+   00000000000064e96c09000000000000000000000000a86f1409000080fa4e940000
+   200f37490000356c1cf47523180800000000000080bac69200000000000000000000
+   0000000000000000000000a872950400908f192500000000000000a047c694000000
+   0000204c1349407656940000b2b7bb04000000d0d974120000000000000000000040
+   fbcc2001000000000000a5384a02a052d94102000000000000000080c08c2f0104e7
+   59092027734a00891a5d82b04d2d010000d0bd752500000000000008d43a12000000
+   000000000000000064ea79090000000000000000000028cf121234eb270900000000
+   0000a872a40450b8152400000028c35312542a0b4a000000a9ba51020080d27d2601
+   00000000401b3c260140932e95000000000000000048d93512000000000000000000
+   00000000000000f08faf25a025869400000000007aefce327e3aa0aeb9594b0288cf
+   f01240afbd2c4195432580205d2d01000000000000000000b4c9f212000000000014
+   e34a0900000000000000e8adcd24000000000000803a8e9600000000000000000000
+   c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
+   006230ad0484640b09000068b9172500000000a0c3af12000000346e490980588c2b
+   0100000000007432870464ee1e090000000000000000206ad74a000094623d090000
+   0000000000000042739104b4c5251200000000908683240000009af29e0400000000
+   00000000003df284040000000000000040b6ce9720598f4b40a2f693002018af4800
+   000000f1da4502000000000000000000c8c72a120000000000000000000000d0168b
+   4b0040b3fe04353d7f81
+
 Document History
 
+   -08
+
+   *  Add CDDL for CBOR StatusList encoding
+
+   *  Fix cwt typ value to full media type
+
+   *  Holders may also fetch and verify Status List Tokens
+
+   *  Update terminology for referenced token and Status List Token
+
    -07
+
+   *  add considerations about External Status Issuer or Status Provider
+
+   *  add recommendations for Key Resolution and Trust Management
+
+   *  add extended key usage extensions for x509
+
+   *  Relying Parties avoiding correlatable Information
 
    *  editorial changes on terminology and Referenced Tokens
 
@@ -2245,10 +2983,21 @@ Document History
 
    *  differentiate unlinkability between Issuer-RP and RP-RP
 
+   *  add more test vectors for the status list encoding
+
    *  add prior art
 
    *  updated language around application specific status type values
       and assigned ranges for application specific usage
+
+   *  add short security considerations section for mac based
+      deployments
+
+   *  privacy considerations for other status types like suspended
+
+   *  fix aggregation_uri text in referenced token
+
+   *  mention key resolution in validation rules
 
    -06
 
