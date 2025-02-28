@@ -1809,9 +1809,12 @@ CBOR encoding:
 # Document History
 {:numbered="false"}
 
--08
+-09
 
 * Add CDDL for CBOR StatusList encoding
+
+-08
+
 * Fix cwt typ value to full media type
 * Holders may also fetch and verify Status List Tokens
 * Update terminology for referenced token and Status List Token
