@@ -244,7 +244,7 @@ base64url:
 
 # Status List {#status-list}
 
-A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. The [first section]()#status-list-byte-array describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third section describe how to encode a Status List in JSON and CBOR representation.
+A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. The [first section](#status-list-byte-array) describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third section describe how to encode such a Status List in JSON and CBOR representation.
 
 ## Compressed Byte Array {#status-list-byte-array}
 
