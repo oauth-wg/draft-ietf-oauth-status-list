@@ -376,10 +376,10 @@ Table of Contents
 
    A Status List is a data structure that contains the statuses of many
    Referenced Tokens represented by one or multiple bits.  The first
-   section#status-list-byte-array describes how to construct a
-   compressed byte array that is the base component for the Status List
-   data structure.  The second and third section describe how to encode
-   a Status List in JSON and CBOR representation.
+   section (Section 4.1) describes how to construct a compressed byte
+   array that is the base component for the Status List data structure.
+   The second and third section describe how to encode such a Status
+   List in JSON and CBOR representation.
 
 4.1.  Compressed Byte Array
 
@@ -700,9 +700,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d584032144679b9b9bc337bb535
-   ab16464effd341a1cb82a756e19221668cf8c48c528c7823ce7bae0dee3b53dead82
-   fa1b532c261923ee55797ac984d71bfb1cba89
+   646269747301636c73744a78dadbb918000217015d58406f25c022c8a1949ef008d1
+   445ed5c5727d35234c0186d125ecb8fe6392a73b1fb8c9b7ea40e4a6e7c4a9d042a2
+   6ac40825049c0b306068df32d5bc2c60008fe4
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -725,12 +725,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      32144679b9b9bc337bb535ab  #       "2\x14Fy¹¹¼3{µ5«"
-      16464effd341a1cb82a756e1  #       "\x16FNÿÓA¡Ë\x82§Vá"
-      9221668cf8c48c528c7823ce  #       "\x92!f\x8cøÄ\x8cR\x8cx#Î"
-      7bae0dee3b53dead82fa1b53  #       "{®\x0dî;SÞ\xad\x82ú\x1bS"
-      2c261923ee55797ac984d71b  #       ",&\x19#îUyzÉ\x84×\x1b"
-      fb1cba89                  #       "û\x1cº\x89"
+      6f25c022c8a1949ef008d144  #       "o%À"È¡\x94\x9eð\x08ÑD"
+      5ed5c5727d35234c0186d125  #       "^ÕÅr}5#L\x01\x86Ñ%"
+      ecb8fe6392a73b1fb8c9b7ea  #       "ì¸þc\x92§;\x1f¸É·ê"
+      40e4a6e7c4a9d042a26ac408  #       "@ä¦çÄ©ÐB¢jÄ\x08"
+      25049c0b306068df32d5bc2c  #       "%\x04\x9c\x0b0`hß2Õ¼,"
+      60008fe4                  #       "`\x00\x8fä"
 
 6.  Referenced Token
 
@@ -875,37 +875,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158407d18fd97eb920d2cf877ad8c8fc094032cfea4
-   8b7ed3b95670d13c7de3a53348152f304799a1a974078f87f821ca8a74661c442ab4
-   0eda6de220c6abb810b85e
+   7374617475736c697374732f315840aebbc9a183f4e0e4293eb2000487200a92624e
+   c93ea9a3ec28741b4d162c16c39e902c37b8efd78f831700dacf2b2fb01846005b4d
+   5b5790a719b39ed20f1232
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      7d18fd97eb920d2cf877ad8c  #       "}\x18ý\x97ë\x92\x0d,øw\xad\x8c"
-      8fc094032cfea48b7ed3b956  #       "\x8fÀ\x94\x03,þ¤\x8b~Ó¹V"
-      70d13c7de3a53348152f3047  #       "pÑ<}ã¥3H\x15/0G"
-      99a1a974078f87f821ca8a74  #       "\x99¡©t\x07\x8f\x87ø!Ê\x8at"
-      661c442ab40eda6de220c6ab  #       "f\x1cD*´\x0eÚmâ Æ«"
-      b810b85e                  #       "¸\x10¸^"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         aebbc9a183f4e0e4293eb200  #       "®»É¡\x83ôàä)>²\x00"
+         0487200a92624ec93ea9a3ec  #       "\x04\x87 \x0a\x92bNÉ>©£ì"
+         28741b4d162c16c39e902c37  #       "(t\x1bM\x16,\x16Ã\x9e\x90,7"
+         b8efd78f831700dacf2b2fb0  #       "¸ï×\x8f\x83\x17\x00ÚÏ+/°"
+         1846005b4d5b5790a719b39e  #       "\x18F\x00[M[W\x90§\x19³\x9e"
+         d20f1232                  #       "Ò\x0f\x122"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1140,8 +1140,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.ZJmtR74RAJ6Utl-8guHPYx5TE8uU1pZnt0sD_7Et-gzfikx8JDhp
-   CIwpz_uHAsPFReJLqaDSMyJnSTFsFDnc8A
+   nR0bCI6NDMyMDB9.eCXUH5gkL5vprwbg9rTpBbuPVYd-F7MXCt5OPf0qElY6HQJ_-eLw
+   9G_8BvFj74aw8DG4W_QLWGfjEQ6mJn1WbA
 
 8.2.  Status List Response
 
@@ -1280,8 +1280,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.ZJmtR74RAJ6Utl-8guHPYx5TE8uU1pZnt0sD_7Et-gzfikx8JDhp
-   CIwpz_uHAsPFReJLqaDSMyJnSTFsFDnc8A
+   nR0bCI6NDMyMDB9.eCXUH5gkL5vprwbg9rTpBbuPVYd-F7MXCt5OPf0qElY6HQJ_-eLw
+   9G_8BvFj74aw8DG4W_QLWGfjEQ6mJn1WbA
 
 9.  Status List Aggregation
 
