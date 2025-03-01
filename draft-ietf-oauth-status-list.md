@@ -831,22 +831,22 @@ An Issuer MAY support any of these mechanisms:
 - Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.
 
 ~~~ ascii art
-                                      ┌─────────────────┐       
-                                      │                 │       
-                                      │ Issuer Metadata │       
-                                      │                 │       
-                                      └───┬─────────────┘       
-                                          │                     
+                                      ┌─────────────────┐
+                                      │                 │
+                                      │ Issuer Metadata │
+                                      │                 │
+                                      └───┬─────────────┘
+                                          │
   ┌───────────────────┐                   │ link within metadata
- ┌───────────────────┐│  link all         ▼                     
-┌───────────────────┐││◄───────┐  ┌─────────────────────────┐   
-│                   ││◄────────┤  │                         │   
-│ Status List Token │◄┴────────┴──┤ Status List Aggregation │   
-│                   │┘            │                         │   
-└───────┬───────────┘             └─────────────────────────┘   
-        │                                 ▲                     
-        │   link by aggregation_uri       │                     
-        └─────────────────────────────────┘                     
+ ┌───────────────────┐│  link all         ▼
+┌───────────────────┐││◄───────┐  ┌─────────────────────────┐
+│                   ││◄────────┤  │                         │
+│ Status List Token │◄┴────────┴──┤ Status List Aggregation │
+│                   │┘            │                         │
+└───────┬───────────┘             └─────────────────────────┘
+        │                                 ▲
+        │   link by aggregation_uri       │
+        └─────────────────────────────────┘
 ~~~
 
 ## Issuer Metadata
