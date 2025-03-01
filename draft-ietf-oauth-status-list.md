@@ -231,7 +231,7 @@ Relying Party:
 : An entity that relies on the Referenced Token and fetches the corresponding Status List Token to validate the status of that Referenced Token. Also known as Verifier.
 
 Status List:
-: An object in JSON or CBOR representation containing a compressed byte array that lists the statuses of many Referenced Tokens.
+: An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.
 
 Status List Token:
 : A token in JWT (as defined in {{RFC7519}}) or CWT (as defined in {{RFC8392}}) representation that contains a cryptographically secured Status List.
