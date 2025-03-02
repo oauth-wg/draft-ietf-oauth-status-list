@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-27T00:17:29.359279+00:00",
+  "timestamp": "2025-03-02T00:18:49.991273+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5236,7 +5236,7 @@
       ],
       "body": "In #228, C2bo wrote:\n\n> The claim \"aggregation_uri\" is meant as a way to allow efficient caching for RPs, not for alternative URIs \n> - it points to all relevant status lists for an issuer or specific referenced token type.\n\n\"aggregation_uri\" is defined in 4.1 as:\n\n> aggregation_uri: OPTIONAL.  JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token.  \nSee section 9 for further detail.\n\nSection 9 (Status List Aggregation) states:\n\n> Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThese two descriptions are not aligned with section 4.1. **The case of the Issuer is not mentioned in section 4.1**.\nHowever, in section 9, the sentence mentions: \n> all relevant Status Lists for a specific type of Referenced Token **or Issuer**.  \n\n Then comes some questions.\n\nHow can the Relying party retrieve either: \n\na) all relevant Status Lists for a specific [type of] Referenced Token, or\nb) all relevant Status Lists for an Issuer ?\n\nIn the first case, how long should \"all relevant Status Lists\" for a specific type of Referenced Token be accessible ? \nSame question for \"all relevant Status Lists\" for an Issuer.\n\nIf the case of the \"Issuer\" is indeed supported, there should be some additional text to warn the Issuers about some consequences when this claim is supported. For example:\n\n> \"All relevant Status Lists for an Issuer\" allows a Relying Party to know how many Referenced Tokens have been issued by an Issuer and are either valid, suspended or revoked at an instant of time. This can reveal also the number of entities that have been registered. Issuers should be warned of the consequences before choosing to support this optional claim.\n\n\nFinally, the argument is that this claim is \"meant as a way to allow efficient caching for RPs\". However, I still have difficulties to understand the usefulness of this optional claim when the JSON String contains a URI to retrieve the Status List Aggregation for this Referenced Token.\nCaching is pretty well supported by the ttl claim:\n\n> *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. \n\n",
       "createdAt": "2025-02-03T09:45:58Z",
-      "updatedAt": "2025-02-25T08:07:38Z",
+      "updatedAt": "2025-03-01T14:46:10Z",
       "closedAt": null,
       "comments": [
         {
@@ -5308,6 +5308,34 @@
           "body": "\n>  I think there is some misunderstanding on how the aggregation_uri currently works:\n>  It is a uri that is provided either by metadata (.well-known etc) or within a Status List Token itself.\n>  When resolved, it contains a JSON array with a list of URLs to Status List Tokens.\n\n> This now becomes understandable, but this is not what the text was saying:\n\n> JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer.\n\n> This text is from the draft an clear enough to me. What's missing?\n\nThe draft is unclear as it does not contain the following wording: \n\n> \"JSON array with a list of URLs to Status List Tokens.\n\nSome text like below would be more understandable:\n\n> uri that is provided either by metadata (.well-known etc) or within a Status List Token itself.\nWhen resolved, it contains a JSON array with a list of URLs to Status List Tokens.\n\nYou wrote:\n\n> There may be more than one \"latest\"  Status List Token, if the Status Issuer is chunking these Referenced Tokens into multiple Status Lists for scalability. Therefore, aggregation_uri may contain multiple URIs to multiple Status List Tokens. If one of them fails for whatever reason, still continue with the others.\n\nThe above explanation is using the word \"chunking\": \n\n> \"if the Status Issuer is chunking these Referenced Tokens into multiple Status Lists for scalability\".\n\n I made a search on the term \"chunk\" and, in the draft, I found the following text:\n\n>    The Status List Issuer may chunk its Referenced Tokens into multiple\n>    Status Lists to reduce the transmission size of an individual Status\n>    List Token.  This may be useful for setups where some entities\n>    operate in constrained environments, e.g. for mobile internet or\n>    embedded devices.  The Status List Issuer may chunk the Status List\n>    Tokens depending on the Referenced Token's expiry date to align their\n>    lifecycles and allow for easier retiring of Status List Tokens,\n>    however the Status Issuer must be aware of possible privacy risks due\n>    to correlations.\n\n\"chunk\" is a term I am not familiar with. \n         Cambridge dictionary: a part of something, especially a large part. \n         North American: divide (something) into chunks. \n\nThis does not help me to understand why \"chunking\" is used and what is being \"chunked\".\n\nThe Issuer can decide to place THE status of a Referenced Token in any SLT depending upon a criteria of its is own choice. \nIt is is NOT the job of the Status List Issuer to decide: it is the job of the Issuer. \n\nThis still does not explain why THE status of a Referenced Token should be placed into \"more than one SLT\". \nTo make an analogy, when using CRLs, there is one and only one (base) CRL referenced in an X.509 PKC and if it fails \n(whatever the verb \"fail\" may mean) then there is no \"continuation\". \n\nLet us make things simple and do not attempt to make things over complicated.\n\nThe text that is \"chunk-related\" should be removed.\n\nThe text that is mentioning \"types of Referenced Tokens\" should also be removed.",
           "createdAt": "2025-02-25T08:07:37Z",
           "updatedAt": "2025-02-25T08:07:37Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > I think there is some misunderstanding on how the aggregation_uri currently works:\n> > It is a uri that is provided either by metadata (.well-known etc) or within a Status List Token itself.\n> > When resolved, it contains a JSON array with a list of URLs to Status List Tokens.\n> \n> > This now becomes understandable, but this is not what the text was saying:\n> \n> > JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer.\n> \n> > This text is from the draft an clear enough to me. What's missing?\n> \n> The draft is unclear as it does not contain the following wording:\n> \n> > \"JSON array with a list of URLs to Status List Tokens.\n> \n> Some text like below would be more understandable:\n> \n> > uri that is provided either by metadata (.well-known etc) or within a Status List Token itself.\n> > When resolved, it contains a JSON array with a list of URLs to Status List Tokens.\n\nNo, you still got it wrong. The Status List contains ONE URL in the `aggregation_uri`, that one points to the object described in Section 9 which contains the array of URLs to the other Status List Tokens.\n\n> \n> You wrote:\n> \n> > There may be more than one \"latest\"  Status List Token, if the Status Issuer is chunking these Referenced Tokens into multiple Status Lists for scalability. Therefore, aggregation_uri may contain multiple URIs to multiple Status List Tokens. If one of them fails for whatever reason, still continue with the others.\n> \n> The above explanation is using the word \"chunking\":\n> \n> > \"if the Status Issuer is chunking these Referenced Tokens into multiple Status Lists for scalability\".\n> \n> I made a search on the term \"chunk\" and, in the draft, I found the following text:\n> \n> > The Status List Issuer may chunk its Referenced Tokens into multiple\n> > Status Lists to reduce the transmission size of an individual Status\n> > List Token.  This may be useful for setups where some entities\n> > operate in constrained environments, e.g. for mobile internet or\n> > embedded devices.  The Status List Issuer may chunk the Status List\n> > Tokens depending on the Referenced Token's expiry date to align their\n> > lifecycles and allow for easier retiring of Status List Tokens,\n> > however the Status Issuer must be aware of possible privacy risks due\n> > to correlations.\n> \n> \"chunk\" is a term I am not familiar with. Cambridge dictionary: a part of something, especially a large part. North American: divide (something) into chunks.\n> \n> This does not help me to understand why \"chunking\" is used and what is being \"chunked\".\n> \n> The Issuer can decide to place THE status of a Referenced Token in any SLT depending upon a criteria of its is own choice. It is is NOT the job of the Status List Issuer to decide: it is the job of the Issuer.\n> \n> This still does not explain why THE status of a Referenced Token should be placed into \"more than one SLT\". To make an analogy, when using CRLs, there is one and only one (base) CRL referenced in an X.509 PKC and if it fails (whatever the verb \"fail\" may mean) then there is no \"continuation\".\n> \n> Let us make things simple and do not attempt to make things over complicated.\n> \n> The text that is \"chunk-related\" should be removed.\n> \n> The text that is mentioning \"types of Referenced Tokens\" should also be removed.\n\nI'm ok to rename \"chunk\" into \"aggregate\".\n\nA Referenced Token's status is not put into multiple Status List Tokens, but many Referenced Token's statuses may be divided/spread/distributed across multiple Status List Tokens. Already today, some X509 CAs have more than one CRL, which is the same mechanism.\n\n",
+          "createdAt": "2025-02-28T17:56:10Z",
+          "updatedAt": "2025-02-28T17:58:03Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "It seems that we don't agree about the role of the Issuer and of the Status Issuer.\nIt is the Issuer that decides which SLT will be used for a given Referenced Token (i.e., it is not the Status Issuer).\n\nI still disagree with (or do not understadd) the following sentence: \n\n> The aggregation_uri contains a list of Status List Tokens - if fetching or validating one of them fails,\n> the others should still be processed\n\nIn addition, would you agree to remove the text that is mentioning \"types of Referenced Tokens\" ?",
+          "createdAt": "2025-02-28T18:24:01Z",
+          "updatedAt": "2025-02-28T18:24:01Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "How the Status List Tokens are organized is primarily a technical task, therefore the Status List Issuer's. As the recommendation is anyway to randomize, there is no need for the Issuer of Referenced Token to give further guidance.\n\nI also don't agree to remove the text types of Referenced Tokens. Easy example: A goverment issuer is issuing multiple Credentials/Referenced Token, but police officers are only interested to cache the status information for driving licenses. Therefore it may make sense to have multiple Status List Aggregations per Referenced Token.",
+          "createdAt": "2025-03-01T14:41:15Z",
+          "updatedAt": "2025-03-01T14:41:15Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I added further explanations for aggregation_uri and renamed chunking in #272 \nIf you still disagree after this, please bring it up to the mailing list or bring it up in the IETF Bangkok meeting",
+          "createdAt": "2025-03-01T14:46:09Z",
+          "updatedAt": "2025-03-01T14:46:09Z"
         }
       ]
     },
@@ -5433,6 +5461,22 @@
       "body": "Rohan Maly wrote on the mailing list:\n\n> 3. The document uses status_list (JSON object) and StatusList (CBOR map) to refer to the map, but Status List seems to be used to refer to both the compressed byte string (in Section 5) and the uncompressed byte array of status values (in Section 4 step 2, and Section 4.1 2nd sentence).\n\nOur response: This is correct, we will separate, the parts of section 4 that talk about the the uncompressed byte array into its own subsection and not use the wording Status List for this. Otherwise, through out the rest of the document, Status List refers to the compressed byte array as defined in the terminology.",
       "createdAt": "2025-02-20T07:40:41Z",
       "updatedAt": "2025-02-20T07:56:19Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 271,
+      "id": "I_kwDOJZ2aqs6sHgvm",
+      "title": "Update Acknowledgments",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/271",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "I'd like to add the people that have contributed/provided feedback in the past few weeks/months. Please give a thumbs up / comment here if you are ok with being mentioned in the Acknowledgments section.\n\nI might have forgotten people - please comment if you think someone else should be added.\n\n@rohanmahy\n@steffenschwalm\n@Denisthemalice\n@sschulz-t\n@cre8\n@mickrau\n@hannestschofenig\n@wbl\n@rifaat-shekh-yusef\n\n(also fix Giuseppe's spelling)",
+      "createdAt": "2025-02-28T16:57:41Z",
+      "updatedAt": "2025-02-28T16:57:41Z",
       "closedAt": null,
       "comments": []
     }
@@ -17769,13 +17813,147 @@
       "labels": [],
       "body": "Closes #268 ",
       "createdAt": "2025-02-23T17:50:26Z",
-      "updatedAt": "2025-02-23T17:56:48Z",
+      "updatedAt": "2025-03-01T09:14:47Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "9459928c2eeb7a8edef727137bcb0b4c4c8159b2",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "status_list_def",
-      "headRefOid": "6594d79506541c6130c997c12b1371556c63274e",
+      "headRefOid": "22f0a2d354ae02e3ddbbb7b36a1a0a6528246756",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6eB9uj",
+          "commit": {
+            "abbreviatedOid": "6594d79"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-28T17:02:32Z",
+          "updatedAt": "2025-02-28T17:17:27Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\n: An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.\r\n```",
+              "createdAt": "2025-02-28T17:02:33Z",
+              "updatedAt": "2025-02-28T17:17:27Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nA Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. The [first section](#status-list-byte-array) describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third section describe how to encode such a Status List in JSON and CBOR representation.\r\n```",
+              "createdAt": "2025-02-28T17:04:56Z",
+              "updatedAt": "2025-02-28T17:17:27Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 270,
+      "id": "PR_kwDOJZ2aqs6M8TlK",
+      "title": "Add cddl for statuslist cbor encoding",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/270",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #267 \r\nI only added the CDDL for the StatusList object CBOR encoding which seemed to be the most important to provide CDDL for. I don't think CDDL for the CWT would help (and I didn't find many examples in other specs doing CDDL for CWT).\r\n\r\n@rohanmahy Would that work for you?",
+      "createdAt": "2025-02-28T13:50:58Z",
+      "updatedAt": "2025-02-28T17:23:07Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "9459928c2eeb7a8edef727137bcb0b4c4c8159b2",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "267-cddl-for-cbor",
+      "headRefOid": "b9734d455c5c994a28280baa72cc64883c0070c3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "rohanmahy",
+          "authorAssociation": "NONE",
+          "body": "> Closes #267 I only added the CDDL for the StatusList object CBOR encoding which seemed to be the most important to provide CDDL for. I don't think CDDL for the CWT would help (and I didn't find many examples in other specs doing CDDL for CWT).\r\n> \r\n> @rohanmahy Would that work for you?\r\n\r\nI proposed a one line change in the CDDL. `bits` can't take any arbitrary integer value. It has exactly 4 choices, so just enumerate them.\r\n\r\nUsing text string keys instead of integer keys is unconventional. I don't have an objection, as long as you are deliberately making that decision.\r\n\r\nI agree that anyone using CWTs does not need you to provide CDDL for a generic structure.\r\n\r\nThanks, -r",
+          "createdAt": "2025-02-28T14:31:01Z",
+          "updatedAt": "2025-02-28T14:31:01Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6eAY0d",
+          "commit": {
+            "abbreviatedOid": "ed86717"
+          },
+          "author": "rohanmahy",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-02-28T14:24:13Z",
+          "updatedAt": "2025-02-28T14:24:13Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\r\nStatusList = {\r\n    bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token\r\n    lst: bstr, ; Byte string that contains the Status List\r\n    ? aggregation_uri: tstr, ; link to the Status List Aggregation\r\n}\r\n```",
+              "createdAt": "2025-02-28T14:24:13Z",
+              "updatedAt": "2025-02-28T14:24:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6eBvzE",
+          "commit": {
+            "abbreviatedOid": "1b0acae"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-28T16:38:07Z",
+          "updatedAt": "2025-02-28T16:38:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6eB_AP",
+          "commit": {
+            "abbreviatedOid": "1b0acae"
+          },
+          "author": "rohanmahy",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-02-28T17:04:59Z",
+          "updatedAt": "2025-02-28T17:04:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 272,
+      "id": "PR_kwDOJZ2aqs6NCOq-",
+      "title": "add diagram for Status List Aggregation for further explanation, rena\u2026",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/272",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026me chunking to divide up\r\n\r\nCloses #255 ",
+      "createdAt": "2025-03-01T14:44:33Z",
+      "updatedAt": "2025-03-01T14:57:15Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "9459928c2eeb7a8edef727137bcb0b4c4c8159b2",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "chunking",
+      "headRefOid": "26e324410782331a86c0d1ad39c4f01c118970e4",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
