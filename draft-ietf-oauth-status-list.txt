@@ -528,6 +528,14 @@ Table of Contents
          type of Referenced Token.  See section Section 9 for further
          detail.
 
+   The following is the CDDL definition of the StatusList structure:
+
+   StatusList = {
+       bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token
+       lst: bstr, ; Byte string that contains the Status List
+       ? aggregation_uri: tstr, ; link to the Status List Aggregation
+   }
+
    The following example illustrates the CBOR representation of the
    Status List in Hex:
 
@@ -682,9 +690,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d584068920d5f5baf5d06004112
-   064e2f1f812014613458428152db3efb4615b84be47f029a7fcdec74d187d1b0ab5c
-   1adeeec181c3720d8db0cbd93d20a7c194f1fe
+   646269747301636c73744a78dadbb918000217015d58404ff35df8a27dd3f4240286
+   bfca5ffa48d935af7240ad25f9ab9733404379332ad4b2f5fdd935498ce6713e8b9a
+   73652861f71d81b59aa395d04276f87b826c3c
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -707,12 +715,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      68920d5f5baf5d0600411206  #       "h\x92\x0d_[¯]\x06\x00A\x12\x06"
-      4e2f1f812014613458428152  #       "N/\x1f\x81 \x14a4XB\x81R"
-      db3efb4615b84be47f029a7f  #       "Û>ûF\x15¸Kä\x7f\x02\x9a\x7f"
-      cdec74d187d1b0ab5c1adeee  #       "ÍìtÑ\x87Ñ°«\\x1aÞî"
-      c181c3720d8db0cbd93d20a7  #       "Á\x81Ãr\x0d\x8d°ËÙ= §"
-      c194f1fe                  #       "Á\x94ñþ"
+      4ff35df8a27dd3f4240286bf  #       "Oó]ø¢}Óô$\x02\x86¿"
+      ca5ffa48d935af7240ad25f9  #       "Ê_úHÙ5¯r@\xad%ù"
+      ab9733404379332ad4b2f5fd  #       "«\x973@Cy3*Ô²õý"
+      d935498ce6713e8b9a736528  #       "Ù5I\x8cæq>\x8b\x9ase("
+      61f71d81b59aa395d04276f8  #       "a÷\x1d\x81µ\x9a£\x95ÐBvø"
+      7b826c3c                  #       "{\x82l<"
 
 6.  Referenced Token
 
@@ -857,9 +865,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158403f606780d5f347c00b5b3dd59be3f03fda93a2
-   59254032946f9c2461d0e2b3a331962a5cba654469dfc3055fc3f20738783601d81b
-   cc87fb107628cd354575af
+   7374617475736c697374732f315840ae779847a96a2c65a0daeb33f1099e72fa91d9
+   53894ecb85a8bcc320c1989a5fa9e6f24deac15ecbc97210e1daf58c47e80ffb6b0f
+   5113b372d460c71a804629
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -882,12 +890,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         3f606780d5f347c00b5b3dd5  #       "?`g\x80ÕóGÀ\x0b[=Õ"
-         9be3f03fda93a25925403294  #       "\x9bãð?Ú\x93¢Y%@2\x94"
-         6f9c2461d0e2b3a331962a5c  #       "o\x9c$aÐâ³£1\x96*\"
-         ba654469dfc3055fc3f20738  #       "ºeDißÃ\x05_Ãò\x078"
-         783601d81bcc87fb107628cd  #       "x6\x01Ø\x1bÌ\x87û\x10v(Í"
-         354575af                  #       "5Eu¯"
+         ae779847a96a2c65a0daeb33  #       "®w\x98G©j,e\xa0Úë3"
+         f1099e72fa91d953894ecb85  #       "ñ\x09\x9erú\x91ÙS\x89NË\x85"
+         a8bcc320c1989a5fa9e6f24d  #       "¨¼Ã Á\x98\x9a_©æòM"
+         eac15ecbc97210e1daf58c47  #       "êÁ^ËÉr\x10áÚõ\x8cG"
+         e80ffb6b0f5113b372d460c7  #       "è\x0fûk\x0fQ\x13³rÔ`Ç"
+         1a804629                  #       "\x1a\x80F)"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1122,8 +1130,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.OHSdxns4dddluhUxJoM6InSjQDEnTYeOvlnB74LgdWDCQjWnFGkw
-   1HvMnbjN1h8lmMuwkKvakJf6VNUapKoX9Q
+   nR0bCI6NDMyMDB9.0jyfAbVo0HZESE-RF1fEBUlKUe96oGDTl2at5vM32orYZEnKnqpk
+   TuUsXh0UXfbfAYFRl26SRuGrJBo3837J3A
 
 8.2.  Status List Response
 
@@ -1262,8 +1270,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.OHSdxns4dddluhUxJoM6InSjQDEnTYeOvlnB74LgdWDCQjWnFGkw
-   1HvMnbjN1h8lmMuwkKvakJf6VNUapKoX9Q
+   nR0bCI6NDMyMDB9.0jyfAbVo0HZESE-RF1fEBUlKUe96oGDTl2at5vM32orYZEnKnqpk
+   TuUsXh0UXfbfAYFRl26SRuGrJBo3837J3A
 
 9.  Status List Aggregation
 
@@ -2943,6 +2951,8 @@ Test vectors for Status List encoding
 Document History
 
    -09
+
+   *  Add CDDL for CBOR StatusList encoding
 
    *  add diagram for Status List Aggregation for further explanation
 
