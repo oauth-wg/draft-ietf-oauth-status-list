@@ -358,6 +358,16 @@ This section defines the data structure for a CBOR-encoded Status List:
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the Status List as specified in [](#status-list).
   * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further detail.
 
+The following is the CDDL definition of the StatusList structure:
+
+~~~ cddl
+StatusList = {
+    bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token
+    lst: bstr, ; Byte string that contains the Status List
+    ? aggregation_uri: tstr, ; link to the Status List Aggregation
+}
+~~~
+
 The following example illustrates the CBOR representation of the Status List in Hex:
 
 ~~~~~~~~~~
@@ -1820,6 +1830,7 @@ CBOR encoding:
 
 -09
 
+* Add CDDL for CBOR StatusList encoding
 * add diagram for Status List Aggregation for further explanation
 * rename "chunking" of Status List Tokens (for scalability reasons) into "divide .. up"
 
