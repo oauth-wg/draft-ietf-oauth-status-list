@@ -82,8 +82,9 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Terminology
    4.  Status List
-     4.1.  Status List in JSON Format
-     4.2.  Status List in CBOR Format
+     4.1.  Compressed Byte Array
+     4.2.  Status List in JSON Format
+     4.3.  Status List in CBOR Format
    5.  Status List Token
      5.1.  Status List Token in JWT Format
      5.2.  Status List Token in CWT Format
@@ -351,7 +352,8 @@ Table of Contents
       of that Referenced Token.  Also known as Verifier.
 
    Status List:  An object in JSON or CBOR representation containing a
-      bit array that lists the statuses of many Referenced Tokens.
+      compressed byte array that represents the statuses of many
+      Referenced Tokens.
 
    Status List Token:  A token in JWT (as defined in [RFC7519]) or CWT
       (as defined in [RFC8392]) representation that contains a
@@ -372,35 +374,49 @@ Table of Contents
 
 4.  Status List
 
-   A Status List is a byte array that contains the statuses of many
-   Referenced Tokens represented by one or multiple bits.  A common
-   representation of a Status List is composed by the following
-   algorithm:
+   A Status List is a data structure that contains the statuses of many
+   Referenced Tokens represented by one or multiple bits.  The first
+   section (Section 4.1) describes how to construct a compressed byte
+   array that is the base component for the Status List data structure.
+   The second and third section describe how to encode such a Status
+   List in JSON and CBOR representation.
 
-   1.  Each status of a Referenced Token MUST be represented with a bit-
-       size of 1,2,4 or 8.  Therefore up to 2,4,16 or 256 statuses for a
-       Referenced Token are possible, depending on the bit-size.  This
-       limitation is intended to limit bit manipulation necessary to a
-       single byte for every operation and thus keeping implementations
-       simpler and less error-prone.
+4.1.  Compressed Byte Array
 
-   2.  The overall Status List is encoded as a byte array.  Depending on
-       the bit-size, each byte corresponds to 8/(#bit-size) statuses
-       (8,4,2 or 1).  The status of each Referenced Token is identified
-       using the index that maps to one or more specific bits within the
-       byte array.  The index starts counting at 0 and ends with "size"
-       - 1 (being the last valid entry).  The bits within an array are
-       counted from the least significant bit "0" to the most
-       significant bit ("7").  All bits of the byte array at a
-       particular index are set to a status value.
+   A compressed byte array containing the status information of the
+   Referenced Token is composed by the following algorithm:
 
-   3.  The byte array is compressed using DEFLATE [RFC1951] with the
-       ZLIB [RFC1950] data format.  Implementations are RECOMMENDED to
-       use the highest compression level available.
+   1.  The Status Issuer MUST define a number of bits (bits) of either
+       1,2,4 or 8, that represents the amount of bits used to describe
+       the status of each Referenced Token within this Status List.
+       Therefore up to 2,4,16 or 256 statuses for a Referenced Token are
+       possible, depending on the bit size.  This limitation is intended
+       to limit bit manipulation necessary to a single byte for every
+       operation and thus keeping implementations simpler and less
+       error-prone.
 
-   The following example illustrates a Status List that represents the
-   statuses of 16 Referenced Tokens, requiring 16 bits (2 bytes) for the
-   uncompressed byte array (1 bit status):
+   2.  The Status Issuer creates a byte array of size = amount of
+       Referenced Tokens * bits / 8 or greater.  Depending on the bits,
+       each byte in the array corresponds to 8/(bits) statuses (8,4,2 or
+       1).
+
+   3.  The Status Issuer sets the status values for all Referenced
+       Tokens within the byte array.  The status of each Referenced
+       Token is identified using an index that maps to one or more
+       specific bits within the byte array.  The index starts counting
+       at 0 and ends with amount of Referenced Tokens - 1 (being the
+       last valid entry).  The bits within an array are counted from the
+       least significant bit ("0") to the most significant bit ("7").
+       All bits of the byte array at a particular index are set to a
+       status value.
+
+   4.  The Status Issuer compresses the byte array using DEFLATE
+       [RFC1951] with the ZLIB [RFC1950] data format.  Implementations
+       are RECOMMENDED to use the highest compression level available.
+
+   The following example illustrates the byte array of a Status List
+   that represents the statuses of 16 Referenced Tokens with a bits of
+   1, requiring 2 bytes (16 bits) for the uncompressed byte array:
 
    status[0] = 1
    status[1] = 0
@@ -421,21 +437,21 @@ Table of Contents
 
    These bits are concatenated:
 
-   byte             0                  1               2
-   bit       7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7
-            +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
-   values   |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|  |0|...
-            +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
-   index     7 6 5 4 3 2 1 0   15   ...  10 9 8   23
-            \_______________/  \_______________/
-                   0xB9               0xA3
+   byte no            0                  1               2
+   bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7
+              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
+   values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|  |0|...
+              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
+   index       7 6 5 4 3 2 1 0   15   ...  10 9 8   23
+              \_______________/  \_______________/
+   byte value       0xB9               0xA3
 
-   In this example, the Status List additionally includes the Status
-   Type "SUSPENDED".  As the Status Type value for "SUSPENDED" is 0x02
-   and does not fit into 1 bit, the "bits" is required to be 2.
-
-   This example Status List represents the status of 12 Referenced
-   Tokens, requiring 24 bits (3 bytes) of status (2 bit status):
+   In the following example, the Status List additionally includes the
+   Status Type "SUSPENDED".  As the Status Type value for "SUSPENDED" is
+   0x02 and does not fit into 1 bit, the bits is required to be 2.  This
+   example illustrates the byte array of a Status List that represents
+   the statuses of 12 Referenced Tokens with a bits of 2, requiring 3
+   bytes (24 bits) for the uncompressed byte array:
 
    status[0] = 1
    status[1] = 2
@@ -452,18 +468,18 @@ Table of Contents
 
    These bits are concatenated:
 
-   byte             0                  1                  2
-   bit       7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
-            +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-   values   |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
-            +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-             \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
-   status     3   0   2   1      1   0   1   0      3   3   2   1
-   index      3   2   1   0      7   6   5   4      11  10  9   8
-              \___________/      \___________/      \___________/
-                   0xC9               0x44               0xF9
+   byte no            0                  1                  2
+   bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
+              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+   values     |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
+              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+               \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
+   status       3   0   2   1      1   0   1   0      3   3   2   1
+   index        3   2   1   0      7   6   5   4      11  10  9   8
+                \___________/      \___________/      \___________/
+   byte value       0xC9               0x44               0xF9
 
-4.1.  Status List in JSON Format
+4.2.  Status List in JSON Format
 
    This section defines the data structure for a JSON-encoded Status
    List:
@@ -472,13 +488,13 @@ Table of Contents
       It MUST contain at least the following claims:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
-         Referenced Token in the Status List (lst).  The allowed values
-         for bits are 1,2,4 and 8.
+         Referenced Token in the compressed byte array (lst).  The
+         allowed values for bits are 1,2,4 and 8.
 
       -  lst: REQUIRED.  JSON String that contains the status values for
          all the Referenced Tokens it conveys statuses for.  The value
-         MUST be the base64url-encoded Status List as specified in
-         Section 4.
+         MUST be the base64url-encoded compressed byte array as
+         specified in Section 4.1.
 
       -  aggregation_uri: OPTIONAL.  JSON String that contains a URI to
          retrieve the Status List Aggregation for this type of
@@ -486,7 +502,7 @@ Table of Contents
          details.
 
    The following example illustrates the JSON representation of the
-   Status List with bit-size 1 from the example above:
+   Status List with bits 1 from the example above:
 
    byte_array = [0xb9, 0xa3]
    encoded:
@@ -496,7 +512,7 @@ Table of Contents
    }
 
    The following example illustrates the JSON representation of the
-   Status List with bit-size 2 from the example above:
+   Status List with bits 2 from the example above:
 
    byte_array = [0xc9, 0x44, 0xf9]
    encoded:
@@ -508,7 +524,7 @@ Table of Contents
    See section Appendix "Test vectors for Status List encoding" for more
    test vectors.
 
-4.2.  Status List in CBOR Format
+4.3.  Status List in CBOR Format
 
    This section defines the data structure for a CBOR-encoded Status
    List:
@@ -517,11 +533,13 @@ Table of Contents
       following entries:
 
       -  bits: REQUIRED.  Unsigned integer (Major Type 0) that contains
-         the number of bits per Referenced Token in the Status List.
-         The allowed values for bits are 1, 2, 4 and 8.
+         the number of bits per Referenced Token in the compressed byte
+         array (lst).  The allowed values for bits are 1, 2, 4 and 8.
 
       -  lst: REQUIRED.  Byte string (Major Type 2) that contains the
-         Status List as specified in Section 4.
+         status values for all the Referenced Tokens it conveys statuses
+         for.  The value MUST be the compressed byte array as specified
+         in Section 4.1.
 
       -  aggregation_uri: OPTIONAL.  Text string (Major Type 3) that
          contains a URI to retrieve the Status List Aggregation for this
@@ -600,7 +618,7 @@ Table of Contents
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the rules outlined in
-      Section 4.1.
+      Section 4.2.
 
    The following additional rules apply:
 
@@ -668,7 +686,7 @@ Table of Contents
       value of the claim MUST be a positive number.
 
    *  65533 (status list): REQUIRED.  The status list claim MUST specify
-      the Status List conforming to the rules outlined in Section 4.2.
+      the Status List conforming to the rules outlined in Section 4.3.
 
    The following additional rules apply:
 
@@ -690,9 +708,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d58404ff35df8a27dd3f4240286
-   bfca5ffa48d935af7240ad25f9ab9733404379332ad4b2f5fdd935498ce6713e8b9a
-   73652861f71d81b59aa395d04276f87b826c3c
+   646269747301636c73744a78dadbb918000217015d584034e2f207ae911a918d3684
+   22901d63ea091c309c0410f7d2c227c9d9242a6d22bfd6219d89181266441a594733
+   814c2dc2189f9ae07375f5be2dd3fc358c8ea0
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -715,12 +733,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      4ff35df8a27dd3f4240286bf  #       "Oó]ø¢}Óô$\x02\x86¿"
-      ca5ffa48d935af7240ad25f9  #       "Ê_úHÙ5¯r@\xad%ù"
-      ab9733404379332ad4b2f5fd  #       "«\x973@Cy3*Ô²õý"
-      d935498ce6713e8b9a736528  #       "Ù5I\x8cæq>\x8b\x9ase("
-      61f71d81b59aa395d04276f8  #       "a÷\x1d\x81µ\x9a£\x95ÐBvø"
-      7b826c3c                  #       "{\x82l<"
+      34e2f207ae911a918d368422  #       "4âò\x07®\x91\x1a\x91\x8d6\x84""
+      901d63ea091c309c0410f7d2  #       "\x90\x1dcê\x09\x1c0\x9c\x04\x10÷Ò"
+      c227c9d9242a6d22bfd6219d  #       "Â'ÉÙ$*m"¿Ö!\x9d"
+      89181266441a594733814c2d  #       "\x89\x18\x12fD\x1aYG3\x81L-"
+      c2189f9ae07375f5be2dd3fc  #       "Â\x18\x9f\x9aàsuõ¾-Óü"
+      358c8ea0                  #       "5\x8c\x8e\xa0"
 
 6.  Referenced Token
 
@@ -865,9 +883,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840ae779847a96a2c65a0daeb33f1099e72fa91d9
-   53894ecb85a8bcc320c1989a5fa9e6f24deac15ecbc97210e1daf58c47e80ffb6b0f
-   5113b372d460c71a804629
+   7374617475736c697374732f3158402fdcc17524b5c4495479c7bba9a704a11e2ecb
+   d1e0a7c45c21640e9b114fe309162ef93048101144d1460039cf5dd252aaba19265c
+   0ee8a8196c0e507e5572a0
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -890,12 +908,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         ae779847a96a2c65a0daeb33  #       "®w\x98G©j,e\xa0Úë3"
-         f1099e72fa91d953894ecb85  #       "ñ\x09\x9erú\x91ÙS\x89NË\x85"
-         a8bcc320c1989a5fa9e6f24d  #       "¨¼Ã Á\x98\x9a_©æòM"
-         eac15ecbc97210e1daf58c47  #       "êÁ^ËÉr\x10áÚõ\x8cG"
-         e80ffb6b0f5113b372d460c7  #       "è\x0fûk\x0fQ\x13³rÔ`Ç"
-         1a804629                  #       "\x1a\x80F)"
+         2fdcc17524b5c4495479c7bb  #       "/ÜÁu$µÄITyÇ»"
+         a9a704a11e2ecbd1e0a7c45c  #       "©§\x04¡\x1e.ËÑà§Ä\"
+         21640e9b114fe309162ef930  #       "!d\x0e\x9b\x11Oã\x09\x16.ù0"
+         48101144d1460039cf5dd252  #       "H\x10\x11DÑF\x009Ï]ÒR"
+         aaba19265c0ee8a8196c0e50  #       "ªº\x19&\\x0eè¨\x19l\x0eP"
+         7e5572a0                  #       "~Ur\xa0"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1130,8 +1148,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.0jyfAbVo0HZESE-RF1fEBUlKUe96oGDTl2at5vM32orYZEnKnqpk
-   TuUsXh0UXfbfAYFRl26SRuGrJBo3837J3A
+   nR0bCI6NDMyMDB9.coxGXrTldiDznsP4badsEstU0iiGtT-7CTje7DxEaZULWuactyhA
+   o2UEpsqOkMO2A7n1KGdBhcyhKyuMqrY2gw
 
 8.2.  Status List Response
 
@@ -1270,8 +1288,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.0jyfAbVo0HZESE-RF1fEBUlKUe96oGDTl2at5vM32orYZEnKnqpk
-   TuUsXh0UXfbfAYFRl26SRuGrJBo3837J3A
+   nR0bCI6NDMyMDB9.coxGXrTldiDznsP4badsEstU0iiGtT-7CTje7DxEaZULWuactyhA
+   o2UEpsqOkMO2A7n1KGdBhcyhKyuMqrY2gw
 
 9.  Status List Aggregation
 
@@ -1323,7 +1341,7 @@ d2                              # tag(18)
 
    The URI to the Status List Aggregation MAY be provided as the
    optional parameter aggregation_uri in the Status List itself as
-   explained in Section 4.2 and Section 4.1 respectively.  A Relying
+   explained in Section 4.3 and Section 4.2 respectively.  A Relying
    Party may use this URI to retrieve an up-to-date list of relevant
    Status Lists.
 
@@ -2433,8 +2451,8 @@ Acknowledgments
 Test vectors for Status List encoding
 
    All examples here are given in the form of JSON or CBOR payloads.
-   The examples are encoded according to Section 4.1 for JSON and
-   Section 4.2 for CBOR.  The CBOR examples are displayed as hex values.
+   The examples are encoded according to Section 4.2 for JSON and
+   Section 4.3 for CBOR.  The CBOR examples are displayed as hex values.
 
    All values that are not mentioned for the examples below can be
    assumed to be 0 (VALID).  All examples are initialized with a size of
@@ -2951,6 +2969,11 @@ Test vectors for Status List encoding
 Document History
 
    -09
+
+   *  introduce dedicated section for compressed byte array of the
+      Status List
+
+   *  fix Status List definitions
 
    *  Add CDDL for CBOR StatusList encoding
 
