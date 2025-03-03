@@ -1797,16 +1797,26 @@ encoded:
             </ul>
 </li>
         </ul>
-<p id="section-4.3-3">The following example illustrates the CBOR representation of the Status List in Hex:<a href="#section-4.3-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4.3-4">
+<p id="section-4.3-3">The following is the CDDL definition of the StatusList structure:<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<div class="lang-cddl sourcecode" id="section-4.3-4">
+<pre>
+StatusList = {
+    bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token
+    lst: bstr, ; Byte string that contains the Status List
+    ? aggregation_uri: tstr, ; link to the Status List Aggregation
+}
+</pre><a href="#section-4.3-4" class="pilcrow">¶</a>
+</div>
+<p id="section-4.3-5">The following example illustrates the CBOR representation of the Status List in Hex:<a href="#section-4.3-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.3-6">
 <pre>
 byte_array = [0xb9, 0xa3]
 encoded:
 a2646269747301636c73744a78dadbb918000217015d
-</pre><a href="#section-4.3-4" class="pilcrow">¶</a>
+</pre><a href="#section-4.3-6" class="pilcrow">¶</a>
 </div>
-<p id="section-4.3-5">The following is the CBOR Annotated Hex output of the example above:<a href="#section-4.3-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4.3-6">
+<p id="section-4.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-4.3-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.3-8">
 <pre>
 a2                              # map(2)
   64                            #   string(4)
@@ -1816,9 +1826,9 @@ a2                              # map(2)
     6c7374                      #     "lst"
   4a                            #   bytes(10)
     78dadbb918000217015d        #     "xÚÛ¹\x18\x00\x02\x17\x01]"
-</pre><a href="#section-4.3-6" class="pilcrow">¶</a>
+</pre><a href="#section-4.3-8" class="pilcrow">¶</a>
 </div>
-<p id="section-4.3-7">See section <a href="#test-vectors" class="auto internal xref">Appendix "Test vectors for Status List encoding"</a> for more test vectors.<a href="#section-4.3-7" class="pilcrow">¶</a></p>
+<p id="section-4.3-9">See section <a href="#test-vectors" class="auto internal xref">Appendix "Test vectors for Status List encoding"</a> for more test vectors.<a href="#section-4.3-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1949,9 +1959,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840d9bda5979006e305471270
-b530ed9dcc9c5a4965cce8cfb027759dd6816d554e96ccaf0316be9ddfb85059633f
-069a66e2364b489a3e11a915fce46f610bb246
+646269747301636c73744a78dadbb918000217015d5840d9532b8bb70395a1069ccb
+72352ed6437ee023961d7c56f540c24150d3c7bb56877e88d2a5363c4dac2e1e2d60
+48b3f13394650287eeaba59826f0738131b3c9
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1976,12 +1986,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      d9bda5979006e305471270b5  #       "Ù½¥\x97\x90\x06ã\x05G\x12pµ"
-      30ed9dcc9c5a4965cce8cfb0  #       "0í\x9dÌ\x9cZIeÌèÏ°"
-      27759dd6816d554e96ccaf03  #       "'u\x9dÖ\x81mUN\x96Ì¯\x03"
-      16be9ddfb85059633f069a66  #       "\x16¾\x9dß¸PYc?\x06\x9af"
-      e2364b489a3e11a915fce46f  #       "â6KH\x9a&gt;\x11©\x15üäo"
-      610bb246                  #       "a\x0b²F"
+      d9532b8bb70395a1069ccb72  #       "ÙS+\x8b·\x03\x95¡\x06\x9cËr"
+      352ed6437ee023961d7c56f5  #       "5.ÖC~à#\x96\x1d|Võ"
+      40c24150d3c7bb56877e88d2  #       "@ÂAPÓÇ»V\x87~\x88Ò"
+      a5363c4dac2e1e2d6048b3f1  #       "¥6&lt;M¬.\x1e-`H³ñ"
+      3394650287eeaba59826f073  #       "3\x94e\x02\x87î«¥\x98&amp;ðs"
+      8131b3c9                  #       "\x811³É"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2123,9 +2133,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840e5a5b77cc1dbe181ca752c0f431ee0bf477986
-89a411a785aadd27ebc5af35d5dfc225b8867353947fe3191da233ddb2a0e9b230a4
-1efed7c808e06786e42457
+7374617475736c697374732f3158401b26f3b17475a6b4e86001d3e16baac3fa8cc1
+feb67fd9a8796d4381fb4691b80ab03fa8c93c94cfa6c43fb5621fc34e7084e671a1
+34e1d70547ecb7dff2a0a4
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2150,12 +2160,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      e5a5b77cc1dbe181ca752c0f  #       "å¥·|ÁÛá\x81Êu,\x0f"
-      431ee0bf47798689a411a785  #       "C\x1eà¿Gy\x86\x89¤\x11§\x85"
-      aadd27ebc5af35d5dfc225b8  #       "ªÝ'ëÅ¯5ÕßÂ%¸"
-      867353947fe3191da233ddb2  #       "\x86sS\x94\x7fã\x19\x1d¢3Ý²"
-      a0e9b230a41efed7c808e067  #       "\xa0é²0¤\x1eþ×È\x08àg"
-      86e42457                  #       "\x86ä$W"
+      1b26f3b17475a6b4e86001d3  #       "\x1b&amp;ó±tu¦´è`\x01Ó"
+      e16baac3fa8cc1feb67fd9a8  #       "ákªÃú\x8cÁþ¶\x7fÙ¨"
+      796d4381fb4691b80ab03fa8  #       "ymC\x81ûF\x91¸\x0a°?¨"
+      c93c94cfa6c43fb5621fc34e  #       "É&lt;\x94Ï¦Ä?µb\x1fÃN"
+      7084e671a134e1d70547ecb7  #       "p\x84æq¡4á×\x05Gì·"
+      dff2a0a4                  #       "ßò\xa0¤"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2369,8 +2379,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.USokvdGdfMTgSco_9sh0r16t20x0k9QEWy-jqnhWDqxKpojJWBU8
-9-NzjcMUqNcwVbknhc8yh2i_Z_XJwd962Q
+nR0bCI6NDMyMDB9.Xg0SK1PP4y-MGRmvqb-cHOlQmE5jBYBpVs3MqV7hh2WKufysg6wV
+RjNQDsIxm1oivNCT_5H9yu7qzpgRr5xMdw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2476,8 +2486,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.USokvdGdfMTgSco_9sh0r16t20x0k9QEWy-jqnhWDqxKpojJWBU8
-9-NzjcMUqNcwVbknhc8yh2i_Z_XJwd962Q
+nR0bCI6NDMyMDB9.Xg0SK1PP4y-MGRmvqb-cHOlQmE5jBYBpVs3MqV7hh2WKufysg6wV
+RjNQDsIxm1oivNCT_5H9yu7qzpgRr5xMdw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -4284,10 +4294,13 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
           <p id="appendix-C-2.2.1">fix Status List definitions<a href="#appendix-C-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.3">
-          <p id="appendix-C-2.3.1">add diagram for Status List Aggregation for further explanation<a href="#appendix-C-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.3.1">Add CDDL for CBOR StatusList encoding<a href="#appendix-C-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.4">
-          <p id="appendix-C-2.4.1">rename "chunking" of Status List Tokens (for scalability reasons) into "divide .. up"<a href="#appendix-C-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.4.1">add diagram for Status List Aggregation for further explanation<a href="#appendix-C-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.5">
+          <p id="appendix-C-2.5.1">rename "chunking" of Status List Tokens (for scalability reasons) into "divide .. up"<a href="#appendix-C-2.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-C-3">-08<a href="#appendix-C-3" class="pilcrow">¶</a></p>
