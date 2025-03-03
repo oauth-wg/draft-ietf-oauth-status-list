@@ -1433,15 +1433,18 @@ We would like to thank
 Brian Campbell,
 Filip Skokan,
 Francesco Marino,
-Guiseppe De Marco,
+Giuseppe De Marco,
 Kristina Yasuda,
 Markus Kreusch,
 Martijn Haring,
 Michael B. Jones,
 Michael Schwartz,
 Mike Prorock,
+Mirko Mollik,
 Oliver Terbu,
 Orie Steele,
+Rifaat Shekh-Yusef,
+Rohan Mahy,
 Timo Glastra
 and
 Torsten Lodderstedt
@@ -1834,6 +1837,7 @@ CBOR encoding:
 
 -09
 
+* update acknowledgments
 * introduce dedicated section for compressed byte array of the Status List
 * fix Status List definitions
 * Add CDDL for CBOR StatusList encoding
