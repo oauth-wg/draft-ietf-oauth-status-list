@@ -840,6 +840,25 @@ An Issuer MAY support any of these mechanisms:
 - Issuer metadata: The Issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
 - Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.
 
+~~~ ascii art
+                                      ┌─────────────────┐
+                                      │                 │
+                                      │ Issuer Metadata │
+                                      │                 │
+                                      └───┬─────────────┘
+                                          │
+  ┌───────────────────┐                   │ link within metadata
+ ┌───────────────────┐│  link all         ▼
+┌───────────────────┐││◄───────┐  ┌─────────────────────────┐
+│                   ││◄────────┤  │                         │
+│ Status List Token │◄┴────────┴──┤ Status List Aggregation │
+│                   │┘            │                         │
+└───────┬───────────┘             └─────────────────────────┘
+        │                                 ▲
+        │   link by aggregation_uri       │
+        └─────────────────────────────────┘
+~~~
+
 ## Issuer Metadata
 
 The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or via a VICAL extension for ISO mDoc / mDL. If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
@@ -1080,7 +1099,7 @@ The storage and transmission size of the Status Issuer's Status List Tokens depe
 
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
-The Status List Issuer may chunk its Referenced Tokens into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may chunk the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
+The Status List Issuer may divide its Referenced Tokens up into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may organize the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
 
 ## External Status Issuer
 
@@ -1812,6 +1831,8 @@ CBOR encoding:
 -09
 
 * Add CDDL for CBOR StatusList encoding
+* add diagram for Status List Aggregation for further explanation
+* rename "chunking" of Status List Tokens (for scalability reasons) into "divide .. up"
 
 -08
 
