@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-02T00:18:49.991273+00:00",
+  "timestamp": "2025-03-04T00:17:36.409519+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5227,7 +5227,7 @@
       "id": "I_kwDOJZ2aqs6ogGPh",
       "title": "About claim \"aggregation_uri\"",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/255",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -5236,8 +5236,8 @@
       ],
       "body": "In #228, C2bo wrote:\n\n> The claim \"aggregation_uri\" is meant as a way to allow efficient caching for RPs, not for alternative URIs \n> - it points to all relevant status lists for an issuer or specific referenced token type.\n\n\"aggregation_uri\" is defined in 4.1 as:\n\n> aggregation_uri: OPTIONAL.  JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token.  \nSee section 9 for further detail.\n\nSection 9 (Status List Aggregation) states:\n\n> Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or Issuer.  \n\nThese two descriptions are not aligned with section 4.1. **The case of the Issuer is not mentioned in section 4.1**.\nHowever, in section 9, the sentence mentions: \n> all relevant Status Lists for a specific type of Referenced Token **or Issuer**.  \n\n Then comes some questions.\n\nHow can the Relying party retrieve either: \n\na) all relevant Status Lists for a specific [type of] Referenced Token, or\nb) all relevant Status Lists for an Issuer ?\n\nIn the first case, how long should \"all relevant Status Lists\" for a specific type of Referenced Token be accessible ? \nSame question for \"all relevant Status Lists\" for an Issuer.\n\nIf the case of the \"Issuer\" is indeed supported, there should be some additional text to warn the Issuers about some consequences when this claim is supported. For example:\n\n> \"All relevant Status Lists for an Issuer\" allows a Relying Party to know how many Referenced Tokens have been issued by an Issuer and are either valid, suspended or revoked at an instant of time. This can reveal also the number of entities that have been registered. Issuers should be warned of the consequences before choosing to support this optional claim.\n\n\nFinally, the argument is that this claim is \"meant as a way to allow efficient caching for RPs\". However, I still have difficulties to understand the usefulness of this optional claim when the JSON String contains a URI to retrieve the Status List Aggregation for this Referenced Token.\nCaching is pretty well supported by the ttl claim:\n\n> *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. \n\n",
       "createdAt": "2025-02-03T09:45:58Z",
-      "updatedAt": "2025-03-01T14:46:10Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-03T07:51:31Z",
+      "closedAt": "2025-03-03T07:51:31Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -5433,7 +5433,7 @@
       "id": "I_kwDOJZ2aqs6qyWtk",
       "title": "CDDL for CBOR",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/267",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -5442,8 +5442,8 @@
       "labels": [],
       "body": "Rohan Mahy suggested on the mailing list:\n\n8. There should be a CDDL snippet for the CBOR. I would be happy to provide one once points 6 and 7 are addressed.",
       "createdAt": "2025-02-20T07:36:49Z",
-      "updatedAt": "2025-02-20T07:56:34Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-03T07:52:45Z",
+      "closedAt": "2025-03-03T07:52:44Z",
       "comments": []
     },
     {
@@ -5451,7 +5451,7 @@
       "id": "I_kwDOJZ2aqs6qyYfO",
       "title": "Clarify whether Status List refers to the uncompressed or compressed byte array",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/268",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -5460,8 +5460,8 @@
       "labels": [],
       "body": "Rohan Maly wrote on the mailing list:\n\n> 3. The document uses status_list (JSON object) and StatusList (CBOR map) to refer to the map, but Status List seems to be used to refer to both the compressed byte string (in Section 5) and the uncompressed byte array of status values (in Section 4 step 2, and Section 4.1 2nd sentence).\n\nOur response: This is correct, we will separate, the parts of section 4 that talk about the the uncompressed byte array into its own subsection and not use the wording Status List for this. Otherwise, through out the rest of the document, Status List refers to the compressed byte array as defined in the terminology.",
       "createdAt": "2025-02-20T07:40:41Z",
-      "updatedAt": "2025-02-20T07:56:19Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-03T07:54:43Z",
+      "closedAt": "2025-03-03T07:54:43Z",
       "comments": []
     },
     {
@@ -5474,9 +5474,9 @@
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
-      "body": "I'd like to add the people that have contributed/provided feedback in the past few weeks/months. Please give a thumbs up / comment here if you are ok with being mentioned in the Acknowledgments section.\n\nI might have forgotten people - please comment if you think someone else should be added.\n\n@rohanmahy\n@steffenschwalm\n@Denisthemalice\n@sschulz-t\n@cre8\n@mickrau\n@hannestschofenig\n@wbl\n@rifaat-shekh-yusef\n\n(also fix Giuseppe's spelling)",
+      "body": "I'd like to add the people that have contributed/provided feedback in the past few weeks/months. Please give a thumbs up / comment here if you are ok with being mentioned in the Acknowledgments section.\n\nI might have forgotten people - please comment if you think someone else should be added.\n\n@rohanmahy - done\n@steffenschwalm\n@Denisthemalice\n@sschulz-t\n@cre8 - done\n@mickrau - done\n@hannestschofenig - done\n@wbl\n@rifaat-shekh-yusef - done\n\n(also fix Giuseppe's spelling)",
       "createdAt": "2025-02-28T16:57:41Z",
-      "updatedAt": "2025-02-28T16:57:41Z",
+      "updatedAt": "2025-03-03T18:34:16Z",
       "closedAt": null,
       "comments": []
     }
@@ -17806,24 +17806,26 @@
       "id": "PR_kwDOJZ2aqs6MNE_i",
       "title": "Clarify Status List definition",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/269",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #268 ",
       "createdAt": "2025-02-23T17:50:26Z",
-      "updatedAt": "2025-03-01T09:14:47Z",
+      "updatedAt": "2025-03-03T07:54:42Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "9459928c2eeb7a8edef727137bcb0b4c4c8159b2",
+      "baseRefOid": "233f2ca5641edcf2044e46c9d2472840c46ad98e",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "status_list_def",
-      "headRefOid": "22f0a2d354ae02e3ddbbb7b36a1a0a6528246756",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "8b3c09be50fa99caff3f2ed2b0d929b53d9b3a7a",
+      "closedAt": "2025-03-03T07:54:42Z",
+      "mergedAt": "2025-03-03T07:54:42Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "f80b63b6d943adb409b82afa99b4162ef538a9fb"
+      },
       "comments": [],
       "reviews": [
         {
@@ -17851,6 +17853,32 @@
               "updatedAt": "2025-02-28T17:17:27Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6eHiLC",
+          "commit": {
+            "abbreviatedOid": "22f0a2d"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-02T17:16:20Z",
+          "updatedAt": "2025-03-02T17:16:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6eJk-e",
+          "commit": {
+            "abbreviatedOid": "6a91868"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-03T07:53:16Z",
+          "updatedAt": "2025-03-03T07:53:16Z",
+          "comments": []
         }
       ]
     },
@@ -17859,28 +17887,30 @@
       "id": "PR_kwDOJZ2aqs6M8TlK",
       "title": "Add cddl for statuslist cbor encoding",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/270",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #267 \r\nI only added the CDDL for the StatusList object CBOR encoding which seemed to be the most important to provide CDDL for. I don't think CDDL for the CWT would help (and I didn't find many examples in other specs doing CDDL for CWT).\r\n\r\n@rohanmahy Would that work for you?",
       "createdAt": "2025-02-28T13:50:58Z",
-      "updatedAt": "2025-02-28T17:23:07Z",
+      "updatedAt": "2025-03-03T07:52:52Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "9459928c2eeb7a8edef727137bcb0b4c4c8159b2",
+      "baseRefOid": "fdd538082e23fa5ac51ea5c583d0c56ee911f502",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "267-cddl-for-cbor",
-      "headRefOid": "b9734d455c5c994a28280baa72cc64883c0070c3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "e479eebcf31a857fd5d3c81783208f5631e44bcb",
+      "closedAt": "2025-03-03T07:52:44Z",
+      "mergedAt": "2025-03-03T07:52:44Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "233f2ca5641edcf2044e46c9d2472840c46ad98e"
+      },
       "comments": [
         {
           "author": "rohanmahy",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> Closes #267 I only added the CDDL for the StatusList object CBOR encoding which seemed to be the most important to provide CDDL for. I don't think CDDL for the CWT would help (and I didn't find many examples in other specs doing CDDL for CWT).\r\n> \r\n> @rohanmahy Would that work for you?\r\n\r\nI proposed a one line change in the CDDL. `bits` can't take any arbitrary integer value. It has exactly 4 choices, so just enumerate them.\r\n\r\nUsing text string keys instead of integer keys is unconventional. I don't have an objection, as long as you are deliberately making that decision.\r\n\r\nI agree that anyone using CWTs does not need you to provide CDDL for a generic structure.\r\n\r\nThanks, -r",
           "createdAt": "2025-02-28T14:31:01Z",
           "updatedAt": "2025-02-28T14:31:01Z"
@@ -17893,7 +17923,7 @@
             "abbreviatedOid": "ed86717"
           },
           "author": "rohanmahy",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-02-28T14:24:13Z",
@@ -17926,11 +17956,24 @@
             "abbreviatedOid": "1b0acae"
           },
           "author": "rohanmahy",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2025-02-28T17:04:59Z",
           "updatedAt": "2025-02-28T17:04:59Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6eJkOA",
+          "commit": {
+            "abbreviatedOid": "b9734d4"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-03T07:51:31Z",
+          "updatedAt": "2025-03-03T07:51:31Z",
           "comments": []
         }
       ]
@@ -17940,26 +17983,97 @@
       "id": "PR_kwDOJZ2aqs6NCOq-",
       "title": "add diagram for Status List Aggregation for further explanation, rena\u2026",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/272",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "\u2026me chunking to divide up\r\n\r\nCloses #255 ",
       "createdAt": "2025-03-01T14:44:33Z",
-      "updatedAt": "2025-03-01T14:57:15Z",
+      "updatedAt": "2025-03-03T07:51:31Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "9459928c2eeb7a8edef727137bcb0b4c4c8159b2",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "chunking",
       "headRefOid": "26e324410782331a86c0d1ad39c4f01c118970e4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-03T07:51:31Z",
+      "mergedAt": "2025-03-03T07:51:30Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "fdd538082e23fa5ac51ea5c583d0c56ee911f502"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6eHiIC",
+          "commit": {
+            "abbreviatedOid": "26e3244"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-02T17:15:23Z",
+          "updatedAt": "2025-03-02T17:15:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6eJj5t",
+          "commit": {
+            "abbreviatedOid": "26e3244"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-03T07:50:46Z",
+          "updatedAt": "2025-03-03T07:50:46Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 273,
+      "id": "PR_kwDOJZ2aqs6NHTPG",
+      "title": "update acknowledgments",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/273",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "First set of #271 - I'll leave the issue open and update again when more people have answered",
+      "createdAt": "2025-03-03T08:36:46Z",
+      "updatedAt": "2025-03-03T18:42:35Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f80b63b6d943adb409b82afa99b4162ef538a9fb",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "271-update-acks",
+      "headRefOid": "c6f0fa908794d463c2d1879eab8fea2ce268fcde",
+      "closedAt": "2025-03-03T18:42:31Z",
+      "mergedAt": "2025-03-03T18:42:31Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "91656c2d124a2576a898306c2d8b15d8cd929e2c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6ePvRI",
+          "commit": {
+            "abbreviatedOid": "c6f0fa9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-03T18:31:13Z",
+          "updatedAt": "2025-03-03T18:31:13Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
