@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-04T00:17:36.409519+00:00",
+  "timestamp": "2025-03-06T00:17:59.905551+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5479,6 +5479,30 @@
       "updatedAt": "2025-03-03T18:34:16Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 274,
+      "id": "I_kwDOJZ2aqs6sq4pR",
+      "title": "ttl counting from iat rather than fetch time",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/274",
+      "state": "OPEN",
+      "author": "remcoschaar",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 11.4 holds a description on caching status lists and expiry. The section contains a diagram, where the `ttl` is based of the time of fetching.\n\nThe time of fetching can be rather arbitrary, e.g. first time of encountering of a token by an issuer in practice. A Relying Party may initially fetch a status list \"just before `iat`\". The RP will then have an outdated status list for the full `ttl`, before again fetching the status list just before it will be renewed by the issuer.\n\nTypically the issuer of a token will publish a new status list every period (every `ttl`). This would be based off of `iat`, with the period `ttl`. Hereby suggesting to revise the diagram, to base the `ttl` on the `iat` rather than the \"time of fetching\". That way the Relying Party can get the most recent status list as soon as it is available.\n\nA downside may be that the issuer could see a load at or just after `iat`+`ttl`. This however may happen in practice anyways, as it is typically a public endpoint.\n",
+      "createdAt": "2025-03-05T10:31:37Z",
+      "updatedAt": "2025-03-05T12:50:37Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "That was a conscious decision to distribute the load for the hosting of the Status List. It is a SHOULD in the draft, so implementations may choose to not use the time of fetching + `ttl`, but use `iat` + `ttl` to guarantee most up-to-date information. The Status List Token can be considered valid until it hits `exp` time and it should imho be up to the RP policy how to use `ttl`.",
+          "createdAt": "2025-03-05T12:50:36Z",
+          "updatedAt": "2025-03-05T12:50:36Z"
+        }
+      ]
     }
   ],
   "pulls": [
