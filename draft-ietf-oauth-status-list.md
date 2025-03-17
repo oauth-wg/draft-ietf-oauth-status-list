@@ -844,7 +844,7 @@ An Issuer MAY support any of these mechanisms:
 - Issuer metadata: The Issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
 - Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.
 
-~~~ ascii art
+~~~ ascii-art
                                       ┌─────────────────┐
                                       │                 │
                                       │ Issuer Metadata │
@@ -1453,6 +1453,33 @@ Torsten Lodderstedt
 
 for their valuable contributions, discussions and feedback to this specification.
 
+# Size comparison {#size-comparison}
+{:unnumbered}
+
+The following tables show a size comparison for a Status List (compressed byte array) and a compressedd Byte Array of UUIDs.
+
+## Status List size for varying sizes and revocation rates
+{:unnumbered}
+
+| Size | 0.01%   | 0.1%     | 1%       | 2%       | 5%       | 10%      | 25%       | 50%      | 75%       | 100%    |
+| 100k | 81 B    | 252 B    | 1.4 KB   | 2.3 KB   | 4.5 KB   | 6.9 KB   | 10.2 KB   | 12.2 KB  | 10.2 KB   | 35 B    |
+| 1M   | 442 B   | 2.2 KB   | 13.7 KB  | 23.0 KB  | 43.9 KB  | 67.6 KB  | 102.2 KB  | 122.1 KB | 102.4 KB  | 144 B   |
+| 10M  | 3.8 KB  | 21.1 KB  | 135.4 KB | 230.0 KB | 437.0 KB | 672.9 KB | 1023.4 KB | 1.2 MB   | 1023.5 KB | 1.2 KB  |
+| 100M | 38.3 KB | 213.0 KB | 1.3 MB   | 2.2 MB   | 4.3 MB   | 6.6 MB   | 10.0 MB   | 11.9 MB  | 10.0 MB   | 11.9 KB |
+{: title="Status List Size examples for varying sizes and revocation rates"}
+
+## Compressed array of UUIDv4 (128 bit UUIDs) for varying sizes and revocation rates
+{:unnumbered}
+
+This is a simple approximation of the best case size for UUID based variants without any additional metadata (128 bit UUID per revoked entry).
+
+| Size | 0.01%    | 0.1%     | 1%       | 2%       | 5%      | 10%      | 25%      | 50%      | 75%      | 100%     |
+| 100k | 219 B    | 1.6 KB   | 15.4 KB  | 29.7 KB  | 78.1 KB | 154.9 KB | 392.9 KB | 783.1 KB | 1.1 MB   | 1.5 MB   |
+| 1M   | 1.6 KB   | 16.4 KB  | 157.7 KB | 310.4 KB | 781 KB  | 1.5 MB   | 3.8 MB   | 7.6 MB   | 11.4 MB  | 15.3 MB  |
+| 10M  | 15.3 KB  | 155.9 KB | 1.5 MB   | 3.1 MB   | 7.6 MB  | 15.2 MB  | 38.2 MB  | 76.3 MB  | 114.4 MB | 152.6 MB |
+| 100M | 157.6 KB | 1.5 MB   | 15.3 MB  | 30.5 MB  | 76.3 MB | 152.6 MB | 381.4 MB | 762.9 MB | 1.1 GB   | 1.5 GB   |
+{: title="Size examples for 128 bit UUIDs for varying sizes and revocation rates"}
+
 # Test vectors for Status List encoding {#test-vectors}
 {:unnumbered}
 
@@ -1836,6 +1863,10 @@ CBOR encoding:
 
 # Document History
 {:numbered="false"}
+
+-10
+
+* Add size comparison for status list and compressed uuids
 
 -09
 
