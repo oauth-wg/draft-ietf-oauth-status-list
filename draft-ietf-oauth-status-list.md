@@ -1456,7 +1456,7 @@ for their valuable contributions, discussions and feedback to this specification
 # Size comparison {#size-comparison}
 {:unnumbered}
 
-The following tables show a size comparison for a Status List (compressed byte array) and a compressedd Byte Array of UUIDs.
+The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array) and a compressed Byte Array of UUIDs.
 
 ## Status List size for varying sizes and revocation rates
 {:unnumbered}
