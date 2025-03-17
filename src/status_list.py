@@ -1,9 +1,11 @@
+import math
 import zlib
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 from typing import Dict
 
 from cbor2 import dumps, loads
 
+LEVEL=9
 
 class StatusList:
     list: bytearray
@@ -13,7 +15,7 @@ class StatusList:
 
     def __init__(self, size: int, bits: int):
         self.divisor = 8 // bits
-        self.list = bytearray([0] * (size // self.divisor))
+        self.list = bytearray([0] * math.ceil(size / self.divisor))
         self.bits = bits
         self.size = size
 
@@ -24,11 +26,11 @@ class StatusList:
         return new
 
     def encodeAsString(self) -> str:
-        zipped = zlib.compress(self.list, level=9)
+        zipped = zlib.compress(self.list, level=LEVEL)
         return urlsafe_b64encode(zipped).decode().strip("=")
 
     def encodeAsBytes(self) -> bytes:
-        return zlib.compress(self.list, level=9)
+        return zlib.compress(self.list, level=LEVEL)
 
     def encodeAsJSON(self) -> Dict:
         encoded_list = self.encodeAsString()
