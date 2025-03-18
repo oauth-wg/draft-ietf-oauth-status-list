@@ -1456,7 +1456,7 @@ for their valuable contributions, discussions and feedback to this specification
 # Size comparison {#size-comparison}
 {:unnumbered}
 
-The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array) and a compressed Byte Array of UUIDs.
+The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array) and a compressed Byte Array of UUIDs. Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.
 
 ## Status List size for varying sizes and revocation rates
 {:unnumbered}
