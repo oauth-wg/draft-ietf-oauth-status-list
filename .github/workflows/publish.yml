@@ -30,7 +30,7 @@ jobs:
     - name: "Generate examples"
       run: |
         npm install -g cborg
-        python3 -m pip install --upgrade pip wheel setuptools
+        python3 -m pip install --upgrade pip wheel setuptools==76.1.0
         python3 -m pip install -r src/requirements.txt
         python3 src/main.py
 
