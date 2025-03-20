@@ -1456,7 +1456,7 @@ for their valuable contributions, discussions and feedback to this specification
 # Size comparison {#size-comparison}
 {:unnumbered}
 
-The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array) and a compressed Byte Array of UUIDs. Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.
+The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array) and a compressed Byte Array of UUIDs (as an approximation for a Certificate Revocation List). Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.
 
 ## Status List size for varying sizes and revocation rates
 {:unnumbered}
@@ -1471,7 +1471,7 @@ The following tables show a size comparison for a Status List (compressed byte a
 ## Compressed array of UUIDv4 (128 bit UUIDs) for varying sizes and revocation rates
 {:unnumbered}
 
-This is a simple approximation of the best case size for UUID based variants without any additional metadata (128 bit UUID per revoked entry).
+This is a simple approximation of a Certificate Revocation List using an array of UUIDs without any additional metadata (128 bit UUID per revoked entry).
 
 | Size | 0.01%    | 0.1%     | 1%       | 2%       | 5%      | 10%      | 25%      | 50%      | 75%      | 100%     |
 | 100k | 219 B    | 1.6 KB   | 15.4 KB  | 29.7 KB  | 78.1 KB | 154.9 KB | 392.9 KB | 783.1 KB | 1.1 MB   | 1.5 MB   |
