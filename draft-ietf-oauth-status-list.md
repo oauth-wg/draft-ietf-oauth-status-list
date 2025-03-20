@@ -1371,7 +1371,7 @@ This specification requests registration of the following values in the IANA "OA
 
 * Metadata Name: status_list_aggregation_endpoint
 * Metadata Description: URL of the Authorization Server aggregating OAuth Token Status List URLs for token status management.
-* Change Controller: IETF
+* Change Controller: IESG
 * Reference: [](#aggregation) of this specification
 
 ## Media Type Registration
@@ -1867,6 +1867,7 @@ CBOR encoding:
 -10
 
 * Add size comparison for status list and compressed uuids
+* Change Controller IESG for OAuths Parameters Registration
 
 -09
 
