@@ -971,34 +971,6 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
      └─────────────────┘
 ~~~
 
-## Status List Caching
-
-When fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the `iat`, `exp` and `ttl` claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. The following diagram illustrates the relationship between these claims and how they are designed to influence caching.
-
-~~~ ascii-art
-Time of fetching
-
-         │
-         │            Check for        Check for        Check for
-         │             updates          updates          updates
-         │
- iat     │                │                │                │    exp
-         │                │                │                │
-  │      │                │                │                │     │
-  │      │                │                │                │     │
-  │      │                │                │                │     │
-  │      │                │                │                │     │
-  │      │      ttl       │      ttl       │      ttl       │     │
-  │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
-  │      │                │                │                │     │
-  │      │                │                │                │     │
-  │                                                               │
-──┼───────────────────────────────────────────────────────────────┼─►
-  │                                                               │
-~~~
-
-It is essential to understand the distinct purposes of the `ttl` and `exp` claims. The `ttl` claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available. In contrast, the `exp` claim specifies an absolute timestamp, marking the point in time when the Status List expires and MUST NOT be relied upon any longer. Together, these claims provide guidance on when to check for updates (`ttl` claim) and when the Status List must be refreshed or replaced (`exp` claim).
-
 # Privacy Considerations
 
 ## Observability of Issuers {#privacy-issuer}
@@ -1117,6 +1089,45 @@ If the roles of the Issuer of the Referenced Token and the Status Issuer are per
 ## External Status Provider for Scalability
 
 If the roles of the Status Issuer and the Status Provider are performed by different entities, this may allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs. At the same time the authenticity and integrity of Token Status List is still guaranteed, as it is signed by the Status Issuer.
+
+## Status List Update Interval and Caching
+
+Status Issuers have two options to communicate their update interval policy for the status of their Referenced Tokens:
+
+- the `exp` claim specifies an absolute timestamp, marking the point in time when the Status List expires and MUST NOT be relied upon any longer
+- the `ttl` claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available
+
+Both `ttl` and `exp` are RECOMMENDED to be used by the Status Issuer.
+
+When fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the `iat`, `exp` and `ttl` claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. Relying Parties have different options for caching the Status List:
+
+- After time of fetching, the Relying Party caches the Status List for time duration of `ttl` before making checks for updates. This method is RECOMMENDED to distribute the load for the Status Provider.
+- After initial fetching, the Relying Party checks for updates at time of `iat` + `ttl`. This method ensures the most up-to-date information for critical use cases. The Relying Party should account a minimal offset due to the signing and distribution process of the Status Issuer.
+- If no `ttl` is given, then Relying Party SHOULD check for updates latest after time of `exp`.
+
+Ultimately, its the Relying Parties decision how often to check for updates, ecosystems may define there own guidelines and policies for updating the Status List information.
+
+The following diagram illustrates the relationship between these claims and how they are designed to influence caching:
+
+~~~ ascii-art
+
+       Time of        Check for        Check for        Check for
+       Fetching        updates          updates          updates
+         
+ iat     │                │                │                │    exp
+         │                │                │                │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │      │      ttl       │      ttl       │      ttl       │     │
+  │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
+  │      │                │                │                │     │
+  │      │                │                │                │     │
+  │                                                               │
+──┼───────────────────────────────────────────────────────────────┼─►
+  │                                                               │
+~~~
 
 ## Relying Parties avoiding correlatable Information
 
@@ -1866,6 +1877,7 @@ CBOR encoding:
 
 -10
 
+* improve caching guidelines and move them to implementaiton considerations
 * Add size comparison for status list and compressed uuids
 * Change Controller IESG for OAuths Parameters Registration
 
