@@ -1113,7 +1113,7 @@ The following diagram illustrates the relationship between these claims and how 
 
        Time of        Check for        Check for        Check for
        Fetching        updates          updates          updates
-         
+
  iat     │                │                │                │    exp
          │                │                │                │
   │      │                │                │                │     │
