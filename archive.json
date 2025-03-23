@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-20T00:17:43.136015+00:00",
+  "timestamp": "2025-03-23T00:19:52.290152+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5039,10 +5039,12 @@
       "assignees": [
         "tplooker"
       ],
-      "labels": [],
+      "labels": [
+        "pending-close"
+      ],
       "body": "Currently Token Status List  not useable for revocation x509 credentials which is critical in context of eIDAS where \n\na) each QEAA has to be signed with xqualified signature or seal based on x509 certificates\nb) credentials in x509 legally possible and covered in ETSI TS 119 472-1 [Token Status List ]\n(https://docbox.etsi.org/esi/Open/Latest_Drafts/ETSI%20DRAFT%20TS_119_472-1v0.0.6-public.pdf)\n\nto avoid that trust service providers have to provide 2 different approaches for revocation, so 1 for credential 1 for its signature x509 shall be covered by Token Status List Spec. As mentioned by @paulbastian  in brief discussion it could be possible to define an X.509 extension in ASN.1, analogous to the CRL Distribution Endpoint:\n\nTokenStatusListDisitrubionEndpoint ::= SEQUENCE {\n        uri                    [0]     RelativeDistinguishedName,\n        index                   [1]     INTEGER }\n\nFurthermore, minimal adjustments to the Validation Logic section would be necessary.",
       "createdAt": "2025-01-24T13:30:59Z",
-      "updatedAt": "2025-02-23T12:19:54Z",
+      "updatedAt": "2025-03-21T16:10:30Z",
       "closedAt": null,
       "comments": [
         {
@@ -5142,6 +5144,13 @@
           "body": "@paulbastian @tplooker @c2bo the avoidance to put profile for using TokenStatusList for the QES/QSeal of certain QEAA in the IETF Specification seems: As you define in 12.1 of the spec the idea is to avoid that \" Issuer creates a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.\". In case for the QEA/QSeal of QEAA no TokenStatusList used we have following issue:\n\n- Attestation = TokenStatus List --> privacy solved\n- QES/Seal of attestation = OCSP because x509 --> as QES/QSeal is referenced and linked to belonging attestation the tracking of Holder of given QEAA is possible\n\nMeans: if not in both cases attestation and its signature TokenStatusList used, the requirement of 12.1 of the TokenStatusList specification seems compromiseable I guess.\n\nTogether with @cre8 I would like to contribute a concrete Solution for the proposed Extenstion of Token Status List (TSL) draft to support X.509 certificates. you`ll find the proposal below:\n\nTo extend the Token Status List (TSL) draft to support X.509 certificates, we need to introduce:\n\n1. A new section in the draft detailing how to encode and interpret the status of X.509 certificates.\n\n\n2. An ASN.1 extension that allows an X.509 certificate to reference a Token Status List.\n\n---\n\nProposed Additional Section for the Token Status List Draft\n\nX.509 Certificate Status Management using Token Status Lists\n\n1. Introduction\n\nX.509 certificates require a scalable, efficient mechanism to check their revocation status. Traditional methods such as Certificate Revocation Lists (CRLs) and Online Certificate Status Protocol (OCSP) have limitations in terms of scalability and privacy. Token Status Lists (TSL) provide an alternative by allowing X.509 certificates to reference a compact, Merkle-tree-based status list.\n\nThis section defines how X.509 certificates can integrate with TSL by embedding a reference to the list, enabling verifiers to efficiently check revocation status.\n\n2. X.509 Token Status List Reference\n\nEach X.509 certificate can include a TSL reference via an X.509 certificate extension. This extension provides:\n\nA URI pointing to the published Token Status List.\n\nAn index or hash within the list that corresponds to the certificate.\n\nOptional cryptographic proofs to ensure integrity.\n\n\n3. X.509 Extension Definition\n\nTo integrate with X.509, we define a new certificate extension named id-pe-tokenStatusList. This extension is non-critical and allows verifiers to check the status of a certificate using TSL.\n\nThe extension contains:\n\nThe URI where the status list is published.\n\nThe index position or hash of the certificate within the list.\n\nAn optional timestamp for the last status update.\n\n\n\n---\n\nASN.1 Definition for the X.509 Token Status List Extension\n\nHere is the ASN.1 definition for embedding the Token Status List reference into an X.509 certificate:\n\nid-pe-tokenStatusList OBJECT IDENTIFIER ::= { id-pe 45 }\n\nTokenStatusListSyntax ::= SEQUENCE {\n statusListURI IA5String, -- URI of the Token Status List\n statusIndex INTEGER OPTIONAL, -- Index of the certificate in the list (if applicable)\n statusHash OCTET STRING OPTIONAL, -- Hash of certificate entry in the list (if used)\n lastUpdated GeneralizedTime OPTIONAL -- Timestamp of last update\n}\n\nTokenStatusListExtension ::= SEQUENCE {\n statusList TokenStatusListSyntax\n}\n\n-- X.509 extension definition\nEXTENSION ::= {\n SYNTAX TokenStatusListSyntax\n IDENTIFIED BY id-pe-tokenStatusList\n}\n\n---\n\nHow Verifiers Use This Extension\n\n1. Extract the statusListURI from the X.509 certificate extension.\n\n\n2. Fetch the Token Status List from the given URI.\n\n\n3. Determine certificate status by:\n\nUsing statusIndex to look up the certificate's entry in the list.\n\nIf statusHash is provided, verifying the hash matches the stored entry.\n\nEnsuring that the lastUpdated field is recent enough for validity.\n\n4. Verify the cryptographic proof (if applicable) to confirm the integrity of the status list.\n\n---\n\nIntegration with the X.509 Certificate Signing Process\n\n1. Certificate Issuance:\n\nThe CA generates a Token Status List and assigns an entry to the new certificate.\n\nThe CA includes the corresponding id-pe-tokenStatusList extension in the certificate before signing.\n\n2. Certificate Verification:\n\nRelying parties extract the extension and validate the status by fetching the list.\n\nThey confirm whether the certificate is revoked, suspended, or still valid.\n\n---\n\nConclusion\n\nBy adding this X.509 extension, certificates can efficiently use Token Status Lists for status verification. This method enhances scalability, reduces reliance on OCSP servers, and improves privacy by minimizing direct queries to certificate authorities.\n",
           "createdAt": "2025-02-17T17:37:32Z",
           "updatedAt": "2025-02-23T12:19:54Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The topic was presented at [IETF 122](https://www.youtube.com/watch?v=0mfln_LvCJU), the working group direction seems to confirm the direction, that this work is out of scope for the OAuth wg. However, this means that X.509 with Status List is still possible, but it needs to be determined where to pursue this work.",
+          "createdAt": "2025-03-21T16:10:08Z",
+          "updatedAt": "2025-03-21T16:10:08Z"
         }
       ]
     },
@@ -5469,7 +5478,7 @@
       "id": "I_kwDOJZ2aqs6sHgvm",
       "title": "Update Acknowledgments",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/271",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
@@ -5478,8 +5487,8 @@
       ],
       "body": "I'd like to add the people that have contributed/provided feedback in the past few weeks/months. Please give a thumbs up / comment here if you are ok with being mentioned in the Acknowledgments section.\n\nI might have forgotten people - please comment if you think someone else should be added.\n\n@rohanmahy - done\n@steffenschwalm\n@Denisthemalice\n@sschulz-t\n@cre8 - done\n@mickrau - done\n@hannestschofenig - done\n@wbl\n@rifaat-shekh-yusef - done\n\n(also fix Giuseppe's spelling)",
       "createdAt": "2025-02-28T16:57:41Z",
-      "updatedAt": "2025-03-17T09:59:29Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-20T07:48:46Z",
+      "closedAt": "2025-03-20T07:48:46Z",
       "comments": []
     },
     {
@@ -5490,11 +5499,13 @@
       "state": "OPEN",
       "author": "remcoschaar",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "paulbastian"
+      ],
       "labels": [],
       "body": "Section 11.4 holds a description on caching status lists and expiry. The section contains a diagram, where the `ttl` is based of the time of fetching.\n\nThe time of fetching can be rather arbitrary, e.g. first time of encountering of a token by an issuer in practice. A Relying Party may initially fetch a status list \"just before `iat`\". The RP will then have an outdated status list for the full `ttl`, before again fetching the status list just before it will be renewed by the issuer.\n\nTypically the issuer of a token will publish a new status list every period (every `ttl`). This would be based off of `iat`, with the period `ttl`. Hereby suggesting to revise the diagram, to base the `ttl` on the `iat` rather than the \"time of fetching\". That way the Relying Party can get the most recent status list as soon as it is available.\n\nA downside may be that the issuer could see a load at or just after `iat`+`ttl`. This however may happen in practice anyways, as it is typically a public endpoint.\n",
       "createdAt": "2025-03-05T10:31:37Z",
-      "updatedAt": "2025-03-06T15:04:58Z",
+      "updatedAt": "2025-03-21T15:36:02Z",
       "closedAt": null,
       "comments": [
         {
@@ -5518,15 +5529,15 @@
       "id": "I_kwDOJZ2aqs6uS-rj",
       "title": "Size comparison",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/276",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Feedback from mailing list:\nWould be useful to include example sizes for different revocation numbers and overall sizes and perhaps compare to alternatives (like uuid based variants)",
       "createdAt": "2025-03-17T08:47:25Z",
-      "updatedAt": "2025-03-17T08:47:25Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-20T07:41:11Z",
+      "closedAt": "2025-03-20T07:41:11Z",
       "comments": []
     },
     {
@@ -5537,11 +5548,13 @@
       "state": "OPEN",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
-      "assignees": [],
+      "assignees": [
+        "c2bo"
+      ],
       "labels": [],
       "body": "Feedback from IETF 122: Consider registering the Status List CWT typ in https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#content-formats  ",
       "createdAt": "2025-03-18T08:25:51Z",
-      "updatedAt": "2025-03-18T08:25:51Z",
+      "updatedAt": "2025-03-20T07:48:27Z",
       "closedAt": null,
       "comments": []
     }
@@ -18145,24 +18158,26 @@
       "id": "PR_kwDOJZ2aqs6Og9Jx",
       "title": "Change Controller IESG for OAuths Parameters Registration",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/275",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "feedback from IANA review",
       "createdAt": "2025-03-13T13:39:02Z",
-      "updatedAt": "2025-03-13T14:28:07Z",
+      "updatedAt": "2025-03-20T07:09:39Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "91656c2d124a2576a898306c2d8b15d8cd929e2c",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/iana_review",
       "headRefOid": "3f81306b96f8640acd5f3f5832bfc995cdbdb782",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-20T07:09:39Z",
+      "mergedAt": "2025-03-20T07:09:39Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "026614e4602fde1b4e8d0f10d8e3a9812aceef66"
+      },
       "comments": [],
       "reviews": [
         {
@@ -18185,24 +18200,26 @@
       "id": "PR_kwDOJZ2aqs6O6Ivt",
       "title": "size comparison",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/277",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #276 \r\n\r\nRendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/276-size-comparison/draft-ietf-oauth-status-list.html#name-size-comparison\r\n\r\nNot really happy with  how the table renders, but there seem to be some limit to what is possible with kramdown table parsing?",
       "createdAt": "2025-03-17T11:41:05Z",
-      "updatedAt": "2025-03-18T09:20:53Z",
+      "updatedAt": "2025-03-20T07:41:10Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "91656c2d124a2576a898306c2d8b15d8cd929e2c",
+      "baseRefOid": "026614e4602fde1b4e8d0f10d8e3a9812aceef66",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "276-size-comparison",
-      "headRefOid": "31d87a78c8a8293139af23bd2cbdad4c1f29b9c3",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "299d671d4b4f50ef747f2bb4d88a033f25f818aa",
+      "closedAt": "2025-03-20T07:41:10Z",
+      "mergedAt": "2025-03-20T07:41:10Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "0d7d83a74fe0a972ee23b8bfd98f5f78d0496827"
+      },
       "comments": [],
       "reviews": [
         {
@@ -18244,6 +18261,152 @@
               "updatedAt": "2025-03-18T08:58:20Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6hBhH5",
+          "commit": {
+            "abbreviatedOid": "3d141db"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-20T07:16:27Z",
+          "updatedAt": "2025-03-20T07:16:28Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\nThe following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array) and a compressed Byte Array of UUIDs (as an approximation for a Certificate Revocation List). Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.\r\n```",
+              "createdAt": "2025-03-20T07:16:27Z",
+              "updatedAt": "2025-03-20T07:16:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6hBi5q",
+          "commit": {
+            "abbreviatedOid": "3d141db"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-03-20T07:20:19Z",
+          "updatedAt": "2025-03-20T07:20:20Z",
+          "comments": [
+            {
+              "originalPosition": 31,
+              "body": "```suggestion\r\nThis is a simple approximation of a Certificate Revocation List using an array of UUIDs without any additional metadata (128 bit UUID per revoked entry).\r\n```",
+              "createdAt": "2025-03-20T07:20:20Z",
+              "updatedAt": "2025-03-20T07:20:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6hBrzj",
+          "commit": {
+            "abbreviatedOid": "299d671"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-20T07:40:59Z",
+          "updatedAt": "2025-03-20T07:40:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 279,
+      "id": "PR_kwDOJZ2aqs6PoBPi",
+      "title": "add coap content format registration",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/279",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #278 ",
+      "createdAt": "2025-03-21T14:09:06Z",
+      "updatedAt": "2025-03-21T21:19:32Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "0d7d83a74fe0a972ee23b8bfd98f5f78d0496827",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "278-coap-content-format",
+      "headRefOid": "73adcaaa6b6d253f47df39bb607ece8ddb0befca",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6hTiBU",
+          "commit": {
+            "abbreviatedOid": "73adcaa"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-21T14:55:14Z",
+          "updatedAt": "2025-03-21T14:55:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6hXd_8",
+          "commit": {
+            "abbreviatedOid": "73adcaa"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-21T21:19:32Z",
+          "updatedAt": "2025-03-21T21:19:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 280,
+      "id": "PR_kwDOJZ2aqs6PpbSg",
+      "title": "improve caching guidelines and move them to implementaiton considerat\u2026",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/280",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026ions\r\n\r\nCloses #274 ",
+      "createdAt": "2025-03-21T16:40:35Z",
+      "updatedAt": "2025-03-22T07:16:22Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "0d7d83a74fe0a972ee23b8bfd98f5f78d0496827",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "ttl_consideration",
+      "headRefOid": "d4b2746c69b13f9896700aa4b15a1d1d38364fc2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6hZ7ib",
+          "commit": {
+            "abbreviatedOid": "d4b2746"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-22T07:16:22Z",
+          "updatedAt": "2025-03-22T07:16:22Z",
+          "comments": []
         }
       ]
     }
