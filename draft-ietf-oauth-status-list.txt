@@ -109,7 +109,6 @@ Table of Contents
      11.1.  Correct decoding and parsing of the encoded Status List
      11.2.  Security Guidance for JWT and CWT
      11.3.  Key Resolution and Trust Management
-     11.4.  Status List Caching
    12. Privacy Considerations
      12.1.  Observability of Issuers
      12.2.  Malicious Issuers
@@ -127,8 +126,9 @@ Table of Contents
      13.3.  Status List Size
      13.4.  External Status Issuer
      13.5.  External Status Provider for Scalability
-     13.6.  Relying Parties avoiding correlatable Information
-     13.7.  Status List Formats
+     13.6.  Status List Update Interval and Caching
+     13.7.  Relying Parties avoiding correlatable Information
+     13.8.  Status List Formats
    14. IANA Considerations
      14.1.  JSON Web Token Claims Registration
        14.1.1.  Registry Contents
@@ -714,9 +714,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840b66a30fb03748be5ee4f3c
-   ec8134fe3c3d1798a93da6b383370a3b3117a659e749f52bb2a57869c4363b41d5b5
-   bdbd5410721c0c6babbb2fde9c9df2e80687ab
+   646269747301636c73744a78dadbb918000217015d58403e34e122c38ecc89eca01a
+   90f64f12a4afbf37a6682b42476bd729e3785cc9b24e7ca3a9c0191b3b0042042a3e
+   9ef64781895284600b0ba65598434d9f118364
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -739,12 +739,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      b66a30fb03748be5ee4f3cec  #       "¶j0û\x03t\x8båîO<ì"
-      8134fe3c3d1798a93da6b383  #       "\x814þ<=\x17\x98©=¦³\x83"
-      370a3b3117a659e749f52bb2  #       "7\x0a;1\x17¦YçIõ+²"
-      a57869c4363b41d5b5bdbd54  #       "¥xiÄ6;AÕµ½½T"
-      10721c0c6babbb2fde9c9df2  #       "\x10r\x1c\x0ck«»/Þ\x9c\x9dò"
-      e80687ab                  #       "è\x06\x87«"
+      3e34e122c38ecc89eca01a90  #       ">4á"Ã\x8eÌ\x89ì\xa0\x1a\x90"
+      f64f12a4afbf37a6682b4247  #       "öO\x12¤¯¿7¦h+BG"
+      6bd729e3785cc9b24e7ca3a9  #       "k×)ãx\É²N|£©"
+      c0191b3b0042042a3e9ef647  #       "À\x19\x1b;\x00B\x04*>\x9eöG"
+      81895284600b0ba65598434d  #       "\x81\x89R\x84`\x0b\x0b¦U\x98CM"
+      9f118364                  #       "\x9f\x11\x83d"
 
 6.  Referenced Token
 
@@ -889,37 +889,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158409084303c2fd2afdc757d82869c34f7c3d06998
-   c9d504016834fe090c1a915e6911db4a4bca9a1a94202bf7b56a24d031fa3a89457b
-   efd4dcf38a62b1473424e7
+   7374617475736c697374732f315840c1c15ea42ae168ad9174fd1bc2d2d53052637f
+   65541aabdf89742eeac32431d88a1385c576de9a1f8e0269b17d32ad91e88b49b0ba
+   c6c3676557b063adf94256
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         9084303c2fd2afdc757d8286  #       "\x90\x840</Ò¯Üu}\x82\x86"
-         9c34f7c3d06998c9d5040168  #       "\x9c4÷ÃÐi\x98ÉÕ\x04\x01h"
-         34fe090c1a915e6911db4a4b  #       "4þ\x09\x0c\x1a\x91^i\x11ÛJK"
-         ca9a1a94202bf7b56a24d031  #       "Ê\x9a\x1a\x94 +÷µj$Ð1"
-         fa3a89457befd4dcf38a62b1  #       "ú:\x89E{ïÔÜó\x8ab±"
-         473424e7                  #       "G4$ç"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      c1c15ea42ae168ad9174fd1b  #       "ÁÁ^¤*áh\xad\x91tý\x1b"
+      c2d2d53052637f65541aabdf  #       "ÂÒÕ0Rc\x7feT\x1a«ß"
+      89742eeac32431d88a1385c5  #       "\x89t.êÃ$1Ø\x8a\x13\x85Å"
+      76de9a1f8e0269b17d32ad91  #       "vÞ\x9a\x1f\x8e\x02i±}2\xad\x91"
+      e88b49b0bac6c3676557b063  #       "è\x8bI°ºÆÃgeW°c"
+      adf94256                  #       "\xadùBV"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1154,8 +1154,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.CeAh8uIOoksbwxstqwkhuLYP6KUqxqX69HhR5U1MM9sxBZTBPzJF
-   NsJzWNmqCBWXZYdNJWtkhRdoEiuLLRRdHg
+   nR0bCI6NDMyMDB9.rrqCQz6qQELlUbMBj0OlpEGI8YMfI-EdLA-aXNbdLg40gLXkXmQe
+   5C7fR69fM4S8yLBgTJkt7F0EJumL7RJ4MA
 
 8.2.  Status List Response
 
@@ -1294,8 +1294,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.CeAh8uIOoksbwxstqwkhuLYP6KUqxqX69HhR5U1MM9sxBZTBPzJF
-   NsJzWNmqCBWXZYdNJWtkhRdoEiuLLRRdHg
+   nR0bCI6NDMyMDB9.rrqCQz6qQELlUbMBj0OlpEGI8YMfI-EdLA-aXNbdLg40gLXkXmQe
+   5C7fR69fM4S8yLBgTJkt7F0EJumL7RJ4MA
 
 9.  Status List Aggregation
 
@@ -1496,45 +1496,6 @@ d2                              # tag(18)
         ┌─────────────────┐
         │ Status Provider │
         └─────────────────┘
-
-11.4.  Status List Caching
-
-   When fetching a Status List Token, Relying Parties must carefully
-   evaluate how long a Status List is cached for.  Collectively the iat,
-   exp and ttl claims when present in a Status List Token communicate
-   how long a Status List should be cached and should be considered
-   valid for.  The following diagram illustrates the relationship
-   between these claims and how they are designed to influence caching.
-
-   Time of fetching
-
-            │
-            │            Check for        Check for        Check for
-            │             updates          updates          updates
-            │
-    iat     │                │                │                │    exp
-            │                │                │                │
-     │      │                │                │                │     │
-     │      │                │                │                │     │
-     │      │                │                │                │     │
-     │      │                │                │                │     │
-     │      │      ttl       │      ttl       │      ttl       │     │
-     │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
-     │      │                │                │                │     │
-     │      │                │                │                │     │
-     │                                                               │
-   ──┼───────────────────────────────────────────────────────────────┼─►
-     │                                                               │
-
-   It is essential to understand the distinct purposes of the ttl and
-   exp claims.  The ttl claim represents a duration to be interpreted
-   relative to the time the Status List is fetched, indicating when a
-   new version of the Status List may be available.  In contrast, the
-   exp claim specifies an absolute timestamp, marking the point in time
-   when the Status List expires and MUST NOT be relied upon any longer.
-   Together, these claims provide guidance on when to check for updates
-   (ttl claim) and when the Status List must be refreshed or replaced
-   (exp claim).
 
 12.  Privacy Considerations
 
@@ -1802,7 +1763,67 @@ d2                              # tag(18)
    and integrity of Token Status List is still guaranteed, as it is
    signed by the Status Issuer.
 
-13.6.  Relying Parties avoiding correlatable Information
+13.6.  Status List Update Interval and Caching
+
+   Status Issuers have two options to communicate their update interval
+   policy for the status of their Referenced Tokens:
+
+   *  the exp claim specifies an absolute timestamp, marking the point
+      in time when the Status List expires and MUST NOT be relied upon
+      any longer
+
+   *  the ttl claim represents a duration to be interpreted relative to
+      the time the Status List is fetched, indicating when a new version
+      of the Status List may be available
+
+   Both ttl and exp are RECOMMENDED to be used by the Status Issuer.
+
+   When fetching a Status List Token, Relying Parties must carefully
+   evaluate how long a Status List is cached for.  Collectively the iat,
+   exp and ttl claims when present in a Status List Token communicate
+   how long a Status List should be cached and should be considered
+   valid for.  Relying Parties have different options for caching the
+   Status List:
+
+   *  After time of fetching, the Relying Party caches the Status List
+      for time duration of ttl before making checks for updates.  This
+      method is RECOMMENDED to distribute the load for the Status
+      Provider.
+
+   *  After initial fetching, the Relying Party checks for updates at
+      time of iat + ttl.  This method ensures the most up-to-date
+      information for critical use cases.  The Relying Party should
+      account a minimal offset due to the signing and distribution
+      process of the Status Issuer.
+
+   *  If no ttl is given, then Relying Party SHOULD check for updates
+      latest after time of exp.
+
+   Ultimately, its the Relying Parties decision how often to check for
+   updates, ecosystems may define there own guidelines and policies for
+   updating the Status List information.
+
+   The following diagram illustrates the relationship between these
+   claims and how they are designed to influence caching:
+
+          Time of        Check for        Check for        Check for
+          Fetching        updates          updates          updates
+
+    iat     │                │                │                │    exp
+            │                │                │                │
+     │      │                │                │                │     │
+     │      │                │                │                │     │
+     │      │                │                │                │     │
+     │      │                │                │                │     │
+     │      │      ttl       │      ttl       │      ttl       │     │
+     │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
+     │      │                │                │                │     │
+     │      │                │                │                │     │
+     │                                                               │
+   ──┼───────────────────────────────────────────────────────────────┼─►
+     │                                                               │
+
+13.7.  Relying Parties avoiding correlatable Information
 
    If the Relying Party does not require the Referenced Token and the
    Status List Token after the presentation, e.g. for subsequent status
@@ -1816,7 +1837,7 @@ d2                              # tag(18)
    The Relying Party should instead only keep the relevant payload from
    the Referenced Token.
 
-13.7.  Status List Formats
+13.8.  Status List Formats
 
    This specification defines 2 different token formats of the Status
    List:
@@ -3060,6 +3081,9 @@ Test vectors for Status List encoding
 Document History
 
    -10
+
+   *  improve caching guidelines and move them to implementaiton
+      considerations
 
    *  Add CoAP Content-Format ID and IANA registration
 
