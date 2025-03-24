@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 22 September 2025                                              
+Expires: 25 September 2025                                              
                                                               C. Bormann
                                                                   SPRIND
-                                                           21 March 2025
+                                                           24 March 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 September 2025.
+   This Internet-Draft will expire on 25 September 2025.
 
 Copyright Notice
 
@@ -145,7 +145,8 @@ Table of Contents
        14.5.2.  Initial Registry Contents
      14.6.  OAuth Parameters Registration
      14.7.  Media Type Registration
-     14.8.  X.509 Certificate Extended Key Purpose OID Registration
+     14.8.  CoAP Content-Format Registrations
+     14.9.  X.509 Certificate Extended Key Purpose OID Registration
    15. References
      15.1.  Normative References
      15.2.  Informative References
@@ -666,7 +667,8 @@ Table of Contents
    The following content applies to the protected header of the CWT:
 
    *  16 (type): REQUIRED.  The type of the CWT MUST be application/
-      statuslist+cwt as defined in [RFC9596].
+      statuslist+cwt or the registered CoAP Content-Format ID (see
+      Section 14.8) as defined in [RFC9596].
 
    The following content applies to the CWT Claims Set:
 
@@ -712,9 +714,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840fd8da6f18f8b85b6d2dfe7
-   9f9114f860f6b1330daf443f89a2d7ee420c9b9d9d2b163e5cc1af458ef86d6a5984
-   c8312b870067baea6870b2c56a2961dfbd60a5
+   646269747301636c73744a78dadbb918000217015d5840a7e7c3da99376ddeeeaf42
+   330e641c23b7f961366a34977005ccdbdd96ebb9611e9bd4d5a48235b7304948b54c
+   6e3736726e99f189c9880dbc4cf71f6ae1c793
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -737,12 +739,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      fd8da6f18f8b85b6d2dfe79f  #       "ý\x8d¦ñ\x8f\x8b\x85¶Òßç\x9f"
-      9114f860f6b1330daf443f89  #       "\x91\x14ø`ö±3\x0d¯D?\x89"
-      a2d7ee420c9b9d9d2b163e5c  #       "¢×îB\x0c\x9b\x9d\x9d+\x16>\"
-      c1af458ef86d6a5984c8312b  #       "Á¯E\x8eømjY\x84È1+"
-      870067baea6870b2c56a2961  #       "\x87\x00gºêhp²Åj)a"
-      dfbd60a5                  #       "ß½`¥"
+      a7e7c3da99376ddeeeaf4233  #       "§çÃÚ\x997mÞî¯B3"
+      0e641c23b7f961366a349770  #       "\x0ed\x1c#·ùa6j4\x97p"
+      05ccdbdd96ebb9611e9bd4d5  #       "\x05ÌÛÝ\x96ë¹a\x1e\x9bÔÕ"
+      a48235b7304948b54c6e3736  #       "¤\x825·0IHµLn76"
+      726e99f189c9880dbc4cf71f  #       "rn\x99ñ\x89É\x88\x0d¼L÷\x1f"
+      6ae1c793                  #       "jáÇ\x93"
 
 6.  Referenced Token
 
@@ -887,9 +889,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840e74f24c054e171afa264edaf98dc2fc903b6c1
-   0743d432e81773cd6905a4edb817e96d68cb54a1ebd20e5456ce52c615e5f28fb2ba
-   59757afa92c39267f49658
+   7374617475736c697374732f3158406043eeb0137d4d58c43e83f59e5c0e29d28887
+   c471620c20cdb6c687a038097a3e71321297eb501cd542bdff075509cb42564955e0
+   34c6993eb4ab974f65d001
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -912,12 +914,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         e74f24c054e171afa264edaf  #       "çO$ÀTáq¯¢dí¯"
-         98dc2fc903b6c10743d432e8  #       "\x98Ü/É\x03¶Á\x07CÔ2è"
-         1773cd6905a4edb817e96d68  #       "\x17sÍi\x05¤í¸\x17émh"
-         cb54a1ebd20e5456ce52c615  #       "ËT¡ëÒ\x0eTVÎRÆ\x15"
-         e5f28fb2ba59757afa92c392  #       "åò\x8f²ºYuzú\x92Ã\x92"
-         67f49658                  #       "gô\x96X"
+         6043eeb0137d4d58c43e83f5  #       "`Cî°\x13}MXÄ>\x83õ"
+         9e5c0e29d28887c471620c20  #       "\x9e\\x0e)Ò\x88\x87Äqb\x0c "
+         cdb6c687a038097a3e713212  #       "Í¶Æ\x87\xa08\x09z>q2\x12"
+         97eb501cd542bdff075509cb  #       "\x97ëP\x1cÕB½ÿ\x07U\x09Ë"
+         42564955e034c6993eb4ab97  #       "BVIUà4Æ\x99>´«\x97"
+         4f65d001                  #       "OeÐ\x01"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1152,8 +1154,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.9YF6dGKYmSfwgoOmxM82kMdYxqtyg-Y7sFPas2gm8q6GHdKEEWzT
-   EUtV3ldNIJBJLQ685FClI8QmHBkbqzKhiw
+   nR0bCI6NDMyMDB9.SKsbQnaw7vkEkl3NlTrFDFwlpgI1PHdvb4YgwTexiHtpUY0lUsXM
+   gQzVCEQO6MJPSWO1fUo8yan_a9xH3URccg
 
 8.2.  Status List Response
 
@@ -1292,8 +1294,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.9YF6dGKYmSfwgoOmxM82kMdYxqtyg-Y7sFPas2gm8q6GHdKEEWzT
-   EUtV3ldNIJBJLQ685FClI8QmHBkbqzKhiw
+   nR0bCI6NDMyMDB9.SKsbQnaw7vkEkl3NlTrFDFwlpgI1PHdvb4YgwTexiHtpUY0lUsXM
+   gQzVCEQO6MJPSWO1fUo8yan_a9xH3URccg
 
 9.  Status List Aggregation
 
@@ -2307,7 +2309,21 @@ d2                              # tag(18)
 
    *  Provisional registration?  No
 
-14.8.  X.509 Certificate Extended Key Purpose OID Registration
+14.8.  CoAP Content-Format Registrations
+
+   IANA is requested to register the following Content-Format numbers in
+   the "CoAP Content-Formats" sub-registry, within the "Constrained
+   RESTful Environments (CoRE) Parameters" Registry [IANA.Core.Params]:
+
+   *  Content Type: application/statuslist+cwt
+
+   *  Content Coding: -
+
+   *  ID: TBD
+
+   *  Reference: this specification
+
+14.9.  X.509 Certificate Extended Key Purpose OID Registration
 
    IANA is also requested to register the following OID
    "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key
@@ -2320,6 +2336,11 @@ d2                              # tag(18)
 
    [CORS]     WHATWG, "Fetch Living Standard", n.d.,
               <https://fetch.spec.whatwg.org/#http-cors-protocol>.
+
+   [IANA.Core.Params]
+              IANA, "Constrained RESTful Environments (CoRE)
+              Parameters", n.d., <https://www.iana.org/assignments/core-
+              parameters/core-parameters.xhtml>.
 
    [IANA.CWT] IANA, "CBOR Web Token (CWT) Claims", n.d.,
               <https://www.iana.org/assignments/cwt/cwt.xhtml>.
@@ -3063,6 +3084,8 @@ Document History
 
    *  improve caching guidelines and move them to implementaiton
       considerations
+
+   *  Add CoAP Content-Format ID and IANA registration
 
    *  Add size comparison for status list and compressed uuids
 
