@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 21 September 2025</td>
+<td class="center">Expires 25 September 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-20" class="published">20 March 2025</time>
+<time datetime="2025-03-24" class="published">24 March 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-21">21 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-09-25">25 September 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1124,7 +1124,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1404,7 +1404,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.14.2.7.1"><a href="#section-14.7" class="auto internal xref">14.7</a>.  <a href="#name-media-type-registration" class="internal xref">Media Type Registration</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.8">
-                <p id="section-toc.1-1.14.2.8.1"><a href="#section-14.8" class="auto internal xref">14.8</a>.  <a href="#name-x509-certificate-extended-k" class="internal xref">X.509 Certificate Extended Key Purpose OID Registration</a></p>
+                <p id="section-toc.1-1.14.2.8.1"><a href="#section-14.8" class="auto internal xref">14.8</a>.  <a href="#name-coap-content-format-registr" class="internal xref">CoAP Content-Format Registrations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14.2.9">
+                <p id="section-toc.1-1.14.2.9.1"><a href="#section-14.9" class="auto internal xref">14.9</a>.  <a href="#name-x509-certificate-extended-k" class="internal xref">X.509 Certificate Extended Key Purpose OID Registration</a></p>
 </li>
             </ul>
 </li>
@@ -1928,7 +1931,7 @@ a2                              # map(2)
 <p id="section-5.2-2">The following content applies to the protected header of the CWT:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.1">
-            <p id="section-5.2-3.1.1"><code>16</code> (type): <span class="bcp14">REQUIRED</span>. The type of the CWT <span class="bcp14">MUST</span> be <code>application/statuslist+cwt</code> as defined in <span>[<a href="#RFC9596" class="cite xref">RFC9596</a>]</span>.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-3.1.1"><code>16</code> (type): <span class="bcp14">REQUIRED</span>. The type of the CWT <span class="bcp14">MUST</span> be <code>application/statuslist+cwt</code> or the registered CoAP Content-Format ID (see <a href="#coap-content-type" class="auto internal xref">Section 14.8</a>) as defined in <span>[<a href="#RFC9596" class="cite xref">RFC9596</a>]</span>.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-4">The following content applies to the CWT Claims Set:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
@@ -1970,9 +1973,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d58406fe10e6d8089bd500fc084
-9fb189c58792ca515cc7df122f9bde244afbc5f79e1eaa3f93a94ce2536f215845a7
-946547be0b6d2131e8598b00faded8331a8de9
+646269747301636c73744a78dadbb918000217015d5840b66a30fb03748be5ee4f3c
+ec8134fe3c3d1798a93da6b383370a3b3117a659e749f52bb2a57869c4363b41d5b5
+bdbd5410721c0c6babbb2fde9c9df2e80687ab
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1997,12 +2000,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      6fe10e6d8089bd500fc0849f  #       "oá\x0em\x80\x89½P\x0fÀ\x84\x9f"
-      b189c58792ca515cc7df122f  #       "±\x89Å\x87\x92ÊQ\Çß\x12/"
-      9bde244afbc5f79e1eaa3f93  #       "\x9bÞ$JûÅ÷\x9e\x1eª?\x93"
-      a94ce2536f215845a7946547  #       "©LâSo!XE§\x94eG"
-      be0b6d2131e8598b00faded8  #       "¾\x0bm!1èY\x8b\x00úÞØ"
-      331a8de9                  #       "3\x1a\x8dé"
+      b66a30fb03748be5ee4f3cec  #       "¶j0û\x03t\x8båîO&lt;ì"
+      8134fe3c3d1798a93da6b383  #       "\x814þ&lt;=\x17\x98©=¦³\x83"
+      370a3b3117a659e749f52bb2  #       "7\x0a;1\x17¦YçIõ+²"
+      a57869c4363b41d5b5bdbd54  #       "¥xiÄ6;AÕµ½½T"
+      10721c0c6babbb2fde9c9df2  #       "\x10r\x1c\x0ck«»/Þ\x9c\x9dò"
+      e80687ab                  #       "è\x06\x87«"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2144,9 +2147,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840dcefe29441ef626ef4ca3479507d660b6cd829
-fe087e8b58c8eb0e50fcf83c2c875bec10774f8bfd5cd8e7fe38225e779975e2830b
-593c77b140e490b0966586
+7374617475736c697374732f3158409084303c2fd2afdc757d82869c34f7c3d06998
+c9d504016834fe090c1a915e6911db4a4bca9a1a94202bf7b56a24d031fa3a89457b
+efd4dcf38a62b1473424e7
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2171,12 +2174,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      dcefe29441ef626ef4ca3479  #       "Üïâ\x94AïbnôÊ4y"
-      507d660b6cd829fe087e8b58  #       "P}f\x0blØ)þ\x08~\x8bX"
-      c8eb0e50fcf83c2c875bec10  #       "Èë\x0ePüø&lt;,\x87[ì\x10"
-      774f8bfd5cd8e7fe38225e77  #       "wO\x8bý\Øçþ8"^w"
-      9975e2830b593c77b140e490  #       "\x99uâ\x83\x0bY&lt;w±@ä\x90"
-      b0966586                  #       "°\x96e\x86"
+      9084303c2fd2afdc757d8286  #       "\x90\x840&lt;/Ò¯Üu}\x82\x86"
+      9c34f7c3d06998c9d5040168  #       "\x9c4÷ÃÐi\x98ÉÕ\x04\x01h"
+      34fe090c1a915e6911db4a4b  #       "4þ\x09\x0c\x1a\x91^i\x11ÛJK"
+      ca9a1a94202bf7b56a24d031  #       "Ê\x9a\x1a\x94 +÷µj$Ð1"
+      fa3a89457befd4dcf38a62b1  #       "ú:\x89E{ïÔÜó\x8ab±"
+      473424e7                  #       "G4$ç"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2390,8 +2393,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.seGHFke1DdHWn0gZutZ44mDn0rOebDhRXJ7evq6bzUHJYiEYLWTK
-Y8QmM73SIYqTdvVVjzhBL81faz903fd2Jg
+nR0bCI6NDMyMDB9.CeAh8uIOoksbwxstqwkhuLYP6KUqxqX69HhR5U1MM9sxBZTBPzJF
+NsJzWNmqCBWXZYdNJWtkhRdoEiuLLRRdHg
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2497,8 +2500,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.seGHFke1DdHWn0gZutZ44mDn0rOebDhRXJ7evq6bzUHJYiEYLWTK
-Y8QmM73SIYqTdvVVjzhBL81faz903fd2Jg
+nR0bCI6NDMyMDB9.CeAh8uIOoksbwxstqwkhuLYP6KUqxqX69HhR5U1MM9sxBZTBPzJF
+NsJzWNmqCBWXZYdNJWtkhRdoEiuLLRRdHg
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3541,12 +3544,36 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
         </ul>
 </section>
 </div>
-<div id="x509-certificate-extended-key-purpose-oid-registration">
+<div id="coap-content-type">
 <section id="section-14.8">
-        <h3 id="name-x509-certificate-extended-k">
-<a href="#section-14.8" class="section-number selfRef">14.8. </a><a href="#name-x509-certificate-extended-k" class="section-name selfRef">X.509 Certificate Extended Key Purpose OID Registration</a>
+        <h3 id="name-coap-content-format-registr">
+<a href="#section-14.8" class="section-number selfRef">14.8. </a><a href="#name-coap-content-format-registr" class="section-name selfRef">CoAP Content-Format Registrations</a>
         </h3>
-<p id="section-14.8-1">IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section <a href="#eku" class="auto internal xref">Section 10.1</a>.<a href="#section-14.8-1" class="pilcrow">¶</a></p>
+<p id="section-14.8-1">IANA is requested to register the following Content-Format numbers in
+the "CoAP Content-Formats" sub-registry, within the "Constrained
+RESTful Environments (CoRE) Parameters" Registry <span>[<a href="#IANA.Core.Params" class="cite xref">IANA.Core.Params</a>]</span>:<a href="#section-14.8-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-14.8-2.1">
+            <p id="section-14.8-2.1.1">Content Type: application/statuslist+cwt<a href="#section-14.8-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-14.8-2.2">
+            <p id="section-14.8-2.2.1">Content Coding: -<a href="#section-14.8-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-14.8-2.3">
+            <p id="section-14.8-2.3.1">ID: TBD<a href="#section-14.8-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-14.8-2.4">
+            <p id="section-14.8-2.4.1">Reference: this specification<a href="#section-14.8-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="x509-certificate-extended-key-purpose-oid-registration">
+<section id="section-14.9">
+        <h3 id="name-x509-certificate-extended-k">
+<a href="#section-14.9" class="section-number selfRef">14.9. </a><a href="#name-x509-certificate-extended-k" class="section-name selfRef">X.509 Certificate Extended Key Purpose OID Registration</a>
+        </h3>
+<p id="section-14.9-1">IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section <a href="#eku" class="auto internal xref">Section 10.1</a>.<a href="#section-14.9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3565,6 +3592,10 @@ in <span>[<a href="#RFC6838" class="cite xref">RFC6838</a>]</span>.<a href="#sec
 <dt id="CORS">[CORS]</dt>
         <dd>
 <span class="refAuthor">WHATWG</span>, <span class="refTitle">"Fetch Living Standard"</span>, <span>n.d.</span>, <span>&lt;<a href="https://fetch.spec.whatwg.org/#http-cors-protocol">https://fetch.spec.whatwg.org/#http-cors-protocol</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA.Core.Params">[IANA.Core.Params]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Parameters"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.iana.org/assignments/core-parameters/core-parameters.xhtml">https://www.iana.org/assignments/core-parameters/core-parameters.xhtml</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.CWT">[IANA.CWT]</dt>
         <dd>
@@ -4479,10 +4510,13 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <p id="appendix-D-1">-10<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-2.1">
-          <p id="appendix-D-2.1.1">Add size comparison for status list and compressed uuids<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.1.1">Add CoAP Content-Format ID and IANA registration<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.2">
-          <p id="appendix-D-2.2.1">Change Controller IESG for OAuths Parameters Registration<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.2.1">Add size comparison for status list and compressed uuids<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-2.3">
+          <p id="appendix-D-2.3.1">Change Controller IESG for OAuths Parameters Registration<a href="#appendix-D-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-3">-09<a href="#appendix-D-3" class="pilcrow">¶</a></p>
