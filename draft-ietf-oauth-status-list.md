@@ -75,6 +75,11 @@ normative:
       org: "IANA"
     title: "OAuth Authorization Server Metadata"
     target: "https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#authorization-server-metadata"
+  IANA.Core.Params:
+    author:
+      org: "IANA"
+    title: "Constrained RESTful Environments (CoRE) Parameters"
+    target: "https://www.iana.org/assignments/core-parameters/core-parameters.xhtml"
   CORS:
     author:
       org: "WHATWG"
@@ -430,7 +435,7 @@ The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {
 
 The following content applies to the protected header of the CWT:
 
-* `16` (type): REQUIRED. The type of the CWT MUST be `application/statuslist+cwt` as defined in {{RFC9596}}.
+* `16` (type): REQUIRED. The type of the CWT MUST be `application/statuslist+cwt` or the registered CoAP Content-Format ID (see [](#coap-content-type)) as defined in {{RFC9596}}.
 
 The following content applies to the CWT Claims Set:
 
@@ -1431,6 +1436,17 @@ To indicate that the content is an CWT-based Status List:
   * Change controller: IETF
   * Provisional registration? No
 
+## CoAP Content-Format Registrations {#coap-content-type}
+
+IANA is requested to register the following Content-Format numbers in
+the "CoAP Content-Formats" sub-registry, within the "Constrained
+RESTful Environments (CoRE) Parameters" Registry [IANA.Core.Params]:
+
+  * Content Type: application/statuslist+cwt
+  * Content Coding: -
+  * ID: TBD
+  * Reference: this specification
+
 ## X.509 Certificate Extended Key Purpose OID Registration
 
 IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section [](#eku).
@@ -1878,6 +1894,7 @@ CBOR encoding:
 -10
 
 * improve caching guidelines and move them to implementaiton considerations
+* Add CoAP Content-Format ID and IANA registration
 * Add size comparison for status list and compressed uuids
 * Change Controller IESG for OAuths Parameters Registration
 
