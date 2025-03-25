@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-23T00:19:52.290152+00:00",
+  "timestamp": "2025-03-25T00:18:19.859729+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5496,7 +5496,7 @@
       "id": "I_kwDOJZ2aqs6sq4pR",
       "title": "ttl counting from iat rather than fetch time",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/274",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "remcoschaar",
       "authorAssociation": "NONE",
       "assignees": [
@@ -5505,8 +5505,8 @@
       "labels": [],
       "body": "Section 11.4 holds a description on caching status lists and expiry. The section contains a diagram, where the `ttl` is based of the time of fetching.\n\nThe time of fetching can be rather arbitrary, e.g. first time of encountering of a token by an issuer in practice. A Relying Party may initially fetch a status list \"just before `iat`\". The RP will then have an outdated status list for the full `ttl`, before again fetching the status list just before it will be renewed by the issuer.\n\nTypically the issuer of a token will publish a new status list every period (every `ttl`). This would be based off of `iat`, with the period `ttl`. Hereby suggesting to revise the diagram, to base the `ttl` on the `iat` rather than the \"time of fetching\". That way the Relying Party can get the most recent status list as soon as it is available.\n\nA downside may be that the issuer could see a load at or just after `iat`+`ttl`. This however may happen in practice anyways, as it is typically a public endpoint.\n",
       "createdAt": "2025-03-05T10:31:37Z",
-      "updatedAt": "2025-03-21T15:36:02Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-24T17:33:00Z",
+      "closedAt": "2025-03-24T17:33:00Z",
       "comments": [
         {
           "author": "c2bo",
@@ -5545,7 +5545,7 @@
       "id": "I_kwDOJZ2aqs6uf4P5",
       "title": "Register CoAP Content Format ID?",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/278",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -5554,8 +5554,8 @@
       "labels": [],
       "body": "Feedback from IETF 122: Consider registering the Status List CWT typ in https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#content-formats  ",
       "createdAt": "2025-03-18T08:25:51Z",
-      "updatedAt": "2025-03-20T07:48:27Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-24T17:31:43Z",
+      "closedAt": "2025-03-24T17:31:43Z",
       "comments": []
     }
   ],
@@ -18322,24 +18322,26 @@
       "id": "PR_kwDOJZ2aqs6PoBPi",
       "title": "add coap content format registration",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/279",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #278 ",
       "createdAt": "2025-03-21T14:09:06Z",
-      "updatedAt": "2025-03-21T21:19:32Z",
+      "updatedAt": "2025-03-24T17:31:42Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "0d7d83a74fe0a972ee23b8bfd98f5f78d0496827",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "278-coap-content-format",
       "headRefOid": "73adcaaa6b6d253f47df39bb607ece8ddb0befca",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-03-24T17:31:42Z",
+      "mergedAt": "2025-03-24T17:31:41Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "8ff2afd58e5e9bfe8ed45410a31c778659109a5d"
+      },
       "comments": [],
       "reviews": [
         {
@@ -18367,6 +18369,19 @@
           "createdAt": "2025-03-21T21:19:32Z",
           "updatedAt": "2025-03-21T21:19:32Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6hmWxE",
+          "commit": {
+            "abbreviatedOid": "73adcaa"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-24T17:31:35Z",
+          "updatedAt": "2025-03-24T17:31:35Z",
+          "comments": []
         }
       ]
     },
@@ -18375,24 +18390,26 @@
       "id": "PR_kwDOJZ2aqs6PpbSg",
       "title": "improve caching guidelines and move them to implementaiton considerat\u2026",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/280",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "\u2026ions\r\n\r\nCloses #274 ",
       "createdAt": "2025-03-21T16:40:35Z",
-      "updatedAt": "2025-03-22T07:16:22Z",
+      "updatedAt": "2025-03-24T17:32:59Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "0d7d83a74fe0a972ee23b8bfd98f5f78d0496827",
+      "baseRefOid": "8ff2afd58e5e9bfe8ed45410a31c778659109a5d",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "ttl_consideration",
-      "headRefOid": "d4b2746c69b13f9896700aa4b15a1d1d38364fc2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "bf07ad12b33721a69892f5651e055dcdfcb988af",
+      "closedAt": "2025-03-24T17:32:59Z",
+      "mergedAt": "2025-03-24T17:32:59Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "ca6eaa283f9b4ecdc10cad7a2f2b1e434b9deafe"
+      },
       "comments": [],
       "reviews": [
         {
@@ -18406,6 +18423,19 @@
           "body": "",
           "createdAt": "2025-03-22T07:16:22Z",
           "updatedAt": "2025-03-22T07:16:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6hmXXV",
+          "commit": {
+            "abbreviatedOid": "d4b2746"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-03-24T17:32:15Z",
+          "updatedAt": "2025-03-24T17:32:15Z",
           "comments": []
         }
       ]
