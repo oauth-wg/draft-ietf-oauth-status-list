@@ -909,11 +909,11 @@ Other specifications MAY choose to re-use this OID for other status mechanisms.
 The following OID is defined for usage in the EKU extension
 
 ~~~
-   id-kp  OBJECT IDENTIFIER  ::=
+  id-kp  OBJECT IDENTIFIER  ::=
        { iso(1) identified-organization(3) dod(6) internet(1)
          security(5) mechanisms(5) pkix(7) 3 }
 
-   id-kp-oauthStatusListSigning OBJECT IDENTIFIER ::= { id-kp TBD }
+  id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
 ~~~
 
 # Security Considerations {#Security}
