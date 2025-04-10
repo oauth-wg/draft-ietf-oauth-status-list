@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 25 September 2025                                              
+Expires: 12 October 2025                                                
                                                               C. Bormann
                                                                   SPRIND
-                                                           24 March 2025
+                                                           10 April 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 September 2025.
+   This Internet-Draft will expire on 12 October 2025.
 
 Copyright Notice
 
@@ -582,7 +582,7 @@ Table of Contents
 
 5.  Status List Token
 
-   A Status List Token embeds the Status List into a token that is
+   A Status List Token embeds a Status List into a token that is
    cryptographically signed and protects the integrity of the Status
    List.  This allows for the Status List Token to be hosted by third
    parties or be transferred for offline use cases.
@@ -714,9 +714,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d58403e34e122c38ecc89eca01a
-   90f64f12a4afbf37a6682b42476bd729e3785cc9b24e7ca3a9c0191b3b0042042a3e
-   9ef64781895284600b0ba65598434d9f118364
+   646269747301636c73744a78dadbb918000217015d58400ab4d3f17d475db6294178
+   0dc466000c5d18b0cd25d56c2148551eb39fc5ca16c0629ffe8a734e72aabe552ea2
+   a6b97bc1689ed36b766090d3d6cc1126d21439
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -739,12 +739,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      3e34e122c38ecc89eca01a90  #       ">4á"Ã\x8eÌ\x89ì\xa0\x1a\x90"
-      f64f12a4afbf37a6682b4247  #       "öO\x12¤¯¿7¦h+BG"
-      6bd729e3785cc9b24e7ca3a9  #       "k×)ãx\É²N|£©"
-      c0191b3b0042042a3e9ef647  #       "À\x19\x1b;\x00B\x04*>\x9eöG"
-      81895284600b0ba65598434d  #       "\x81\x89R\x84`\x0b\x0b¦U\x98CM"
-      9f118364                  #       "\x9f\x11\x83d"
+      0ab4d3f17d475db62941780d  #       "\x0a´Óñ}G]¶)Ax\x0d"
+      c466000c5d18b0cd25d56c21  #       "Äf\x00\x0c]\x18°Í%Õl!"
+      48551eb39fc5ca16c0629ffe  #       "HU\x1e³\x9fÅÊ\x16Àb\x9fþ"
+      8a734e72aabe552ea2a6b97b  #       "\x8asNrª¾U.¢¦¹{"
+      c1689ed36b766090d3d6cc11  #       "Áh\x9eÓkv`\x90ÓÖÌ\x11"
+      26d21439                  #       "&Ò\x149"
 
 6.  Referenced Token
 
@@ -889,9 +889,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840c1c15ea42ae168ad9174fd1bc2d2d53052637f
-   65541aabdf89742eeac32431d88a1385c576de9a1f8e0269b17d32ad91e88b49b0ba
-   c6c3676557b063adf94256
+   7374617475736c697374732f31584049185ef26fe9f515837fc5570fd39d55837ea9
+   9fda8af6ef70bb7624a7ff24923ae8992bf27d1246fb96cd855f73106381144ba94b
+   819211659b62310e9b79cf
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -914,12 +914,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      c1c15ea42ae168ad9174fd1b  #       "ÁÁ^¤*áh\xad\x91tý\x1b"
-      c2d2d53052637f65541aabdf  #       "ÂÒÕ0Rc\x7feT\x1a«ß"
-      89742eeac32431d88a1385c5  #       "\x89t.êÃ$1Ø\x8a\x13\x85Å"
-      76de9a1f8e0269b17d32ad91  #       "vÞ\x9a\x1f\x8e\x02i±}2\xad\x91"
-      e88b49b0bac6c3676557b063  #       "è\x8bI°ºÆÃgeW°c"
-      adf94256                  #       "\xadùBV"
+      49185ef26fe9f515837fc557  #       "I\x18^òoéõ\x15\x83\x7fÅW"
+      0fd39d55837ea99fda8af6ef  #       "\x0fÓ\x9dU\x83~©\x9fÚ\x8aöï"
+      70bb7624a7ff24923ae8992b  #       "p»v$§ÿ$\x92:è\x99+"
+      f27d1246fb96cd855f731063  #       "ò}\x12Fû\x96Í\x85_s\x10c"
+      81144ba94b819211659b6231  #       "\x81\x14K©K\x81\x92\x11e\x9bb1"
+      0e9b79cf                  #       "\x0e\x9byÏ"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1090,7 +1090,7 @@ d2                              # tag(18)
 
    *  0x02 - "SUSPENDED" - The status of the Referenced Token is
       temporarily invalid, hanging, debarred from privilege.  This state
-      is reversible.
+      is usually temporary.
 
    The Status Type value 0x03 and Status Type values in the range 0x0B
    until 0x0F are permanently reserved as application specific.  Meaning
@@ -1154,8 +1154,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.rrqCQz6qQELlUbMBj0OlpEGI8YMfI-EdLA-aXNbdLg40gLXkXmQe
-   5C7fR69fM4S8yLBgTJkt7F0EJumL7RJ4MA
+   nR0bCI6NDMyMDB9.ohZjBev-kJbWNDnmOTB_nB-PI5QAsoAOjWseKUwVPvMtL9wTwH0V
+   t8XkZd8zY5tLbAHO5D-FMGKQMisFNksAPw
 
 8.2.  Status List Response
 
@@ -1294,8 +1294,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.rrqCQz6qQELlUbMBj0OlpEGI8YMfI-EdLA-aXNbdLg40gLXkXmQe
-   5C7fR69fM4S8yLBgTJkt7F0EJumL7RJ4MA
+   nR0bCI6NDMyMDB9.ohZjBev-kJbWNDnmOTB_nB-PI5QAsoAOjWseKUwVPvMtL9wTwH0V
+   t8XkZd8zY5tLbAHO5D-FMGKQMisFNksAPw
 
 9.  Status List Aggregation
 
@@ -1655,24 +1655,22 @@ d2                              # tag(18)
    As previously explained, there is the potential risk of observability
    by Relying Parties (see Section 12.3) and Outsiders (see
    Section 12.4).  That means that any Status Type that transports
-   special information about a Token can leak information to other
-   parties.  This documents defines one additional Status Type with
-   "SUSPENDED" that conveys such additional information.  Depending on
-   the use-case, suspended could for example provide information that an
-   authorization in the Token is suspended, but the token itself is
-   still valid.
+   special information about a Referenced Token can leak information to
+   other parties.  This document defines one additional Status Type with
+   "SUSPENDED" that conveys such additional information.
 
-   A concrete example would be a driver's license, where the digital
-   driver's license might still be useful to prove other information
-   about its holder, but suspended could signal that it should not be
-   considered valid in the scope of being allowed to drive a car.  This
-   case could be solved by either introducing a special status type, or
-   by revoking the Token and re-issuing with changed attributes.  For
-   such a case, the status type suspended might be dangerous as it would
-   leak the information of a suspended driver's license even if the
-   driver's license is used as a mean of identification and not in the
-   context of driving a car.  This could also allow for the unwanted
-   collection of statistical data on the status of driver's licenses.
+   A concrete example for "SUSPENDED" would be a driver's license, where
+   the digital driver's license might still be useful to prove other
+   information about its holder, but suspended could signal that it
+   should not be considered valid in the scope of being allowed to drive
+   a car.  This case could be solved by either introducing a special
+   status type, or by revoking the Referenced Token and re-issuing with
+   changed attributes.  For such a case, the status type suspended might
+   be dangerous as it would leak the information of a suspended driver's
+   license even if the driver's license is used as a mean of
+   identification and not in the context of driving a car.  This could
+   also allow for the unwanted collection of statistical data on the
+   status of driver's licenses.
 
    Ecosystems that want to use other Status Types than "VALID" and
    "INVALID" should consider the possible leakage of data and profiling
@@ -1700,16 +1698,15 @@ d2                              # tag(18)
 
 13.2.  Default Values and Double Allocation
 
-   Implementations producing Status Lists are RECOMMENDED to initialize
-   the Status List byte array with a default value and provide this as
-   an initialization parameter to the Issuer.  The Issuer is RECOMMENDED
-   to use a default value that represents the most common value for its
+   The Status Issuer is RECOMMENDED to initialize the Status List byte
+   array with a default value provided as an initialization parameter by
+   the Issuer of the Referenced Token.  The Issuer is RECOMMENDED to use
+   a default value that represents the most common value for its
    Referenced Tokens to avoid an update during issuance.
 
-   Implementations producing Status Lists are RECOMMENDED to prevent
-   double allocation, i.e. re-using the same uri and index for multiple
-   Referenced Tokens.  The Issuer MUST prevent any unintended double
-   allocation by using the Status List.
+   The Status Issuer is RECOMMENDED to prevent double allocation, i.e.
+   re-using the same uri and index for multiple Referenced Tokens.  The
+   Status Issuer MUST prevent any unintended double allocation.
 
 13.3.  Status List Size
 
@@ -1825,14 +1822,13 @@ d2                              # tag(18)
 
 13.7.  Relying Parties avoiding correlatable Information
 
-   If the Relying Party does not require the Referenced Token and the
-   Status List Token after the presentation, e.g. for subsequent status
-   checks or audit trail, it is RECOMMENDED to delete correlatable
-   information, in particular:
+   If the Relying Party does not require the Referenced Token or the
+   Status List Token, e.g. for subsequent status checks or audit trail,
+   it is RECOMMENDED to delete correlatable information, in particular:
 
-   *  the status claim in the Referenced Token
+   *  the status claim in the Referenced Token (after the presentation)
 
-   *  the Status List Token itself
+   *  the Status List Token itself (after expiration or update)
 
    The Relying Party should instead only keep the relevant payload from
    the Referenced Token.
@@ -2176,7 +2172,7 @@ d2                              # tag(18)
 
    *  Status Type Description: The status of the Referenced Token is
       temporarily invalid, hanging or debarred from privilege.  This
-      state is reversible.
+      state is usually temporary.
 
    *  Status Type value: 0x02
 
@@ -3079,6 +3075,10 @@ Test vectors for Status List encoding
    4b0040b3fe04353d7f81
 
 Document History
+
+   -11
+
+   *  some nitpicks
 
    -10
 
