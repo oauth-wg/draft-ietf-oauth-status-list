@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T00:21:05.184419+00:00",
+  "timestamp": "2025-04-10T00:18:13.356706+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5557,6 +5557,142 @@
       "updatedAt": "2025-03-24T17:31:43Z",
       "closedAt": "2025-03-24T17:31:43Z",
       "comments": []
+    },
+    {
+      "number": 281,
+      "id": "I_kwDOJZ2aqs6xiCoJ",
+      "title": "Feedback from Denis (mailing list)",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/281",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "I took a closer look to the document. Below are 17 comments.\n\n\n1. The current definition of a Status List is:\n\n   Status List:  An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.\n\nThis definition is ambiguous. It is proposed to change this definition as follows:\n\n   Status List:  An object in JSON or CBOR representation containing a compressed byte array itself contained in a Status List Token that represents the statuses of many Referenced Tokens.\n\n\n2. In section 4.1:\n\n   3.  The Status Issuer sets the status values for all Referenced tokens within the byte array.  \n\nThis sentence is ambiguous;.\n\nChange into:\n\n   3.  The Status Issuer sets the status values for all Referenced Tokens that are referenced in the Status List Token.  \n\n\n3. Section 5 states:\n\nStatus List Token\n\n   A Status List Token embeds the Status List into a token that is cryptographically signed and protects the integrity of the Status  List.\n\nIt would be more appropriate to use \"a\" instead of \"the\" and to say:\n\n   A Status List Token embeds a Status List into a token that is cryptographically signed and protects the integrity of the Status List.\n\n\n4. Section 7.1 is stating:\n\nStatus Types Values\n\n   *  0x02 - \"SUSPENDED\" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.\n\nI would be worth to explain what is meant by \" This state is reversible\".\n\nChange into: \n\nThis state is usually temporary. In a further issued Status List Token, this state may remain the same, change to VALID, INVALID or to any other state.\n\n\n5. Section 8.4, second paragraph states:\n\n   To obtain the Status List Token, the Relying Party MUST send an HTTP\n\nThe Holder can also obtain a Status List Token. Using the term\" client\" would cover both cases.\n\nChange into:\n\n   To obtain the Status List Token, the client UST send an HTTP \n\n\n6. Section 9 states:\n\n    Status List Aggregation\n\n    Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch\n    all relevant Status Lists for a specific type of Referenced Token or Issuer.\n\nThe concept of a specific type of Referenced Token looks odd, as the \"type\" of the Referenced Token is not present in the Status List.\n\nI have not yet understood how a client can fetch \"all relevant Status List Tokens for a specific type of Referenced Token\".\n\nI can understand how a how a client can fetch \"all relevant Status List Tokens for a specific Issuer\".\n\"The Status List Aggregation URI provides a list of Status List URIs.\"\n\nI would expect that it contains a list of Status List Token URIs, i.e. NOT a list of Status List URIs.\n\nIf all the URIs of the Status List Tokens of a given Issuer are made publicly available, then there is a leakage of information. \nThe client would be able to know roughly how many Referenced Tokens are currently issued. Issuers should be warned of the consequences. \nThis should be mentioned here as well as in the privacy considerations section\n\n\n7. Section 12.5.2 states\n\nColluding Status Issuer and Relying Party\n\n   A Status Issuer and a Relying Party Issuer may link two transactions involving the same Referenced Tokens by comparing the status claims\n   of the Referenced Token and therefore determine that they have interacted with the same Holder.  It is therefore recommended to use\n   Status Lists for Referenced Token formats that have similar unlinkability properties.\n\nThis section is not understandable to me. Would it be possible first to explain how the link may happen only by using the SLT ?\n\nWhat means \"similar unlinkability properties\" ? I have no idea.\n\n\n8. One typo in section 12.8 (Status Types)\n\n     This documents defines ...\n\n\n9. In section 12.8 again:\n\n       Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, but the token itself is still valid.\n\nNo. If the Token is suspended, it is not valid.\n\nChange proposal :\n\n     Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, which means that it should be considered currently invalid.\n\n\n10. The concrete example is biased.\n\n       \"suspended could signal that it should not be considered valid in the scope of being allowed to drive a car\".\n\nNo. Suspended does not mean that the driver is no more allowed to drive a car. Suspended can be used because the driver license has been lost or stolen \nand rather that invalidating it immediately, the person can ask to the Issuer to suspend it in order to prevent someone else to temporary use it. \nA status different from VALID, INVALID or SUSPENDED should be used to signal that the driver is no more allowed to drive a car.\n\nThis example should either be removed or modified.\n\n\n11. In section 13.1 the text states:\n\n   Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties.  \n   In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this \n   from becoming a possible source of correlation.\n\nThis is not a good recommendation. The next paragraph is a better solution.Correlation would still be possible during some time-window. \n\nPlease remove this paragraph.\n\n\n12. The text states:\n\n   Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability.  \n   In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status Lists.  \n   Revoking batch-issued Referenced Tokens might reveal this correlation later on.\n\nThe first sentence is correct. The second sentence would need to be reworded:\n\n    In this case, every Referenced Token MUST have a dedicated Status List entry and one-time use Referenced Tokens SHOULD be spread \n    across multiple Status List Tokens. In this way, revoking batch-issued Referenced Tokens is unlikely to reveal a correlation later on.\n\n\n13. In section 13.3, the text states:\n\n   Implementations producing Status Lists are RECOMMENDED to initialize the Status List byte array with a default value and provide this as\n   an initialization parameter to the Issuer.  The Issuer is RECOMMENDED to use a default value that represents the most common value for its\n   Referenced Tokens to avoid an update during issuance.\n\nThere is a confusion between \"Status Lists\" and \"Status List Tokens\". The recommendation does not take into account that some Referenced Tokens \ncan be issued with the status VALID while some others with the status SUSPENDED.\n\nChange into:\n\n    Implementations producing Status List Tokens are RECOMMENDED to initialize the Status List byte array with a default value. \n    Some Referenced Tokens may be issued under the status VALID while some others under the status SUSPENDED. \n    Status List Tokens should be prepared in advance with the relevant status.\n\n\n14. The next paragraph states:\n\n   Implementations producing Status Lists are RECOMMENDED to prevent double allocation, i.e. re-using the same uri and index for multiple\n   Referenced Tokens.  The Issuer MUST prevent any unintended double allocation by using the Status List.\n\nThere is a confusion between \"Status Lists\" and \"Status List Tokens\".\n\nChange into:\n\n   Implementations producing Status List Tokens are RECOMMENDED to prevent double allocation, i.e. re-using the same uri and index for multiple\n   Referenced Tokens.  The Issuer MUST prevent any unintended double allocation.\n\n\n15. In section 13.3, the text states:\n\n   The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. \n\nIn order to avoid a confusion between \"Status Lists\" and \"Status List Tokens\", change into:\n\n    The Status List Issuer may increase the size of a Status List contained in a Status List Token if it requires indices for additional Referenced Tokens.\n\n\n16. Then after the text states:\n\n   The Status List Issuer may divide its Referenced Tokens up into multiple Status Lists to reduce the transmission size of an individual Status List Token.  \n\nMake a similar change:\n\n   The Status List Issuer may divide its Referenced Tokens up into multiple Status List Tokens to reduce the transmission size of an individual Status List Token.\n\n\n17. In section 13.7, the text states:\n\nRelying Parties avoiding correlatable Information\n\n   If the Relying Party does not require the Referenced Token and the Status List Token after the presentation, e.g. for subsequent status\n   checks or audit trail, it is RECOMMENDED to delete correlatable information, in particular:\n\n   *  the status claim in the Referenced Token\n\n   *  the Status List Token itself\n\n   The Relying Party should instead only keep the relevant payload from the Referenced Token.\n\nDeleting the Status List Token is not a good idea, as the same Status List Token could be useful for another Referenced Token checked later on.\n\nChange proposal:\n\n     The Relying Party should only keep the relevant payload from the Referenced Token. In particular, it should not keep the status claim in the Referenced Token.\n\n\nDenis\n",
+      "createdAt": "2025-04-08T03:25:01Z",
+      "updatedAt": "2025-04-09T06:00:35Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> I took a closer look to the document. Below are 17 comments.\n> \n>     1. The current definition of a Status List is:\n>        Status List:  An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.\n> \n> \n> This definition is ambiguous. It is proposed to change this definition as follows:\n> \n> Status List: An object in JSON or CBOR representation containing a compressed byte array itself contained in a Status List Token that represents the statuses of many Referenced Tokens.\n\nWe do not agree with this, the current definition of Status List seems correct. Status List Token relies on Status List.\n\n",
+          "createdAt": "2025-04-08T03:27:48Z",
+          "updatedAt": "2025-04-08T03:27:48Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     2. In section 4.1:\n>        \n>        3. The Status Issuer sets the status values for all Referenced tokens within the byte array.\n> \n> \n> This sentence is ambiguous;.\n> \n> Change into:\n> \n>     3. The Status Issuer sets the status values for all Referenced Tokens that are referenced in the Status List Token.\n> \n\nWe do not agree with this. Section 4.1 describes the byte array. The definition of Status List relies on the byte array. The definition of Status List Token relies on Status List.",
+          "createdAt": "2025-04-08T03:32:22Z",
+          "updatedAt": "2025-04-08T03:32:22Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     3. Section 5 states:\n> \n> \n> Status List Token\n> \n> A Status List Token embeds the Status List into a token that is cryptographically signed and protects the integrity of the Status List.\n> \n> It would be more appropriate to use \"a\" instead of \"the\" and to say:\n> \n> A Status List Token embeds a Status List into a token that is cryptographically signed and protects the integrity of the Status List.\n> \n\nWe do not think this a necessary change, but it may be a minor improvement.",
+          "createdAt": "2025-04-08T03:34:28Z",
+          "updatedAt": "2025-04-08T03:34:46Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     4. Section 7.1 is stating:\n> \n> \n> Status Types Values\n> \n>     * 0x02 - \"SUSPENDED\" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.\n> \n> \n> I would be worth to explain what is meant by \" This state is reversible\".\n> \n> Change into:\n> \n> This state is usually temporary. In a further issued Status List Token, this state may remain the same, change to VALID, INVALID or to any other state.\n> \n\nWe can change the text to: \"The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is usually temporary.\"",
+          "createdAt": "2025-04-08T03:37:51Z",
+          "updatedAt": "2025-04-08T03:37:51Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     5. Section 8.4, second paragraph states:\n>        To obtain the Status List Token, the Relying Party MUST send an HTTP\n> \n> \n> The Holder can also obtain a Status List Token. Using the term\" client\" would cover both cases.\n> \n> Change into:\n> \n> To obtain the Status List Token, the client UST send an HTTP\n> \n\nWe do not agree, see beginning of Section 8:\n\nhttps://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-verification-and-processing",
+          "createdAt": "2025-04-08T03:43:18Z",
+          "updatedAt": "2025-04-08T03:43:18Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     6. Section 9 states:\n>        Status List Aggregation\n>        Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch\n>        all relevant Status Lists for a specific type of Referenced Token or Issuer.\n> \n> \n> The concept of a specific type of Referenced Token looks odd, as the \"type\" of the Referenced Token is not present in the Status List.\n> \n> I have not yet understood how a client can fetch \"all relevant Status List Tokens for a specific type of Referenced Token\".\n> \n> I can understand how a how a client can fetch \"all relevant Status List Tokens for a specific Issuer\". \"The Status List Aggregation URI provides a list of Status List URIs.\"\n> \n> I would expect that it contains a list of Status List Token URIs, i.e. NOT a list of Status List URIs.\n> \n> If all the URIs of the Status List Tokens of a given Issuer are made publicly available, then there is a leakage of information. The client would be able to know roughly how many Referenced Tokens are currently issued. Issuers should be warned of the consequences. This should be mentioned here as well as in the privacy considerations section\n> \n\nWe do not agree, an issuer may choose to list status list tokens for a particular type of Referenced Tokens if he offers multiple types of Referenced Tokens. How this is explicitly done is out of scope. Also, the privacy drawback is already documented at https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-observability-of-outsiders",
+          "createdAt": "2025-04-08T03:49:49Z",
+          "updatedAt": "2025-04-08T03:49:49Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     7. Section 12.5.2 states\n> \n> \n> Colluding Status Issuer and Relying Party\n> \n> A Status Issuer and a Relying Party Issuer may link two transactions involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.\n> \n> This section is not understandable to me. Would it be possible first to explain how the link may happen only by using the SLT ?\n> \n> What means \"similar unlinkability properties\" ? I have no idea.\n> \n\nWe do not agree. Section 12.5 explains this: \"The tuple of uri and index inside the Referenced Token are unique and therefore is traceable data.\" Unlinkability is well explained in the literature.",
+          "createdAt": "2025-04-08T03:53:33Z",
+          "updatedAt": "2025-04-08T03:53:33Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     8. One typo in section 12.8 (Status Types)\n>        This documents defines ...\n> \n\nAgreed.",
+          "createdAt": "2025-04-08T03:54:23Z",
+          "updatedAt": "2025-04-08T03:54:23Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     9. In section 12.8 again:\n>        ```\n>        Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, but the token itself is still valid.\n>        ```\n> \n> \n> No. If the Token is suspended, it is not valid.\n> \n> Change proposal :\n> \n> ```\n>  Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, which means that it should be considered currently invalid.\n> ```\n\nWe removed the whole sentence, as the following example seems sufficient.",
+          "createdAt": "2025-04-08T04:05:52Z",
+          "updatedAt": "2025-04-08T04:05:52Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     10. The concrete example is biased.\n>         \"suspended could signal that it should not be considered valid in the scope of being allowed to drive a car\".\n> \n> \n> No. Suspended does not mean that the driver is no more allowed to drive a car. Suspended can be used because the driver license has been lost or stolen and rather that invalidating it immediately, the person can ask to the Issuer to suspend it in order to prevent someone else to temporary use it. A status different from VALID, INVALID or SUSPENDED should be used to signal that the driver is no more allowed to drive a car.\n> \n> This example should either be removed or modified.\n> \n\nWe do not agree. The example signals with \"could\" that other means of suspended in the context of mobile driving are possible, but the example is sufficient to convey the privacy risks.\n\n",
+          "createdAt": "2025-04-08T04:10:16Z",
+          "updatedAt": "2025-04-08T04:10:16Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     11. In section 13.1 the text states:\n> \n> \n> Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.\n> \n> This is not a good recommendation. The next paragraph is a better solution.Correlation would still be possible during some time-window.\n> \n> Please remove this paragraph.\n\nWe do not agree. Those two mechanisms (re-issuance and batch issuance) are not mutual exclusive, this is also what the text indicates: \"Referenced Tokens may **also** be issued in batches\"\n",
+          "createdAt": "2025-04-08T04:19:14Z",
+          "updatedAt": "2025-04-08T04:19:14Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> 12. The text states:\n>  \n>    Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability.  \n>    In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status Lists.  \n>    Revoking batch-issued Referenced Tokens might reveal this correlation later on.\n>  \n> The first sentence is correct. The second sentence would need to be reworded:\n>  \n>   In this case, every Referenced Token MUST have a dedicated Status List entry and one-time use Referenced Tokens SHOULD be spread \n>     across multiple Status List Tokens. In this way, revoking batch-issued Referenced Tokens is unlikely to reveal a correlation later on.\n\nWe do not agree with the change from MAY to SHOULD and a relying party getting a lot of credentials from a specific issuer is likely to know most status list tokens and can still do the correlation. Spreading across different Status List Tokens will likely have limited effect.\n",
+          "createdAt": "2025-04-09T05:37:47Z",
+          "updatedAt": "2025-04-09T05:37:47Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": ">     13. In section 13.3, the text states:\n>\n> Implementations producing Status Lists are RECOMMENDED to initialize the Status List byte array with a default value and provide this as\n> an initialization parameter to the Issuer.  The Issuer is RECOMMENDED to use a default value that represents the most common value for its\n> Referenced Tokens to avoid an update during issuance.\n> \n> There is a confusion between \"Status Lists\" and \"Status List Tokens\". The recommendation does not take into account that some Referenced Tokens\n> can be issued with the status VALID while some others with the status SUSPENDED.\n> \n> Change into:\n> \n> ```\n> Implementations producing Status List Tokens are RECOMMENDED to initialize the Status List byte array with a default value. \n> Some Referenced Tokens may be issued under the status VALID while some others under the status SUSPENDED. \n> Status List Tokens should be prepared in advance with the relevant status.\n> ```\n\nWe do not agree but still see some improvement for the text to:\n\nThe Status Issuer is RECOMMENDED to initialize the Status List byte array with a default value provided as\nan initialization parameter by the Issuer of the Referenced Token. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.\n",
+          "createdAt": "2025-04-09T05:50:47Z",
+          "updatedAt": "2025-04-09T05:50:47Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> 14. The next paragraph states:\n>  \n>    Implementations producing Status Lists are RECOMMENDED to prevent double allocation, i.e. re-using the same uri and index for multiple\n>    Referenced Tokens.  The Issuer MUST prevent any unintended double allocation by using the Status List.\n>  \n> There is a confusion between \"Status Lists\" and \"Status List Tokens\".\n>  \n> Change into:\n>  \n>    Implementations producing Status List Tokens are RECOMMENDED to prevent double allocation, i.e. re-using the same uri and index for multiple\n>    Referenced Tokens.  The Issuer MUST prevent any unintended double allocation.\n\nThis statement is true for both, Status List and Status List Tokens (which contains a Status List). The Status List is the object holding the different entries, so I think that makes sense here. Second sentence should be adjusted.",
+          "createdAt": "2025-04-09T05:53:32Z",
+          "updatedAt": "2025-04-09T05:53:32Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> 15. In section 13.3, the text states:\n>  \n>    The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. \n>  \n> In order to avoid a confusion between \"Status Lists\" and \"Status List Tokens\", change into:\n>  \n>   The Status List Issuer may increase the size of a Status List contained in a Status List Token if it requires indices for additional Referenced Tokens.\n\nBoth terms are well defined in the specification - We don't think this change is beneficial.",
+          "createdAt": "2025-04-09T05:55:53Z",
+          "updatedAt": "2025-04-09T05:55:53Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> 16. Then after the text states:\n>  \n>    The Status List Issuer may divide its Referenced Tokens up into multiple Status Lists to reduce the transmission size of an individual Status List Token.  \n>  \n> Make a similar change:\n>  \n>    The Status List Issuer may divide its Referenced Tokens up into multiple Status List Tokens to reduce the transmission size of an individual Status List Token.\n\nSame as above",
+          "createdAt": "2025-04-09T05:57:02Z",
+          "updatedAt": "2025-04-09T05:57:02Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> 17. In section 13.7, the text states:\n>  \n> Relying Parties avoiding correlatable Information\n>  \n>    If the Relying Party does not require the Referenced Token and the Status List Token after the presentation, e.g. for subsequent status\n>    checks or audit trail, it is RECOMMENDED to delete correlatable information, in particular:\n>  \n>    *  the status claim in the Referenced Token\n>  \n>    *  the Status List Token itself\n>  \n>    The Relying Party should instead only keep the relevant payload from the Referenced Token.\n>  \n> Deleting the Status List Token is not a good idea, as the same Status List Token could be useful for another Referenced Token checked later on.\n>  \n> Change proposal:\n>  \n>    The Relying Party should only keep the relevant payload from the Referenced Token. In particular, it should not keep the status claim in the Referenced Token.\n\nWe should still delete the Status List Token once we have a newer version or it expired. But agreed, that this section could be improved.",
+          "createdAt": "2025-04-09T06:00:34Z",
+          "updatedAt": "2025-04-09T06:00:34Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -18439,6 +18575,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 282,
+      "id": "PR_kwDOJZ2aqs6R4qot",
+      "title": "some nitpicks",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/282",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #281 ",
+      "createdAt": "2025-04-09T06:06:25Z",
+      "updatedAt": "2025-04-09T06:06:26Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "ca6eaa283f9b4ecdc10cad7a2f2b1e434b9deafe",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/comments_by_denis",
+      "headRefOid": "aa33a4ade7f05e792139cfc8b008fa1c39d3939e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
