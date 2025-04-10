@@ -912,7 +912,7 @@ The following OID is defined for usage in the EKU extension
        { iso(1) identified-organization(3) dod(6) internet(1)
          security(5) mechanisms(5) pkix(7) 3 }
 
-   id-kp-oauthStatusListSigning             OBJECT IDENTIFIER ::= { id-kp TBD }
+   id-kp-oauthStatusListSigning OBJECT IDENTIFIER ::= { id-kp TBD }
 ~~~
 
 # Security Considerations {#Security}
