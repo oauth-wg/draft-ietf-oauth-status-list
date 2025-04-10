@@ -1892,6 +1892,10 @@ CBOR encoding:
 # Document History
 {:numbered="false"}
 
+-11
+
+* Allow for extended key usage OID to be used for other status mechanisms
+
 -10
 
 * improve caching guidelines and move them to implementaiton considerations
