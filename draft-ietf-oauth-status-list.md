@@ -904,16 +904,17 @@ The following is a non-normative example for media type `application/json`:
 ## Extended Key Usage Extension {#eku}
 
 {{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used. A certificate's issuer explicitly delegates Status List Token signing authority by issuing a X.509 certificate containing the KeyPurposeId defined below in the extended key usage extension.
+Other specifications MAY choose to re-use this OID for other status mechanisms.
 
 The following OID is defined for usage in the EKU extension
 
-```
-   id-kp  OBJECT IDENTIFIER  ::=
+~~~
+  id-kp  OBJECT IDENTIFIER  ::=
        { iso(1) identified-organization(3) dod(6) internet(1)
          security(5) mechanisms(5) pkix(7) 3 }
 
-   id-kp-oauthStatusListSigning             OBJECT IDENTIFIER ::= { id-kp TBD }
-```
+  id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
+~~~
 
 # Security Considerations {#Security}
 
@@ -1890,6 +1891,10 @@ CBOR encoding:
 
 # Document History
 {:numbered="false"}
+
+-11
+
+* Allow for extended key usage OID to be used for other status mechanisms
 
 -10
 
