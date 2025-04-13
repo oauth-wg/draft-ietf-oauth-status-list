@@ -393,7 +393,7 @@ See section [](#test-vectors) for more test vectors.
 
 # Status List Token {#status-list-token}
 
-A Status List Token embeds the Status List into a token that is cryptographically signed and protects the integrity of the Status List. This allows for the Status List Token to be hosted by third parties or be transferred for offline use cases.
+A Status List Token embeds a Status List into a token that is cryptographically signed and protects the integrity of the Status List. This allows for the Status List Token to be hosted by third parties or be transferred for offline use cases.
 
 This section specifies Status List Tokens in JSON Web Token (JWT) and CBOR Web Token (CWT) format.
 
@@ -727,7 +727,7 @@ This document creates a registry in [](#iana-status-types) that includes the mos
 
  - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
  - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
- - 0x02 - "SUSPENDED" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.
+ - 0x02 - "SUSPENDED" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is usually temporary.
 
  The Status Type value 0x03 and Status Type values in the range 0x0B until 0x0F are permanently reserved as application specific. Meaning the processing of Status Types using these values is application specific. All other Status Type values are reserved for future registration.
 
@@ -1050,9 +1050,9 @@ There are strong privacy concerns that have to be carefully taken into considera
 
 ## Status Types {#privacy-status-types}
 
-As previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports special information about a Token can leak information to other parties. This documents defines one additional Status Type with "SUSPENDED" that conveys such additional information. Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, but the token itself is still valid.
+As previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports special information about a Referenced Token can leak information to other parties. This document defines one additional Status Type with "SUSPENDED" that conveys such additional information.
 
-A concrete example would be a driver's license, where the digital driver's license might still be useful to prove other information about its holder, but suspended could signal that it should not be considered valid in the scope of being allowed to drive a car. This case could be solved by either introducing a special status type, or by revoking the Token and re-issuing with changed attributes. For such a case, the status type suspended might be dangerous as it would leak the information of a suspended driver's license even if the driver's license is used as a mean of identification and not in the context of driving a car. This could also allow for the unwanted collection of statistical data on the status of driver's licenses.
+A concrete example for "SUSPENDED" would be a driver's license, where the digital driver's license might still be useful to prove other information about its holder, but suspended could signal that it should not be considered valid in the scope of being allowed to drive a car. This case could be solved by either introducing a special status type, or by revoking the Referenced Token and re-issuing with changed attributes. For such a case, the status type suspended might be dangerous as it would leak the information of a suspended driver's license even if the driver's license is used as a mean of identification and not in the context of driving a car. This could also allow for the unwanted collection of statistical data on the status of driver's licenses.
 
 Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might a better fit for their use-case.
 
@@ -1068,9 +1068,10 @@ Referenced Tokens may also be issued in batches and be presented by Holders in a
 
 ## Default Values and Double Allocation
 
-Implementations producing Status Lists are RECOMMENDED to initialize the Status List byte array with a default value and provide this as an initialization parameter to the Issuer. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.
+The Status Issuer is RECOMMENDED to initialize the Status List byte array with a default value provided as
+an initialization parameter by the Issuer of the Referenced Token. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.
 
-Implementations producing Status Lists are RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens. The Issuer MUST prevent any unintended double allocation by using the Status List.
+The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens. The Status Issuer MUST prevent any unintended double allocation.
 
 ## Status List Size
 
@@ -1137,10 +1138,10 @@ The following diagram illustrates the relationship between these claims and how 
 
 ## Relying Parties avoiding correlatable Information
 
-If the Relying Party does not require the Referenced Token and the Status List Token after the presentation, e.g. for subsequent status checks or audit trail, it is RECOMMENDED to delete correlatable information, in particular:
+If the Relying Party does not require the Referenced Token or the Status List Token, e.g. for subsequent status checks or audit trail, it is RECOMMENDED to delete correlatable information, in particular:
 
-- the `status` claim in the Referenced Token
-- the Status List Token itself
+- the `status` claim in the Referenced Token (after the presentation)
+- the Status List Token itself (after expiration or update)
 
 The Relying Party should instead only keep the relevant payload from the Referenced Token.
 
@@ -1359,7 +1360,7 @@ Specification Document(s):
 <br/>
 
 * Status Type Name: SUSPENDED
-* Status Type Description: The status of the Referenced Token is temporarily invalid, hanging or debarred from privilege. This state is reversible.
+* Status Type Description: The status of the Referenced Token is temporarily invalid, hanging or debarred from privilege. This state is usually temporary.
 * Status Type value: `0x02`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
@@ -1895,6 +1896,7 @@ CBOR encoding:
 -11
 
 * Allow for extended key usage OID to be used for other status mechanisms
+* some nitpicks
 
 -10
 
