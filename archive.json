@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-10T00:18:13.356706+00:00",
+  "timestamp": "2025-04-13T00:43:25.292145+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5563,15 +5563,15 @@
       "id": "I_kwDOJZ2aqs6xiCoJ",
       "title": "Feedback from Denis (mailing list)",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/281",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "I took a closer look to the document. Below are 17 comments.\n\n\n1. The current definition of a Status List is:\n\n   Status List:  An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.\n\nThis definition is ambiguous. It is proposed to change this definition as follows:\n\n   Status List:  An object in JSON or CBOR representation containing a compressed byte array itself contained in a Status List Token that represents the statuses of many Referenced Tokens.\n\n\n2. In section 4.1:\n\n   3.  The Status Issuer sets the status values for all Referenced tokens within the byte array.  \n\nThis sentence is ambiguous;.\n\nChange into:\n\n   3.  The Status Issuer sets the status values for all Referenced Tokens that are referenced in the Status List Token.  \n\n\n3. Section 5 states:\n\nStatus List Token\n\n   A Status List Token embeds the Status List into a token that is cryptographically signed and protects the integrity of the Status  List.\n\nIt would be more appropriate to use \"a\" instead of \"the\" and to say:\n\n   A Status List Token embeds a Status List into a token that is cryptographically signed and protects the integrity of the Status List.\n\n\n4. Section 7.1 is stating:\n\nStatus Types Values\n\n   *  0x02 - \"SUSPENDED\" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is reversible.\n\nI would be worth to explain what is meant by \" This state is reversible\".\n\nChange into: \n\nThis state is usually temporary. In a further issued Status List Token, this state may remain the same, change to VALID, INVALID or to any other state.\n\n\n5. Section 8.4, second paragraph states:\n\n   To obtain the Status List Token, the Relying Party MUST send an HTTP\n\nThe Holder can also obtain a Status List Token. Using the term\" client\" would cover both cases.\n\nChange into:\n\n   To obtain the Status List Token, the client UST send an HTTP \n\n\n6. Section 9 states:\n\n    Status List Aggregation\n\n    Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch\n    all relevant Status Lists for a specific type of Referenced Token or Issuer.\n\nThe concept of a specific type of Referenced Token looks odd, as the \"type\" of the Referenced Token is not present in the Status List.\n\nI have not yet understood how a client can fetch \"all relevant Status List Tokens for a specific type of Referenced Token\".\n\nI can understand how a how a client can fetch \"all relevant Status List Tokens for a specific Issuer\".\n\"The Status List Aggregation URI provides a list of Status List URIs.\"\n\nI would expect that it contains a list of Status List Token URIs, i.e. NOT a list of Status List URIs.\n\nIf all the URIs of the Status List Tokens of a given Issuer are made publicly available, then there is a leakage of information. \nThe client would be able to know roughly how many Referenced Tokens are currently issued. Issuers should be warned of the consequences. \nThis should be mentioned here as well as in the privacy considerations section\n\n\n7. Section 12.5.2 states\n\nColluding Status Issuer and Relying Party\n\n   A Status Issuer and a Relying Party Issuer may link two transactions involving the same Referenced Tokens by comparing the status claims\n   of the Referenced Token and therefore determine that they have interacted with the same Holder.  It is therefore recommended to use\n   Status Lists for Referenced Token formats that have similar unlinkability properties.\n\nThis section is not understandable to me. Would it be possible first to explain how the link may happen only by using the SLT ?\n\nWhat means \"similar unlinkability properties\" ? I have no idea.\n\n\n8. One typo in section 12.8 (Status Types)\n\n     This documents defines ...\n\n\n9. In section 12.8 again:\n\n       Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, but the token itself is still valid.\n\nNo. If the Token is suspended, it is not valid.\n\nChange proposal :\n\n     Depending on the use-case, suspended could for example provide information that an authorization in the Token is suspended, which means that it should be considered currently invalid.\n\n\n10. The concrete example is biased.\n\n       \"suspended could signal that it should not be considered valid in the scope of being allowed to drive a car\".\n\nNo. Suspended does not mean that the driver is no more allowed to drive a car. Suspended can be used because the driver license has been lost or stolen \nand rather that invalidating it immediately, the person can ask to the Issuer to suspend it in order to prevent someone else to temporary use it. \nA status different from VALID, INVALID or SUSPENDED should be used to signal that the driver is no more allowed to drive a car.\n\nThis example should either be removed or modified.\n\n\n11. In section 13.1 the text states:\n\n   Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties.  \n   In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this \n   from becoming a possible source of correlation.\n\nThis is not a good recommendation. The next paragraph is a better solution.Correlation would still be possible during some time-window. \n\nPlease remove this paragraph.\n\n\n12. The text states:\n\n   Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability.  \n   In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status Lists.  \n   Revoking batch-issued Referenced Tokens might reveal this correlation later on.\n\nThe first sentence is correct. The second sentence would need to be reworded:\n\n    In this case, every Referenced Token MUST have a dedicated Status List entry and one-time use Referenced Tokens SHOULD be spread \n    across multiple Status List Tokens. In this way, revoking batch-issued Referenced Tokens is unlikely to reveal a correlation later on.\n\n\n13. In section 13.3, the text states:\n\n   Implementations producing Status Lists are RECOMMENDED to initialize the Status List byte array with a default value and provide this as\n   an initialization parameter to the Issuer.  The Issuer is RECOMMENDED to use a default value that represents the most common value for its\n   Referenced Tokens to avoid an update during issuance.\n\nThere is a confusion between \"Status Lists\" and \"Status List Tokens\". The recommendation does not take into account that some Referenced Tokens \ncan be issued with the status VALID while some others with the status SUSPENDED.\n\nChange into:\n\n    Implementations producing Status List Tokens are RECOMMENDED to initialize the Status List byte array with a default value. \n    Some Referenced Tokens may be issued under the status VALID while some others under the status SUSPENDED. \n    Status List Tokens should be prepared in advance with the relevant status.\n\n\n14. The next paragraph states:\n\n   Implementations producing Status Lists are RECOMMENDED to prevent double allocation, i.e. re-using the same uri and index for multiple\n   Referenced Tokens.  The Issuer MUST prevent any unintended double allocation by using the Status List.\n\nThere is a confusion between \"Status Lists\" and \"Status List Tokens\".\n\nChange into:\n\n   Implementations producing Status List Tokens are RECOMMENDED to prevent double allocation, i.e. re-using the same uri and index for multiple\n   Referenced Tokens.  The Issuer MUST prevent any unintended double allocation.\n\n\n15. In section 13.3, the text states:\n\n   The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. \n\nIn order to avoid a confusion between \"Status Lists\" and \"Status List Tokens\", change into:\n\n    The Status List Issuer may increase the size of a Status List contained in a Status List Token if it requires indices for additional Referenced Tokens.\n\n\n16. Then after the text states:\n\n   The Status List Issuer may divide its Referenced Tokens up into multiple Status Lists to reduce the transmission size of an individual Status List Token.  \n\nMake a similar change:\n\n   The Status List Issuer may divide its Referenced Tokens up into multiple Status List Tokens to reduce the transmission size of an individual Status List Token.\n\n\n17. In section 13.7, the text states:\n\nRelying Parties avoiding correlatable Information\n\n   If the Relying Party does not require the Referenced Token and the Status List Token after the presentation, e.g. for subsequent status\n   checks or audit trail, it is RECOMMENDED to delete correlatable information, in particular:\n\n   *  the status claim in the Referenced Token\n\n   *  the Status List Token itself\n\n   The Relying Party should instead only keep the relevant payload from the Referenced Token.\n\nDeleting the Status List Token is not a good idea, as the same Status List Token could be useful for another Referenced Token checked later on.\n\nChange proposal:\n\n     The Relying Party should only keep the relevant payload from the Referenced Token. In particular, it should not keep the status claim in the Referenced Token.\n\n\nDenis\n",
       "createdAt": "2025-04-08T03:25:01Z",
-      "updatedAt": "2025-04-09T06:00:35Z",
-      "closedAt": null,
+      "updatedAt": "2025-04-10T23:22:29Z",
+      "closedAt": "2025-04-10T23:22:29Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -5693,6 +5693,22 @@
           "updatedAt": "2025-04-09T06:00:34Z"
         }
       ]
+    },
+    {
+      "number": 283,
+      "id": "I_kwDOJZ2aqs6yAgIt",
+      "title": "Extended Key Usage OID",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/283",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "It might make sense to allow for the OID to be re-used by other (similar) status mechanisms.",
+      "createdAt": "2025-04-10T18:06:11Z",
+      "updatedAt": "2025-04-10T18:06:11Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -18581,26 +18597,95 @@
       "id": "PR_kwDOJZ2aqs6R4qot",
       "title": "some nitpicks",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/282",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #281 ",
       "createdAt": "2025-04-09T06:06:25Z",
-      "updatedAt": "2025-04-09T06:06:26Z",
+      "updatedAt": "2025-04-10T23:22:28Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "ca6eaa283f9b4ecdc10cad7a2f2b1e434b9deafe",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/comments_by_denis",
       "headRefOid": "aa33a4ade7f05e792139cfc8b008fa1c39d3939e",
+      "closedAt": "2025-04-10T23:22:28Z",
+      "mergedAt": "2025-04-10T23:22:28Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "58cbdc6b7d62f4d8d4be66a1d926fd8f71c3ef6b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6kXysW",
+          "commit": {
+            "abbreviatedOid": "aa33a4a"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-10T17:34:11Z",
+          "updatedAt": "2025-04-10T17:34:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6kbxlO",
+          "commit": {
+            "abbreviatedOid": "aa33a4a"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-10T23:22:04Z",
+          "updatedAt": "2025-04-10T23:22:04Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 284,
+      "id": "PR_kwDOJZ2aqs6SJLMM",
+      "title": "fix rendering of OID and make clear that it can be used for other status mechanisms",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/284",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #283",
+      "createdAt": "2025-04-10T18:06:36Z",
+      "updatedAt": "2025-04-10T18:09:16Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "ca6eaa283f9b4ecdc10cad7a2f2b1e434b9deafe",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "rendering-fix-oid",
+      "headRefOid": "612524833bf10c23a00050bd033388153f2357f8",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6kYK6g",
+          "commit": {
+            "abbreviatedOid": "6125248"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-10T18:09:16Z",
+          "updatedAt": "2025-04-10T18:09:16Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
