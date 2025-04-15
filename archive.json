@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-13T00:43:25.292145+00:00",
+  "timestamp": "2025-04-15T00:19:00.883340+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5033,7 +5033,7 @@
       "id": "I_kwDOJZ2aqs6ndRSE",
       "title": "Extension Token Status List to x509",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/243",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "steffenschwalm",
       "authorAssociation": "NONE",
       "assignees": [
@@ -5044,8 +5044,8 @@
       ],
       "body": "Currently Token Status List  not useable for revocation x509 credentials which is critical in context of eIDAS where \n\na) each QEAA has to be signed with xqualified signature or seal based on x509 certificates\nb) credentials in x509 legally possible and covered in ETSI TS 119 472-1 [Token Status List ]\n(https://docbox.etsi.org/esi/Open/Latest_Drafts/ETSI%20DRAFT%20TS_119_472-1v0.0.6-public.pdf)\n\nto avoid that trust service providers have to provide 2 different approaches for revocation, so 1 for credential 1 for its signature x509 shall be covered by Token Status List Spec. As mentioned by @paulbastian  in brief discussion it could be possible to define an X.509 extension in ASN.1, analogous to the CRL Distribution Endpoint:\n\nTokenStatusListDisitrubionEndpoint ::= SEQUENCE {\n        uri                    [0]     RelativeDistinguishedName,\n        index                   [1]     INTEGER }\n\nFurthermore, minimal adjustments to the Validation Logic section would be necessary.",
       "createdAt": "2025-01-24T13:30:59Z",
-      "updatedAt": "2025-03-21T16:10:30Z",
-      "closedAt": null,
+      "updatedAt": "2025-04-13T18:13:16Z",
+      "closedAt": "2025-04-13T15:49:42Z",
       "comments": [
         {
           "author": "tplooker",
@@ -5151,6 +5151,20 @@
           "body": "The topic was presented at [IETF 122](https://www.youtube.com/watch?v=0mfln_LvCJU), the working group direction seems to confirm the direction, that this work is out of scope for the OAuth wg. However, this means that X.509 with Status List is still possible, but it needs to be determined where to pursue this work.",
           "createdAt": "2025-03-21T16:10:08Z",
           "updatedAt": "2025-03-21T16:10:08Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closing this one, see https://mailarchive.ietf.org/arch/msg/oauth/EOYiOhxc8IeRbJX27FZNUeUkBrw/",
+          "createdAt": "2025-04-13T15:49:28Z",
+          "updatedAt": "2025-04-13T15:49:28Z"
+        },
+        {
+          "author": "steffenschwalm",
+          "authorAssociation": "NONE",
+          "body": "Thanks Paul!\r\n\r\nPaul Bastian ***@***.***> schrieb am So., 13. Apr. 2025,\r\n17:50:\r\n\r\n> Closed #243\r\n> <https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/243> as\r\n> not planned.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/243#event-17238958823>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/BJOAAA27UIRV3YNPCFHLQ532ZKBSXAVCNFSM6AAAAABVZWDBR6VHI2DSMVQWIX3LMV45UABCJFZXG5LFIV3GK3TUJZXXI2LGNFRWC5DJN5XDWMJXGIZTQOJVHA4DEMY>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> <oauth-wg/draft-ietf-oauth-status-list/issue/243/issue_event/17238958823@\r\n> github.com>\r\n>\r\n",
+          "createdAt": "2025-04-13T18:13:15Z",
+          "updatedAt": "2025-04-13T18:13:15Z"
         }
       ]
     },
@@ -18659,13 +18673,13 @@
       "labels": [],
       "body": "Closes #283",
       "createdAt": "2025-04-10T18:06:36Z",
-      "updatedAt": "2025-04-10T18:09:16Z",
+      "updatedAt": "2025-04-13T14:07:23Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "ca6eaa283f9b4ecdc10cad7a2f2b1e434b9deafe",
+      "baseRefOid": "58cbdc6b7d62f4d8d4be66a1d926fd8f71c3ef6b",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "rendering-fix-oid",
-      "headRefOid": "612524833bf10c23a00050bd033388153f2357f8",
+      "headRefOid": "c874117132787fbba8b93d62268bfeb593a6e141",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
