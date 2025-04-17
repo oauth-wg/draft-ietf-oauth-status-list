@@ -28,13 +28,14 @@ $ make
 Command line usage requires that you have the necessary software installed.  See
 [the instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/SETUP.md).
 
+## Implementations (Open Source)
 
-# Implementations
-
-| Project | Language | Issuer | Holder | Relying Party |
+| Project                                                                                                           | Language   | Issuer | Holder | Relying Party |
 |---|---|---|---|---|
-| [OWF sd-jwt-js](https://github.com/openwallet-foundation/sd-jwt-js) | TypeScript | yes | yes | yes |
+| [OWF sd-jwt-js](https://github.com/openwallet-foundation/sd-jwt-js)                                               | TypeScript | yes    | yes    | yes           |
+| [Adorsys status-list-server](https://github.com/adorsys/status-list-server)                                       | Rust       | yes    | no     | no            |
+| [Bundesdruckerei issuer](https://github.com/Bundesdruckerei-GmbH/pid-issuer/tree/main/status-list-service-0.1.11) | Kotlin     | yes    | yes    | yes           |
 
-# Testing
+## Testing
 
 You may use this [Cyberchef script](https://gchq.github.io/CyberChef/#recipe=JWT_Decode()JPath_expression('status_list.lst','%5C%5Cn')From_Base64('A-Za-z0-9-_',true,false)Zlib_Inflate(0,0,'Adaptive',false,false)To_Binary('Line%20feed',8)Add_line_numbers()) to quickly analyze a Token Status List in JWT format.
