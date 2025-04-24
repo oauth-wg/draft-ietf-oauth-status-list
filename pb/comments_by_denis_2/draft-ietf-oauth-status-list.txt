@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 22 September 2025                                              
+Expires: 26 October 2025                                                
                                                               C. Bormann
                                                                   SPRIND
-                                                           21 March 2025
+                                                           24 April 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 September 2025.
+   This Internet-Draft will expire on 26 October 2025.
 
 Copyright Notice
 
@@ -109,7 +109,6 @@ Table of Contents
      11.1.  Correct decoding and parsing of the encoded Status List
      11.2.  Security Guidance for JWT and CWT
      11.3.  Key Resolution and Trust Management
-     11.4.  Status List Caching
    12. Privacy Considerations
      12.1.  Observability of Issuers
      12.2.  Malicious Issuers
@@ -127,8 +126,9 @@ Table of Contents
      13.3.  Status List Size
      13.4.  External Status Issuer
      13.5.  External Status Provider for Scalability
-     13.6.  Relying Parties avoiding correlatable Information
-     13.7.  Status List Formats
+     13.6.  Status List Update Interval and Caching
+     13.7.  Relying Parties avoiding correlatable Information
+     13.8.  Status List Formats
    14. IANA Considerations
      14.1.  JSON Web Token Claims Registration
        14.1.1.  Registry Contents
@@ -582,7 +582,7 @@ Table of Contents
 
 5.  Status List Token
 
-   A Status List Token embeds the Status List into a token that is
+   A Status List Token embeds a Status List into a token that is
    cryptographically signed and protects the integrity of the Status
    List.  This allows for the Status List Token to be hosted by third
    parties or be transferred for offline use cases.
@@ -714,9 +714,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840153d2f1084164b3e95775a
-   018679dbabf7d4ffa58c76fd3138dd61adc51da19a8b150c751d11604125df4258d2
-   c369847237bfc4e2373249d45153021bf9f4ee
+   646269747301636c73744a78dadbb918000217015d58408cf2a4ba73975169134889
+   bef80f1dd4745213861fdcd09812d0de22f3d9308324dc06b44be5a694542be1371e
+   7d3a5a381382a00cff186079709eaeb9200e37
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -739,12 +739,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      153d2f1084164b3e95775a01  #       "\x15=/\x10\x84\x16K>\x95wZ\x01"
-      8679dbabf7d4ffa58c76fd31  #       "\x86yÛ«÷Ôÿ¥\x8cvý1"
-      38dd61adc51da19a8b150c75  #       "8Ýa\xadÅ\x1d¡\x9a\x8b\x15\x0cu"
-      1d11604125df4258d2c36984  #       "\x1d\x11`A%ßBXÒÃi\x84"
-      7237bfc4e2373249d4515302  #       "r7¿Äâ72IÔQS\x02"
-      1bf9f4ee                  #       "\x1bùôî"
+      8cf2a4ba73975169134889be  #       "\x8cò¤ºs\x97Qi\x13H\x89¾"
+      f80f1dd4745213861fdcd098  #       "ø\x0f\x1dÔtR\x13\x86\x1fÜÐ\x98"
+      12d0de22f3d9308324dc06b4  #       "\x12ÐÞ"óÙ0\x83$Ü\x06´"
+      4be5a694542be1371e7d3a5a  #       "Kå¦\x94T+á7\x1e}:Z"
+      381382a00cff186079709eae  #       "8\x13\x82\xa0\x0cÿ\x18`yp\x9e®"
+      b9200e37                  #       "¹ \x0e7"
 
 6.  Referenced Token
 
@@ -889,37 +889,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840fe249d9fdea9b256f4fda7d390442289469d59
-   4e85cb8f8807c9ed44da2858a86a8578ae78007ee05cfc8c35ed7e128a0439363852
-   edc5cbb505688b27f41cdf
+   7374617475736c697374732f315840f17993af6df02d41f17747e932f3ba0cee9570
+   3299865aa51f77d8075357be0e63460c9e25a08e76a85a1795baf087f31a32be8c34
+   51a2cc7c2548417b1c7535
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      fe249d9fdea9b256f4fda7d3  #       "þ$\x9d\x9fÞ©²Vôý§Ó"
-      90442289469d594e85cb8f88  #       "\x90D"\x89F\x9dYN\x85Ë\x8f\x88"
-      07c9ed44da2858a86a8578ae  #       "\x07ÉíDÚ(X¨j\x85x®"
-      78007ee05cfc8c35ed7e128a  #       "x\x00~à\ü\x8c5í~\x12\x8a"
-      0439363852edc5cbb505688b  #       "\x04968RíÅËµ\x05h\x8b"
-      27f41cdf                  #       "'ô\x1cß"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         f17993af6df02d41f17747e9  #       "ñy\x93¯mð-AñwGé"
+         32f3ba0cee95703299865aa5  #       "2óº\x0cî\x95p2\x99\x86Z¥"
+         1f77d8075357be0e63460c9e  #       "\x1fwØ\x07SW¾\x0ecF\x0c\x9e"
+         25a08e76a85a1795baf087f3  #       "%\xa0\x8ev¨Z\x17\x95ºð\x87ó"
+         1a32be8c3451a2cc7c254841  #       "\x1a2¾\x8c4Q¢Ì|%HA"
+         7b1c7535                  #       "{\x1cu5"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1090,7 +1090,7 @@ d2                              # tag(18)
 
    *  0x02 - "SUSPENDED" - The status of the Referenced Token is
       temporarily invalid, hanging, debarred from privilege.  This state
-      is reversible.
+      is usually temporary.
 
    The Status Type value 0x03 and Status Type values in the range 0x0B
    until 0x0F are permanently reserved as application specific.  Meaning
@@ -1109,7 +1109,7 @@ d2                              # tag(18)
 8.  Verification and Processing
 
    The fetching, processing and verifying of a Status List Token may be
-   done by either the Holder or the Relying Party.  In the following
+   done by either the Holder or the Relying Party.  The following
    section is described from the role of the Relying Party, however the
    same rules would also apply for the Holder.
 
@@ -1154,8 +1154,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.kTaVaeQyiZwIR_APRrPpFYGP05DuaQfeZtGYMIOGDnlFdcPtfHKd
-   qAhDCCAhOqEE0V8eRyHI8QgfrKFystFKBg
+   nR0bCI6NDMyMDB9.XZB4nrsemLeeD_oYvz89sQcgTziXsZdMLF4ghm4m6if2kWf51MJo
+   xI6D_mPodvA3TMm3cmcZQs5nXFu-AefEQg
 
 8.2.  Status List Response
 
@@ -1294,17 +1294,17 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.kTaVaeQyiZwIR_APRrPpFYGP05DuaQfeZtGYMIOGDnlFdcPtfHKd
-   qAhDCCAhOqEE0V8eRyHI8QgfrKFystFKBg
+   nR0bCI6NDMyMDB9.XZB4nrsemLeeD_oYvz89sQcgTziXsZdMLF4ghm4m6if2kWf51MJo
+   xI6D_mPodvA3TMm3cmcZQs5nXFu-AefEQg
 
 9.  Status List Aggregation
 
    Status List Aggregation is an optional mechanism to retrieve a list
    of URIs to all Status List Tokens, allowing a Relying Party to fetch
-   all relevant Status Lists for a specific type of Referenced Token or
-   Issuer.  This mechanism is intended to support fetching and caching
-   mechanisms and allow offline validation of the status of a reference
-   token for a period of time.
+   all relevant Status List Tokens for a specific type of Referenced
+   Token or Issuer.  This mechanism is intended to support fetching and
+   caching mechanisms and allow offline validation of the status of a
+   reference token for a period of time.
 
    If a Relying Party encounters an invalid Status List referenced in
    the response from the Status List Aggregation endpoint, it SHOULD
@@ -1497,45 +1497,6 @@ d2                              # tag(18)
         │ Status Provider │
         └─────────────────┘
 
-11.4.  Status List Caching
-
-   When fetching a Status List Token, Relying Parties must carefully
-   evaluate how long a Status List is cached for.  Collectively the iat,
-   exp and ttl claims when present in a Status List Token communicate
-   how long a Status List should be cached and should be considered
-   valid for.  The following diagram illustrates the relationship
-   between these claims and how they are designed to influence caching.
-
-   Time of fetching
-
-            │
-            │            Check for        Check for        Check for
-            │             updates          updates          updates
-            │
-    iat     │                │                │                │    exp
-            │                │                │                │
-     │      │                │                │                │     │
-     │      │                │                │                │     │
-     │      │                │                │                │     │
-     │      │                │                │                │     │
-     │      │      ttl       │      ttl       │      ttl       │     │
-     │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
-     │      │                │                │                │     │
-     │      │                │                │                │     │
-     │                                                               │
-   ──┼───────────────────────────────────────────────────────────────┼─►
-     │                                                               │
-
-   It is essential to understand the distinct purposes of the ttl and
-   exp claims.  The ttl claim represents a duration to be interpreted
-   relative to the time the Status List is fetched, indicating when a
-   new version of the Status List may be available.  In contrast, the
-   exp claim specifies an absolute timestamp, marking the point in time
-   when the Status List expires and MUST NOT be relied upon any longer.
-   Together, these claims provide guidance on when to check for updates
-   (ttl claim) and when the Status List must be refreshed or replaced
-   (exp claim).
-
 12.  Privacy Considerations
 
 12.1.  Observability of Issuers
@@ -1694,24 +1655,22 @@ d2                              # tag(18)
    As previously explained, there is the potential risk of observability
    by Relying Parties (see Section 12.3) and Outsiders (see
    Section 12.4).  That means that any Status Type that transports
-   special information about a Token can leak information to other
-   parties.  This documents defines one additional Status Type with
-   "SUSPENDED" that conveys such additional information.  Depending on
-   the use-case, suspended could for example provide information that an
-   authorization in the Token is suspended, but the token itself is
-   still valid.
+   special information about a Referenced Token can leak information to
+   other parties.  This document defines one additional Status Type with
+   "SUSPENDED" that conveys such additional information.
 
-   A concrete example would be a driver's license, where the digital
-   driver's license might still be useful to prove other information
-   about its holder, but suspended could signal that it should not be
-   considered valid in the scope of being allowed to drive a car.  This
-   case could be solved by either introducing a special status type, or
-   by revoking the Token and re-issuing with changed attributes.  For
-   such a case, the status type suspended might be dangerous as it would
-   leak the information of a suspended driver's license even if the
-   driver's license is used as a mean of identification and not in the
-   context of driving a car.  This could also allow for the unwanted
-   collection of statistical data on the status of driver's licenses.
+   A concrete example for "SUSPENDED" would be a driver's license, where
+   the digital driver's license might still be useful to prove other
+   information about its holder, but suspended could signal that it
+   should not be considered valid in the scope of being allowed to drive
+   a car.  This case could be solved by either introducing a special
+   status type, or by revoking the Referenced Token and re-issuing with
+   changed attributes.  For such a case, the status type suspended might
+   be dangerous as it would leak the information of a suspended driver's
+   license even if the driver's license is used as a mean of
+   identification and not in the context of driving a car.  This could
+   also allow for the unwanted collection of statistical data on the
+   status of driver's licenses.
 
    Ecosystems that want to use other Status Types than "VALID" and
    "INVALID" should consider the possible leakage of data and profiling
@@ -1734,21 +1693,20 @@ d2                              # tag(18)
    Referenced Tokens may also be issued in batches and be presented by
    Holders in a one-time-use policy to avoid linkability.  In this case,
    every Referenced Token MUST have a dedicated Status List entry and
-   MAY be spread across multiple Status Lists.  Revoking batch-issued
-   Referenced Tokens might reveal this correlation later on.
+   MAY be spread across multiple Status List Tokens.  Revoking batch-
+   issued Referenced Tokens might reveal this correlation later on.
 
 13.2.  Default Values and Double Allocation
 
-   Implementations producing Status Lists are RECOMMENDED to initialize
-   the Status List byte array with a default value and provide this as
-   an initialization parameter to the Issuer.  The Issuer is RECOMMENDED
-   to use a default value that represents the most common value for its
+   The Status Issuer is RECOMMENDED to initialize the Status List byte
+   array with a default value provided as an initialization parameter by
+   the Issuer of the Referenced Token.  The Issuer is RECOMMENDED to use
+   a default value that represents the most common value for its
    Referenced Tokens to avoid an update during issuance.
 
-   Implementations producing Status Lists are RECOMMENDED to prevent
-   double allocation, i.e. re-using the same uri and index for multiple
-   Referenced Tokens.  The Issuer MUST prevent any unintended double
-   allocation by using the Status List.
+   The Status Issuer is RECOMMENDED to prevent double allocation, i.e.
+   re-using the same uri and index for multiple Referenced Tokens.  The
+   Status Issuer MUST prevent any unintended double allocation.
 
 13.3.  Status List Size
 
@@ -1802,21 +1760,80 @@ d2                              # tag(18)
    and integrity of Token Status List is still guaranteed, as it is
    signed by the Status Issuer.
 
-13.6.  Relying Parties avoiding correlatable Information
+13.6.  Status List Update Interval and Caching
 
-   If the Relying Party does not require the Referenced Token and the
-   Status List Token after the presentation, e.g. for subsequent status
-   checks or audit trail, it is RECOMMENDED to delete correlatable
-   information, in particular:
+   Status Issuers have two options to communicate their update interval
+   policy for the status of their Referenced Tokens:
 
-   *  the status claim in the Referenced Token
+   *  the exp claim specifies an absolute timestamp, marking the point
+      in time when the Status List expires and MUST NOT be relied upon
+      any longer
 
-   *  the Status List Token itself
+   *  the ttl claim represents a duration to be interpreted relative to
+      the time the Status List is fetched, indicating when a new version
+      of the Status List may be available
+
+   Both ttl and exp are RECOMMENDED to be used by the Status Issuer.
+
+   When fetching a Status List Token, Relying Parties must carefully
+   evaluate how long a Status List is cached for.  Collectively the iat,
+   exp and ttl claims when present in a Status List Token communicate
+   how long a Status List should be cached and should be considered
+   valid for.  Relying Parties have different options for caching the
+   Status List:
+
+   *  After time of fetching, the Relying Party caches the Status List
+      for time duration of ttl before making checks for updates.  This
+      method is RECOMMENDED to distribute the load for the Status
+      Provider.
+
+   *  After initial fetching, the Relying Party checks for updates at
+      time of iat + ttl.  This method ensures the most up-to-date
+      information for critical use cases.  The Relying Party should
+      account a minimal offset due to the signing and distribution
+      process of the Status Issuer.
+
+   *  If no ttl is given, then Relying Party SHOULD check for updates
+      latest after time of exp.
+
+   Ultimately, its the Relying Parties decision how often to check for
+   updates, ecosystems may define there own guidelines and policies for
+   updating the Status List information.
+
+   The following diagram illustrates the relationship between these
+   claims and how they are designed to influence caching:
+
+          Time of        Check for        Check for        Check for
+          Fetching        updates          updates          updates
+
+    iat     │                │                │                │    exp
+            │                │                │                │
+     │      │                │                │                │     │
+     │      │                │                │                │     │
+     │      │                │                │                │     │
+     │      │                │                │                │     │
+     │      │      ttl       │      ttl       │      ttl       │     │
+     │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
+     │      │                │                │                │     │
+     │      │                │                │                │     │
+     │                                                               │
+   ──┼───────────────────────────────────────────────────────────────┼─►
+     │                                                               │
+
+13.7.  Relying Parties avoiding correlatable Information
+
+   If the Relying Party does not require the Referenced Token or the
+   Status List Token, e.g. for subsequent status checks or audit trail,
+   it is RECOMMENDED to delete correlatable information, in particular:
+
+   *  the status claim in the Referenced Token (after the presentation)
+
+   *  the Status List Token itself (after expiration or update)
 
    The Relying Party should instead only keep the relevant payload from
    the Referenced Token.
 
-13.7.  Status List Formats
+13.8.  Status List Formats
 
    This specification defines 2 different token formats of the Status
    List:
@@ -2155,7 +2172,7 @@ d2                              # tag(18)
 
    *  Status Type Description: The status of the Referenced Token is
       temporarily invalid, hanging or debarred from privilege.  This
-      state is reversible.
+      state is usually temporary.
 
    *  Status Type value: 0x02
 
@@ -3059,7 +3076,16 @@ Test vectors for Status List encoding
 
 Document History
 
+   -11
+
+   *  some nitpicks
+
+   *  even more nitpicks
+
    -10
+
+   *  improve caching guidelines and move them to implementaiton
+      considerations
 
    *  Add CoAP Content-Format ID and IANA registration
 
