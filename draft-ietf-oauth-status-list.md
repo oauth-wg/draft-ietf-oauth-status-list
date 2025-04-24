@@ -737,7 +737,7 @@ See [](#privacy-status-types) for privacy considerations on status types.
 
 # Verification and Processing
 
-The fetching, processing and verifying of a Status List Token may be done by either the Holder or the Relying Party. In the following section is described from the role of the Relying Party, however the same rules would also apply for the Holder.
+The fetching, processing and verifying of a Status List Token may be done by either the Holder or the Relying Party. The following section is described from the role of the Relying Party, however the same rules would also apply for the Holder.
 
 ## Status List Request {#status-list-request}
 
@@ -839,7 +839,7 @@ Content-Type: application/statuslist+jwt
 
 # Status List Aggregation {#aggregation}
 
-Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status Lists for a specific type of Referenced Token or Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
+Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status List Tokens for a specific type of Referenced Token or Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
 
 If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response.
 
@@ -1063,7 +1063,7 @@ The lifetime of a Status List Token depends on the lifetime of its Referenced To
 
 Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.
 
-Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status Lists. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
+Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status List Tokens. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
 
 ## Default Values and Double Allocation
 
@@ -1895,6 +1895,7 @@ CBOR encoding:
 -11
 
 * some nitpicks
+* even more nitpicks
 
 -10
 
