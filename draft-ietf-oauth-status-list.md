@@ -181,7 +181,7 @@ Furthermore, the document defines an extension point that enables other specific
 
 ## Example Use Cases
 
-An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the token issuer, whereas the mechanism defined in this specification does not have this limitation.
+An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the token Issuer for each token validation, whereas the mechanism defined in this specification reduces the Issuer interaction significantly. This characteristic reduces the deployment dependency on the Issuer and provides privacy benefits (herd anonymity).
 
 Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SD-JWT.VC}}.
 
@@ -259,7 +259,7 @@ A compressed byte array containing the status information of the Referenced Toke
 
 2. The Status Issuer creates a byte array of size = amount of Referenced Tokens * `bits` / 8 or greater. Depending on the `bits`, each byte in the array corresponds to 8/(`bits`) statuses (8,4,2 or 1).
 
-3. The Status Issuer sets the status values for all Referenced Tokens within the byte array. The status of each Referenced Token is identified using an index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with amount of Referenced Tokens - 1 (being the last valid entry). The bits within an array are counted from the least significant bit ("0") to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value.
+3. The Status Issuer sets the status values for all Referenced Tokens within the byte array. The status of each Referenced Token is identified using an index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with amount of Referenced Tokens - 1 (being the last valid entry). The bits within an array are counted from the least significant bit ("0") to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value (see [](#status-types) for more details on the values).
 
 4. The Status Issuer compresses the byte array using DEFLATE {{RFC1951}} with the ZLIB {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.
 
@@ -471,7 +471,7 @@ The following is the CBOR Annotated Hex output of the example above:
 
 ## Status Claim {#status-claim}
 
-By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference to a Status List Token as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
+By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference a Status List Token as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
 ## Referenced Token in JOSE {#referenced-token-jose}
 
@@ -743,9 +743,9 @@ The fetching, processing and verifying of a Status List Token may be done by eit
 
 To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token.
 
-The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-based clients to access it.
+The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.
 
-The Relying Party SHOULD send the following Accept-Header to indicate the requested response type:
+The Relying Party MUST send the following Accept-Header to indicate the requested response type:
 
 - "application/statuslist+jwt" for Status List Token in JWT format
 - "application/statuslist+cwt" for Status List Token in CWT format
@@ -786,7 +786,7 @@ In the case of "application/statuslist+cwt", the response MUST be of type CWT an
 
 The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
-If caching-related HTTP headers are present in the HTTP response, Relying Parties SHOULD prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.
+If caching-related HTTP headers are present in the HTTP response, Relying Parties MUST prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.
 
 ## Validation Rules
 
@@ -841,7 +841,7 @@ Content-Type: application/statuslist+jwt
 
 Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status List Tokens for a specific type of Referenced Token or Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
 
-If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response.
+If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response instead of fully aborting processing and retrying later.
 
 There are two options for a Relying Party to retrieve the Status List Aggregation.
 An Issuer MAY support any of these mechanisms:
@@ -870,7 +870,7 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or via a VICAL extension for ISO mDoc / mDL. If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or via a VICAL extension for ISO mDoc / mDL (VICAL is defined in {{ISO.mdoc}}, such an extension does not exist yet). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
 
 The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
 
@@ -884,7 +884,7 @@ This section defines the structure for a JSON-encoded Status List Aggregation:
 
 * `status_lists`: REQUIRED. JSON array of strings that contains URIs linking to Status List Tokens.
 
-The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return SHOULD be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
+The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return MUST be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
 
 The following is a non-normative example for media type `application/json`:
 
@@ -899,9 +899,7 @@ The following is a non-normative example for media type `application/json`:
 }
 ~~~
 
-# X.509 Certificate Extensions
-
-## Extended Key Usage Extension {#eku}
+# X.509 Certificate Extended Key Usage Extension {#eku}
 
 {{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used. A certificate's issuer explicitly delegates Status List Token signing authority by issuing a X.509 certificate containing the KeyPurposeId defined below in the extended key usage extension.
 
@@ -933,7 +931,7 @@ A Status List Token in the CWT format should follow the security considerations 
 
 ## Key Resolution and Trust Management {#key-management}
 
-This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made for specifications, profiles, or ecosystems that are planning ot make use of the Status List mechanism:
+This specification does not mandate specific methods for key resolution and trust management, however the following recommendations are made for specifications, profiles, or ecosystems that are planning to make use of the Status List mechanism:
 
 If the Issuer of the Referenced Token is the same entity as the Status Issuer, then the same key that is embedded into the Referenced Token may be used for the Status List Token. In this case the Status List Token may use:
 - the same `x5c` value or an `x5t`, `x5t#S256` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
@@ -976,7 +974,7 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
      └─────────────────┘
 ~~~
 
-# Privacy Considerations
+# Privacy Considerations {#privacy-considerations}
 
 ## Observability of Issuers {#privacy-issuer}
 
@@ -1068,9 +1066,9 @@ Referenced Tokens may also be issued in batches and be presented by Holders in a
 ## Default Values and Double Allocation
 
 The Status Issuer is RECOMMENDED to initialize the Status List byte array with a default value provided as
-an initialization parameter by the Issuer of the Referenced Token. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance.
+an initialization parameter by the Issuer of the Referenced Token. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance (usually 0x00, VALID). This preserves the benefits from compression and effectively hides the number of active Reference Tokens since a valid state looks the same as one that was initialized but not used yet.
 
-The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens. The Status Issuer MUST prevent any unintended double allocation.
+The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens (since `uri` and `index` form a unique identifier that might be used for tracking, see (#privacy-considerations) for more details). The Status Issuer MUST prevent any unintended double allocation.
 
 ## Status List Size
 
