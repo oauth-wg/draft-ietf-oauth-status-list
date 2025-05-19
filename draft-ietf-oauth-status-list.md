@@ -1892,6 +1892,7 @@ CBOR encoding:
 
 -11
 
+* incorporate feedback from shepherd review
 * some nitpicks
 * even more nitpicks
 
