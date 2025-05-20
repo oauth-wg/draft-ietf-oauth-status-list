@@ -181,7 +181,7 @@ Furthermore, the document defines an extension point that enables other specific
 
 ## Example Use Cases
 
-An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines another way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the token Issuer for each token validation, whereas the mechanism defined in this specification reduces the Issuer interaction significantly. This characteristic reduces the deployment dependency on the Issuer and provides privacy benefits (herd anonymity).
+An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines a way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the Issuer of the access tokens for each token validation. In contrast, the mechanism defined in this specification allows to fetch the status for many tokens, reducing interactions with the Issuer significantly for better scalability and providing better privacy as the Issuer does not learn which specific access token is verified (herd anonymity).
 
 Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SD-JWT.VC}}.
 
@@ -870,7 +870,7 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or via a VICAL extension for ISO mDoc / mDL (VICAL is defined in {{ISO.mdoc}}, such an extension does not exist yet). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
 
 The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
 
@@ -1066,7 +1066,7 @@ Referenced Tokens may also be issued in batches and be presented by Holders in a
 ## Default Values and Double Allocation
 
 The Status Issuer is RECOMMENDED to initialize the Status List byte array with a default value provided as
-an initialization parameter by the Issuer of the Referenced Token. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance (usually 0x00, VALID). This preserves the benefits from compression and effectively hides the number of active Reference Tokens since a valid state looks the same as one that was initialized but not used yet.
+an initialization parameter by the Issuer of the Referenced Token. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance (usually 0x00, VALID). This preserves the benefits from compression and effectively hides the number of managed Referenced Tokens since an unused index value can not be distinguished from a valid Referenced Token.
 
 The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens (since `uri` and `index` form a unique identifier that might be used for tracking, see (#privacy-considerations) for more details). The Status Issuer MUST prevent any unintended double allocation.
 
