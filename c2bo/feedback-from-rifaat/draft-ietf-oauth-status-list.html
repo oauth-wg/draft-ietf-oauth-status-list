@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 20 November 2025</td>
+<td class="center">Expires 21 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-19" class="published">19 May 2025</time>
+<time datetime="2025-05-20" class="published">20 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-20">20 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-21">21 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1124,7 +1124,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1510,7 +1510,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-example-use-cases">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-example-use-cases" class="section-name selfRef">Example Use Cases</a>
         </h3>
-<p id="section-1.1-1">An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> defines another way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the token Issuer for each token validation, whereas the mechanism defined in this specification reduces the Issuer interaction significantly. This characteristic reduces the deployment dependency on the Issuer and provides privacy benefits (herd anonymity).<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> defines a way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the Issuer of the access tokens for each token validation. In contrast, the mechanism defined in this specification allows to fetch the status for many tokens, reducing interactions with the Issuer significantly for better scalability and providing better privacy as the Issuer does not learn which specific access token is verified (herd anonymity).<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1968,9 +1968,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d58401a541b3e62695b757dd7b1
-da99866dc3256258f58d65b6b734635accf7867ab5846d9cc349506d4b0016d3b342
-aac01e244e7d16c44ea7bc93f280255de2e017
+646269747301636c73744a78dadbb918000217015d5840431f55625dc1cca707c97c
+88af5a95abfa9b4d28a6164b5f8ed53e1e6ec6657469e16a58e488ce12c6b6a7a274
+a3f7a5628a725cbfabf79bb7903aabe4023f01
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1995,12 +1995,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      1a541b3e62695b757dd7b1da  #       "\x1aT\x1b&gt;bi[u}×±Ú"
-      99866dc3256258f58d65b6b7  #       "\x99\x86mÃ%bXõ\x8de¶·"
-      34635accf7867ab5846d9cc3  #       "4cZÌ÷\x86zµ\x84m\x9cÃ"
-      49506d4b0016d3b342aac01e  #       "IPmK\x00\x16Ó³BªÀ\x1e"
-      244e7d16c44ea7bc93f28025  #       "$N}\x16ÄN§¼\x93ò\x80%"
-      5de2e017                  #       "]âà\x17"
+      431f55625dc1cca707c97c88  #       "C\x1fUb]ÁÌ§\x07É|\x88"
+      af5a95abfa9b4d28a6164b5f  #       "¯Z\x95«ú\x9bM(¦\x16K_"
+      8ed53e1e6ec6657469e16a58  #       "\x8eÕ&gt;\x1enÆetiájX"
+      e488ce12c6b6a7a274a3f7a5  #       "ä\x88Î\x12Æ¶§¢t£÷¥"
+      628a725cbfabf79bb7903aab  #       "b\x8ar\¿«÷\x9b·\x90:«"
+      e4023f01                  #       "ä\x02?\x01"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2142,9 +2142,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584043d3e321b40da3d501e7c3c03605d0065ac522
-8136010187df5c95d4c9d1bec25f3c4d109de417ffd77453003ddd36bfadaafdae01
-eeb27a6a0f8e94bc113549
+7374617475736c697374732f315840ecfaa9397312583fb8eab82473b219d8ba7b6f
+a2e8140f25b757d23242faa0efe24633f77f35eae54f382140de19126a05f6d5dea7
+940b2bd24a33695fe6cb56
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2169,12 +2169,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      43d3e321b40da3d501e7c3c0  #       "CÓã!´\x0d£Õ\x01çÃÀ"
-      3605d0065ac5228136010187  #       "6\x05Ð\x06ZÅ"\x816\x01\x01\x87"
-      df5c95d4c9d1bec25f3c4d10  #       "ß\\x95ÔÉÑ¾Â_&lt;M\x10"
-      9de417ffd77453003ddd36bf  #       "\x9dä\x17ÿ×tS\x00=Ý6¿"
-      adaafdae01eeb27a6a0f8e94  #       "\xadªý®\x01î²zj\x0f\x8e\x94"
-      bc113549                  #       "¼\x115I"
+      ecfaa9397312583fb8eab824  #       "ìú©9s\x12X?¸ê¸$"
+      73b219d8ba7b6fa2e8140f25  #       "s²\x19Øº{o¢è\x14\x0f%"
+      b757d23242faa0efe24633f7  #       "·WÒ2Bú\xa0ïâF3÷"
+      7f35eae54f382140de19126a  #       "\x7f5êåO8!@Þ\x19\x12j"
+      05f6d5dea7940b2bd24a3369  #       "\x05öÕÞ§\x94\x0b+ÒJ3i"
+      5fe6cb56                  #       "_æËV"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2388,8 +2388,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.uuDlsUiNgCQJZ62o0BI2zThnXBPnD-9MMv-ufAo3-tTH7gjy45tE
-7PvQtHPZSsnK-IulOFPAnQrh54tVQeDGHQ
+nR0bCI6NDMyMDB9.OxYNE7ENSYjJZzoV4VmbjKkPz7AOrxBLcsQnECdukklqvlJS1FUp
+SPwQJ2rSiDwTJnF7JYVKm5710CHtHyjeoQ
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2495,8 +2495,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.uuDlsUiNgCQJZ62o0BI2zThnXBPnD-9MMv-ufAo3-tTH7gjy45tE
-7PvQtHPZSsnK-IulOFPAnQrh54tVQeDGHQ
+nR0bCI6NDMyMDB9.OxYNE7ENSYjJZzoV4VmbjKkPz7AOrxBLcsQnECdukklqvlJS1FUp
+SPwQJ2rSiDwTJnF7JYVKm5710CHtHyjeoQ
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2545,7 +2545,7 @@ An Issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
         <h3 id="name-issuer-metadata">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-issuer-metadata" class="section-name selfRef">Issuer Metadata</a>
         </h3>
-<p id="section-9.1-1">The Issuer <span class="bcp14">MAY</span> link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or via a VICAL extension for ISO mDoc / mDL (VICAL is defined in <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>, such an extension does not exist yet). If the Issuer is an OAuth Authorization Server according to <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> to use <code>status_list_aggregation_endpoint</code> for its metadata defined by <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">The Issuer <span class="bcp14">MAY</span> link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>). If the Issuer is an OAuth Authorization Server according to <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> to use <code>status_list_aggregation_endpoint</code> for its metadata defined by <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2835,7 +2835,7 @@ An Issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
 <a href="#section-13.2" class="section-number selfRef">13.2. </a><a href="#name-default-values-and-double-a" class="section-name selfRef">Default Values and Double Allocation</a>
         </h3>
 <p id="section-13.2-1">The Status Issuer is <span class="bcp14">RECOMMENDED</span> to initialize the Status List byte array with a default value provided as
-an initialization parameter by the Issuer of the Referenced Token. The Issuer is <span class="bcp14">RECOMMENDED</span> to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance (usually 0x00, VALID). This preserves the benefits from compression and effectively hides the number of active Reference Tokens since a valid state looks the same as one that was initialized but not used yet.<a href="#section-13.2-1" class="pilcrow">¶</a></p>
+an initialization parameter by the Issuer of the Referenced Token. The Issuer is <span class="bcp14">RECOMMENDED</span> to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance (usually 0x00, VALID). This preserves the benefits from compression and effectively hides the number of managed Referenced Tokens since an unused index value can not be distinguished from a valid Referenced Token.<a href="#section-13.2-1" class="pilcrow">¶</a></p>
 <p id="section-13.2-2">The Status Issuer is <span class="bcp14">RECOMMENDED</span> to prevent double allocation, i.e. re-using the same <code>uri</code> and <code>index</code> for multiple Referenced Tokens (since <code>uri</code> and <code>index</code> form a unique identifier that might be used for tracking, see (#privacy-considerations) for more details). The Status Issuer <span class="bcp14">MUST</span> prevent any unintended double allocation.<a href="#section-13.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>

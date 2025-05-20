@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 20 November 2025                                               
+Expires: 21 November 2025                                               
                                                               C. Bormann
                                                                   SPRIND
-                                                             19 May 2025
+                                                             20 May 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 November 2025.
+   This Internet-Draft will expire on 21 November 2025.
 
 Copyright Notice
 
@@ -246,13 +246,14 @@ Table of Contents
 
    An example of the usage of a Status List is to manage the status of
    issued access tokens as defined in section 1.4 of [RFC6749].  Token
-   Introspection [RFC7662] defines another way to determine the status
-   of an issued access token, but it requires the party trying to
-   validate the state of access tokens to directly contact the token
-   Issuer for each token validation, whereas the mechanism defined in
-   this specification reduces the Issuer interaction significantly.
-   This characteristic reduces the deployment dependency on the Issuer
-   and provides privacy benefits (herd anonymity).
+   Introspection [RFC7662] defines a way to determine the status of an
+   issued access token, but it requires the party trying to validate the
+   state of access tokens to directly contact the Issuer of the access
+   tokens for each token validation.  In contrast, the mechanism defined
+   in this specification allows to fetch the status for many tokens,
+   reducing interactions with the Issuer significantly for better
+   scalability and providing better privacy as the Issuer does not learn
+   which specific access token is verified (herd anonymity).
 
    Another possible use case for the Status List is to express the
    status of verifiable credentials (Referenced Tokens) issued by an
@@ -715,9 +716,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d58401a541b3e62695b757dd7b1
-   da99866dc3256258f58d65b6b734635accf7867ab5846d9cc349506d4b0016d3b342
-   aac01e244e7d16c44ea7bc93f280255de2e017
+   646269747301636c73744a78dadbb918000217015d5840431f55625dc1cca707c97c
+   88af5a95abfa9b4d28a6164b5f8ed53e1e6ec6657469e16a58e488ce12c6b6a7a274
+   a3f7a5628a725cbfabf79bb7903aabe4023f01
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -740,12 +741,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      1a541b3e62695b757dd7b1da  #       "\x1aT\x1b>bi[u}×±Ú"
-      99866dc3256258f58d65b6b7  #       "\x99\x86mÃ%bXõ\x8de¶·"
-      34635accf7867ab5846d9cc3  #       "4cZÌ÷\x86zµ\x84m\x9cÃ"
-      49506d4b0016d3b342aac01e  #       "IPmK\x00\x16Ó³BªÀ\x1e"
-      244e7d16c44ea7bc93f28025  #       "$N}\x16ÄN§¼\x93ò\x80%"
-      5de2e017                  #       "]âà\x17"
+      431f55625dc1cca707c97c88  #       "C\x1fUb]ÁÌ§\x07É|\x88"
+      af5a95abfa9b4d28a6164b5f  #       "¯Z\x95«ú\x9bM(¦\x16K_"
+      8ed53e1e6ec6657469e16a58  #       "\x8eÕ>\x1enÆetiájX"
+      e488ce12c6b6a7a274a3f7a5  #       "ä\x88Î\x12Æ¶§¢t£÷¥"
+      628a725cbfabf79bb7903aab  #       "b\x8ar\¿«÷\x9b·\x90:«"
+      e4023f01                  #       "ä\x02?\x01"
 
 6.  Referenced Token
 
@@ -890,37 +891,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584043d3e321b40da3d501e7c3c03605d0065ac522
-   8136010187df5c95d4c9d1bec25f3c4d109de417ffd77453003ddd36bfadaafdae01
-   eeb27a6a0f8e94bc113549
+   7374617475736c697374732f315840ecfaa9397312583fb8eab82473b219d8ba7b6f
+   a2e8140f25b757d23242faa0efe24633f77f35eae54f382140de19126a05f6d5dea7
+   940b2bd24a33695fe6cb56
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      43d3e321b40da3d501e7c3c0  #       "CÓã!´\x0d£Õ\x01çÃÀ"
-      3605d0065ac5228136010187  #       "6\x05Ð\x06ZÅ"\x816\x01\x01\x87"
-      df5c95d4c9d1bec25f3c4d10  #       "ß\\x95ÔÉÑ¾Â_<M\x10"
-      9de417ffd77453003ddd36bf  #       "\x9dä\x17ÿ×tS\x00=Ý6¿"
-      adaafdae01eeb27a6a0f8e94  #       "\xadªý®\x01î²zj\x0f\x8e\x94"
-      bc113549                  #       "¼\x115I"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         ecfaa9397312583fb8eab824  #       "ìú©9s\x12X?¸ê¸$"
+         73b219d8ba7b6fa2e8140f25  #       "s²\x19Øº{o¢è\x14\x0f%"
+         b757d23242faa0efe24633f7  #       "·WÒ2Bú\xa0ïâF3÷"
+         7f35eae54f382140de19126a  #       "\x7f5êåO8!@Þ\x19\x12j"
+         05f6d5dea7940b2bd24a3369  #       "\x05öÕÞ§\x94\x0b+ÒJ3i"
+         5fe6cb56                  #       "_æËV"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1156,8 +1157,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.uuDlsUiNgCQJZ62o0BI2zThnXBPnD-9MMv-ufAo3-tTH7gjy45tE
-   7PvQtHPZSsnK-IulOFPAnQrh54tVQeDGHQ
+   nR0bCI6NDMyMDB9.OxYNE7ENSYjJZzoV4VmbjKkPz7AOrxBLcsQnECdukklqvlJS1FUp
+   SPwQJ2rSiDwTJnF7JYVKm5710CHtHyjeoQ
 
 8.2.  Status List Response
 
@@ -1296,8 +1297,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.uuDlsUiNgCQJZ62o0BI2zThnXBPnD-9MMv-ufAo3-tTH7gjy45tE
-   7PvQtHPZSsnK-IulOFPAnQrh54tVQeDGHQ
+   nR0bCI6NDMyMDB9.OxYNE7ENSYjJZzoV4VmbjKkPz7AOrxBLcsQnECdukklqvlJS1FUp
+   SPwQJ2rSiDwTJnF7JYVKm5710CHtHyjeoQ
 
 9.  Status List Aggregation
 
@@ -1345,12 +1346,11 @@ d2                              # tag(18)
 
    The Issuer MAY link to the Status List Aggregation URI in metadata
    that can be provided by different means like .well-known metadata as
-   is used commonly in OAuth and OpenID or via a VICAL extension for ISO
-   mDoc / mDL (VICAL is defined in [ISO.mdoc], such an extension does
-   not exist yet).  If the Issuer is an OAuth Authorization Server
-   according to [RFC6749], it is RECOMMENDED to use
-   status_list_aggregation_endpoint for its metadata defined by
-   [RFC8414].
+   is used commonly in OAuth and OpenID or within Issuer certificates or
+   trust lists (such as VICAL as defined in Annex C of [ISO.mdoc]).  If
+   the Issuer is an OAuth Authorization Server according to [RFC6749],
+   it is RECOMMENDED to use status_list_aggregation_endpoint for its
+   metadata defined by [RFC8414].
 
    The concrete specification on how this is implemented depends on the
    specific ecosystem and is out of scope of this specification.
@@ -1705,8 +1705,8 @@ d2                              # tag(18)
    a default value that represents the most common value for its
    Referenced Tokens to avoid an update during issuance (usually 0x00,
    VALID).  This preserves the benefits from compression and effectively
-   hides the number of active Reference Tokens since a valid state looks
-   the same as one that was initialized but not used yet.
+   hides the number of managed Referenced Tokens since an unused index
+   value can not be distinguished from a valid Referenced Token.
 
    The Status Issuer is RECOMMENDED to prevent double allocation, i.e.
    re-using the same uri and index for multiple Referenced Tokens (since
