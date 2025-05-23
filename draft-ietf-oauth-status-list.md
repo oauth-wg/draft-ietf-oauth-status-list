@@ -1068,7 +1068,7 @@ Referenced Tokens may also be issued in batches and be presented by Holders in a
 The Status Issuer is RECOMMENDED to initialize the Status List byte array with a default value provided as
 an initialization parameter by the Issuer of the Referenced Token. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance (usually 0x00, VALID). This preserves the benefits from compression and effectively hides the number of managed Referenced Tokens since an unused index value can not be distinguished from a valid Referenced Token.
 
-The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens (since `uri` and `index` form a unique identifier that might be used for tracking, see (#privacy-considerations) for more details). The Status Issuer MUST prevent any unintended double allocation.
+The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens (since `uri` and `index` form a unique identifier that might be used for tracking, see [](#privacy-considerations) for more details). The Status Issuer MUST prevent any unintended double allocation.
 
 ## Status List Size
 
