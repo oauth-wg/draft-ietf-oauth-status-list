@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 9 November 2025                                                
+Expires: 24 November 2025                                               
                                                               C. Bormann
                                                                   SPRIND
-                                                              8 May 2025
+                                                             23 May 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 November 2025.
+   This Internet-Draft will expire on 24 November 2025.
 
 Copyright Notice
 
@@ -103,8 +103,7 @@ Table of Contents
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
      9.3.  Status List Aggregation in JSON Format
-   10. X.509 Certificate Extensions
-     10.1.  Extended Key Usage Extension
+   10. X.509 Certificate Extended Key Usage Extension
    11. Security Considerations
      11.1.  Correct decoding and parsing of the encoded Status List
      11.2.  Security Guidance for JWT and CWT
@@ -247,11 +246,15 @@ Table of Contents
 
    An example of the usage of a Status List is to manage the status of
    issued access tokens as defined in section 1.4 of [RFC6749].  Token
-   Introspection [RFC7662] defines another way to determine the status
-   of an issued access token, but it requires the party trying to
-   validate the state of access tokens to directly contact the token
-   issuer, whereas the mechanism defined in this specification does not
-   have this limitation.
+   Introspection [RFC7662] defines a way to determine the status of an
+   issued access token, but it requires the party trying to validate the
+   state of access tokens to directly contact the Issuer of the access
+   tokens for each token validation.  In contrast, the mechanism defined
+   in this specification allows a party to fetch the status for many
+   tokens, reducing interactions with the Issuer significantly for
+   better scalability and providing better privacy as the Issuer does
+   not learn which specific access token is being verified (herd
+   anonymity).
 
    Another possible use case for the Status List is to express the
    status of verifiable credentials (Referenced Tokens) issued by an
@@ -413,7 +416,7 @@ Table of Contents
        last valid entry).  The bits within an array are counted from the
        least significant bit ("0") to the most significant bit ("7").
        All bits of the byte array at a particular index are set to a
-       status value.
+       status value (see Section 7 for more details on the values).
 
    4.  The Status Issuer compresses the byte array using DEFLATE
        [RFC1951] with the ZLIB [RFC1950] data format.  Implementations
@@ -714,9 +717,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d584058dbbeaffce42f4a6273a6
-   f8452a8dbe75d0f033d3e74ee891d8edb605a049bbd1e4f7a475085e8eb280a698ad
-   59337c87406652fc88babb3b2bf14690876093
+   646269747301636c73744a78dadbb918000217015d5840288f8bc488de513a5f34ad
+   4fd6b6ffe7c64c035e230aeb56e128933a43921e4c5c1267c5192bddd07ea2478221
+   36c07706264075c531afae9d752aeda3408f6d
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -739,12 +742,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      58dbbeaffce42f4a6273a6f8  #       "XÛ¾¯üä/Jbs¦ø"
-      452a8dbe75d0f033d3e74ee8  #       "E*\x8d¾uÐð3ÓçNè"
-      91d8edb605a049bbd1e4f7a4  #       "\x91Øí¶\x05\xa0I»Ñä÷¤"
-      75085e8eb280a698ad59337c  #       "u\x08^\x8e²\x80¦\x98\xadY3|"
-      87406652fc88babb3b2bf146  #       "\x87@fRü\x88º»;+ñF"
-      90876093                  #       "\x90\x87`\x93"
+      288f8bc488de513a5f34ad4f  #       "(\x8f\x8bÄ\x88ÞQ:_4\xadO"
+      d6b6ffe7c64c035e230aeb56  #       "Ö¶ÿçÆL\x03^#\x0aëV"
+      e128933a43921e4c5c1267c5  #       "á(\x93:C\x92\x1eL\\x12gÅ"
+      192bddd07ea247822136c077  #       "\x19+ÝÐ~¢G\x82!6Àw"
+      06264075c531afae9d752aed  #       "\x06&@uÅ1¯®\x9du*í"
+      a3408f6d                  #       "£@\x8fm"
 
 6.  Referenced Token
 
@@ -752,7 +755,7 @@ d2                              # tag(18)
 
    By including a "status" claim in a Referenced Token, the Issuer is
    referencing a mechanism to retrieve status information about this
-   Referenced Token.  The claim contains members used to reference to a
+   Referenced Token.  The claim contains members used to reference a
    Status List Token as defined in this specification.  Other members of
    the "status" object may be defined by other specifications.  This is
    analogous to "cnf" claim in Section 3.1 of [RFC7800] in which
@@ -889,37 +892,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584063839f182958590924273b86e5097b2db03dd5
-   ebb1b04d92560899904243af225f91bf12aa18b04bb8a02056f15e9c472c26fb39f0
-   ce5b3225c9920fe66d02c4
+   7374617475736c697374732f315840f3c53d61a9eea3dc9d7cee6cd5a0b08521ee3e
+   62e94cd4ccf6cde106343f0b4df254bd63ea7eff867c4003f02d7698944aabb59898
+   c57f829500a946427cb979
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         63839f182958590924273b86  #       "c\x83\x9f\x18)XY\x09$';\x86"
-         e5097b2db03dd5ebb1b04d92  #       "å\x09{-°=Õë±°M\x92"
-         560899904243af225f91bf12  #       "V\x08\x99\x90BC¯"_\x91¿\x12"
-         aa18b04bb8a02056f15e9c47  #       "ª\x18°K¸\xa0 Vñ^\x9cG"
-         2c26fb39f0ce5b3225c9920f  #       ",&û9ðÎ[2%É\x92\x0f"
-         e66d02c4                  #       "æm\x02Ä"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      f3c53d61a9eea3dc9d7cee6c  #       "óÅ=a©î£Ü\x9d|îl"
+      d5a0b08521ee3e62e94cd4cc  #       "Õ\xa0°\x85!î>béLÔÌ"
+      f6cde106343f0b4df254bd63  #       "öÍá\x064?\x0bMòT½c"
+      ea7eff867c4003f02d769894  #       "ê~ÿ\x86|@\x03ð-v\x98\x94"
+      4aabb59898c57f829500a946  #       "J«µ\x98\x98Å\x7f\x82\x95\x00©F"
+      427cb979                  #       "B|¹y"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1120,9 +1123,10 @@ d2                              # tag(18)
 
    The HTTP endpoint SHOULD support the use of Cross-Origin Resource
    Sharing (CORS) [CORS] and/or other methods as appropriate to enable
-   Browser-based clients to access it.
+   Browser-based clients to access it, unless ecosystems using this
+   specification choose not to support Browser-based clients.
 
-   The Relying Party SHOULD send the following Accept-Header to indicate
+   The Relying Party MUST send the following Accept-Header to indicate
    the requested response type:
 
    *  "application/statuslist+jwt" for Status List Token in JWT format
@@ -1154,8 +1158,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.I7mqdNot-kgRi3QDo4Ampa5r9L55260Pnu8cpTFMvhPbnv1lt3Ll
-   hCWzN9nawS5wcjpl7lEjA2f2caHifupO0g
+   nR0bCI6NDMyMDB9.fc3idrCGONc1pk8jnkiiZzNZPT6ZrxPLJ7DUi6nc5FNldZqSrI0z
+   VsirchZ56L-rMzV6Dub75qGSKZDjtAQ9cg
 
 8.2.  Status List Response
 
@@ -1175,7 +1179,7 @@ d2                              # tag(18)
    [RFC9110].
 
    If caching-related HTTP headers are present in the HTTP response,
-   Relying Parties SHOULD prioritize the exp and ttl claims within the
+   Relying Parties MUST prioritize the exp and ttl claims within the
    Status List Token over the HTTP headers for determining caching
    behavior.
 
@@ -1294,8 +1298,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.I7mqdNot-kgRi3QDo4Ampa5r9L55260Pnu8cpTFMvhPbnv1lt3Ll
-   hCWzN9nawS5wcjpl7lEjA2f2caHifupO0g
+   nR0bCI6NDMyMDB9.fc3idrCGONc1pk8jnkiiZzNZPT6ZrxPLJ7DUi6nc5FNldZqSrI0z
+   VsirchZ56L-rMzV6Dub75qGSKZDjtAQ9cg
 
 9.  Status List Aggregation
 
@@ -1309,7 +1313,7 @@ d2                              # tag(18)
    If a Relying Party encounters an invalid Status List referenced in
    the response from the Status List Aggregation endpoint, it SHOULD
    continue processing the other valid Status Lists referenced in the
-   response.
+   response instead of fully aborting processing and retrying later.
 
    There are two options for a Relying Party to retrieve the Status List
    Aggregation.  An Issuer MAY support any of these mechanisms:
@@ -1343,11 +1347,11 @@ d2                              # tag(18)
 
    The Issuer MAY link to the Status List Aggregation URI in metadata
    that can be provided by different means like .well-known metadata as
-   is used commonly in OAuth and OpenID or via a VICAL extension for ISO
-   mDoc / mDL.  If the Issuer is an OAuth Authorization Server according
-   to [RFC6749], it is RECOMMENDED to use
-   status_list_aggregation_endpoint for its metadata defined by
-   [RFC8414].
+   is used commonly in OAuth and OpenID or within Issuer certificates or
+   trust lists (such as VICAL as defined in Annex C of [ISO.mdoc]).  If
+   the Issuer is an OAuth Authorization Server according to [RFC6749],
+   it is RECOMMENDED to use status_list_aggregation_endpoint for its
+   metadata defined by [RFC8414].
 
    The concrete specification on how this is implemented depends on the
    specific ecosystem and is out of scope of this specification.
@@ -1369,7 +1373,7 @@ d2                              # tag(18)
       linking to Status List Tokens.
 
    The Status List Aggregation URI provides a list of Status List URIs.
-   This aggregation in JSON and the media type return SHOULD be
+   This aggregation in JSON and the media type return MUST be
    application/json.  A Relying Party can iterate through this list and
    fetch all Status List Tokens before encountering the specific URI in
    a Referenced Token.
@@ -1385,9 +1389,7 @@ d2                              # tag(18)
       ]
    }
 
-10.  X.509 Certificate Extensions
-
-10.1.  Extended Key Usage Extension
+10.  X.509 Certificate Extended Key Usage Extension
 
    [RFC5280] specifies the Extended Key Usage (EKU) X.509 certificate
    extension for use on end entity certificates.  The extension
@@ -1443,7 +1445,7 @@ d2                              # tag(18)
    This specification does not mandate specific methods for key
    resolution and trust management, however the following
    recommendations are made for specifications, profiles, or ecosystems
-   that are planning ot make use of the Status List mechanism:
+   that are planning to make use of the Status List mechanism:
 
    If the Issuer of the Referenced Token is the same entity as the
    Status Issuer, then the same key that is embedded into the Referenced
@@ -1479,7 +1481,7 @@ d2                              # tag(18)
    x.509 PKI.  The certificate of the Issuer for the Referenced Token
    and the Status Issuer should be issued by the same Certificate
    Authority and the Status Issuer's certificate should utilize extended
-   key usage (Section 10.1).
+   key usage (Section 10).
 
    ┌───────────────────────┐
    │ Certificate Authority │
@@ -1702,10 +1704,15 @@ d2                              # tag(18)
    array with a default value provided as an initialization parameter by
    the Issuer of the Referenced Token.  The Issuer is RECOMMENDED to use
    a default value that represents the most common value for its
-   Referenced Tokens to avoid an update during issuance.
+   Referenced Tokens to avoid an update during issuance (usually 0x00,
+   VALID).  This preserves the benefits from compression and effectively
+   hides the number of managed Referenced Tokens since an unused index
+   value can not be distinguished from a valid Referenced Token.
 
    The Status Issuer is RECOMMENDED to prevent double allocation, i.e.
-   re-using the same uri and index for multiple Referenced Tokens.  The
+   re-using the same uri and index for multiple Referenced Tokens (since
+   uri and index form a unique identifier that might be used for
+   tracking, see (#privacy-considerations) for more details).  The
    Status Issuer MUST prevent any unintended double allocation.
 
 13.3.  Status List Size
@@ -2324,7 +2331,7 @@ d2                              # tag(18)
    IANA is also requested to register the following OID
    "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key
    Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section
-   Section 10.1.
+   Section 10.
 
 15.  References
 
@@ -2363,9 +2370,7 @@ d2                              # tag(18)
               DOI 10.17487/RFC1950, May 1996,
               <https://www.rfc-editor.org/rfc/rfc1950>.
 
-   [RFC1951]  Deutsch, P., "DEFLATE Compressed Data Format Specification
-              version 1.3", RFC 1951, DOI 10.17487/RFC1951, May 1996,
-              <https://www.rfc-editor.org/rfc/rfc1951>.
+   [RFC1951]  "*** BROKEN REFERENCE ***".
 
    [RFC2046]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part Two: Media Types", RFC 2046,
@@ -2439,10 +2444,7 @@ d2                              # tag(18)
               DOI 10.17487/RFC9110, June 2022,
               <https://www.rfc-editor.org/rfc/rfc9110>.
 
-   [RFC9596]  Jones, M.B. and O. Steele, "CBOR Object Signing and
-              Encryption (COSE) "typ" (type) Header Parameter",
-              RFC 9596, DOI 10.17487/RFC9596, June 2024,
-              <https://www.rfc-editor.org/rfc/rfc9596>.
+   [RFC9596]  "*** BROKEN REFERENCE ***".
 
 15.2.  Informative References
 
@@ -3077,6 +3079,8 @@ Test vectors for Status List encoding
 Document History
 
    -11
+
+   *  incorporate feedback from shepherd review
 
    *  some nitpicks
 
