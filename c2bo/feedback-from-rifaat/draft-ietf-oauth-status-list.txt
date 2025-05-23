@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 21 November 2025                                               
+Expires: 24 November 2025                                               
                                                               C. Bormann
                                                                   SPRIND
-                                                             20 May 2025
+                                                             23 May 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 November 2025.
+   This Internet-Draft will expire on 24 November 2025.
 
 Copyright Notice
 
@@ -250,10 +250,11 @@ Table of Contents
    issued access token, but it requires the party trying to validate the
    state of access tokens to directly contact the Issuer of the access
    tokens for each token validation.  In contrast, the mechanism defined
-   in this specification allows to fetch the status for many tokens,
-   reducing interactions with the Issuer significantly for better
-   scalability and providing better privacy as the Issuer does not learn
-   which specific access token is verified (herd anonymity).
+   in this specification allows a party to fetch the status for many
+   tokens, reducing interactions with the Issuer significantly for
+   better scalability and providing better privacy as the Issuer does
+   not learn which specific access token is being verified (herd
+   anonymity).
 
    Another possible use case for the Status List is to express the
    status of verifiable credentials (Referenced Tokens) issued by an
@@ -716,9 +717,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840431f55625dc1cca707c97c
-   88af5a95abfa9b4d28a6164b5f8ed53e1e6ec6657469e16a58e488ce12c6b6a7a274
-   a3f7a5628a725cbfabf79bb7903aabe4023f01
+   646269747301636c73744a78dadbb918000217015d5840ac13a20a9d9ea6c0a6a668
+   def49704ad574c52474fccad9de6171aeeb01463f11722e812f475e61084bdd758fa
+   530f9282a1c133971d49524f69e4cf54a76395
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -741,12 +742,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      431f55625dc1cca707c97c88  #       "C\x1fUb]ÁÌ§\x07É|\x88"
-      af5a95abfa9b4d28a6164b5f  #       "¯Z\x95«ú\x9bM(¦\x16K_"
-      8ed53e1e6ec6657469e16a58  #       "\x8eÕ>\x1enÆetiájX"
-      e488ce12c6b6a7a274a3f7a5  #       "ä\x88Î\x12Æ¶§¢t£÷¥"
-      628a725cbfabf79bb7903aab  #       "b\x8ar\¿«÷\x9b·\x90:«"
-      e4023f01                  #       "ä\x02?\x01"
+      ac13a20a9d9ea6c0a6a668de  #       "¬\x13¢\x0a\x9d\x9e¦À¦¦hÞ"
+      f49704ad574c52474fccad9d  #       "ô\x97\x04\xadWLRGOÌ\xad\x9d"
+      e6171aeeb01463f11722e812  #       "æ\x17\x1aî°\x14cñ\x17"è\x12"
+      f475e61084bdd758fa530f92  #       "ôuæ\x10\x84½×XúS\x0f\x92"
+      82a1c133971d49524f69e4cf  #       "\x82¡Á3\x97\x1dIROiäÏ"
+      54a76395                  #       "T§c\x95"
 
 6.  Referenced Token
 
@@ -891,9 +892,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840ecfaa9397312583fb8eab82473b219d8ba7b6f
-   a2e8140f25b757d23242faa0efe24633f77f35eae54f382140de19126a05f6d5dea7
-   940b2bd24a33695fe6cb56
+   7374617475736c697374732f315840ddc426c110d7f745bcb1a7071352229dd9c937
+   a81a3306f75f389c3d5d5a2cee336838909b142cc975a48c6cd5295da6fe671d715c
+   56d95f7cdd7d6840a4e3f3
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -916,12 +917,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         ecfaa9397312583fb8eab824  #       "ìú©9s\x12X?¸ê¸$"
-         73b219d8ba7b6fa2e8140f25  #       "s²\x19Øº{o¢è\x14\x0f%"
-         b757d23242faa0efe24633f7  #       "·WÒ2Bú\xa0ïâF3÷"
-         7f35eae54f382140de19126a  #       "\x7f5êåO8!@Þ\x19\x12j"
-         05f6d5dea7940b2bd24a3369  #       "\x05öÕÞ§\x94\x0b+ÒJ3i"
-         5fe6cb56                  #       "_æËV"
+         ddc426c110d7f745bcb1a707  #       "ÝÄ&Á\x10×÷E¼±§\x07"
+         1352229dd9c937a81a3306f7  #       "\x13R"\x9dÙÉ7¨\x1a3\x06÷"
+         5f389c3d5d5a2cee33683890  #       "_8\x9c=]Z,î3h8\x90"
+         9b142cc975a48c6cd5295da6  #       "\x9b\x14,Éu¤\x8clÕ)]¦"
+         fe671d715c56d95f7cdd7d68  #       "þg\x1dq\VÙ_|Ý}h"
+         40a4e3f3                  #       "@¤ãó"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1157,8 +1158,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.OxYNE7ENSYjJZzoV4VmbjKkPz7AOrxBLcsQnECdukklqvlJS1FUp
-   SPwQJ2rSiDwTJnF7JYVKm5710CHtHyjeoQ
+   nR0bCI6NDMyMDB9.DwqPcE7YasxfIc02E70OgNInBwI4JFduNEZBsJe8G3Qz1D1fVoKu
+   HXCznsnAI9eNTNZ0HzV0SgEcWCw2M_E3Qw
 
 8.2.  Status List Response
 
@@ -1297,8 +1298,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.OxYNE7ENSYjJZzoV4VmbjKkPz7AOrxBLcsQnECdukklqvlJS1FUp
-   SPwQJ2rSiDwTJnF7JYVKm5710CHtHyjeoQ
+   nR0bCI6NDMyMDB9.DwqPcE7YasxfIc02E70OgNInBwI4JFduNEZBsJe8G3Qz1D1fVoKu
+   HXCznsnAI9eNTNZ0HzV0SgEcWCw2M_E3Qw
 
 9.  Status List Aggregation
 
