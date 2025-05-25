@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-22T00:19:17.915214+00:00",
+  "timestamp": "2025-05-25T00:21:57.439205+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -18932,24 +18932,26 @@
       "id": "PR_kwDOJZ2aqs6Wqwot",
       "title": "Incorporate feedback from Rifaat",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/288",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Rendered Version: https://drafts.oauth.net/draft-ietf-oauth-status-list/c2bo/feedback-from-rifaat/draft-ietf-oauth-status-list.html",
       "createdAt": "2025-05-19T07:14:01Z",
-      "updatedAt": "2025-05-20T15:27:45Z",
+      "updatedAt": "2025-05-23T08:44:39Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "adf93d85c7d2074e04431a8a0a8b5374e8b53b14",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "c2bo/feedback-from-rifaat",
-      "headRefOid": "d38d16e99f8a969494daa2b49f04b3410a5e087f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "215392706aeaf81b7e21956c2b8c54c77787f958",
+      "closedAt": "2025-05-23T08:44:39Z",
+      "mergedAt": "2025-05-23T08:44:39Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "87e7da2e63f6baf9e761aa1f46f8cb56e69db51c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -18996,6 +18998,89 @@
               "updatedAt": "2025-05-20T15:27:15Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6qr7kI",
+          "commit": {
+            "abbreviatedOid": "d38d16e"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-23T08:28:13Z",
+          "updatedAt": "2025-05-23T08:28:13Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nAn example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines a way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the Issuer of the access tokens for each token validation. In contrast, the mechanism defined in this specification allows a party to fetch the status for many tokens, reducing interactions with the Issuer significantly for better scalability and providing better privacy as the Issuer does not learn which specific access token is being verified (herd anonymity).\r\n```",
+              "createdAt": "2025-05-23T08:28:13Z",
+              "updatedAt": "2025-05-23T08:28:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6qr9S7",
+          "commit": {
+            "abbreviatedOid": "d38d16e"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "One minor comment otherwise LGTM",
+          "createdAt": "2025-05-23T08:30:26Z",
+          "updatedAt": "2025-05-23T08:30:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 289,
+      "id": "PR_kwDOJZ2aqs6XWleI",
+      "title": "Fix broken link to privacy considerations",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/289",
+      "state": "MERGED",
+      "author": "jogu",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-23T09:04:55Z",
+      "updatedAt": "2025-05-23T09:07:44Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "87e7da2e63f6baf9e761aa1f46f8cb56e69db51c",
+      "headRepository": "jogu/draft-ietf-oauth-status-list",
+      "headRefName": "broken-link",
+      "headRefOid": "039d284df51a614cea0cf63c24f492a7422981f9",
+      "closedAt": "2025-05-23T09:07:21Z",
+      "mergedAt": "2025-05-23T09:07:21Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "3ddfa038bd69201c99ca909a7f0d54eafd53e9ef"
+      },
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks Joseph!",
+          "createdAt": "2025-05-23T09:07:43Z",
+          "updatedAt": "2025-05-23T09:07:43Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6qsW47",
+          "commit": {
+            "abbreviatedOid": "039d284"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-23T09:07:12Z",
+          "updatedAt": "2025-05-23T09:07:12Z",
+          "comments": []
         }
       ]
     }
