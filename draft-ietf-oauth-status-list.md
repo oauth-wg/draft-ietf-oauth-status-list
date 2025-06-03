@@ -27,6 +27,7 @@ author:
     email: tobias.looker@mattr.global
  -
     fullname: Paul Bastian
+    organization: Bundesdruckerei
     email: paul.bastian@posteo.de
  -
     fullname: Christian Bormann
@@ -1889,6 +1890,10 @@ CBOR encoding:
 
 # Document History
 {:numbered="false"}
+
+-12
+
+* add Paul's affiliation
 
 -11
 
