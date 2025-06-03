@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 24 November 2025                                               
+Expires: 5 December 2025                                 Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                             23 May 2025
+                                                             3 June 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 November 2025.
+   This Internet-Draft will expire on 5 December 2025.
 
 Copyright Notice
 
@@ -717,9 +717,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840c31750e84c6222062bf86d
-   b0f97e42e297a8496c71d6d547f4fa0e73a1bcccc45755338300897b0d738381f0ed
-   77375720920ac040b2ba7f379c2021f41276b0
+   646269747301636c73744a78dadbb918000217015d5840ae5f0f6c61835f86a910c2
+   16b2025ed5e8a2696e7a344e5349463ca9b2ffebbe4fc408f59301a34f09f52738ac
+   d1c15f07e3b11755059bc3074ef7b302dfd1e1
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -742,12 +742,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      c31750e84c6222062bf86db0  #       "Ã\x17PèLb"\x06+øm°"
-      f97e42e297a8496c71d6d547  #       "ù~Bâ\x97¨IlqÖÕG"
-      f4fa0e73a1bcccc457553383  #       "ôú\x0es¡¼ÌÄWU3\x83"
-      00897b0d738381f0ed773757  #       "\x00\x89{\x0ds\x83\x81ðíw7W"
-      20920ac040b2ba7f379c2021  #       " \x92\x0aÀ@²º\x7f7\x9c !"
-      f41276b0                  #       "ô\x12v°"
+      ae5f0f6c61835f86a910c216  #       "®_\x0fla\x83_\x86©\x10Â\x16"
+      b2025ed5e8a2696e7a344e53  #       "²\x02^Õè¢inz4NS"
+      49463ca9b2ffebbe4fc408f5  #       "IF<©²ÿë¾OÄ\x08õ"
+      9301a34f09f52738acd1c15f  #       "\x93\x01£O\x09õ'8¬ÑÁ_"
+      07e3b11755059bc3074ef7b3  #       "\x07ã±\x17U\x05\x9bÃ\x07N÷³"
+      02dfd1e1                  #       "\x02ßÑá"
 
 6.  Referenced Token
 
@@ -892,37 +892,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158400d6d8e6dd1d566a739b3a8d53e3c161e9598ec
-   5eae88d89933b619f28366cefa7056ec4afe29a726a7bd0bd7506bc37593634a823d
-   a552b7a1fed44ba1ab72d9
+   7374617475736c697374732f315840e9dc3361aa3f22b5675309519494ef59f685b1
+   53619faf0e8425434fd4687ae951560bacfb8a5b6231538814675c381c7e30d70483
+   3aa3cc44c3ad8dce821b9a
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      0d6d8e6dd1d566a739b3a8d5  #       "\x0dm\x8emÑÕf§9³¨Õ"
-      3e3c161e9598ec5eae88d899  #       "><\x16\x1e\x95\x98ì^®\x88Ø\x99"
-      33b619f28366cefa7056ec4a  #       "3¶\x19ò\x83fÎúpVìJ"
-      fe29a726a7bd0bd7506bc375  #       "þ)§&§½\x0b×PkÃu"
-      93634a823da552b7a1fed44b  #       "\x93cJ\x82=¥R·¡þÔK"
-      a1ab72d9                  #       "¡«rÙ"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         e9dc3361aa3f22b567530951  #       "éÜ3aª?"µgS\x09Q"
+         9494ef59f685b153619faf0e  #       "\x94\x94ïYö\x85±Sa\x9f¯\x0e"
+         8425434fd4687ae951560bac  #       "\x84%COÔhzéQV\x0b¬"
+         fb8a5b6231538814675c381c  #       "û\x8a[b1S\x88\x14g\8\x1c"
+         7e30d704833aa3cc44c3ad8d  #       "~0×\x04\x83:£ÌDÃ\xad\x8d"
+         ce821b9a                  #       "Î\x82\x1b\x9a"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1158,8 +1158,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9._BG6auKTTp-1KYUEDQsHRo1amK02RtqMqJk3h470xe9hVvDQwIxP
-   qZyxZ9fCYyGXyVa0g5o0aeO5bMKE6z6TBg
+   nR0bCI6NDMyMDB9.5vvHNH6ahDomM4oSi9IEwbe5VzCShy55Q5myklo_Ct0bmeumUknG
+   EvbW7QgTTVRwPwqyhk0VqWK3KHy1ECVilg
 
 8.2.  Status List Response
 
@@ -1298,8 +1298,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9._BG6auKTTp-1KYUEDQsHRo1amK02RtqMqJk3h470xe9hVvDQwIxP
-   qZyxZ9fCYyGXyVa0g5o0aeO5bMKE6z6TBg
+   nR0bCI6NDMyMDB9.5vvHNH6ahDomM4oSi9IEwbe5VzCShy55Q5myklo_Ct0bmeumUknG
+   EvbW7QgTTVRwPwqyhk0VqWK3KHy1ECVilg
 
 9.  Status List Aggregation
 
@@ -2481,9 +2481,9 @@ d2                              # tag(18)
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-08, 3 December
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-08>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-09, 28 May
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-sd-jwt-vc-09>.
 
    [smith2020let]
               Smith, T., Dickinson, L., and K. Seamons, "Let's revoke:
@@ -3083,6 +3083,10 @@ Test vectors for Status List encoding
 
 Document History
 
+   -12
+
+   *  add Paul's affiliation
+
    -11
 
    *  incorporate feedback from shepherd review
@@ -3329,6 +3333,7 @@ Authors' Addresses
 
 
    Paul Bastian
+   Bundesdruckerei
    Email: paul.bastian@posteo.de
 
 
