@@ -1891,6 +1891,10 @@ CBOR encoding:
 # Document History
 {:numbered="false"}
 
+-12
+
+* add Paul's affiliation
+
 -11
 
 * incorporate feedback from shepherd review
