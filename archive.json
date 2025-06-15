@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-12T00:19:41.407261+00:00",
+  "timestamp": "2025-06-15T00:22:29.121063+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5736,9 +5736,52 @@
       "labels": [],
       "body": "The original email:\n\n> Hi folks,\n> \n> I have the following comments.\n> \n> As a general comment, I worry that Referenced tokens may already define a \"status\" claim for their own purposes. Since this was not a previously registered or public claim, I fear there may be collisions with existing private claims. I'd suggest using a less common claim. Perhaps _status (like the _sd claim in the SD-JWT RFC) or even \"token_status\", which are both less likely to collide. I searched around and didn't see \"status\" as a claim in any public documentation. This affects section 3 and 6.1, among others. I'm new to this RFC discussion, so perhaps this has been discussed already.\n> \n> Other comments:\n> \n>    Section 1:\n> \n> There's a typo. \"data structures\" -> \"data structure\".\n> \n>    Section 1.2:\n> \n> I found this sentence confusing: \"Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.\"\n> \n> Would suggest this rewording: \"Placing large numbers of Referenced Tokens into the same list also offers Holders and Relying parties herd privacy, even from the Status Provider.\"\n> \n>    Section 3:\n> \n> Another possible typo: \"Also known as Verifier.\" -> \"Also known as a Verifier.\"\n> \n>    Section 4.1.4:\n> \n> This is the first introduction to status values, would be nice to define the values of 0x00 and 0x01 or at least reference section 7.1. It was confusing to not know the value meanings. In the next paragraph there is a new status type, SUSPENDED which is defined.\n> \n> There's also a status listed of value 3 (status[3]) but that value is never defined. Would suggest either defining or mentioning that this is application specific, as defined in 7.1.\n> \n>    Section 4.2:\n> \n> This states the status_list claim is REQUIRED but it is not present in the examples. Would it not be better to show that? For the first example, display something like:\n> \n> {\n>    \"status_list\":\n>    {\n>      \"bits\": 1,\n>      \"lst\": \"eNrbuRgAAhcBXQ\"\n>    }\n> }\n> \n>    Section 6.2: \n> \n> This sentence has a redundant phrase: \"The value of idx MUST be a non-negative number, containing a value of zero or greater.\" Could it be replaced with \"The value of idx MUST be a non-negative integer.\"?\n> \n> There's a self-reference to section 6.2: \"The \"status\" object uses the same encoding as a JWT as defined in Section 6.2.\" \n> \n> But this sentence is in section 6.2. Is that intended or should it be a reference to something else? What am I missing?\n> \n>    Section 7.1:\n> \n> There's a phrase that is not a full sentence: \"Meaning the processing of Status Types using these values is application specific.\" You could drop 'Meaning'.\n> \n> The following paragraph feels important:\n> \n> \"The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the \"exp\" (Expiration Time) but also has a status of 0x00 (\"VALID\"), the token is considered expired.\"\n> \n> Could add a MUST before 'precede' and change it to:\n> \n> \"The processing rules for Referenced Tokens (such as JWT or CWT) MUST precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the \"exp\" (Expiration Time) but also has a status of 0x00 (\"VALID\"), the token is considered expired.\"\n> \n> It is a MUST in section 8.3, so maybe it'd be better to refer the reader to that section?\n> \n>    Section 8.1:\n> \n> I was confused by these two sentences:\n> \n> \"The Relying Party MUST send the following Accept-Header to indicate the requested response type:\"\n> \n> \"If the Relying Party does not send an Accept Header, the response type is assumed to be known implicitly or out-of-band. \"\n> \n> I was under the impression that a MUST was non-negotiable, but in the second sentence guidance for not sending the Accept-Header is given. Maybe change MUST to SHOULD?\n> \n>    Section 8.3\n> \n> Perhaps Step 4.3 and 4.4 should reference section 13.6 which gives implementation guidance?\n> \n>    Section 11.3:\n> \n> Looks like a formatting issue with lists not being rendered. \n> \n> For example, \"- the same x5c value or an x5t ...\" and \"- the same x5chain value\"\n> \n>    Section 12.1:\n> \n> We refer to the \"issuer\" as \"he\" or \"him\" a few times in section 12.\n> \n> Could replace it with \"the issuer\" without any loss of meaning and it would read better:\n> \n> \"this would enable him\" -> \"this would enable the issuer\"\n> \n>    Section 12.2:\n> \n> Same as in section 12.1 \n> \n> \"By these means, he could maintain\" -> \"By these means, the issuer could maintain\"\n> \n>    Section 12.4:\n> \n> \"and his related business\" was confusing. Maybe instead: \"and related implementation details\"\n> \n> The list prefaced with \"This behaviour could be mitigated by:\" needs the tense to be changed. Suggest:\n> \n> This behaviour could be mitigated by:\n> \n> - disabling the Status List Aggregation [Section 9](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-11.html#aggregation)\n> \n> - choosing non-sequential, pseudo-random or random indices\n> \n> - using decoy entries to obfuscate the real number of Referenced Tokens within a Status List\n> \n> - choosing to deploy and utilize multiple Status Lists simultaneously\n> \n>    Section 13.2\n> \n> The link appears broken: \"see (#privacy-considerations) for more details\"\n> \n>    Section 13.3\n> \n> Similar to section 11, this section appears to have some list formatting issues. \"Status List Tokens depends on: - the size...\"\n> \n> Thanks,\n> Dan",
       "createdAt": "2025-06-10T08:32:40Z",
-      "updatedAt": "2025-06-10T08:33:10Z",
+      "updatedAt": "2025-06-14T06:34:49Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "\n> I have the following comments.\n> \n> As a general comment, I worry that Referenced tokens may already define a \"status\" claim for their own purposes. Since this was not a previously registered or public claim, I fear there may be collisions with existing private claims. I'd suggest using a less common claim. Perhaps _status (like the _sd claim in the SD-JWT RFC) or even \"token_status\", which are both less likely to collide. I searched around and didn't see \"status\" as a claim in any public documentation. This affects section 3 and 6.1, among others. I'm new to this RFC discussion, so perhaps this has been discussed already.\n\nI'm not in favor of making this change:\n1. as your research suggested, nobody is using it\n2. other drafts like 7800 didn't do it either\n3. ISO 18013-5 is already using the \"status\" claim suggested by us\n4. it would break a number of implementations\n\n> \n> Other comments:\n> \n>    Section 1:\n> \n> There's a typo. \"data structures\" -> \"data structure\".\n\napplied\n\n> \n>    Section 1.2:\n> \n> I found this sentence confusing: \"Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.\"\n> \n> Would suggest this rewording: \"Placing large numbers of Referenced Tokens into the same list also offers Holders and Relying parties herd privacy, even from the Status Provider.\"\n\napplied\n\n> \n>    Section 3:\n> \n> Another possible typo: \"Also known as Verifier.\" -> \"Also known as a Verifier.\"\n\napplied. Also included a note for Issuer ~ Provider.\n> \n>    Section 4.1.4:\n> \n> This is the first introduction to status values, would be nice to define the values of 0x00 and 0x01 or at least reference section 7.1. It was confusing to not know the value meanings. In the next paragraph there is a new status type, SUSPENDED which is defined.\n> \n> There's also a status listed of value 3 (status[3]) but that value is never defined. Would suggest either defining or mentioning that this is application specific, as defined in 7.1.\n\nThere is section named 4.1.4, so not sure which one you are talking about. The enumeration 3 says quite early in 4.1.: \"All bits of the byte array at a particular index are set to a status value (see [Section 7](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#status-types) for more details on the values).\"\n\n> \n>    Section 4.2:\n> \n> This states the status_list claim is REQUIRED but it is not present in the examples. Would it not be better to show that? For the first example, display something like:\n> \n> {\n>    \"status_list\":\n>    {\n>      \"bits\": 1,\n>      \"lst\": \"eNrbuRgAAhcBXQ\"\n>    }\n> }\n> \n\nfair point - this should be added imo\n\n>    Section 6.2: \n> \n> This sentence has a redundant phrase: \"The value of idx MUST be a non-negative number, containing a value of zero or greater.\" Could it be replaced with \"The value of idx MUST be a non-negative integer.\"?\n\napplied\n\n> There's a self-reference to section 6.2: \"The \"status\" object uses the same encoding as a JWT as defined in Section 6.2.\" \n\nfixed\n\n> But this sentence is in section 6.2. Is that intended or should it be a reference to something else? What am I missing?\n> \n\nthe idea of this was more of: SD-JWT VC is making use of the \"status\" parameter defined in this document, therefore an SD-JWT VC can be considered a Referenced Token. I modified the text.\n\n>    Section 7.1:\n> \n> There's a phrase that is not a full sentence: \"Meaning the processing of Status Types using these values is application specific.\" You could drop 'Meaning'.\n\napplied\n\n> \n> The following paragraph feels important:\n> \n> \"The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the \"exp\" (Expiration Time) but also has a status of 0x00 (\"VALID\"), the token is considered expired.\"\n> \n> Could add a MUST before 'precede' and change it to:\n> \n> \"The processing rules for Referenced Tokens (such as JWT or CWT) MUST precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the \"exp\" (Expiration Time) but also has a status of 0x00 (\"VALID\"), the token is considered expired.\"\n> \n> It is a MUST in section 8.3, so maybe it'd be better to refer the reader to that section?\n\nThat makes sense to me, although we have a MUST in the sentence before. Still applied.\n\n>    Section 8.1:\n> \n> I was confused by these two sentences:\n> \n> \"The Relying Party MUST send the following Accept-Header to indicate the requested response type:\"\n> \n> \"If the Relying Party does not send an Accept Header, the response type is assumed to be known implicitly or out-of-band. \"\n> \n> I was under the impression that a MUST was non-negotiable, but in the second sentence guidance for not sending the Accept-Header is given. Maybe change MUST to SHOULD?\n\nFair point. I think we need to discuss.\n\n>    Section 8.3\n> \n> Perhaps Step 4.3 and 4.4 should reference section 13.6 which gives implementation guidance?\n\nAgain, the section don't match, you may have reviewed not the latest version. But I assume you mean that Status List Token sections at definition of `ttl` and `exp` should reference to 13.6?\n\n>    Section 11.3:\n> \n> Looks like a formatting issue with lists not being rendered. \n> \n> For example, \"- the same x5c value or an x5t ...\" and \"- the same x5chain value\"\n\nfixed\n\n>    Section 12.1:\n> \n> We refer to the \"issuer\" as \"he\" or \"him\" a few times in section 12.\n> \n> Could replace it with \"the issuer\" without any loss of meaning and it would read better:\n> \n> \"this would enable him\" -> \"this would enable the issuer\"\n\nfixed\n\n>    Section 12.2:\n> \n> Same as in section 12.1 \n> \n> \"By these means, he could maintain\" -> \"By these means, the issuer could maintain\"\n\nfixed\n\n>    Section 12.4:\n> \n> \"and his related business\" was confusing. Maybe instead: \"and related implementation details\"\n\nWhat is meant here: it could reveal numbers, e.g. about the amount of customers or sensitive data\n\n> The list prefaced with \"This behaviour could be mitigated by:\" needs the tense to be changed. Suggest:\n> \n> This behaviour could be mitigated by:\n> \n> - disabling the Status List Aggregation [Section 9](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-11.html#aggregation)\n> \n> - choosing non-sequential, pseudo-random or random indices\n> \n> - using decoy entries to obfuscate the real number of Referenced Tokens within a Status List\n> \n> - choosing to deploy and utilize multiple Status Lists simultaneously\n\nfixed\n\n>    Section 13.2\n> \n> The link appears broken: \"see (#privacy-considerations) for more details\"\n\nThis was already fixed\n\n>    Section 13.3\n> \n> Similar to section 11, this section appears to have some list formatting issues. \"Status List Tokens depends on: - the size...\"\n\nfixed",
+          "createdAt": "2025-06-12T15:36:27Z",
+          "updatedAt": "2025-06-12T15:36:27Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> There is section named 4.1.4, so not sure which one you are talking about. The enumeration 3 says quite early in 4.1.: \"All bits of the byte array at a particular index are set to a status value (see [Section 7](https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#status-types) for more details on the values).\"\n\nwe added this as not too long ago as part of the feedback from WGLC\n\n> > Section 4.2:\nThis states the status_list claim is REQUIRED but it is not present in the examples. Would it not be better to show that? For the first example, display something like:\n{\n\"status_list\":\n{\n\"bits\": 1,\n\"lst\": \"eNrbuRgAAhcBXQ\"\n}\n}\n\n> fair point - this should be added imo\n\nThis would mean we adjust the examples to include the outer object?",
+          "createdAt": "2025-06-12T16:57:08Z",
+          "updatedAt": "2025-06-12T16:57:28Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Regarding the examples and section 4.2 / 4.3:\n\nWe have some asymmetry between the description of\nJSON:\n>4.2. Status List in JSON Format\n> This section defines the data structure for a JSON-encoded Status List:\n> - status_list: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:\n> [...]\n\nCBOR:\n> 4.3 Status List in CBOR Format\n> This section defines the data structure for a CBOR-encoded Status List:\n> - The StatusList structure is a map (Major Type 5) and defines the following entries:\n> [...]\n\nIMHO, we should only define the objects, so remove the \"status_list\" here since it is defined in the JWT part anyway.",
+          "createdAt": "2025-06-12T19:27:26Z",
+          "updatedAt": "2025-06-12T19:27:26Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We should also say that the keys for the CBOR map are strings?",
+          "createdAt": "2025-06-12T21:01:32Z",
+          "updatedAt": "2025-06-12T21:01:32Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> We should also say that the keys for the CBOR map are strings?\n\nYes, would probably be cleaner as well",
+          "createdAt": "2025-06-13T08:59:28Z",
+          "updatedAt": "2025-06-13T08:59:28Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Regarding the examples and section 4.2 / 4.3:\n> \n> We have some asymmetry between the description of\n> JSON:\n> >4.2. Status List in JSON Format\n> > This section defines the data structure for a JSON-encoded Status List:\n> > - status_list: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:\n> > [...]\n> \n> CBOR:\n> > 4.3 Status List in CBOR Format\n> > This section defines the data structure for a CBOR-encoded Status List:\n> > - The StatusList structure is a map (Major Type 5) and defines the following entries:\n> > [...]\n> \n> IMHO, we should only define the objects, so remove the \"status_list\" here since it is defined in the JWT part anyway.\n\nIf other standards were to reuse the section 4 objects without the token parts of section 5, what would make more sense?",
+          "createdAt": "2025-06-14T06:34:49Z",
+          "updatedAt": "2025-06-14T06:34:49Z"
+        }
+      ]
     },
     {
       "number": 292,
@@ -19170,6 +19213,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 293,
+      "id": "PR_kwDOJZ2aqs6aPo3G",
+      "title": "add feedback from Dan Moore",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/293",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #291 ",
+      "createdAt": "2025-06-12T15:37:50Z",
+      "updatedAt": "2025-06-12T15:37:50Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "7e3a352048ebb4c98e1a5b7b183d33bbaecd2512",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "feedback_dan_moore",
+      "headRefOid": "f9b7d60c17df5915cd9f20ee08030921e498518b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
