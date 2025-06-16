@@ -340,7 +340,7 @@ byte value       0xC9               0x44               0xF9
 
 This section defines the data structure for a JSON-encoded Status List:
 
-* The `StatusList` structure is a JSON Object and MUST contain at least the following claims:
+* The `StatusList` structure is a JSON Object and MUST contain at least the following members:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the compressed byte array (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded compressed byte array as specified in [](#status-list-byte-array).
    * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer. See section [](#aggregation) for further details.
