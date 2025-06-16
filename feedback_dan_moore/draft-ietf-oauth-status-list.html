@@ -1521,7 +1521,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-rationale" class="section-name selfRef">Rationale</a>
         </h3>
 <p id="section-1.2-1">Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2-2">This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing large numbers of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="design-considerations">
@@ -1969,9 +1969,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840d0f59a8cee09b577209a12
-ec81aa895c2e04667fb60ce4b778065e727a88a5cded07599072af44e668c7538399
-488963443129dc02c1da581791e353a45ec8b4
+646269747301636c73744a78dadbb918000217015d584014e64d853391811a26bd5d
+54065609dd44906d7cad84a3d847f31ba38665ae9959952002f4ddb82d6938af623c
+3185607e5a5d20310a49402e90ee2393a08ef0
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1996,12 +1996,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      d0f59a8cee09b577209a12ec  #       "Ðõ\x9a\x8cî\x09µw \x9a\x12ì"
-      81aa895c2e04667fb60ce4b7  #       "\x81ª\x89\.\x04f\x7f¶\x0cä·"
-      78065e727a88a5cded075990  #       "x\x06^rz\x88¥Íí\x07Y\x90"
-      72af44e668c7538399488963  #       "r¯DæhÇS\x83\x99H\x89c"
-      443129dc02c1da581791e353  #       "D1)Ü\x02ÁÚX\x17\x91ãS"
-      a45ec8b4                  #       "¤^È´"
+      14e64d853391811a26bd5d54  #       "\x14æM\x853\x91\x81\x1a&amp;½]T"
+      065609dd44906d7cad84a3d8  #       "\x06V\x09ÝD\x90m|\xad\x84£Ø"
+      47f31ba38665ae9959952002  #       "Gó\x1b£\x86e®\x99Y\x95 \x02"
+      f4ddb82d6938af623c318560  #       "ôÝ¸-i8¯b&lt;1\x85`"
+      7e5a5d20310a49402e90ee23  #       "~Z] 1\x0aI@.\x90î#"
+      93a08ef0                  #       "\x93\xa0\x8eð"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2142,9 +2142,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584057e67314037f974bc63be490e446f4e1966fc7
-1cfe3f8a07dcf0d81cfbb8895dcfadb9ed626b97675f2332b21739fa5731746c82d8
-d4ad1ac3a6cdf5d120ee07
+7374617475736c697374732f3158408c2ffb2e5aaacb043518288f5e9b6102f2d9e3
+ee9aa193aebf1e6a34ba0c03344868749ef036ec05eb50ac26257e21eadf8fbde00b
+d045b32b6d3ddea04f0e1d
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2169,12 +2169,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      57e67314037f974bc63be490  #       "Wæs\x14\x03\x7f\x97KÆ;ä\x90"
-      e446f4e1966fc71cfe3f8a07  #       "äFôá\x96oÇ\x1cþ?\x8a\x07"
-      dcf0d81cfbb8895dcfadb9ed  #       "ÜðØ\x1cû¸\x89]Ï\xad¹í"
-      626b97675f2332b21739fa57  #       "bk\x97g_#2²\x179úW"
-      31746c82d8d4ad1ac3a6cdf5  #       "1tl\x82ØÔ\xad\x1aÃ¦Íõ"
-      d120ee07                  #       "Ñ î\x07"
+      8c2ffb2e5aaacb043518288f  #       "\x8c/û.ZªË\x045\x18(\x8f"
+      5e9b6102f2d9e3ee9aa193ae  #       "^\x9ba\x02òÙãî\x9a¡\x93®"
+      bf1e6a34ba0c03344868749e  #       "¿\x1ej4º\x0c\x034Hht\x9e"
+      f036ec05eb50ac26257e21ea  #       "ð6ì\x05ëP¬&amp;%~!ê"
+      df8fbde00bd045b32b6d3dde  #       "ß\x8f½à\x0bÐE³+m=Þ"
+      a04f0e1d                  #       "\xa0O\x0e\x1d"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2388,8 +2388,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.JrA9Zv8B3HWQuEgyzO_tTKmAntzNU_qp-XWvPEw6y0AijIZYeDe4
-hbC0q3NJB6VE9sC7T9EY_fhKhVS6xsnq-A
+nR0bCI6NDMyMDB9.3elKJeANMwdBDlRKb35Mz8TCgLHaV9f8zmm0gs7-79bAaFAcA-Py
+yerVvsTTdXIer2KJJ60ZWEALn-okfgN9cw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2495,8 +2495,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.JrA9Zv8B3HWQuEgyzO_tTKmAntzNU_qp-XWvPEw6y0AijIZYeDe4
-hbC0q3NJB6VE9sC7T9EY_fhKhVS6xsnq-A
+nR0bCI6NDMyMDB9.3elKJeANMwdBDlRKb35Mz8TCgLHaV9f8zmm0gs7-79bAaFAcA-Py
+yerVvsTTdXIer2KJJ60ZWEALn-okfgN9cw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
