@@ -340,7 +340,7 @@ byte value       0xC9               0x44               0xF9
 
 This section defines the data structure for a JSON-encoded Status List:
 
-* `status_list`: REQUIRED. JSON Object that contains a Status List. It MUST contain at least the following claims:
+* The `StatusList` structure is a JSON Object and MUST contain at least the following claims:
    * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the compressed byte array (`lst`). The allowed values for `bits` are 1,2,4 and 8.
    * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded compressed byte array as specified in [](#status-list-byte-array).
    * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer. See section [](#aggregation) for further details.
@@ -363,7 +363,7 @@ See section [](#test-vectors) for more test vectors.
 
 This section defines the data structure for a CBOR-encoded Status List:
 
-* The `StatusList` structure is a map (Major Type 5) and defines the following entries:
+* The `StatusList` structure is a map (Major Type 5) MUST contain at least the following entries:
   * `bits`: REQUIRED. Unsigned integer (Major Type 0) that contains the number of bits per Referenced Token in the compressed byte array (`lst`). The allowed values for `bits` are 1, 2, 4 and 8.
   * `lst`: REQUIRED. Byte string (Major Type 2) that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the compressed byte array as specified in [](#status-list-byte-array).
   * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further detail.
@@ -1897,6 +1897,7 @@ CBOR encoding:
 
 * add Paul's affiliation
 * add feedback from Dan Moore
+* change JSON Status List structure to only contain JSON object
 
 -11
 
