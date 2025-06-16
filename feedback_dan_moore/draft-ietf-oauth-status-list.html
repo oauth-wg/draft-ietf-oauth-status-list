@@ -15,7 +15,7 @@
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.28.1
-    Python 3.12.10
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
@@ -24,7 +24,7 @@
     platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
+    requests 2.32.4
     setuptools 80.9.0
     wcwidth 0.2.13
 -->
@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 14 December 2025</td>
+<td class="center">Expires 18 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-12" class="published">12 June 2025</time>
+<time datetime="2025-06-16" class="published">16 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-14">14 December 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-18">18 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1125,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1746,7 +1746,7 @@ byte value       0xC9               0x44               0xF9
 <p id="section-4.2-1">This section defines the data structure for a JSON-encoded Status List:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-2.1">
-            <p id="section-4.2-2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. JSON Object that contains a Status List. It <span class="bcp14">MUST</span> contain at least the following claims:<a href="#section-4.2-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-2.1.1">The <code>StatusList</code> structure is a JSON Object and <span class="bcp14">MUST</span> contain at least the following claims:<a href="#section-4.2-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-2.1.2.1">
                 <p id="section-4.2-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. JSON Integer specifying the number of bits per Referenced Token in the compressed byte array (<code>lst</code>). The allowed values for <code>bits</code> are 1,2,4 and 8.<a href="#section-4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -1793,7 +1793,7 @@ encoded:
 <p id="section-4.3-1">This section defines the data structure for a CBOR-encoded Status List:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.3-2.1">
-            <p id="section-4.3-2.1.1">The <code>StatusList</code> structure is a map (Major Type 5) and defines the following entries:<a href="#section-4.3-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-2.1.1">The <code>StatusList</code> structure is a map (Major Type 5) <span class="bcp14">MUST</span> contain at least the following entries:<a href="#section-4.3-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.3-2.1.2.1">
                 <p id="section-4.3-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (Major Type 0) that contains the number of bits per Referenced Token in the compressed byte array (<code>lst</code>). The allowed values for <code>bits</code> are 1, 2, 4 and 8.<a href="#section-4.3-2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -1969,9 +1969,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840c5d7b0d26295e31c870964
-0efec09fc61b580d9324d734b49e077a14f4783f31aa717677501b8f439328140402
-66e28d786844f6e52c3e1e881ee87f4e0e9d5e
+646269747301636c73744a78dadbb918000217015d5840005b1df8c31ce1c2522588
+e2a93769cbc926362527ca2b7396364449e34934245f494d60f7cf40adbaa15b0bb0
+0038a4e5d2d6a08c5b7f7ffaf6cae71dfb9c43
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1996,12 +1996,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      c5d7b0d26295e31c8709640e  #       "Å×°Òb\x95ã\x1c\x87\x09d\x0e"
-      fec09fc61b580d9324d734b4  #       "þÀ\x9fÆ\x1bX\x0d\x93$×4´"
-      9e077a14f4783f31aa717677  #       "\x9e\x07z\x14ôx?1ªqvw"
-      501b8f43932814040266e28d  #       "P\x1b\x8fC\x93(\x14\x04\x02fâ\x8d"
-      786844f6e52c3e1e881ee87f  #       "xhDöå,&gt;\x1e\x88\x1eè\x7f"
-      4e0e9d5e                  #       "N\x0e\x9d^"
+      005b1df8c31ce1c2522588e2  #       "\x00[\x1døÃ\x1cáÂR%\x88â"
+      a93769cbc926362527ca2b73  #       "©7iËÉ&amp;6%'Ê+s"
+      96364449e34934245f494d60  #       "\x966DIãI4$_IM`"
+      f7cf40adbaa15b0bb00038a4  #       "÷Ï@\xadº¡[\x0b°\x008¤"
+      e5d2d6a08c5b7f7ffaf6cae7  #       "åÒÖ\xa0\x8c[\x7f\x7fúöÊç"
+      1dfb9c43                  #       "\x1dû\x9cC"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2142,9 +2142,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840d92c83cb28637f75d09c3bb680d88f6800cdda
-b2e4d0b69b7f7f99add17be8b34f5ea7e1838b674c1c39ad76ee67a4db333af344fe
-c532e20aeff60423d42c05
+7374617475736c697374732f315840cad9394e61c9635d7e6f6617a17a533053f175
+589464899d121b8f423d76dcba90749d28872f8e3625e19c4a24689bc674f056d8b5
+11a3334bbd9c57827d4eda
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2169,12 +2169,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      d92c83cb28637f75d09c3bb6  #       "Ù,\x83Ë(c\x7fuÐ\x9c;¶"
-      80d88f6800cddab2e4d0b69b  #       "\x80Ø\x8fh\x00ÍÚ²äÐ¶\x9b"
-      7f7f99add17be8b34f5ea7e1  #       "\x7f\x7f\x99\xadÑ{è³O^§á"
-      838b674c1c39ad76ee67a4db  #       "\x83\x8bgL\x1c9\xadvîg¤Û"
-      333af344fec532e20aeff604  #       "3:óDþÅ2â\x0aïö\x04"
-      23d42c05                  #       "#Ô,\x05"
+      cad9394e61c9635d7e6f6617  #       "ÊÙ9NaÉc]~of\x17"
+      a17a533053f175589464899d  #       "¡zS0SñuX\x94d\x89\x9d"
+      121b8f423d76dcba90749d28  #       "\x12\x1b\x8fB=vÜº\x90t\x9d("
+      872f8e3625e19c4a24689bc6  #       "\x87/\x8e6%á\x9cJ$h\x9bÆ"
+      74f056d8b511a3334bbd9c57  #       "tðVØµ\x11£3K½\x9cW"
+      827d4eda                  #       "\x82}NÚ"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2388,8 +2388,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.iLjuOx_eqkBBcqolGMLnVPaDImXE1BWJwPwb_teWIgy51x5qt31u
-mE4KGgT_cSTKm6f8x3OXQIzLbfkEXDY8Cw
+nR0bCI6NDMyMDB9.e_geZZ4MCkMxFZyAcTYqk7Ajw1CL-hsMXDJ_ybQJY8LwMjQ5wkD5
+TVlsevCNr6DoC0NBMmKkU_3veGvDXCS46Q
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2495,8 +2495,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.iLjuOx_eqkBBcqolGMLnVPaDImXE1BWJwPwb_teWIgy51x5qt31u
-mE4KGgT_cSTKm6f8x3OXQIzLbfkEXDY8Cw
+nR0bCI6NDMyMDB9.e_geZZ4MCkMxFZyAcTYqk7Ajw1CL-hsMXDJ_ybQJY8LwMjQ5wkD5
+TVlsevCNr6DoC0NBMmKkU_3veGvDXCS46Q
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -4543,6 +4543,9 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 </li>
         <li class="normal" id="appendix-D-2.2">
           <p id="appendix-D-2.2.1">add feedback from Dan Moore<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-2.3">
+          <p id="appendix-D-2.3.1">change JSON Status List structure to only contain JSON object<a href="#appendix-D-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-3">-11<a href="#appendix-D-3" class="pilcrow">¶</a></p>
