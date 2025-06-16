@@ -1877,7 +1877,7 @@ a2                              # map(2)
             <p id="section-5.1-5.4.1"><code>ttl</code>: <span class="bcp14">OPTIONAL</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number encoded in JSON as a number.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.5">
-            <p id="section-5.1-5.5.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. The <code>status_list</code> (status list) claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-json" class="auto internal xref">Section 4.2</a>.<a href="#section-5.1-5.5.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.5.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. The <code>status_list</code> (status list) claim <span class="bcp14">MUST</span> specify the Status List conforming to the structure defined in <a href="#status-list-json" class="auto internal xref">Section 4.2</a>.<a href="#section-5.1-5.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.1-6">The following additional rules apply:<a href="#section-5.1-6" class="pilcrow">¶</a></p>
@@ -1945,7 +1945,7 @@ a2                              # map(2)
             <p id="section-5.2-5.4.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. Unsigned integer (Major Type 0). The time to live claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.5">
-            <p id="section-5.2-5.5.1"><code>65533</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the rules outlined in <a href="#status-list-cbor" class="auto internal xref">Section 4.3</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.5.1"><code>65533</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the structure defined in <a href="#status-list-cbor" class="auto internal xref">Section 4.3</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-6">The following additional rules apply:<a href="#section-5.2-6" class="pilcrow">¶</a></p>
@@ -1969,9 +1969,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d584014e64d853391811a26bd5d
-54065609dd44906d7cad84a3d847f31ba38665ae9959952002f4ddb82d6938af623c
-3185607e5a5d20310a49402e90ee2393a08ef0
+646269747301636c73744a78dadbb918000217015d58405f2e9009b0702f227ad6a6
+55ab9d9a808f4cc1c937a05352854164fd83e29df54888e6d65231384a2ede361852
+944fe2d88cb426f64f804d5577d7a757893d70
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1996,12 +1996,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      14e64d853391811a26bd5d54  #       "\x14æM\x853\x91\x81\x1a&amp;½]T"
-      065609dd44906d7cad84a3d8  #       "\x06V\x09ÝD\x90m|\xad\x84£Ø"
-      47f31ba38665ae9959952002  #       "Gó\x1b£\x86e®\x99Y\x95 \x02"
-      f4ddb82d6938af623c318560  #       "ôÝ¸-i8¯b&lt;1\x85`"
-      7e5a5d20310a49402e90ee23  #       "~Z] 1\x0aI@.\x90î#"
-      93a08ef0                  #       "\x93\xa0\x8eð"
+      5f2e9009b0702f227ad6a655  #       "_.\x90\x09°p/"zÖ¦U"
+      ab9d9a808f4cc1c937a05352  #       "«\x9d\x9a\x80\x8fLÁÉ7\xa0SR"
+      854164fd83e29df54888e6d6  #       "\x85Adý\x83â\x9dõH\x88æÖ"
+      5231384a2ede361852944fe2  #       "R18J.Þ6\x18R\x94Oâ"
+      d88cb426f64f804d5577d7a7  #       "Ø\x8c´&amp;öO\x80MUw×§"
+      57893d70                  #       "W\x89=p"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2142,9 +2142,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158408c2ffb2e5aaacb043518288f5e9b6102f2d9e3
-ee9aa193aebf1e6a34ba0c03344868749ef036ec05eb50ac26257e21eadf8fbde00b
-d045b32b6d3ddea04f0e1d
+7374617475736c697374732f315840aa378f96cb6e50d20fe3c263d9b9eb748a2a6a
+6a679b31bfa2f2d1d9bfb49b5504cded085aa973baf28746786a65882d34c78e27a7
+2174affc39324d470a2233
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2169,12 +2169,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      8c2ffb2e5aaacb043518288f  #       "\x8c/û.ZªË\x045\x18(\x8f"
-      5e9b6102f2d9e3ee9aa193ae  #       "^\x9ba\x02òÙãî\x9a¡\x93®"
-      bf1e6a34ba0c03344868749e  #       "¿\x1ej4º\x0c\x034Hht\x9e"
-      f036ec05eb50ac26257e21ea  #       "ð6ì\x05ëP¬&amp;%~!ê"
-      df8fbde00bd045b32b6d3dde  #       "ß\x8f½à\x0bÐE³+m=Þ"
-      a04f0e1d                  #       "\xa0O\x0e\x1d"
+      aa378f96cb6e50d20fe3c263  #       "ª7\x8f\x96ËnPÒ\x0fãÂc"
+      d9b9eb748a2a6a6a679b31bf  #       "Ù¹ët\x8a*jjg\x9b1¿"
+      a2f2d1d9bfb49b5504cded08  #       "¢òÑÙ¿´\x9bU\x04Íí\x08"
+      5aa973baf28746786a65882d  #       "Z©sºò\x87Fxje\x88-"
+      34c78e27a72174affc39324d  #       "4Ç\x8e'§!t¯ü92M"
+      470a2233                  #       "G\x0a"3"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2388,8 +2388,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.3elKJeANMwdBDlRKb35Mz8TCgLHaV9f8zmm0gs7-79bAaFAcA-Py
-yerVvsTTdXIer2KJJ60ZWEALn-okfgN9cw
+nR0bCI6NDMyMDB9.hzaCP5BYQN3ywio5ZdcP59vzGO8mMqnuieV9Sp4utnUtZxCpuhbM
+hsM-8G5zFSdoWS2r_uOZC_CGc0uXYj9mDg
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2495,8 +2495,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.3elKJeANMwdBDlRKb35Mz8TCgLHaV9f8zmm0gs7-79bAaFAcA-Py
-yerVvsTTdXIer2KJJ60ZWEALn-okfgN9cw
+nR0bCI6NDMyMDB9.hzaCP5BYQN3ywio5ZdcP59vzGO8mMqnuieV9Sp4utnUtZxCpuhbM
+hsM-8G5zFSdoWS2r_uOZC_CGc0uXYj9mDg
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
