@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-15T00:22:29.121063+00:00",
+  "timestamp": "2025-06-17T00:20:00.313838+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5798,6 +5798,51 @@
       "updatedAt": "2025-06-10T08:34:01Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 294,
+      "id": "I_kwDOJZ2aqs67sWrV",
+      "title": "More Feedback from Denis",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/294",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Denis wrote on the OAuth Mailing List:\n\n> Hi Rifaat,\n>  \n> I have 10 comments.\n>  \n> 1) There are still a few vocabulary issues that relate to confusion between \"Token Status Lists\" and \"Status List Tokens\".\n>    This is addressed in subsequent comments.\n>  \n>  \n> 2) The title of the document is \"Token Status List\". There is no single \"Token Status List\".\n>     The goal of this document is to allow the retrieval of Status List Tokens, where each Status List Token (SLT)\n>     contains a Token Status List that provides up-to-date status information on several Referenced Tokens.  \n>  \n>    The acronym \"SLT\" should be introduced in the document, in the same way as the acronym \"CRL\"\n>     has been introduced for \"Certificate Revocation List\" (RFC 5280).\n>  \n>    The title of this document should rather be: Status List Tokens (SLTs)\n>  \n>  \n> 3) The current text in section 6.1 (Status Claim) is: \n> \n>        By including a \"status\" claim in a Referenced Token, the Issuer is\n>        referencing a mechanism to retrieve status information about this\n>        Referenced Token.  The claim contains members used to reference a\n>        Status List Token as defined in this specification.  Other members of\n>        the \"status\" object may be defined by other specifications.\n> \n>    In this specification, only one member of the \"status\" object is defined.\n>    Taking into account the previous comment, I propose to rephrase these sentences as follows: \n> \n>        By including a \"status\" claim in a Referenced Token, the Issuer can  \n>        indicate in a \"status\" object, how status information about a  \n>        Referenced Token can be obtained.  This specification defines one  \n>        member of the \"status\" object, called \"status_list\".  Other members of\n>        the \"status\" object may be defined by other specifications. \n> \n> 4) The examples in sections 6.2 and 6.1 are confusing \"status lists\" with \"status list tokens\".\n>  \n> The current text in section 6.2 ( Referenced Token in JOSE) is: \n> \n>        The following is a non-normative example of a decoded header and\n>        payload of a Referenced Token:\n>      \n>        {\n>          \"alg\": \"ES256\",\n>          \"kid\": \"11\"\n>        }\n>        .\n>        {\n>          \"status\": {\n>            \"status_list\": {\n>              \"idx\": 0,\n>              \"uri\": \"https://example.com/statuslists/1\"\n>            }\n>          }\n>        }\n> \n>  \n>    The uri does not contain \"statuslists\" (status lists) but \"slts\" (Status List Tokens).\n>    The uri should be changed into the following way:\n>  \n>          \"uri\": \"https://example.com/slts/1\"\n>  \n>    The same comment applies to the example on page 22 within section 6.3 (Referenced Token in COSE).\n>  \n>  \n> 5) The current text in section 9 (Status List Aggregation) is: \n> \n>     9.  Status List Aggregation\n>      \n>        Status List Aggregation is an optional mechanism to retrieve a list\n>        of URIs to all Status List Tokens, allowing a Relying Party to fetch\n>        all relevant Status List Tokens for a specific type of Referenced\n>        Token or Issuer.  This mechanism is intended to support fetching and\n>        caching mechanisms and allow offline validation of the status of a\n>        reference token for a period of time.\n> \n>     The wording \"for a specific type of Referenced Token or Issuer\" should be avoided because the retriever of the SLTs\n>     has no way to know whether the retrieved SLTs will be about a \"specific type of Referenced Token\", about \"all the Referenced Tokens\n>     issued by that Issuer\" or about anything else. Depending upon choices made by the Issuer, the retrieved SLTs may help or\n>     *may not help* the Relying Party, depending upon the context and the choices made by the Issuer.\n>  \n> The following rewording is proposed: \n> \n>     9.  Status List Aggregation\n>      \n>     Status List Aggregation is an optional mechanism that allows to take advantage of an access to a given Status List Token\n>     referenced in a Referenced Token to retrieve other Status List Tokens published by the same Issuer. \n>     This feature is intended to support pre-fetching and caching of Status List Tokens and allows offline validation of the status\n>     of further received Reference Tokens for a period of time.\n> \n>  \n> 6) The text continues with: \n> \n>        \"If a Relying Party encounters an invalid Status List referenced in\n>        the response from the Status List Aggregation endpoint, it SHOULD\n>        continue processing the other valid Status Lists referenced in the\n>        response instead of fully aborting processing and retrying later\". \n> \n>    This sentence is misleading: the Status List Aggregation endpoint does not contain \"Status Lists\" but contains \"Status List Tokens\".\n>    If corrected the quoted sentence, the sentence would become: \n> \n>        If a Relying Party encounters an invalid Status List Token referenced  \n>        in the response from the Status List Aggregation endpoint, it SHOULD\n>        continue processing the other valid Status List Tokens referenced in  \n>        the response instead of fully aborting processing and retrying later.\n> \n>    However, when fetching the Status List Tokens, the pre-fetching and caching mechanism does not *mandate* any \"validation mechanism\",\n>    hence the concept of an \" invalid Status List\" or of an \" invalid Status List Token\" is irrelevant. The goal of this mechanism is to allow\n>    fetching SLTs and to place them into a cache without *necessarily* verifying their \"validity\" at the moment of the retrieval.\n>    I propose to remove that sentence.\n>  \n>  \n> 7) Section 9.3 (Status List Aggregation in JSON Format) states: \n> \n>     9.3.  Status List Aggregation in JSON Format\n>      \n>        This section defines the structure for a JSON-encoded Status List\n>        Aggregation:\n>      \n>        *  status_lists: REQUIRED.  JSON array of strings that contains URIs\n>           linking to Status List Tokens.\n>      \n>        The Status List Aggregation URI provides a list of Status List URIs.\n>      \n>        (...)\n>      \n>        The following is a non-normative example for media type application/\n>        json:\n>      \n>        {\n>           \"status_lists\" : [\n>              \"https://example.com/statuslists/1\",\n>              \"https://example.com/statuslists/2\",\n>              \"https://example.com/statuslists/3\"\n>           ]\n>        }\n> \n>  \n>    Given the confusion between \"Status Lists\" and \"Status List Tokens\", the text from this section should be modified.\n>    Below is a proposal: \n> \n>     9.3.  Status List Aggregation in JSON Format\n>      \n>        This section defines the structure for a JSON-encoded Status List\n>        Aggregation:\n>      \n>        *  status_lists: REQUIRED.  JSON array of strings that contains URIs\n>           linking to Status List Tokens.\n>      \n>        The Status List Aggregation URI provides a list of Status List *Token* URIs.\n>      \n>        (...)\n>      \n>        The following is a non-normative example for media type application/\n>        json:\n>      \n>        {\n>           \"status_lists\" : [\n>              \"https://example.com/slts/1\",\n>              \"https://example.com/slts/2\",\n>              \"https://example.com/slts/3\"\n>           ]\n>        }\n> \n>  \n> 8) Section 13.1 (Token Lifecycle) states: \n> \n>     13.1.  Token Lifecycle\n>      \n>        The lifetime of a Status List Token depends on the lifetime of its\n>        Referenced Tokens.  Once all Referenced Tokens are expired, the\n>        Issuer may stop serving the Status List Token.\n>      \n>        Referenced Tokens may be regularly re-issued to mitigate the\n>        linkability of presentations to Relying Parties.  In this case, every\n>        re-issued Referenced Token MUST have a fresh Status List entry in\n>        order to prevent this from becoming a possible source of correlation.\n>      \n>        Referenced Tokens may also be issued in batches and be presented by\n>        Holders in a one-time-use policy to avoid linkability.  In this case,\n>        every Referenced Token MUST have a dedicated Status List entry and\n>        MAY be spread across multiple Status List Tokens.  Revoking batch-\n>        issued Referenced Tokens might reveal this correlation later on.\n> \n>    The use of the sub-title 13.1 \"Token Lifecycle \" is confusing as it can apply either to \"Referenced Tokens\" or to \"Status List Tokens\".\n>    The first sentence applies to \"Status List Token Lifecycle\" but the next sentences apply to linkability issues using indexes contained\n>    in Status List Tokens. I propose to separate these two cases.\n>  \n> The following text is proposed: \n> \n>     13.1.  Status List Token Lifecycle\n>      \n>        The lifetime of a Status List Token depends on the lifetime of its\n>        Referenced Tokens.  Once all Referenced Tokens from a Status List Token\n>        are expired, the Issuer may stop issuing the Status List Token.\n>      \n>     13.2.  Linkability issues using indexes contained in Status List Tokens\n>      \n>        To mitigate the linkability of presentations of Referenced Tokens to  \n>        Relying Parties using the index contained in a Status List Token,  \n>        batches of one-time-use Referenced Tokens should be issued by the  \n>        Issuer and each Referenced Tokens from the batch should only be used  \n>        once by the Holder.  \n>      \n>        For each Referenced Token belonging to a batch of one-time-use  \n>        Referenced Tokens, the indexes in the Status List should not be  \n>        placed into the same Status List and hence into the same Status List  \n>        Token, but spread among different Token Status Tokens.  In this way,  \n>        if the status of a batch of one-time-use Referenced Token changes  \n>        simultaneously, it will be difficult to know whether the Referenced  \n>        Tokens belongs to a batch of one-time-use Referenced Tokens and to  \n>        which one. \n> \n> \n> 9) There is also an issue about the new IANA entries where the \"status\" claim is defined\n>     and where it is possible to place underneath the \"status_list\" entry.\n>  \n>    The definition of the Claim Name \"status\" in section 14.1.1 includes the following sentence:\n> \n>        *  Claim Description: Reference to a status or validity mechanism\n>           containing up-to-date status information on the JWT.\n> \n>    A status or a validity mechanism does not *contain* up-to-date status information.\n>    It *describes* how status information is provided for a given Referenced Token.\n>  \n>    I suggest to change this sentence into: \n> \n>        *  Claim Description: Reference to a status or validity mechanism  \n>           describing how status information about a Referenced Token can  \n>           be obtained. \n> \n> 10) Section 14.1.2 defines the Claim Name \"status_list\" \n> \n>     Claim Name: status_list\n>      \n>        *  Claim Description: A status list containing up-to-date status\n>           information on multiple tokens. \n> \n>    I propose to rephrase it in this way: \n> \n>     Claim Name: status_list\n>      \n>        *  Claim Description: A status list contained in a Status List Token  \n>           providing up-to-date status information on several Referenced  \n>           Tokens.\n> \n>  \n> Denis ",
+      "createdAt": "2025-06-16T08:03:38Z",
+      "updatedAt": "2025-06-16T16:58:25Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> There are still a few vocabulary issues that relate to confusion between \"Token Status Lists\" and \"Status List Tokens\".\n> This is addressed in subsequent comments.\n> \n> The title of the document is \"Token Status List\". There is no single \"Token Status List\".\n> The goal of this document is to allow the retrieval of Status List Tokens, where each Status List Token (SLT)\n> contains a Token Status List that provides up-to-date status information on several Referenced Tokens.\n> \n> The acronym \"SLT\" should be introduced in the document, in the same way as the acronym \"CRL\"\n> has been introduced for \"Certificate Revocation List\" (RFC 5280).\n> \n> The title of this document should rather be: Status List Tokens (SLTs)\n\nThe name \"Token Status List\" of the draft makes sense:\n- the naming is similar to Certificate Revocation List - read: Revocation List for Certificates, here the same: Status List for Token\n- Token is a very common term in the OAuth ecosystem, similar to \"Certificate\", so the naming sequence is exactly the same as CRL\n- the Status List Token is still its own thing, it's defined in the section 5 and covers how a Status List structure from Section 4 is integrty/authenticity-protected, however a Status List Token is usually not relevant from the high-level outside look\n\nConclusion:\n- I agree that it makes sense to establish an official abbreviation like CRL\n  - I think that TSL makes more sense\n- Status List Token should remain as an internal terminology apart from TSL",
+          "createdAt": "2025-06-16T15:07:24Z",
+          "updatedAt": "2025-06-16T15:07:24Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> 3) The current text in section 6.1 (Status Claim) is: \n> \n>        By including a \"status\" claim in a Referenced Token, the Issuer is\n>        referencing a mechanism to retrieve status information about this\n>        Referenced Token.  The claim contains members used to reference a\n>        Status List Token as defined in this specification.  Other members of\n>        the \"status\" object may be defined by other specifications.\n> \n>    In this specification, only one member of the \"status\" object is defined.\n>    Taking into account the previous comment, I propose to rephrase these sentences as follows: \n> \n>        By including a \"status\" claim in a Referenced Token, the Issuer can  \n>        indicate in a \"status\" object, how status information about a  \n>        Referenced Token can be obtained.  This specification defines one  \n>        member of the \"status\" object, called \"status_list\".  Other members of\n>        the \"status\" object may be defined by other specifications. \n\nPartly accepted",
+          "createdAt": "2025-06-16T15:17:31Z",
+          "updatedAt": "2025-06-16T15:17:31Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> 4) The examples in sections 6.2 and 6.1 are confusing \"status lists\" with \"status list tokens\".\n>  \n> The current text in section 6.2 ( Referenced Token in JOSE) is: \n> \n>        The following is a non-normative example of a decoded header and\n>        payload of a Referenced Token:\n>      \n>        {\n>          \"alg\": \"ES256\",\n>          \"kid\": \"11\"\n>        }\n>        .\n>        {\n>          \"status\": {\n>            \"status_list\": {\n>              \"idx\": 0,\n>              \"uri\": \"https://example.com/statuslists/1\"\n>            }\n>          }\n>        }\n> \n>  \n>    The uri does not contain \"statuslists\" (status lists) but \"slts\" (Status List Tokens).\n>    The uri should be changed into the following way:\n>  \n>          \"uri\": \"https://example.com/slts/1\"\n>  \n>    The same comment applies to the example on page 22 within section 6.3 (Referenced Token in COSE).\n>  \n\nThe URI is a non-normative example, so I don't believe it is relevant. If other group members think this is important, we may change this.",
+          "createdAt": "2025-06-16T15:19:22Z",
+          "updatedAt": "2025-06-16T15:19:22Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> 5) The current text in section 9 (Status List Aggregation) is: \n> \n>     9.  Status List Aggregation\n>      \n>        Status List Aggregation is an optional mechanism to retrieve a list\n>        of URIs to all Status List Tokens, allowing a Relying Party to fetch\n>        all relevant Status List Tokens for a specific type of Referenced\n>        Token or Issuer.  This mechanism is intended to support fetching and\n>        caching mechanisms and allow offline validation of the status of a\n>        reference token for a period of time.\n> \n>     The wording \"for a specific type of Referenced Token or Issuer\" should be avoided because the retriever of the SLTs\n>     has no way to know whether the retrieved SLTs will be about a \"specific type of Referenced Token\", about \"all the Referenced Tokens\n>     issued by that Issuer\" or about anything else. Depending upon choices made by the Issuer, the retrieved SLTs may help or\n>     *may not help* the Relying Party, depending upon the context and the choices made by the Issuer.\n>  \n> The following rewording is proposed: \n> \n>     9.  Status List Aggregation\n>      \n>     Status List Aggregation is an optional mechanism that allows to take advantage of an access to a given Status List Token\n>     referenced in a Referenced Token to retrieve other Status List Tokens published by the same Issuer. \n>     This feature is intended to support pre-fetching and caching of Status List Tokens and allows offline validation of the status\n>     of further received Reference Tokens for a period of time.\n\nThe Section 9 on Status List Aggregation lists two mechanisms:\n\n> There are two options for a Relying Party to retrieve the Status List Aggregation. An Issuer MAY support any of these mechanisms:\n> \n> Issuer metadata: The Issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol\n> \n> Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.\n\nSo while the Relying Party may not know whether an Issuer uses a particular Status List Aggregation to link *all* Status Lists or only for a specific type of Referenced Token, an Issuer has still the choice to do so, therefore the text is correct in my opinion. Your proposed text removes functionality that does not match the rest of Section 9.",
+          "createdAt": "2025-06-16T16:58:25Z",
+          "updatedAt": "2025-06-16T16:58:25Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -19226,19 +19271,73 @@
       "labels": [],
       "body": "Closes #291 ",
       "createdAt": "2025-06-12T15:37:50Z",
-      "updatedAt": "2025-06-12T15:37:50Z",
+      "updatedAt": "2025-06-16T06:31:53Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7e3a352048ebb4c98e1a5b7b183d33bbaecd2512",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "feedback_dan_moore",
-      "headRefOid": "f9b7d60c17df5915cd9f20ee08030921e498518b",
+      "headRefOid": "662200fc13611c951cf13e79633c6ade9ca19d2c",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6ur9bF",
+          "commit": {
+            "abbreviatedOid": "859f88c"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-16T06:15:56Z",
+          "updatedAt": "2025-06-16T06:17:02Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\r\n* The `StatusList` structure is a JSON Object and MUST contain at least the following members:\r\n```",
+              "createdAt": "2025-06-16T06:15:56Z",
+              "updatedAt": "2025-06-16T06:17:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6usBKv",
+          "commit": {
+            "abbreviatedOid": "c3cc52d"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-16T06:24:11Z",
+          "updatedAt": "2025-06-16T06:24:12Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nThis specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.\r\n```",
+              "createdAt": "2025-06-16T06:24:11Z",
+              "updatedAt": "2025-06-16T06:24:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6usBxh",
+          "commit": {
+            "abbreviatedOid": "c3cc52d"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, with one minor change",
+          "createdAt": "2025-06-16T06:25:23Z",
+          "updatedAt": "2025-06-16T06:25:23Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
