@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 22 December 2025</td>
+<td class="center">Expires 25 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-20" class="published">20 June 2025</time>
+<time datetime="2025-06-23" class="published">23 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-22">22 December 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-25">25 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1125,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1972,9 +1972,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840f537a9e8e810018279e497
-d663a72cef1028c27e2fd6b503674698b963ed18c109b04374786accc113324f4be7
-9ea732f0ca2b64be3e292e8602023dfaf6dfca
+646269747301636c73744a78dadbb918000217015d584033454614c83076d5865fa9
+69fa6fafb65f550c3674e372662596a2050b33a55b38e586df8b49dd989bc5b13619
+614f68ec06753c0f1c17d0f2109663b1460f7e
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1999,12 +1999,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      f537a9e8e810018279e497d6  #       "õ7©èè\x10\x01\x82yä\x97Ö"
-      63a72cef1028c27e2fd6b503  #       "c§,ï\x10(Â~/Öµ\x03"
-      674698b963ed18c109b04374  #       "gF\x98¹cí\x18Á\x09°Ct"
-      786accc113324f4be79ea732  #       "xjÌÁ\x132OKç\x9e§2"
-      f0ca2b64be3e292e8602023d  #       "ðÊ+d¾&gt;).\x86\x02\x02="
-      faf6dfca                  #       "úößÊ"
+      33454614c83076d5865fa969  #       "3EF\x14È0vÕ\x86_©i"
+      fa6fafb65f550c3674e37266  #       "úo¯¶_U\x0c6tãrf"
+      2596a2050b33a55b38e586df  #       "%\x96¢\x05\x0b3¥[8å\x86ß"
+      8b49dd989bc5b13619614f68  #       "\x8bIÝ\x98\x9bÅ±6\x19aOh"
+      ec06753c0f1c17d0f2109663  #       "ì\x06u&lt;\x0f\x1c\x17Ðò\x10\x96c"
+      b1460f7e                  #       "±F\x0f~"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2039,10 +2039,10 @@ d2                              # tag(18)
                 <p id="section-6.2-3.1.2.1.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span> when the status mechanism defined in this specification is used. It <span class="bcp14">MUST</span> specify a JSON Object that contains a reference to a Status List Token. It <span class="bcp14">MUST</span> at least contain the following claims:<a href="#section-6.2-3.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-3.1.2.1.2.1">
-                    <p id="section-6.2-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify a JSON Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of <code>idx</code> <span class="bcp14">MUST</span> be a non-negative number, containing a value of zero or greater.<a href="#section-6.2-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.2-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of <code>idx</code> <span class="bcp14">MUST</span> be a non-negative number, containing a value of zero or greater.<a href="#section-6.2-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.2-3.1.2.1.2.2">
-                    <p id="section-6.2-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a JSON String value that identifies the Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-6.2-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.2-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-6.2-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -2146,9 +2146,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158406e5656df2c4f01e87bc3b306d753bcef4f4f24
-9ecf24a5fa4ff5bb726ab0ec208de98fe15f1c29b103bf5a2ed397383ac954e0ec1f
-051f6450d3ce4fb6bb0070
+7374617475736c697374732f3158403170d7aee4ff3988ce010d330c44ff2a4be99a
+6fc0be482e26567d1cc55566b2c486a0b1b2d18ac4f9694694189acd1b8395e38a0d
+99991d2471359d7dfb695a
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2173,12 +2173,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      6e5656df2c4f01e87bc3b306  #       "nVVß,O\x01è{Ã³\x06"
-      d753bcef4f4f249ecf24a5fa  #       "×S¼ïOO$\x9eÏ$¥ú"
-      4ff5bb726ab0ec208de98fe1  #       "Oõ»rj°ì \x8dé\x8fá"
-      5f1c29b103bf5a2ed397383a  #       "_\x1c)±\x03¿Z.Ó\x978:"
-      c954e0ec1f051f6450d3ce4f  #       "ÉTàì\x1f\x05\x1fdPÓÎO"
-      b6bb0070                  #       "¶»\x00p"
+      3170d7aee4ff3988ce010d33  #       "1p×®äÿ9\x88Î\x01\x0d3"
+      0c44ff2a4be99a6fc0be482e  #       "\x0cDÿ*Ké\x9aoÀ¾H."
+      26567d1cc55566b2c486a0b1  #       "&amp;V}\x1cÅUf²Ä\x86\xa0±"
+      b2d18ac4f9694694189acd1b  #       "²Ñ\x8aÄùiF\x94\x18\x9aÍ\x1b"
+      8395e38a0d99991d2471359d  #       "\x83\x95ã\x8a\x0d\x99\x99\x1d$q5\x9d"
+      7dfb695a                  #       "}ûiZ"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2392,8 +2392,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.WQmMZMGWDfCtRcFq3cC5DAZO6B3wSoLt5ElTJD7BObCrAA61cO75
-Ex18EMNNGRWsmBfvbcuwErh2X-ytG-1qYw
+nR0bCI6NDMyMDB9.ikMlJZw8VMPGyUWbwn3Xm7SKfhLcS_kyzoa6gfdjiQVzU39gJhwg
+Il5GBGpgOgujo_Um3EKZF1Vr0IwEbduQQQ
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2499,8 +2499,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.WQmMZMGWDfCtRcFq3cC5DAZO6B3wSoLt5ElTJD7BObCrAA61cO75
-Ex18EMNNGRWsmBfvbcuwErh2X-ytG-1qYw
+nR0bCI6NDMyMDB9.ikMlJZw8VMPGyUWbwn3Xm7SKfhLcS_kyzoa6gfdjiQVzU39gJhwg
+Il5GBGpgOgujo_Um3EKZF1Vr0IwEbduQQQ
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
