@@ -27,6 +27,7 @@ author:
     email: tobias.looker@mattr.global
  -
     fullname: Paul Bastian
+    organization: Bundesdruckerei
     email: paul.bastian@posteo.de
  -
     fullname: Christian Bormann
@@ -1894,6 +1895,8 @@ CBOR encoding:
 -12
 
 * Allow for extended key usage OID to be used for other status mechanisms
+* add Paul's affiliation
+
 
 -11
 
