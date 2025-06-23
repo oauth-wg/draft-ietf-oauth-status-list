@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 5 December 2025                                 Bundesdruckerei
+Expires: 25 December 2025                                Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                             3 June 2025
+                                                            23 June 2025
 
 
                            Token Status List
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 December 2025.
+   This Internet-Draft will expire on 25 December 2025.
 
 Copyright Notice
 
@@ -175,7 +175,7 @@ Table of Contents
 
    This document defines a Status List data structure that describes the
    individual statuses of multiple Referenced Tokens.  A Referenced
-   Token may be of any format, but is most commonly a data structures
+   Token may be of any format, but is most commonly a data structure
    secured by JOSE or COSE.  The Referenced Token is referenced by the
    Status List, which describes the status of the Referenced Token.  The
    statuses of all Referenced Tokens are conveyed via a bit array in the
@@ -280,8 +280,9 @@ Table of Contents
    bits (often a single bit) and compressing the resulting binary data.
    Thereby, a Status List may contain statuses of many thousands or
    millions Referenced Tokens while remaining as small as possible.
-   Placing large amounts of Referenced Tokens into the same list also
-   enables herd privacy relative to the Status Provider.
+   Placing a large number of Referenced Tokens into the same list also
+   offers Holders and Relying Parties herd privacy from the Status
+   Provider.
 
 1.3.  Design Considerations
 
@@ -343,7 +344,8 @@ Table of Contents
 
 3.  Terminology
 
-   Issuer:  An entity that issues the Referenced Token.
+   Issuer:  An entity that issues the Referenced Token.  Also known as a
+      Provider.
 
    Status Issuer:  An entity that issues the Status List Token about the
       status information of the Referenced Token.  This role may be
@@ -357,7 +359,7 @@ Table of Contents
 
    Relying Party:  An entity that relies on the Referenced Token and
       fetches the corresponding Status List Token to validate the status
-      of that Referenced Token.  Also known as Verifier.
+      of that Referenced Token.  Also known as a Verifier.
 
    Status List:  An object in JSON or CBOR representation containing a
       compressed byte array that represents the statuses of many
@@ -492,8 +494,8 @@ Table of Contents
    This section defines the data structure for a JSON-encoded Status
    List:
 
-   *  status_list: REQUIRED.  JSON Object that contains a Status List.
-      It MUST contain at least the following claims:
+   *  The StatusList structure is a JSON Object and MUST contain at
+      least the following members:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the compressed byte array (lst).  The
@@ -537,8 +539,8 @@ Table of Contents
    This section defines the data structure for a CBOR-encoded Status
    List:
 
-   *  The StatusList structure is a map (Major Type 5) and defines the
-      following entries:
+   *  The StatusList structure is a map (Major Type 5) MUST contain at
+      least the following entries:
 
       -  bits: REQUIRED.  Unsigned integer (Major Type 0) that contains
          the number of bits per Referenced Token in the compressed byte
@@ -625,7 +627,7 @@ Table of Contents
       encoded in JSON as a number.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
-      specify the Status List conforming to the rules outlined in
+      specify the Status List conforming to the structure defined in
       Section 4.2.
 
    The following additional rules apply:
@@ -695,7 +697,8 @@ Table of Contents
       value of the claim MUST be a positive number.
 
    *  65533 (status list): REQUIRED.  The status list claim MUST specify
-      the Status List conforming to the rules outlined in Section 4.3.
+      the Status List conforming to the structure defined in
+      Section 4.3.
 
    The following additional rules apply:
 
@@ -717,9 +720,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840ae5f0f6c61835f86a910c2
-   16b2025ed5e8a2696e7a344e5349463ca9b2ffebbe4fc408f59301a34f09f52738ac
-   d1c15f07e3b11755059bc3074ef7b302dfd1e1
+   646269747301636c73744a78dadbb918000217015d5840fc883d2d2ac4baca41ec1d
+   aeb7d34ebb16c8f5dd260d52647c351f1a3680bd5852d6d3d8a1a2e58cbd47ecb4dd
+   1495c1b945dae3991adfbd62f7cd25f6c34141
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -742,12 +745,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      ae5f0f6c61835f86a910c216  #       "®_\x0fla\x83_\x86©\x10Â\x16"
-      b2025ed5e8a2696e7a344e53  #       "²\x02^Õè¢inz4NS"
-      49463ca9b2ffebbe4fc408f5  #       "IF<©²ÿë¾OÄ\x08õ"
-      9301a34f09f52738acd1c15f  #       "\x93\x01£O\x09õ'8¬ÑÁ_"
-      07e3b11755059bc3074ef7b3  #       "\x07ã±\x17U\x05\x9bÃ\x07N÷³"
-      02dfd1e1                  #       "\x02ßÑá"
+      fc883d2d2ac4baca41ec1dae  #       "ü\x88=-*ÄºÊAì\x1d®"
+      b7d34ebb16c8f5dd260d5264  #       "·ÓN»\x16ÈõÝ&\x0dRd"
+      7c351f1a3680bd5852d6d3d8  #       "|5\x1f\x1a6\x80½XRÖÓØ"
+      a1a2e58cbd47ecb4dd1495c1  #       "¡¢å\x8c½Gì´Ý\x14\x95Á"
+      b945dae3991adfbd62f7cd25  #       "¹EÚã\x99\x1aß½b÷Í%"
+      f6c34141                  #       "öÃAA"
 
 6.  Referenced Token
 
@@ -775,11 +778,10 @@ d2                              # tag(18)
          specification is used.  It contains a reference to a Status
          List Token.  It MUST at least contain the following claims:
 
-         o  idx: REQUIRED.  The idx (index) claim MUST specify an
-            Integer that represents the index to check for status
-            information in the Status List for the current Referenced
-            Token.  The value of idx MUST be a non-negative number,
-            containing a value of zero or greater.
+         o  idx: REQUIRED.  The idx (index) claim MUST specify a non-
+            negative Integer that represents the index to check for
+            status information in the Status List for the current
+            Referenced Token.
 
          o  uri: REQUIRED.  The uri (URI) claim MUST specify a String
             value that identifies the Status List Token containing the
@@ -806,12 +808,11 @@ d2                              # tag(18)
      }
    }
 
-   SD-JWT-based Verifiable Credentials [SD-JWT.VC] introduce the usage
-   of a status mechanism in Section 3.2.2.2.  The "status" object uses
-   the same encoding as a JWT as defined in Section 6.2.
-
-   The following is a non-normative example of a Referenced Token in SD-
-   JWT-VC serialized form as received from an Issuer:
+   SD-JWT-based Verifiable Credentials [SD-JWT.VC] section 3.2.2.2.
+   introduces the usage of the status mechanism defined in this section.
+   Therefore, an SD-JWT VC can be considered a Referenced Token.  The
+   following is a non-normative example of a Referenced Token in SD-JWT
+   VC serialized form as received from an Issuer:
 
    eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
    Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
@@ -872,10 +873,9 @@ d2                              # tag(18)
          fields:
 
          o  idx: REQUIRED.  Unsigned integer (Major Type 0) The idx
-            (index) claim MUST specify an Integer that represents the
-            index to check for status information in the Status List for
-            the current Referenced Token.  The value of idx MUST be a
-            non-negative number, containing a value of zero or greater.
+            (index) claim MUST specify a non-negative Integer that
+            represents the index to check for status information in the
+            Status List for the current Referenced Token.
 
          o  uri: REQUIRED.  Text string (Major Type 3).  The uri (URI)
             claim MUST specify a String value that identifies the Status
@@ -892,9 +892,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840e9dc3361aa3f22b5675309519494ef59f685b1
-   53619faf0e8425434fd4687ae951560bacfb8a5b6231538814675c381c7e30d70483
-   3aa3cc44c3ad8dce821b9a
+   7374617475736c697374732f315840cac9036db23fb915190fca2ebf90cb032f6b0c
+   90dde029df4b7946143be44dfd723b7d2e4367d55d23f0f54ca1236fa68c7d74b38b
+   fde7a6e7c86c62b541bbe1
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -917,12 +917,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         e9dc3361aa3f22b567530951  #       "éÜ3aª?"µgS\x09Q"
-         9494ef59f685b153619faf0e  #       "\x94\x94ïYö\x85±Sa\x9f¯\x0e"
-         8425434fd4687ae951560bac  #       "\x84%COÔhzéQV\x0b¬"
-         fb8a5b6231538814675c381c  #       "û\x8a[b1S\x88\x14g\8\x1c"
-         7e30d704833aa3cc44c3ad8d  #       "~0×\x04\x83:£ÌDÃ\xad\x8d"
-         ce821b9a                  #       "Î\x82\x1b\x9a"
+         cac9036db23fb915190fca2e  #       "ÊÉ\x03m²?¹\x15\x19\x0fÊ."
+         bf90cb032f6b0c90dde029df  #       "¿\x90Ë\x03/k\x0c\x90Ýà)ß"
+         4b7946143be44dfd723b7d2e  #       "KyF\x14;äMýr;}."
+         4367d55d23f0f54ca1236fa6  #       "CgÕ]#ðõL¡#o¦"
+         8c7d74b38bfde7a6e7c86c62  #       "\x8c}t³\x8býç¦çÈlb"
+         b541bbe1                  #       "µA»á"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1096,8 +1096,8 @@ d2                              # tag(18)
       is usually temporary.
 
    The Status Type value 0x03 and Status Type values in the range 0x0B
-   until 0x0F are permanently reserved as application specific.  Meaning
-   the processing of Status Types using these values is application
+   until 0x0F are permanently reserved as application specific.  The
+   processing of Status Types using these values is application
    specific.  All other Status Type values are reserved for future
    registration.
 
@@ -1158,8 +1158,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.5vvHNH6ahDomM4oSi9IEwbe5VzCShy55Q5myklo_Ct0bmeumUknG
-   EvbW7QgTTVRwPwqyhk0VqWK3KHy1ECVilg
+   nR0bCI6NDMyMDB9.vsVn-OSrSai1iXyOWzfWcS1e3nMbgloy9FvaT9JKaUymj6HtUaAL
+   XYmuceoSvZCSqcnnjnjSkz2CjU6v_s3NfA
 
 8.2.  Status List Response
 
@@ -1188,7 +1188,7 @@ d2                              # tag(18)
    Upon receiving a Referenced Token, a Relying Party MUST first perform
    the validation of the Referenced Token - e.g., checking for expected
    attributes, valid signature and expiration time.  The processing
-   rules for Referenced Tokens (such as JWT or CWT) precede any
+   rules for Referenced Tokens (such as JWT or CWT) MUST precede any
    evaluation of a Referenced Token's status.  For example, if a token
    is evaluated as being expired through the "exp" (Expiration Time) but
    also has a status of 0x00 ("VALID"), the token is considered expired.
@@ -1298,8 +1298,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.5vvHNH6ahDomM4oSi9IEwbe5VzCShy55Q5myklo_Ct0bmeumUknG
-   EvbW7QgTTVRwPwqyhk0VqWK3KHy1ECVilg
+   nR0bCI6NDMyMDB9.vsVn-OSrSai1iXyOWzfWcS1e3nMbgloy9FvaT9JKaUymj6HtUaAL
+   XYmuceoSvZCSqcnnjnjSkz2CjU6v_s3NfA
 
 9.  Status List Aggregation
 
@@ -1450,18 +1450,25 @@ d2                              # tag(18)
    If the Issuer of the Referenced Token is the same entity as the
    Status Issuer, then the same key that is embedded into the Referenced
    Token may be used for the Status List Token.  In this case the Status
-   List Token may use: - the same x5c value or an x5t, x5t#S256 or kid
-   parameter referencing to the same key as used in the Referenced Token
-   for JOSE. - the same x5chain value or an x5t or kid parameter
-   referencing to the same key as used in the Referenced Token for COSE.
+   List Token may use:
+
+   *  the same x5c value or an x5t, x5t#S256 or kid parameter
+      referencing to the same key as used in the Referenced Token for
+      JOSE.
+
+   *  the same x5chain value or an x5t or kid parameter referencing to
+      the same key as used in the Referenced Token for COSE.
 
    Alternatively, the Status Issuer may use the same web-based key
    resolution that is used for the Referenced Token.  In this case the
-   Status List Token may use: - an x5u, jwks, jwks_uri or kid parameter
-   referencing to a key using the same web-based resolution as used in
-   the Referenced Token for JOSE. - an x5u or kid parameter referencing
-   to a key using the same web-based resolution as used in the
-   Referenced Token for COSE.
+   Status List Token may use:
+
+   *  an x5u, jwks, jwks_uri or kid parameter referencing to a key using
+      the same web-based resolution as used in the Referenced Token for
+      JOSE.
+
+   *  an x5u or kid parameter referencing to a key using the same web-
+      based resolution as used in the Referenced Token for COSE.
 
    ┌────────┐  host keys  ┌──────────────────────┐
    │ Issuer ├────────┬───►│ .well-known metadata │
@@ -1507,9 +1514,9 @@ d2                              # tag(18)
    context of the Issuer-Holder-Verifier model [SD-JWT.VC], is to
    prevent the Issuer from tracking the usage of the Referenced Token
    when the status is being checked.  If an Issuer offers status
-   information by referencing a specific token, this would enable him to
-   create a profile for the issued token by correlating the date and
-   identity of Relying Parties, that are requesting the status.
+   information by referencing a specific token, this would enable the
+   Issuer to create a profile for the issued token by correlating the
+   date and identity of Relying Parties, that are requesting the status.
 
    The Status List approaches these privacy implications by integrating
    the status information of many Referenced Tokens into the same list.
@@ -1538,7 +1545,7 @@ d2                              # tag(18)
 
    A malicious Issuer could bypass the privacy benefits of the herd
    privacy by generating a unique Status List for every Referenced
-   Token.  By these means, he could maintain a mapping between
+   Token.  By these means, the Issuer could maintain a mapping between
    Referenced Tokens and Status Lists and thus track the usage of
    Referenced Tokens by utilizing this mapping for the incoming
    requests.  This malicious behaviour could be detected by Relying
@@ -1566,24 +1573,26 @@ d2                              # tag(18)
 12.4.  Observability of Outsiders
 
    Outside actors may analyse the publicly available Status Lists to get
-   information on the internal processes of the Issuer and his related
-   business.  This data may allow inferences on the total number of
-   issued Reference Tokens and the revocation rate.  Additionally,
-   actors may regularly fetch this data or use the historic data
-   functionality to learn how these numbers change over time.
+   information on the internal processes of the Issuer and its related
+   business, e.g. number of customers or clients.  This data may allow
+   inferences on the total number of issued Reference Tokens and the
+   revocation rate.  Additionally, actors may regularly fetch this data
+   or use the historic data functionality to learn how these numbers
+   change over time.
 
    This behaviour could be mitigated by:
 
-   *  disable the historical data feature Section 8.4
+   *  disabling the historical data feature Section 8.4
 
-   *  disable the Status List Aggregation Section 9
+   *  disabling the Status List Aggregation Section 9
 
-   *  choose non-sequential, pseudo-random or random indices
+   *  choosing non-sequential, pseudo-random or random indices
 
-   *  use decoy entries to obfuscate the real number of Referenced
+   *  using decoy entries to obfuscate the real number of Referenced
       Tokens within a Status List
 
-   *  choose to deploy and utilize multiple Status Lists simultaneously
+   *  choosing to deploy and utilize multiple Status Lists
+      simultaneously
 
 12.5.  Unlinkability
 
@@ -1718,13 +1727,17 @@ d2                              # tag(18)
 13.3.  Status List Size
 
    The storage and transmission size of the Status Issuer's Status List
-   Tokens depends on: - the size of the Status List, i.e. the number of
-   Referenced Tokens - the revocation rate and distribution of the
-   Status List data (due to compression, revocation rates close to 0% or
-   100% create lowest sizes while revocation rates closer to 50% and
-   random distribution create highest sizes) - the lifetime of
-   Referenced Tokens (shorter lifetimes allows for earlier retirement of
-   Status List Tokens)
+   Tokens depends on:
+
+   *  the size of the Status List, i.e. the number of Referenced Tokens
+
+   *  the revocation rate and distribution of the Status List data (due
+      to compression, revocation rates close to 0% or 100% create lowest
+      sizes while revocation rates closer to 50% and random distribution
+      create highest sizes)
+
+   *  the lifetime of Referenced Tokens (shorter lifetimes allows for
+      earlier retirement of Status List Tokens)
 
    The Status List Issuer may increase the size of a Status List if it
    requires indices for additional Referenced Tokens.  It is RECOMMENDED
@@ -2498,11 +2511,12 @@ d2                              # tag(18)
 
 Acknowledgments
 
-   We would like to thank Brian Campbell, Filip Skokan, Francesco
-   Marino, Giuseppe De Marco, Hannes Tschofenig, Kristina Yasuda, Markus
-   Kreusch, Martijn Haring, Michael B.  Jones, Micha Kraus, Michael
-   Schwartz, Mike Prorock, Mirko Mollik, Oliver Terbu, Orie Steele,
-   Rifaat Shekh-Yusef, Rohan Mahy, Timo Glastra and Torsten Lodderstedt
+   We would like to thank Brian Campbell, Dan Moore, Filip Skokan,
+   Francesco Marino, Giuseppe De Marco, Hannes Tschofenig, Kristina
+   Yasuda, Markus Kreusch, Martijn Haring, Michael B.  Jones, Micha
+   Kraus, Michael Schwartz, Mike Prorock, Mirko Mollik, Oliver Terbu,
+   Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy, Timo Glastra and Torsten
+   Lodderstedt
 
    for their valuable contributions, discussions and feedback to this
    specification.
@@ -3086,6 +3100,10 @@ Document History
    -12
 
    *  add Paul's affiliation
+
+   *  add feedback from Dan Moore
+
+   *  change JSON Status List structure to only contain JSON object
 
    -11
 
