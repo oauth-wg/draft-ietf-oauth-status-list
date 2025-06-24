@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-22T00:22:14.202217+00:00",
+  "timestamp": "2025-06-24T00:20:07.572945+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5729,15 +5729,15 @@
       "id": "I_kwDOJZ2aqs66uJen",
       "title": "Mailinglist Feedback from Dan Moore",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/291",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The original email:\n\n> Hi folks,\n> \n> I have the following comments.\n> \n> As a general comment, I worry that Referenced tokens may already define a \"status\" claim for their own purposes. Since this was not a previously registered or public claim, I fear there may be collisions with existing private claims. I'd suggest using a less common claim. Perhaps _status (like the _sd claim in the SD-JWT RFC) or even \"token_status\", which are both less likely to collide. I searched around and didn't see \"status\" as a claim in any public documentation. This affects section 3 and 6.1, among others. I'm new to this RFC discussion, so perhaps this has been discussed already.\n> \n> Other comments:\n> \n>    Section 1:\n> \n> There's a typo. \"data structures\" -> \"data structure\".\n> \n>    Section 1.2:\n> \n> I found this sentence confusing: \"Placing large amounts of Referenced Tokens into the same list also enables herd privacy relative to the Status Provider.\"\n> \n> Would suggest this rewording: \"Placing large numbers of Referenced Tokens into the same list also offers Holders and Relying parties herd privacy, even from the Status Provider.\"\n> \n>    Section 3:\n> \n> Another possible typo: \"Also known as Verifier.\" -> \"Also known as a Verifier.\"\n> \n>    Section 4.1.4:\n> \n> This is the first introduction to status values, would be nice to define the values of 0x00 and 0x01 or at least reference section 7.1. It was confusing to not know the value meanings. In the next paragraph there is a new status type, SUSPENDED which is defined.\n> \n> There's also a status listed of value 3 (status[3]) but that value is never defined. Would suggest either defining or mentioning that this is application specific, as defined in 7.1.\n> \n>    Section 4.2:\n> \n> This states the status_list claim is REQUIRED but it is not present in the examples. Would it not be better to show that? For the first example, display something like:\n> \n> {\n>    \"status_list\":\n>    {\n>      \"bits\": 1,\n>      \"lst\": \"eNrbuRgAAhcBXQ\"\n>    }\n> }\n> \n>    Section 6.2: \n> \n> This sentence has a redundant phrase: \"The value of idx MUST be a non-negative number, containing a value of zero or greater.\" Could it be replaced with \"The value of idx MUST be a non-negative integer.\"?\n> \n> There's a self-reference to section 6.2: \"The \"status\" object uses the same encoding as a JWT as defined in Section 6.2.\" \n> \n> But this sentence is in section 6.2. Is that intended or should it be a reference to something else? What am I missing?\n> \n>    Section 7.1:\n> \n> There's a phrase that is not a full sentence: \"Meaning the processing of Status Types using these values is application specific.\" You could drop 'Meaning'.\n> \n> The following paragraph feels important:\n> \n> \"The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the \"exp\" (Expiration Time) but also has a status of 0x00 (\"VALID\"), the token is considered expired.\"\n> \n> Could add a MUST before 'precede' and change it to:\n> \n> \"The processing rules for Referenced Tokens (such as JWT or CWT) MUST precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the \"exp\" (Expiration Time) but also has a status of 0x00 (\"VALID\"), the token is considered expired.\"\n> \n> It is a MUST in section 8.3, so maybe it'd be better to refer the reader to that section?\n> \n>    Section 8.1:\n> \n> I was confused by these two sentences:\n> \n> \"The Relying Party MUST send the following Accept-Header to indicate the requested response type:\"\n> \n> \"If the Relying Party does not send an Accept Header, the response type is assumed to be known implicitly or out-of-band. \"\n> \n> I was under the impression that a MUST was non-negotiable, but in the second sentence guidance for not sending the Accept-Header is given. Maybe change MUST to SHOULD?\n> \n>    Section 8.3\n> \n> Perhaps Step 4.3 and 4.4 should reference section 13.6 which gives implementation guidance?\n> \n>    Section 11.3:\n> \n> Looks like a formatting issue with lists not being rendered. \n> \n> For example, \"- the same x5c value or an x5t ...\" and \"- the same x5chain value\"\n> \n>    Section 12.1:\n> \n> We refer to the \"issuer\" as \"he\" or \"him\" a few times in section 12.\n> \n> Could replace it with \"the issuer\" without any loss of meaning and it would read better:\n> \n> \"this would enable him\" -> \"this would enable the issuer\"\n> \n>    Section 12.2:\n> \n> Same as in section 12.1 \n> \n> \"By these means, he could maintain\" -> \"By these means, the issuer could maintain\"\n> \n>    Section 12.4:\n> \n> \"and his related business\" was confusing. Maybe instead: \"and related implementation details\"\n> \n> The list prefaced with \"This behaviour could be mitigated by:\" needs the tense to be changed. Suggest:\n> \n> This behaviour could be mitigated by:\n> \n> - disabling the Status List Aggregation [Section 9](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-11.html#aggregation)\n> \n> - choosing non-sequential, pseudo-random or random indices\n> \n> - using decoy entries to obfuscate the real number of Referenced Tokens within a Status List\n> \n> - choosing to deploy and utilize multiple Status Lists simultaneously\n> \n>    Section 13.2\n> \n> The link appears broken: \"see (#privacy-considerations) for more details\"\n> \n>    Section 13.3\n> \n> Similar to section 11, this section appears to have some list formatting issues. \"Status List Tokens depends on: - the size...\"\n> \n> Thanks,\n> Dan",
       "createdAt": "2025-06-10T08:32:40Z",
-      "updatedAt": "2025-06-17T19:21:51Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-23T09:35:40Z",
+      "closedAt": "2025-06-23T09:35:40Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -18835,13 +18835,13 @@
       "labels": [],
       "body": "Closes #283",
       "createdAt": "2025-04-10T18:06:36Z",
-      "updatedAt": "2025-05-27T15:08:38Z",
+      "updatedAt": "2025-06-23T07:08:43Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "3ddfa038bd69201c99ca909a7f0d54eafd53e9ef",
+      "baseRefOid": "7e3a352048ebb4c98e1a5b7b183d33bbaecd2512",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "rendering-fix-oid",
-      "headRefOid": "ecae1776a207bcb84fd8847a0b5f4c22b9aaffd6",
+      "headRefOid": "26ef2c325322375f4126cb35ff9eaf0bb83ab463",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -19306,24 +19306,26 @@
       "id": "PR_kwDOJZ2aqs6aPo3G",
       "title": "add feedback from Dan Moore",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/293",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #291 ",
       "createdAt": "2025-06-12T15:37:50Z",
-      "updatedAt": "2025-06-16T06:31:53Z",
+      "updatedAt": "2025-06-23T09:35:39Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7e3a352048ebb4c98e1a5b7b183d33bbaecd2512",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "feedback_dan_moore",
       "headRefOid": "662200fc13611c951cf13e79633c6ade9ca19d2c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-06-23T09:35:39Z",
+      "mergedAt": "2025-06-23T09:35:39Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "42edbb5f6a6bec1b810d2e0cbc057a8f19260eae"
+      },
       "comments": [],
       "reviews": [
         {
@@ -19393,19 +19395,159 @@
       "labels": [],
       "body": "Closes #294 ",
       "createdAt": "2025-06-20T14:15:53Z",
-      "updatedAt": "2025-06-20T14:15:54Z",
+      "updatedAt": "2025-06-23T10:21:56Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7e3a352048ebb4c98e1a5b7b183d33bbaecd2512",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "comments_by_denis_3",
-      "headRefOid": "a9df6d9857ef1652a5166ae30ed02a4458fbff72",
+      "headRefOid": "dd03a59a317ca9410c5cbc99bf7672d343f6c2b9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs6vxOLP",
+          "commit": {
+            "abbreviatedOid": "a9df6d9"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-23T07:10:17Z",
+          "updatedAt": "2025-06-23T07:10:17Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6vxjv5",
+          "commit": {
+            "abbreviatedOid": "a9df6d9"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-06-23T07:42:06Z",
+          "updatedAt": "2025-06-23T07:42:43Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "We had the same discussions in openid4vc and I'd prefer to not have the JSON here (for String, Integer). Especially JSON string has created confusion - people interpret that as a valid json (object) encoded as a string.",
+              "createdAt": "2025-06-23T07:42:06Z",
+              "updatedAt": "2025-06-23T07:48:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6vy-Tr",
+          "commit": {
+            "abbreviatedOid": "a9df6d9"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM with Christians proposed change around JSON string incorperated.",
+          "createdAt": "2025-06-23T09:36:56Z",
+          "updatedAt": "2025-06-23T09:36:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6vzGZI",
+          "commit": {
+            "abbreviatedOid": "a9df6d9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-23T09:46:20Z",
+          "updatedAt": "2025-06-23T09:46:20Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "and what about JSON object?",
+              "createdAt": "2025-06-23T09:46:20Z",
+              "updatedAt": "2025-06-23T09:46:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6vzGm7",
+          "commit": {
+            "abbreviatedOid": "a9df6d9"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-23T09:46:39Z",
+          "updatedAt": "2025-06-23T09:46:39Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\r\n    * `idx`: REQUIRED. The `idx` (index) claim MUST specify a Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.\r\n    * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.\r\n```",
+              "createdAt": "2025-06-23T09:46:39Z",
+              "updatedAt": "2025-06-23T09:46:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6vzVtG",
+          "commit": {
+            "abbreviatedOid": "a9df6d9"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-23T10:06:21Z",
+          "updatedAt": "2025-06-23T10:06:21Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "JSON Object is good - that term is also defined in the RFC.\r\nCorrect terms for JSON would be JSON text and JSON number, but using string and integer seems to be cleaner here. ",
+              "createdAt": "2025-06-23T10:06:21Z",
+              "updatedAt": "2025-06-23T10:06:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6vzdHZ",
+          "commit": {
+            "abbreviatedOid": "a9df6d9"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-23T10:16:18Z",
+          "updatedAt": "2025-06-23T10:16:18Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\r\n    * `idx`: REQUIRED. The `idx` (index) claim MUST specify an Integer that represents the index to check for status information in the Status List for the current Referenced Token. The value of `idx` MUST be a non-negative number, containing a value of zero or greater.\r\n    * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.\r\n```",
+              "createdAt": "2025-06-23T10:16:18Z",
+              "updatedAt": "2025-06-23T10:16:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs6vzg84",
+          "commit": {
+            "abbreviatedOid": "dd03a59"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-23T10:21:56Z",
+          "updatedAt": "2025-06-23T10:21:56Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
