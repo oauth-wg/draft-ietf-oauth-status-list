@@ -838,7 +838,7 @@ Content-Type: application/statuslist+jwt
 
 # Status List Aggregation {#aggregation}
 
-Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status List Tokens for a specific type of Referenced Token or Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
+Status List Aggregation is an optional mechanism offered by the Issuer to publish a list of one or more Status List Tokens URIs, allowing a Relying Party to fetch Status List Tokens provided by this Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
 
 If a Relying Party encounters an invalid Status List Token referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response instead of fully aborting processing and retrying later.
 
@@ -869,7 +869,7 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}. The Issuer MAY limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.
 
 The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
 
@@ -1464,6 +1464,7 @@ IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in th
 We would like to thank
 Brian Campbell,
 Dan Moore,
+Denis Pinkas,
 Filip Skokan,
 Francesco Marino,
 Giuseppe De Marco,
