@@ -840,7 +840,7 @@ Content-Type: application/statuslist+jwt
 
 Status List Aggregation is an optional mechanism offered by the Issuer to publish a list of one or more Status List Tokens URIs, allowing a Relying Party to fetch Status List Tokens provided by this Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
 
-If a Relying Party encounters an invalid Status List Token referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response instead of fully aborting processing and retrying later.
+If a Relying Party encounters an error while validating Status List Token referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response instead of fully aborting processing and retrying later.
 
 There are two options for a Relying Party to retrieve the Status List Aggregation.
 An Issuer MAY support any of these mechanisms:
