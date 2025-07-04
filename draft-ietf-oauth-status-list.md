@@ -744,7 +744,7 @@ To obtain the Status List Token, the Relying Party MUST send an HTTP GET request
 
 The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.
 
-The Relying Party SHOULD send the following Accept-Header to indicate the requested response type if the Content-Type of Status List in that ecosystem is unknown and the Relying Party only supports one format:
+The Relying Party SHOULD send the following Accept Header to indicate the requested response type unless the Content-Type of Status List Tokens in the respective ecosystem is known or the Relying Party only supports both formats:
 
 - "application/statuslist+jwt" for Status List Token in JWT format
 - "application/statuslist+cwt" for Status List Token in CWT format
