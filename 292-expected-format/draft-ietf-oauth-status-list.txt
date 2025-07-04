@@ -720,9 +720,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d584063b5be8cf7042fb865f367
-   1ed121d77b617e81851768f877103566a3c5a24d18bc4a8fb6d456609c05289305da
-   0aac156701eada120e7ac692f4ce9c954159fc
+   646269747301636c73744a78dadbb918000217015d58409102c0e6eb3b4a120f747c
+   2c717370bd7015d1d8daf3e926f90de22ca1baf46bb821de9f7259cb5a687c56784e
+   5b380dd141a2ddb3869246a1074ab7c2e93ba3
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -745,12 +745,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      63b5be8cf7042fb865f3671e  #       "cµ¾\x8c÷\x04/¸eóg\x1e"
-      d121d77b617e81851768f877  #       "Ñ!×{a~\x81\x85\x17høw"
-      103566a3c5a24d18bc4a8fb6  #       "\x105f£Å¢M\x18¼J\x8f¶"
-      d456609c05289305da0aac15  #       "ÔV`\x9c\x05(\x93\x05Ú\x0a¬\x15"
-      6701eada120e7ac692f4ce9c  #       "g\x01êÚ\x12\x0ezÆ\x92ôÎ\x9c"
-      954159fc                  #       "\x95AYü"
+      9102c0e6eb3b4a120f747c2c  #       "\x91\x02Àæë;J\x12\x0ft|,"
+      717370bd7015d1d8daf3e926  #       "qsp½p\x15ÑØÚóé&"
+      f90de22ca1baf46bb821de9f  #       "ù\x0dâ,¡ºôk¸!Þ\x9f"
+      7259cb5a687c56784e5b380d  #       "rYËZh|VxN[8\x0d"
+      d141a2ddb3869246a1074ab7  #       "ÑA¢Ý³\x86\x92F¡\x07J·"
+      c2e93ba3                  #       "Âé;£"
 
 6.  Referenced Token
 
@@ -892,9 +892,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158400d2400ea3cfda02cd62b852c949eaad969187c
-   22ee9a7aea92518f4ba6c438e91140cafe6a12d378632dcb48c36447e6a703f629e3
-   25f01be8f55f1d7e189142
+   7374617475736c697374732f3158409e4dca51fb72b9f2ab700726f295333bb4919e
+   71b201194d498abcd1d485f02664a339c4ed80370c874171df51bf3a8ca6c2b24e5a
+   61e1a907b41798f032b303
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -917,12 +917,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         0d2400ea3cfda02cd62b852c  #       "\x0d$\x00ê<ý\xa0,Ö+\x85,"
-         949eaad969187c22ee9a7aea  #       "\x94\x9eªÙi\x18|"î\x9azê"
-         92518f4ba6c438e91140cafe  #       "\x92Q\x8fK¦Ä8é\x11@Êþ"
-         6a12d378632dcb48c36447e6  #       "j\x12Óxc-ËHÃdGæ"
-         a703f629e325f01be8f55f1d  #       "§\x03ö)ã%ð\x1bèõ_\x1d"
-         7e189142                  #       "~\x18\x91B"
+         9e4dca51fb72b9f2ab700726  #       "\x9eMÊQûr¹ò«p\x07&"
+         f295333bb4919e71b201194d  #       "ò\x953;´\x91\x9eq²\x01\x19M"
+         498abcd1d485f02664a339c4  #       "I\x8a¼ÑÔ\x85ð&d£9Ä"
+         ed80370c874171df51bf3a8c  #       "í\x807\x0c\x87AqßQ¿:\x8c"
+         a6c2b24e5a61e1a907b41798  #       "¦Â²NZaá©\x07´\x17\x98"
+         f032b303                  #       "ð2³\x03"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1126,10 +1126,10 @@ d2                              # tag(18)
    Browser-based clients to access it, unless ecosystems using this
    specification choose not to support Browser-based clients.
 
-   The Relying Party SHOULD send the following Accept-Header to indicate
-   the requested response type if the Content-Type of Status List in
-   that ecosystem is unknown and the Relying Party only supports one
-   format:
+   The Relying Party SHOULD send the following Accept Header to indicate
+   the requested response type unless the Content-Type of Status List
+   Tokens in the respective ecosystem is known or the Relying Party only
+   supports both formats:
 
    *  "application/statuslist+jwt" for Status List Token in JWT format
 
@@ -1160,8 +1160,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.kwNvd5G64Owojmqv6WYr0TAymFvkt-JnETduRb5hxXKlO0aD97z-
-   8b1-4G7RBEMyXsF2uUEUbBYd0-j92vnKzA
+   nR0bCI6NDMyMDB9.BLcOhVtrnGXQ6TxECEwlGkr1O1v52mqVsQ_ldmJMaRkw10exhdjA
+   10swXUGWssVmFoZPoOK0bZzMUJC7zt8XWQ
 
 8.2.  Status List Response
 
@@ -1300,8 +1300,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.kwNvd5G64Owojmqv6WYr0TAymFvkt-JnETduRb5hxXKlO0aD97z-
-   8b1-4G7RBEMyXsF2uUEUbBYd0-j92vnKzA
+   nR0bCI6NDMyMDB9.BLcOhVtrnGXQ6TxECEwlGkr1O1v52mqVsQ_ldmJMaRkw10exhdjA
+   10swXUGWssVmFoZPoOK0bZzMUJC7zt8XWQ
 
 9.  Status List Aggregation
 
