@@ -744,7 +744,7 @@ To obtain the Status List Token, the Relying Party MUST send an HTTP GET request
 
 The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.
 
-The Relying Party MUST send the following Accept-Header to indicate the requested response type:
+The Relying Party SHOULD send the following Accept-Header to indicate the requested response type if the Content-Type of Status List in that ecosystem is unknown and the Relying Party only supports one format:
 
 - "application/statuslist+jwt" for Status List Token in JWT format
 - "application/statuslist+cwt" for Status List Token in CWT format
@@ -1898,6 +1898,7 @@ CBOR encoding:
 * add Paul's affiliation
 * add feedback from Dan Moore
 * change JSON Status List structure to only contain JSON object
+* relax the accept header from must to should
 
 -11
 
