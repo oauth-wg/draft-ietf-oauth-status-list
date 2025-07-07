@@ -1,5 +1,5 @@
 ---
-title: "Token Status List"
+title: "Token Status List (TSL)"
 category: std
 lang: en
 
@@ -124,7 +124,7 @@ informative:
 
 --- abstract
 
-This specification defines a mechanism, data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
+This specification defines a mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
 
 --- middle
 
@@ -363,10 +363,10 @@ See section [](#test-vectors) for more test vectors.
 
 This section defines the data structure for a CBOR-encoded Status List:
 
-* The `StatusList` structure is a map (Major Type 5) MUST contain at least the following entries:
-  * `bits`: REQUIRED. Unsigned integer (Major Type 0) that contains the number of bits per Referenced Token in the compressed byte array (`lst`). The allowed values for `bits` are 1, 2, 4 and 8.
-  * `lst`: REQUIRED. Byte string (Major Type 2) that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the compressed byte array as specified in [](#status-list-byte-array).
-  * `aggregation_uri`: OPTIONAL. Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further detail.
+* The `StatusList` structure is a CBOR map (Major Type 5) and defines the following entries:
+  * `bits`: REQUIRED. CBOR Unsigned integer (Major Type 0) that contains the number of bits per Referenced Token in the compressed byte array (`lst`). The allowed values for `bits` are 1, 2, 4 and 8.
+  * `lst`: REQUIRED. CBOR Byte string (Major Type 2) that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the compressed byte array as specified in [](#status-list-byte-array).
+  * `aggregation_uri`: OPTIONAL. CBOR Text string (Major Type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further detail.
 
 The following is the CDDL definition of the StatusList structure:
 
@@ -472,7 +472,7 @@ The following is the CBOR Annotated Hex output of the example above:
 
 ## Status Claim {#status-claim}
 
-By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. The claim contains members used to reference a Status List Token as defined in this specification. Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
+By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. This specification defines one possible member of the "status" object, called "status_list". Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of {{RFC7800}} in which different authenticity confirmation methods can be included.
 
 ## Referenced Token in JOSE {#referenced-token-jose}
 
@@ -481,7 +481,7 @@ The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{R
 The following content applies to the JWT Claims Set:
 
 * `status`: REQUIRED. The `status` (status) claim MUST specify a JSON Object that contains at least one reference to a status mechanism.
-  * `status_list`: REQUIRED when the status mechanism defined in this specification is used. It contains a reference to a Status List Token. It MUST at least contain the following claims:
+  * `status_list`: REQUIRED when the status mechanism defined in this specification is used. It MUST specify a JSON Object that contains a reference to a Status List Token. It MUST at least contain the following claims:
     * `idx`: REQUIRED. The `idx` (index) claim MUST specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.
     * `uri`: REQUIRED. The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
@@ -838,9 +838,9 @@ Content-Type: application/statuslist+jwt
 
 # Status List Aggregation {#aggregation}
 
-Status List Aggregation is an optional mechanism to retrieve a list of URIs to all Status List Tokens, allowing a Relying Party to fetch all relevant Status List Tokens for a specific type of Referenced Token or Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
+Status List Aggregation is an optional mechanism offered by the Issuer to publish a list of one or more Status List Tokens URIs, allowing a Relying Party to fetch Status List Tokens provided by this Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a reference token for a period of time.
 
-If a Relying Party encounters an invalid Status List referenced in the response from the Status List Aggregation endpoint, it SHOULD continue processing the other valid Status Lists referenced in the response instead of fully aborting processing and retrying later.
+If a Relying Party encounters an error while validating one of the Status List Tokens returned from the Status List Aggregation endpoint, it SHOULD continue processing the other Status List Tokens.
 
 There are two options for a Relying Party to retrieve the Status List Aggregation.
 An Issuer MAY support any of these mechanisms:
@@ -869,7 +869,7 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}. The Issuer MAY limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.
 
 The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
 
@@ -883,7 +883,7 @@ This section defines the structure for a JSON-encoded Status List Aggregation:
 
 * `status_lists`: REQUIRED. JSON array of strings that contains URIs linking to Status List Tokens.
 
-The Status List Aggregation URI provides a list of Status List URIs. This aggregation in JSON and the media type return MUST be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
+The Status List Aggregation URI provides a list of Status List Token URIs. This aggregation in JSON and the media type return MUST be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
 
 The following is a non-normative example for media type `application/json`:
 
@@ -1003,7 +1003,7 @@ Once the Relying Party receives the Referenced Token, this enables them to reque
 
 This behaviour could be mitigated by:
 
-- regular re-issuance of the Referenced Token, see [](#implementation-lifecycle).
+- regular re-issuance of the Referenced Token, see [](#implementation-linkability).
 
 ## Observability of Outsiders {#privacy-outsider}
 
@@ -1025,7 +1025,7 @@ The tuple of uri and index inside the Referenced Token are unique and therefore 
 
 Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
 
-To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-lifecycle) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
+To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
@@ -1061,9 +1061,13 @@ Ecosystems that want to use other Status Types than "VALID" and "INVALID" should
 
 The lifetime of a Status List Token depends on the lifetime of its Referenced Tokens. Once all Referenced Tokens are expired, the Issuer may stop serving the Status List Token.
 
+## Linkability Mitigation {#implementation-linkability}
+
 Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.
 
 Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status List Tokens. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
+
+Beware, that this mechanism solves linkability issues between Relying Parties, but does not prevent traceability by Issuers.
 
 ## Default Values and Double Allocation
 
@@ -1165,14 +1169,14 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 ### Registry Contents
 
 * Claim Name: `status`
-* Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the JWT.
+* Claim Description: A JSON object containing a reference to a status mechanism from the JWT Status Mechanisms Registry.
 * Change Controller: IETF
 * Specification Document(s): [](#status-claim) of this specification
 
 <br/>
 
 * Claim Name: `status_list`
-* Claim Description: A status list containing up-to-date status information on multiple tokens.
+* Claim Description: A JSON object containing up-to-date status information on multiple tokens using the Token Status List mechanism.
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-jwt) of this specification
 
@@ -1221,7 +1225,7 @@ Specification Document(s):
 ### Initial Registry Contents
 
 * Status Mechanism Value: `status_list`
-* Status Mechanism Description: A status list containing up-to-date status information on multiple tokens.
+* Status Mechanism Description: A Token Status List containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
 * Specification Document(s): [](#referenced-token-jose) of this specification
 
@@ -1235,7 +1239,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 <br/>
 
 * Claim Name: `status`
-* Claim Description: Reference to a status or validity mechanism containing up-to-date status information on the CWT.
+* Claim Description: A CBOR structure containing a reference to a status mechanism from the CWT Status Mechanisms Registry.
 * JWT Claim Name: `status`
 * Claim Key: TBD (requested assignment 65535)
 * Claim Value Type: map
@@ -1245,7 +1249,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 <br/>
 
 * Claim Name: `status_list`
-* Claim Description: A status list containing up-to-date status information on multiple tokens.
+* Claim Description: A CBOR structure containing up-to-date status information on multiple tokens using the Token Status List mechanism.
 * JWT Claim Name: `status_list`
 * Claim Key: TBD (requested assignment 65533)
 * Claim Value Type: map
@@ -1299,7 +1303,7 @@ Specification Document(s):
 ### Initial Registry Contents
 
 * Status Mechanism Value: `status_list`
-* Status Mechanism Description: A status list containing up-to-date status information on multiple tokens.
+* Status Mechanism Description: A Token Status List containing up-to-date status information on multiple tokens.
 * Change Controller: IETF
 * Specification Document(s): [](#referenced-token-cose) of this specification
 
@@ -1461,6 +1465,7 @@ IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in th
 We would like to thank
 Brian Campbell,
 Dan Moore,
+Denis Pinkas,
 Filip Skokan,
 Francesco Marino,
 Giuseppe De Marco,
@@ -1900,8 +1905,12 @@ CBOR encoding:
 * add Paul's affiliation
 * add feedback from Dan Moore
 * change JSON Status List structure to only contain JSON object
+* further nitpicks
+* clarifying status and status_list IANA descriptions for JWT/CWT
+* clarifying description texts for status and status_list in CBOR
+* splitting Linkability Mitigation from Token Lifecycle section in Implementation Consideration
 * relax the accept header from must to should
-
+* added further privacy consideration around issuer tracking using unique URIs
 
 -11
 
