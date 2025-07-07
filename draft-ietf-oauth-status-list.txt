@@ -11,17 +11,17 @@ Expires: 8 January 2026                                  Bundesdruckerei
                                                              7 July 2025
 
 
-                           Token Status List
+                        Token Status List (TSL)
                   draft-ietf-oauth-status-list-latest
 
 Abstract
 
-   This specification defines a mechanism, data structures and
-   processing rules for representing the status of tokens secured by
-   JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and
-   Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO
-   mdoc.  It also defines an extension point and a registry for future
-   status mechanisms.
+   This specification defines a mechanism called Token Status List
+   (abbreviated TSL), data structures and processing rules for
+   representing the status of tokens secured by JSON Object Signing and
+   Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such
+   as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc.  It also defines an
+   extension point and a registry for future status mechanisms.
 
 About This Document
 
@@ -121,13 +121,14 @@ Table of Contents
      12.8.  Status Types
    13. Implementation Considerations
      13.1.  Token Lifecycle
-     13.2.  Default Values and Double Allocation
-     13.3.  Status List Size
-     13.4.  External Status Issuer
-     13.5.  External Status Provider for Scalability
-     13.6.  Status List Update Interval and Caching
-     13.7.  Relying Parties avoiding correlatable Information
-     13.8.  Status List Formats
+     13.2.  Linkability Mitigation
+     13.3.  Default Values and Double Allocation
+     13.4.  Status List Size
+     13.5.  External Status Issuer
+     13.6.  External Status Provider for Scalability
+     13.7.  Status List Update Interval and Caching
+     13.8.  Relying Parties avoiding correlatable Information
+     13.9.  Status List Formats
    14. IANA Considerations
      14.1.  JSON Web Token Claims Registration
        14.1.1.  Registry Contents
@@ -539,22 +540,23 @@ Table of Contents
    This section defines the data structure for a CBOR-encoded Status
    List:
 
-   *  The StatusList structure is a map (Major Type 5) MUST contain at
-      least the following entries:
+   *  The StatusList structure is a CBOR map (Major Type 5) and defines
+      the following entries:
 
-      -  bits: REQUIRED.  Unsigned integer (Major Type 0) that contains
-         the number of bits per Referenced Token in the compressed byte
-         array (lst).  The allowed values for bits are 1, 2, 4 and 8.
+      -  bits: REQUIRED.  CBOR Unsigned integer (Major Type 0) that
+         contains the number of bits per Referenced Token in the
+         compressed byte array (lst).  The allowed values for bits are
+         1, 2, 4 and 8.
 
-      -  lst: REQUIRED.  Byte string (Major Type 2) that contains the
-         status values for all the Referenced Tokens it conveys statuses
-         for.  The value MUST be the compressed byte array as specified
-         in Section 4.1.
+      -  lst: REQUIRED.  CBOR Byte string (Major Type 2) that contains
+         the status values for all the Referenced Tokens it conveys
+         statuses for.  The value MUST be the compressed byte array as
+         specified in Section 4.1.
 
-      -  aggregation_uri: OPTIONAL.  Text string (Major Type 3) that
-         contains a URI to retrieve the Status List Aggregation for this
-         type of Referenced Token.  See section Section 9 for further
-         detail.
+      -  aggregation_uri: OPTIONAL.  CBOR Text string (Major Type 3)
+         that contains a URI to retrieve the Status List Aggregation for
+         this type of Referenced Token.  See section Section 9 for
+         further detail.
 
    The following is the CDDL definition of the StatusList structure:
 
@@ -720,9 +722,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d584025d7759f871485e4204da3
-   bf7e7c8e5ddd421d6e8b89d696b14bdfe20815c676b97fc09f14471b33475368c857
-   1806f3f27aaa24a3f12d9a5fecd6326aaa486e
+   646269747301636c73744a78dadbb918000217015d58401faa50110cac50ae8424d0
+   c7aafbc4d3ef218262e0c6d1617173f28823791d29bb7e3e2c8824a901fc9a1453b9
+   33649ecb33086c7aa6bb63e1392c1df5b2f2bf
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -745,12 +747,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      25d7759f871485e4204da3bf  #       "%×u\x9f\x87\x14\x85ä M£¿"
-      7e7c8e5ddd421d6e8b89d696  #       "~|\x8e]ÝB\x1dn\x8b\x89Ö\x96"
-      b14bdfe20815c676b97fc09f  #       "±Kßâ\x08\x15Æv¹\x7fÀ\x9f"
-      14471b33475368c8571806f3  #       "\x14G\x1b3GShÈW\x18\x06ó"
-      f27aaa24a3f12d9a5fecd632  #       "òzª$£ñ-\x9a_ìÖ2"
-      6aaa486e                  #       "jªHn"
+      1faa50110cac50ae8424d0c7  #       "\x1fªP\x11\x0c¬P®\x84$ÐÇ"
+      aafbc4d3ef218262e0c6d161  #       "ªûÄÓï!\x82bàÆÑa"
+      7173f28823791d29bb7e3e2c  #       "qsò\x88#y\x1d)»~>,"
+      8824a901fc9a1453b933649e  #       "\x88$©\x01ü\x9a\x14S¹3d\x9e"
+      cb33086c7aa6bb63e1392c1d  #       "Ë3\x08lz¦»cá9,\x1d"
+      f5b2f2bf                  #       "õ²ò¿"
 
 6.  Referenced Token
 
@@ -758,9 +760,9 @@ d2                              # tag(18)
 
    By including a "status" claim in a Referenced Token, the Issuer is
    referencing a mechanism to retrieve status information about this
-   Referenced Token.  The claim contains members used to reference a
-   Status List Token as defined in this specification.  Other members of
-   the "status" object may be defined by other specifications.  This is
+   Referenced Token.  This specification defines one possible member of
+   the "status" object, called "status_list".  Other members of the
+   "status" object may be defined by other specifications.  This is
    analogous to "cnf" claim in Section 3.1 of [RFC7800] in which
    different authenticity confirmation methods can be included.
 
@@ -775,8 +777,9 @@ d2                              # tag(18)
       Object that contains at least one reference to a status mechanism.
 
       -  status_list: REQUIRED when the status mechanism defined in this
-         specification is used.  It contains a reference to a Status
-         List Token.  It MUST at least contain the following claims:
+         specification is used.  It MUST specify a JSON Object that
+         contains a reference to a Status List Token.  It MUST at least
+         contain the following claims:
 
          o  idx: REQUIRED.  The idx (index) claim MUST specify a non-
             negative Integer that represents the index to check for
@@ -892,9 +895,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584059237f34c5ac89806df4ea82b0f0e25a161d4d
-   723812a60fba7038ac359aa271c1ee19c49821a147f159a6a3aed530abf98f3a0997
-   1adc7298db2d96c9f4513c
+   7374617475736c697374732f31584097413528814e7282cf7f492fa8f99b430db922
+   be744ca8e2c02ccaf06a1056c6a4fb7be3038104035e1fa7fe8f5d3a27bb850bc831
+   5da424198c1d12ed8a37e5
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -917,12 +920,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      59237f34c5ac89806df4ea82  #       "Y#\x7f4Å¬\x89\x80môê\x82"
-      b0f0e25a161d4d723812a60f  #       "°ðâZ\x16\x1dMr8\x12¦\x0f"
-      ba7038ac359aa271c1ee19c4  #       "ºp8¬5\x9a¢qÁî\x19Ä"
-      9821a147f159a6a3aed530ab  #       "\x98!¡GñY¦£®Õ0«"
-      f98f3a09971adc7298db2d96  #       "ù\x8f:\x09\x97\x1aÜr\x98Û-\x96"
-      c9f4513c                  #       "ÉôQ<"
+      97413528814e7282cf7f492f  #       "\x97A5(\x81Nr\x82Ï\x7fI/"
+      a8f99b430db922be744ca8e2  #       "¨ù\x9bC\x0d¹"¾tL¨â"
+      c02ccaf06a1056c6a4fb7be3  #       "À,Êðj\x10VÆ¤û{ã"
+      038104035e1fa7fe8f5d3a27  #       "\x03\x81\x04\x03^\x1f§þ\x8f]:'"
+      bb850bc8315da424198c1d12  #       "»\x85\x0bÈ1]¤$\x19\x8c\x1d\x12"
+      ed8a37e5                  #       "í\x8a7å"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1160,8 +1163,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.qGtEO-C3XdYTcIKjOgZAZTXsSKETC9MGnYpwAq1pHvs9S0h5iQe6
-   oDysrfHk9GjM1oNKhm28kibv4WHUrCM3_A
+   nR0bCI6NDMyMDB9.Ra2CW9knLJUzfh47uDON5EAfJZUeE4QXtKXfYjzw4IfMoP74f1qr
+   QBjDPOf7SIY9BsXb-ev-10vHC6hpeXR8fg
 
 8.2.  Status List Response
 
@@ -1300,22 +1303,21 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.qGtEO-C3XdYTcIKjOgZAZTXsSKETC9MGnYpwAq1pHvs9S0h5iQe6
-   oDysrfHk9GjM1oNKhm28kibv4WHUrCM3_A
+   nR0bCI6NDMyMDB9.Ra2CW9knLJUzfh47uDON5EAfJZUeE4QXtKXfYjzw4IfMoP74f1qr
+   QBjDPOf7SIY9BsXb-ev-10vHC6hpeXR8fg
 
 9.  Status List Aggregation
 
-   Status List Aggregation is an optional mechanism to retrieve a list
-   of URIs to all Status List Tokens, allowing a Relying Party to fetch
-   all relevant Status List Tokens for a specific type of Referenced
-   Token or Issuer.  This mechanism is intended to support fetching and
-   caching mechanisms and allow offline validation of the status of a
-   reference token for a period of time.
+   Status List Aggregation is an optional mechanism offered by the
+   Issuer to publish a list of one or more Status List Tokens URIs,
+   allowing a Relying Party to fetch Status List Tokens provided by this
+   Issuer.  This mechanism is intended to support fetching and caching
+   mechanisms and allow offline validation of the status of a reference
+   token for a period of time.
 
-   If a Relying Party encounters an invalid Status List referenced in
-   the response from the Status List Aggregation endpoint, it SHOULD
-   continue processing the other valid Status Lists referenced in the
-   response instead of fully aborting processing and retrying later.
+   If a Relying Party encounters an error while validating one of the
+   Status List Tokens returned from the Status List Aggregation
+   endpoint, it SHOULD continue processing the other Status List Tokens.
 
    There are two options for a Relying Party to retrieve the Status List
    Aggregation.  An Issuer MAY support any of these mechanisms:
@@ -1353,7 +1355,9 @@ d2                              # tag(18)
    trust lists (such as VICAL as defined in Annex C of [ISO.mdoc]).  If
    the Issuer is an OAuth Authorization Server according to [RFC6749],
    it is RECOMMENDED to use status_list_aggregation_endpoint for its
-   metadata defined by [RFC8414].
+   metadata defined by [RFC8414].  The Issuer MAY limit the Status List
+   Tokens listed by a Status List Aggregation to a particular type of
+   Referenced Token.
 
    The concrete specification on how this is implemented depends on the
    specific ecosystem and is out of scope of this specification.
@@ -1374,8 +1378,8 @@ d2                              # tag(18)
    *  status_lists: REQUIRED.  JSON array of strings that contains URIs
       linking to Status List Tokens.
 
-   The Status List Aggregation URI provides a list of Status List URIs.
-   This aggregation in JSON and the media type return MUST be
+   The Status List Aggregation URI provides a list of Status List Token
+   URIs.  This aggregation in JSON and the media type return MUST be
    application/json.  A Relying Party can iterate through this list and
    fetch all Status List Tokens before encountering the specific URI in
    a Referenced Token.
@@ -1574,7 +1578,7 @@ d2                              # tag(18)
 
    This behaviour could be mitigated by:
 
-   *  regular re-issuance of the Referenced Token, see Section 13.1.
+   *  regular re-issuance of the Referenced Token, see Section 13.2.
 
 12.4.  Observability of Outsiders
 
@@ -1615,7 +1619,7 @@ d2                              # tag(18)
    To avoid privacy risks for colluding Relying Parties, it is
    RECOMMENDED that Issuers provide the ability to issue batches of one-
    time-use Referenced Tokens, enabling Holders to use in a single
-   interaction with a Relying Party before discarding.  See Section 13.1
+   interaction with a Relying Party before discarding.  See Section 13.2
    to avoid further correlatable information by the values of uri and
    index, Status Issuers are RECOMMENDED to:
 
@@ -1702,6 +1706,8 @@ d2                              # tag(18)
    Referenced Tokens.  Once all Referenced Tokens are expired, the
    Issuer may stop serving the Status List Token.
 
+13.2.  Linkability Mitigation
+
    Referenced Tokens may be regularly re-issued to mitigate the
    linkability of presentations to Relying Parties.  In this case, every
    re-issued Referenced Token MUST have a fresh Status List entry in
@@ -1713,7 +1719,10 @@ d2                              # tag(18)
    MAY be spread across multiple Status List Tokens.  Revoking batch-
    issued Referenced Tokens might reveal this correlation later on.
 
-13.2.  Default Values and Double Allocation
+   Beware, that this mechanism solves linkability issues between Relying
+   Parties, but does not prevent traceability by Issuers.
+
+13.3.  Default Values and Double Allocation
 
    The Status Issuer is RECOMMENDED to initialize the Status List byte
    array with a default value provided as an initialization parameter by
@@ -1730,7 +1739,7 @@ d2                              # tag(18)
    tracking, see Section 12 for more details).  The Status Issuer MUST
    prevent any unintended double allocation.
 
-13.3.  Status List Size
+13.4.  Status List Size
 
    The storage and transmission size of the Status Issuer's Status List
    Tokens depends on:
@@ -1760,7 +1769,7 @@ d2                              # tag(18)
    Status List Tokens, however the Status Issuer must be aware of
    possible privacy risks due to correlations.
 
-13.4.  External Status Issuer
+13.5.  External Status Issuer
 
    If the roles of the Issuer of the Referenced Token and the Status
    Issuer are performed by different entities, this may allow for use
@@ -1777,7 +1786,7 @@ d2                              # tag(18)
       -  update cycle of the Issuer used for ttl in the Status List
          Token as described in Section 5
 
-13.5.  External Status Provider for Scalability
+13.6.  External Status Provider for Scalability
 
    If the roles of the Status Issuer and the Status Provider are
    performed by different entities, this may allow for greater
@@ -1786,7 +1795,7 @@ d2                              # tag(18)
    and integrity of Token Status List is still guaranteed, as it is
    signed by the Status Issuer.
 
-13.6.  Status List Update Interval and Caching
+13.7.  Status List Update Interval and Caching
 
    Status Issuers have two options to communicate their update interval
    policy for the status of their Referenced Tokens:
@@ -1846,7 +1855,7 @@ d2                              # tag(18)
    ──┼───────────────────────────────────────────────────────────────┼─►
      │                                                               │
 
-13.7.  Relying Parties avoiding correlatable Information
+13.8.  Relying Parties avoiding correlatable Information
 
    If the Relying Party does not require the Referenced Token or the
    Status List Token, e.g. for subsequent status checks or audit trail,
@@ -1859,7 +1868,7 @@ d2                              # tag(18)
    The Relying Party should instead only keep the relevant payload from
    the Referenced Token.
 
-13.8.  Status List Formats
+13.9.  Status List Formats
 
    This specification defines 2 different token formats of the Status
    List:
@@ -1887,8 +1896,8 @@ d2                              # tag(18)
 
    *  Claim Name: status
 
-   *  Claim Description: Reference to a status or validity mechanism
-      containing up-to-date status information on the JWT.
+   *  Claim Description: A JSON object containing a reference to a
+      status mechanism from the JWT Status Mechanisms Registry.
 
    *  Change Controller: IETF
 
@@ -1898,8 +1907,9 @@ d2                              # tag(18)
 
    *  Claim Name: status_list
 
-   *  Claim Description: A status list containing up-to-date status
-      information on multiple tokens.
+   *  Claim Description: A JSON object containing up-to-date status
+      information on multiple tokens using the Token Status List
+      mechanism.
 
    *  Change Controller: IETF
 
@@ -1974,8 +1984,8 @@ d2                              # tag(18)
 
    *  Status Mechanism Value: status_list
 
-   *  Status Mechanism Description: A status list containing up-to-date
-      status information on multiple tokens.
+   *  Status Mechanism Description: A Token Status List containing up-
+      to-date status information on multiple tokens.
 
    *  Change Controller: IETF
 
@@ -1993,8 +2003,8 @@ d2                              # tag(18)
 
    *  Claim Name: status
 
-   *  Claim Description: Reference to a status or validity mechanism
-      containing up-to-date status information on the CWT.
+   *  Claim Description: A CBOR structure containing a reference to a
+      status mechanism from the CWT Status Mechanisms Registry.
 
    *  JWT Claim Name: status
 
@@ -2010,8 +2020,9 @@ d2                              # tag(18)
 
    *  Claim Name: status_list
 
-   *  Claim Description: A status list containing up-to-date status
-      information on multiple tokens.
+   *  Claim Description: A CBOR structure containing up-to-date status
+      information on multiple tokens using the Token Status List
+      mechanism.
 
    *  JWT Claim Name: status_list
 
@@ -2099,8 +2110,8 @@ d2                              # tag(18)
 
    *  Status Mechanism Value: status_list
 
-   *  Status Mechanism Description: A status list containing up-to-date
-      status information on multiple tokens.
+   *  Status Mechanism Description: A Token Status List containing up-
+      to-date status information on multiple tokens.
 
    *  Change Controller: IETF
 
@@ -2517,12 +2528,12 @@ d2                              # tag(18)
 
 Acknowledgments
 
-   We would like to thank Brian Campbell, Dan Moore, Filip Skokan,
-   Francesco Marino, Giuseppe De Marco, Hannes Tschofenig, Kristina
-   Yasuda, Markus Kreusch, Martijn Haring, Michael B.  Jones, Micha
-   Kraus, Michael Schwartz, Mike Prorock, Mirko Mollik, Oliver Terbu,
-   Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy, Timo Glastra and Torsten
-   Lodderstedt
+   We would like to thank Brian Campbell, Dan Moore, Denis Pinkas, Filip
+   Skokan, Francesco Marino, Giuseppe De Marco, Hannes Tschofenig,
+   Kristina Yasuda, Markus Kreusch, Martijn Haring, Michael B.  Jones,
+   Micha Kraus, Michael Schwartz, Mike Prorock, Mirko Mollik, Oliver
+   Terbu, Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy, Timo Glastra and
+   Torsten Lodderstedt
 
    for their valuable contributions, discussions and feedback to this
    specification.
@@ -3113,6 +3124,15 @@ Document History
    *  add feedback from Dan Moore
 
    *  change JSON Status List structure to only contain JSON object
+
+   *  further nitpicks
+
+   *  clarifying status and status_list IANA descriptions for JWT/CWT
+
+   *  clarifying description texts for status and status_list in CBOR
+
+   *  splitting Linkability Mitigation from Token Lifecycle section in
+      Implementation Consideration
 
    *  relax the accept header from must to should
 
