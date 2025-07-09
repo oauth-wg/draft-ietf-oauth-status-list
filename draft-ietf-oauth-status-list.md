@@ -176,13 +176,13 @@ The following diagram depicts the relationship between the involved roles (Relyi
 
 ~~~
 
-Status Lists may be composed to express a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.
+Status Lists can be used to express a variety of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.
 
 Furthermore, the document defines an extension point that enables other specifications to describe additional status mechanisms and creates an IANA registry.
 
 ## Example Use Cases
 
-An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} defines a way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the Issuer of the access tokens for each token validation. In contrast, the mechanism defined in this specification allows a party to fetch the status for many tokens, reducing interactions with the Issuer significantly for better scalability and providing better privacy as the Issuer does not learn which specific access token is being verified (herd anonymity).
+An example of the usage of a Status List is to manage the statuses of issued access tokens as defined in section 1.4 of {{RFC6749}}. Token Introspection {{RFC7662}} provides a method to determine the status of an issued access token, but it necessitates the party attempting to validate the state of access tokens to directly contact the Issuer of each token for validation. In contrast, the mechanism defined in this specification allows a party to retrieve the statuses for many tokens, reducing interactions with the Issuer substantially. This not only improves scalability but also enhances privacy by preventing the Issuer from gaining knowledge of access tokens being verified (herd anonymity).
 
 Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SD-JWT.VC}}.
 
