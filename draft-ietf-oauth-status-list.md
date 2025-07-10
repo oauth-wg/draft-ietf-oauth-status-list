@@ -869,9 +869,10 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}. The Issuer MAY limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID Connect, or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use `status_list_aggregation_endpoint` for its metadata defined by {{RFC8414}}. The Issuer MAY limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.
 
-The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.
+The concrete implementation details depend on the specific ecosystem and are out of scope of this specification.
+
 
 ## Status List Parameter
 
