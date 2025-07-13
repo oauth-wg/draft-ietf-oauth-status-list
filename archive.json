@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-10T00:20:31.812812+00:00",
+  "timestamp": "2025-07-13T00:23:08.288490+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5893,6 +5893,22 @@
           "updatedAt": "2025-06-20T10:59:57Z"
         }
       ]
+    },
+    {
+      "number": 298,
+      "id": "I_kwDOJZ2aqs6_y2f6",
+      "title": "property uri",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/298",
+      "state": "OPEN",
+      "author": "adeinega",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Property `uri` is currently defined as\n\n`The uri (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of uri MUST be a URI conforming to [RFC3986].`\n\nThe issue here is that an issuer of ATs can and query and path parameters (unique to each issued AT), that would allow to track the usage of ATs. While it's technically impossible to completely \"hide\" information about who downloaded the status list (I refer to SRC IP, user's agent, etc.), the spec in my view should discourage, and even explicitly forbid such techniques. Otherwise, it leaves the door open for this sort of misuse... which also defects the purpose of being a privacy-preserving way to check the statuses of tokens.\n\nI also think it's a bit better to refer to `uri` as one of properties of the `status` claim, not as `claim`.",
+      "createdAt": "2025-07-10T03:46:45Z",
+      "updatedAt": "2025-07-10T03:48:15Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -19690,7 +19706,7 @@
     {
       "number": 297,
       "id": "PR_kwDOJZ2aqs6eMY-N",
-      "title": "grammar fixes",
+      "title": "grammar fixes and rewording",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/297",
       "state": "OPEN",
       "author": "adeinega",
@@ -19699,13 +19715,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-07-09T21:33:07Z",
-      "updatedAt": "2025-07-09T22:56:47Z",
+      "updatedAt": "2025-07-10T03:12:46Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "c50a2fab7e0ddaa6fea8996c01de525b10d98674",
       "headRepository": "adeinega/draft-ietf-oauth-status-list",
       "headRefName": "adeinega-patch-1",
-      "headRefOid": "4bdefdcf650047740004f092bf6abbd64e3bf865",
+      "headRefOid": "fb79496309e1a5607c9d5282f06fede838c6071d",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
