@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-15T00:21:26.621663+00:00",
+  "timestamp": "2025-07-17T00:21:24.047194+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5902,11 +5902,13 @@
       "state": "OPEN",
       "author": "adeinega",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "tplooker"
+      ],
       "labels": [],
       "body": "Property `uri` is currently defined as\n\n`The uri (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of uri MUST be a URI conforming to [RFC3986].`\n\nThe issue here is that an issuer of ATs can and query and path parameters (unique to each issued AT), that would allow to track the usage of ATs. While it's technically impossible to completely \"hide\" information about who downloaded the status list (I refer to SRC IP, user's agent, etc.), the spec in my view should discourage, and even explicitly forbid such techniques. Otherwise, it leaves the door open for this sort of misuse... which also defects the purpose of being a privacy-preserving way to check the statuses of tokens.\n\nI also think it's a bit better to refer to `uri` as one of properties of the `status` claim, not as `claim`.",
       "createdAt": "2025-07-10T03:46:45Z",
-      "updatedAt": "2025-07-14T16:09:33Z",
+      "updatedAt": "2025-07-16T06:24:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -5915,6 +5917,13 @@
           "body": "There is a bit text on the danger of malicious issuers here: https://drafts.oauth.net/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html#name-malicious-issuers. Nonetheless, I agree that it would probably be a good idea to add a bit of text that using path/query parameters is not permitted for the URI that is included in the token.",
           "createdAt": "2025-07-14T16:09:33Z",
           "updatedAt": "2025-07-14T16:09:33Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agree with Christian, we already have some text, but it could be enhanced with the given context.",
+          "createdAt": "2025-07-15T23:23:31Z",
+          "updatedAt": "2025-07-15T23:23:31Z"
         }
       ]
     }
@@ -19723,7 +19732,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-07-09T21:33:07Z",
-      "updatedAt": "2025-07-10T03:12:46Z",
+      "updatedAt": "2025-07-16T06:22:03Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "c50a2fab7e0ddaa6fea8996c01de525b10d98674",
@@ -19755,6 +19764,32 @@
               "updatedAt": "2025-07-09T22:56:47Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs60NFAk",
+          "commit": {
+            "abbreviatedOid": "fb79496"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-16T06:21:37Z",
+          "updatedAt": "2025-07-16T06:21:37Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs60NFiI",
+          "commit": {
+            "abbreviatedOid": "fb79496"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-16T06:22:03Z",
+          "updatedAt": "2025-07-16T06:22:03Z",
+          "comments": []
         }
       ]
     }
