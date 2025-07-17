@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 8 January 2026                                  Bundesdruckerei
+Expires: 18 January 2026                                 Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                             7 July 2025
+                                                            17 July 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 18 January 2026.
 
 Copyright Notice
 
@@ -722,9 +722,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d58401faa50110cac50ae8424d0
-   c7aafbc4d3ef218262e0c6d1617173f28823791d29bb7e3e2c8824a901fc9a1453b9
-   33649ecb33086c7aa6bb63e1392c1df5b2f2bf
+   646269747301636c73744a78dadbb918000217015d58402f36984838f740f6e41787
+   3e0cea5700f715fa7bd19089c01654b664c43e615d5b358f576d12f7d585f9533b70
+   1ed6b088e5906d41b290f70076083c2df8f2a3
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -747,12 +747,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      1faa50110cac50ae8424d0c7  #       "\x1fªP\x11\x0c¬P®\x84$ÐÇ"
-      aafbc4d3ef218262e0c6d161  #       "ªûÄÓï!\x82bàÆÑa"
-      7173f28823791d29bb7e3e2c  #       "qsò\x88#y\x1d)»~>,"
-      8824a901fc9a1453b933649e  #       "\x88$©\x01ü\x9a\x14S¹3d\x9e"
-      cb33086c7aa6bb63e1392c1d  #       "Ë3\x08lz¦»cá9,\x1d"
-      f5b2f2bf                  #       "õ²ò¿"
+      2f36984838f740f6e417873e  #       "/6\x98H8÷@öä\x17\x87>"
+      0cea5700f715fa7bd19089c0  #       "\x0cêW\x00÷\x15ú{Ñ\x90\x89À"
+      1654b664c43e615d5b358f57  #       "\x16T¶dÄ>a][5\x8fW"
+      6d12f7d585f9533b701ed6b0  #       "m\x12÷Õ\x85ùS;p\x1eÖ°"
+      88e5906d41b290f70076083c  #       "\x88å\x90mA²\x90÷\x00v\x08<"
+      2df8f2a3                  #       "-øò£"
 
 6.  Referenced Token
 
@@ -895,37 +895,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584097413528814e7282cf7f492fa8f99b430db922
-   be744ca8e2c02ccaf06a1056c6a4fb7be3038104035e1fa7fe8f5d3a27bb850bc831
-   5da424198c1d12ed8a37e5
+   7374617475736c697374732f3158407d2b04423611d1fa8da70c0f43889f4c782719
+   ab1d8b3bcbe4b6490c5dc3e31589c8b3c2a9f66859a411b7db6f7ec8e8c7bde7d86d
+   967ec446844e467a923a9a
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      97413528814e7282cf7f492f  #       "\x97A5(\x81Nr\x82Ï\x7fI/"
-      a8f99b430db922be744ca8e2  #       "¨ù\x9bC\x0d¹"¾tL¨â"
-      c02ccaf06a1056c6a4fb7be3  #       "À,Êðj\x10VÆ¤û{ã"
-      038104035e1fa7fe8f5d3a27  #       "\x03\x81\x04\x03^\x1f§þ\x8f]:'"
-      bb850bc8315da424198c1d12  #       "»\x85\x0bÈ1]¤$\x19\x8c\x1d\x12"
-      ed8a37e5                  #       "í\x8a7å"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         7d2b04423611d1fa8da70c0f  #       "}+\x04B6\x11Ñú\x8d§\x0c\x0f"
+         43889f4c782719ab1d8b3bcb  #       "C\x88\x9fLx'\x19«\x1d\x8b;Ë"
+         e4b6490c5dc3e31589c8b3c2  #       "ä¶I\x0c]Ãã\x15\x89È³Â"
+         a9f66859a411b7db6f7ec8e8  #       "©öhY¤\x11·Ûo~Èè"
+         c7bde7d86d967ec446844e46  #       "Ç½çØm\x96~ÄF\x84NF"
+         7a923a9a                  #       "z\x92:\x9a"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1163,8 +1163,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Ra2CW9knLJUzfh47uDON5EAfJZUeE4QXtKXfYjzw4IfMoP74f1qr
-   QBjDPOf7SIY9BsXb-ev-10vHC6hpeXR8fg
+   nR0bCI6NDMyMDB9.xcT1MZ_rCMJwir3ft2amrikAeSt8Fk8d_2dciz-GhM45RDCcNMr-
+   ZWEXMeQ0xG5SltS9wPNaaODlrGqB_d5ApA
 
 8.2.  Status List Response
 
@@ -1303,8 +1303,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Ra2CW9knLJUzfh47uDON5EAfJZUeE4QXtKXfYjzw4IfMoP74f1qr
-   QBjDPOf7SIY9BsXb-ev-10vHC6hpeXR8fg
+   nR0bCI6NDMyMDB9.xcT1MZ_rCMJwir3ft2amrikAeSt8Fk8d_2dciz-GhM45RDCcNMr-
+   ZWEXMeQ0xG5SltS9wPNaaODlrGqB_d5ApA
 
 9.  Status List Aggregation
 
@@ -2511,9 +2511,9 @@ d2                              # tag(18)
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-09, 28 May
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-10, 7 July
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-09>.
+              oauth-sd-jwt-vc-10>.
 
    [smith2020let]
               Smith, T., Dickinson, L., and K. Seamons, "Let's revoke:
@@ -3135,6 +3135,9 @@ Document History
       Implementation Consideration
 
    *  relax the accept header from must to should
+
+   *  added further privacy consideration around issuer tracking using
+      unique URIs
 
    -11
 
