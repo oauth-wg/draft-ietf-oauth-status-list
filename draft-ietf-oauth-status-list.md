@@ -993,9 +993,13 @@ This behaviour may be mitigated by:
 - private relay protocols or other mechanisms hiding the original sender like {{RFC9458}}.
 - using trusted Third Party Hosting, see [](#third-party-hosting).
 
-## Malicious Issuers
+## Issuer Tracking of Reference Tokens
 
-A malicious Issuer could bypass the privacy benefits of the herd privacy by generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. This malicious behaviour could be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes.
+A malicious Issuer could bypass the privacy benefits of the herd privacy by 
+- Generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. 
+- Encoding a unique uri in each Reference Token which points to the underlying Status List. This may involve using uri components such as query parameters, unique path segments or fragments to make the uri unique.
+
+This malicious behaviour can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Reference Tokens being verified.
 
 ## Observability of Relying Parties {#privacy-relying-party}
 
