@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-17T00:21:24.047194+00:00",
+  "timestamp": "2025-07-20T00:23:32.837235+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5908,7 +5908,7 @@
       "labels": [],
       "body": "Property `uri` is currently defined as\n\n`The uri (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of uri MUST be a URI conforming to [RFC3986].`\n\nThe issue here is that an issuer of ATs can and query and path parameters (unique to each issued AT), that would allow to track the usage of ATs. While it's technically impossible to completely \"hide\" information about who downloaded the status list (I refer to SRC IP, user's agent, etc.), the spec in my view should discourage, and even explicitly forbid such techniques. Otherwise, it leaves the door open for this sort of misuse... which also defects the purpose of being a privacy-preserving way to check the statuses of tokens.\n\nI also think it's a bit better to refer to `uri` as one of properties of the `status` claim, not as `claim`.",
       "createdAt": "2025-07-10T03:46:45Z",
-      "updatedAt": "2025-07-16T06:24:22Z",
+      "updatedAt": "2025-07-17T01:39:40Z",
       "closedAt": null,
       "comments": [
         {
@@ -5924,6 +5924,13 @@
           "body": "Agree with Christian, we already have some text, but it could be enhanced with the given context.",
           "createdAt": "2025-07-15T23:23:31Z",
           "updatedAt": "2025-07-15T23:23:31Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Have opened #298 to enhance this text further.",
+          "createdAt": "2025-07-17T01:39:40Z",
+          "updatedAt": "2025-07-17T01:39:40Z"
         }
       ]
     }
@@ -19732,10 +19739,10 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-07-09T21:33:07Z",
-      "updatedAt": "2025-07-16T06:22:03Z",
+      "updatedAt": "2025-07-17T21:41:17Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "c50a2fab7e0ddaa6fea8996c01de525b10d98674",
+      "baseRefOid": "aeb1502f7133dd86401cc49c3ce96b3999862088",
       "headRepository": "adeinega/draft-ietf-oauth-status-list",
       "headRefName": "adeinega-patch-1",
       "headRefOid": "fb79496309e1a5607c9d5282f06fede838c6071d",
@@ -19743,7 +19750,22 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "@adeinega can we also add you to acknowledgements?",
+          "createdAt": "2025-07-17T21:21:04Z",
+          "updatedAt": "2025-07-17T21:21:04Z"
+        },
+        {
+          "author": "adeinega",
+          "authorAssociation": "NONE",
+          "body": "@c2bo, sure, thank you.",
+          "createdAt": "2025-07-17T21:41:16Z",
+          "updatedAt": "2025-07-17T21:41:16Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOJZ2aqs6zA1Vt",
@@ -19790,6 +19812,180 @@
           "createdAt": "2025-07-16T06:22:03Z",
           "updatedAt": "2025-07-16T06:22:03Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs60gzmX",
+          "commit": {
+            "abbreviatedOid": "fb79496"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-17T08:31:26Z",
+          "updatedAt": "2025-07-17T08:31:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 299,
+      "id": "PR_kwDOJZ2aqs6fSRSM",
+      "title": "fix: issue 298",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/299",
+      "state": "OPEN",
+      "author": "tplooker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #298",
+      "createdAt": "2025-07-17T01:37:39Z",
+      "updatedAt": "2025-07-17T21:56:09Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "aeb1502f7133dd86401cc49c3ce96b3999862088",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "tl/issue-298",
+      "headRefOid": "3be60e6f82556157e211b218bf37f51cb5394332",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "adeinega",
+          "authorAssociation": "NONE",
+          "body": "I've also left a comment about the use of claim vs property in my https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/298.",
+          "createdAt": "2025-07-17T02:39:51Z",
+          "updatedAt": "2025-07-17T02:39:51Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs60c70D",
+          "commit": {
+            "abbreviatedOid": "e71650b"
+          },
+          "author": "adeinega",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-17T02:13:59Z",
+          "updatedAt": "2025-07-17T02:14:00Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\nThis malicious behavior can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Reference Tokens being verified.\r\n```",
+              "createdAt": "2025-07-17T02:13:59Z",
+              "updatedAt": "2025-07-17T02:14:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs60dBOr",
+          "commit": {
+            "abbreviatedOid": "e71650b"
+          },
+          "author": "adeinega",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-17T02:29:57Z",
+          "updatedAt": "2025-07-17T02:29:57Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I\u2019m not entirely sure if it\u2019s always a malicious issuer. This kind of thing can \"accidentally\" be introduced by a legitimate issuer due to the various reasons (due to lack of recommendations, knowledge, and whatnot).\r\n\r\nIt's a bit unfortunate that there isn't much RPs can do about it as URLs such as https://example.com/some_tenant_guid1/statuslists/1 and https://example.com/some_tenant_guid2/statuslists/1 are valid ones.",
+              "createdAt": "2025-07-17T02:29:57Z",
+              "updatedAt": "2025-07-17T02:29:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs60dCu9",
+          "commit": {
+            "abbreviatedOid": "e71650b"
+          },
+          "author": "adeinega",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-17T02:34:53Z",
+          "updatedAt": "2025-07-17T02:34:53Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "Typically, OP specs don't allow the fragment component (#) to be a part of URLs to their endpoints.\r\n\r\nBrowsers do utilize it, but not the server-side code.",
+              "createdAt": "2025-07-17T02:34:53Z",
+              "updatedAt": "2025-07-17T02:35:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs60g4Z-",
+          "commit": {
+            "abbreviatedOid": "e71650b"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-17T08:37:24Z",
+          "updatedAt": "2025-07-17T08:40:13Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\nAn Issuer could maliciously or accidentally bypass the privacy benefits of the herd privacy by either:\n```\n",
+              "createdAt": "2025-07-17T08:37:24Z",
+              "updatedAt": "2025-07-17T08:40:13Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "Listing it doesn't do any harm either, I would keep it in",
+              "createdAt": "2025-07-17T08:39:24Z",
+              "updatedAt": "2025-07-17T08:40:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs60mLLw",
+          "commit": {
+            "abbreviatedOid": "e71650b"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-17T14:56:50Z",
+          "updatedAt": "2025-07-17T14:56:50Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "We've been mainly using the British spelling, so I'd keep behaviour as is.",
+              "createdAt": "2025-07-17T14:56:50Z",
+              "updatedAt": "2025-07-17T14:56:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs60q54t",
+          "commit": {
+            "abbreviatedOid": "3be60e6"
+          },
+          "author": "adeinega",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-07-17T21:56:08Z",
+          "updatedAt": "2025-07-17T21:56:09Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\n- Encoding a unique URI in each Reference Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.\r\n```\r\n\r\nTypically, it's written in uppercase.",
+              "createdAt": "2025-07-17T21:56:09Z",
+              "updatedAt": "2025-07-17T21:56:09Z"
+            }
+          ]
         }
       ]
     }
