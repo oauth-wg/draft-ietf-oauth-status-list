@@ -997,7 +997,7 @@ This behaviour may be mitigated by:
 
 An Issuer could maliciously or accidentally bypass the privacy benefits of the herd privacy by either:
 - Generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. 
-- Encoding a unique uri in each Reference Token which points to the underlying Status List. This may involve using uri components such as query parameters, unique path segments or fragments to make the uri unique.
+- Encoding a unique URI in each Reference Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.
 
 This malicious behaviour can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Reference Tokens being verified.
 
