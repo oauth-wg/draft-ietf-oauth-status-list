@@ -1905,6 +1905,10 @@ CBOR encoding:
 # Document History
 {:numbered="false"}
 
+-13
+
+* added further privacy consideration around issuer tracking using unique URIs
+
 -12
 
 * Allow for extended key usage OID to be used for other status mechanisms
@@ -1916,7 +1920,6 @@ CBOR encoding:
 * clarifying description texts for status and status_list in CBOR
 * splitting Linkability Mitigation from Token Lifecycle section in Implementation Consideration
 * relax the accept header from must to should
-* added further privacy consideration around issuer tracking using unique URIs
 
 -11
 
