@@ -1914,6 +1914,7 @@ CBOR encoding:
 * clarifying description texts for status and status_list in CBOR
 * splitting Linkability Mitigation from Token Lifecycle section in Implementation Consideration
 * relax the accept header from must to should
+* added further privacy consideration around issuer tracking using unique URIs
 
 -11
 
