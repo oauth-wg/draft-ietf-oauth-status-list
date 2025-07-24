@@ -994,9 +994,14 @@ This behaviour may be mitigated by:
 - private relay protocols or other mechanisms hiding the original sender like {{RFC9458}}.
 - using trusted Third Party Hosting, see [](#third-party-hosting).
 
-## Malicious Issuers
+## Issuer Tracking of Reference Tokens
 
-A malicious Issuer could bypass the privacy benefits of the herd privacy by generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. This malicious behaviour could be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes.
+An Issuer could maliciously or accidentally bypass the privacy benefits of the herd privacy by either:
+
+- Generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests.
+- Encoding a unique URI in each Reference Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.
+
+This malicious behavior can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Reference Tokens being verified.
 
 ## Observability of Relying Parties {#privacy-relying-party}
 
@@ -1464,6 +1469,7 @@ IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in th
 {:numbered="false"}
 
 We would like to thank
+Andrii Deinega,
 Brian Campbell,
 Dan Moore,
 Denis Pinkas,
@@ -1900,6 +1906,10 @@ CBOR encoding:
 # Document History
 {:numbered="false"}
 
+-13
+
+* added further privacy consideration around issuer tracking using unique URIs
+
 -12
 
 * Allow for extended key usage OID to be used for other status mechanisms
@@ -1911,7 +1921,6 @@ CBOR encoding:
 * clarifying description texts for status and status_list in CBOR
 * splitting Linkability Mitigation from Token Lifecycle section in Implementation Consideration
 * relax the accept header from must to should
-* added further privacy consideration around issuer tracking using unique URIs
 
 -11
 
