@@ -1282,7 +1282,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-observability-of-issuers" class="internal xref">Observability of Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-malicious-issuers" class="internal xref">Malicious Issuers</a></p>
+                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-issuer-tracking-of-referenc" class="internal xref">Issuer Tracking of Reference Tokens</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.3">
                 <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-observability-of-relying-pa" class="internal xref">Observability of Relying Parties</a></p>
@@ -1972,9 +1972,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840073f834107d05e8e8511fd
-d6794fd29bb5b2784e51ada5e19381fe9eb72ad9f63dd8e06a78d7f54408ae265755
-fd6e59b890d0328e6d9ece01aa4389e00e9798
+646269747301636c73744a78dadbb918000217015d58407468754b9aae18bed20fd1
+40d53a9187fc8def7347b24dda718ff3e5ada9df7fe8877a03dcddcd0b5bbcdd9aff
+986ed5f8596bcf7d3e0fc3cd9f3b6545d0846c
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1999,12 +1999,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      073f834107d05e8e8511fdd6  #       "\x07?\x83A\x07Ð^\x8e\x85\x11ýÖ"
-      794fd29bb5b2784e51ada5e1  #       "yOÒ\x9bµ²xNQ\xad¥á"
-      9381fe9eb72ad9f63dd8e06a  #       "\x93\x81þ\x9e·*Ùö=Øàj"
-      78d7f54408ae265755fd6e59  #       "x×õD\x08®&amp;WUýnY"
-      b890d0328e6d9ece01aa4389  #       "¸\x90Ð2\x8em\x9eÎ\x01ªC\x89"
-      e00e9798                  #       "à\x0e\x97\x98"
+      7468754b9aae18bed20fd140  #       "thuK\x9a®\x18¾Ò\x0fÑ@"
+      d53a9187fc8def7347b24dda  #       "Õ:\x91\x87ü\x8dïsG²MÚ"
+      718ff3e5ada9df7fe8877a03  #       "q\x8fóå\xad©ß\x7fè\x87z\x03"
+      dcddcd0b5bbcdd9aff986ed5  #       "ÜÝÍ\x0b[¼Ý\x9aÿ\x98nÕ"
+      f8596bcf7d3e0fc3cd9f3b65  #       "øYkÏ}&gt;\x0fÃÍ\x9f;e"
+      45d0846c                  #       "EÐ\x84l"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2145,9 +2145,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158409436c83d66c3490a7a80235a926555c9ac2f0b
-e9ca7cca04402ba5eea46ceb4adc4535c8a4528525978f6a4706b49013694e180710
-cba7576d9f2c36d6462191
+7374617475736c697374732f315840fe731635330d94f3e8b5d8f707e4cc24041fcf
+95851190005549350a65a5a83be9609337af075e67575d7b475918ada4579da78bff
+576e85197ee9e9836a35d6
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2172,12 +2172,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      9436c83d66c3490a7a80235a  #       "\x946È=fÃI\x0az\x80#Z"
-      926555c9ac2f0be9ca7cca04  #       "\x92eUÉ¬/\x0béÊ|Ê\x04"
-      402ba5eea46ceb4adc4535c8  #       "@+¥î¤lëJÜE5È"
-      a4528525978f6a4706b49013  #       "¤R\x85%\x97\x8fjG\x06´\x90\x13"
-      694e180710cba7576d9f2c36  #       "iN\x18\x07\x10Ë§Wm\x9f,6"
-      d6462191                  #       "ÖF!\x91"
+      fe731635330d94f3e8b5d8f7  #       "þs\x1653\x0d\x94óèµØ÷"
+      07e4cc24041fcf9585119000  #       "\x07äÌ$\x04\x1fÏ\x95\x85\x11\x90\x00"
+      5549350a65a5a83be9609337  #       "UI5\x0ae¥¨;é`\x937"
+      af075e67575d7b475918ada4  #       "¯\x07^gW]{GY\x18\xad¤"
+      579da78bff576e85197ee9e9  #       "W\x9d§\x8bÿWn\x85\x19~éé"
+      836a35d6                  #       "\x83j5Ö"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2391,8 +2391,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.VwDK1n5I405BO71edHDDYI1Cb70FV2O8akA21tRd8HW-af3kvsP2
-0S1EXFknnRYL0phqN9xSIQvOmcAW-SPjZg
+nR0bCI6NDMyMDB9.BlSra5GOXA1MJRqh5Im7TvNdm2hVB5wlkS22F9JH6NMtEYwvOz4X
+OluoDECNXuBFd8CrjbIFA7ZNX0_qst03Mw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2498,8 +2498,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.VwDK1n5I405BO71edHDDYI1Cb70FV2O8akA21tRd8HW-af3kvsP2
-0S1EXFknnRYL0phqN9xSIQvOmcAW-SPjZg
+nR0bCI6NDMyMDB9.BlSra5GOXA1MJRqh5Im7TvNdm2hVB5wlkS22F9JH6NMtEYwvOz4X
+OluoDECNXuBFd8CrjbIFA7ZNX0_qst03Mw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2719,12 +2719,21 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         </ul>
 </section>
 </div>
-<div id="malicious-issuers">
+<div id="issuer-tracking-of-reference-tokens">
 <section id="section-12.2">
-        <h3 id="name-malicious-issuers">
-<a href="#section-12.2" class="section-number selfRef">12.2. </a><a href="#name-malicious-issuers" class="section-name selfRef">Malicious Issuers</a>
+        <h3 id="name-issuer-tracking-of-referenc">
+<a href="#section-12.2" class="section-number selfRef">12.2. </a><a href="#name-issuer-tracking-of-referenc" class="section-name selfRef">Issuer Tracking of Reference Tokens</a>
         </h3>
-<p id="section-12.2-1">A malicious Issuer could bypass the privacy benefits of the herd privacy by generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests. This malicious behaviour could be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes.<a href="#section-12.2-1" class="pilcrow">¶</a></p>
+<p id="section-12.2-1">An Issuer could maliciously or accidentally bypass the privacy benefits of the herd privacy by either:<a href="#section-12.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-12.2-2.1">
+            <p id="section-12.2-2.1.1">Generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests.<a href="#section-12.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-12.2-2.2">
+            <p id="section-12.2-2.2.1">Encoding a unique URI in each Reference Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.<a href="#section-12.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-12.2-3">This malicious behavior can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Reference Tokens being verified.<a href="#section-12.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-relying-party">
@@ -3788,6 +3797,7 @@ RESTful Environments (CoRE) Parameters" Registry <span>[<a href="#IANA.Core.Para
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">We would like to thank
+Andrii Deinega,
 Brian Campbell,
 Dan Moore,
 Denis Pinkas,
@@ -4552,368 +4562,371 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
       <h2 id="name-document-history">
 <a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
-<p id="appendix-D-1">-12<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<p id="appendix-D-1">-13<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-2.1">
-          <p id="appendix-D-2.1.1">Allow for extended key usage OID to be used for other status mechanisms<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.2">
-          <p id="appendix-D-2.2.1">add Paul's affiliation<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.3">
-          <p id="appendix-D-2.3.1">add feedback from Dan Moore<a href="#appendix-D-2.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.4">
-          <p id="appendix-D-2.4.1">change JSON Status List structure to only contain JSON object<a href="#appendix-D-2.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.5">
-          <p id="appendix-D-2.5.1">further nitpicks<a href="#appendix-D-2.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.6">
-          <p id="appendix-D-2.6.1">clarifying status and status_list IANA descriptions for JWT/CWT<a href="#appendix-D-2.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.7">
-          <p id="appendix-D-2.7.1">clarifying description texts for status and status_list in CBOR<a href="#appendix-D-2.7.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.8">
-          <p id="appendix-D-2.8.1">splitting Linkability Mitigation from Token Lifecycle section in Implementation Consideration<a href="#appendix-D-2.8.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.9">
-          <p id="appendix-D-2.9.1">relax the accept header from must to should<a href="#appendix-D-2.9.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-2.10">
-          <p id="appendix-D-2.10.1">added further privacy consideration around issuer tracking using unique URIs<a href="#appendix-D-2.10.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.1.1">added further privacy consideration around issuer tracking using unique URIs<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-3">-11<a href="#appendix-D-3" class="pilcrow">¶</a></p>
+<p id="appendix-D-3">-12<a href="#appendix-D-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-4.1">
-          <p id="appendix-D-4.1.1">incorporate feedback from shepherd review<a href="#appendix-D-4.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-4.1.1">Allow for extended key usage OID to be used for other status mechanisms<a href="#appendix-D-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-4.2">
-          <p id="appendix-D-4.2.1">some nitpicks<a href="#appendix-D-4.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-4.2.1">add Paul's affiliation<a href="#appendix-D-4.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-4.3">
-          <p id="appendix-D-4.3.1">even more nitpicks<a href="#appendix-D-4.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-4.3.1">add feedback from Dan Moore<a href="#appendix-D-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-4.4">
+          <p id="appendix-D-4.4.1">change JSON Status List structure to only contain JSON object<a href="#appendix-D-4.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-4.5">
+          <p id="appendix-D-4.5.1">further nitpicks<a href="#appendix-D-4.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-4.6">
+          <p id="appendix-D-4.6.1">clarifying status and status_list IANA descriptions for JWT/CWT<a href="#appendix-D-4.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-4.7">
+          <p id="appendix-D-4.7.1">clarifying description texts for status and status_list in CBOR<a href="#appendix-D-4.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-4.8">
+          <p id="appendix-D-4.8.1">splitting Linkability Mitigation from Token Lifecycle section in Implementation Consideration<a href="#appendix-D-4.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-4.9">
+          <p id="appendix-D-4.9.1">relax the accept header from must to should<a href="#appendix-D-4.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-5">-10<a href="#appendix-D-5" class="pilcrow">¶</a></p>
+<p id="appendix-D-5">-11<a href="#appendix-D-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-6.1">
-          <p id="appendix-D-6.1.1">improve caching guidelines and move them to implementaiton considerations<a href="#appendix-D-6.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-6.1.1">incorporate feedback from shepherd review<a href="#appendix-D-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-6.2">
-          <p id="appendix-D-6.2.1">Add CoAP Content-Format ID and IANA registration<a href="#appendix-D-6.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-6.2.1">some nitpicks<a href="#appendix-D-6.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-6.3">
-          <p id="appendix-D-6.3.1">Add size comparison for status list and compressed uuids<a href="#appendix-D-6.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-6.4">
-          <p id="appendix-D-6.4.1">Change Controller IESG for OAuths Parameters Registration<a href="#appendix-D-6.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-6.3.1">even more nitpicks<a href="#appendix-D-6.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-7">-09<a href="#appendix-D-7" class="pilcrow">¶</a></p>
+<p id="appendix-D-7">-10<a href="#appendix-D-7" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-8.1">
-          <p id="appendix-D-8.1.1">update acknowledgments<a href="#appendix-D-8.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-8.1.1">improve caching guidelines and move them to implementaiton considerations<a href="#appendix-D-8.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-8.2">
-          <p id="appendix-D-8.2.1">introduce dedicated section for compressed byte array of the Status List<a href="#appendix-D-8.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-8.2.1">Add CoAP Content-Format ID and IANA registration<a href="#appendix-D-8.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-8.3">
-          <p id="appendix-D-8.3.1">fix Status List definitions<a href="#appendix-D-8.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-8.3.1">Add size comparison for status list and compressed uuids<a href="#appendix-D-8.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-8.4">
-          <p id="appendix-D-8.4.1">Add CDDL for CBOR StatusList encoding<a href="#appendix-D-8.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-8.5">
-          <p id="appendix-D-8.5.1">add diagram for Status List Aggregation for further explanation<a href="#appendix-D-8.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-8.6">
-          <p id="appendix-D-8.6.1">rename "chunking" of Status List Tokens (for scalability reasons) into "divide .. up"<a href="#appendix-D-8.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-8.4.1">Change Controller IESG for OAuths Parameters Registration<a href="#appendix-D-8.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-9">-08<a href="#appendix-D-9" class="pilcrow">¶</a></p>
+<p id="appendix-D-9">-09<a href="#appendix-D-9" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-10.1">
-          <p id="appendix-D-10.1.1">Fix cwt typ value to full media type<a href="#appendix-D-10.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-10.1.1">update acknowledgments<a href="#appendix-D-10.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-10.2">
-          <p id="appendix-D-10.2.1">Holders may also fetch and verify Status List Tokens<a href="#appendix-D-10.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-10.2.1">introduce dedicated section for compressed byte array of the Status List<a href="#appendix-D-10.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-10.3">
-          <p id="appendix-D-10.3.1">Update terminology for referenced token and Status List Token<a href="#appendix-D-10.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-10.3.1">fix Status List definitions<a href="#appendix-D-10.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-10.4">
+          <p id="appendix-D-10.4.1">Add CDDL for CBOR StatusList encoding<a href="#appendix-D-10.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-10.5">
+          <p id="appendix-D-10.5.1">add diagram for Status List Aggregation for further explanation<a href="#appendix-D-10.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-10.6">
+          <p id="appendix-D-10.6.1">rename "chunking" of Status List Tokens (for scalability reasons) into "divide .. up"<a href="#appendix-D-10.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-11">-07<a href="#appendix-D-11" class="pilcrow">¶</a></p>
+<p id="appendix-D-11">-08<a href="#appendix-D-11" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-12.1">
-          <p id="appendix-D-12.1.1">add considerations about External Status Issuer or Status Provider<a href="#appendix-D-12.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-12.1.1">Fix cwt typ value to full media type<a href="#appendix-D-12.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-12.2">
-          <p id="appendix-D-12.2.1">add recommendations for Key Resolution and Trust Management<a href="#appendix-D-12.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-12.2.1">Holders may also fetch and verify Status List Tokens<a href="#appendix-D-12.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-12.3">
-          <p id="appendix-D-12.3.1">add extended key usage extensions for x509<a href="#appendix-D-12.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.4">
-          <p id="appendix-D-12.4.1">Relying Parties avoiding correlatable Information<a href="#appendix-D-12.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.5">
-          <p id="appendix-D-12.5.1">editorial changes on terminology and Referenced Tokens<a href="#appendix-D-12.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.6">
-          <p id="appendix-D-12.6.1">clarify privacy consideration around one time use reference tokens<a href="#appendix-D-12.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.7">
-          <p id="appendix-D-12.7.1">explain the Status List Token size dependencies<a href="#appendix-D-12.7.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.8">
-          <p id="appendix-D-12.8.1">explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date<a href="#appendix-D-12.8.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.9">
-          <p id="appendix-D-12.9.1">add short-lived tokens in the Rationale<a href="#appendix-D-12.9.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.10">
-          <p id="appendix-D-12.10.1">rename Status Mechanism Methods registry to Status Mechanisms registry<a href="#appendix-D-12.10.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.11">
-          <p id="appendix-D-12.11.1">changes as requested by IANA review<a href="#appendix-D-12.11.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.12">
-          <p id="appendix-D-12.12.1">emphasize that security and privacy considerations only apply to Status List and no other status mechanisms<a href="#appendix-D-12.12.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.13">
-          <p id="appendix-D-12.13.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-D-12.13.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.14">
-          <p id="appendix-D-12.14.1">add more test vectors for the status list encoding<a href="#appendix-D-12.14.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.15">
-          <p id="appendix-D-12.15.1">add prior art<a href="#appendix-D-12.15.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.16">
-          <p id="appendix-D-12.16.1">updated language around application specific status type values and assigned ranges for application specific usage<a href="#appendix-D-12.16.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.17">
-          <p id="appendix-D-12.17.1">add short security considerations section for mac based deployments<a href="#appendix-D-12.17.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.18">
-          <p id="appendix-D-12.18.1">privacy considerations for other status types like suspended<a href="#appendix-D-12.18.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.19">
-          <p id="appendix-D-12.19.1">fix aggregation_uri text in referenced token<a href="#appendix-D-12.19.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-12.20">
-          <p id="appendix-D-12.20.1">mention key resolution in validation rules<a href="#appendix-D-12.20.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-12.3.1">Update terminology for referenced token and Status List Token<a href="#appendix-D-12.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-13">-06<a href="#appendix-D-13" class="pilcrow">¶</a></p>
+<p id="appendix-D-13">-07<a href="#appendix-D-13" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-14.1">
-          <p id="appendix-D-14.1.1">iana registration text updated with update procedures<a href="#appendix-D-14.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.1.1">add considerations about External Status Issuer or Status Provider<a href="#appendix-D-14.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.2">
-          <p id="appendix-D-14.2.1">explicitly mention that status list is expected to be contained in cryptographically secured containers<a href="#appendix-D-14.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.2.1">add recommendations for Key Resolution and Trust Management<a href="#appendix-D-14.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.3">
-          <p id="appendix-D-14.3.1">reworked and simplified introduction and abstract<a href="#appendix-D-14.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.3.1">add extended key usage extensions for x509<a href="#appendix-D-14.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.4">
-          <p id="appendix-D-14.4.1">specify http status codes and allow redirects<a href="#appendix-D-14.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.4.1">Relying Parties avoiding correlatable Information<a href="#appendix-D-14.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.5">
-          <p id="appendix-D-14.5.1">add status_list_aggregation_endpoint OAuth metadata<a href="#appendix-D-14.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.5.1">editorial changes on terminology and Referenced Tokens<a href="#appendix-D-14.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.6">
-          <p id="appendix-D-14.6.1">remove unsigned options (json/cbor) of status list<a href="#appendix-D-14.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.6.1">clarify privacy consideration around one time use reference tokens<a href="#appendix-D-14.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.7">
-          <p id="appendix-D-14.7.1">add section about mixing status list formats and media type<a href="#appendix-D-14.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.7.1">explain the Status List Token size dependencies<a href="#appendix-D-14.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.8">
-          <p id="appendix-D-14.8.1">fixes from IETF review<a href="#appendix-D-14.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.8.1">explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date<a href="#appendix-D-14.8.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.9">
-          <p id="appendix-D-14.9.1">update guidance around ttl<a href="#appendix-D-14.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.9.1">add short-lived tokens in the Rationale<a href="#appendix-D-14.9.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-14.10">
-          <p id="appendix-D-14.10.1">add guidance around aggregation endpoint<a href="#appendix-D-14.10.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-14.10.1">rename Status Mechanism Methods registry to Status Mechanisms registry<a href="#appendix-D-14.10.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.11">
+          <p id="appendix-D-14.11.1">changes as requested by IANA review<a href="#appendix-D-14.11.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.12">
+          <p id="appendix-D-14.12.1">emphasize that security and privacy considerations only apply to Status List and no other status mechanisms<a href="#appendix-D-14.12.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.13">
+          <p id="appendix-D-14.13.1">differentiate unlinkability between Issuer-RP and RP-RP<a href="#appendix-D-14.13.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.14">
+          <p id="appendix-D-14.14.1">add more test vectors for the status list encoding<a href="#appendix-D-14.14.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.15">
+          <p id="appendix-D-14.15.1">add prior art<a href="#appendix-D-14.15.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.16">
+          <p id="appendix-D-14.16.1">updated language around application specific status type values and assigned ranges for application specific usage<a href="#appendix-D-14.16.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.17">
+          <p id="appendix-D-14.17.1">add short security considerations section for mac based deployments<a href="#appendix-D-14.17.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.18">
+          <p id="appendix-D-14.18.1">privacy considerations for other status types like suspended<a href="#appendix-D-14.18.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.19">
+          <p id="appendix-D-14.19.1">fix aggregation_uri text in referenced token<a href="#appendix-D-14.19.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-14.20">
+          <p id="appendix-D-14.20.1">mention key resolution in validation rules<a href="#appendix-D-14.20.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-15">-05<a href="#appendix-D-15" class="pilcrow">¶</a></p>
+<p id="appendix-D-15">-06<a href="#appendix-D-15" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-16.1">
-          <p id="appendix-D-16.1.1">add optional support for historical requests<a href="#appendix-D-16.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-16.1.1">iana registration text updated with update procedures<a href="#appendix-D-16.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-16.2">
-          <p id="appendix-D-16.2.1">update CBOR claim definitions<a href="#appendix-D-16.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-16.2.1">explicitly mention that status list is expected to be contained in cryptographically secured containers<a href="#appendix-D-16.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-16.3">
-          <p id="appendix-D-16.3.1">improve section on Status Types and introduce IANA registry for it<a href="#appendix-D-16.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-16.3.1">reworked and simplified introduction and abstract<a href="#appendix-D-16.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-16.4">
-          <p id="appendix-D-16.4.1">add Status Issuer and Status Provider role description to the introduction/terminology<a href="#appendix-D-16.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-16.4.1">specify http status codes and allow redirects<a href="#appendix-D-16.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-16.5">
-          <p id="appendix-D-16.5.1">add information on third party hosting to security consideration<a href="#appendix-D-16.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-16.5.1">add status_list_aggregation_endpoint OAuth metadata<a href="#appendix-D-16.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-16.6">
-          <p id="appendix-D-16.6.1">remove constraint that Status List Token must not use a MAC<a href="#appendix-D-16.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-16.6.1">remove unsigned options (json/cbor) of status list<a href="#appendix-D-16.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-16.7">
+          <p id="appendix-D-16.7.1">add section about mixing status list formats and media type<a href="#appendix-D-16.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-16.8">
+          <p id="appendix-D-16.8.1">fixes from IETF review<a href="#appendix-D-16.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-16.9">
+          <p id="appendix-D-16.9.1">update guidance around ttl<a href="#appendix-D-16.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-16.10">
+          <p id="appendix-D-16.10.1">add guidance around aggregation endpoint<a href="#appendix-D-16.10.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-17">-04<a href="#appendix-D-17" class="pilcrow">¶</a></p>
+<p id="appendix-D-17">-05<a href="#appendix-D-17" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-18.1">
-          <p id="appendix-D-18.1.1">add mDL example as Referenced Token and consolidate CWT and CBOR sections<a href="#appendix-D-18.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-18.1.1">add optional support for historical requests<a href="#appendix-D-18.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-18.2">
-          <p id="appendix-D-18.2.1">add implementation consideration for Default Values, Double Allocation and Status List Size<a href="#appendix-D-18.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-18.2.1">update CBOR claim definitions<a href="#appendix-D-18.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-18.3">
-          <p id="appendix-D-18.3.1">add privacy consideration on using private relay protocols<a href="#appendix-D-18.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-18.3.1">improve section on Status Types and introduce IANA registry for it<a href="#appendix-D-18.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-18.4">
-          <p id="appendix-D-18.4.1">add privacy consideration on observability of outsiders<a href="#appendix-D-18.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-18.4.1">add Status Issuer and Status Provider role description to the introduction/terminology<a href="#appendix-D-18.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-18.5">
-          <p id="appendix-D-18.5.1">add security considerations on correct parsing and decoding<a href="#appendix-D-18.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-18.5.1">add information on third party hosting to security consideration<a href="#appendix-D-18.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-18.6">
-          <p id="appendix-D-18.6.1">remove requirement for matching iss claim in Referenced Token and Status List Token<a href="#appendix-D-18.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-18.7">
-          <p id="appendix-D-18.7.1">add sd-jwt-vc example<a href="#appendix-D-18.7.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-18.8">
-          <p id="appendix-D-18.8.1">fix CWT status_list map encoding<a href="#appendix-D-18.8.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-18.9">
-          <p id="appendix-D-18.9.1">editorial fixes<a href="#appendix-D-18.9.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-18.10">
-          <p id="appendix-D-18.10.1">add CORS considerations to the http endpoint<a href="#appendix-D-18.10.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-18.11">
-          <p id="appendix-D-18.11.1">fix reference of Status List in CBOR format<a href="#appendix-D-18.11.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-18.12">
-          <p id="appendix-D-18.12.1">added status_list CWT claim key assigned<a href="#appendix-D-18.12.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-18.13">
-          <p id="appendix-D-18.13.1">move base64url definition to terminology<a href="#appendix-D-18.13.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-18.6.1">remove constraint that Status List Token must not use a MAC<a href="#appendix-D-18.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-19">-03<a href="#appendix-D-19" class="pilcrow">¶</a></p>
+<p id="appendix-D-19">-04<a href="#appendix-D-19" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-20.1">
-          <p id="appendix-D-20.1.1">remove unused reference to RFC9111<a href="#appendix-D-20.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.1.1">add mDL example as Referenced Token and consolidate CWT and CBOR sections<a href="#appendix-D-20.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.2">
-          <p id="appendix-D-20.2.1">add validation rules for status list token<a href="#appendix-D-20.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.2.1">add implementation consideration for Default Values, Double Allocation and Status List Size<a href="#appendix-D-20.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.3">
-          <p id="appendix-D-20.3.1">introduce the status list aggregation mechanism<a href="#appendix-D-20.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.3.1">add privacy consideration on using private relay protocols<a href="#appendix-D-20.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.4">
-          <p id="appendix-D-20.4.1">relax requirements for status_list claims to contain other parameters<a href="#appendix-D-20.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.4.1">add privacy consideration on observability of outsiders<a href="#appendix-D-20.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.5">
-          <p id="appendix-D-20.5.1">change cwt referenced token example to hex and annotated hex<a href="#appendix-D-20.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.5.1">add security considerations on correct parsing and decoding<a href="#appendix-D-20.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.6">
-          <p id="appendix-D-20.6.1">require TLS only for fetching Status List, not for Status List Token<a href="#appendix-D-20.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.6.1">remove requirement for matching iss claim in Referenced Token and Status List Token<a href="#appendix-D-20.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.7">
-          <p id="appendix-D-20.7.1">remove the undefined phrase Status List endpoint<a href="#appendix-D-20.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.7.1">add sd-jwt-vc example<a href="#appendix-D-20.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.8">
-          <p id="appendix-D-20.8.1">remove http caching in favor of the new ttl claim<a href="#appendix-D-20.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.8.1">fix CWT status_list map encoding<a href="#appendix-D-20.8.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.9">
-          <p id="appendix-D-20.9.1">clarify the sub claim of Status List Token<a href="#appendix-D-20.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.9.1">editorial fixes<a href="#appendix-D-20.9.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.10">
-          <p id="appendix-D-20.10.1">relax status_list iss requirements for CWT<a href="#appendix-D-20.10.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.10.1">add CORS considerations to the http endpoint<a href="#appendix-D-20.10.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-20.11">
-          <p id="appendix-D-20.11.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-D-20.11.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-20.11.1">fix reference of Status List in CBOR format<a href="#appendix-D-20.11.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-20.12">
+          <p id="appendix-D-20.12.1">added status_list CWT claim key assigned<a href="#appendix-D-20.12.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-20.13">
+          <p id="appendix-D-20.13.1">move base64url definition to terminology<a href="#appendix-D-20.13.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-21">-02<a href="#appendix-D-21" class="pilcrow">¶</a></p>
+<p id="appendix-D-21">-03<a href="#appendix-D-21" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-22.1">
-          <p id="appendix-D-22.1.1">add ttl claim to Status List Token to convey caching<a href="#appendix-D-22.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-22.1.1">remove unused reference to RFC9111<a href="#appendix-D-22.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-22.2">
-          <p id="appendix-D-22.2.1">relax requirements on referenced token<a href="#appendix-D-22.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-22.2.1">add validation rules for status list token<a href="#appendix-D-22.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-22.3">
-          <p id="appendix-D-22.3.1">clarify Deflate / zlib compression<a href="#appendix-D-22.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-22.3.1">introduce the status list aggregation mechanism<a href="#appendix-D-22.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-22.4">
-          <p id="appendix-D-22.4.1">make a reference to the Issuer-Holder-Verifier model of SD-JWT VC<a href="#appendix-D-22.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-22.4.1">relax requirements for status_list claims to contain other parameters<a href="#appendix-D-22.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-22.5">
-          <p id="appendix-D-22.5.1">add COSE/CWT/CBOR encoding<a href="#appendix-D-22.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-22.5.1">change cwt referenced token example to hex and annotated hex<a href="#appendix-D-22.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-22.6">
+          <p id="appendix-D-22.6.1">require TLS only for fetching Status List, not for Status List Token<a href="#appendix-D-22.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-22.7">
+          <p id="appendix-D-22.7.1">remove the undefined phrase Status List endpoint<a href="#appendix-D-22.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-22.8">
+          <p id="appendix-D-22.8.1">remove http caching in favor of the new ttl claim<a href="#appendix-D-22.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-22.9">
+          <p id="appendix-D-22.9.1">clarify the sub claim of Status List Token<a href="#appendix-D-22.9.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-22.10">
+          <p id="appendix-D-22.10.1">relax status_list iss requirements for CWT<a href="#appendix-D-22.10.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-22.11">
+          <p id="appendix-D-22.11.1">Fixes missing parts &amp; iana ttl registration in CWT examples<a href="#appendix-D-22.11.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-23">-01<a href="#appendix-D-23" class="pilcrow">¶</a></p>
+<p id="appendix-D-23">-02<a href="#appendix-D-23" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-24.1">
-          <p id="appendix-D-24.1.1">Rename title of the draft<a href="#appendix-D-24.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-24.1.1">add ttl claim to Status List Token to convey caching<a href="#appendix-D-24.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-24.2">
-          <p id="appendix-D-24.2.1">add design consideration to the introduction<a href="#appendix-D-24.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-24.2.1">relax requirements on referenced token<a href="#appendix-D-24.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-24.3">
-          <p id="appendix-D-24.3.1">Change status claim to in referenced token to allow re-use for other mechanisms<a href="#appendix-D-24.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-24.3.1">clarify Deflate / zlib compression<a href="#appendix-D-24.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-24.4">
-          <p id="appendix-D-24.4.1">Add IANA Registry for status mechanisms<a href="#appendix-D-24.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-24.4.1">make a reference to the Issuer-Holder-Verifier model of SD-JWT VC<a href="#appendix-D-24.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-24.5">
-          <p id="appendix-D-24.5.1">restructure the sections of this document<a href="#appendix-D-24.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-24.6">
-          <p id="appendix-D-24.6.1">add option to return an unsigned Status List<a href="#appendix-D-24.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-24.7">
-          <p id="appendix-D-24.7.1">Changing compression from gzip to zlib<a href="#appendix-D-24.7.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-24.8">
-          <p id="appendix-D-24.8.1">Change typo in Status List Token sub claim description<a href="#appendix-D-24.8.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-D-24.9">
-          <p id="appendix-D-24.9.1">Add access token as an example use-case<a href="#appendix-D-24.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-24.5.1">add COSE/CWT/CBOR encoding<a href="#appendix-D-24.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-25">-00<a href="#appendix-D-25" class="pilcrow">¶</a></p>
+<p id="appendix-D-25">-01<a href="#appendix-D-25" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-26.1">
-          <p id="appendix-D-26.1.1">Initial draft after working group adoption<a href="#appendix-D-26.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-26.1.1">Rename title of the draft<a href="#appendix-D-26.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-26.2">
-          <p id="appendix-D-26.2.1">update acknowledgments<a href="#appendix-D-26.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-26.2.1">add design consideration to the introduction<a href="#appendix-D-26.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-26.3">
-          <p id="appendix-D-26.3.1">renamed Verifier to Relying Party<a href="#appendix-D-26.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-26.3.1">Change status claim to in referenced token to allow re-use for other mechanisms<a href="#appendix-D-26.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-26.4">
-          <p id="appendix-D-26.4.1">added IANA consideration<a href="#appendix-D-26.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-26.4.1">Add IANA Registry for status mechanisms<a href="#appendix-D-26.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-26.5">
+          <p id="appendix-D-26.5.1">restructure the sections of this document<a href="#appendix-D-26.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-26.6">
+          <p id="appendix-D-26.6.1">add option to return an unsigned Status List<a href="#appendix-D-26.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-26.7">
+          <p id="appendix-D-26.7.1">Changing compression from gzip to zlib<a href="#appendix-D-26.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-26.8">
+          <p id="appendix-D-26.8.1">Change typo in Status List Token sub claim description<a href="#appendix-D-26.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-26.9">
+          <p id="appendix-D-26.9.1">Add access token as an example use-case<a href="#appendix-D-26.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-27">[ draft-ietf-oauth-status-list ]<a href="#appendix-D-27" class="pilcrow">¶</a></p>
-<p id="appendix-D-28">-01<a href="#appendix-D-28" class="pilcrow">¶</a></p>
+<p id="appendix-D-27">-00<a href="#appendix-D-27" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-D-29.1">
-          <p id="appendix-D-29.1.1">Applied editorial improvements suggested by Michael Jones.<a href="#appendix-D-29.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-D-28.1">
+          <p id="appendix-D-28.1.1">Initial draft after working group adoption<a href="#appendix-D-28.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-28.2">
+          <p id="appendix-D-28.2.1">update acknowledgments<a href="#appendix-D-28.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-28.3">
+          <p id="appendix-D-28.3.1">renamed Verifier to Relying Party<a href="#appendix-D-28.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-28.4">
+          <p id="appendix-D-28.4.1">added IANA consideration<a href="#appendix-D-28.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-D-30">-00<a href="#appendix-D-30" class="pilcrow">¶</a></p>
+<p id="appendix-D-29">[ draft-ietf-oauth-status-list ]<a href="#appendix-D-29" class="pilcrow">¶</a></p>
+<p id="appendix-D-30">-01<a href="#appendix-D-30" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-31.1">
-          <p id="appendix-D-31.1.1">Initial draft<a href="#appendix-D-31.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-31.1.1">Applied editorial improvements suggested by Michael Jones.<a href="#appendix-D-31.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-D-32">-00<a href="#appendix-D-32" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-D-33.1">
+          <p id="appendix-D-33.1.1">Initial draft<a href="#appendix-D-33.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
