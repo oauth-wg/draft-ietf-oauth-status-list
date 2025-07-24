@@ -11,10 +11,10 @@
 <meta content="
        This specification defines a mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
     " name="description">
-<meta content="xml2rfc 3.29.0" name="generator">
+<meta content="xml2rfc 3.30.0" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.29.0
+  xml2rfc 3.30.0
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 18 January 2026</td>
+<td class="center">Expires 25 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-07-17" class="published">17 July 2025</time>
+<time datetime="2025-07-24" class="published">24 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-01-18">18 January 2026</time></dd>
+<dd class="expires"><time datetime="2026-01-25">25 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1125,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1507,14 +1507,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 
 </pre><a href="#section-1-8" class="pilcrow">¶</a>
 </div>
-<p id="section-1-9">Status Lists may be composed to express a range of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<p id="section-1-9">Status Lists can be used to express a variety of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.<a href="#section-1-9" class="pilcrow">¶</a></p>
 <p id="section-1-10">Furthermore, the document defines an extension point that enables other specifications to describe additional status mechanisms and creates an IANA registry.<a href="#section-1-10" class="pilcrow">¶</a></p>
 <div id="example-use-cases">
 <section id="section-1.1">
         <h3 id="name-example-use-cases">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-example-use-cases" class="section-name selfRef">Example Use Cases</a>
         </h3>
-<p id="section-1.1-1">An example of the usage of a Status List is to manage the status of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> defines a way to determine the status of an issued access token, but it requires the party trying to validate the state of access tokens to directly contact the Issuer of the access tokens for each token validation. In contrast, the mechanism defined in this specification allows a party to fetch the status for many tokens, reducing interactions with the Issuer significantly for better scalability and providing better privacy as the Issuer does not learn which specific access token is being verified (herd anonymity).<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">An example of the usage of a Status List is to manage the statuses of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> provides a method to determine the status of an issued access token, but it necessitates the party attempting to validate the state of access tokens to directly contact the Issuer of each token for validation. In contrast, the mechanism defined in this specification allows a party to retrieve the statuses for many tokens, reducing interactions with the Issuer substantially. This not only improves scalability but also enhances privacy by preventing the Issuer from gaining knowledge of access tokens being verified (herd anonymity).<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1650,7 +1650,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-status-list">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-status-list" class="section-name selfRef">Status List</a>
       </h2>
-<p id="section-4-1">A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. The <span><a href="#status-list-byte-array" class="internal xref">first section</a> (<a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a>)</span> describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third section describe how to encode such a Status List in JSON and CBOR representation.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. The <span><a href="#status-list-byte-array" class="internal xref">first section</a> (<a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a>)</span> describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third sections describe how to encode such a Status List in JSON and CBOR representations.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="status-list-byte-array">
 <section id="section-4.1">
         <h3 id="name-compressed-byte-array">
@@ -1972,9 +1972,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d58402f36984838f740f6e41787
-3e0cea5700f715fa7bd19089c01654b664c43e615d5b358f576d12f7d585f9533b70
-1ed6b088e5906d41b290f70076083c2df8f2a3
+646269747301636c73744a78dadbb918000217015d5840073f834107d05e8e8511fd
+d6794fd29bb5b2784e51ada5e19381fe9eb72ad9f63dd8e06a78d7f54408ae265755
+fd6e59b890d0328e6d9ece01aa4389e00e9798
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -1999,12 +1999,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      2f36984838f740f6e417873e  #       "/6\x98H8÷@öä\x17\x87&gt;"
-      0cea5700f715fa7bd19089c0  #       "\x0cêW\x00÷\x15ú{Ñ\x90\x89À"
-      1654b664c43e615d5b358f57  #       "\x16T¶dÄ&gt;a][5\x8fW"
-      6d12f7d585f9533b701ed6b0  #       "m\x12÷Õ\x85ùS;p\x1eÖ°"
-      88e5906d41b290f70076083c  #       "\x88å\x90mA²\x90÷\x00v\x08&lt;"
-      2df8f2a3                  #       "-øò£"
+      073f834107d05e8e8511fdd6  #       "\x07?\x83A\x07Ð^\x8e\x85\x11ýÖ"
+      794fd29bb5b2784e51ada5e1  #       "yOÒ\x9bµ²xNQ\xad¥á"
+      9381fe9eb72ad9f63dd8e06a  #       "\x93\x81þ\x9e·*Ùö=Øàj"
+      78d7f54408ae265755fd6e59  #       "x×õD\x08®&amp;WUýnY"
+      b890d0328e6d9ece01aa4389  #       "¸\x90Ð2\x8em\x9eÎ\x01ªC\x89"
+      e00e9798                  #       "à\x0e\x97\x98"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2145,9 +2145,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158407d2b04423611d1fa8da70c0f43889f4c782719
-ab1d8b3bcbe4b6490c5dc3e31589c8b3c2a9f66859a411b7db6f7ec8e8c7bde7d86d
-967ec446844e467a923a9a
+7374617475736c697374732f3158409436c83d66c3490a7a80235a926555c9ac2f0b
+e9ca7cca04402ba5eea46ceb4adc4535c8a4528525978f6a4706b49013694e180710
+cba7576d9f2c36d6462191
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2172,12 +2172,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      7d2b04423611d1fa8da70c0f  #       "}+\x04B6\x11Ñú\x8d§\x0c\x0f"
-      43889f4c782719ab1d8b3bcb  #       "C\x88\x9fLx'\x19«\x1d\x8b;Ë"
-      e4b6490c5dc3e31589c8b3c2  #       "ä¶I\x0c]Ãã\x15\x89È³Â"
-      a9f66859a411b7db6f7ec8e8  #       "©öhY¤\x11·Ûo~Èè"
-      c7bde7d86d967ec446844e46  #       "Ç½çØm\x96~ÄF\x84NF"
-      7a923a9a                  #       "z\x92:\x9a"
+      9436c83d66c3490a7a80235a  #       "\x946È=fÃI\x0az\x80#Z"
+      926555c9ac2f0be9ca7cca04  #       "\x92eUÉ¬/\x0béÊ|Ê\x04"
+      402ba5eea46ceb4adc4535c8  #       "@+¥î¤lëJÜE5È"
+      a4528525978f6a4706b49013  #       "¤R\x85%\x97\x8fjG\x06´\x90\x13"
+      694e180710cba7576d9f2c36  #       "iN\x18\x07\x10Ë§Wm\x9f,6"
+      d6462191                  #       "ÖF!\x91"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2391,8 +2391,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.xcT1MZ_rCMJwir3ft2amrikAeSt8Fk8d_2dciz-GhM45RDCcNMr-
-ZWEXMeQ0xG5SltS9wPNaaODlrGqB_d5ApA
+nR0bCI6NDMyMDB9.VwDK1n5I405BO71edHDDYI1Cb70FV2O8akA21tRd8HW-af3kvsP2
+0S1EXFknnRYL0phqN9xSIQvOmcAW-SPjZg
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2498,8 +2498,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.xcT1MZ_rCMJwir3ft2amrikAeSt8Fk8d_2dciz-GhM45RDCcNMr-
-ZWEXMeQ0xG5SltS9wPNaaODlrGqB_d5ApA
+nR0bCI6NDMyMDB9.VwDK1n5I405BO71edHDDYI1Cb70FV2O8akA21tRd8HW-af3kvsP2
+0S1EXFknnRYL0phqN9xSIQvOmcAW-SPjZg
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2548,8 +2548,8 @@ An Issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
         <h3 id="name-issuer-metadata">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-issuer-metadata" class="section-name selfRef">Issuer Metadata</a>
         </h3>
-<p id="section-9.1-1">The Issuer <span class="bcp14">MAY</span> link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>). If the Issuer is an OAuth Authorization Server according to <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> to use <code>status_list_aggregation_endpoint</code> for its metadata defined by <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>. The Issuer <span class="bcp14">MAY</span> limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
-<p id="section-9.1-2">The concrete specification on how this is implemented depends on the specific ecosystem and is out of scope of this specification.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">The Issuer <span class="bcp14">MAY</span> link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID Connect, or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>). If the Issuer is an OAuth Authorization Server according to <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> to use <code>status_list_aggregation_endpoint</code> for its metadata defined by <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>. The Issuer <span class="bcp14">MAY</span> limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-2">The concrete implementation details depend on the specific ecosystem and are out of scope of this specification.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="status-list-parameter">
@@ -2670,7 +2670,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
 └─────────────────┘
 </pre><a href="#section-11.3-6" class="pilcrow">¶</a>
 </div>
-<p id="section-11.3-7">If the Issuer of the Referenced Token is a different entity than the Status Issuer, then the keys used for the Status List Token may be cryptographically linked, e.g. by an Certificate Authority through an x.509 PKI. The certificate of the Issuer for the Referenced Token and the Status Issuer should be issued by the same Certificate Authority and the Status Issuer's certificate should utilize <span><a href="#eku" class="internal xref">extended key usage</a> (<a href="#eku" class="auto internal xref">Section 10</a>)</span>.<a href="#section-11.3-7" class="pilcrow">¶</a></p>
+<p id="section-11.3-7">If the Issuer of the Referenced Token is a different entity than the Status Issuer, then the keys used for the Status List Token may be cryptographically linked, e.g. by a Certificate Authority through an x.509 PKI. The certificate of the Issuer for the Referenced Token and the Status Issuer should be issued by the same Certificate Authority and the Status Issuer's certificate should utilize <span><a href="#eku" class="internal xref">extended key usage</a> (<a href="#eku" class="auto internal xref">Section 10</a>)</span>.<a href="#section-11.3-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-11.3-8">
 <pre>
 ┌───────────────────────┐
@@ -2946,7 +2946,7 @@ an initialization parameter by the Issuer of the Referenced Token. The Issuer is
             <p id="section-13.7-5.3.1">If no <code>ttl</code> is given, then Relying Party <span class="bcp14">SHOULD</span> check for updates latest after time of <code>exp</code>.<a href="#section-13.7-5.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-13.7-6">Ultimately, its the Relying Parties decision how often to check for updates, ecosystems may define there own guidelines and policies for updating the Status List information.<a href="#section-13.7-6" class="pilcrow">¶</a></p>
+<p id="section-13.7-6">Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information.<a href="#section-13.7-6" class="pilcrow">¶</a></p>
 <p id="section-13.7-7">The following diagram illustrates the relationship between these claims and how they are designed to influence caching:<a href="#section-13.7-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-13.7-8">
 <pre>
