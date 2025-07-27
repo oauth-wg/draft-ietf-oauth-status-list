@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-24T00:21:28.271896+00:00",
+  "timestamp": "2025-07-27T00:23:39.070791+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5899,17 +5899,17 @@
       "id": "I_kwDOJZ2aqs6_y2f6",
       "title": "property uri",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/298",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "adeinega",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [
         "tplooker"
       ],
       "labels": [],
       "body": "Property `uri` is currently defined as\n\n`The uri (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of uri MUST be a URI conforming to [RFC3986].`\n\nThe issue here is that an issuer of ATs can and query and path parameters (unique to each issued AT), that would allow to track the usage of ATs. While it's technically impossible to completely \"hide\" information about who downloaded the status list (I refer to SRC IP, user's agent, etc.), the spec in my view should discourage, and even explicitly forbid such techniques. Otherwise, it leaves the door open for this sort of misuse... which also defects the purpose of being a privacy-preserving way to check the statuses of tokens.\n\nI also think it's a bit better to refer to `uri` as one of properties of the `status` claim, not as `claim`.",
       "createdAt": "2025-07-10T03:46:45Z",
-      "updatedAt": "2025-07-17T01:39:40Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-24T14:25:33Z",
+      "closedAt": "2025-07-24T14:25:33Z",
       "comments": [
         {
           "author": "c2bo",
@@ -5965,14 +5965,22 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/301",
       "state": "OPEN",
       "author": "adeinega",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I wonder if the specification should include recommendations to safeguard consumers (Holders and Verifiers) from [excessive resource consumption](https://en.wikipedia.org/wiki/Zip_bomb) by accidental, unintentional, or maybe even malicious actions by Issuers?\n\nhttps://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list#section-13.4",
       "createdAt": "2025-07-23T21:25:05Z",
-      "updatedAt": "2025-07-23T21:25:05Z",
+      "updatedAt": "2025-07-25T12:45:56Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "We had several rounds of discussions about recommendations regarding size (also minimum size), but in the end the consensus was to not add any for the time being.",
+          "createdAt": "2025-07-25T12:45:56Z",
+          "updatedAt": "2025-07-25T12:45:56Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -19772,24 +19780,26 @@
       "id": "PR_kwDOJZ2aqs6eMY-N",
       "title": "grammar fixes and rewording",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/297",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "adeinega",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-07-09T21:33:07Z",
-      "updatedAt": "2025-07-17T21:41:17Z",
+      "updatedAt": "2025-07-24T14:20:29Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "aeb1502f7133dd86401cc49c3ce96b3999862088",
       "headRepository": "adeinega/draft-ietf-oauth-status-list",
       "headRefName": "adeinega-patch-1",
       "headRefOid": "fb79496309e1a5607c9d5282f06fede838c6071d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-24T14:20:29Z",
+      "mergedAt": "2025-07-24T14:20:29Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "508990ed0632919bf9c1f0d1431f9b911d2ccdb8"
+      },
       "comments": [
         {
           "author": "c2bo",
@@ -19800,7 +19810,7 @@
         },
         {
           "author": "adeinega",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "@c2bo, sure, thank you.",
           "createdAt": "2025-07-17T21:41:16Z",
           "updatedAt": "2025-07-17T21:41:16Z"
@@ -19813,7 +19823,7 @@
             "abbreviatedOid": "4bdefdc"
           },
           "author": "adeinega",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-07-09T22:56:46Z",
@@ -19873,28 +19883,30 @@
       "id": "PR_kwDOJZ2aqs6fSRSM",
       "title": "fix: issue 298",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/299",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #298",
       "createdAt": "2025-07-17T01:37:39Z",
-      "updatedAt": "2025-07-23T20:51:23Z",
+      "updatedAt": "2025-07-24T14:25:32Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "aeb1502f7133dd86401cc49c3ce96b3999862088",
+      "baseRefOid": "508990ed0632919bf9c1f0d1431f9b911d2ccdb8",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "tl/issue-298",
-      "headRefOid": "9698a122906a36e3a3dcb437d519a12490ff4955",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "2fff953ca1e5c742e81297054672ff68589d78d1",
+      "closedAt": "2025-07-24T14:25:32Z",
+      "mergedAt": "2025-07-24T14:25:32Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "410e1427f5f488f63abd64961efceaa6911512e0"
+      },
       "comments": [
         {
           "author": "adeinega",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "I've also left a comment about the use of claim vs property in my https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/298.",
           "createdAt": "2025-07-17T02:39:51Z",
           "updatedAt": "2025-07-17T02:39:51Z"
@@ -19914,7 +19926,7 @@
             "abbreviatedOid": "e71650b"
           },
           "author": "adeinega",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-07-17T02:13:59Z",
@@ -19934,7 +19946,7 @@
             "abbreviatedOid": "e71650b"
           },
           "author": "adeinega",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-07-17T02:29:57Z",
@@ -19954,7 +19966,7 @@
             "abbreviatedOid": "e71650b"
           },
           "author": "adeinega",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-07-17T02:34:53Z",
@@ -20020,7 +20032,7 @@
             "abbreviatedOid": "3be60e6"
           },
           "author": "adeinega",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-07-17T21:56:08Z",
