@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-27T00:23:39.070791+00:00",
+  "timestamp": "2025-08-07T00:21:54.542487+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5941,12 +5941,12 @@
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/300",
       "state": "OPEN",
       "author": "adeinega",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Have you considered switching to [Brotli (RFC 7932)](https://datatracker.ietf.org/doc/html/rfc7932) from DEFLATE & Zlib?\n\nOr, alternatively... could we allow to specify a compression mechanism?\n\nMy tests with 1M Referenced Tokens and a revocation rate of 0.01% produced compressed bit arrays that were up to 10 times smaller (it compresses sparse data extremely well).\n\nIt\u2019s also going to perform better on devices with limited resources because of its design decisions.",
       "createdAt": "2025-07-21T22:47:25Z",
-      "updatedAt": "2025-07-22T22:01:43Z",
+      "updatedAt": "2025-08-05T21:19:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -5955,6 +5955,20 @@
           "body": "Was discussed in IETF 121 if I recall correctly (introduction of a compression_alg parameter and possible introduction of more options) and the preference was to keep the spec simple and keep only deflate for the time being.\n\nWe can still add an optional parameter that defaults to DEFLATE if not present in a version 1.1 of the spec if that comes up, but for the time being not introducing it was the choice the WG made.",
           "createdAt": "2025-07-22T22:01:43Z",
           "updatedAt": "2025-07-22T22:01:43Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I found [this table](https://cran.r-project.org/web/packages/brotli/vignettes/brotli-2015-09-22.pdf) for some comparison, which does not seem to hint at a factor 10. Anyway, we will try to make our own tests and compare them with the numbers from the size comparison annex.",
+          "createdAt": "2025-08-05T06:30:27Z",
+          "updatedAt": "2025-08-05T06:30:27Z"
+        },
+        {
+          "author": "adeinega",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "For what it's worth...\n\n@paulbastian, the document you referred to was written by the creators of Brotli, and they didn't try to compress the same \"pattern\" for data we are going to deal with (a long string of zeroes, with almost randomly distributed 1s, or something along this line).\n\nIn my very quick and dirty testing, I asked ChatGPT to write a GoLang application that \"generates a sequence of `totalCount` digits, where `onesCount` of them are randomly placed 1s and the rest are 0s\". It did it well. Then, I used the `brotli` and `zlib-flate` command line utilities to compress the output (max compression in both cases).\n\nFor `onesCount` equals 100 and `totalCount` equals 1000000, Brotli shows 2x better compression ratio (641 vs 1265 bytes).\nFor `onesCount` equals 1000 and `totalCount` equals 1000000, Brotli and Zlib show similar (comparable) results ~3 KBs.\n\nInterestingly enough, Brotli compresses small values in `onesCount` to almost nothing and I tend to think this happens because it uses a static dictionary.",
+          "createdAt": "2025-08-05T21:19:05Z",
+          "updatedAt": "2025-08-05T21:19:05Z"
         }
       ]
     },
