@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 8 January 2026                                  Bundesdruckerei
+Expires: 9 February 2026                                 Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                             7 July 2025
+                                                           8 August 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2026.
+   This Internet-Draft will expire on 9 February 2026.
 
 Copyright Notice
 
@@ -110,7 +110,7 @@ Table of Contents
      11.3.  Key Resolution and Trust Management
    12. Privacy Considerations
      12.1.  Observability of Issuers
-     12.2.  Malicious Issuers
+     12.2.  Issuer Tracking of Reference Tokens
      12.3.  Observability of Relying Parties
      12.4.  Observability of Outsiders
      12.5.  Unlinkability
@@ -235,9 +235,9 @@ Table of Contents
    │ Status Provider │◄──────┴────────────────────┘
    └─────────────────┘     fetch Status List Token
 
-   Status Lists may be composed to express a range of Status Types.
-   This document defines basic Status Types for the most common use
-   cases as well as an extensibility mechanism for custom Status Types.
+   Status Lists can be used to express a variety of Status Types.  This
+   document defines basic Status Types for the most common use cases as
+   well as an extensibility mechanism for custom Status Types.
 
    Furthermore, the document defines an extension point that enables
    other specifications to describe additional status mechanisms and
@@ -245,17 +245,17 @@ Table of Contents
 
 1.1.  Example Use Cases
 
-   An example of the usage of a Status List is to manage the status of
+   An example of the usage of a Status List is to manage the statuses of
    issued access tokens as defined in section 1.4 of [RFC6749].  Token
-   Introspection [RFC7662] defines a way to determine the status of an
-   issued access token, but it requires the party trying to validate the
-   state of access tokens to directly contact the Issuer of the access
-   tokens for each token validation.  In contrast, the mechanism defined
-   in this specification allows a party to fetch the status for many
-   tokens, reducing interactions with the Issuer significantly for
-   better scalability and providing better privacy as the Issuer does
-   not learn which specific access token is being verified (herd
-   anonymity).
+   Introspection [RFC7662] provides a method to determine the status of
+   an issued access token, but it necessitates the party attempting to
+   validate the state of access tokens to directly contact the Issuer of
+   each token for validation.  In contrast, the mechanism defined in
+   this specification allows a party to retrieve the statuses for many
+   tokens, reducing interactions with the Issuer substantially.  This
+   not only improves scalability but also enhances privacy by preventing
+   the Issuer from gaining knowledge of access tokens being verified
+   (herd anonymity).
 
    Another possible use case for the Status List is to express the
    status of verifiable credentials (Referenced Tokens) issued by an
@@ -389,8 +389,8 @@ Table of Contents
    Referenced Tokens represented by one or multiple bits.  The first
    section (Section 4.1) describes how to construct a compressed byte
    array that is the base component for the Status List data structure.
-   The second and third section describe how to encode such a Status
-   List in JSON and CBOR representation.
+   The second and third sections describe how to encode such a Status
+   List in JSON and CBOR representations.
 
 4.1.  Compressed Byte Array
 
@@ -518,6 +518,7 @@ Table of Contents
    byte_array = [0xb9, 0xa3]
    encoded:
    {
+     "alg": "zlib",
      "bits": 1,
      "lst": "eNrbuRgAAhcBXQ"
    }
@@ -528,6 +529,7 @@ Table of Contents
    byte_array = [0xc9, 0x44, 0xf9]
    encoded:
    {
+     "alg": "zlib",
      "bits": 2,
      "lst": "eNo76fITAAPfAgc"
    }
@@ -571,11 +573,15 @@ Table of Contents
 
    byte_array = [0xb9, 0xa3]
    encoded:
-   a2646269747301636c73744a78dadbb918000217015d
+   a363616c67647a6c6962646269747301636c73744a78dadbb918000217015d
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   a2                              # map(2)
+   a3                              # map(3)
+     63                            #   string(3)
+       616c67                      #     "alg"
+     64                            #   string(4)
+       7a6c6962                    #     "zlib"
      64                            #   string(4)
        62697473                    #     "bits"
      01                            #   uint(1)
@@ -659,6 +665,7 @@ Table of Contents
      "exp": 2291720170,
      "iat": 1686920170,
      "status_list": {
+       "alg": "zlib",
        "bits": 1,
        "lst": "eNrbuRgAAhcBXQ"
      },
@@ -720,11 +727,11 @@ Table of Contents
    CWT format in Hex:
 
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
-   7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
-   74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840c1906c9b23beb032b1f6ee
-   9f31bf51a3417fc63790303fadf1a45f4448cc5a38535808dd23d1ff5255deaf9e46
-   59ac93e41f78875ea58a323438e5aadd1b2a5e
+   7774a1044231325859a502782168747470733a2f2f6578616d706c652e636f6d2f73
+   74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda3
+   63616c67647a6c6962646269747301636c73744a78dadbb918000217015d5840cc6e
+   891085343740015c5651be6ca472a037b973c120dee5c6f6c814c7111b0b6f962436
+   f2e3aeff2277da1cfa0efd597d92c0b620a6378e82b538ecdf23a6c0
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -738,21 +745,22 @@ d2                              # tag(18)
       04                        #       uint(4)
       42                        #       bytes(2)
         3132                    #         "12"
-    58 50                       #     bytes(80)
+    58 59                       #     bytes(89)
       a502782168747470733a2f2f  #       "¥\x02x!https://"
       6578616d706c652e636f6d2f  #       "example.com/"
       7374617475736c697374732f  #       "statuslists/"
       31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
-      ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
-      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
-      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
+      ea19fffe19a8c019fffda363  #       "ê\x19ÿþ\x19¨À\x19ÿý£c"
+      616c67647a6c696264626974  #       "algdzlibdbit"
+      7301636c73744a78dadbb918  #       "s\x01clstJxÚÛ¹\x18"
+      000217015d                #       "\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      c1906c9b23beb032b1f6ee9f  #       "Á\x90l\x9b#¾°2±öî\x9f"
-      31bf51a3417fc63790303fad  #       "1¿Q£A\x7fÆ7\x900?\xad"
-      f1a45f4448cc5a38535808dd  #       "ñ¤_DHÌZ8SX\x08Ý"
-      23d1ff5255deaf9e4659ac93  #       "#ÑÿRUÞ¯\x9eFY¬\x93"
-      e41f78875ea58a323438e5aa  #       "ä\x1fx\x87^¥\x8a248åª"
-      dd1b2a5e                  #       "Ý\x1b*^"
+      cc6e891085343740015c5651  #       "Ìn\x89\x10\x8547@\x01\VQ"
+      be6ca472a037b973c120dee5  #       "¾l¤r\xa07¹sÁ Þå"
+      c6f6c814c7111b0b6f962436  #       "ÆöÈ\x14Ç\x11\x1b\x0bo\x96$6"
+      f2e3aeff2277da1cfa0efd59  #       "òã®ÿ"wÚ\x1cú\x0eýY"
+      7d92c0b620a6378e82b538ec  #       "}\x92À¶ ¦7\x8e\x82µ8ì"
+      df23a6c0                  #       "ß#¦À"
 
 6.  Referenced Token
 
@@ -895,37 +903,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584008fbd9026e08ae1221356c45989ca09fcf47b4
-   48c5858d156de132527a5f2d8cd8fef2bb54dabbe3f0683df279b7c8d3b4127dfb44
-   187be2ea557a285fd3ebfd
+   7374617475736c697374732f315840f4078e2cc73056da545fd6ce14b46dc7da1ab2
+   2256959f1bca5cf97ce1ab8e67f8ff158d8c446d9a29bff900b19f1768a2e76e39e8
+   201f5506f638782a2eec0d
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      08fbd9026e08ae1221356c45  #       "\x08ûÙ\x02n\x08®\x12!5lE"
-      989ca09fcf47b448c5858d15  #       "\x98\x9c\xa0\x9fÏG´HÅ\x85\x8d\x15"
-      6de132527a5f2d8cd8fef2bb  #       "má2Rz_-\x8cØþò»"
-      54dabbe3f0683df279b7c8d3  #       "TÚ»ãðh=òy·ÈÓ"
-      b4127dfb44187be2ea557a28  #       "´\x12}ûD\x18{âêUz("
-      5fd3ebfd                  #       "_Óëý"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         f4078e2cc73056da545fd6ce  #       "ô\x07\x8e,Ç0VÚT_ÖÎ"
+         14b46dc7da1ab22256959f1b  #       "\x14´mÇÚ\x1a²"V\x95\x9f\x1b"
+         ca5cf97ce1ab8e67f8ff158d  #       "Ê\ù|á«\x8egøÿ\x15\x8d"
+         8c446d9a29bff900b19f1768  #       "\x8cDm\x9a)¿ù\x00±\x9f\x17h"
+         a2e76e39e8201f5506f63878  #       "¢çn9è \x1fU\x06ö8x"
+         2a2eec0d                  #       "*.ì\x0d"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1161,10 +1169,10 @@ d2                              # tag(18)
 
    eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
-   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
-   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.9X3U8UnUbBIdHwSzHjp-9QmIFDisiSMd8PUHIbo0lQ9LG_rZnjHV
-   iXBK07Ggj5itBPIely75FuSXKqMboWplLQ
+   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImFsZyI6InpsaWIiLCJiaXRzIjoxLCJsc
+   3QiOiJlTnJidVJnQUFoY0JYUSJ9LCJzdWIiOiJodHRwczovL2V4YW1wbGUuY29tL3N0Y
+   XR1c2xpc3RzLzEiLCJ0dGwiOjQzMjAwfQ.6Wuwi__wqq4AVVtNv8P-PsLS6XKbjo0QRf
+   _EJPr2XWS_2jeCSUfL6ociPOAX6kTvQsO-4Ery5e1DAoybg8x5pA
 
 8.2.  Status List Response
 
@@ -1301,10 +1309,10 @@ d2                              # tag(18)
 
    eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
-   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
-   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.9X3U8UnUbBIdHwSzHjp-9QmIFDisiSMd8PUHIbo0lQ9LG_rZnjHV
-   iXBK07Ggj5itBPIely75FuSXKqMboWplLQ
+   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImFsZyI6InpsaWIiLCJiaXRzIjoxLCJsc
+   3QiOiJlTnJidVJnQUFoY0JYUSJ9LCJzdWIiOiJodHRwczovL2V4YW1wbGUuY29tL3N0Y
+   XR1c2xpc3RzLzEiLCJ0dGwiOjQzMjAwfQ.6Wuwi__wqq4AVVtNv8P-PsLS6XKbjo0QRf
+   _EJPr2XWS_2jeCSUfL6ociPOAX6kTvQsO-4Ery5e1DAoybg8x5pA
 
 9.  Status List Aggregation
 
@@ -1351,16 +1359,16 @@ d2                              # tag(18)
 
    The Issuer MAY link to the Status List Aggregation URI in metadata
    that can be provided by different means like .well-known metadata as
-   is used commonly in OAuth and OpenID or within Issuer certificates or
-   trust lists (such as VICAL as defined in Annex C of [ISO.mdoc]).  If
-   the Issuer is an OAuth Authorization Server according to [RFC6749],
-   it is RECOMMENDED to use status_list_aggregation_endpoint for its
-   metadata defined by [RFC8414].  The Issuer MAY limit the Status List
-   Tokens listed by a Status List Aggregation to a particular type of
-   Referenced Token.
+   is used commonly in OAuth and OpenID Connect, or within Issuer
+   certificates or trust lists (such as VICAL as defined in Annex C of
+   [ISO.mdoc]).  If the Issuer is an OAuth Authorization Server
+   according to [RFC6749], it is RECOMMENDED to use
+   status_list_aggregation_endpoint for its metadata defined by
+   [RFC8414].  The Issuer MAY limit the Status List Tokens listed by a
+   Status List Aggregation to a particular type of Referenced Token.
 
-   The concrete specification on how this is implemented depends on the
-   specific ecosystem and is out of scope of this specification.
+   The concrete implementation details depend on the specific ecosystem
+   and are out of scope of this specification.
 
 9.2.  Status List Parameter
 
@@ -1494,7 +1502,7 @@ d2                              # tag(18)
 
    If the Issuer of the Referenced Token is a different entity than the
    Status Issuer, then the keys used for the Status List Token may be
-   cryptographically linked, e.g. by an Certificate Authority through an
+   cryptographically linked, e.g. by a Certificate Authority through an
    x.509 PKI.  The certificate of the Issuer for the Referenced Token
    and the Status Issuer should be issued by the same Certificate
    Authority and the Status Issuer's certificate should utilize extended
@@ -1551,16 +1559,26 @@ d2                              # tag(18)
 
    *  using trusted Third Party Hosting, see Section 12.6.
 
-12.2.  Malicious Issuers
+12.2.  Issuer Tracking of Reference Tokens
 
-   A malicious Issuer could bypass the privacy benefits of the herd
-   privacy by generating a unique Status List for every Referenced
-   Token.  By these means, the Issuer could maintain a mapping between
-   Referenced Tokens and Status Lists and thus track the usage of
-   Referenced Tokens by utilizing this mapping for the incoming
-   requests.  This malicious behaviour could be detected by Relying
-   Parties that request large amounts of Referenced Tokens by comparing
-   the number of different Status Lists and their sizes.
+   An Issuer could maliciously or accidentally bypass the privacy
+   benefits of the herd privacy by either:
+
+   *  Generating a unique Status List for every Referenced Token.  By
+      these means, the Issuer could maintain a mapping between
+      Referenced Tokens and Status Lists and thus track the usage of
+      Referenced Tokens by utilizing this mapping for the incoming
+      requests.
+
+   *  Encoding a unique URI in each Reference Token which points to the
+      underlying Status List.  This may involve using URI components
+      such as query parameters, unique path segments, or fragments to
+      make the URI unique.
+
+   This malicious behavior can be detected by Relying Parties that
+   request large amounts of Referenced Tokens by comparing the number of
+   different Status Lists and their sizes with the volume of Reference
+   Tokens being verified.
 
 12.3.  Observability of Relying Parties
 
@@ -1831,8 +1849,8 @@ d2                              # tag(18)
    *  If no ttl is given, then Relying Party SHOULD check for updates
       latest after time of exp.
 
-   Ultimately, its the Relying Parties decision how often to check for
-   updates, ecosystems may define there own guidelines and policies for
+   Ultimately, it's the Relying Parties decision how often to check for
+   updates, ecosystems may define their own guidelines and policies for
    updating the Status List information.
 
    The following diagram illustrates the relationship between these
@@ -2511,9 +2529,9 @@ d2                              # tag(18)
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-09, 28 May
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-10, 7 July
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-09>.
+              oauth-sd-jwt-vc-10>.
 
    [smith2020let]
               Smith, T., Dickinson, L., and K. Seamons, "Let's revoke:
@@ -2528,12 +2546,12 @@ d2                              # tag(18)
 
 Acknowledgments
 
-   We would like to thank Brian Campbell, Dan Moore, Denis Pinkas, Filip
-   Skokan, Francesco Marino, Giuseppe De Marco, Hannes Tschofenig,
-   Kristina Yasuda, Markus Kreusch, Martijn Haring, Michael B.  Jones,
-   Micha Kraus, Michael Schwartz, Mike Prorock, Mirko Mollik, Oliver
-   Terbu, Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy, Timo Glastra and
-   Torsten Lodderstedt
+   We would like to thank Andrii Deinega, Brian Campbell, Dan Moore,
+   Denis Pinkas, Filip Skokan, Francesco Marino, Giuseppe De Marco,
+   Hannes Tschofenig, Kristina Yasuda, Markus Kreusch, Martijn Haring,
+   Michael B.  Jones, Micha Kraus, Michael Schwartz, Mike Prorock, Mirko
+   Mollik, Oliver Terbu, Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy,
+   Timo Glastra and Torsten Lodderstedt
 
    for their valuable contributions, discussions and feedback to this
    specification.
@@ -2623,22 +2641,24 @@ Test vectors for Status List encoding
    JSON encoding:
 
    {
+     "alg": "zlib",
      "bits": 1,
-     "lst": "eNrt3AENwCAMAEGogklACtKQPg9LugC9k_ACvreiogE
-     AAKkeCQAAAAAAAAAAAAAAAAAAAIBylgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-     AAAAAAAAAAAAAAAAAAAXG9IAAAAAAAAAPwsJAAAAAAAAAAAAAAAvhsSAAAAAAAAAAA
-     A7KpLAAAAAAAAAAAAAAAAAAAAAJsLCQAAAAAAAAAAADjelAAAAAAAAAAAKjDMAQAAA
-     ACAZC8L2AEb"
+     "lst": "eNrt3AENwCAMAEGogklACtKQPg
+     9LugC9k_ACvreiogEAAKkeCQAAAAAAAAAAAAAAAAAAAIBylgQAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXG9IAAAAAAAAAPwsJAAAAAAAAAAAAA
+     AAvhsSAAAAAAAAAAAA7KpLAAAAAAAAAAAAAAAAAAAAAJsLCQAAAAAAAAAAADjelAAA
+     AAAAAAAAKjDMAQAAAACAZC8L2AEb"
    }
 
    CBOR encoding:
 
-   a2646269747301636c737458bd78daeddc010dc0200c0041a88249400ad2903e0f4b
-   ba00bd93f002beb7a2a2010000a91e09000000000000000000000000000000807296
-   04000000000000000000000000000000000000000000000000000000000000000000
-   000000000000005c6f4800000000000000fc2c240000000000000000000000be1b12
-   000000000000000000ecaa4b000000000000000000000000000000009b0b09000000
-   00000000000038de9400000000000000002a30cc010000000080642f0bd8011b
+   a363616c67647a6c6962646269747301636c737458bd78daeddc010dc0200c0041a8
+   8249400ad2903e0f4bba00bd93f002beb7a2a2010000a91e09000000000000000000
+   00000000000080729604000000000000000000000000000000000000000000000000
+   000000000000000000000000000000005c6f4800000000000000fc2c240000000000
+   000000000000be1b12000000000000000000ecaa4b00000000000000000000000000
+   0000009b0b0900000000000000000038de9400000000000000002a30cc0100000000
+   80642f0bd8011b
 
 2 bit Status List
 
@@ -2659,28 +2679,30 @@ Test vectors for Status List encoding
    JSON encoding:
 
    {
+     "alg": "zlib",
      "bits": 2,
-     "lst": "eNrt2zENACEQAEEuoaBABP5VIO01fCjIHTMStt9ovGV
-     IAAAAAABAbiEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEB5WwIAAAAAA
-     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAID0ugQAAAAAAAAAAAAAAAAAQG12SgAAA
-     AAAAAAAAAAAAAAAAAAAAAAAAOCSIQEAAAAAAAAAAAAAAAAAAAAAAAD8ExIAAAAAAAA
-     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwJEuAQAAAAAAAAAAAAAAAAAAAAAAAMB9S
-     wIAAAAAAAAAAAAAAAAAAACoYUoAAAAAAAAAAAAAAEBqH81gAQw"
+     "lst": "eNrt2zENACEQAEEuoaBABP5VIO
+     01fCjIHTMStt9ovGVIAAAAAABAbiEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAEB5WwIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAID0ugQAAAAAAAAA
+     AAAAAAAAQG12SgAAAAAAAAAAAAAAAAAAAAAAAAAAAOCSIQEAAAAAAAAAAAAAAAAAAA
+     AAAAD8ExIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwJEuAQAAAAAAAAAA
+     AAAAAAAAAAAAAMB9SwIAAAAAAAAAAAAAAAAAAACoYUoAAAAAAAAAAAAAAEBqH81gAQ
+     w"
    }
 
    CBOR encoding:
 
-   a2646269747302636c737459013d78daeddb310d00211000412ea1a04004fe5520ed
-   357c28c81d3312b6df68bc65480000000000406e2101000000000000000000000000
-   0000000000000000000000000000000000000040795b020000000000000000000000
+   a363616c67647a6c6962646269747302636c737459013d78daeddb310d0021100041
+   2ea1a04004fe5520ed357c28c81d3312b6df68bc65480000000000406e2101000000
+   0000000000000000000000000000000000000000000000000000000040795b020000
    00000000000000000000000000000000000000000000000000000000000000000000
    00000000000000000000000000000000000000000000000000000000000000000000
-   0080f4ba0400000000000000000000000000406d764a000000000000000000000000
-   000000000000000000e0922101000000000000000000000000000000000000fc1312
-   00000000000000000000000000000000000000000000000000000000000000c0912e
-   01000000000000000000000000000000000000c07d4b020000000000000000000000
-   00000000a8614a0000000000000000000000406a1fcd60010c
+   0000000000000000000080f4ba0400000000000000000000000000406d764a000000
+   000000000000000000000000000000000000e0922101000000000000000000000000
+   000000000000fc131200000000000000000000000000000000000000000000000000
+   000000000000c0912e01000000000000000000000000000000000000c07d4b020000
+   00000000000000000000000000a8614a0000000000000000000000406a1fcd60010c
 
 4 bit Status List
 
@@ -2705,42 +2727,43 @@ Test vectors for Status List encoding
    JSON encoding:
 
    {
+     "alg": "zlib",
      "bits": 4,
-     "lst": "eNrt0EENgDAQADAIHwImkIIEJEwCUpCEBBQRHOy35Li
-     1EjoOQGabAgAAAAAAAAAAAAAAAAAAACC1SQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     "lst": "eNrt0EENgDAQADAIHwImkIIEJE
+     wCUpCEBBQRHOy35Li1EjoOQGabAgAAAAAAAAAAAAAAAAAAACC1SQEAAAAAAAAAAAAA
      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADrsCAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADrsC
      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-     AAADoxaEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIIoCgAAAAAAAAAAAAAAAAA
-     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACArpwKAAAAAAAAAAAAAAAAAAAAA
-     AAAAAAAAAAAAAAAAAAAAAAAAAAAAGhqVkAzlwIAAAAAiGVRAAAAAAAAAAAAAAAAAAA
-     AAAAAAAAAAAAAAAAAAAAAAABx3AoAgLpVAQAAAAAAAAAAAAAAwM89rwMAAAAAAAAAA
-     AjsA9xMBMA"
+     AAAAAAAAAAAAAAAAAAAADoxaEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIIoCg
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACArpwKAAAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGhqVkAzlwIAAAAAiGVRAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABx3AoAgLpVAQAAAAAAAAAAAAAA
+     wM89rwMAAAAAAAAAAAjsA9xMBMA"
    }
 
    CBOR encoding:
 
-   a2646269747304636c737459024878daedd0410d8030100030081f0226908204244c
-   025290840414111cecb7e4b8b5123a0e40669b020000000000000000000000000000
-   0020b549010000000000000000000000000000000000000000000000000000000000
+   a363616c67647a6c6962646269747304636c737459024878daedd0410d8030100030
+   081f0226908204244c025290840414111cecb7e4b8b5123a0e40669b020000000000
+   0000000000000000000020b549010000000000000000000000000000000000000000
    00000000000000000000000000000000000000000000000000000000000000000000
    00000000000000000000000000000000000000000000000000000000000000000000
    00000000000000000000000000000000000000000000000000000000000000000000
    00000000000000000000000000000000000000000000000000000000000000000000
    00000000000000000000000000000000000000000000000000000000000000000000
-   0000000000400ebb0200000000000000000000000000000000000000000000000000
+   0000000000000000000000000000400ebb0200000000000000000000000000000000
    00000000000000000000000000000000000000000000000000000000000000000000
-   000000000000e8c5a100000000000000000000000000000000000000000000000000
+   000000000000000000000000000000e8c5a100000000000000000000000000000000
    00000000000000000000000000000000000000000000000000000000000000000000
-   00000000000000000000000000000000000082280a00000000000000000000000000
-   00000000000000000000000000000000000000000000000000000000000080ae9c0a
+   00000000000000000000000000000000000000000000000000000082280a00000000
    00000000000000000000000000000000000000000000000000000000000000000000
-   000000686a5640339702000000008865510000000000000000000000000000000000
-   00000000000000000000000000000071dc0a0080ba55010000000000000000000000
-   c0cf3daf03000000000000000008ec03dc4c04c0
+   000000000080ae9c0a00000000000000000000000000000000000000000000000000
+   000000000000000000000000686a5640339702000000008865510000000000000000
+   00000000000000000000000000000000000000000000000071dc0a0080ba55010000
+   000000000000000000c0cf3daf03000000000000000008ec03dc4c04c0
 
 8 bit Status List
 
@@ -3006,113 +3029,119 @@ Test vectors for Status List encoding
    JSON encoding:
 
    {
+     "alg": "zlib",
      "bits": 8,
-     "lst": "eNrt0WOQM2kYhtGsbdu2bdu2bdu2bdu2bdu2jVnU1my
-     -SWYm6U5enFPVf7ue97orFYAo7CQBAACQuuckAABStqUEAAAAAAAAtN6wEgAE71QJA
-     AAAAIrwhwQAAAAAAdtAAgAAAAAAACLwkAQAAAAAAAAAAACUaFcJAACAeJwkAQAAAAA
-     AAABQvL4kAAAAWmJwCQAAAAAAAAjAwBIAAAB06ywJoDKQBARpfgkAAAAAAAAAAAAAA
-     AAAAACo50sJAAAAAAAAAOiRcSQAAAAAgAJNKgEAAG23mgQAAAAAAECw3pUAQvegBAA
-     AAAAAAADduE4CAAAAyjSvBAAQiw8koHjvSABAb-wlARCONyVoxtMSZOd0CQAAAOjWD
-     RKQmLckAAAAAACysLYEQGcnSAAAAAAQooUlAABI15kSAIH5RAIgLB9LABC4_SUgGZN
-     IAABAmM6RoLbTJIASzCIBAEAhfpcAAAAAAABquk8CAAAAAAAAaJl9SvvzBOICAFWmk
-     IBgfSgBAAAANOgrCQAAAAAAAADStK8EAAC03gASAAAAAAAAAADFWFUCAAAAMjOaBEA
-     DHpYAQjCIBADduFwCAAAAAGitMSSI3BUSAECOHpAA6IHrJQAAAAAAsjeVBAAAKRpVA
-     orWvwQAAAAAAAAAkKRtJAAAAAAAgCbcLAF0bXUJAAAAoF02kYDg7CYBAAAAAEB6NpQ
-     AAAAAAAAAAAAAAEr1uQQAAF06VgIAAAAAAAAAqDaeBAAQqgMkAAAAAABogQMlAAAAA
-     AAa87MEAAAQiwslAAAAAAAAAAAAAAAAMrOyBAAAiekv-hcsY0Sgne6QAAAAAAAgaUt
-     JAAAAAAAAAAAAAAAAAAAAAAAAAADwt-07vjVkAAAAgDy8KgFAUEaSAAAAAJL3vgQAW
-     dhcAgAAoBHDSUDo1pQAAACI2o4SAABZm14CALoyuwQAAPznGQkgZwdLAAAQukclAAA
-     AAAAAAAAAgKbMKgEAAAAAAAAAAAAAAAAAAECftpYAAAAAAAAAAAAACnaXBAAAAADk7
-     iMJAAAAAAAAAABqe00CAnGbBBG4TAIAgFDdKgFAXCaWAAAAAAAAAAAAAAAAAKAJQwR
-     72XbGAQAAAKAhh0sAAAAAAABQgO8kAAAAAAAAAAAAACAaM0kAAAC5W0QCAIJ3mAQAx
-     GwxCQAA6nhSAsjZBRIAANEbWQIAAAAAaJE3JACAwA0qAUBIVpKAlphbAiAPp0iQnKE
-     kAAAAAAAgBP1KAAAAdOl4CQAAAAAAAPjLZBIAAG10RtrPm8_CAEBMTpYAAAAAAIjQY
-     BL8z5QSAAAAAEDYPpUAACAsj0gAAADQkHMlAAjHDxIA0Lg9JQAAgHDsLQEAAABAQS6
-     WAAAAgLjNFs2l_RgLAIAEfCEBlGZZCQAAaIHjJACgtlskAAAozb0SAAAAVFtfAgAAA
-     AAAAAAAAAAAAAAAAAAAAKDDtxIAAAAAVZaTAKB5W0kAANCAsSUgJ0tL0GqHSNBbL0g
-     AZflRAgCARG0kQXNmlgCABiwkAQAAAEB25pIAAAAAAAAAAAAAoFh9SwAAAAAAADWNm
-     OSrpjFsEoaRgDKcF9Q1dxsEAAAAAAAAAAAAAAAAgPZ6SQIAAAAAAAAAgChMLgEAAAA
-     AAAAAqZlQAsK2qQQAAAAAAAD06XUJAAAAqG9bCQAAgLD9IgEAAAAAAAAAAAAAAAAAA
-     EBNe0gAAAAAAAAAAEBPHSEBAAAAlOZtCYA4fS8B0GFRCQAo0gISAOTgNwmC840EAAA
-     AAAAAAAAAAAAAAAAAUJydJfjXPBIAAAAAAAAAAAAAAABk6WwJAAAAAAAAAAAAAAAAq
-     G8UCQAAgPpOlAAAIA83SQAANWwc9HUjGAgAAAAAAACAusaSAAAAAAAAAAAAAAAAAAA
-     AAAAAAAAAqHKVBACQjxklAAAAAAAAAKBHxpQAAAAAACBME0lAdlaUAACyt7sEAAAA0
-     Nl0EgAAAAAAAAAAAABA-8wgAQAAAAAAAKU4SgKgUtlBAgAAAAAAAAAAgMCMLwEE51k
-     JICdzSgCJGl2CsE0tAQAA0L11JQAAAAAAAAjUOhIAAAAAAAAAAAAAAGTqeQkAAAAAA
-     AAAAAAAKM8SEjTrJwkAAAAAAACocqQEULgVJAAAACjDUxJUKgtKAAAAqbpRAgCA0n0
-     mAQAAAABAGzwmAUCTLpUAAAAAAAAAAEjZNRIAAAAAAAAAAAAAAAAAAAAA8I-vJaAlh
-     pQAAAAAAHrvzjJ-OqCuuVlLAojP8BJAr70sQZVDJYAgXS0BAAAAAAAAAAAAtMnyEgA
-     AAAAAFONKCQAAAAAAAADorc0kAAAAAAAAgDqOlgAAAAAAAAAAAADIwv0SAAAAAAAAA
-     AAAAADBuV0CIFVDSwAAAABAAI6RAAAAAGIwrQSEZAsJAABouRclAAAAAKDDrxIAAAA
-     0bkkJgFiMKwEAAAAAAHQyhwRk7h4JAAAAAAAAAAAgatdKAACUYj0JAAAAAAAAAAAAQ
-     nORBLTFJRIAAAAAkIaDJAAAAJryngQAAAAAAAAAAAA98oQEAAAAAAAAAEC2zpcgWY9
-     LQKL2kwAgGK9IAAAAAPHaRQIAAAAAAAAAAADIxyoSAAAAAAAAAAAAAADQFotLAECz_
-     gQ1PX-B"
+     "lst": "eNrt0WOQM2kYhtGsbdu2bdu2bd
+     u2bdu2bdu2jVnU1my-SWYm6U5enFPVf7ue97orFYAo7CQBAACQuuckAABStqUEAAAA
+     AAAAtN6wEgAE71QJAAAAAIrwhwQAAAAAAdtAAgAAAAAAACLwkAQAAAAAAAAAAACUaF
+     cJAACAeJwkAQAAAAAAAABQvL4kAAAAWmJwCQAAAAAAAAjAwBIAAAB06ywJoDKQBARp
+     fgkAAAAAAAAAAAAAAAAAAACo50sJAAAAAAAAAOiRcSQAAAAAgAJNKgEAAG23mgQAAA
+     AAAECw3pUAQvegBAAAAAAAAADduE4CAAAAyjSvBAAQiw8koHjvSABAb-wlARCONyVo
+     xtMSZOd0CQAAAOjWDRKQmLckAAAAAACysLYEQGcnSAAAAAAQooUlAABI15kSAIH5RA
+     IgLB9LABC4_SUgGZNIAABAmM6RoLbTJIASzCIBAEAhfpcAAAAAAABquk8CAAAAAAAA
+     aJl9SvvzBOICAFWmkIBgfSgBAAAANOgrCQAAAAAAAADStK8EAAC03gASAAAAAAAAAA
+     DFWFUCAAAAMjOaBEADHpYAQjCIBADduFwCAAAAAGitMSSI3BUSAECOHpAA6IHrJQAA
+     AAAAsjeVBAAAKRpVAorWvwQAAAAAAAAAkKRtJAAAAAAAgCbcLAF0bXUJAAAAoF02kY
+     Dg7CYBAAAAAEB6NpQAAAAAAAAAAAAAAEr1uQQAAF06VgIAAAAAAAAAqDaeBAAQqgMk
+     AAAAAABogQMlAAAAAAAa87MEAAAQiwslAAAAAAAAAAAAAAAAMrOyBAAAiekv-hcsY0
+     Sgne6QAAAAAAAgaUtJAAAAAAAAAAAAAAAAAAAAAAAAAADwt-07vjVkAAAAgDy8KgFA
+     UEaSAAAAAJL3vgQAWdhcAgAAoBHDSUDo1pQAAACI2o4SAABZm14CALoyuwQAAPznGQ
+     kgZwdLAAAQukclAAAAAAAAAAAAgKbMKgEAAAAAAAAAAAAAAAAAAECftpYAAAAAAAAA
+     AAAACnaXBAAAAADk7iMJAAAAAAAAAABqe00CAnGbBBG4TAIAgFDdKgFAXCaWAAAAAA
+     AAAAAAAAAAAKAJQwR72XbGAQAAAKAhh0sAAAAAAABQgO8kAAAAAAAAAAAAACAaM0kA
+     AAC5W0QCAIJ3mAQAxGwxCQAA6nhSAsjZBRIAANEbWQIAAAAAaJE3JACAwA0qAUBIVp
+     KAlphbAiAPp0iQnKEkAAAAAAAgBP1KAAAAdOl4CQAAAAAAAPjLZBIAAG10RtrPm8_C
+     AEBMTpYAAAAAAIjQYBL8z5QSAAAAAEDYPpUAACAsj0gAAADQkHMlAAjHDxIA0Lg9JQ
+     AAgHDsLQEAAABAQS6WAAAAgLjNFs2l_RgLAIAEfCEBlGZZCQAAaIHjJACgtlskAAAo
+     zb0SAAAAVFtfAgAAAAAAAAAAAAAAAAAAAAAAAKDDtxIAAAAAVZaTAKB5W0kAANCAsS
+     UgJ0tL0GqHSNBbL0gAZflRAgCARG0kQXNmlgCABiwkAQAAAEB25pIAAAAAAAAAAAAA
+     oFh9SwAAAAAAADWNmOSrpjFsEoaRgDKcF9Q1dxsEAAAAAAAAAAAAAAAAgPZ6SQIAAA
+     AAAAAAgChMLgEAAAAAAAAAqZlQAsK2qQQAAAAAAAD06XUJAAAAqG9bCQAAgLD9IgEA
+     AAAAAAAAAAAAAAAAAEBNe0gAAAAAAAAAAEBPHSEBAAAAlOZtCYA4fS8B0GFRCQAo0g
+     ISAOTgNwmC840EAAAAAAAAAAAAAAAAAAAAUJydJfjXPBIAAAAAAAAAAAAAAABk6WwJ
+     AAAAAAAAAAAAAAAAqG8UCQAAgPpOlAAAIA83SQAANWwc9HUjGAgAAAAAAACAusaSAA
+     AAAAAAAAAAAAAAAAAAAAAAAAAAqHKVBACQjxklAAAAAAAAAKBHxpQAAAAAACBME0lA
+     dlaUAACyt7sEAAAA0Nl0EgAAAAAAAAAAAABA-8wgAQAAAAAAAKU4SgKgUtlBAgAAAA
+     AAAAAAgMCMLwEE51kJICdzSgCJGl2CsE0tAQAA0L11JQAAAAAAAAjUOhIAAAAAAAAA
+     AAAAAGTqeQkAAAAAAAAAAAAAKM8SEjTrJwkAAAAAAACocqQEULgVJAAAACjDUxJUKg
+     tKAAAAqbpRAgCA0n0mAQAAAABAGzwmAUCTLpUAAAAAAAAAAEjZNRIAAAAAAAAAAAAA
+     AAAAAAAA8I-vJaAlhpQAAAAAAHrvzjJ-OqCuuVlLAojP8BJAr70sQZVDJYAgXS0BAA
+     AAAAAAAAAAtMnyEgAAAAAAFONKCQAAAAAAAADorc0kAAAAAAAAgDqOlgAAAAAAAAAA
+     AADIwv0SAAAAAAAAAAAAAADBuV0CIFVDSwAAAABAAI6RAAAAAGIwrQSEZAsJAABouR
+     clAAAAAKDDrxIAAAA0bkkJgFiMKwEAAAAAAHQyhwRk7h4JAAAAAAAAAAAgatdKAACU
+     Yj0JAAAAAAAAAAAAQnORBLTFJRIAAAAAkIaDJAAAAJryngQAAAAAAAAAAAA98oQEAA
+     AAAAAAAEC2zpcgWY9LQKL2kwAgGK9IAAAAAPHaRQIAAAAAAAAAAADIxyoSAAAAAAAA
+     AAAAAADQFotLAECz_gQ1PX-B"
    }
 
    CBOR encoding:
 
-   a2646269747308636c73745907b078daedd1639033691886d1ac6ddbb66ddbb66ddb
-   b66ddbb66ddbb68d59d4d66cbe496626e94e5e9c53d57fbb9ef7ba2b158028ec2401
-   000090bae724000052b6a504000000000000b4deb0120004ef5409000000008af087
-   040000000001db400200000000000022f09004000000000000000000946857090000
-   80789c24010000000000000050bcbe240000005a62700900000000000008c0c01200
-   000074eb2c09a032900404697e09000000000000000000000000000000a8e74b0900
-   000000000000e89171240000000080024d2a0100006db79a04000000000040b0de95
-   0042f7a00400000000000000ddb84e02000000ca34af0400108b0f24a078ef480040
-   6fec2501108e372568c6d31264e77409000000e8d60d129098b7240000000000b2b0
-   b604406727480000000010a28525000048d799120081f94402202c1f4b0010b8fd25
-   2019934800004098ce91a0b6d3248012cc22010040217e970000000000006aba4f02
-   00000000000068997d4afbf304e2020055a69080607d280100000034e82b09000000
-   00000000d2b4af040000b4de00120000000000000000c558550200000032339a0440
-   031e96004230880400ddb85c020000000068ad312488dc151200408e1e9000e881eb
-   250000000000b23795040000291a55028ad6bf040000000000000090a46d24000000
-   00008026dc2c01746d7509000000a05d369180e0ec260100000000407a3694000000
-   00000000000000004af5b90400005d3a560200000000000000a8369e040010aa0324
-   00000000006881032500000000001af3b3040000108b0b2500000000000000000000
-   000032b3b204000089e92ffa172c6344a09dee90000000000020694b490000000000
-   000000000000000000000000000000f0b7ed3bbe3564000000803cbc2a0140504692
-   0000000092f7be040059d85c020000a011c34940e8d69400000088da8e120000599b
-   5e0200ba32bb040000fce719092067074b000010ba472500000000000000000080a6
-   cc2a010000000000000000000000000000409fb696000000000000000000000a7697
-   0400000000e4ee230900000000000000006a7b4d0202719b0411b84c02008050dd2a
-   01405c269600000000000000000000000000a00943047bd976c601000000a021874b
-   0000000000005080ef2400000000000000000000201a3349000000b95b4402008277
-   980400c46c31090000ea785202c8d905120000d11b590200000000689137240080c0
-   0d2a01404856928096985b02200fa748909ca12400000000002004fd4a00000074e9
-   7809000000000000f8cb641200006d7446dacf9bcfc200404c4e96000000000088d0
-   6012fccf94120000000040d83e950000202c8f48000000d09073250008c70f1200d0
-   b83d2500008070ec2d0100000040412e9600000080b8cd16cda5fd180b0080047c21
-   019466590900006881e32400a0b65b24000028cdbd12000000545b5f020000000000
-   00000000000000000000000000a0c3b7120000000055969300a0795b490000d080b1
-   2520274b4bd06a8748d05b2f480065f951020080446d24417366960080062c240100
-   00004076e69200000000000000000000a0587d4b000000000000358d98e4aba6316c
-   12869180329c17d435771b0400000000000000000000000080f67a49020000000000
-   000080284c2e0100000000000000a9995002c2b6a904000000000000f4e975090000
-   00a86f5b09000080b0fd22010000000000000000000000000000404d7b4800000000
-   00000000404f1d210100000094e66d0980387d2f01d06151090028d2021200e4e037
-   0982f38d04000000000000000000000000000000509c9d25f8d73c12000000000000
-   00000000000064e96c09000000000000000000000000a86f1409000080fa4e940000
-   200f37490000356c1cf47523180800000000000080bac69200000000000000000000
-   0000000000000000000000a872950400908f192500000000000000a047c694000000
-   0000204c1349407656940000b2b7bb04000000d0d974120000000000000000000040
-   fbcc2001000000000000a5384a02a052d94102000000000000000080c08c2f0104e7
-   59092027734a00891a5d82b04d2d010000d0bd752500000000000008d43a12000000
-   000000000000000064ea79090000000000000000000028cf121234eb270900000000
-   0000a872a40450b8152400000028c35312542a0b4a000000a9ba51020080d27d2601
-   00000000401b3c260140932e95000000000000000048d93512000000000000000000
-   00000000000000f08faf25a025869400000000007aefce327e3aa0aeb9594b0288cf
-   f01240afbd2c4195432580205d2d01000000000000000000b4c9f212000000000014
-   e34a0900000000000000e8adcd24000000000000803a8e9600000000000000000000
-   c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
-   006230ad0484640b09000068b9172500000000a0c3af12000000346e490980588c2b
-   0100000000007432870464ee1e090000000000000000206ad74a000094623d090000
-   0000000000000042739104b4c5251200000000908683240000009af29e0400000000
-   00000000003df284040000000000000040b6ce9720598f4b40a2f693002018af4800
-   000000f1da4502000000000000000000c8c72a120000000000000000000000d0168b
-   4b0040b3fe04353d7f81
+   a363616c67647a6c6962646269747308636c73745907b078daedd1639033691886d1
+   ac6ddbb66ddbb66ddbb66ddbb66ddbb68d59d4d66cbe496626e94e5e9c53d57fbb9e
+   f7ba2b158028ec2401000090bae724000052b6a504000000000000b4deb0120004ef
+   5409000000008af087040000000001db400200000000000022f09004000000000000
+   00000094685709000080789c24010000000000000050bcbe240000005a6270090000
+   0000000008c0c01200000074eb2c09a032900404697e090000000000000000000000
+   00000000a8e74b0900000000000000e89171240000000080024d2a0100006db79a04
+   000000000040b0de950042f7a00400000000000000ddb84e02000000ca34af040010
+   8b0f24a078ef4800406fec2501108e372568c6d31264e77409000000e8d60d129098
+   b7240000000000b2b0b604406727480000000010a28525000048d799120081f94402
+   202c1f4b0010b8fd252019934800004098ce91a0b6d3248012cc22010040217e9700
+   00000000006aba4f0200000000000068997d4afbf304e2020055a69080607d280100
+   000034e82b0900000000000000d2b4af040000b4de00120000000000000000c55855
+   0200000032339a0440031e96004230880400ddb85c020000000068ad312488dc1512
+   00408e1e9000e881eb250000000000b23795040000291a55028ad6bf040000000000
+   000090a46d2400000000008026dc2c01746d7509000000a05d369180e0ec26010000
+   0000407a369400000000000000000000004af5b90400005d3a560200000000000000
+   a8369e040010aa032400000000006881032500000000001af3b3040000108b0b2500
+   000000000000000000000032b3b204000089e92ffa172c6344a09dee900000000000
+   20694b490000000000000000000000000000000000000000f0b7ed3bbe3564000000
+   803cbc2a01405046920000000092f7be040059d85c020000a011c34940e8d6940000
+   0088da8e120000599b5e0200ba32bb040000fce719092067074b000010ba47250000
+   0000000000000080a6cc2a010000000000000000000000000000409fb69600000000
+   0000000000000a76970400000000e4ee230900000000000000006a7b4d0202719b04
+   11b84c02008050dd2a01405c269600000000000000000000000000a00943047bd976
+   c601000000a021874b0000000000005080ef2400000000000000000000201a334900
+   0000b95b4402008277980400c46c31090000ea785202c8d905120000d11b59020000
+   0000689137240080c00d2a01404856928096985b02200fa748909ca1240000000000
+   2004fd4a00000074e97809000000000000f8cb641200006d7446dacf9bcfc200404c
+   4e96000000000088d06012fccf94120000000040d83e950000202c8f48000000d090
+   73250008c70f1200d0b83d2500008070ec2d0100000040412e9600000080b8cd16cd
+   a5fd180b0080047c21019466590900006881e32400a0b65b24000028cdbd12000000
+   545b5f02000000000000000000000000000000000000a0c3b7120000000055969300
+   a0795b490000d080b12520274b4bd06a8748d05b2f480065f951020080446d244173
+   66960080062c24010000004076e69200000000000000000000a0587d4b0000000000
+   00358d98e4aba6316c12869180329c17d435771b0400000000000000000000000080
+   f67a49020000000000000080284c2e0100000000000000a9995002c2b6a904000000
+   000000f4e97509000000a86f5b09000080b0fd220100000000000000000000000000
+   00404d7b480000000000000000404f1d210100000094e66d0980387d2f01d0615109
+   0028d2021200e4e0370982f38d04000000000000000000000000000000509c9d25f8
+   d73c1200000000000000000000000064e96c09000000000000000000000000a86f14
+   09000080fa4e940000200f37490000356c1cf47523180800000000000080bac69200
+   0000000000000000000000000000000000000000a872950400908f19250000000000
+   0000a047c6940000000000204c1349407656940000b2b7bb04000000d0d974120000
+   000000000000000040fbcc2001000000000000a5384a02a052d94102000000000000
+   000080c08c2f0104e759092027734a00891a5d82b04d2d010000d0bd752500000000
+   000008d43a12000000000000000000000064ea79090000000000000000000028cf12
+   1234eb2709000000000000a872a40450b8152400000028c35312542a0b4a000000a9
+   ba51020080d27d260100000000401b3c260140932e95000000000000000048d93512
+   00000000000000000000000000000000f08faf25a025869400000000007aefce327e
+   3aa0aeb9594b0288cff01240afbd2c4195432580205d2d01000000000000000000b4
+   c9f212000000000014e34a0900000000000000e8adcd24000000000000803a8e9600
+   000000000000000000c8c2fd120000000000000000000000c1b95d022055434b0000
+   000040008e91000000006230ad0484640b09000068b9172500000000a0c3af120000
+   00346e490980588c2b0100000000007432870464ee1e090000000000000000206ad7
+   4a000094623d0900000000000000000042739104b4c5251200000000908683240000
+   009af29e040000000000000000003df284040000000000000040b6ce9720598f4b40
+   a2f693002018af4800000000f1da4502000000000000000000c8c72a120000000000
+   000000000000d0168b4b0040b3fe04353d7f81
 
 Document History
+
+   -13
+
+   *  added further privacy consideration around issuer tracking using
+      unique URIs
 
    -12
 
