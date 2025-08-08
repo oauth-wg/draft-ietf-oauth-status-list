@@ -3,9 +3,15 @@ import zlib
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 from typing import Dict
 
-from cbor2 import dumps, loads
+import brotli
+from cbor2 import dumps
 
-LEVEL=9
+ALG_ZLIB = "zlib"
+ALG_BROTLI = "brotli"
+
+LEVEL_ZLIB = 9
+LEVEL_BROTLI = 11
+
 
 class StatusList:
     list: bytearray
@@ -13,28 +19,33 @@ class StatusList:
     size: int
     divisor: int
 
-    def __init__(self, size: int, bits: int):
+    def __init__(self, size: int, bits: int, alg: str = ALG_ZLIB):
         self.divisor = 8 // bits
         self.list = bytearray([0] * math.ceil(size / self.divisor))
         self.bits = bits
         self.size = size
+        self.alg = alg
 
     @classmethod
-    def fromEncoded(cls, encoded: str, bits: int = 1):
-        new = cls(0, bits)
+    def fromEncoded(cls, encoded: str, bits: int = 1, alg: str = ALG_ZLIB):
+        new = cls(0, bits, alg)
         new.decode(encoded)
         return new
 
     def encodeAsString(self) -> str:
-        zipped = zlib.compress(self.list, level=LEVEL)
-        return urlsafe_b64encode(zipped).decode().strip("=")
+        compressed = self.encodeAsBytes()
+        return urlsafe_b64encode(compressed).decode().strip("=")
 
     def encodeAsBytes(self) -> bytes:
-        return zlib.compress(self.list, level=LEVEL)
+        if self.alg == ALG_BROTLI:
+            return brotli.compress(self.list, quality=LEVEL_BROTLI)
+        else:
+            return zlib.compress(self.list, level=LEVEL_ZLIB)
 
     def encodeAsJSON(self) -> Dict:
         encoded_list = self.encodeAsString()
         object = {
+            "alg": self.alg,
             "bits": self.bits,
             "lst": encoded_list,
         }
@@ -43,6 +54,7 @@ class StatusList:
     def encodeAsCBOR(self) -> Dict:
         encoded_list = self.encodeAsBytes()
         object = {
+            "alg": self.alg,
             "bits": self.bits,
             "lst": encoded_list,
         }
@@ -53,8 +65,11 @@ class StatusList:
         return dumps(object)
 
     def decode(self, input: str):
-        zipped = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
-        self.list = bytearray(zlib.decompress(zipped))
+        compressed = urlsafe_b64decode(f"{input}{'=' * divmod(len(input),4)[1]}")
+        if self.alg == ALG_BROTLI:
+            self.list = bytearray(zlib.decompress(compressed))
+        else:
+            self.list = bytearray(zlib.decompress(compressed))
         self.size = len(self.list) * self.divisor
 
     def set(self, pos: int, value: int):

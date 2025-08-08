@@ -55,9 +55,10 @@ class StatusListToken:
         status_list = claims["status_list"]
         lst = status_list["lst"]
         bits = status_list["bits"]
+        sl_alg = status_list["alg"]
         issuer = claims["iss"]
         subject = claims["sub"]
-        list = StatusList.fromEncoded(encoded=lst, bits=bits)
+        list = StatusList.fromEncoded(encoded=lst, bits=bits, alg=sl_alg)
 
         return cls(
             issuer=issuer,
