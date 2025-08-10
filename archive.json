@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-07T00:21:54.542487+00:00",
+  "timestamp": "2025-08-10T00:23:28.363477+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5946,7 +5946,7 @@
       "labels": [],
       "body": "Have you considered switching to [Brotli (RFC 7932)](https://datatracker.ietf.org/doc/html/rfc7932) from DEFLATE & Zlib?\n\nOr, alternatively... could we allow to specify a compression mechanism?\n\nMy tests with 1M Referenced Tokens and a revocation rate of 0.01% produced compressed bit arrays that were up to 10 times smaller (it compresses sparse data extremely well).\n\nIt\u2019s also going to perform better on devices with limited resources because of its design decisions.",
       "createdAt": "2025-07-21T22:47:25Z",
-      "updatedAt": "2025-08-05T21:19:05Z",
+      "updatedAt": "2025-08-08T14:19:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -5969,6 +5969,27 @@
           "body": "For what it's worth...\n\n@paulbastian, the document you referred to was written by the creators of Brotli, and they didn't try to compress the same \"pattern\" for data we are going to deal with (a long string of zeroes, with almost randomly distributed 1s, or something along this line).\n\nIn my very quick and dirty testing, I asked ChatGPT to write a GoLang application that \"generates a sequence of `totalCount` digits, where `onesCount` of them are randomly placed 1s and the rest are 0s\". It did it well. Then, I used the `brotli` and `zlib-flate` command line utilities to compress the output (max compression in both cases).\n\nFor `onesCount` equals 100 and `totalCount` equals 1000000, Brotli shows 2x better compression ratio (641 vs 1265 bytes).\nFor `onesCount` equals 1000 and `totalCount` equals 1000000, Brotli and Zlib show similar (comparable) results ~3 KBs.\n\nInterestingly enough, Brotli compresses small values in `onesCount` to almost nothing and I tend to think this happens because it uses a static dictionary.",
           "createdAt": "2025-08-05T21:19:05Z",
           "updatedAt": "2025-08-05T21:19:05Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "That sounds like it might also be related to header size?\n\nI ran some benchmarks modifying our python implementation generating the test vectors. Percent numbers are revocation rates:\n\nzlib\n```\n+------------+----------+-----------+-----------+-----------+-----------+-----------+------------+-----------+------------+----------+\n|    size    |   0.01%  |    0.1%   |    1.0%   |    2.0%   |    5.0%   |   10.0%   |    25.0%   |   50.0%   |    75.0%   |   100%   |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+------------+-----------+------------+----------+\n|   100000   |  87.0 B  |  264.0 B  |   1.4 KB  |   2.4 KB  |   4.6 KB  |   6.9 KB  |   10.2 KB  |  12.2 KB  |   10.2 KB  |  35.0 B  |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+------------+-----------+------------+----------+\n|   1000000  |  451.0 B |   2.2 KB  |  13.6 KB  |  22.9 KB  |  44.1 KB  |  67.5 KB  |  102.3 KB  |  122.1 KB |  102.3 KB  |  144.0 B |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+------------+-----------+------------+----------+\n|  10000000  |  3.9 KB  |  21.1 KB  |  136.1 KB |  229.6 KB |  436.4 KB |  673.7 KB |  1023.1 KB |   1.2 MB  |  1023.2 KB |  1.2 KB  |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+------------+-----------+------------+----------+\n|  100000000 |  38.4 KB |  210.8 KB |   1.3 MB  |   2.2 MB  |   4.3 MB  |   6.6 MB  |   10.0 MB  |  11.9 MB  |   10.0 MB  |  11.9 KB |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+------------+-----------+------------+----------+\n```\nbrotli\n```\n+------------+----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+---------+\n|    size    |   0.01%  |    0.1%   |    1.0%   |    2.0%   |    5.0%   |   10.0%   |   25.0%   |   50.0%   |   75.0%   |   100%  |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+---------+\n|   100000   |  79.0 B  |  235.0 B  |   1.3 KB  |   2.3 KB  |   3.7 KB  |   5.8 KB  |  10.0 KB  |  12.2 KB  |  10.0 KB  |  13.0 B |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+---------+\n|   1000000  |  443.0 B |   2.0 KB  |  12.7 KB  |  21.4 KB  |  36.6 KB  |  58.0 KB  |  99.6 KB  |  122.1 KB |  99.5 KB  |  14.0 B |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+---------+\n|  10000000  |  3.9 KB  |  19.3 KB  |  121.2 KB |  211.2 KB |  365.2 KB |  581.6 KB |  995.5 KB |   1.2 MB  |  995.8 KB |  14.0 B |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+---------+\n|  100000000 |  38.5 KB |  192.7 KB |   1.2 MB  |   2.0 MB  |   3.6 MB  |   5.7 MB  |   9.7 MB  |  11.9 MB  |   9.7 MB  |  27.0 B |\n+------------+----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+-----------+---------+```",
+          "createdAt": "2025-08-08T09:34:15Z",
+          "updatedAt": "2025-08-08T09:34:15Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@c2bo this is with zlib-9 anbd brotli-11?\n\nIt looks to me that the results differ less than expected, for the average/expected revocation rates of 1.0% and 2.0%, the difference is less than 10%. This would not justify the added complexity in my view.",
+          "createdAt": "2025-08-08T13:50:30Z",
+          "updatedAt": "2025-08-08T13:50:30Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Yes, that is with levels 9 and 11 respectively.\nI would agree - the differences do not look big enough to justify adding the complexity and interop challenges, especially given that the draft already went through WGLC.",
+          "createdAt": "2025-08-08T14:19:01Z",
+          "updatedAt": "2025-08-08T14:19:01Z"
         }
       ]
     },
@@ -5984,7 +6005,7 @@
       "labels": [],
       "body": "I wonder if the specification should include recommendations to safeguard consumers (Holders and Verifiers) from [excessive resource consumption](https://en.wikipedia.org/wiki/Zip_bomb) by accidental, unintentional, or maybe even malicious actions by Issuers?\n\nhttps://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list#section-13.4",
       "createdAt": "2025-07-23T21:25:05Z",
-      "updatedAt": "2025-07-25T12:45:56Z",
+      "updatedAt": "2025-08-08T13:52:38Z",
       "closedAt": null,
       "comments": [
         {
@@ -5993,6 +6014,13 @@
           "body": "We had several rounds of discussions about recommendations regarding size (also minimum size), but in the end the consensus was to not add any for the time being.",
           "createdAt": "2025-07-25T12:45:56Z",
           "updatedAt": "2025-07-25T12:45:56Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I also agree, these numbers really differ on the use case and may not age very well over time.",
+          "createdAt": "2025-08-08T13:52:38Z",
+          "updatedAt": "2025-08-08T13:52:38Z"
         }
       ]
     }
