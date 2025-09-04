@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-14T00:20:21.052718+00:00",
+  "timestamp": "2025-09-04T00:17:36.401036+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -5939,7 +5939,7 @@
       "id": "I_kwDOJZ2aqs7ButVp",
       "title": "Brotli vs Zlib",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/300",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "adeinega",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -5948,8 +5948,8 @@
       ],
       "body": "Have you considered switching to [Brotli (RFC 7932)](https://datatracker.ietf.org/doc/html/rfc7932) from DEFLATE & Zlib?\n\nOr, alternatively... could we allow to specify a compression mechanism?\n\nMy tests with 1M Referenced Tokens and a revocation rate of 0.01% produced compressed bit arrays that were up to 10 times smaller (it compresses sparse data extremely well).\n\nIt\u2019s also going to perform better on devices with limited resources because of its design decisions.",
       "createdAt": "2025-07-21T22:47:25Z",
-      "updatedAt": "2025-08-12T06:09:24Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-02T06:09:42Z",
+      "closedAt": "2025-09-02T06:08:20Z",
       "comments": [
         {
           "author": "c2bo",
@@ -5992,6 +5992,13 @@
           "body": "Yes, that is with levels 9 and 11 respectively.\nI would agree - the differences do not look big enough to justify adding the complexity and interop challenges, especially given that the draft already went through WGLC.",
           "createdAt": "2025-08-08T14:19:01Z",
           "updatedAt": "2025-08-08T14:19:01Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Agreed as editors that the improved compression does not justify the added complexity and potential interop issues.",
+          "createdAt": "2025-09-02T06:09:42Z",
+          "updatedAt": "2025-09-02T06:09:42Z"
         }
       ]
     },
@@ -6000,7 +6007,7 @@
       "id": "I_kwDOJZ2aqs7CLV0A",
       "title": "the maximum size of a Status List",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/301",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "adeinega",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -6009,8 +6016,8 @@
       ],
       "body": "I wonder if the specification should include recommendations to safeguard consumers (Holders and Verifiers) from [excessive resource consumption](https://en.wikipedia.org/wiki/Zip_bomb) by accidental, unintentional, or maybe even malicious actions by Issuers?\n\nhttps://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list#section-13.4",
       "createdAt": "2025-07-23T21:25:05Z",
-      "updatedAt": "2025-08-12T06:09:39Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-02T06:09:16Z",
+      "closedAt": "2025-09-02T06:09:16Z",
       "comments": [
         {
           "author": "c2bo",
@@ -6025,6 +6032,13 @@
           "body": "I also agree, these numbers really differ on the use case and may not age very well over time.",
           "createdAt": "2025-08-08T13:52:38Z",
           "updatedAt": "2025-08-08T13:52:38Z"
+        },
+        {
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We've discussed as editors and for the above reasons shared by @paulbastian and @c2bo we don't believe adding a recommendation would be worthwhile. Closing issue.",
+          "createdAt": "2025-09-02T06:09:16Z",
+          "updatedAt": "2025-09-02T06:09:16Z"
         }
       ]
     }
