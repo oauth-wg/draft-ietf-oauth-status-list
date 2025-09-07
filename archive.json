@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-04T00:17:36.401036+00:00",
+  "timestamp": "2025-09-07T00:20:08.582944+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6039,6 +6039,37 @@
           "body": "We've discussed as editors and for the above reasons shared by @paulbastian and @c2bo we don't believe adding a recommendation would be worthwhile. Closing issue.",
           "createdAt": "2025-09-02T06:09:16Z",
           "updatedAt": "2025-09-02T06:09:16Z"
+        }
+      ]
+    },
+    {
+      "number": 302,
+      "id": "I_kwDOJZ2aqs7J5x1x",
+      "title": "Clarification : Status List Token (in CWT) to the HTTP Response",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/302",
+      "state": "OPEN",
+      "author": "babisRoutis",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I was not able to locate a reference to the specification, with regards to how the a Status List Token in CWT is being included to a HTTP Response.\n\nIs it in hex?",
+      "createdAt": "2025-09-05T12:20:11Z",
+      "updatedAt": "2025-09-05T13:03:00Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hi @babisRoutis \n\nI think the intention is that the HTTP Response contains solely the CWT in the HTTP body. As the body can transfer binary data and CWT is a binary format, there are no further encoding considerations. But I guess we could be a little clearer (especially that the HTTP body is to be used) on this and provide an example.",
+          "createdAt": "2025-09-05T12:39:47Z",
+          "updatedAt": "2025-09-05T12:39:47Z"
+        },
+        {
+          "author": "babisRoutis",
+          "authorAssociation": "NONE",
+          "body": "Dear @paulbastian \n\nIndeed, there is no need for an additional encoding. \nA clarification would be an awesome addition, because there are some readers that get the impression that this should be in hex (mainly driven from the CWT examples of the spec).\n\nMany thanks for the quick clarification",
+          "createdAt": "2025-09-05T13:03:00Z",
+          "updatedAt": "2025-09-05T13:03:00Z"
         }
       ]
     }
