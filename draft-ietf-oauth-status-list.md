@@ -787,6 +787,8 @@ The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}}.
 
 If caching-related HTTP headers are present in the HTTP response, Relying Parties MUST prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.
 
+Note that while the examples for Status List Tokens in CWT format in this document are provided in hex encoding, this does not mean that hex encoding is expected for HTTP messages. The expected encoding in an HTTP response containing a Status List Token in CWT format is binary encoding as defined in section 9.2.1 of {{RFC8392}}. This means that the body of an HTTP response contains the raw CBOR bytes.
+
 ## Validation Rules
 
 Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) MUST precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.
@@ -1908,6 +1910,7 @@ CBOR encoding:
 
 -13
 
+* add a note that cwt is encoded in raw/binary.
 * added further privacy consideration around issuer tracking using unique URIs
 
 -12
