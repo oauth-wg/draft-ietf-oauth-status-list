@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-16T00:17:54.776494+00:00",
+  "timestamp": "2025-09-18T00:18:02.789412+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -20164,13 +20164,13 @@
       "labels": [],
       "body": "Closes #302 \r\n\r\nWording feels somewhat rough, but I think this is the best place to add that note. Any ideas to improve wording?",
       "createdAt": "2025-09-15T16:30:59Z",
-      "updatedAt": "2025-09-15T19:19:36Z",
+      "updatedAt": "2025-09-17T14:50:01Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "410e1427f5f488f63abd64961efceaa6911512e0",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "302-cwt-encoding",
-      "headRefOid": "aa41579040570520fa9e6be191587981c2cbb5a3",
+      "headRefOid": "a6e09f61c3e2d053f28de62b681629564fdc9d52",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -20182,6 +20182,34 @@
           "body": "cc @babisRoutis - couldn't request your review for some reason?",
           "createdAt": "2025-09-15T17:22:45Z",
           "updatedAt": "2025-09-15T17:22:45Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We should also clarify, that the CWT/JWT goes into the HTTP response body?",
+          "createdAt": "2025-09-17T09:07:12Z",
+          "updatedAt": "2025-09-17T09:07:12Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> We should also clarify, that the CWT/JWT goes into the HTTP response body?\r\n\r\nThat is why i added this sentence - I guess we could add the JWT one?\r\n\r\n> This means that the body of an HTTP response contains the raw CBOR bytes.",
+          "createdAt": "2025-09-17T09:44:16Z",
+          "updatedAt": "2025-09-17T09:44:16Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> > We should also clarify, that the CWT/JWT goes into the HTTP response body?\n> \n> That is why i added this sentence - I guess we could add the JWT one?\n> \n> > This means that the body of an HTTP response contains the raw CBOR bytes.\n\nYes, clarify further up for both JWT and CWT and have the reference to CWT encoding speed there as well. Let the now only talk about the hex encoding of examples underneath.",
+          "createdAt": "2025-09-17T10:05:20Z",
+          "updatedAt": "2025-09-17T10:05:20Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Moved the whole note up - seemed more logical if we already state something about the body of the http response here.",
+          "createdAt": "2025-09-17T14:49:53Z",
+          "updatedAt": "2025-09-17T14:49:53Z"
         }
       ],
       "reviews": [
@@ -20197,6 +20225,46 @@
           "createdAt": "2025-09-15T19:19:36Z",
           "updatedAt": "2025-09-15T19:19:36Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7AiFmJ",
+          "commit": {
+            "abbreviatedOid": "aa41579"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-16T14:00:09Z",
+          "updatedAt": "2025-09-16T14:00:09Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Does it make more sense to add this to the paragraph of line 784?",
+              "createdAt": "2025-09-16T14:00:09Z",
+              "updatedAt": "2025-09-16T14:00:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7AsSMW",
+          "commit": {
+            "abbreviatedOid": "aa41579"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-17T06:19:58Z",
+          "updatedAt": "2025-09-17T06:19:58Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "I was thinking about that initially as well since it directly fits to the media type, but it kinda made sense to me to not put it in between the normative statements and instead as a note  afterwards.",
+              "createdAt": "2025-09-17T06:19:58Z",
+              "updatedAt": "2025-09-17T06:19:58Z"
+            }
+          ]
         }
       ]
     }
