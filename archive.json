@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-02T00:17:55.271773+00:00",
+  "timestamp": "2025-10-09T00:18:08.261951+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6072,6 +6072,22 @@
           "updatedAt": "2025-09-05T13:03:00Z"
         }
       ]
+    },
+    {
+      "number": 304,
+      "id": "I_kwDOJZ2aqs7QH63u",
+      "title": "Feedback from AD review",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/304",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "> Introduction:  JOSE Tokens has a reference to the IANA registry?  Is there something other than JWT?  Why not RFC 7515 or one of the other JWT references?\n\n> Section 1.2: no reply necessary, I'm a PKIX Person, these are observations: OCSP stapling:  This is only 'less up-to-date' if the server doesn't pull OCSP responses 'often enough'.  The larger issue is that the OCSP Staple has to be requested by the client (or RP in your language).    Web PKI is going the route of short lived certificates as none of the other mechanisms have scaled.  It will be interesting to see if the token status list concept works better.  \n\n> Section 5.1 and 5.2, exp, ttl:  In PKIX, this time is not technically an expiry, but an expectation of the next time to issue.  It is, however, treated like an expiry, which means that systems lock up and refuse connections if they don't have fresher CRLs.  Is that what you want here?  The ttl option, which might be less prone to misunderstanding, if it is listed as a time period vice a point in time.  Also, a ref to the diagram at the end of 13.7 might help (it certainly helped me understand how you intended these two values to work together).\n\n> Section 5.1 and 5.2, #2:  Signature or a MAC algorithm?  Keyed MAC?  MACs can (generally) be recomputed, which you don't want.\n\n> Section 8.1, para 6:  Seems like it could be dangerous. Please add something to Sec Cons to address the potential issues w/ redirects (why is an infinite redirect bad).\n\n> Section 8.3:  numbered lists within numbered lists, there has to be a better way, maybe numbered lists with alpha sub lists?\n\n> Section 11:  Add a mention of how expired or out of time TTL settings can be used as a denial of service mechanism.  There are a bunch of ways this can happen, for example, the entity that generates the token status list is down, or promulgation of the token status list is blocked.  Is there a mitigation for user/integrators of this type of service?\n\n> Section 11/13, compression vulnerabilities: I don't want to hold up this draft, but I need to consult, as I haven't dealt with compression issues in a million years (or it seems that way).  If there are known issues with zlib and DEFLATE, we need to mention the issue in Section 11 and the mitigation in Section 13 (or some other reasonable combination).  \n\n> Section 12.3:  KYC?\n\n> Section 13.7:  Is there guidance on how an issuer should choose both exp and ttl?  If the ttl/exp are too long, a RP doesn't know to check for a refreshed token status list?  If the ttl/exp are too short then there might be a DOS when the status token list is not refreshed in time.  \n\n> Section 14.7:  (no change required to the draft) If this request for registration has already been made, please send me the link to the mail archive.  If this request has not yet been made, please do that ASAP in accordance with RFC 6838 (and supply me the link to the mail archive).  These requests often take some time, and require some nudging.\n\n> Normative Reference:  Living standards are not classically acceptable as normative standards in IETF specifications. Can you get either a permanent anchor or a snapshot for the (https://whatwg.org/working-mode#anchors) [CORS] reference?  (for an example see draft-ietf-oauth-browser-based-apps)\n\n> Normative Reference:  RFC 5226 has been obsoleted by RFC 8126, should this be updated?\n",
+      "createdAt": "2025-10-07T14:27:06Z",
+      "updatedAt": "2025-10-07T14:27:06Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
