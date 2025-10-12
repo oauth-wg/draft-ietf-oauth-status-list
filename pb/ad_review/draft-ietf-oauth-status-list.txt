@@ -620,13 +620,14 @@ Table of Contents
    *  exp: OPTIONAL.  As generally defined in [RFC7519].  The exp
       (expiration time) claim, if present, MUST specify the time at
       which the Status List Token is considered expired by the Status
-      Issuer.  Consider guidance from Section 13.7.
+      Issuer.  Consider the guidance provided in Section 13.7.
 
    *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST
       specify the maximum amount of time, in seconds, that the Status
       List Token can be cached by a consumer before a fresh copy SHOULD
       be retrieved.  The value of the claim MUST be a positive number
-      encoded in JSON as a number.  Consider guidance from Section 13.7.
+      encoded in JSON as a number.  Consider the guidance provided in
+      Section 13.7.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the structure defined in
@@ -691,14 +692,14 @@ Table of Contents
    *  4 (expiration time): OPTIONAL.  As generally defined in [RFC8392].
       The expiration time claim, if present, MUST specify the time at
       which the Status List Token is considered expired by its issuer.
-      Consider guidance from Section 13.7.
+      Consider the guidance provided in Section 13.7.
 
    *  65534 (time to live): OPTIONAL.  Unsigned integer (Major Type 0).
       The time to live claim, if present, MUST specify the maximum
       amount of time, in seconds, that the Status List Token can be
       cached by a consumer before a fresh copy SHOULD be retrieved.  The
-      value of the claim MUST be a positive number.  Consider guidance
-      from Section 13.7.
+      value of the claim MUST be a positive number.  Consider the
+      guidance provided in Section 13.7.
 
    *  65533 (status list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the structure defined in
@@ -724,9 +725,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840181e910ca8d8859aeff217
-   ee5f72c450dac14ee5982f2702b86ddaf2050ddf5686569e15091960c63e0a4aeafa
-   cab54ada2400a73ddf06b4b73c4735a2e79ed9
+   646269747301636c73744a78dadbb918000217015d58409c9d076179e2ea79803eb2
+   ab13ebabe9ab1c242197b59e38da79beb4d2ad88eff9faa429cd50baabe90b988dc4
+   ecf6200917f14869cc6c1d6b32cf7378485f52
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -749,12 +750,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      181e910ca8d8859aeff217ee  #       "\x18\x1e\x91\x0c¨Ø\x85\x9aïò\x17î"
-      5f72c450dac14ee5982f2702  #       "_rÄPÚÁNå\x98/'\x02"
-      b86ddaf2050ddf5686569e15  #       "¸mÚò\x05\x0dßV\x86V\x9e\x15"
-      091960c63e0a4aeafacab54a  #       "\x09\x19`Æ>\x0aJêúÊµJ"
-      da2400a73ddf06b4b73c4735  #       "Ú$\x00§=ß\x06´·<G5"
-      a2e79ed9                  #       "¢ç\x9eÙ"
+      9c9d076179e2ea79803eb2ab  #       "\x9c\x9d\x07ayâêy\x80>²«"
+      13ebabe9ab1c242197b59e38  #       "\x13ë«é«\x1c$!\x97µ\x9e8"
+      da79beb4d2ad88eff9faa429  #       "Úy¾´Ò\xad\x88ïùú¤)"
+      cd50baabe90b988dc4ecf620  #       "ÍPº«é\x0b\x98\x8dÄìö "
+      0917f14869cc6c1d6b32cf73  #       "\x09\x17ñHiÌl\x1dk2Ïs"
+      78485f52                  #       "xH_R"
 
 6.  Referenced Token
 
@@ -897,37 +898,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840310418884709cd4c590851804917ecccabf769
-   33b6da105d1fb95add0a51f4fa760fd236719d5eef79b6a097c520d322d37a36c7b1
-   7529063568e73215a7ce29
+   7374617475736c697374732f315840035872dedbae7043380764170cf772e9b24faf
+   10dbbdbcedb0680c0b8954988d5b6329a39c667a275ac143f912dc40a5a6bbed8a92
+   30f64044eb252681a2a574
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      310418884709cd4c59085180  #       "1\x04\x18\x88G\x09ÍLY\x08Q\x80"
-      4917ecccabf76933b6da105d  #       "I\x17ìÌ«÷i3¶Ú\x10]"
-      1fb95add0a51f4fa760fd236  #       "\x1f¹ZÝ\x0aQôúv\x0fÒ6"
-      719d5eef79b6a097c520d322  #       "q\x9d^ïy¶\xa0\x97Å Ó""
-      d37a36c7b17529063568e732  #       "Óz6Ç±u)\x065hç2"
-      15a7ce29                  #       "\x15§Î)"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         035872dedbae704338076417  #       "\x03XrÞÛ®pC8\x07d\x17"
+         0cf772e9b24faf10dbbdbced  #       "\x0c÷ré²O¯\x10Û½¼í"
+         b0680c0b8954988d5b6329a3  #       "°h\x0c\x0b\x89T\x98\x8d[c)£"
+         9c667a275ac143f912dc40a5  #       "\x9cfz'ZÁCù\x12Ü@¥"
+         a6bbed8a9230f64044eb2526  #       "¦»í\x8a\x920ö@Dë%&"
+         81a2a574                  #       "\x81¢¥t"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1165,8 +1166,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Gs52bPGntf3MTgWZRwxzL2FvbNnQSFuwA-ssdzgtZiq0cpeL0EOT
-   q-od4zVxGa56OPMd35EKDWunSeualJ38Vw
+   nR0bCI6NDMyMDB9.b9PvPmMa5M4EQirZjpKlTjwZNMSwNAzjJLE_hrFKhJIayU1l4K2p
+   36wdctuvfDi8c7VjnA-roMhd0ubV3thsMw
 
 8.2.  Status List Response
 
@@ -1314,8 +1315,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Gs52bPGntf3MTgWZRwxzL2FvbNnQSFuwA-ssdzgtZiq0cpeL0EOT
-   q-od4zVxGa56OPMd35EKDWunSeualJ38Vw
+   nR0bCI6NDMyMDB9.b9PvPmMa5M4EQirZjpKlTjwZNMSwNAzjJLE_hrFKhJIayU1l4K2p
+   36wdctuvfDi8c7VjnA-roMhd0ubV3thsMw
 
 9.  Status List Aggregation
 
