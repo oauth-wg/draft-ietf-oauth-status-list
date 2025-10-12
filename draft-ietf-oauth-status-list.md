@@ -85,7 +85,7 @@ normative:
     author:
       org: "WHATWG"
     title: "Fetch Living Standard"
-    target: "https://fetch.spec.whatwg.org/#http-cors-protocol"
+    target: "https://fetch.spec.whatwg.org/commit-snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-cors-protocol"
 
 informative:
   RFC6749: RFC6749
@@ -1912,6 +1912,7 @@ CBOR encoding:
 
 -13
 
+* fix CORS spec to specific version
 * explain KYC
 * link implementation guidance to exp and ttl in Status List Token definition
 * reference RFC7515 instead of IANA:JOSE
