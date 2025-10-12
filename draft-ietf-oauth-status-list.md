@@ -796,18 +796,20 @@ Upon receiving a Referenced Token, a Relying Party MUST first perform the valida
 If this validation is not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
 
 1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jose) for JOSE-based Referenced Tokens and [](#referenced-token-cose) for COSE-based Referenced Tokens. Other formats of Referenced Tokens may define other encoding of the URI and index.
-2. Resolve the Status List Token from the provided URI
-3. Validate the Status List Token:
-    a. Validate the Status List Token by following the rules defined in section 7.2 of {{RFC7519}} for JWTs and section 7.2 of {{RFC8392}} for CWTs. This step might require the resolution of a public key as described in [](#key-management).
-    b. Check for the existence of the required claims as defined in [](#status-list-token-jwt) and [](#status-list-token-cwt) depending on the token type
-4. All existing claims in the Status List Token MUST be checked according to the rules in [](#status-list-token-jwt) and [](#status-list-token-cwt)
-    a. The subject claim (`sub` or `2`) of the Status List Token MUST be equal to the `uri` claim in the `status_list` object of the Referenced Token
-    b. If the Relying Party has custom policies regarding the freshness of the Status List Token, it SHOULD check the issued at claim (`iat` or `6`)
-    c. If the expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
-    d. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
-5. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
-6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bounds of the Status List
-7. Check the status value as described in [](#status-types)
+1. Resolve the Status List Token from the provided URI
+1. Validate the Status List Token:
+    1. Validate the Status List Token by following the rules defined in section 7.2 of {{RFC7519}} for JWTs and section 7.2 of {{RFC8392}} for CWTs. This step might require the resolution of a public key as described in [](#key-management).
+    1. Check for the existence of the required claims as defined in [](#status-list-token-jwt) and [](#status-list-token-cwt) depending on the token type
+    {: type="a"}
+1. All existing claims in the Status List Token MUST be checked according to the rules in [](#status-list-token-jwt) and [](#status-list-token-cwt)
+    1. The subject claim (`sub` or `2`) of the Status List Token MUST be equal to the `uri` claim in the `status_list` object of the Referenced Token
+    1. If the Relying Party has custom policies regarding the freshness of the Status List Token, it SHOULD check the issued at claim (`iat` or `6`)
+    1. If the expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
+    1. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
+    {: type="a"}
+1. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
+1. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bounds of the Status List
+1. Check the status value as described in [](#status-types)
 
 If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
 
