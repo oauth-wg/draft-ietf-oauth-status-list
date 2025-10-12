@@ -39,7 +39,7 @@ normative:
   RFC1951: RFC1951
   RFC2046: RFC2046
   RFC3986: RFC3986
-  RFC5226: RFC5226
+  RFC8126: RFC8126
   RFC6838: RFC6838
   RFC7515: RFC7515
   RFC7519: RFC7519
@@ -1201,7 +1201,7 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
-JWT Status Mechanisms are registered by Specification Required {{RFC5226}} after a three-week
+JWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.
@@ -1280,7 +1280,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
-CWT Status Mechanisms are registered by Specification Required {{RFC5226}} after a three-week
+CWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
@@ -1321,7 +1321,7 @@ Specification Document(s):
 
 This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human readable label, the bit representation and a common description for it.
 
-Status Types are registered by Specification Required {{RFC5226}} after a two-week
+Status Types are registered by Specification Required {{RFC8126}} after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
