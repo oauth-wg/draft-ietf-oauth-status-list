@@ -985,6 +985,12 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
 
 Clients that follow 3xx (Redirection) class of status codes should be aware of possible dangers of redirects, such as infinite redirection loops since they could be used as an attack vector for possible denial of service attacks on clients. The general guidance for redirects given in Section 15.4 of {{RFC9110}} should be applied.
 
+## Exiration and Caching {#security-ttl}
+
+Expiration and Caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients should check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Provider could accidentally or maliciously use this mechanism to effectively DDoS the provided Status List Token URI.
+
+Concrete values for both claims heavily depend on the use-case requirements and clients should be configured with lower/upper bounds for these values that fit their respective use-cases.
+
 # Privacy Considerations {#privacy-considerations}
 
 ## Observability of Issuers {#privacy-issuer}
@@ -1130,7 +1136,7 @@ When fetching a Status List Token, Relying Parties must carefully evaluate how l
 - After initial fetching, the Relying Party checks for updates at time of `iat` + `ttl`. This method ensures the most up-to-date information for critical use cases. The Relying Party should account a minimal offset due to the signing and distribution process of the Status Issuer.
 - If no `ttl` is given, then Relying Party SHOULD check for updates latest after time of `exp`.
 
-Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information.
+Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information. Clients should make sure that `exp` and `ttl` are within reasonable bounds before creating requests to get a fresh Status List Token (see [](#security-ttl) for more details).
 
 The following diagram illustrates the relationship between these claims and how they are designed to influence caching:
 
@@ -1916,6 +1922,7 @@ CBOR encoding:
 
 -13
 
+* Add short security consideraiton on redirects and ttl
 * fix CORS spec to specific version
 * explain KYC
 * link implementation guidance to exp and ttl in Status List Token definition
