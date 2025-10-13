@@ -1136,7 +1136,7 @@ When fetching a Status List Token, Relying Parties must carefully evaluate how l
 - After initial fetching, the Relying Party checks for updates at time of `iat` + `ttl`. This method ensures the most up-to-date information for critical use cases. The Relying Party should account a minimal offset due to the signing and distribution process of the Status Issuer.
 - If no `ttl` is given, then Relying Party SHOULD check for updates latest after time of `exp`.
 
-Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information. Clients should make sure that `exp` and `ttl` are within reasonable bounds before creating requests to get a fresh Status List Token (see [](#security-ttl) for more details).
+Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information. Clients should ensure that `exp` and `ttl` are within reasonable bounds before creating requests to get a fresh Status List Token (see [](#security-ttl) for more details).
 
 The following diagram illustrates the relationship between these claims and how they are designed to influence caching:
 
