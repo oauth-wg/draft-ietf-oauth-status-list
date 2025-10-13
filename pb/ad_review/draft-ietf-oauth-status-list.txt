@@ -109,6 +109,7 @@ Table of Contents
      11.2.  Security Guidance for JWT and CWT
      11.3.  Key Resolution and Trust Management
      11.4.  Redirection 3xx
+     11.5.  Exiration and Caching
    12. Privacy Considerations
      12.1.  Observability of Issuers
      12.2.  Issuer Tracking of Reference Tokens
@@ -726,9 +727,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840d64513a79d91af19526ebb
-   5c43f7c5e5c69d9d82ab58e0f41aa43d3dc73b6384276fe6c9363cb2cab43a3c0576
-   72e16d9b10b2dd7e3d6f24fcd5eaf1ab4c501d
+   646269747301636c73744a78dadbb918000217015d5840bc2b7807be053353915e67
+   36ac354a9c47f85df04f516210233ce8cb9b0a09b67f1a84cbb1071c56f449eb2b82
+   65901444917a145157ed78f5782f0bc941c113
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -751,12 +752,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      d64513a79d91af19526ebb5c  #       "ÖE\x13§\x9d\x91¯\x19Rn»\"
-      43f7c5e5c69d9d82ab58e0f4  #       "C÷ÅåÆ\x9d\x9d\x82«Xàô"
-      1aa43d3dc73b6384276fe6c9  #       "\x1a¤==Ç;c\x84'oæÉ"
-      363cb2cab43a3c057672e16d  #       "6<²Ê´:<\x05vrám"
-      9b10b2dd7e3d6f24fcd5eaf1  #       "\x9b\x10²Ý~=o$üÕêñ"
-      ab4c501d                  #       "«LP\x1d"
+      bc2b7807be053353915e6736  #       "¼+x\x07¾\x053S\x91^g6"
+      ac354a9c47f85df04f516210  #       "¬5J\x9cGø]ðOQb\x10"
+      233ce8cb9b0a09b67f1a84cb  #       "#<èË\x9b\x0a\x09¶\x7f\x1a\x84Ë"
+      b1071c56f449eb2b82659014  #       "±\x07\x1cVôIë+\x82e\x90\x14"
+      44917a145157ed78f5782f0b  #       "D\x91z\x14QWíxõx/\x0b"
+      c941c113                  #       "ÉAÁ\x13"
 
 6.  Referenced Token
 
@@ -899,37 +900,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584081752668b906ff6d21eeb0a7f1aa615e3dc4f5
-   c216307047a8ed138b6e8ae8f591878d2a736b594f4f9bfa77375ae48eab5a22a24a
-   814f630c79aee662ed66a9
+   7374617475736c697374732f315840e7144f040f79b05bdf6fd69930847f45f85003
+   f585ed308ada5ce39d0dcf5dcc296d8bc116d91fbe9d60003f41d733787d51d24c3d
+   dfe47b011ab37050fdb2ac
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      81752668b906ff6d21eeb0a7  #       "\x81u&h¹\x06ÿm!î°§"
-      f1aa615e3dc4f5c216307047  #       "ñªa^=ÄõÂ\x160pG"
-      a8ed138b6e8ae8f591878d2a  #       "¨í\x13\x8bn\x8aèõ\x91\x87\x8d*"
-      736b594f4f9bfa77375ae48e  #       "skYOO\x9búw7Zä\x8e"
-      ab5a22a24a814f630c79aee6  #       "«Z"¢J\x81Oc\x0cy®æ"
-      62ed66a9                  #       "bíf©"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         e7144f040f79b05bdf6fd699  #       "ç\x14O\x04\x0fy°[ßoÖ\x99"
+         30847f45f85003f585ed308a  #       "0\x84\x7fEøP\x03õ\x85í0\x8a"
+         da5ce39d0dcf5dcc296d8bc1  #       "Ú\ã\x9d\x0dÏ]Ì)m\x8bÁ"
+         16d91fbe9d60003f41d73378  #       "\x16Ù\x1f¾\x9d`\x00?A×3x"
+         7d51d24c3ddfe47b011ab370  #       "}QÒL=ßä{\x01\x1a³p"
+         50fdb2ac                  #       "Pý²¬"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1168,8 +1169,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.rB0qbFRo0StYLGR-On9ecCHilVxM44l_1dALHqKopjdWKK2VV6Ai
-   wjoNDP5O74h2S_fLgQSHmhsnR-tKj0YzxA
+   nR0bCI6NDMyMDB9.7lAzh8dMC93ll8MimG7qvvrg84sWOvHjWBUGUyNoaxqnhlyHqxCq
+   xkFcLDHkNjCJglAYUwlfo7mhEvnyv2YS0Q
 
 8.2.  Status List Response
 
@@ -1317,8 +1318,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.rB0qbFRo0StYLGR-On9ecCHilVxM44l_1dALHqKopjdWKK2VV6Ai
-   wjoNDP5O74h2S_fLgQSHmhsnR-tKj0YzxA
+   nR0bCI6NDMyMDB9.7lAzh8dMC93ll8MimG7qvvrg84sWOvHjWBUGUyNoaxqnhlyHqxCq
+   xkFcLDHkNjCJglAYUwlfo7mhEvnyv2YS0Q
 
 9.  Status List Aggregation
 
@@ -1537,6 +1538,20 @@ d2                              # tag(18)
    loops since they could be used as an attack vector for possible
    denial of service attacks on clients.  The general guidance for
    redirects given in Section 15.4 of [RFC9110] should be applied.
+
+11.5.  Exiration and Caching
+
+   Expiration and Caching information is conveyed via the exp and ttl
+   claims as explained in Section 13.7.  Clients should check that both
+   values are within reasonable ranges before requesting new Status List
+   Tokens based on these values to prevent accidentally creating
+   unreasonable amounts of requests for a specific URL.  Status Provider
+   could accidentally or maliciously use this mechanism to effectively
+   DDoS the provided Status List Token URI.
+
+   Concrete values for both claims heavily depend on the use-case
+   requirements and clients should be configured with lower/upper bounds
+   for these values that fit their respective use-cases.
 
 12.  Privacy Considerations
 
@@ -1866,7 +1881,9 @@ d2                              # tag(18)
 
    Ultimately, it's the Relying Parties decision how often to check for
    updates, ecosystems may define their own guidelines and policies for
-   updating the Status List information.
+   updating the Status List information.  Clients should make sure that
+   exp and ttl are within reasonable bounds before creating requests to
+   get a fresh Status List Token (see Section 11.5 for more details).
 
    The following diagram illustrates the relationship between these
    claims and how they are designed to influence caching:
@@ -3150,6 +3167,8 @@ Test vectors for Status List encoding
 Document History
 
    -13
+
+   *  Add short security consideraiton on redirects and ttl
 
    *  fix CORS spec to specific version
 
