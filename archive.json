@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T00:19:13.622104+00:00",
+  "timestamp": "2025-10-14T00:18:04.388623+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6085,7 +6085,7 @@
       "labels": [],
       "body": "> Introduction:  JOSE Tokens has a reference to the IANA registry?  Is there something other than JWT?  Why not RFC 7515 or one of the other JWT references?\n\n> Section 1.2: no reply necessary, I'm a PKIX Person, these are observations: OCSP stapling:  This is only 'less up-to-date' if the server doesn't pull OCSP responses 'often enough'.  The larger issue is that the OCSP Staple has to be requested by the client (or RP in your language).    Web PKI is going the route of short lived certificates as none of the other mechanisms have scaled.  It will be interesting to see if the token status list concept works better.  \n\n> Section 5.1 and 5.2, exp, ttl:  In PKIX, this time is not technically an expiry, but an expectation of the next time to issue.  It is, however, treated like an expiry, which means that systems lock up and refuse connections if they don't have fresher CRLs.  Is that what you want here?  The ttl option, which might be less prone to misunderstanding, if it is listed as a time period vice a point in time.  Also, a ref to the diagram at the end of 13.7 might help (it certainly helped me understand how you intended these two values to work together).\n\n> Section 5.1 and 5.2, #2:  Signature or a MAC algorithm?  Keyed MAC?  MACs can (generally) be recomputed, which you don't want.\n\n> Section 8.1, para 6:  Seems like it could be dangerous. Please add something to Sec Cons to address the potential issues w/ redirects (why is an infinite redirect bad).\n\n> Section 8.3:  numbered lists within numbered lists, there has to be a better way, maybe numbered lists with alpha sub lists?\n\n> Section 11:  Add a mention of how expired or out of time TTL settings can be used as a denial of service mechanism.  There are a bunch of ways this can happen, for example, the entity that generates the token status list is down, or promulgation of the token status list is blocked.  Is there a mitigation for user/integrators of this type of service?\n\n> Section 11/13, compression vulnerabilities: I don't want to hold up this draft, but I need to consult, as I haven't dealt with compression issues in a million years (or it seems that way).  If there are known issues with zlib and DEFLATE, we need to mention the issue in Section 11 and the mitigation in Section 13 (or some other reasonable combination).  \n\n> Section 12.3:  KYC?\n\n> Section 13.7:  Is there guidance on how an issuer should choose both exp and ttl?  If the ttl/exp are too long, a RP doesn't know to check for a refreshed token status list?  If the ttl/exp are too short then there might be a DOS when the status token list is not refreshed in time.  \n\n> Section 14.7:  (no change required to the draft) If this request for registration has already been made, please send me the link to the mail archive.  If this request has not yet been made, please do that ASAP in accordance with RFC 6838 (and supply me the link to the mail archive).  These requests often take some time, and require some nudging.\n\n> Normative Reference:  Living standards are not classically acceptable as normative standards in IETF specifications. Can you get either a permanent anchor or a snapshot for the (https://whatwg.org/working-mode#anchors) [CORS] reference?  (for an example see draft-ietf-oauth-browser-based-apps)\n\n> Normative Reference:  RFC 5226 has been obsoleted by RFC 8126, should this be updated?\n",
       "createdAt": "2025-10-07T14:27:06Z",
-      "updatedAt": "2025-10-10T06:21:22Z",
+      "updatedAt": "2025-10-13T11:29:20Z",
       "closedAt": null,
       "comments": [
         {
@@ -6094,6 +6094,20 @@
           "body": "> > Introduction:  JOSE Tokens has a reference to the IANA registry?  Is there something other than JWT?  Why not RFC 7515 or one of the other JWT references?\n\nWe can point to RFC7515 instead of the IANA registry.\n\n> \n> > Section 1.2: no reply necessary, I'm a PKIX Person, these are observations: OCSP stapling:  This is only 'less up-to-date' if the server doesn't pull OCSP responses 'often enough'.  The larger issue is that the OCSP Staple has to be requested by the client (or RP in your language).    Web PKI is going the route of short lived certificates as none of the other mechanisms have scaled.  It will be interesting to see if the token status list concept works better.\n> \n> > Section 5.1 and 5.2, exp, ttl:  In PKIX, this time is not technically an expiry, but an expectation of the next time to issue.  It is, however, treated like an expiry, which means that systems lock up and refuse connections if they don't have fresher CRLs.  Is that what you want here?  The ttl option, which might be less prone to misunderstanding, if it is listed as a time period vice a point in time.  Also, a ref to the diagram at the end of 13.7 might help (it certainly helped me understand how you intended these two values to work together).\n\nI think it was similar feedback that led us to include both exp and ttl. I agree a note linking to section 13.7 would be a good idea.\n\n> \n> > Section 5.1 and 5.2, [#2](https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/2):  Signature or a MAC algorithm?  Keyed MAC?  MACs can (generally) be recomputed, which you don't want.\n\nSigned Status List Tokens are expected to be the norm. Our thought was that we wouldn't want to exclude the possiblity of Issuers and Relying Partys having a shared out-of-band channel to exchange keys. This however means, that in this scenario the trust of the Relying Party would moreof originate from the fact, that the Status List Token was received from the Issuers endpoint, e.g. Web PKI.\n\n> \n> > Section 8.1, para 6:  Seems like it could be dangerous. Please add something to Sec Cons to address the potential issues w/ redirects (why is an infinite redirect bad).\n\nIs it common practice to disallow redirects when fetching CRLs? I'm not aware of it. Also, as the trust primarily originates from the Status List Tokens signature it even less of a deal.\n\n> \n> > Section 8.3:  numbered lists within numbered lists, there has to be a better way, maybe numbered lists with alpha sub lists?\n\nagreed.\n\n> \n> > Section 11:  Add a mention of how expired or out of time TTL settings can be used as a denial of service mechanism.  There are a bunch of ways this can happen, for example, the entity that generates the token status list is down, or promulgation of the token status list is blocked.  Is there a mitigation for user/integrators of this type of service?\n\nI'm unsure how TTL settings can be expired or out of time, as its just a time duration? However, we could add guidance on how a client should behave if the initial request to the Status List Token uri fails in order to avoid heavy load on the server.\n\n> \n> > Section 11/13, compression vulnerabilities: I don't want to hold up this draft, but I need to consult, as I haven't dealt with compression issues in a million years (or it seems that way).  If there are known issues with zlib and DEFLATE, we need to mention the issue in Section 11 and the mitigation in Section 13 (or some other reasonable combination).\n\nTo my knowledge, issues only exist with implementations, not the algorithm itself. Potential threats are so-called \"zipbombs\" although modern implemenations should have guards against such. We could add a consideration.\n\n> \n> > Section 12.3:  KYC?\n\n[Know your customer](https://en.wikipedia.org/wiki/Know_your_customer), identity proofing in financial sector. We should use simpler wording here.\n\n> \n> > Section 13.7:  Is there guidance on how an issuer should choose both exp and ttl?  If the ttl/exp are too long, a RP doesn't know to check for a refreshed token status list?  If the ttl/exp are too short then there might be a DOS when the status token list is not refreshed in time.\n\nTo me it seems very use-case specific. I could only imagine giving an example?\n\n> \n> > Section 14.7:  (no change required to the draft) If this request for registration has already been made, please send me the link to the mail archive.  If this request has not yet been made, please do that ASAP in accordance with RFC 6838 (and supply me the link to the mail archive).  These requests often take some time, and require some nudging.\n\nI think we didn't?\n\n> \n> > Normative Reference:  Living standards are not classically acceptable as normative standards in IETF specifications. Can you get either a permanent anchor or a snapshot for the (https://whatwg.org/working-mode#anchors) [CORS] reference?  (for an example see draft-ietf-oauth-browser-based-apps)\n\nLike this: https://fetch.spec.whatwg.org/commit-snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-cors-protocol ?\n\n> \n> > Normative Reference:  RFC 5226 has been obsoleted by RFC 8126, should this be updated?\n\nOkay\n\n",
           "createdAt": "2025-10-09T19:59:04Z",
           "updatedAt": "2025-10-10T06:21:22Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I witnessed a contradiction in the current draft - Section 5.1 says `exp` and `ttl` is OPTIONAL. Section 13.7 gives guidance for those values saying \"Both `ttl` and `exp` are RECOMMENDED to be used by the Status Issuer.\" So should we update Section 5.1 and 5.2?",
+          "createdAt": "2025-10-12T11:55:55Z",
+          "updatedAt": "2025-10-12T11:55:55Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> I witnessed a contradiction in the current draft - Section 5.1 says `exp` and `ttl` is OPTIONAL. Section 13.7 gives guidance for those values saying \"Both `ttl` and `exp` are RECOMMENDED to be used by the Status Issuer.\" So should we update Section 5.1 and 5.2?\n\nI think recommending both values makes sense - imho let's update section 5.1/5.2?",
+          "createdAt": "2025-10-13T11:29:20Z",
+          "updatedAt": "2025-10-13T11:29:20Z"
         }
       ]
     }
@@ -20330,6 +20344,67 @@
           "createdAt": "2025-09-30T06:09:29Z",
           "updatedAt": "2025-09-30T06:09:29Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 305,
+      "id": "PR_kwDOJZ2aqs6tTmso",
+      "title": "AD review",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/305",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-12T12:14:44Z",
+      "updatedAt": "2025-10-13T11:17:55Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "0e47997a5048bcaefb43241296a67933a4d2e271",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/ad_review",
+      "headRefOid": "fdc3ccf49235449025ff83a24575f4b95782909f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Closes #304\r\nPreview: https://drafts.oauth.net/draft-ietf-oauth-status-list/pb/ad_review/draft-ietf-oauth-status-list.html",
+          "createdAt": "2025-10-12T12:53:10Z",
+          "updatedAt": "2025-10-12T12:53:10Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7GZIhD",
+          "commit": {
+            "abbreviatedOid": "9e68268"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-12T12:56:43Z",
+          "updatedAt": "2025-10-12T12:57:11Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "```suggestion\r\n* `exp`: OPTIONAL. As generally defined in {{RFC7519}}. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by the Status Issuer. Consider the guidance provided in [](#expiry-and-caching).\r\n* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number encoded in JSON as a number. Consider the guidance provided in [](#expiry-and-caching).\r\n```",
+              "createdAt": "2025-10-12T12:56:43Z",
+              "updatedAt": "2025-10-12T12:57:11Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "```suggestion\r\n* `4` (expiration time): OPTIONAL. As generally defined in {{RFC8392}}. The expiration time claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer. Consider the guidance provided in [](#expiry-and-caching).\r\n* `65534` (time to live): OPTIONAL. Unsigned integer (Major Type 0). The time to live claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number. Consider the guidance provided in [](#expiry-and-caching).\r\n```",
+              "createdAt": "2025-10-12T12:57:01Z",
+              "updatedAt": "2025-10-12T12:57:11Z"
+            }
+          ]
         }
       ]
     }
