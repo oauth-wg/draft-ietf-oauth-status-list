@@ -753,7 +753,7 @@ If the Relying Party does not send an Accept Header, the response type is assume
 
 A successful response that contains a Status List Token MUST use an HTTP status code in the 2xx range.
 
-A response MAY also choose to redirect the client to another URI using an HTTP status code in the 3xx range, which clients SHOULD follow. A client SHOULD detect and intervene in cyclical redirections (i.e., "infinite" redirection loops). See [](#redirects) for further guidance on redirects.
+A response MAY also choose to redirect the client to another URI using an HTTP status code in the 3xx range, which clients SHOULD follow. See [](#redirects) for security considerations on redirects.
 
 The following are non-normative examples of a request and response for a Status List Token with type `application/statuslist+jwt`:
 
@@ -983,11 +983,11 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
 
 ## Redirection 3xx {#redirects}
 
-Clients that follow 3xx (Redirection) class of status codes should be aware of possible dangers of redirects, such as infinite redirection loops since they could be used as an attack vector for possible denial of service attacks on clients. The general guidance for redirects given in Section 15.4 of {{RFC9110}} should be applied.
+Clients that follow 3xx (Redirection) class of status codes should be aware of possible dangers of redirects, such as infinite redirection loops since they could be used as an attack vector for possible denial of service attacks on clients. A client SHOULD detect and intervene in cyclical redirections (i.e., "infinite" redirection loops). More guidance for redirects given in Section 15.4 of {{RFC9110}} should be applied.
 
 ## Exiration and Caching {#security-ttl}
 
-Expiration and Caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients should check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Provider could accidentally or maliciously use this mechanism to effectively DDoS the provided Status List Token URI.
+Expiration and Caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients should check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Issuers could accidentally or maliciously use this mechanism to effectively DDoS the contained URL of the Status Provider.
 
 Concrete values for both claims heavily depend on the use-case requirements and clients should be configured with lower/upper bounds for these values that fit their respective use-cases.
 
