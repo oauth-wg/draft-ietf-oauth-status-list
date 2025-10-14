@@ -410,8 +410,8 @@ The following content applies to the JWT Claims Set:
 
 * `sub`: REQUIRED. As generally defined in {{RFC7519}}. The `sub` (subject) claim MUST specify the URI of the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `iat`: REQUIRED. As generally defined in {{RFC7519}}. The `iat` (issued at) claim MUST specify the time at which the Status List Token was issued.
-* `exp`: OPTIONAL. As generally defined in {{RFC7519}}. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by the Status Issuer. Consider the guidance provided in [](#expiry-and-caching).
-* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number encoded in JSON as a number. Consider the guidance provided in [](#expiry-and-caching).
+* `exp`: RECOMMENDED. As generally defined in {{RFC7519}}. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by the Status Issuer. Consider the guidance provided in [](#expiry-and-caching).
+* `ttl`: RECOMMENDED. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number encoded in JSON as a number. Consider the guidance provided in [](#expiry-and-caching).
 * `status_list`: REQUIRED. The `status_list` (status list) claim MUST specify the Status List conforming to the structure defined in [](#status-list-json).
 
 The following additional rules apply:
@@ -442,8 +442,8 @@ The following content applies to the CWT Claims Set:
 
 * `2` (subject): REQUIRED. As generally defined in {{RFC8392}}. The subject claim MUST specify the URI of the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `6` (issued at): REQUIRED. As generally defined in {{RFC8392}}. The issued at claim MUST specify the time at which the Status List Token was issued.
-* `4` (expiration time): OPTIONAL. As generally defined in {{RFC8392}}. The expiration time claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer. Consider the guidance provided in [](#expiry-and-caching).
-* `65534` (time to live): OPTIONAL. Unsigned integer (Major Type 0). The time to live claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number. Consider the guidance provided in [](#expiry-and-caching).
+* `4` (expiration time): RECOMMENDED. As generally defined in {{RFC8392}}. The expiration time claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer. Consider the guidance provided in [](#expiry-and-caching).
+* `65534` (time to live): RECOMMENDED. Unsigned integer (Major Type 0). The time to live claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number. Consider the guidance provided in [](#expiry-and-caching).
 * `65533` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the structure defined in [](#status-list-cbor).
 
 The following additional rules apply:
@@ -1922,6 +1922,7 @@ CBOR encoding:
 
 -13
 
+* Make exp and ttl recommended in claim description (fixes inconsistency, was recommended in other text)
 * Add short security consideraiton on redirects and ttl
 * fix CORS spec to specific version
 * explain KYC
