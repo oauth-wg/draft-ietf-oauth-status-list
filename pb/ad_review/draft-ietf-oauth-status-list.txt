@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 16 April 2026                                   Bundesdruckerei
+Expires: 17 April 2026                                   Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                         13 October 2025
+                                                         14 October 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 April 2026.
+   This Internet-Draft will expire on 17 April 2026.
 
 Copyright Notice
 
@@ -619,12 +619,12 @@ Table of Contents
       (issued at) claim MUST specify the time at which the Status List
       Token was issued.
 
-   *  exp: OPTIONAL.  As generally defined in [RFC7519].  The exp
+   *  exp: RECOMMENDED.  As generally defined in [RFC7519].  The exp
       (expiration time) claim, if present, MUST specify the time at
       which the Status List Token is considered expired by the Status
       Issuer.  Consider the guidance provided in Section 13.7.
 
-   *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST
+   *  ttl: RECOMMENDED.  The ttl (time to live) claim, if present, MUST
       specify the maximum amount of time, in seconds, that the Status
       List Token can be cached by a consumer before a fresh copy SHOULD
       be retrieved.  The value of the claim MUST be a positive number
@@ -691,13 +691,13 @@ Table of Contents
       issued at claim MUST specify the time at which the Status List
       Token was issued.
 
-   *  4 (expiration time): OPTIONAL.  As generally defined in [RFC8392].
-      The expiration time claim, if present, MUST specify the time at
-      which the Status List Token is considered expired by its issuer.
-      Consider the guidance provided in Section 13.7.
+   *  4 (expiration time): RECOMMENDED.  As generally defined in
+      [RFC8392].  The expiration time claim, if present, MUST specify
+      the time at which the Status List Token is considered expired by
+      its issuer.  Consider the guidance provided in Section 13.7.
 
-   *  65534 (time to live): OPTIONAL.  Unsigned integer (Major Type 0).
-      The time to live claim, if present, MUST specify the maximum
+   *  65534 (time to live): RECOMMENDED.  Unsigned integer (Major Type
+      0).  The time to live claim, if present, MUST specify the maximum
       amount of time, in seconds, that the Status List Token can be
       cached by a consumer before a fresh copy SHOULD be retrieved.  The
       value of the claim MUST be a positive number.  Consider the
@@ -727,9 +727,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840cac76165c692a3ae0ac057
-   51b84562db04dbe307b572ab81819a9ed843973c9d92993ccdcf4f7db7bbac13d7f9
-   9b1b65505d59d44e25bf63d3e67069d6282980
+   646269747301636c73744a78dadbb918000217015d58402574c628fb3ca309b51b47
+   0d6fca529108d1adf5bc8fb6eb112f58aad3d0d4cf8cfb830a8f88756a1035bd5259
+   e7febfd481970538f1a064e0264fd8fa319dbe
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -752,12 +752,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      cac76165c692a3ae0ac05751  #       "ÊÇaeÆ\x92£®\x0aÀWQ"
-      b84562db04dbe307b572ab81  #       "¸EbÛ\x04Ûã\x07µr«\x81"
-      819a9ed843973c9d92993ccd  #       "\x81\x9a\x9eØC\x97<\x9d\x92\x99<Í"
-      cf4f7db7bbac13d7f99b1b65  #       "ÏO}·»¬\x13×ù\x9b\x1be"
-      505d59d44e25bf63d3e67069  #       "P]YÔN%¿cÓæpi"
-      d6282980                  #       "Ö()\x80"
+      2574c628fb3ca309b51b470d  #       "%tÆ(û<£\x09µ\x1bG\x0d"
+      6fca529108d1adf5bc8fb6eb  #       "oÊR\x91\x08Ñ\xadõ¼\x8f¶ë"
+      112f58aad3d0d4cf8cfb830a  #       "\x11/XªÓÐÔÏ\x8cû\x83\x0a"
+      8f88756a1035bd5259e7febf  #       "\x8f\x88uj\x105½RYçþ¿"
+      d481970538f1a064e0264fd8  #       "Ô\x81\x97\x058ñ\xa0dà&OØ"
+      fa319dbe                  #       "ú1\x9d¾"
 
 6.  Referenced Token
 
@@ -900,9 +900,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840b873dc7988ed25d18aae0da6af3d96a429a540
-   f22eec588a959d936fb6e63e699dbd288e65735ae7910291a5a2361d9820c415d04e
-   dfc3c57aa76b6d3cc543f9
+   7374617475736c697374732f315840f1abf4b19c32ad64be61747ef6178eee743f69
+   0c7cf92b1e30d2476d85933b3c2ad50961540213fe48a1545a1f23f555859d5322c7
+   bc7706e6e1212dba0b882f
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -925,12 +925,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         b873dc7988ed25d18aae0da6  #       "¸sÜy\x88í%Ñ\x8a®\x0d¦"
-         af3d96a429a540f22eec588a  #       "¯=\x96¤)¥@ò.ìX\x8a"
-         959d936fb6e63e699dbd288e  #       "\x95\x9d\x93o¶æ>i\x9d½(\x8e"
-         65735ae7910291a5a2361d98  #       "esZç\x91\x02\x91¥¢6\x1d\x98"
-         20c415d04edfc3c57aa76b6d  #       " Ä\x15ÐNßÃÅz§km"
-         3cc543f9                  #       "<ÅCù"
+         f1abf4b19c32ad64be61747e  #       "ñ«ô±\x9c2\xadd¾at~"
+         f6178eee743f690c7cf92b1e  #       "ö\x17\x8eît?i\x0c|ù+\x1e"
+         30d2476d85933b3c2ad50961  #       "0ÒGm\x85\x93;<*Õ\x09a"
+         540213fe48a1545a1f23f555  #       "T\x02\x13þH¡TZ\x1f#õU"
+         859d5322c7bc7706e6e1212d  #       "\x85\x9dS"Ç¼w\x06æá!-"
+         ba0b882f                  #       "º\x0b\x88/"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1169,8 +1169,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.zaiHixRzZClwSRp_bAd92q9C2Xf82wOC_jBFwAQkE10A7kFvI6IM
-   nH5HP7X28-HKgj8RZzEu1pItDUEj-OX-Hw
+   nR0bCI6NDMyMDB9.8ZzvWsUWWvdRDW2quZcLlj28y8Je3ejw20EqLk662ssZb9rwlnuA
+   gjjtBYBIIkv0VMUxaqQ_OL3CTmJZaDMkiw
 
 8.2.  Status List Response
 
@@ -1318,8 +1318,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.zaiHixRzZClwSRp_bAd92q9C2Xf82wOC_jBFwAQkE10A7kFvI6IM
-   nH5HP7X28-HKgj8RZzEu1pItDUEj-OX-Hw
+   nR0bCI6NDMyMDB9.8ZzvWsUWWvdRDW2quZcLlj28y8Je3ejw20EqLk662ssZb9rwlnuA
+   gjjtBYBIIkv0VMUxaqQ_OL3CTmJZaDMkiw
 
 9.  Status List Aggregation
 
@@ -3167,6 +3167,9 @@ Test vectors for Status List encoding
 Document History
 
    -13
+
+   *  Make exp and ttl recommended in claim description (fixes
+      inconsistency, was recommended in other text)
 
    *  Add short security consideraiton on redirects and ttl
 

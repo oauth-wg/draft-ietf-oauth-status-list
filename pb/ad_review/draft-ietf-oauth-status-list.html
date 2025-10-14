@@ -1049,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 16 April 2026</td>
+<td class="center">Expires 17 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-13" class="published">13 October 2025</time>
+<time datetime="2025-10-14" class="published">14 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-16">16 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-17">17 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1125,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1880,10 +1880,10 @@ a2                              # map(2)
             <p id="section-5.1-5.2.1"><code>iat</code>: <span class="bcp14">REQUIRED</span>. As generally defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. The <code>iat</code> (issued at) claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.3">
-            <p id="section-5.1-5.3.1"><code>exp</code>: <span class="bcp14">OPTIONAL</span>. As generally defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. The <code>exp</code> (expiration time) claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by the Status Issuer. Consider the guidance provided in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.3.1"><code>exp</code>: <span class="bcp14">RECOMMENDED</span>. As generally defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>. The <code>exp</code> (expiration time) claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by the Status Issuer. Consider the guidance provided in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>.<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.4">
-            <p id="section-5.1-5.4.1"><code>ttl</code>: <span class="bcp14">OPTIONAL</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number encoded in JSON as a number. Consider the guidance provided in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.1-5.4.1"><code>ttl</code>: <span class="bcp14">RECOMMENDED</span>. The <code>ttl</code> (time to live) claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number encoded in JSON as a number. Consider the guidance provided in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>.<a href="#section-5.1-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.1-5.5">
             <p id="section-5.1-5.5.1"><code>status_list</code>: <span class="bcp14">REQUIRED</span>. The <code>status_list</code> (status list) claim <span class="bcp14">MUST</span> specify the Status List conforming to the structure defined in <a href="#status-list-json" class="auto internal xref">Section 4.2</a>.<a href="#section-5.1-5.5.1" class="pilcrow">¶</a></p>
@@ -1948,10 +1948,10 @@ a2                              # map(2)
             <p id="section-5.2-5.2.1"><code>6</code> (issued at): <span class="bcp14">REQUIRED</span>. As generally defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The issued at claim <span class="bcp14">MUST</span> specify the time at which the Status List Token was issued.<a href="#section-5.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.3">
-            <p id="section-5.2-5.3.1"><code>4</code> (expiration time): <span class="bcp14">OPTIONAL</span>. As generally defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The expiration time claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by its issuer. Consider the guidance provided in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.3.1"><code>4</code> (expiration time): <span class="bcp14">RECOMMENDED</span>. As generally defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The expiration time claim, if present, <span class="bcp14">MUST</span> specify the time at which the Status List Token is considered expired by its issuer. Consider the guidance provided in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>.<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.4">
-            <p id="section-5.2-5.4.1"><code>65534</code> (time to live): <span class="bcp14">OPTIONAL</span>. Unsigned integer (Major Type 0). The time to live claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number. Consider the guidance provided in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
+            <p id="section-5.2-5.4.1"><code>65534</code> (time to live): <span class="bcp14">RECOMMENDED</span>. Unsigned integer (Major Type 0). The time to live claim, if present, <span class="bcp14">MUST</span> specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy <span class="bcp14">SHOULD</span> be retrieved. The value of the claim <span class="bcp14">MUST</span> be a positive number. Consider the guidance provided in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>.<a href="#section-5.2-5.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-5.2-5.5">
             <p id="section-5.2-5.5.1"><code>65533</code> (status list): <span class="bcp14">REQUIRED</span>. The status list claim <span class="bcp14">MUST</span> specify the Status List conforming to the structure defined in <a href="#status-list-cbor" class="auto internal xref">Section 4.3</a>.<a href="#section-5.2-5.5.1" class="pilcrow">¶</a></p>
@@ -1978,9 +1978,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840cac76165c692a3ae0ac057
-51b84562db04dbe307b572ab81819a9ed843973c9d92993ccdcf4f7db7bbac13d7f9
-9b1b65505d59d44e25bf63d3e67069d6282980
+646269747301636c73744a78dadbb918000217015d58402574c628fb3ca309b51b47
+0d6fca529108d1adf5bc8fb6eb112f58aad3d0d4cf8cfb830a8f88756a1035bd5259
+e7febfd481970538f1a064e0264fd8fa319dbe
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2005,12 +2005,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      cac76165c692a3ae0ac05751  #       "ÊÇaeÆ\x92£®\x0aÀWQ"
-      b84562db04dbe307b572ab81  #       "¸EbÛ\x04Ûã\x07µr«\x81"
-      819a9ed843973c9d92993ccd  #       "\x81\x9a\x9eØC\x97&lt;\x9d\x92\x99&lt;Í"
-      cf4f7db7bbac13d7f99b1b65  #       "ÏO}·»¬\x13×ù\x9b\x1be"
-      505d59d44e25bf63d3e67069  #       "P]YÔN%¿cÓæpi"
-      d6282980                  #       "Ö()\x80"
+      2574c628fb3ca309b51b470d  #       "%tÆ(û&lt;£\x09µ\x1bG\x0d"
+      6fca529108d1adf5bc8fb6eb  #       "oÊR\x91\x08Ñ\xadõ¼\x8f¶ë"
+      112f58aad3d0d4cf8cfb830a  #       "\x11/XªÓÐÔÏ\x8cû\x83\x0a"
+      8f88756a1035bd5259e7febf  #       "\x8f\x88uj\x105½RYçþ¿"
+      d481970538f1a064e0264fd8  #       "Ô\x81\x97\x058ñ\xa0dà&amp;OØ"
+      fa319dbe                  #       "ú1\x9d¾"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2151,9 +2151,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840b873dc7988ed25d18aae0da6af3d96a429a540
-f22eec588a959d936fb6e63e699dbd288e65735ae7910291a5a2361d9820c415d04e
-dfc3c57aa76b6d3cc543f9
+7374617475736c697374732f315840f1abf4b19c32ad64be61747ef6178eee743f69
+0c7cf92b1e30d2476d85933b3c2ad50961540213fe48a1545a1f23f555859d5322c7
+bc7706e6e1212dba0b882f
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2178,12 +2178,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      b873dc7988ed25d18aae0da6  #       "¸sÜy\x88í%Ñ\x8a®\x0d¦"
-      af3d96a429a540f22eec588a  #       "¯=\x96¤)¥@ò.ìX\x8a"
-      959d936fb6e63e699dbd288e  #       "\x95\x9d\x93o¶æ&gt;i\x9d½(\x8e"
-      65735ae7910291a5a2361d98  #       "esZç\x91\x02\x91¥¢6\x1d\x98"
-      20c415d04edfc3c57aa76b6d  #       " Ä\x15ÐNßÃÅz§km"
-      3cc543f9                  #       "&lt;ÅCù"
+      f1abf4b19c32ad64be61747e  #       "ñ«ô±\x9c2\xadd¾at~"
+      f6178eee743f690c7cf92b1e  #       "ö\x17\x8eît?i\x0c|ù+\x1e"
+      30d2476d85933b3c2ad50961  #       "0ÒGm\x85\x93;&lt;*Õ\x09a"
+      540213fe48a1545a1f23f555  #       "T\x02\x13þH¡TZ\x1f#õU"
+      859d5322c7bc7706e6e1212d  #       "\x85\x9dS"Ç¼w\x06æá!-"
+      ba0b882f                  #       "º\x0b\x88/"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2397,8 +2397,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.zaiHixRzZClwSRp_bAd92q9C2Xf82wOC_jBFwAQkE10A7kFvI6IM
-nH5HP7X28-HKgj8RZzEu1pItDUEj-OX-Hw
+nR0bCI6NDMyMDB9.8ZzvWsUWWvdRDW2quZcLlj28y8Je3ejw20EqLk662ssZb9rwlnuA
+gjjtBYBIIkv0VMUxaqQ_OL3CTmJZaDMkiw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2505,8 +2505,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.zaiHixRzZClwSRp_bAd92q9C2Xf82wOC_jBFwAQkE10A7kFvI6IM
-nH5HP7X28-HKgj8RZzEu1pItDUEj-OX-Hw
+nR0bCI6NDMyMDB9.8ZzvWsUWWvdRDW2quZcLlj28y8Je3ejw20EqLk662ssZb9rwlnuA
+gjjtBYBIIkv0VMUxaqQ_OL3CTmJZaDMkiw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -4589,25 +4589,28 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <p id="appendix-D-1">-13<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-2.1">
-          <p id="appendix-D-2.1.1">Add short security consideraiton on redirects and ttl<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.1.1">Make exp and ttl recommended in claim description (fixes inconsistency, was recommended in other text)<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.2">
-          <p id="appendix-D-2.2.1">fix CORS spec to specific version<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.2.1">Add short security consideraiton on redirects and ttl<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.3">
-          <p id="appendix-D-2.3.1">explain KYC<a href="#appendix-D-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.3.1">fix CORS spec to specific version<a href="#appendix-D-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.4">
-          <p id="appendix-D-2.4.1">link implementation guidance to exp and ttl in Status List Token definition<a href="#appendix-D-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.4.1">explain KYC<a href="#appendix-D-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.5">
-          <p id="appendix-D-2.5.1">reference RFC7515 instead of IANA:JOSE<a href="#appendix-D-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.5.1">link implementation guidance to exp and ttl in Status List Token definition<a href="#appendix-D-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.6">
-          <p id="appendix-D-2.6.1">add a note that cwt is encoded in raw/binary.<a href="#appendix-D-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.6.1">reference RFC7515 instead of IANA:JOSE<a href="#appendix-D-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.7">
-          <p id="appendix-D-2.7.1">added further privacy consideration around issuer tracking using unique URIs<a href="#appendix-D-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.7.1">add a note that cwt is encoded in raw/binary.<a href="#appendix-D-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-2.8">
+          <p id="appendix-D-2.8.1">added further privacy consideration around issuer tracking using unique URIs<a href="#appendix-D-2.8.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-3">-12<a href="#appendix-D-3" class="pilcrow">¶</a></p>
