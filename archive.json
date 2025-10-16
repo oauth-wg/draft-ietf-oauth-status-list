@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-14T00:18:04.388623+00:00",
+  "timestamp": "2025-10-16T00:19:08.636302+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -20359,13 +20359,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-12T12:14:44Z",
-      "updatedAt": "2025-10-13T11:17:55Z",
+      "updatedAt": "2025-10-14T06:16:13Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "0e47997a5048bcaefb43241296a67933a4d2e271",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/ad_review",
-      "headRefOid": "fdc3ccf49235449025ff83a24575f4b95782909f",
+      "headRefOid": "8d38c05206eda965a050d5262e65cf4688a417ff",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -20403,6 +20403,26 @@
               "body": "```suggestion\r\n* `4` (expiration time): OPTIONAL. As generally defined in {{RFC8392}}. The expiration time claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer. Consider the guidance provided in [](#expiry-and-caching).\r\n* `65534` (time to live): OPTIONAL. Unsigned integer (Major Type 0). The time to live claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number. Consider the guidance provided in [](#expiry-and-caching).\r\n```",
               "createdAt": "2025-10-12T12:57:01Z",
               "updatedAt": "2025-10-12T12:57:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7GuYR8",
+          "commit": {
+            "abbreviatedOid": "fdc3ccf"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T06:15:37Z",
+          "updatedAt": "2025-10-14T06:15:38Z",
+          "comments": [
+            {
+              "originalPosition": 99,
+              "body": "```suggestion\r\nExpiration and Caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients should check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Issuer could accidentally or maliciously use this mechanism to effectively DDoS the contained URL of the Status Provider.\r\n```",
+              "createdAt": "2025-10-14T06:15:37Z",
+              "updatedAt": "2025-10-14T06:15:38Z"
             }
           ]
         }
