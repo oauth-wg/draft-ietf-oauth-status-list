@@ -11,21 +11,20 @@
 <meta content="
        This specification defines a mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.4.0
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.5
-    setuptools 80.9.0
     wcwidth 0.2.14
 -->
 <link href="draft-ietf-oauth-status-list.xml" rel="alternate" type="application/rfc+xml">
@@ -1049,7 +1048,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 17 April 2026</td>
+<td class="center">Expires 21 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1061,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-14" class="published">14 October 2025</time>
+<time datetime="2025-10-18" class="published">18 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-17">17 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-21">21 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1125,7 +1124,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1278,6 +1277,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.5">
                 <p id="section-toc.1-1.11.2.5.1"><a href="#section-11.5" class="auto internal xref">11.5</a>.  <a href="#name-exiration-and-caching" class="internal xref">Exiration and Caching</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.6">
+                <p id="section-toc.1-1.11.2.6.1"><a href="#section-11.6" class="auto internal xref">11.6</a>.  <a href="#name-status-list-token-protectio" class="internal xref">Status List Token Protection</a></p>
 </li>
             </ul>
 </li>
@@ -1978,9 +1980,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d58408681dd0578a1e156e9444c
-ad40c00b8aa0ef364a3620cc5f9c9739f1cbd366049f274eea385d84566a5c658c9c
-1e71539d148b7c13c8a5f44da5961ba0bd4f42
+646269747301636c73744a78dadbb918000217015d5840a842824e951522a6218351
+8c2fb23e3599373c06f727c2c2d4504351d1b29a7d4e37abf227d6096cf8e06c9b9c
+b78e089a7f67484d3c7eac3684f6c47f995450
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2005,12 +2007,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      8681dd0578a1e156e9444cad  #       "\x86\x81Ý\x05x¡áVéDL\xad"
-      40c00b8aa0ef364a3620cc5f  #       "@À\x0b\x8a\xa0ï6J6 Ì_"
-      9c9739f1cbd366049f274eea  #       "\x9c\x979ñËÓf\x04\x9f'Nê"
-      385d84566a5c658c9c1e7153  #       "8]\x84Vj\e\x8c\x9c\x1eqS"
-      9d148b7c13c8a5f44da5961b  #       "\x9d\x14\x8b|\x13È¥ôM¥\x96\x1b"
-      a0bd4f42                  #       "\xa0½OB"
+      a842824e951522a62183518c  #       "¨B\x82N\x95\x15"¦!\x83Q\x8c"
+      2fb23e3599373c06f727c2c2  #       "/²&gt;5\x997&lt;\x06÷'ÂÂ"
+      d4504351d1b29a7d4e37abf2  #       "ÔPCQÑ²\x9a}N7«ò"
+      27d6096cf8e06c9b9cb78e08  #       "'Ö\x09løàl\x9b\x9c·\x8e\x08"
+      9a7f67484d3c7eac3684f6c4  #       "\x9a\x7fgHM&lt;~¬6\x84öÄ"
+      7f995450                  #       "\x7f\x99TP"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2151,9 +2153,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158407aa5d4cea352652a4389546c65673f7991d405
-df8e8d9949ca7e95e105b4816fe97d012f0b4ccc2010205cab9fc3d386cce24ab022
-1436760cc9514a82e90c91
+7374617475736c697374732f315840f8048beb2b344655f2f739cf670d9dd908ac85
+555431bd615cd27dcfdf9057d366564a4dedc039f9114551ae2aecbfd1b87eb1b94e
+e86dcd5da71a01f39a699e
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2178,12 +2180,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      7aa5d4cea352652a4389546c  #       "z¥ÔÎ£Re*C\x89Tl"
-      65673f7991d405df8e8d9949  #       "eg?y\x91Ô\x05ß\x8e\x8d\x99I"
-      ca7e95e105b4816fe97d012f  #       "Ê~\x95á\x05´\x81oé}\x01/"
-      0b4ccc2010205cab9fc3d386  #       "\x0bLÌ \x10 \«\x9fÃÓ\x86"
-      cce24ab0221436760cc9514a  #       "ÌâJ°"\x146v\x0cÉQJ"
-      82e90c91                  #       "\x82é\x0c\x91"
+      f8048beb2b344655f2f739cf  #       "ø\x04\x8bë+4FUò÷9Ï"
+      670d9dd908ac85555431bd61  #       "g\x0d\x9dÙ\x08¬\x85UT1½a"
+      5cd27dcfdf9057d366564a4d  #       "\Ò}Ïß\x90WÓfVJM"
+      edc039f9114551ae2aecbfd1  #       "íÀ9ù\x11EQ®*ì¿Ñ"
+      b87eb1b94ee86dcd5da71a01  #       "¸~±¹NèmÍ]§\x1a\x01"
+      f39a699e                  #       "ó\x9ai\x9e"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2397,8 +2399,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.y_p6jeXfKQyeXc0kYSSTT6guxCX88eqZscMmiHDRphWOZxA9XCtY
-gqUjP-uw8LVaWZiymuRpbEwF_C0t5rxaDA
+nR0bCI6NDMyMDB9.KgiWQ5MFtnS0jnMl1wxuRFofotygdpc1ctuFLDL-zKXn5zTwbIdk
+AVZjg5_zmd6Yt0oNBWW4V5oEJ5CLlPgHpw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2505,8 +2507,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.y_p6jeXfKQyeXc0kYSSTT6guxCX88eqZscMmiHDRphWOZxA9XCtY
-gqUjP-uw8LVaWZiymuRpbEwF_C0t5rxaDA
+nR0bCI6NDMyMDB9.KgiWQ5MFtnS0jnMl1wxuRFofotygdpc1ctuFLDL-zKXn5zTwbIdk
+AVZjg5_zmd6Yt0oNBWW4V5oEJ5CLlPgHpw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2714,6 +2716,14 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         </h3>
 <p id="section-11.5-1">Expiration and Caching information is conveyed via the <code>exp</code> and <code>ttl</code> claims as explained in <a href="#expiry-and-caching" class="auto internal xref">Section 13.7</a>. Clients should check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Issuers could accidentally or maliciously use this mechanism to effectively DDoS the contained URL of the Status Provider.<a href="#section-11.5-1" class="pilcrow">¶</a></p>
 <p id="section-11.5-2">Concrete values for both claims heavily depend on the use-case requirements and clients should be configured with lower/upper bounds for these values that fit their respective use-cases.<a href="#section-11.5-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-mac">
+<section id="section-11.6">
+        <h3 id="name-status-list-token-protectio">
+<a href="#section-11.6" class="section-number selfRef">11.6. </a><a href="#name-status-list-token-protectio" class="section-name selfRef">Status List Token Protection</a>
+        </h3>
+<p id="section-11.6-1">This specification allows both, cryptographic signatures, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers should only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. MAC should only be used to secure Status List Tokens for deployments where Status Issuer and Relying Party have a trust relationship and possibility to scurely communicate the MAC out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the prorection of Status List Tokens and impelementers should default to digital signatures if they are unsure.<a href="#section-11.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
