@@ -991,6 +991,10 @@ Expiration and Caching information is conveyed via the `exp` and `ttl` claims as
 
 Concrete values for both claims heavily depend on the use-case requirements and clients should be configured with lower/upper bounds for these values that fit their respective use-cases.
 
+## Status List Token Protection {#security-mac}
+
+This specification allows both, cryptographic signatures, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers should only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. MAC should only be used to secure Status List Tokens for deployments where Status Issuer and Relying Party have a trust relationship and possibility to scurely communicate the MAC out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the prorection of Status List Tokens and impelementers should default to digital signatures if they are unsure.
+
 # Privacy Considerations {#privacy-considerations}
 
 ## Observability of Issuers {#privacy-issuer}
