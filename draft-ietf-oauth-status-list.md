@@ -245,6 +245,9 @@ Status List Token:
 Referenced Token:
 : A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
 
+Client:
+: An application that fetches information, such as a Status List Token, from the Status List Provider on behalf of the Holder or Relying Party.
+
 base64url:
 : Denotes the URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
 
@@ -1926,6 +1929,7 @@ CBOR encoding:
 
 -13
 
+* add definition of client to terminology
 * Make exp and ttl recommended in claim description (fixes inconsistency, was recommended in other text)
 * Add short security consideraiton on redirects and ttl
 * fix CORS spec to specific version
