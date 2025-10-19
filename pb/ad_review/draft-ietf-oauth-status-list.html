@@ -1645,9 +1645,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <p id="section-3-1.16.1">A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> with JOSE as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> with COSE as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.<a href="#section-3-1.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-1.17">base64url:</dt>
+<dt id="section-3-1.17">Client:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.18">
-          <p id="section-3-1.18.1">Denotes the URL-safe base64 encoding without padding as defined in Section 2 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.18.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.18.1">An application that fetches information, such as a Status List Token, from the Status List Provider on behalf of the Holder or Relying Party.<a href="#section-3-1.18.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.19">base64url:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.20">
+          <p id="section-3-1.20.1">Denotes the URL-safe base64 encoding without padding as defined in Section 2 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.20.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1980,9 +1985,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d58402fe648cdae2391dddc9540
-b19dc274932929a760c6392492f45ea33e738d99152acfa3ba46d865742156270c96
-d55567a23b671e0995a99a18791e55587d6fda
+646269747301636c73744a78dadbb918000217015d5840b0f19bb0de5ae14e8f5999
+cc41b5cb4cf1fc1a3cfa8e90f9cd0bb38439dfa3d1920fc847204d79ec8a795fc3ab
+5c8ce96a15fb5ee597b73a4e2d0e51b9dbe246
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2007,12 +2012,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      2fe648cdae2391dddc9540b1  #       "/æHÍ®#\x91ÝÜ\x95@±"
-      9dc274932929a760c6392492  #       "\x9dÂt\x93))§`Æ9$\x92"
-      f45ea33e738d99152acfa3ba  #       "ô^£&gt;s\x8d\x99\x15*Ï£º"
-      46d865742156270c96d55567  #       "FØet!V'\x0c\x96ÕUg"
-      a23b671e0995a99a18791e55  #       "¢;g\x1e\x09\x95©\x9a\x18y\x1eU"
-      587d6fda                  #       "X}oÚ"
+      b0f19bb0de5ae14e8f5999cc  #       "°ñ\x9b°ÞZáN\x8fY\x99Ì"
+      41b5cb4cf1fc1a3cfa8e90f9  #       "AµËLñü\x1a&lt;ú\x8e\x90ù"
+      cd0bb38439dfa3d1920fc847  #       "Í\x0b³\x849ß£Ñ\x92\x0fÈG"
+      204d79ec8a795fc3ab5c8ce9  #       " Myì\x8ay_Ã«\\x8cé"
+      6a15fb5ee597b73a4e2d0e51  #       "j\x15û^å\x97·:N-\x0eQ"
+      b9dbe246                  #       "¹ÛâF"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2153,9 +2158,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584078caefa3883b35b11be5c7c770c41e2865eefa
-580c8d69756d656656191bde1fdf4649a17d9737b55951a3c4434603cec2a76bf82e
-7686209b749fdd70fd2ccc
+7374617475736c697374732f3158406a507f8d736471f1307453889e5463c6bd2eeb
+061bad64552bd61b68abf8b2f4695764adf2aaa6ed36fd3f5a7ec88b04b73385a819
+9159e49f4489fb84fe1cf2
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2180,12 +2185,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      78caefa3883b35b11be5c7c7  #       "xÊï£\x88;5±\x1båÇÇ"
-      70c41e2865eefa580c8d6975  #       "pÄ\x1e(eîúX\x0c\x8diu"
-      6d656656191bde1fdf4649a1  #       "mefV\x19\x1bÞ\x1fßFI¡"
-      7d9737b55951a3c4434603ce  #       "}\x977µYQ£ÄCF\x03Î"
-      c2a76bf82e7686209b749fdd  #       "Â§kø.v\x86 \x9bt\x9fÝ"
-      70fd2ccc                  #       "pý,Ì"
+      6a507f8d736471f130745388  #       "jP\x7f\x8dsdqñ0tS\x88"
+      9e5463c6bd2eeb061bad6455  #       "\x9eTcÆ½.ë\x06\x1b\xaddU"
+      2bd61b68abf8b2f4695764ad  #       "+Ö\x1bh«ø²ôiWd\xad"
+      f2aaa6ed36fd3f5a7ec88b04  #       "òª¦í6ý?Z~È\x8b\x04"
+      b73385a8199159e49f4489fb  #       "·3\x85¨\x19\x91Yä\x9fD\x89û"
+      84fe1cf2                  #       "\x84þ\x1cò"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2399,8 +2404,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.MHWf-j1SkLzqJfvscWiit5mI8CGiUczdvV4liLoFxY1q2ZNE0Fs-
-zSlv2lq5kkhnC0iqD0ZB5QYTk73dZVdL4w
+nR0bCI6NDMyMDB9.nFGg-wF4xTcnXKpQqTwm3uNF4k7ML7bWs124PeHbBuWIUCuSYC_8
+K6RK2dHn0vZH6_P8UZLipIRo3XUii9-hgg
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2507,8 +2512,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.MHWf-j1SkLzqJfvscWiit5mI8CGiUczdvV4liLoFxY1q2ZNE0Fs-
-zSlv2lq5kkhnC0iqD0ZB5QYTk73dZVdL4w
+nR0bCI6NDMyMDB9.nFGg-wF4xTcnXKpQqTwm3uNF4k7ML7bWs124PeHbBuWIUCuSYC_8
+K6RK2dHn0vZH6_P8UZLipIRo3XUii9-hgg
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -4599,28 +4604,31 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <p id="appendix-D-1">-13<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-2.1">
-          <p id="appendix-D-2.1.1">Make exp and ttl recommended in claim description (fixes inconsistency, was recommended in other text)<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.1.1">add definition of client to terminology<a href="#appendix-D-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.2">
-          <p id="appendix-D-2.2.1">Add short security consideraiton on redirects and ttl<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.2.1">Make exp and ttl recommended in claim description (fixes inconsistency, was recommended in other text)<a href="#appendix-D-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.3">
-          <p id="appendix-D-2.3.1">fix CORS spec to specific version<a href="#appendix-D-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.3.1">Add short security consideraiton on redirects and ttl<a href="#appendix-D-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.4">
-          <p id="appendix-D-2.4.1">explain KYC<a href="#appendix-D-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.4.1">fix CORS spec to specific version<a href="#appendix-D-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.5">
-          <p id="appendix-D-2.5.1">link implementation guidance to exp and ttl in Status List Token definition<a href="#appendix-D-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.5.1">explain KYC<a href="#appendix-D-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.6">
-          <p id="appendix-D-2.6.1">reference RFC7515 instead of IANA:JOSE<a href="#appendix-D-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.6.1">link implementation guidance to exp and ttl in Status List Token definition<a href="#appendix-D-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.7">
-          <p id="appendix-D-2.7.1">add a note that cwt is encoded in raw/binary.<a href="#appendix-D-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.7.1">reference RFC7515 instead of IANA:JOSE<a href="#appendix-D-2.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.8">
-          <p id="appendix-D-2.8.1">added further privacy consideration around issuer tracking using unique URIs<a href="#appendix-D-2.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.8.1">add a note that cwt is encoded in raw/binary.<a href="#appendix-D-2.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-2.9">
+          <p id="appendix-D-2.9.1">added further privacy consideration around issuer tracking using unique URIs<a href="#appendix-D-2.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-3">-12<a href="#appendix-D-3" class="pilcrow">¶</a></p>

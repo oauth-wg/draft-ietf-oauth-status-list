@@ -383,6 +383,10 @@ Table of Contents
       [RFC9052].  Examples for Referenced Tokens are SD-JWT VC and ISO
       mdoc.
 
+   Client:  An application that fetches information, such as a Status
+      List Token, from the Status List Provider on behalf of the Holder
+      or Relying Party.
+
    base64url:  Denotes the URL-safe base64 encoding without padding as
       defined in Section 2 of [RFC7515] as "Base64url Encoding".
 
@@ -728,9 +732,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d58402fe648cdae2391dddc9540
-   b19dc274932929a760c6392492f45ea33e738d99152acfa3ba46d865742156270c96
-   d55567a23b671e0995a99a18791e55587d6fda
+   646269747301636c73744a78dadbb918000217015d5840b0f19bb0de5ae14e8f5999
+   cc41b5cb4cf1fc1a3cfa8e90f9cd0bb38439dfa3d1920fc847204d79ec8a795fc3ab
+   5c8ce96a15fb5ee597b73a4e2d0e51b9dbe246
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -753,12 +757,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      2fe648cdae2391dddc9540b1  #       "/æHÍ®#\x91ÝÜ\x95@±"
-      9dc274932929a760c6392492  #       "\x9dÂt\x93))§`Æ9$\x92"
-      f45ea33e738d99152acfa3ba  #       "ô^£>s\x8d\x99\x15*Ï£º"
-      46d865742156270c96d55567  #       "FØet!V'\x0c\x96ÕUg"
-      a23b671e0995a99a18791e55  #       "¢;g\x1e\x09\x95©\x9a\x18y\x1eU"
-      587d6fda                  #       "X}oÚ"
+      b0f19bb0de5ae14e8f5999cc  #       "°ñ\x9b°ÞZáN\x8fY\x99Ì"
+      41b5cb4cf1fc1a3cfa8e90f9  #       "AµËLñü\x1a<ú\x8e\x90ù"
+      cd0bb38439dfa3d1920fc847  #       "Í\x0b³\x849ß£Ñ\x92\x0fÈG"
+      204d79ec8a795fc3ab5c8ce9  #       " Myì\x8ay_Ã«\\x8cé"
+      6a15fb5ee597b73a4e2d0e51  #       "j\x15û^å\x97·:N-\x0eQ"
+      b9dbe246                  #       "¹ÛâF"
 
 6.  Referenced Token
 
@@ -901,9 +905,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584078caefa3883b35b11be5c7c770c41e2865eefa
-   580c8d69756d656656191bde1fdf4649a17d9737b55951a3c4434603cec2a76bf82e
-   7686209b749fdd70fd2ccc
+   7374617475736c697374732f3158406a507f8d736471f1307453889e5463c6bd2eeb
+   061bad64552bd61b68abf8b2f4695764adf2aaa6ed36fd3f5a7ec88b04b73385a819
+   9159e49f4489fb84fe1cf2
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -926,12 +930,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         78caefa3883b35b11be5c7c7  #       "xÊï£\x88;5±\x1båÇÇ"
-         70c41e2865eefa580c8d6975  #       "pÄ\x1e(eîúX\x0c\x8diu"
-         6d656656191bde1fdf4649a1  #       "mefV\x19\x1bÞ\x1fßFI¡"
-         7d9737b55951a3c4434603ce  #       "}\x977µYQ£ÄCF\x03Î"
-         c2a76bf82e7686209b749fdd  #       "Â§kø.v\x86 \x9bt\x9fÝ"
-         70fd2ccc                  #       "pý,Ì"
+         6a507f8d736471f130745388  #       "jP\x7f\x8dsdqñ0tS\x88"
+         9e5463c6bd2eeb061bad6455  #       "\x9eTcÆ½.ë\x06\x1b\xaddU"
+         2bd61b68abf8b2f4695764ad  #       "+Ö\x1bh«ø²ôiWd\xad"
+         f2aaa6ed36fd3f5a7ec88b04  #       "òª¦í6ý?Z~È\x8b\x04"
+         b73385a8199159e49f4489fb  #       "·3\x85¨\x19\x91Yä\x9fD\x89û"
+         84fe1cf2                  #       "\x84þ\x1cò"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1168,8 +1172,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.MHWf-j1SkLzqJfvscWiit5mI8CGiUczdvV4liLoFxY1q2ZNE0Fs-
-   zSlv2lq5kkhnC0iqD0ZB5QYTk73dZVdL4w
+   nR0bCI6NDMyMDB9.nFGg-wF4xTcnXKpQqTwm3uNF4k7ML7bWs124PeHbBuWIUCuSYC_8
+   K6RK2dHn0vZH6_P8UZLipIRo3XUii9-hgg
 
 8.2.  Status List Response
 
@@ -1317,8 +1321,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.MHWf-j1SkLzqJfvscWiit5mI8CGiUczdvV4liLoFxY1q2ZNE0Fs-
-   zSlv2lq5kkhnC0iqD0ZB5QYTk73dZVdL4w
+   nR0bCI6NDMyMDB9.nFGg-wF4xTcnXKpQqTwm3uNF4k7ML7bWs124PeHbBuWIUCuSYC_8
+   K6RK2dHn0vZH6_P8UZLipIRo3XUii9-hgg
 
 9.  Status List Aggregation
 
@@ -3183,6 +3187,8 @@ Test vectors for Status List encoding
 Document History
 
    -13
+
+   *  add definition of client to terminology
 
    *  Make exp and ttl recommended in claim description (fixes
       inconsistency, was recommended in other text)
