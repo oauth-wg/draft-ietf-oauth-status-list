@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 21 April 2026                                   Bundesdruckerei
+Expires: 22 April 2026                                   Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                         18 October 2025
+                                                         19 October 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 April 2026.
+   This Internet-Draft will expire on 22 April 2026.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
      11.2.  Security Guidance for JWT and CWT
      11.3.  Key Resolution and Trust Management
      11.4.  Redirection 3xx
-     11.5.  Exiration and Caching
+     11.5.  Expiration and Caching
      11.6.  Status List Token Protection
    12. Privacy Considerations
      12.1.  Observability of Issuers
@@ -728,9 +728,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840a842824e951522a6218351
-   8c2fb23e3599373c06f727c2c2d4504351d1b29a7d4e37abf227d6096cf8e06c9b9c
-   b78e089a7f67484d3c7eac3684f6c47f995450
+   646269747301636c73744a78dadbb918000217015d58402fe648cdae2391dddc9540
+   b19dc274932929a760c6392492f45ea33e738d99152acfa3ba46d865742156270c96
+   d55567a23b671e0995a99a18791e55587d6fda
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -753,12 +753,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      a842824e951522a62183518c  #       "¨B\x82N\x95\x15"¦!\x83Q\x8c"
-      2fb23e3599373c06f727c2c2  #       "/²>5\x997<\x06÷'ÂÂ"
-      d4504351d1b29a7d4e37abf2  #       "ÔPCQÑ²\x9a}N7«ò"
-      27d6096cf8e06c9b9cb78e08  #       "'Ö\x09løàl\x9b\x9c·\x8e\x08"
-      9a7f67484d3c7eac3684f6c4  #       "\x9a\x7fgHM<~¬6\x84öÄ"
-      7f995450                  #       "\x7f\x99TP"
+      2fe648cdae2391dddc9540b1  #       "/æHÍ®#\x91ÝÜ\x95@±"
+      9dc274932929a760c6392492  #       "\x9dÂt\x93))§`Æ9$\x92"
+      f45ea33e738d99152acfa3ba  #       "ô^£>s\x8d\x99\x15*Ï£º"
+      46d865742156270c96d55567  #       "FØet!V'\x0c\x96ÕUg"
+      a23b671e0995a99a18791e55  #       "¢;g\x1e\x09\x95©\x9a\x18y\x1eU"
+      587d6fda                  #       "X}oÚ"
 
 6.  Referenced Token
 
@@ -901,9 +901,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840f8048beb2b344655f2f739cf670d9dd908ac85
-   555431bd615cd27dcfdf9057d366564a4dedc039f9114551ae2aecbfd1b87eb1b94e
-   e86dcd5da71a01f39a699e
+   7374617475736c697374732f31584078caefa3883b35b11be5c7c770c41e2865eefa
+   580c8d69756d656656191bde1fdf4649a17d9737b55951a3c4434603cec2a76bf82e
+   7686209b749fdd70fd2ccc
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -926,12 +926,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         f8048beb2b344655f2f739cf  #       "ø\x04\x8bë+4FUò÷9Ï"
-         670d9dd908ac85555431bd61  #       "g\x0d\x9dÙ\x08¬\x85UT1½a"
-         5cd27dcfdf9057d366564a4d  #       "\Ò}Ïß\x90WÓfVJM"
-         edc039f9114551ae2aecbfd1  #       "íÀ9ù\x11EQ®*ì¿Ñ"
-         b87eb1b94ee86dcd5da71a01  #       "¸~±¹NèmÍ]§\x1a\x01"
-         f39a699e                  #       "ó\x9ai\x9e"
+         78caefa3883b35b11be5c7c7  #       "xÊï£\x88;5±\x1båÇÇ"
+         70c41e2865eefa580c8d6975  #       "pÄ\x1e(eîúX\x0c\x8diu"
+         6d656656191bde1fdf4649a1  #       "mefV\x19\x1bÞ\x1fßFI¡"
+         7d9737b55951a3c4434603ce  #       "}\x977µYQ£ÄCF\x03Î"
+         c2a76bf82e7686209b749fdd  #       "Â§kø.v\x86 \x9bt\x9fÝ"
+         70fd2ccc                  #       "pý,Ì"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1168,8 +1168,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.KgiWQ5MFtnS0jnMl1wxuRFofotygdpc1ctuFLDL-zKXn5zTwbIdk
-   AVZjg5_zmd6Yt0oNBWW4V5oEJ5CLlPgHpw
+   nR0bCI6NDMyMDB9.MHWf-j1SkLzqJfvscWiit5mI8CGiUczdvV4liLoFxY1q2ZNE0Fs-
+   zSlv2lq5kkhnC0iqD0ZB5QYTk73dZVdL4w
 
 8.2.  Status List Response
 
@@ -1317,8 +1317,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.KgiWQ5MFtnS0jnMl1wxuRFofotygdpc1ctuFLDL-zKXn5zTwbIdk
-   AVZjg5_zmd6Yt0oNBWW4V5oEJ5CLlPgHpw
+   nR0bCI6NDMyMDB9.MHWf-j1SkLzqJfvscWiit5mI8CGiUczdvV4liLoFxY1q2ZNE0Fs-
+   zSlv2lq5kkhnC0iqD0ZB5QYTk73dZVdL4w
 
 9.  Status List Aggregation
 
@@ -1540,9 +1540,9 @@ d2                              # tag(18)
    loops).  More guidance for redirects given in Section 15.4 of
    [RFC9110] should be applied.
 
-11.5.  Exiration and Caching
+11.5.  Expiration and Caching
 
-   Expiration and Caching information is conveyed via the exp and ttl
+   Expiration and caching information is conveyed via the exp and ttl
    claims as explained in Section 13.7.  Clients should check that both
    values are within reasonable ranges before requesting new Status List
    Tokens based on these values to prevent accidentally creating
@@ -1550,7 +1550,7 @@ d2                              # tag(18)
    could accidentally or maliciously use this mechanism to effectively
    DDoS the contained URL of the Status Provider.
 
-   Concrete values for both claims heavily depend on the use-case
+   Concrete values for both claims highly depend on the use-case
    requirements and clients should be configured with lower/upper bounds
    for these values that fit their respective use-cases.
 
@@ -1561,13 +1561,13 @@ d2                              # tag(18)
    Implementers should only use MACs to secure the integrity of Status
    List Tokens if they fully understand the risks of MACs when compared
    to digital signatures and especially the requirements of their use-
-   case scenarios.  MAC should only be used to secure Status List Tokens
-   for deployments where Status Issuer and Relying Party have a trust
-   relationship and possibility to scurely communicate the MAC out of
-   band or are the same entity and no other entity needs to verify the
-   Status List Token.  We expect most deployments to use digital
-   signatures for the prorection of Status List Tokens and impelementers
-   should default to digital signatures if they are unsure.
+   case scenarios.  These use-cases typically represent deployments
+   where Status Issuer and Relying Party have a trust relationship and
+   the possibility to securely exchange keys out of band or are the same
+   entity and no other entity needs to verify the Status List Token.  We
+   expect most deployments to use digital signatures for the protection
+   of Status List Tokens and implementers should default to digital
+   signatures if they are unsure.
 
 12.  Privacy Considerations
 
