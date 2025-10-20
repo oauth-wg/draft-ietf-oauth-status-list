@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 15 April 2026                                   Bundesdruckerei
+Expires: 23 April 2026                                   Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                         12 October 2025
+                                                         20 October 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 April 2026.
+   This Internet-Draft will expire on 23 April 2026.
 
 Copyright Notice
 
@@ -108,6 +108,9 @@ Table of Contents
      11.1.  Correct decoding and parsing of the encoded Status List
      11.2.  Security Guidance for JWT and CWT
      11.3.  Key Resolution and Trust Management
+     11.4.  Redirection 3xx
+     11.5.  Expiration and Caching
+     11.6.  Status List Token Protection
    12. Privacy Considerations
      12.1.  Observability of Issuers
      12.2.  Issuer Tracking of Reference Tokens
@@ -165,7 +168,7 @@ Table of Contents
 
 1.  Introduction
 
-   Token formats secured by JOSE [IANA.JOSE] or COSE [RFC9052], such as
+   Token formats secured by JOSE [RFC7515] or COSE [RFC9052], such as
    JWTs [RFC7519], SD-JWT VCs [SD-JWT.VC], CWTs [RFC8392] and ISO mdoc
    [ISO.mdoc], have vast possible applications.  Some of these
    applications can involve issuing a token whereby certain semantics
@@ -379,6 +382,10 @@ Table of Contents
       defined in [RFC7515] or CBOR [RFC8949] with COSE as defined in
       [RFC9052].  Examples for Referenced Tokens are SD-JWT VC and ISO
       mdoc.
+
+   Client:  An application that fetches information, such as a Status
+      List Token, from the Status List Provider on behalf of the Holder
+      or Relying Party.
 
    base64url:  Denotes the URL-safe base64 encoding without padding as
       defined in Section 2 of [RFC7515] as "Base64url Encoding".
@@ -617,16 +624,17 @@ Table of Contents
       (issued at) claim MUST specify the time at which the Status List
       Token was issued.
 
-   *  exp: OPTIONAL.  As generally defined in [RFC7519].  The exp
+   *  exp: RECOMMENDED.  As generally defined in [RFC7519].  The exp
       (expiration time) claim, if present, MUST specify the time at
       which the Status List Token is considered expired by the Status
-      Issuer.
+      Issuer.  Consider the guidance provided in Section 13.7.
 
-   *  ttl: OPTIONAL.  The ttl (time to live) claim, if present, MUST
+   *  ttl: RECOMMENDED.  The ttl (time to live) claim, if present, MUST
       specify the maximum amount of time, in seconds, that the Status
       List Token can be cached by a consumer before a fresh copy SHOULD
       be retrieved.  The value of the claim MUST be a positive number
-      encoded in JSON as a number.
+      encoded in JSON as a number.  Consider the guidance provided in
+      Section 13.7.
 
    *  status_list: REQUIRED.  The status_list (status list) claim MUST
       specify the Status List conforming to the structure defined in
@@ -688,15 +696,17 @@ Table of Contents
       issued at claim MUST specify the time at which the Status List
       Token was issued.
 
-   *  4 (expiration time): OPTIONAL.  As generally defined in [RFC8392].
-      The expiration time claim, if present, MUST specify the time at
-      which the Status List Token is considered expired by its issuer.
+   *  4 (expiration time): RECOMMENDED.  As generally defined in
+      [RFC8392].  The expiration time claim, if present, MUST specify
+      the time at which the Status List Token is considered expired by
+      its issuer.  Consider the guidance provided in Section 13.7.
 
-   *  65534 (time to live): OPTIONAL.  Unsigned integer (Major Type 0).
-      The time to live claim, if present, MUST specify the maximum
+   *  65534 (time to live): RECOMMENDED.  Unsigned integer (Major Type
+      0).  The time to live claim, if present, MUST specify the maximum
       amount of time, in seconds, that the Status List Token can be
       cached by a consumer before a fresh copy SHOULD be retrieved.  The
-      value of the claim MUST be a positive number.
+      value of the claim MUST be a positive number.  Consider the
+      guidance provided in Section 13.7.
 
    *  65533 (status list): REQUIRED.  The status list claim MUST specify
       the Status List conforming to the structure defined in
@@ -722,9 +732,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d584029f9178975e50ec2eb6e3b
-   bb58d88beb85861148b0b9b3671a822f7b147e8dd021e47da395ddaf68c1eaa94479
-   2c4721c520313668da07b1f0dc862bf3910cd9
+   646269747301636c73744a78dadbb918000217015d5840d91efcafb9233ca62a956c
+   7f58fc525068c7427553d7f3cfa7a3153084cdb85d7f60abee80cef59cfc8813490f
+   23139054638c904c9eb59d63ae620d0d983284
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -747,12 +757,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      29f9178975e50ec2eb6e3bbb  #       ")ù\x17\x89uå\x0eÂën;»"
-      58d88beb85861148b0b9b367  #       "XØ\x8bë\x85\x86\x11H°¹³g"
-      1a822f7b147e8dd021e47da3  #       "\x1a\x82/{\x14~\x8dÐ!ä}£"
-      95ddaf68c1eaa944792c4721  #       "\x95Ý¯hÁê©Dy,G!"
-      c520313668da07b1f0dc862b  #       "Å 16hÚ\x07±ðÜ\x86+"
-      f3910cd9                  #       "ó\x91\x0cÙ"
+      d91efcafb9233ca62a956c7f  #       "Ù\x1eü¯¹#<¦*\x95l\x7f"
+      58fc525068c7427553d7f3cf  #       "XüRPhÇBuS×óÏ"
+      a7a3153084cdb85d7f60abee  #       "§£\x150\x84Í¸]\x7f`«î"
+      80cef59cfc8813490f231390  #       "\x80Îõ\x9cü\x88\x13I\x0f#\x13\x90"
+      54638c904c9eb59d63ae620d  #       "Tc\x8c\x90L\x9eµ\x9dc®b\x0d"
+      0d983284                  #       "\x0d\x982\x84"
 
 6.  Referenced Token
 
@@ -895,37 +905,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584023e57046c6f14d1c2f83cf0abe320bbfc376fb
-   4173d8d502422577adc3c6bf9944807d2849e18ff595543958aa748c2a6a4f341f66
-   d04841ae3cad635150656c
+   7374617475736c697374732f315840fa4d18cbac45fcee1cacaebd5c047a497fbe20
+   0210d5589d0b8a55464dde290fbd03f3ec9c900d6d2bce3f5d3c6c9fae2cad8f8f85
+   cc44f7173e88bcc66304b7
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         23e57046c6f14d1c2f83cf0a  #       "#åpFÆñM\x1c/\x83Ï\x0a"
-         be320bbfc376fb4173d8d502  #       "¾2\x0b¿ÃvûAsØÕ\x02"
-         422577adc3c6bf9944807d28  #       "B%w\xadÃÆ¿\x99D\x80}("
-         49e18ff595543958aa748c2a  #       "Iá\x8fõ\x95T9Xªt\x8c*"
-         6a4f341f66d04841ae3cad63  #       "jO4\x1ffÐHA®<\xadc"
-         5150656c                  #       "QPel"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      fa4d18cbac45fcee1cacaebd  #       "úM\x18Ë¬Eüî\x1c¬®½"
+      5c047a497fbe200210d5589d  #       "\\x04zI\x7f¾ \x02\x10ÕX\x9d"
+      0b8a55464dde290fbd03f3ec  #       "\x0b\x8aUFMÞ)\x0f½\x03óì"
+      9c900d6d2bce3f5d3c6c9fae  #       "\x9c\x90\x0dm+Î?]<l\x9f®"
+      2cad8f8f85cc44f7173e88bc  #       ",\xad\x8f\x8f\x85ÌD÷\x17>\x88¼"
+      c66304b7                  #       "Æc\x04·"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1146,8 +1156,7 @@ d2                              # tag(18)
 
    A response MAY also choose to redirect the client to another URI
    using an HTTP status code in the 3xx range, which clients SHOULD
-   follow.  A client SHOULD detect and intervene in cyclical
-   redirections (i.e., "infinite" redirection loops).
+   follow.  See Section 11.4 for security considerations on redirects.
 
    The following are non-normative examples of a request and response
    for a Status List Token with type application/statuslist+jwt:
@@ -1163,8 +1172,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.oLno21ktYgQsXosfVJPbSYhrU3dyTGjfoMiniz6XSOjSZJ0WrhLC
-   XFfhB_j0xY-aoXQjYSDy1FXyka7Y2fXzsA
+   nR0bCI6NDMyMDB9.Jn7yHS5l8QwKCn87zjZkxFfR0-YURYZy2RKUwtlmxL-yIUq73Egk
+   ujj_BFxBdv4-83dss6CcKWbOPAlGwY59Rw
 
 8.2.  Status List Response
 
@@ -1226,29 +1235,29 @@ d2                              # tag(18)
 
    3.  Validate the Status List Token:
 
-       1.  Validate the Status List Token by following the rules defined
+       a.  Validate the Status List Token by following the rules defined
            in section 7.2 of [RFC7519] for JWTs and section 7.2 of
            [RFC8392] for CWTs.  This step might require the resolution
            of a public key as described in Section 11.3.
 
-       2.  Check for the existence of the required claims as defined in
+       b.  Check for the existence of the required claims as defined in
            Section 5.1 and Section 5.2 depending on the token type
 
    4.  All existing claims in the Status List Token MUST be checked
        according to the rules in Section 5.1 and Section 5.2
 
-       1.  The subject claim (sub or 2) of the Status List Token MUST be
+       a.  The subject claim (sub or 2) of the Status List Token MUST be
            equal to the uri claim in the status_list object of the
            Referenced Token
 
-       2.  If the Relying Party has custom policies regarding the
+       b.  If the Relying Party has custom policies regarding the
            freshness of the Status List Token, it SHOULD check the
            issued at claim (iat or 6)
 
-       3.  If the expiration time is defined (exp or 4), it MUST be
+       c.  If the expiration time is defined (exp or 4), it MUST be
            checked if the Status List Token is expired
 
-       4.  If the Relying Party is using a system for caching the Status
+       d.  If the Relying Party is using a system for caching the Status
            List Token, it SHOULD check the ttl claim of the Status List
            Token and retrieve a fresh copy if (time status was resolved
            + ttl < current time)
@@ -1312,8 +1321,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.oLno21ktYgQsXosfVJPbSYhrU3dyTGjfoMiniz6XSOjSZJ0WrhLC
-   XFfhB_j0xY-aoXQjYSDy1FXyka7Y2fXzsA
+   nR0bCI6NDMyMDB9.Jn7yHS5l8QwKCn87zjZkxFfR0-YURYZy2RKUwtlmxL-yIUq73Egk
+   ujj_BFxBdv4-83dss6CcKWbOPAlGwY59Rw
 
 9.  Status List Aggregation
 
@@ -1525,6 +1534,45 @@ d2                              # tag(18)
         │ Status Provider │
         └─────────────────┘
 
+11.4.  Redirection 3xx
+
+   Clients that follow 3xx (Redirection) class of status codes should be
+   aware of possible dangers of redirects, such as infinite redirection
+   loops since they could be used as an attack vector for possible
+   denial of service attacks on clients.  A client SHOULD detect and
+   intervene in cyclical redirections (i.e., "infinite" redirection
+   loops).  More guidance for redirects given in Section 15.4 of
+   [RFC9110] should be applied.
+
+11.5.  Expiration and Caching
+
+   Expiration and caching information is conveyed via the exp and ttl
+   claims as explained in Section 13.7.  Clients should check that both
+   values are within reasonable ranges before requesting new Status List
+   Tokens based on these values to prevent accidentally creating
+   unreasonable amounts of requests for a specific URL.  Status Issuers
+   could accidentally or maliciously use this mechanism to effectively
+   DDoS the contained URL of the Status Provider.
+
+   Concrete values for both claims highly depend on the use-case
+   requirements and clients should be configured with lower/upper bounds
+   for these values that fit their respective use-cases.
+
+11.6.  Status List Token Protection
+
+   This specification allows both, digital signatures using asymmetric
+   cryptography, and Message Authentication Codes (MAC) to be used to
+   protect Status List Tokens.  Implementers should only use MACs to
+   secure the integrity of Status List Tokens if they fully understand
+   the risks of MACs when compared to digital signatures and especially
+   the requirements of their use-case scenarios.  These use-cases
+   typically represent deployments where Status Issuer and Relying Party
+   have a trust relationship and the possibility to securely exchange
+   keys out of band or are the same entity and no other entity needs to
+   verify the Status List Token.  We expect most deployments to use
+   digital signatures for the protection of Status List Tokens and
+   implementers should default to digital signatures if they are unsure.
+
 12.  Privacy Considerations
 
 12.1.  Observability of Issuers
@@ -1590,9 +1638,10 @@ d2                              # tag(18)
    Referenced Token to request the Status List again at a later time.
    By doing so regularly, the Relying Party may create a profile of the
    Referenced Token's validity status.  This behaviour may be intended
-   as a feature, e.g. for a KYC process that requires regular validity
-   checks, but might also be abused in cases where this is not intended
-   and unknown to the Holder, e.g. profiling the suspension of a driving
+   as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer
+   process in finance industry) that requires regular validity checks,
+   but might also be abused in cases where this is not intended and
+   unknown to the Holder, e.g. profiling the suspension of a driving
    license or checking the employment status of an employee credential.
 
    This behaviour could be mitigated by:
@@ -1852,7 +1901,9 @@ d2                              # tag(18)
 
    Ultimately, it's the Relying Parties decision how often to check for
    updates, ecosystems may define their own guidelines and policies for
-   updating the Status List information.
+   updating the Status List information.  Clients should ensure that exp
+   and ttl are within reasonable bounds before creating requests to get
+   a fresh Status List Token (see Section 11.5 for more details).
 
    The following diagram illustrates the relationship between these
    claims and how they are designed to influence caching:
@@ -1953,7 +2004,7 @@ d2                              # tag(18)
    the specification that defines it.
 
    JWT Status Mechanisms are registered by Specification Required
-   [RFC5226] after a three-week review period on the jwt-reg-
+   [RFC8126] after a three-week review period on the jwt-reg-
    review@ietf.org mailing list, on the advice of one or more Designated
    Experts.  However, to allow for the allocation of names prior to
    publication, the Designated Expert(s) may approve registration once
@@ -2079,7 +2130,7 @@ d2                              # tag(18)
    defines it.
 
    CWT Status Mechanisms are registered by Specification Required
-   [RFC5226] after a three-week review period on the cwt-reg-
+   [RFC8126] after a three-week review period on the cwt-reg-
    review@ietf.org mailing list, on the advice of one or more Designated
    Experts.  However, to allow for the allocation of names prior to
    publication, the Designated Expert(s) may approve registration once
@@ -2144,7 +2195,7 @@ d2                              # tag(18)
    registry records a human readable label, the bit representation and a
    common description for it.
 
-   Status Types are registered by Specification Required [RFC5226] after
+   Status Types are registered by Specification Required [RFC8126] after
    a two-week review period on the oauth-ext-review@ietf.org mailing
    list, on the advice of one or more Designated Experts.  However, to
    allow for the allocation of names prior to publication, the
@@ -2387,7 +2438,9 @@ d2                              # tag(18)
 15.1.  Normative References
 
    [CORS]     WHATWG, "Fetch Living Standard", n.d.,
-              <https://fetch.spec.whatwg.org/#http-cors-protocol>.
+              <https://fetch.spec.whatwg.org/commit-
+              snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-
+              cors-protocol>.
 
    [IANA.Core.Params]
               IANA, "Constrained RESTful Environments (CoRE)
@@ -2438,11 +2491,6 @@ d2                              # tag(18)
               RFC 3986, DOI 10.17487/RFC3986, January 2005,
               <https://www.rfc-editor.org/rfc/rfc3986>.
 
-   [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
-              IANA Considerations Section in RFCs", RFC 5226,
-              DOI 10.17487/RFC5226, May 2008,
-              <https://www.rfc-editor.org/rfc/rfc5226>.
-
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
               Infrastructure Certificate and Certificate Revocation List
@@ -2461,6 +2509,11 @@ d2                              # tag(18)
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7519>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              <https://www.rfc-editor.org/rfc/rfc8126>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -2530,9 +2583,9 @@ d2                              # tag(18)
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-11, 15
-              September 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-oauth-sd-jwt-vc-11>.
+              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-12, 20 October
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              oauth-sd-jwt-vc-12>.
 
    [smith2020let]
               Smith, T., Dickinson, L., and K. Seamons, "Let's revoke:
@@ -3134,6 +3187,22 @@ Test vectors for Status List encoding
 Document History
 
    -13
+
+   *  add definition of client to terminology
+
+   *  Make exp and ttl recommended in claim description (fixes
+      inconsistency, was recommended in other text)
+
+   *  Add short security consideraiton on redirects and ttl
+
+   *  fix CORS spec to specific version
+
+   *  explain KYC
+
+   *  link implementation guidance to exp and ttl in Status List Token
+      definition
+
+   *  reference RFC7515 instead of IANA:JOSE
 
    *  add a note that cwt is encoded in raw/binary.
 
