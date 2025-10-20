@@ -20,7 +20,7 @@ jobs:
       contents: write
     steps:
     - name: "Checkout"
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     # Note: No caching for this build!
 
@@ -41,4 +41,5 @@ jobs:
     - name: "Save Archive"
       uses: actions/upload-artifact@v4
       with:
+        name: archive
         path: archive.json

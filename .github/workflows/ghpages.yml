@@ -22,7 +22,7 @@ jobs:
       contents: write
     steps:
     - name: "Checkout"
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: "Setup"
       id: setup
@@ -62,6 +62,7 @@ jobs:
     - name: "Archive Built Drafts"
       uses: actions/upload-artifact@v4
       with:
+        name: drafts
         path: |
           draft-*.html
           draft-*.txt
