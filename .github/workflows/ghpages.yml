@@ -22,18 +22,11 @@ jobs:
       contents: write
     steps:
     - name: "Checkout"
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: "Setup"
       id: setup
       run: date -u "+date=%FT%T" >>"$GITHUB_OUTPUT"
-
-    - name: "Generate examples"
-      run: |
-        npm install -g cborg
-        python3 -m pip install --upgrade pip wheel setuptools==76.1.0
-        python3 -m pip install -r src/requirements.txt
-        python3 src/main.py
 
     - name: "Caching"
       uses: actions/cache@v4
@@ -62,6 +55,7 @@ jobs:
     - name: "Archive Built Drafts"
       uses: actions/upload-artifact@v4
       with:
+        name: drafts
         path: |
           draft-*.html
           draft-*.txt
