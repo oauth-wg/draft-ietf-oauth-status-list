@@ -39,7 +39,7 @@ normative:
   RFC1951: RFC1951
   RFC2046: RFC2046
   RFC3986: RFC3986
-  RFC5226: RFC5226
+  RFC8126: RFC8126
   RFC6838: RFC6838
   RFC7515: RFC7515
   RFC7519: RFC7519
@@ -85,7 +85,7 @@ normative:
     author:
       org: "WHATWG"
     title: "Fetch Living Standard"
-    target: "https://fetch.spec.whatwg.org/#http-cors-protocol"
+    target: "https://fetch.spec.whatwg.org/commit-snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-cors-protocol"
 
 informative:
   RFC6749: RFC6749
@@ -130,7 +130,7 @@ This specification defines a mechanism called Token Status List (abbreviated TSL
 
 # Introduction
 
-Token formats secured by JOSE {{IANA.JOSE}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
+Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
 
 This document defines a Status List data structure that describes the individual statuses of multiple Referenced Tokens. A Referenced Token may be of any format, but is most commonly a data structure secured by JOSE or COSE. The Referenced Token is referenced by the Status List, which describes the status of the Referenced Token. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index corresponds to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format.
 
@@ -244,6 +244,9 @@ Status List Token:
 
 Referenced Token:
 : A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+
+Client:
+: An application that fetches information, such as a Status List Token, from the Status List Provider on behalf of the Holder or Relying Party.
 
 base64url:
 : Denotes the URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
@@ -410,8 +413,8 @@ The following content applies to the JWT Claims Set:
 
 * `sub`: REQUIRED. As generally defined in {{RFC7519}}. The `sub` (subject) claim MUST specify the URI of the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `iat`: REQUIRED. As generally defined in {{RFC7519}}. The `iat` (issued at) claim MUST specify the time at which the Status List Token was issued.
-* `exp`: OPTIONAL. As generally defined in {{RFC7519}}. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by the Status Issuer.
-* `ttl`: OPTIONAL. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number encoded in JSON as a number.
+* `exp`: RECOMMENDED. As generally defined in {{RFC7519}}. The `exp` (expiration time) claim, if present, MUST specify the time at which the Status List Token is considered expired by the Status Issuer. Consider the guidance provided in [](#expiry-and-caching).
+* `ttl`: RECOMMENDED. The `ttl` (time to live) claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number encoded in JSON as a number. Consider the guidance provided in [](#expiry-and-caching).
 * `status_list`: REQUIRED. The `status_list` (status list) claim MUST specify the Status List conforming to the structure defined in [](#status-list-json).
 
 The following additional rules apply:
@@ -442,8 +445,8 @@ The following content applies to the CWT Claims Set:
 
 * `2` (subject): REQUIRED. As generally defined in {{RFC8392}}. The subject claim MUST specify the URI of the Status List Token. The value MUST be equal to that of the `uri` claim contained in the `status_list` claim of the Referenced Token.
 * `6` (issued at): REQUIRED. As generally defined in {{RFC8392}}. The issued at claim MUST specify the time at which the Status List Token was issued.
-* `4` (expiration time): OPTIONAL. As generally defined in {{RFC8392}}. The expiration time claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer.
-* `65534` (time to live): OPTIONAL. Unsigned integer (Major Type 0). The time to live claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number.
+* `4` (expiration time): RECOMMENDED. As generally defined in {{RFC8392}}. The expiration time claim, if present, MUST specify the time at which the Status List Token is considered expired by its issuer. Consider the guidance provided in [](#expiry-and-caching).
+* `65534` (time to live): RECOMMENDED. Unsigned integer (Major Type 0). The time to live claim, if present, MUST specify the maximum amount of time, in seconds, that the Status List Token can be cached by a consumer before a fresh copy SHOULD be retrieved. The value of the claim MUST be a positive number. Consider the guidance provided in [](#expiry-and-caching).
 * `65533` (status list): REQUIRED. The status list claim MUST specify the Status List conforming to the structure defined in [](#status-list-cbor).
 
 The following additional rules apply:
@@ -753,7 +756,7 @@ If the Relying Party does not send an Accept Header, the response type is assume
 
 A successful response that contains a Status List Token MUST use an HTTP status code in the 2xx range.
 
-A response MAY also choose to redirect the client to another URI using an HTTP status code in the 3xx range, which clients SHOULD follow. A client SHOULD detect and intervene in cyclical redirections (i.e., "infinite" redirection loops).
+A response MAY also choose to redirect the client to another URI using an HTTP status code in the 3xx range, which clients SHOULD follow. See [](#redirects) for security considerations on redirects.
 
 The following are non-normative examples of a request and response for a Status List Token with type `application/statuslist+jwt`:
 
@@ -796,18 +799,20 @@ Upon receiving a Referenced Token, a Relying Party MUST first perform the valida
 If this validation is not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
 
 1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jose) for JOSE-based Referenced Tokens and [](#referenced-token-cose) for COSE-based Referenced Tokens. Other formats of Referenced Tokens may define other encoding of the URI and index.
-2. Resolve the Status List Token from the provided URI
-3. Validate the Status List Token:
+1. Resolve the Status List Token from the provided URI
+1. Validate the Status List Token:
     1. Validate the Status List Token by following the rules defined in section 7.2 of {{RFC7519}} for JWTs and section 7.2 of {{RFC8392}} for CWTs. This step might require the resolution of a public key as described in [](#key-management).
-    2. Check for the existence of the required claims as defined in [](#status-list-token-jwt) and [](#status-list-token-cwt) depending on the token type
-4. All existing claims in the Status List Token MUST be checked according to the rules in [](#status-list-token-jwt) and [](#status-list-token-cwt)
+    1. Check for the existence of the required claims as defined in [](#status-list-token-jwt) and [](#status-list-token-cwt) depending on the token type
+    {: type="a"}
+1. All existing claims in the Status List Token MUST be checked according to the rules in [](#status-list-token-jwt) and [](#status-list-token-cwt)
     1. The subject claim (`sub` or `2`) of the Status List Token MUST be equal to the `uri` claim in the `status_list` object of the Referenced Token
-    2. If the Relying Party has custom policies regarding the freshness of the Status List Token, it SHOULD check the issued at claim (`iat` or `6`)
-    3. If the expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
-    4. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
-5. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
-6. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bounds of the Status List
-7. Check the status value as described in [](#status-types)
+    1. If the Relying Party has custom policies regarding the freshness of the Status List Token, it SHOULD check the issued at claim (`iat` or `6`)
+    1. If the expiration time is defined (`exp` or `4`), it MUST be checked if the Status List Token is expired
+    1. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
+    {: type="a"}
+1. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
+1. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). Fail if the provided index is out of bounds of the Status List
+1. Check the status value as described in [](#status-types)
 
 If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
 
@@ -979,6 +984,20 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
      └─────────────────┘
 ~~~
 
+## Redirection 3xx {#redirects}
+
+Clients that follow 3xx (Redirection) class of status codes should be aware of possible dangers of redirects, such as infinite redirection loops since they could be used as an attack vector for possible denial of service attacks on clients. A client SHOULD detect and intervene in cyclical redirections (i.e., "infinite" redirection loops). More guidance for redirects given in Section 15.4 of {{RFC9110}} should be applied.
+
+## Expiration and Caching {#security-ttl}
+
+Expiration and caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients should check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Issuers could accidentally or maliciously use this mechanism to effectively DDoS the contained URL of the Status Provider.
+
+Concrete values for both claims highly depend on the use-case requirements and clients should be configured with lower/upper bounds for these values that fit their respective use-cases.
+
+## Status List Token Protection {#security-mac}
+
+This specification allows both, digital signatures using asymmetric cryptography, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers should only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. These use-cases typically represent deployments where Status Issuer and Relying Party have a trust relationship and the possibility to securely exchange keys out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the protection of Status List Tokens and implementers should default to digital signatures if they are unsure.
+
 # Privacy Considerations {#privacy-considerations}
 
 ## Observability of Issuers {#privacy-issuer}
@@ -1007,7 +1026,7 @@ This malicious behavior can be detected by Relying Parties that request large am
 
 ## Observability of Relying Parties {#privacy-relying-party}
 
-Once the Relying Party receives the Referenced Token, this enables them to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for a KYC process that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
+Once the Relying Party receives the Referenced Token, this enables them to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
 
 This behaviour could be mitigated by:
 
@@ -1109,7 +1128,7 @@ If the roles of the Issuer of the Referenced Token and the Status Issuer are per
 
 If the roles of the Status Issuer and the Status Provider are performed by different entities, this may allow for greater scalability, as the Status List Tokens may be served by operators with greater resources, like CDNs. At the same time the authenticity and integrity of Token Status List is still guaranteed, as it is signed by the Status Issuer.
 
-## Status List Update Interval and Caching
+## Status List Update Interval and Caching {#expiry-and-caching}
 
 Status Issuers have two options to communicate their update interval policy for the status of their Referenced Tokens:
 
@@ -1124,7 +1143,7 @@ When fetching a Status List Token, Relying Parties must carefully evaluate how l
 - After initial fetching, the Relying Party checks for updates at time of `iat` + `ttl`. This method ensures the most up-to-date information for critical use cases. The Relying Party should account a minimal offset due to the signing and distribution process of the Status Issuer.
 - If no `ttl` is given, then Relying Party SHOULD check for updates latest after time of `exp`.
 
-Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information.
+Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information. Clients should ensure that `exp` and `ttl` are within reasonable bounds before creating requests to get a fresh Status List Token (see [](#security-ttl) for more details).
 
 The following diagram illustrates the relationship between these claims and how they are designed to influence caching:
 
@@ -1199,7 +1218,7 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 
 This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
-JWT Status Mechanisms are registered by Specification Required {{RFC5226}} after a three-week
+JWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.
@@ -1278,7 +1297,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
-CWT Status Mechanisms are registered by Specification Required {{RFC5226}} after a three-week
+CWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
 review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
@@ -1319,7 +1338,7 @@ Specification Document(s):
 
 This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human readable label, the bit representation and a common description for it.
 
-Status Types are registered by Specification Required {{RFC5226}} after a two-week
+Status Types are registered by Specification Required {{RFC8126}} after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
@@ -1910,6 +1929,13 @@ CBOR encoding:
 
 -13
 
+* add definition of client to terminology
+* Make exp and ttl recommended in claim description (fixes inconsistency, was recommended in other text)
+* Add short security consideraiton on redirects and ttl
+* fix CORS spec to specific version
+* explain KYC
+* link implementation guidance to exp and ttl in Status List Token definition
+* reference RFC7515 instead of IANA:JOSE
 * add a note that cwt is encoded in raw/binary.
 * added further privacy consideration around issuer tracking using unique URIs
 
