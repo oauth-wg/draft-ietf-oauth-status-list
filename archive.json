@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-19T00:21:11.365145+00:00",
+  "timestamp": "2025-10-21T00:19:07.152133+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6078,15 +6078,15 @@
       "id": "I_kwDOJZ2aqs7QH63u",
       "title": "Feedback from AD review",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/304",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "> Introduction:  JOSE Tokens has a reference to the IANA registry?  Is there something other than JWT?  Why not RFC 7515 or one of the other JWT references?\n\n> Section 1.2: no reply necessary, I'm a PKIX Person, these are observations: OCSP stapling:  This is only 'less up-to-date' if the server doesn't pull OCSP responses 'often enough'.  The larger issue is that the OCSP Staple has to be requested by the client (or RP in your language).    Web PKI is going the route of short lived certificates as none of the other mechanisms have scaled.  It will be interesting to see if the token status list concept works better.  \n\n> Section 5.1 and 5.2, exp, ttl:  In PKIX, this time is not technically an expiry, but an expectation of the next time to issue.  It is, however, treated like an expiry, which means that systems lock up and refuse connections if they don't have fresher CRLs.  Is that what you want here?  The ttl option, which might be less prone to misunderstanding, if it is listed as a time period vice a point in time.  Also, a ref to the diagram at the end of 13.7 might help (it certainly helped me understand how you intended these two values to work together).\n\n> Section 5.1 and 5.2, #2:  Signature or a MAC algorithm?  Keyed MAC?  MACs can (generally) be recomputed, which you don't want.\n\n> Section 8.1, para 6:  Seems like it could be dangerous. Please add something to Sec Cons to address the potential issues w/ redirects (why is an infinite redirect bad).\n\n> Section 8.3:  numbered lists within numbered lists, there has to be a better way, maybe numbered lists with alpha sub lists?\n\n> Section 11:  Add a mention of how expired or out of time TTL settings can be used as a denial of service mechanism.  There are a bunch of ways this can happen, for example, the entity that generates the token status list is down, or promulgation of the token status list is blocked.  Is there a mitigation for user/integrators of this type of service?\n\n> Section 11/13, compression vulnerabilities: I don't want to hold up this draft, but I need to consult, as I haven't dealt with compression issues in a million years (or it seems that way).  If there are known issues with zlib and DEFLATE, we need to mention the issue in Section 11 and the mitigation in Section 13 (or some other reasonable combination).  \n\n> Section 12.3:  KYC?\n\n> Section 13.7:  Is there guidance on how an issuer should choose both exp and ttl?  If the ttl/exp are too long, a RP doesn't know to check for a refreshed token status list?  If the ttl/exp are too short then there might be a DOS when the status token list is not refreshed in time.  \n\n> Section 14.7:  (no change required to the draft) If this request for registration has already been made, please send me the link to the mail archive.  If this request has not yet been made, please do that ASAP in accordance with RFC 6838 (and supply me the link to the mail archive).  These requests often take some time, and require some nudging.\n\n> Normative Reference:  Living standards are not classically acceptable as normative standards in IETF specifications. Can you get either a permanent anchor or a snapshot for the (https://whatwg.org/working-mode#anchors) [CORS] reference?  (for an example see draft-ietf-oauth-browser-based-apps)\n\n> Normative Reference:  RFC 5226 has been obsoleted by RFC 8126, should this be updated?\n",
       "createdAt": "2025-10-07T14:27:06Z",
-      "updatedAt": "2025-10-13T11:29:20Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-20T17:51:49Z",
+      "closedAt": "2025-10-20T17:51:48Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -6108,6 +6108,13 @@
           "body": "> I witnessed a contradiction in the current draft - Section 5.1 says `exp` and `ttl` is OPTIONAL. Section 13.7 gives guidance for those values saying \"Both `ttl` and `exp` are RECOMMENDED to be used by the Status Issuer.\" So should we update Section 5.1 and 5.2?\n\nI think recommending both values makes sense - imho let's update section 5.1/5.2?",
           "createdAt": "2025-10-13T11:29:20Z",
           "updatedAt": "2025-10-13T11:29:20Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Solved in #305 ",
+          "createdAt": "2025-10-20T17:51:48Z",
+          "updatedAt": "2025-10-20T17:51:48Z"
         }
       ]
     }
@@ -20352,24 +20359,26 @@
       "id": "PR_kwDOJZ2aqs6tTmso",
       "title": "AD review",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/305",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-12T12:14:44Z",
-      "updatedAt": "2025-10-18T20:52:49Z",
+      "updatedAt": "2025-10-20T17:50:44Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "0e47997a5048bcaefb43241296a67933a4d2e271",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/ad_review",
-      "headRefOid": "1cf7266e33cc53dc2824d03be8baaf7d459a3ba6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "931d6538e8cadf5d03fae9d17c37bcc73b083289",
+      "closedAt": "2025-10-20T17:50:44Z",
+      "mergedAt": "2025-10-20T17:50:44Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "e5444f017cccb8dc9ac787d6085359757351eb13"
+      },
       "comments": [
         {
           "author": "c2bo",
@@ -20425,8 +20434,181 @@
               "updatedAt": "2025-10-14T06:15:38Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7H8P5A",
+          "commit": {
+            "abbreviatedOid": "1cf7266"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-19T10:09:46Z",
+          "updatedAt": "2025-10-19T10:09:46Z",
+          "comments": [
+            {
+              "originalPosition": 99,
+              "body": "```suggestion\r\nExpiration and caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients should check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Issuers could accidentally or maliciously use this mechanism to effectively DDoS the contained URL of the Status Provider.\r\n```",
+              "createdAt": "2025-10-19T10:09:46Z",
+              "updatedAt": "2025-10-19T10:09:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7H8P74",
+          "commit": {
+            "abbreviatedOid": "1cf7266"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-19T10:10:20Z",
+          "updatedAt": "2025-10-19T10:10:21Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "```suggestion\r\nConcrete values for both claims highly depend on the use-case requirements and clients should be configured with lower/upper bounds for these values that fit their respective use-cases.\r\n```",
+              "createdAt": "2025-10-19T10:10:20Z",
+              "updatedAt": "2025-10-19T10:10:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7H8SWb",
+          "commit": {
+            "abbreviatedOid": "1cf7266"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-19T10:42:32Z",
+          "updatedAt": "2025-10-19T10:42:32Z",
+          "comments": [
+            {
+              "originalPosition": 105,
+              "body": "```suggestion\r\nThis specification allows both, cryptographic signatures, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers should only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. These use-cases typically represent deployments where Status Issuer and Relying Party have a trust relationship and the possibility to securely exchange keys out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the protection of Status List Tokens and implementers should default to digital signatures if they are unsure.\r\n```",
+              "createdAt": "2025-10-19T10:42:32Z",
+              "updatedAt": "2025-10-19T10:42:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7H8Sag",
+          "commit": {
+            "abbreviatedOid": "1cf7266"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-19T10:43:26Z",
+          "updatedAt": "2025-10-19T10:43:26Z",
+          "comments": [
+            {
+              "originalPosition": 97,
+              "body": "```suggestion\r\n## Expiration and Caching {#security-ttl}\r\n```",
+              "createdAt": "2025-10-19T10:43:26Z",
+              "updatedAt": "2025-10-19T10:43:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7H8VcI",
+          "commit": {
+            "abbreviatedOid": "1cf7266"
+          },
+          "author": "ASISBusiness",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-19T11:22:23Z",
+          "updatedAt": "2025-10-19T11:22:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7H8bhv",
+          "commit": {
+            "abbreviatedOid": "c1f3257"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-19T12:30:48Z",
+          "updatedAt": "2025-10-19T12:30:48Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7IHMFp",
+          "commit": {
+            "abbreviatedOid": "76a2dc7"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-20T17:24:08Z",
+          "updatedAt": "2025-10-20T17:24:09Z",
+          "comments": [
+            {
+              "originalPosition": 115,
+              "body": "```suggestion\r\nThis specification allows both, digital signatures using asymmetric cryptography, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers should only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. These use-cases typically represent deployments where Status Issuer and Relying Party have a trust relationship and the possibility to securely exchange keys out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the protection of Status List Tokens and implementers should default to digital signatures if they are unsure.\r\n```",
+              "createdAt": "2025-10-20T17:24:08Z",
+              "updatedAt": "2025-10-20T17:24:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7IHNt6",
+          "commit": {
+            "abbreviatedOid": "76a2dc7"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "One minor nit otherwise approved.",
+          "createdAt": "2025-10-20T17:26:28Z",
+          "updatedAt": "2025-10-20T17:26:28Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 306,
+      "id": "PR_kwDOJZ2aqs6uuttk",
+      "title": "Update tooling again",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/306",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "- Updates gh workflows to most recent version\r\n- Fixes bug with relative ::include paths breaking the release pipeline",
+      "createdAt": "2025-10-20T23:28:22Z",
+      "updatedAt": "2025-10-20T23:33:36Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "126c162377929c12ae38966c0d1c8c107ad87a50",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "update-tooling-again",
+      "headRefOid": "ef5f881700882fc0729d1413e042ca70f449b34c",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "How in the world did you figure this out! Also why are my older ones working fine still?",
+          "createdAt": "2025-10-20T23:33:36Z",
+          "updatedAt": "2025-10-20T23:33:36Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
