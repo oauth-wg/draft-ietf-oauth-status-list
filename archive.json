@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-21T00:19:07.152133+00:00",
+  "timestamp": "2025-10-23T00:18:50.843316+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -20588,7 +20588,7 @@
       "labels": [],
       "body": "- Updates gh workflows to most recent version\r\n- Fixes bug with relative ::include paths breaking the release pipeline",
       "createdAt": "2025-10-20T23:28:22Z",
-      "updatedAt": "2025-10-20T23:33:36Z",
+      "updatedAt": "2025-10-21T00:35:27Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "126c162377929c12ae38966c0d1c8c107ad87a50",
@@ -20606,9 +20606,37 @@
           "body": "How in the world did you figure this out! Also why are my older ones working fine still?",
           "createdAt": "2025-10-20T23:33:36Z",
           "updatedAt": "2025-10-20T23:33:36Z"
+        },
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "> How in the world did you figure this out! Also why are my older ones working fine still?\r\n\r\nit only breaks if you are including with `./<some_path>` - it breaks with a leading `.` and I would assume you don't have that in your includes?\r\n\r\nThis shellscript here seems to be the one that breaks: https://github.com/martinthomson/i-d-template/blob/00a2d981cb9fde43aae6caca4d69737bdf4dc23f/build-targets.sh#L105. Changing to normal include paths fixed the copy for me - I could see empty files being created otherwise in the folder that gets created by the script.",
+          "createdAt": "2025-10-21T00:33:07Z",
+          "updatedAt": "2025-10-21T00:35:09Z"
+        },
+        {
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "body": "Nice, yeah I think I only have like 1 or 2 drafts that even use an include in the first place. Glad you got it sorted!",
+          "createdAt": "2025-10-21T00:35:26Z",
+          "updatedAt": "2025-10-21T00:35:26Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7ILOpX",
+          "commit": {
+            "abbreviatedOid": "ef5f881"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-21T00:24:06Z",
+          "updatedAt": "2025-10-21T00:24:06Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
