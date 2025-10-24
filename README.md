@@ -35,7 +35,7 @@ Command line usage requires that you have the necessary software installed.  See
 | [OWF sd-jwt-js](https://github.com/openwallet-foundation/sd-jwt-js)                                               | TypeScript | yes    | yes    | yes           |
 | [Adorsys status-list-server](https://github.com/adorsys/status-list-server)                                       | Rust       | yes    | no     | no            |
 | [Bundesdruckerei issuer](https://github.com/Bundesdruckerei-GmbH/pid-issuer/tree/main/status-list-service-0.1.11) | Kotlin     | yes    | yes    | yes           |
-| [eudi-wallet-it-python](https://github.com/italia/eudi-wallet-it-python/blob/main/pyeudiw/status_list)            | Python     | no     | yes    | no            |
+| [eudi-wallet-it-python](https://github.com/italia/eudi-wallet-it-python/blob/main/pyeudiw/status_list)            | Python     | yes     | no    | yes            |
 
 
 ## Testing
