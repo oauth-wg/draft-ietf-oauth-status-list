@@ -351,13 +351,13 @@ This section defines the data structure for a JSON-encoded Status List:
 The following example illustrates the JSON representation of the Status List with `bits` 1 from the example above:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding_json}
+{::include examples/status_list_encoding_json}
 ~~~~~~~~~~
 
 The following example illustrates the JSON representation of the Status List with `bits` 2 from the example above:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding2_json}
+{::include examples/status_list_encoding2_json}
 ~~~~~~~~~~
 
 See section [](#test-vectors) for more test vectors.
@@ -384,13 +384,13 @@ StatusList = {
 The following example illustrates the CBOR representation of the Status List in Hex:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding_cbor}
+{::include examples/status_list_encoding_cbor}
 ~~~~~~~~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding_cbor_diag}
+{::include examples/status_list_encoding_cbor_diag}
 ~~~~~~~~~~
 
 See section [](#test-vectors) for more test vectors.
@@ -430,7 +430,7 @@ The following additional rules apply:
 The following is a non-normative example of a Status List Token in JWT format:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_jwt}
+{::include examples/status_list_jwt}
 ~~~~~~~~~~
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
@@ -462,13 +462,13 @@ The following additional rules apply:
 The following is a non-normative example of a Status List Token in CWT format in Hex:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_cwt}
+{::include examples/status_list_cwt}
 ~~~~~~~~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_cwt_diag}
+{::include examples/status_list_cwt_diag}
 ~~~~~~~~~~
 
 # Referenced Token {#referenced-token}
@@ -570,13 +570,13 @@ Application of additional restrictions and policies are at the discretion of the
 The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
 ~~~~~~~~~~
-{::include ./examples/referenced_token_cwt}
+{::include examples/referenced_token_cwt}
 ~~~~~~~~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
-{::include ./examples/referenced_token_cwt_diag}
+{::include examples/referenced_token_cwt_diag}
 ~~~~~~~~~~
 
 ISO mdoc {{ISO.mdoc}} may utilize the Status List mechanism by introducing the `status` parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The `status` parameter uses the same encoding as a CWT as defined in {{referenced-token-cose}}.
@@ -773,7 +773,7 @@ Accept: application/statuslist+jwt
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
 
-{::include ./examples/status_list_jwt_raw}
+{::include examples/status_list_jwt_raw}
 ~~~
 
 ## Status List Response {#status-list-response}
@@ -840,7 +840,7 @@ The following is a non-normative example of a response for the above Request:
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
 
-{::include ./examples/status_list_jwt_raw}
+{::include examples/status_list_jwt_raw}
 ~~~
 
 # Status List Aggregation {#aggregation}
@@ -1572,13 +1572,13 @@ status[1000345]=1
 JSON encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding1_long_json}
+{::include examples/status_list_encoding1_long_json}
 ~~~~~~~~~~
 
 CBOR encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding1_long_cbor}
+{::include examples/status_list_encoding1_long_cbor}
 ~~~~~~~~~~
 
 ## 2 bit Status List
@@ -1603,13 +1603,13 @@ status[1000345]=3
 JSON encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding2_long_json}
+{::include examples/status_list_encoding2_long_json}
 ~~~~~~~~~~
 
 CBOR encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding2_long_cbor}
+{::include examples/status_list_encoding2_long_cbor}
 ~~~~~~~~~~
 
 ## 4 bit Status List
@@ -1638,13 +1638,13 @@ status[1030205]=15
 JSON encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding4_json}
+{::include examples/status_list_encoding4_json}
 ~~~~~~~~~~
 
 CBOR encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding4_cbor}
+{::include examples/status_list_encoding4_cbor}
 ~~~~~~~~~~
 
 ## 8 bit Status List
@@ -1914,13 +1914,13 @@ status[19535] = 255
 JSON encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding8_json}
+{::include examples/status_list_encoding8_json}
 ~~~~~~~~~~
 
 CBOR encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding8_cbor}
+{::include examples/status_list_encoding8_cbor}
 ~~~~~~~~~~
 
 
