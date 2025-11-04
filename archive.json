@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-26T00:20:38.814711+00:00",
+  "timestamp": "2025-11-04T00:19:26.668785+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6117,6 +6117,22 @@
           "updatedAt": "2025-10-20T17:51:48Z"
         }
       ]
+    },
+    {
+      "number": 308,
+      "id": "I_kwDOJZ2aqs7Vd4dy",
+      "title": "Wording section \"Referenced token in COSE\"",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/308",
+      "state": "OPEN",
+      "author": "atezet",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "While working on an implementation of the latest draft, I was confused about how to include a referenced token in ISO mdoc. The section starts of with:\n\n> The Referenced Token MAY be encoded as a \"COSE Web Token (CWT)\" object ...\n\nFirst of all, this must be a typo _CBOR_ Web Token (see https://www.rfc-editor.org/rfc/rfc8392). But then, after showing an example of a CWT, it seamlessly transitions into a description of how to include the status parameter in the MSO:\n\n> ISO mdoc may utilize the Status List mechanism by introducing the status parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The status parameter uses the same encoding as a CWT as defined in Section 6.3.\n\nHere, there is no Section 9.1.2 in this draft, but it also says the CWT encoding is used. However, what follows is an example of an IssuerAuth with a `status` field _not_ using the CWT encoding just described.\n\nFor now, I went with what the last example shows, as ISO mdoc doesn't use CWT encoding (to my knowledge). I feel like these should either be two (sub)sections, or the first part (describing the CWT encoding) is not needed at all.\n\nPlease let me know if anything I wrote is unclear.",
+      "createdAt": "2025-11-03T10:09:07Z",
+      "updatedAt": "2025-11-03T10:09:07Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
