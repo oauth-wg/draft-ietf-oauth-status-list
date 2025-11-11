@@ -1967,6 +1967,10 @@ CBOR encoding:
 # Document History
 {:numbered="false"}
 
+-14
+
+* Add ASN.1 module
+
 -13
 
 * add definition of client to terminology
