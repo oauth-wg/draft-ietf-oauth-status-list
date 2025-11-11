@@ -1505,7 +1505,8 @@ The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
 
 OauthStatusSigning-EKU
   { iso(1) identified-organization(3) dod(6) internet(1)
-  security(5) mechanisms(5) pkix(7) id-mod(0) id-mod-oauth-status-signing-eku (TBD) }
+    security(5) mechanisms(5) pkix(7) id-mod(0)
+    id-mod-oauth-status-signing-eku (TBD) }
 
 DEFINITIONS IMPLICIT TAGS ::=
 BEGIN
