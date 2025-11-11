@@ -90,12 +90,12 @@ normative:
     title: "Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation"
     author:
       org: International Telecommunications Union
-    date: "02/2021"
+    date: "13.02.2021"
   X.690:
     title: "Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"
     author:
       org: International Telecommunications Union
-    date: "02/2021"
+    date: "13.02.2021"
 
 informative:
   RFC6749: RFC6749
