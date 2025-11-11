@@ -86,6 +86,16 @@ normative:
       org: "WHATWG"
     title: "Fetch Living Standard"
     target: "https://fetch.spec.whatwg.org/commit-snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-cors-protocol"
+  X.680:
+    title: "Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation"
+    author:
+      org: International Telecommunications Union
+    date: "02/2021"
+  X.690:
+    title: "Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"
+    author:
+      org: International Telecommunications Union
+    date: "02/2021"
 
 informative:
   RFC6749: RFC6749
@@ -916,7 +926,7 @@ The following OID is defined for usage in the EKU extension
 ~~~
   id-kp  OBJECT IDENTIFIER  ::=
        { iso(1) identified-organization(3) dod(6) internet(1)
-         security(5) mechanisms(5) pkix(7) 3 }
+         security(5) mechanisms(5) pkix(7) kp(3) }
 
   id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
 ~~~
@@ -1482,7 +1492,36 @@ RESTful Environments (CoRE) Parameters" Registry [IANA.Core.Params]:
 
 ## X.509 Certificate Extended Key Purpose OID Registration
 
-IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section [](#eku).
+IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section [](#eku).
+
+IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0), this OID is defined in section [](#asn1-module).
+
+# Appendix A. ASN.1 Module {#asn1-module}
+{:numbered="false"}
+
+The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
+
+~~~
+
+OauthStatusSigning-EKU
+  { iso(1) identified-organization(3) dod(6) internet(1)
+  security(5) mechanisms(5) pkix(7) id-mod(0) id-mod-oauth-status-signing-eku (TBD) }
+
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
+
+-- OID Arc
+
+id-kp OBJECT IDENTIFIER ::=
+  { iso(1) identified-organization(3) dod(6) internet(1)
+    security(5) mechanisms(5) pkix(7) kp(3) }
+
+-- Extended Key Usage Values
+
+id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
+
+END
+~~~
 
 --- back
 
