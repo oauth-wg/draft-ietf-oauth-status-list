@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-04T00:19:26.668785+00:00",
+  "timestamp": "2025-11-13T00:19:52.583174+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6131,6 +6131,22 @@
       "body": "While working on an implementation of the latest draft, I was confused about how to include a referenced token in ISO mdoc. The section starts of with:\n\n> The Referenced Token MAY be encoded as a \"COSE Web Token (CWT)\" object ...\n\nFirst of all, this must be a typo _CBOR_ Web Token (see https://www.rfc-editor.org/rfc/rfc8392). But then, after showing an example of a CWT, it seamlessly transitions into a description of how to include the status parameter in the MSO:\n\n> ISO mdoc may utilize the Status List mechanism by introducing the status parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The status parameter uses the same encoding as a CWT as defined in Section 6.3.\n\nHere, there is no Section 9.1.2 in this draft, but it also says the CWT encoding is used. However, what follows is an example of an IssuerAuth with a `status` field _not_ using the CWT encoding just described.\n\nFor now, I went with what the last example shows, as ISO mdoc doesn't use CWT encoding (to my knowledge). I feel like these should either be two (sub)sections, or the first part (describing the CWT encoding) is not needed at all.\n\nPlease let me know if anything I wrote is unclear.",
       "createdAt": "2025-11-03T10:09:07Z",
       "updatedAt": "2025-11-03T10:09:07Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 309,
+      "id": "I_kwDOJZ2aqs7XPvfv",
+      "title": "Provide ASN.1 module",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/309",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Feedback regarding IANA registration of Extended Key Usage OID:\n\n> I think that a key purpose for OAuth signing is a good idea, but the I-D should include an ASN.1 module.\n\n> See Appendix A of https://datatracker.ietf.org/doc/draft-jpfiset-lamps-attestationkey-eku/ for an example.",
+      "createdAt": "2025-11-11T08:23:46Z",
+      "updatedAt": "2025-11-11T08:23:46Z",
       "closedAt": null,
       "comments": []
     }
@@ -20695,6 +20711,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 310,
+      "id": "PR_kwDOJZ2aqs6ytO_B",
+      "title": "Add asn.1 module",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/310",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #309 \r\n\r\nPreview: https://drafts.oauth.net/draft-ietf-oauth-status-list/309-asn1-module/draft-ietf-oauth-status-list.html",
+      "createdAt": "2025-11-11T08:58:42Z",
+      "updatedAt": "2025-11-11T14:39:16Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "dce1285ddbdd3ea097120800715cb51ef2f2c851",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "309-asn1-module",
+      "headRefOid": "eaa3d7ea8b8451424740940fabd6785e7fc4b2cc",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
