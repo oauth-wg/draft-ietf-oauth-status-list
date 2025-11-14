@@ -1501,6 +1501,8 @@ IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" in the "SM
 
 The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
 
+<CODE BEGINS>
+
 ~~~
 
 OauthStatusSigning-EKU
@@ -1517,12 +1519,14 @@ id-kp OBJECT IDENTIFIER ::=
   { iso(1) identified-organization(3) dod(6) internet(1)
     security(5) mechanisms(5) pkix(7) kp(3) }
 
--- Extended Key Usage Values
+-- OAuth Extended Key Usage
 
 id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
 
 END
 ~~~
+
+<CODE ENDS>
 
 --- back
 
