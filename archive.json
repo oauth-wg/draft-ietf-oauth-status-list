@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-13T00:19:52.583174+00:00",
+  "timestamp": "2025-11-16T00:21:38.358588+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -20613,24 +20613,26 @@
       "id": "PR_kwDOJZ2aqs6uuttk",
       "title": "Update tooling again",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/306",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "- Updates gh workflows to most recent version\r\n- Fixes bug with relative ::include paths breaking the release pipeline",
       "createdAt": "2025-10-20T23:28:22Z",
-      "updatedAt": "2025-10-21T00:35:27Z",
+      "updatedAt": "2025-11-14T16:43:19Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "126c162377929c12ae38966c0d1c8c107ad87a50",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "update-tooling-again",
       "headRefOid": "ef5f881700882fc0729d1413e042ca70f449b34c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-11-14T16:43:19Z",
+      "mergedAt": "2025-11-14T16:43:18Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "a9749fabbd5a8c7c55588950167ac4446782bf4e"
+      },
       "comments": [
         {
           "author": "aaronpk",
@@ -20724,19 +20726,85 @@
       "labels": [],
       "body": "Closes #309 \r\n\r\nPreview: https://drafts.oauth.net/draft-ietf-oauth-status-list/309-asn1-module/draft-ietf-oauth-status-list.html",
       "createdAt": "2025-11-11T08:58:42Z",
-      "updatedAt": "2025-11-11T14:39:16Z",
+      "updatedAt": "2025-11-14T17:10:35Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "dce1285ddbdd3ea097120800715cb51ef2f2c851",
+      "baseRefOid": "a9749fabbd5a8c7c55588950167ac4446782bf4e",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "309-asn1-module",
-      "headRefOid": "eaa3d7ea8b8451424740940fabd6785e7fc4b2cc",
+      "headRefOid": "b0631011f6ff5fd30a8e3ef70cc1715c8765d06e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7OYsty",
+          "commit": {
+            "abbreviatedOid": "eaa3d7e"
+          },
+          "author": "seanturner",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "Just minor nits!",
+          "createdAt": "2025-11-14T03:12:31Z",
+          "updatedAt": "2025-11-14T03:14:55Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\n\n<CODE BEGINS>\n\n```",
+              "createdAt": "2025-11-14T03:12:31Z",
+              "updatedAt": "2025-11-14T03:14:55Z"
+            },
+            {
+              "originalPosition": 56,
+              "body": "```suggestion\n-- OAuth Extended Key Usage\n```",
+              "createdAt": "2025-11-14T03:13:01Z",
+              "updatedAt": "2025-11-14T03:14:55Z"
+            },
+            {
+              "originalPosition": 61,
+              "body": "```suggestion\n~~~\n\n<CODE ENDS>\n```",
+              "createdAt": "2025-11-14T03:14:02Z",
+              "updatedAt": "2025-11-14T03:14:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7Ok-bi",
+          "commit": {
+            "abbreviatedOid": "497ad60"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-14T16:40:45Z",
+          "updatedAt": "2025-11-14T16:48:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7OlGQl",
+          "commit": {
+            "abbreviatedOid": "2bd170c"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-11-14T16:47:10Z",
+          "updatedAt": "2025-11-14T16:47:10Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "I think this would be the correct way to add the CODE BEGINS part (inside the code block)?\r\n```suggestion\r\n~~~\r\n<CODE BEGINS>\r\n\r\n  OauthStatusSigning-EKU\r\n    { iso(1) identified-organization(3) dod(6) internet(1)\r\n      security(5) mechanisms(5) pkix(7) id-mod(0)\r\n      id-mod-oauth-status-signing-eku (TBD) }\r\n\r\n  DEFINITIONS IMPLICIT TAGS ::=\r\n  BEGIN\r\n\r\n  -- OID Arc\r\n\r\n  id-kp OBJECT IDENTIFIER ::=\r\n    { iso(1) identified-organization(3) dod(6) internet(1)\r\n      security(5) mechanisms(5) pkix(7) kp(3) }\r\n\r\n  -- OAuth Extended Key Usage\r\n\r\n  id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }\r\n\r\n  END\r\n\r\n<CODE ENDS>\r\n~~~\r\n```",
+              "createdAt": "2025-11-14T16:47:10Z",
+              "updatedAt": "2025-11-14T16:47:10Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
