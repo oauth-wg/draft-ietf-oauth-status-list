@@ -556,14 +556,18 @@ The resulting payload of the example above:
 
 ## Referenced Token in COSE {#referenced-token-cose}
 
-The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}} or other formats based on COSE.
+The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}} or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:
 
-The following content applies to the CWT Claims Set:
-
-* `65535` (status): REQUIRED. The status claim is encoded as a `Status` CBOR structure and MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents. This specification defines the following data items:
+ * The `Status` CBOR structure is a Map that MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.
   * `status_list` (status list): REQUIRED when the status mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
     * `idx`: REQUIRED. Unsigned integer (Major Type 0) The `idx` (index) claim MUST specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.
     * `uri`: REQUIRED. Text string (Major Type 3). The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
+
+### CBOR Web Token (CWT) {#referenced-token-cwt}
+
+The following content applies to the CWT Claims Set:
+
+* `65535` (status): REQUIRED. The status claim contains the `Status` CBOR structure as described in [](#referenced-token-cose).
 
 Application of additional restrictions and policies are at the discretion of the Relying Party.
 
@@ -579,7 +583,9 @@ The following is the CBOR Annotated Hex output of the example above:
 {::include ./examples/referenced_token_cwt_diag}
 ~~~~~~~~~~
 
-ISO mdoc {{ISO.mdoc}} may utilize the Status List mechanism by introducing the `status` parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2 of {{ISO.mdoc}}. The `status` parameter uses the same encoding as a CWT as defined in {{referenced-token-cose}}.
+### ISO mdoc {#referenced-token-mdoc}
+
+ISO mdoc {{ISO.mdoc}} may utilize the Status List mechanism by introducing the `status` parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2 of {{ISO.mdoc}}. The `status` parameter contains the `Status` CBOR structure as described in [](#referenced-token-cose).
 
 It is RECOMMENDED to use `status` for the label of the field that contains the `Status` CBOR structure.
 
@@ -1926,6 +1932,10 @@ CBOR encoding:
 
 # Document History
 {:numbered="false"}
+
+-14
+
+* slightly restructure/clarify referenced token cose section
 
 -13
 
