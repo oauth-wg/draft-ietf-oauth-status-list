@@ -293,12 +293,12 @@ These bits are concatenated:
 
 ~~~ ascii-art
 
-byte no            0                  1               2
-bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7
-           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
-values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|  |0|...
-           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
-index       7 6 5 4 3 2 1 0   15   ...  10 9 8   23
+byte no            0                  1        
+bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0 
+           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|
+           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+index       7 6 5 4 3 2 1 0   15   ...  10 9 8 
            \_______________/  \_______________/
 byte value       0xB9               0xA3
 
@@ -725,15 +725,15 @@ A Status List can not represent multiple statuses per Referenced Token. If the S
 
 ## Status Types Values
 
+The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. In particular, a Referenced Token that is evaluated as being expired (e.g. through the `exp` claim) but also has a status of 0x00 ("VALID"), is considered expired.
+
 This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. Additional values may defined for particular use cases. Status Types described by this document comprise:
 
  - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
  - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
  - 0x02 - "SUSPENDED" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is usually temporary.
 
- The Status Type value 0x03 and Status Type values in the range 0x0B until 0x0F are permanently reserved as application specific. The processing of Status Types using these values is application specific. All other Status Type values are reserved for future registration.
-
-The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
+ The Status Type value 0x03 and Status Type values in the range 0x0C until 0x0F are permanently reserved as application specific. The processing of Status Types using these values is application specific. All other Status Type values are reserved for future registration.
 
 See [](#privacy-status-types) for privacy considerations on status types.
 
@@ -885,7 +885,7 @@ The concrete implementation details depend on the specific ecosystem and are out
 
 The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in [](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this URI to retrieve an up-to-date list of relevant Status Lists.
 
-## Status List Aggregation in JSON Format
+## Status List Aggregation Data Structure
 
 This section defines the structure for a JSON-encoded Status List Aggregation:
 
@@ -1926,6 +1926,13 @@ CBOR encoding:
 
 # Document History
 {:numbered="false"}
+
+-14
+
+* removed bytes from graphic that were intepreted as padding bytes
+* removed 0x0B from application-specific Status Type
+* reemphasized that expired tokens with status "VALID" are still expired
+* renamed section "Status List Aggregation in JSON Format" to "Status List Aggregation Data Structure"
 
 -13
 
