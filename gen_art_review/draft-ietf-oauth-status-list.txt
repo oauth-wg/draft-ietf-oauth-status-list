@@ -150,9 +150,10 @@ Table of Contents
      14.7.  Media Type Registration
      14.8.  CoAP Content-Format Registrations
      14.9.  X.509 Certificate Extended Key Purpose OID Registration
-   15. References
-     15.1.  Normative References
-     15.2.  Informative References
+   Appendix A.  ASN.1 Module
+   References
+     Normative References
+     Informative References
    Acknowledgments
    Size comparison
      Status List size for varying sizes and revocation rates
@@ -732,9 +733,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840e6fb5793ffcfb13d6eac7e
-   a1eca344de1e4e9e94147d592daf1e6461c10e056af598c9a3b61357573ec679eed1
-   869ce9cb784a5906b5b4b164c530bb2b53c068
+   646269747301636c73744a78dadbb918000217015d5840b79806aac0373717027b48
+   c0c9598f9d3a471e9d5c1e8181fd4a4705213abce4299a5a171c0da3f5c4d2159309
+   8cd95a66ac9b379ba8683c4e6d8a543239f9ef
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -757,12 +758,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      e6fb5793ffcfb13d6eac7ea1  #       "æûW\x93ÿÏ±=n¬~¡"
-      eca344de1e4e9e94147d592d  #       "ì£DÞ\x1eN\x9e\x94\x14}Y-"
-      af1e6461c10e056af598c9a3  #       "¯\x1edaÁ\x0e\x05jõ\x98É£"
-      b61357573ec679eed1869ce9  #       "¶\x13WW>ÆyîÑ\x86\x9cé"
-      cb784a5906b5b4b164c530bb  #       "ËxJY\x06µ´±dÅ0»"
-      2b53c068                  #       "+SÀh"
+      b79806aac0373717027b48c0  #       "·\x98\x06ªÀ77\x17\x02{HÀ"
+      c9598f9d3a471e9d5c1e8181  #       "ÉY\x8f\x9d:G\x1e\x9d\\x1e\x81\x81"
+      fd4a4705213abce4299a5a17  #       "ýJG\x05!:¼ä)\x9aZ\x17"
+      1c0da3f5c4d21593098cd95a  #       "\x1c\x0d£õÄÒ\x15\x93\x09\x8cÙZ"
+      66ac9b379ba8683c4e6d8a54  #       "f¬\x9b7\x9b¨h<Nm\x8aT"
+      3239f9ef                  #       "29ùï"
 
 6.  Referenced Token
 
@@ -905,37 +906,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158401dc8745f912a1514b0634122a192ac48a7e0a3
-   b0439a231c6696b3260aca5fa04962a8cacdbd6d46df0a07a7aa0470821ecba1e381
-   cd9e27ab5c1c855231a942
+   7374617475736c697374732f3158403b73c6e3bfdd0e6a28b6ad4bb9140e83768d76
+   c8695911fd7d0035400554991b0e3f8c1fefb4a2004bfcb8ee2a88f40cd515c49651
+   bf1b38da52920797b1d106
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         1dc8745f912a1514b0634122  #       "\x1dÈt_\x91*\x15\x14°cA""
-         a192ac48a7e0a3b0439a231c  #       "¡\x92¬H§à£°C\x9a#\x1c"
-         6696b3260aca5fa04962a8ca  #       "f\x96³&\x0aÊ_\xa0Ib¨Ê"
-         cdbd6d46df0a07a7aa047082  #       "Í½mFß\x0a\x07§ª\x04p\x82"
-         1ecba1e381cd9e27ab5c1c85  #       "\x1eË¡ã\x81Í\x9e'«\\x1c\x85"
-         5231a942                  #       "R1©B"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      3b73c6e3bfdd0e6a28b6ad4b  #       ";sÆã¿Ý\x0ej(¶\xadK"
+      b9140e83768d76c8695911fd  #       "¹\x14\x0e\x83v\x8dvÈiY\x11ý"
+      7d0035400554991b0e3f8c1f  #       "}\x005@\x05T\x99\x1b\x0e?\x8c\x1f"
+      efb4a2004bfcb8ee2a88f40c  #       "ï´¢\x00Kü¸î*\x88ô\x0c"
+      d515c49651bf1b38da529207  #       "Õ\x15Ä\x96Q¿\x1b8ÚR\x92\x07"
+      97b1d106                  #       "\x97±Ñ\x06"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1172,8 +1173,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Xa9zEUOFhLl2i_1YDi8zaRwPnDK68oG4R1i8k0gJpBZGj244Py70
-   IPTLYjQUYRald3Pg6odGHSh4DaY0sfUZCQ
+   nR0bCI6NDMyMDB9.2BEoCrroWY4qN84LS16-ia3DnyXrhqbImUb_yzcfPL1bpm9XnHJH
+   qr9b1o9n3NP8H_T3qsDy7NGts8t8KDYxJg
 
 8.2.  Status List Response
 
@@ -1321,8 +1322,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.Xa9zEUOFhLl2i_1YDi8zaRwPnDK68oG4R1i8k0gJpBZGj244Py70
-   IPTLYjQUYRald3Pg6odGHSh4DaY0sfUZCQ
+   nR0bCI6NDMyMDB9.2BEoCrroWY4qN84LS16-ia3DnyXrhqbImUb_yzcfPL1bpm9XnHJH
+   qr9b1o9n3NP8H_T3qsDy7NGts8t8KDYxJg
 
 9.  Status List Aggregation
 
@@ -1432,7 +1433,7 @@ d2                              # tag(18)
 
      id-kp  OBJECT IDENTIFIER  ::=
           { iso(1) identified-organization(3) dod(6) internet(1)
-            security(5) mechanisms(5) pkix(7) 3 }
+            security(5) mechanisms(5) pkix(7) kp(3) }
 
      id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
 
@@ -2428,14 +2429,45 @@ d2                              # tag(18)
 
 14.9.  X.509 Certificate Extended Key Purpose OID Registration
 
-   IANA is also requested to register the following OID
-   "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key
-   Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section
-   Section 10.
+   IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD"
+   in the "SMI Security for PKIX Extended Key Purpose" registry
+   (1.3.6.1.5.5.7.3), this OID is defined in section Section 10.
 
-15.  References
+   IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD"
+   in the "SMI Security for PKIX Module Identifier" registry
+   (1.3.6.1.5.5.7.0), this OID is defined in section
+   Section "Appendix A.  ASN.1 Module".
 
-15.1.  Normative References
+Appendix A.  ASN.1 Module
+
+   The following module adheres to ASN.1 specifications [X.680] and
+   [X.690].
+
+   <CODE BEGINS>
+     OauthStatusSigning-EKU
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) id-mod(0)
+         id-mod-oauth-status-signing-eku (TBD) }
+
+     DEFINITIONS IMPLICIT TAGS ::=
+     BEGIN
+
+     -- OID Arc
+
+     id-kp OBJECT IDENTIFIER ::=
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) kp(3) }
+
+     -- OAuth Extended Key Usage
+
+     id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
+
+     END
+   <CODE ENDS>
+
+References
+
+Normative References
 
    [CORS]     WHATWG, "Fetch Living Standard", n.d.,
               <https://fetch.spec.whatwg.org/commit-
@@ -2553,7 +2585,16 @@ d2                              # tag(18)
               RFC 9596, DOI 10.17487/RFC9596, June 2024,
               <https://www.rfc-editor.org/rfc/rfc9596>.
 
-15.2.  Informative References
+   [X.680]    International Telecommunications Union, "Information
+              Technology - Abstract Syntax Notation One (ASN.1):
+              Specification of basic notation", February 2021.
+
+   [X.690]    International Telecommunications Union, "Information
+              Technology - ASN.1 encoding rules: Specification of Basic
+              Encoding Rules (BER), Canonical Encoding Rules (CER) and
+              Distinguished Encoding Rules (DER)", February 2021.
+
+Informative References
 
    [ISO.mdoc] ISO/IEC JTC 1/SC 17, "ISO/IEC 18013-5:2021 ISO-compliant
               driving licence", n.d..
@@ -3197,6 +3238,8 @@ Document History
 
    *  renamed section "Status List Aggregation in JSON Format" to
       "Status List Aggregation Data Structure"
+
+   *  Add ASN.1 module
 
    -13
 
