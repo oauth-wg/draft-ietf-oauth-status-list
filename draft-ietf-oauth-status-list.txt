@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 18 May 2026                                     Bundesdruckerei
+Expires: 29 May 2026                                     Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                        14 November 2025
+                                                        25 November 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 May 2026.
+   This Internet-Draft will expire on 29 May 2026.
 
 Copyright Notice
 
@@ -150,9 +150,10 @@ Table of Contents
      14.7.  Media Type Registration
      14.8.  CoAP Content-Format Registrations
      14.9.  X.509 Certificate Extended Key Purpose OID Registration
-   15. References
-     15.1.  Normative References
-     15.2.  Informative References
+   Appendix A.  ASN.1 Module
+   References
+     Normative References
+     Informative References
    Acknowledgments
    Size comparison
      Status List size for varying sizes and revocation rates
@@ -732,9 +733,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d58405c2eeb44b36a8bd030c7ee
-   f77ad79afd0ce73ff9bb40847eaa1f1c4d6ca227fdeb3fc35fe3588af24baa75a602
-   376a806574131897289d0667e9b9a3873f0a9e
+   646269747301636c73744a78dadbb918000217015d584088d1c35155ed1729f9347f
+   b27be014444deedb969ad81676284c6a9258e497f32a9f004b9f1f118724c9d08ee7
+   629754cc686a334e9a196d3a030b47c9f7b309
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -757,12 +758,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      5c2eeb44b36a8bd030c7eef7  #       "\.ëD³j\x8bÐ0Çî÷"
-      7ad79afd0ce73ff9bb40847e  #       "z×\x9aý\x0cç?ù»@\x84~"
-      aa1f1c4d6ca227fdeb3fc35f  #       "ª\x1f\x1cMl¢'ýë?Ã_"
-      e3588af24baa75a602376a80  #       "ãX\x8aòKªu¦\x027j\x80"
-      6574131897289d0667e9b9a3  #       "et\x13\x18\x97(\x9d\x06gé¹£"
-      873f0a9e                  #       "\x87?\x0a\x9e"
+      88d1c35155ed1729f9347fb2  #       "\x88ÑÃQUí\x17)ù4\x7f²"
+      7be014444deedb969ad81676  #       "{à\x14DMîÛ\x96\x9aØ\x16v"
+      284c6a9258e497f32a9f004b  #       "(Lj\x92Xä\x97ó*\x9f\x00K"
+      9f1f118724c9d08ee7629754  #       "\x9f\x1f\x11\x87$ÉÐ\x8eçb\x97T"
+      cc686a334e9a196d3a030b47  #       "Ìhj3N\x9a\x19m:\x03\x0bG"
+      c9f7b309                  #       "É÷³\x09"
 
 6.  Referenced Token
 
@@ -905,9 +906,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158409ac73771aac474cfc90e1aecfb07a5446649a9
-   51649fd2ffa5e66eb134c9aefbf887ef5445f03a61aae0efbf5d37e440c75c1fba23
-   e59c10701e61f8116c966a
+   7374617475736c697374732f315840036c357dbc195e275a64f58d42f1a0547ed844
+   5c0daa5f091086a19e06a86bf92d3ba2b1cdaecbe9f252ab9182c7ddf14747b1a960
+   48a6331ab8ada2ee9f30fd
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -930,12 +931,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         9ac73771aac474cfc90e1aec  #       "\x9aÇ7qªÄtÏÉ\x0e\x1aì"
-         fb07a5446649a951649fd2ff  #       "û\x07¥DfI©Qd\x9fÒÿ"
-         a5e66eb134c9aefbf887ef54  #       "¥æn±4É®ûø\x87ïT"
-         45f03a61aae0efbf5d37e440  #       "Eð:aªàï¿]7ä@"
-         c75c1fba23e59c10701e61f8  #       "Ç\\x1fº#å\x9c\x10p\x1eaø"
-         116c966a                  #       "\x11l\x96j"
+         036c357dbc195e275a64f58d  #       "\x03l5}¼\x19^'Zdõ\x8d"
+         42f1a0547ed8445c0daa5f09  #       "Bñ\xa0T~ØD\\x0dª_\x09"
+         1086a19e06a86bf92d3ba2b1  #       "\x10\x86¡\x9e\x06¨kù-;¢±"
+         cdaecbe9f252ab9182c7ddf1  #       "Í®ËéòR«\x91\x82ÇÝñ"
+         4747b1a96048a6331ab8ada2  #       "GG±©`H¦3\x1a¸\xad¢"
+         ee9f30fd                  #       "î\x9f0ý"
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
@@ -1172,8 +1173,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.12BFZBv_xHy2y2riOl6yvxl41GriYmrDfkhPIqi0q5eBqKcyV49U
-   ClCuU_JGt6E1fkD8puJtFwfO29e9c8TiXQ
+   nR0bCI6NDMyMDB9.2CTrM3qbAdkUiQ-1yxX5sig3GWdSTZijduIF6iPZlYbYER5H87zj
+   IyYhm2dGcSpDAxrRaYv_CqyaGddVbd8VaQ
 
 8.2.  Status List Response
 
@@ -1321,8 +1322,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.12BFZBv_xHy2y2riOl6yvxl41GriYmrDfkhPIqi0q5eBqKcyV49U
-   ClCuU_JGt6E1fkD8puJtFwfO29e9c8TiXQ
+   nR0bCI6NDMyMDB9.2CTrM3qbAdkUiQ-1yxX5sig3GWdSTZijduIF6iPZlYbYER5H87zj
+   IyYhm2dGcSpDAxrRaYv_CqyaGddVbd8VaQ
 
 9.  Status List Aggregation
 
@@ -1432,7 +1433,7 @@ d2                              # tag(18)
 
      id-kp  OBJECT IDENTIFIER  ::=
           { iso(1) identified-organization(3) dod(6) internet(1)
-            security(5) mechanisms(5) pkix(7) 3 }
+            security(5) mechanisms(5) pkix(7) kp(3) }
 
      id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
 
@@ -2428,14 +2429,45 @@ d2                              # tag(18)
 
 14.9.  X.509 Certificate Extended Key Purpose OID Registration
 
-   IANA is also requested to register the following OID
-   "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key
-   Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section
-   Section 10.
+   IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD"
+   in the "SMI Security for PKIX Extended Key Purpose" registry
+   (1.3.6.1.5.5.7.3), this OID is defined in section Section 10.
 
-15.  References
+   IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD"
+   in the "SMI Security for PKIX Module Identifier" registry
+   (1.3.6.1.5.5.7.0), this OID is defined in section
+   Section "Appendix A.  ASN.1 Module".
 
-15.1.  Normative References
+Appendix A.  ASN.1 Module
+
+   The following module adheres to ASN.1 specifications [X.680] and
+   [X.690].
+
+   <CODE BEGINS>
+     OauthStatusSigning-EKU
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) id-mod(0)
+         id-mod-oauth-status-signing-eku (TBD) }
+
+     DEFINITIONS IMPLICIT TAGS ::=
+     BEGIN
+
+     -- OID Arc
+
+     id-kp OBJECT IDENTIFIER ::=
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) kp(3) }
+
+     -- OAuth Extended Key Usage
+
+     id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
+
+     END
+   <CODE ENDS>
+
+References
+
+Normative References
 
    [CORS]     WHATWG, "Fetch Living Standard", n.d.,
               <https://fetch.spec.whatwg.org/commit-
@@ -2553,7 +2585,16 @@ d2                              # tag(18)
               RFC 9596, DOI 10.17487/RFC9596, June 2024,
               <https://www.rfc-editor.org/rfc/rfc9596>.
 
-15.2.  Informative References
+   [X.680]    International Telecommunications Union, "Information
+              Technology - Abstract Syntax Notation One (ASN.1):
+              Specification of basic notation", February 2021.
+
+   [X.690]    International Telecommunications Union, "Information
+              Technology - ASN.1 encoding rules: Specification of Basic
+              Encoding Rules (BER), Canonical Encoding Rules (CER) and
+              Distinguished Encoding Rules (DER)", February 2021.
+
+Informative References
 
    [ISO.mdoc] ISO/IEC JTC 1/SC 17, "ISO/IEC 18013-5:2021 ISO-compliant
               driving licence", n.d..
@@ -3185,6 +3226,10 @@ Test vectors for Status List encoding
    4b0040b3fe04353d7f81
 
 Document History
+
+   -14
+
+   *  Add ASN.1 module
 
    -13
 
