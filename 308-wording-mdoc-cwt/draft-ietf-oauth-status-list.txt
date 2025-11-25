@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 23 May 2026                                     Bundesdruckerei
+Expires: 29 May 2026                                     Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                        19 November 2025
+                                                        25 November 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 May 2026.
+   This Internet-Draft will expire on 29 May 2026.
 
 Copyright Notice
 
@@ -734,9 +734,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d584062799137f536a6c2afc3a3
-   40c5f632d3bc5b6f969f24348aa33de55603a2ed2b0901ad22b264136f027223cfe1
-   688e83992e3048dc1d2f0213c6693c372caa90
+   646269747301636c73744a78dadbb918000217015d58406efb4c3c1ebf3bccb4f564
+   278311e41dd3658bac966ffe26fd34337a3d2d74628cf0bff56606f486600a92f1be
+   1d1dc4021bb37156246e1c397ba075bcf27684
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -759,12 +759,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      62799137f536a6c2afc3a340  #       "by\x917õ6¦Â¯Ã£@"
-      c5f632d3bc5b6f969f24348a  #       "Åö2Ó¼[o\x96\x9f$4\x8a"
-      a33de55603a2ed2b0901ad22  #       "£=åV\x03¢í+\x09\x01\xad""
-      b264136f027223cfe1688e83  #       "²d\x13o\x02r#Ïáh\x8e\x83"
-      992e3048dc1d2f0213c6693c  #       "\x99.0HÜ\x1d/\x02\x13Æi<"
-      372caa90                  #       "7,ª\x90"
+      6efb4c3c1ebf3bccb4f56427  #       "nûL<\x1e¿;Ì´õd'"
+      8311e41dd3658bac966ffe26  #       "\x83\x11ä\x1dÓe\x8b¬\x96oþ&"
+      fd34337a3d2d74628cf0bff5  #       "ý43z=-tb\x8cð¿õ"
+      6606f486600a92f1be1d1dc4  #       "f\x06ô\x86`\x0a\x92ñ¾\x1d\x1dÄ"
+      021bb37156246e1c397ba075  #       "\x02\x1b³qV$n\x1c9{\xa0u"
+      bcf27684                  #       "¼òv\x84"
 
 6.  Referenced Token
 
@@ -880,20 +880,22 @@ d2                              # tag(18)
       identifier of the status mechanism and the corresponding value
       defines its contents.
 
-   *  status_list (status list): REQUIRED when the status mechanism
-      defined in this specification is used.  It has the same definition
-      as the status_list claim in Section 6.2 but MUST be encoded as a
-      StatusListInfo CBOR structure with the following fields:
+      -  status_list (status list): REQUIRED when the status mechanism
+         defined in this specification is used.  It has the same
+         definition as the status_list claim in Section 6.2 but MUST be
+         encoded as a StatusListInfo CBOR structure with the following
+         fields:
 
-      -  idx: REQUIRED.  Unsigned integer (Major Type 0) The idx (index)
-         claim MUST specify a non-negative Integer that represents the
-         index to check for status information in the Status List for
-         the current Referenced Token.
+         o  idx: REQUIRED.  Unsigned integer (Major Type 0) The idx
+            (index) claim MUST specify a non-negative Integer that
+            represents the index to check for status information in the
+            Status List for the current Referenced Token.
 
-      -  uri: REQUIRED.  Text string (Major Type 3).  The uri (URI)
-         claim MUST specify a String value that identifies the Status
-         List Token containing the status information for the Referenced
-         Token.  The value of uri MUST be a URI conforming to [RFC3986].
+         o  uri: REQUIRED.  Text string (Major Type 3).  The uri (URI)
+            claim MUST specify a String value that identifies the Status
+            List Token containing the status information for the
+            Referenced Token.  The value of uri MUST be a URI conforming
+            to [RFC3986].
 
 6.3.1.  CBOR Web Token (CWT)
 
@@ -911,37 +913,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840039bbcb617cce554090a2d800735bacba993fb
-   84c76b833052aca96d80e7bd4eee25bdeed1f55776d1043c6e77ed113cbaef998573
-   567a37e44fba572fcd5810
+   7374617475736c697374732f3158402c47b61dd17efdb7473e1984a4ba7fa8f873fd
+   3a0fb4981570f35fcf996ede91b335088df43ec115f4aa66c205d5a5b43864e88024
+   f4545d1057c7d62d5817bd
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      039bbcb617cce554090a2d80  #       "\x03\x9b¼¶\x17ÌåT\x09\x0a-\x80"
-      0735bacba993fb84c76b8330  #       "\x075ºË©\x93û\x84Çk\x830"
-      52aca96d80e7bd4eee25bdee  #       "R¬©m\x80ç½Nî%½î"
-      d1f55776d1043c6e77ed113c  #       "ÑõWvÑ\x04<nwí\x11<"
-      baef998573567a37e44fba57  #       "ºï\x99\x85sVz7äOºW"
-      2fcd5810                  #       "/ÍX\x10"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         2c47b61dd17efdb7473e1984  #       ",G¶\x1dÑ~ý·G>\x19\x84"
+         a4ba7fa8f873fd3a0fb49815  #       "¤º\x7f¨øsý:\x0f´\x98\x15"
+         70f35fcf996ede91b335088d  #       "pó_Ï\x99nÞ\x91³5\x08\x8d"
+         f43ec115f4aa66c205d5a5b4  #       "ô>Á\x15ôªfÂ\x05Õ¥´"
+         3864e88024f4545d1057c7d6  #       "8dè\x80$ôT]\x10WÇÖ"
+         2d5817bd                  #       "-X\x17½"
 
 6.3.2.  ISO mdoc
 
@@ -1180,8 +1182,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.nakFKk9b2t-spcNPiNFYOmUMHfKxg6N_Msa-FbkF5zV0OfsmVqiv
-   DakqzxFr3DpfyQ0m7nw3l2jRhT9UY-mHVA
+   nR0bCI6NDMyMDB9.w0JUN1PP7KlMHEwvm1jcBDVnZDjavHYyIKW2QiSg_e1Ii2IdyXi9
+   Sa3yB3fSbVj_HuwXhE6lydQ7HgWPFGVLSg
 
 8.2.  Status List Response
 
@@ -1329,8 +1331,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.nakFKk9b2t-spcNPiNFYOmUMHfKxg6N_Msa-FbkF5zV0OfsmVqiv
-   DakqzxFr3DpfyQ0m7nw3l2jRhT9UY-mHVA
+   nR0bCI6NDMyMDB9.w0JUN1PP7KlMHEwvm1jcBDVnZDjavHYyIKW2QiSg_e1Ii2IdyXi9
+   Sa3yB3fSbVj_HuwXhE6lydQ7HgWPFGVLSg
 
 9.  Status List Aggregation
 
