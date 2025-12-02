@@ -221,7 +221,7 @@ Representing statuses with bits in an array is a rather old and well-known conce
 
 ## Status Mechanisms Registry
 
-This specification establishes IANA "Status Mechanisms" registries for status mechanisms for JWT tokens and for status mechanisms for CBOR tokens and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
+This specification establishes IANA "Status Mechanisms" registries for status mechanisms for JSON based tokens and for status mechanisms for CBOR based tokens and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
 
 Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
 
