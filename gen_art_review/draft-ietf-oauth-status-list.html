@@ -1585,7 +1585,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-status-mechanisms-registry">
 <a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-status-mechanisms-registry" class="section-name selfRef">Status Mechanisms Registry</a>
         </h3>
-<p id="section-1.5-1">This specification establishes IANA "Status Mechanisms" registries for status mechanisms for JSON based tokens and for status mechanisms for CBOR based tokens and registers the members defined by this specification. Other specifications can register other members used for status retrieval.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.5-1">This specification establishes IANA "Status Mechanisms" registries for status mechanisms for JOSE-based tokens and for status mechanisms for COSE-based tokens and registers the members defined by this specification. Other specifications can register other members used for status retrieval.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 <p id="section-1.5-2">Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.<a href="#section-1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1988,9 +1988,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840989563dce274de0cc90679
-e35b43a2896ac2f7c4659b2501c61a99669dfab90287340ead97e16c4c91b868f861
-aa3b3155fdb141a6cc04f345b22525e775b5ef
+646269747301636c73744a78dadbb918000217015d584081e3046b8935dcaa1f3ef8
+7ab94f343b3425e596b70e5c915b6a973962edada3e67799e1dcead78b4c684f8876
+39972f32e49402779a4e561f14008c7f8aae0f
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2015,12 +2015,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      989563dce274de0cc90679e3  #       "\x98\x95cÜâtÞ\x0cÉ\x06yã"
-      5b43a2896ac2f7c4659b2501  #       "[C¢\x89jÂ÷Äe\x9b%\x01"
-      c61a99669dfab90287340ead  #       "Æ\x1a\x99f\x9dú¹\x02\x874\x0e\xad"
-      97e16c4c91b868f861aa3b31  #       "\x97álL\x91¸høaª;1"
-      55fdb141a6cc04f345b22525  #       "Uý±A¦Ì\x04óE²%%"
-      e775b5ef                  #       "çuµï"
+      81e3046b8935dcaa1f3ef87a  #       "\x81ã\x04k\x895Üª\x1f&gt;øz"
+      b94f343b3425e596b70e5c91  #       "¹O4;4%å\x96·\x0e\\x91"
+      5b6a973962edada3e67799e1  #       "[j\x979bí\xad£æw\x99á"
+      dcead78b4c684f887639972f  #       "Üê×\x8bLhO\x88v9\x97/"
+      32e49402779a4e561f14008c  #       "2ä\x94\x02w\x9aNV\x1f\x14\x00\x8c"
+      7f8aae0f                  #       "\x7f\x8a®\x0f"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2161,9 +2161,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584017efa24d1bc25970a5d4c95c00f6d21a034244
-405ba96590402fb5c11f7a08ec02fd711283e466ab872d2f395d6ba30edd94ba9076
-146c0170b89080047a1d7e
+7374617475736c697374732f31584087154ee2f2b77df2781d5e260be05094217e3a
+bb8044ec85d2b7e124552e647a65c7b27a0bad6508b7a26132faec719287eedc64f3
+d81b57870172814996ebbd
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2188,12 +2188,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      17efa24d1bc25970a5d4c95c  #       "\x17ï¢M\x1bÂYp¥ÔÉ\"
-      00f6d21a034244405ba96590  #       "\x00öÒ\x1a\x03BD@[©e\x90"
-      402fb5c11f7a08ec02fd7112  #       "@/µÁ\x1fz\x08ì\x02ýq\x12"
-      83e466ab872d2f395d6ba30e  #       "\x83äf«\x87-/9]k£\x0e"
-      dd94ba9076146c0170b89080  #       "Ý\x94º\x90v\x14l\x01p¸\x90\x80"
-      047a1d7e                  #       "\x04z\x1d~"
+      87154ee2f2b77df2781d5e26  #       "\x87\x15Nâò·}òx\x1d^&amp;"
+      0be05094217e3abb8044ec85  #       "\x0bàP\x94!~:»\x80Dì\x85"
+      d2b7e124552e647a65c7b27a  #       "Ò·á$U.dzeÇ²z"
+      0bad6508b7a26132faec7192  #       "\x0b\xade\x08·¢a2úìq\x92"
+      87eedc64f3d81b5787017281  #       "\x87îÜdóØ\x1bW\x87\x01r\x81"
+      4996ebbd                  #       "I\x96ë½"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2407,8 +2407,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.Cl4GWB0CcBGNbYeHaotogVuxt9VKL099b9bOgjfcFMd98XLguI36
-sd6VToiivlTDObDpj_9HSistd4W3FBJ0zA
+nR0bCI6NDMyMDB9.P7mt3K-0NYs7ZpjWPDQHU0nwVdcNLWi1XbhlTsvgqlpIS7BGAZel
+w0tfFjETqO2WAhxBH-vS9qSMsx9HkKmPeA
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2515,8 +2515,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.Cl4GWB0CcBGNbYeHaotogVuxt9VKL099b9bOgjfcFMd98XLguI36
-sd6VToiivlTDObDpj_9HSistd4W3FBJ0zA
+nR0bCI6NDMyMDB9.P7mt3K-0NYs7ZpjWPDQHU0nwVdcNLWi1XbhlTsvgqlpIS7BGAZel
+w0tfFjETqO2WAhxBH-vS9qSMsx9HkKmPeA
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
