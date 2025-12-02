@@ -1681,7 +1681,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <p id="section-4.1-2.2.1">The Status Issuer creates a byte array of size = amount of Referenced Tokens * <code>bits</code> / 8 or greater. Depending on the <code>bits</code>, each byte in the array corresponds to 8/(<code>bits</code>) statuses (8,4,2 or 1).<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-4.1-2.3">
-            <p id="section-4.1-2.3.1">The Status Issuer sets the status values for all Referenced Tokens within the byte array. Each Referenced Token is assigned a distinct index from 0 to one less than the number of Referenced Tokens assigned to the Status List (which may grow over time). Each index identifies a contiguous block of bits in the byte array, with the blocks being packed into bytes from the least significant bit ("0") to the most significant bit ("7"). These bits contain the encoded status value (see Section 7 of the Referenced Token.<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.3.1">The Status Issuer sets the status values for all Referenced Tokens within the byte array. Each Referenced Token is assigned a distinct index from 0 to one less than the number of Referenced Tokens assigned to the Status List. Each index identifies a contiguous block of bits in the byte array, with the blocks being packed into bytes from the least significant bit ("0") to the most significant bit ("7"). These bits contain the encoded status value of the Referenced Token (see <a href="#status-types" class="auto internal xref">Section 7</a> for more details on the values).<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-4.1-2.4">
             <p id="section-4.1-2.4.1">The Status Issuer compresses the byte array using DEFLATE <span>[<a href="#RFC1951" class="cite xref">RFC1951</a>]</span> with the ZLIB <span>[<a href="#RFC1950" class="cite xref">RFC1950</a>]</span> data format. Implementations are <span class="bcp14">RECOMMENDED</span> to use the highest compression level available.<a href="#section-4.1-2.4.1" class="pilcrow">¶</a></p>
@@ -1988,9 +1988,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d584081e3046b8935dcaa1f3ef8
-7ab94f343b3425e596b70e5c915b6a973962edada3e67799e1dcead78b4c684f8876
-39972f32e49402779a4e561f14008c7f8aae0f
+646269747301636c73744a78dadbb918000217015d584018603c5d0b2a69c5bfab6e
+ff0a5d8ae560237f71b7791c18888a05808a8de442776daba79f1da8ac792c46d6d6
+943b1b58b538da08fcd037313da17018411c6e
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2015,12 +2015,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      81e3046b8935dcaa1f3ef87a  #       "\x81ã\x04k\x895Üª\x1f&gt;øz"
-      b94f343b3425e596b70e5c91  #       "¹O4;4%å\x96·\x0e\\x91"
-      5b6a973962edada3e67799e1  #       "[j\x979bí\xad£æw\x99á"
-      dcead78b4c684f887639972f  #       "Üê×\x8bLhO\x88v9\x97/"
-      32e49402779a4e561f14008c  #       "2ä\x94\x02w\x9aNV\x1f\x14\x00\x8c"
-      7f8aae0f                  #       "\x7f\x8a®\x0f"
+      18603c5d0b2a69c5bfab6eff  #       "\x18`&lt;]\x0b*iÅ¿«nÿ"
+      0a5d8ae560237f71b7791c18  #       "\x0a]\x8aå`#\x7fq·y\x1c\x18"
+      888a05808a8de442776daba7  #       "\x88\x8a\x05\x80\x8a\x8däBwm«§"
+      9f1da8ac792c46d6d6943b1b  #       "\x9f\x1d¨¬y,FÖÖ\x94;\x1b"
+      58b538da08fcd037313da170  #       "Xµ8Ú\x08üÐ71=¡p"
+      18411c6e                  #       "\x18A\x1cn"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2161,9 +2161,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584087154ee2f2b77df2781d5e260be05094217e3a
-bb8044ec85d2b7e124552e647a65c7b27a0bad6508b7a26132faec719287eedc64f3
-d81b57870172814996ebbd
+7374617475736c697374732f315840b4e19acfb26973db859cc49f01b3a61f19307a
+9adee0787fcb5bc79bac667a8e959a0a1bb82cae16e5f2c9508e43970dfd446d64da
+b75c2bb84951f75bb006da
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2188,12 +2188,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      87154ee2f2b77df2781d5e26  #       "\x87\x15Nâò·}òx\x1d^&amp;"
-      0be05094217e3abb8044ec85  #       "\x0bàP\x94!~:»\x80Dì\x85"
-      d2b7e124552e647a65c7b27a  #       "Ò·á$U.dzeÇ²z"
-      0bad6508b7a26132faec7192  #       "\x0b\xade\x08·¢a2úìq\x92"
-      87eedc64f3d81b5787017281  #       "\x87îÜdóØ\x1bW\x87\x01r\x81"
-      4996ebbd                  #       "I\x96ë½"
+      b4e19acfb26973db859cc49f  #       "´á\x9aÏ²isÛ\x85\x9cÄ\x9f"
+      01b3a61f19307a9adee0787f  #       "\x01³¦\x1f\x190z\x9aÞàx\x7f"
+      cb5bc79bac667a8e959a0a1b  #       "Ë[Ç\x9b¬fz\x8e\x95\x9a\x0a\x1b"
+      b82cae16e5f2c9508e43970d  #       "¸,®\x16åòÉP\x8eC\x97\x0d"
+      fd446d64dab75c2bb84951f7  #       "ýDmdÚ·\+¸IQ÷"
+      5bb006da                  #       "[°\x06Ú"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2407,8 +2407,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.P7mt3K-0NYs7ZpjWPDQHU0nwVdcNLWi1XbhlTsvgqlpIS7BGAZel
-w0tfFjETqO2WAhxBH-vS9qSMsx9HkKmPeA
+nR0bCI6NDMyMDB9.FGIoc941JnZ-I-VkxJHL68FznxeNXLpq8ojUuVQgKmouSvi6qdZ5
+HyV0NBYcKcAl5QM3bmIgracl1cge2kEIew
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2515,8 +2515,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.P7mt3K-0NYs7ZpjWPDQHU0nwVdcNLWi1XbhlTsvgqlpIS7BGAZel
-w0tfFjETqO2WAhxBH-vS9qSMsx9HkKmPeA
+nR0bCI6NDMyMDB9.FGIoc941JnZ-I-VkxJHL68FznxeNXLpq8ojUuVQgKmouSvi6qdZ5
+HyV0NBYcKcAl5QM3bmIgracl1cge2kEIew
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
