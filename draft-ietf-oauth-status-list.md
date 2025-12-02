@@ -86,6 +86,16 @@ normative:
       org: "WHATWG"
     title: "Fetch Living Standard"
     target: "https://fetch.spec.whatwg.org/commit-snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-cors-protocol"
+  X.680:
+    title: "Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation"
+    author:
+      org: International Telecommunications Union
+    date: "13.02.2021"
+  X.690:
+    title: "Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"
+    author:
+      org: International Telecommunications Union
+    date: "13.02.2021"
 
 informative:
   RFC6749: RFC6749
@@ -351,13 +361,13 @@ This section defines the data structure for a JSON-encoded Status List:
 The following example illustrates the JSON representation of the Status List with `bits` 1 from the example above:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding_json}
+{::include examples/status_list_encoding_json}
 ~~~~~~~~~~
 
 The following example illustrates the JSON representation of the Status List with `bits` 2 from the example above:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding2_json}
+{::include examples/status_list_encoding2_json}
 ~~~~~~~~~~
 
 See section [](#test-vectors) for more test vectors.
@@ -384,13 +394,13 @@ StatusList = {
 The following example illustrates the CBOR representation of the Status List in Hex:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding_cbor}
+{::include examples/status_list_encoding_cbor}
 ~~~~~~~~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding_cbor_diag}
+{::include examples/status_list_encoding_cbor_diag}
 ~~~~~~~~~~
 
 See section [](#test-vectors) for more test vectors.
@@ -430,7 +440,7 @@ The following additional rules apply:
 The following is a non-normative example of a Status List Token in JWT format:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_jwt}
+{::include examples/status_list_jwt}
 ~~~~~~~~~~
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
@@ -462,13 +472,13 @@ The following additional rules apply:
 The following is a non-normative example of a Status List Token in CWT format in Hex:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_cwt}
+{::include examples/status_list_cwt}
 ~~~~~~~~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_cwt_diag}
+{::include examples/status_list_cwt_diag}
 ~~~~~~~~~~
 
 # Referenced Token {#referenced-token}
@@ -574,13 +584,13 @@ Application of additional restrictions and policies are at the discretion of the
 The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
 ~~~~~~~~~~
-{::include ./examples/referenced_token_cwt}
+{::include examples/referenced_token_cwt}
 ~~~~~~~~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
 ~~~~~~~~~~
-{::include ./examples/referenced_token_cwt_diag}
+{::include examples/referenced_token_cwt_diag}
 ~~~~~~~~~~
 
 ### ISO mdoc {#referenced-token-mdoc}
@@ -779,7 +789,7 @@ Accept: application/statuslist+jwt
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
 
-{::include ./examples/status_list_jwt_raw}
+{::include examples/status_list_jwt_raw}
 ~~~
 
 ## Status List Response {#status-list-response}
@@ -846,7 +856,7 @@ The following is a non-normative example of a response for the above Request:
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
 
-{::include ./examples/status_list_jwt_raw}
+{::include examples/status_list_jwt_raw}
 ~~~
 
 # Status List Aggregation {#aggregation}
@@ -922,7 +932,7 @@ The following OID is defined for usage in the EKU extension
 ~~~
   id-kp  OBJECT IDENTIFIER  ::=
        { iso(1) identified-organization(3) dod(6) internet(1)
-         security(5) mechanisms(5) pkix(7) 3 }
+         security(5) mechanisms(5) pkix(7) kp(3) }
 
   id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
 ~~~
@@ -1488,7 +1498,40 @@ RESTful Environments (CoRE) Parameters" Registry [IANA.Core.Params]:
 
 ## X.509 Certificate Extended Key Purpose OID Registration
 
-IANA is also requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section [](#eku).
+IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section [](#eku).
+
+IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0), this OID is defined in section [](#asn1-module).
+
+# Appendix A. ASN.1 Module {#asn1-module}
+{:numbered="false"}
+
+The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
+
+~~~
+<CODE BEGINS>
+
+  OauthStatusSigning-EKU
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-oauth-status-signing-eku (TBD) }
+
+  DEFINITIONS IMPLICIT TAGS ::=
+  BEGIN
+
+  -- OID Arc
+
+  id-kp OBJECT IDENTIFIER ::=
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) kp(3) }
+
+  -- OAuth Extended Key Usage
+
+  id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
+
+  END
+
+<CODE ENDS>
+~~~
 
 --- back
 
@@ -1578,13 +1621,13 @@ status[1000345]=1
 JSON encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding1_long_json}
+{::include examples/status_list_encoding1_long_json}
 ~~~~~~~~~~
 
 CBOR encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding1_long_cbor}
+{::include examples/status_list_encoding1_long_cbor}
 ~~~~~~~~~~
 
 ## 2 bit Status List
@@ -1609,13 +1652,13 @@ status[1000345]=3
 JSON encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding2_long_json}
+{::include examples/status_list_encoding2_long_json}
 ~~~~~~~~~~
 
 CBOR encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding2_long_cbor}
+{::include examples/status_list_encoding2_long_cbor}
 ~~~~~~~~~~
 
 ## 4 bit Status List
@@ -1644,13 +1687,13 @@ status[1030205]=15
 JSON encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding4_json}
+{::include examples/status_list_encoding4_json}
 ~~~~~~~~~~
 
 CBOR encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding4_cbor}
+{::include examples/status_list_encoding4_cbor}
 ~~~~~~~~~~
 
 ## 8 bit Status List
@@ -1920,13 +1963,13 @@ status[19535] = 255
 JSON encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding8_json}
+{::include examples/status_list_encoding8_json}
 ~~~~~~~~~~
 
 CBOR encoding:
 
 ~~~~~~~~~~
-{::include ./examples/status_list_encoding8_cbor}
+{::include examples/status_list_encoding8_cbor}
 ~~~~~~~~~~
 
 
@@ -1936,6 +1979,7 @@ CBOR encoding:
 -14
 
 * slightly restructure/clarify referenced token cose section
+* Add ASN.1 module
 
 -13
 
