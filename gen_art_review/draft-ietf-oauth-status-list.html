@@ -9,7 +9,7 @@
 <meta content="Paul Bastian" name="author">
 <meta content="Christian Bormann" name="author">
 <meta content="
-       This specification defines a mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
+       This specification defines a status mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
@@ -1044,11 +1044,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Token Status List (TSL)</td>
-<td class="right">November 2025</td>
+<td class="right">December 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 29 May 2026</td>
+<td class="center">Expires 5 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1061,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-11-25" class="published">25 November 2025</time>
+<time datetime="2025-12-02" class="published">2 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-29">29 May 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-05">5 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1087,7 +1087,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Token Status List (TSL)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This specification defines a mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This specification defines a status mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1124,7 +1124,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1507,7 +1507,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
 │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
 └─┬──────┘            └───┬────┘            └──┬────────────┘
-  ▼ update status         │                    │
+  ▼ provide status        │                    │
 ┌───────────────┐         │                    │
 │ Status Issuer │         │                    │
 └─┬─────────────┘         │                    │
@@ -1519,7 +1519,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </pre><a href="#section-1-8" class="pilcrow">¶</a>
 </div>
 <p id="section-1-9">Status Lists can be used to express a variety of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.<a href="#section-1-9" class="pilcrow">¶</a></p>
-<p id="section-1-10">Furthermore, the document defines an extension point that enables other specifications to describe additional status mechanisms and creates an IANA registry.<a href="#section-1-10" class="pilcrow">¶</a></p>
+<p id="section-1-10">Furthermore, the document creates an extension point and IANA registry that enables other specifications to describe additional status mechanisms.<a href="#section-1-10" class="pilcrow">¶</a></p>
 <div id="example-use-cases">
 <section id="section-1.1">
         <h3 id="name-example-use-cases">
@@ -1535,7 +1535,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-rationale" class="section-name selfRef">Rationale</a>
         </h3>
 <p id="section-1.2-1">Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
-<p id="section-1.2-2">This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">This specification seeks to find a balance between scalability, security and privacy by representing statuses as individual bits, packing the them into an array, and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="design-considerations">
@@ -1577,7 +1577,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-prior-work">
 <a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-prior-work" class="section-name selfRef">Prior Work</a>
         </h3>
-<p id="section-1.4-1">Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. <span>[<a href="#smith2020let" class="cite xref">smith2020let</a>]</span> that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List <span>[<a href="#W3C.SL" class="cite xref">W3C.SL</a>]</span> that similarly uses a compressed bit representation.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-1">Representing statuses with bits in an array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. <span>[<a href="#smith2020let" class="cite xref">smith2020let</a>]</span> that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List <span>[<a href="#W3C.SL" class="cite xref">W3C.SL</a>]</span> that similarly uses a compressed bit representation.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="status-mechanisms-registry">
@@ -1585,7 +1585,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-status-mechanisms-registry">
 <a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-status-mechanisms-registry" class="section-name selfRef">Status Mechanisms Registry</a>
         </h3>
-<p id="section-1.5-1">This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.5-1">This specification establishes IANA "Status Mechanisms" registries for status mechanisms for JWT tokens and for status mechanisms for CBOR tokens and registers the members defined by this specification. Other specifications can register other members used for status retrieval.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 <p id="section-1.5-2">Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.<a href="#section-1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1645,7 +1645,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 <dt id="section-3-1.15">Referenced Token:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.16">
-          <p id="section-3-1.16.1">A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> with JOSE as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> with COSE as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.<a href="#section-3-1.16.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.16.1">A cryptographically secured data structure that contains a "status" claim that references a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> with JOSE as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> with COSE as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.<a href="#section-3-1.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-1.17">Client:</dt>
@@ -1655,7 +1655,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 <dt id="section-3-1.19">base64url:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.20">
-          <p id="section-3-1.20.1">Denotes the URL-safe base64 encoding without padding as defined in Section 2 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.20.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.20.1">Denotes the URL-safe base64 encoding with all trailing '=' characters omitted as defined in Section 2 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.20.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1681,7 +1681,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <p id="section-4.1-2.2.1">The Status Issuer creates a byte array of size = amount of Referenced Tokens * <code>bits</code> / 8 or greater. Depending on the <code>bits</code>, each byte in the array corresponds to 8/(<code>bits</code>) statuses (8,4,2 or 1).<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-4.1-2.3">
-            <p id="section-4.1-2.3.1">The Status Issuer sets the status values for all Referenced Tokens within the byte array. The status of each Referenced Token is identified using an index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with amount of Referenced Tokens - 1 (being the last valid entry). The bits within an array are counted from the least significant bit ("0") to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value (see <a href="#status-types" class="auto internal xref">Section 7</a> for more details on the values).<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.3.1">The Status Issuer sets the status values for all Referenced Tokens within the byte array. Each Referenced Token is assigned a distinct index from 0 to one less than the number of Referenced Tokens assigned to the Status List (which may grow over time). Each index identifies a contiguous block of bits in the byte array, with the blocks being packed into bytes from the least significant bit ("0") to the most significant bit ("7"). These bits contain the encoded status value (see Section 7 of the Referenced Token.<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-4.1-2.4">
             <p id="section-4.1-2.4.1">The Status Issuer compresses the byte array using DEFLATE <span>[<a href="#RFC1951" class="cite xref">RFC1951</a>]</span> with the ZLIB <span>[<a href="#RFC1950" class="cite xref">RFC1950</a>]</span> data format. Implementations are <span class="bcp14">RECOMMENDED</span> to use the highest compression level available.<a href="#section-4.1-2.4.1" class="pilcrow">¶</a></p>
@@ -1988,9 +1988,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840b79806aac0373717027b48
-c0c9598f9d3a471e9d5c1e8181fd4a4705213abce4299a5a171c0da3f5c4d2159309
-8cd95a66ac9b379ba8683c4e6d8a543239f9ef
+646269747301636c73744a78dadbb918000217015d58407036b068b2ef7ea22b71f3
+ccdd903fbd10bdfd8f272577b8c7e235c0b3bcd1894ead5d95d2f3a04895eeb55a75
+bd561624fd583d4fdfa98930138a1044cc6d7c
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2015,12 +2015,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      b79806aac0373717027b48c0  #       "·\x98\x06ªÀ77\x17\x02{HÀ"
-      c9598f9d3a471e9d5c1e8181  #       "ÉY\x8f\x9d:G\x1e\x9d\\x1e\x81\x81"
-      fd4a4705213abce4299a5a17  #       "ýJG\x05!:¼ä)\x9aZ\x17"
-      1c0da3f5c4d21593098cd95a  #       "\x1c\x0d£õÄÒ\x15\x93\x09\x8cÙZ"
-      66ac9b379ba8683c4e6d8a54  #       "f¬\x9b7\x9b¨h&lt;Nm\x8aT"
-      3239f9ef                  #       "29ùï"
+      7036b068b2ef7ea22b71f3cc  #       "p6°h²ï~¢+qóÌ"
+      dd903fbd10bdfd8f272577b8  #       "Ý\x90?½\x10½ý\x8f'%w¸"
+      c7e235c0b3bcd1894ead5d95  #       "Çâ5À³¼Ñ\x89N\xad]\x95"
+      d2f3a04895eeb55a75bd5616  #       "Òó\xa0H\x95îµZu½V\x16"
+      24fd583d4fdfa98930138a10  #       "$ýX=Oß©\x890\x13\x8a\x10"
+      44cc6d7c                  #       "DÌm|"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2161,9 +2161,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158403b73c6e3bfdd0e6a28b6ad4bb9140e83768d76
-c8695911fd7d0035400554991b0e3f8c1fefb4a2004bfcb8ee2a88f40cd515c49651
-bf1b38da52920797b1d106
+7374617475736c697374732f315840db8167881ce558b5cb48dac2717125fd54b26b
+1732fceb0367aff73d7d3c2577f6a4f81052b7f0a2770f8e3cbda2220ff1acd3da99
+94e2dbec7e572131542760
 </pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
@@ -2188,12 +2188,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      3b73c6e3bfdd0e6a28b6ad4b  #       ";sÆã¿Ý\x0ej(¶\xadK"
-      b9140e83768d76c8695911fd  #       "¹\x14\x0e\x83v\x8dvÈiY\x11ý"
-      7d0035400554991b0e3f8c1f  #       "}\x005@\x05T\x99\x1b\x0e?\x8c\x1f"
-      efb4a2004bfcb8ee2a88f40c  #       "ï´¢\x00Kü¸î*\x88ô\x0c"
-      d515c49651bf1b38da529207  #       "Õ\x15Ä\x96Q¿\x1b8ÚR\x92\x07"
-      97b1d106                  #       "\x97±Ñ\x06"
+      db8167881ce558b5cb48dac2  #       "Û\x81g\x88\x1cåXµËHÚÂ"
+      717125fd54b26b1732fceb03  #       "qq%ýT²k\x172üë\x03"
+      67aff73d7d3c2577f6a4f810  #       "g¯÷=}&lt;%wö¤ø\x10"
+      52b7f0a2770f8e3cbda2220f  #       "R·ð¢w\x0f\x8e&lt;½¢"\x0f"
+      f1acd3da9994e2dbec7e5721  #       "ñ¬ÓÚ\x99\x94âÛì~W!"
+      31542760                  #       "1T'`"
 </pre><a href="#section-6.3-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
@@ -2407,8 +2407,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.2BEoCrroWY4qN84LS16-ia3DnyXrhqbImUb_yzcfPL1bpm9XnHJH
-qr9b1o9n3NP8H_T3qsDy7NGts8t8KDYxJg
+nR0bCI6NDMyMDB9.X1rSwA4Fz64uC-0Lu1I0rgRNf4UxyWVzqu9X9VDYHGSsT7UN0AVg
+m_lFOGm-e31sX7RTSzm7PRCN0Kr2TJzWpQ
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2515,8 +2515,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.2BEoCrroWY4qN84LS16-ia3DnyXrhqbImUb_yzcfPL1bpm9XnHJH
-qr9b1o9n3NP8H_T3qsDy7NGts8t8KDYxJg
+nR0bCI6NDMyMDB9.X1rSwA4Fz64uC-0Lu1I0rgRNf4UxyWVzqu9X9VDYHGSsT7UN0AVg
+m_lFOGm-e31sX7RTSzm7PRCN0Kr2TJzWpQ
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -3484,7 +3484,7 @@ successful.<a href="#section-14.5-4" class="pilcrow">¶</a></p>
               <p id="section-14.5.2-9.2.1">Status Type Description: The status of the Referenced Token is application specific.<a href="#section-14.5.2-9.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.5.2-9.3">
-              <p id="section-14.5.2-9.3.1">Status Type value: <code>0x0B-0xOF</code><a href="#section-14.5.2-9.3.1" class="pilcrow">¶</a></p>
+              <p id="section-14.5.2-9.3.1">Status Type value: <code>0x0C-0xOF</code><a href="#section-14.5.2-9.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.5.2-9.4">
               <p id="section-14.5.2-9.4.1">Change Controller: IETF<a href="#section-14.5.2-9.4.1" class="pilcrow">¶</a></p>
