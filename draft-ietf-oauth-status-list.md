@@ -1230,16 +1230,16 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-jwt) of this specification
 
-## JWT Status Mechanisms Registry {#iana-registry}
+## JOSE Status Mechanisms Registry {#iana-registry}
 
-This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.
+This specification establishes the IANA "JOSE Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Object Signing and Encryption (JOSE)" registry group at https://www.iana.org/assignments/jose. The registry records the status mechanism member and a reference to the specification that defines it.
 
 JWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
-review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
+review period on the jose-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.
 
-Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism: example").
+Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JOSE Status Mechanism: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
 to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
@@ -1309,15 +1309,15 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-cwt) of this specification
 
-## CWT Status Mechanisms Registry {#cwt-iana-registry}
+## COSE Status Mechanisms Registry {#cwt-iana-registry}
 
-This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.
+This specification establishes the IANA "COSE Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Object Signing and Encryption (COSE)" registry group at https://www.iana.org/assignments/cose. The registry records the status mechanism member and a reference to the specification that defines it.
 
-CWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
-review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
+OSE Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
+review period on the cose-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
-Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register CWT Status Mechanism: example").
+Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register COSE Status Mechanism: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
 to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
@@ -1978,11 +1978,13 @@ CBOR encoding:
 
 -14
 
+* rename JWT/CWT to JOSE/COSE Status mechanism registry 
 * removed bytes from graphic that were intepreted as padding bytes
 * removed 0x0B from application-specific Status Type
 * reemphasized that expired tokens with status "VALID" are still expired
 * renamed section "Status List Aggregation in JSON Format" to "Status List Aggregation Data Structure"
 * slightly restructure/clarify referenced token cose section
+* nits from genART review
 * Add ASN.1 module
 
 -13
