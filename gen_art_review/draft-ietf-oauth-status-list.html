@@ -1215,6 +1215,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
                 <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-referenced-token-in-cose" class="internal xref">Referenced Token in COSE</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.1">
+                    <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="auto internal xref">6.3.1</a>.  <a href="#name-cbor-web-token-cwt" class="internal xref">CBOR Web Token (CWT)</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.2">
+                    <p id="section-toc.1-1.6.2.3.2.2.1"><a href="#section-6.3.2" class="auto internal xref">6.3.2</a>.  <a href="#name-iso-mdoc" class="internal xref">ISO mdoc</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
@@ -1988,9 +1996,9 @@ a2                              # map(2)
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d584018603c5d0b2a69c5bfab6e
-ff0a5d8ae560237f71b7791c18888a05808a8de442776daba79f1da8ac792c46d6d6
-943b1b58b538da08fcd037313da17018411c6e
+646269747301636c73744a78dadbb918000217015d5840e1a963ebf6713d216e45e0
+9795821e51b71ed617110ca99b3ae0afbfd690f900ec50e620fc1eff7d20be746b4b
+b86dae89731d9f6229febf9db55335e531fa20
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2015,12 +2023,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      18603c5d0b2a69c5bfab6eff  #       "\x18`&lt;]\x0b*iÅ¿«nÿ"
-      0a5d8ae560237f71b7791c18  #       "\x0a]\x8aå`#\x7fq·y\x1c\x18"
-      888a05808a8de442776daba7  #       "\x88\x8a\x05\x80\x8a\x8däBwm«§"
-      9f1da8ac792c46d6d6943b1b  #       "\x9f\x1d¨¬y,FÖÖ\x94;\x1b"
-      58b538da08fcd037313da170  #       "Xµ8Ú\x08üÐ71=¡p"
-      18411c6e                  #       "\x18A\x1cn"
+      e1a963ebf6713d216e45e097  #       "á©cëöq=!nEà\x97"
+      95821e51b71ed617110ca99b  #       "\x95\x82\x1eQ·\x1eÖ\x17\x11\x0c©\x9b"
+      3ae0afbfd690f900ec50e620  #       ":à¯¿Ö\x90ù\x00ìPæ "
+      fc1eff7d20be746b4bb86dae  #       "ü\x1eÿ} ¾tkK¸m®"
+      89731d9f6229febf9db55335  #       "\x89s\x1d\x9fb)þ¿\x9dµS5"
+      e531fa20                  #       "å1ú "
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2134,40 +2142,50 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
         <h3 id="name-referenced-token-in-cose">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-referenced-token-in-cose" class="section-name selfRef">Referenced Token in COSE</a>
         </h3>
-<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "COSE Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> or other formats based on COSE.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.3-2">The following content applies to the CWT Claims Set:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "CBOR Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.3-3.1">
-            <p id="section-6.3-3.1.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim is encoded as a <code>Status</code> CBOR structure and <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents. This specification defines the following data items:<a href="#section-6.3-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.3-2.1">
+            <p id="section-6.3-2.1.1">The <code>Status</code> CBOR structure is a Map that <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (Major Type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.<a href="#section-6.3-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.3-3.1.2.1">
-                <p id="section-6.3-3.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-3.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.3-2.1.2.1">
+                <p id="section-6.3-2.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-2.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.3-3.1.2.1.2.1">
-                    <p id="section-6.3-3.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (Major Type 0) The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.<a href="#section-6.3-3.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.3-2.1.2.1.2.1">
+                    <p id="section-6.3-2.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (Major Type 0) The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.<a href="#section-6.3-2.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
-                  <li class="normal" id="section-6.3-3.1.2.1.2.2">
-                    <p id="section-6.3-3.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Text string (Major Type 3). The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-6.3-3.1.2.1.2.2.1" class="pilcrow">¶</a></p>
+                  <li class="normal" id="section-6.3-2.1.2.1.2.2">
+                    <p id="section-6.3-2.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Text string (Major Type 3). The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-6.3-2.1.2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
         </ul>
-<p id="section-6.3-4">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
-<p id="section-6.3-5">The following is a non-normative example of a Referenced Token in CWT format in Hex:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.3-6">
+<div id="referenced-token-cwt">
+<section id="section-6.3.1">
+          <h4 id="name-cbor-web-token-cwt">
+<a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-cbor-web-token-cwt" class="section-name selfRef">CBOR Web Token (CWT)</a>
+          </h4>
+<p id="section-6.3.1-1">The following content applies to the CWT Claims Set:<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3.1-2.1">
+              <p id="section-6.3.1-2.1.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim contains the <code>Status</code> CBOR structure as described in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.3.1-3">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-6.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.1-4">The following is a non-normative example of a Referenced Token in CWT format in Hex:<a href="#section-6.3.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3.1-5">
 <pre>
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840b4e19acfb26973db859cc49f01b3a61f19307a
-9adee0787fcb5bc79bac667a8e959a0a1bb82cae16e5f2c9508e43970dfd446d64da
-b75c2bb84951f75bb006da
-</pre><a href="#section-6.3-6" class="pilcrow">¶</a>
+7374617475736c697374732f315840bfb0b0b1018c3f30d25e5e0ad789a735d4724a
+97a8e959741d91a537a9aa2bb33d6ff832a3d302938360d01c766dd7e120ccb08845
+618c2b17cea1a6731f502e
+</pre><a href="#section-6.3.1-5" class="pilcrow">¶</a>
 </div>
-<p id="section-6.3-7">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.3-8">
+<p id="section-6.3.1-6">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3.1-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3.1-7">
 <pre>
 d2                              # tag(18)
   84                            #   array(4)
@@ -2188,19 +2206,26 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      b4e19acfb26973db859cc49f  #       "´á\x9aÏ²isÛ\x85\x9cÄ\x9f"
-      01b3a61f19307a9adee0787f  #       "\x01³¦\x1f\x190z\x9aÞàx\x7f"
-      cb5bc79bac667a8e959a0a1b  #       "Ë[Ç\x9b¬fz\x8e\x95\x9a\x0a\x1b"
-      b82cae16e5f2c9508e43970d  #       "¸,®\x16åòÉP\x8eC\x97\x0d"
-      fd446d64dab75c2bb84951f7  #       "ýDmdÚ·\+¸IQ÷"
-      5bb006da                  #       "[°\x06Ú"
-</pre><a href="#section-6.3-8" class="pilcrow">¶</a>
+      bfb0b0b1018c3f30d25e5e0a  #       "¿°°±\x01\x8c?0Ò^^\x0a"
+      d789a735d4724a97a8e95974  #       "×\x89§5ÔrJ\x97¨éYt"
+      1d91a537a9aa2bb33d6ff832  #       "\x1d\x91¥7©ª+³=oø2"
+      a3d302938360d01c766dd7e1  #       "£Ó\x02\x93\x83`Ð\x1cvm×á"
+      20ccb08845618c2b17cea1a6  #       " Ì°\x88Ea\x8c+\x17Î¡¦"
+      731f502e                  #       "s\x1fP."
+</pre><a href="#section-6.3.1-7" class="pilcrow">¶</a>
 </div>
-<p id="section-6.3-9">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2. The <code>status</code> parameter uses the same encoding as a CWT as defined in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3-9" class="pilcrow">¶</a></p>
-<p id="section-6.3-10">It is <span class="bcp14">RECOMMENDED</span> to use <code>status</code> for the label of the field that contains the <code>Status</code> CBOR structure.<a href="#section-6.3-10" class="pilcrow">¶</a></p>
-<p id="section-6.3-11">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-6.3-11" class="pilcrow">¶</a></p>
-<p id="section-6.3-12">The following is a non-normative example of an IssuerAuth as specified in ISO mDL (also referred to as signed MSO) in Hex:<a href="#section-6.3-12" class="pilcrow">¶</a></p>
-<div class="alignLeft art-ascii-art art-text artwork" id="section-6.3-13">
+</section>
+</div>
+<div id="referenced-token-mdoc">
+<section id="section-6.3.2">
+          <h4 id="name-iso-mdoc">
+<a href="#section-6.3.2" class="section-number selfRef">6.3.2. </a><a href="#name-iso-mdoc" class="section-name selfRef">ISO mdoc</a>
+          </h4>
+<p id="section-6.3.2-1">ISO mdoc <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> may utilize the Status List mechanism by introducing the <code>status</code> parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2 of <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>. The <code>status</code> parameter contains the <code>Status</code> CBOR structure as described in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.2-2">It is <span class="bcp14">RECOMMENDED</span> to use <code>status</code> for the label of the field that contains the <code>Status</code> CBOR structure.<a href="#section-6.3.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.3.2-3">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-6.3.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.3.2-4">The following is a non-normative example of an IssuerAuth as specified in ISO mDL (also referred to as signed MSO) in Hex:<a href="#section-6.3.2-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-6.3.2-5">
 <pre>
 8443a10126a118215901f3308201ef30820195a00302010202140bfec7da97e048e
 15ac3dacb9eafe82e64fd07f5300a06082a8648ce3d040302302331143012060355
@@ -2244,10 +2269,10 @@ fa484caa722c228288f01d0c03a2c3d66f646967657374416c676f726974686d675
 348412d3235365840b7c2d4abe85aa5ba814ef95de0385c71c802be8ac33a4a971a
 85ed800ba7acb59cb21035f4a68fc0caa450cbefd3b255aec72f83595f0ae7b7d50
 fe8a1c4cafe
-</pre><a href="#section-6.3-13" class="pilcrow">¶</a>
+</pre><a href="#section-6.3.2-5" class="pilcrow">¶</a>
 </div>
-<p id="section-6.3-14">The following is the CBOR Diagnostic Notation of the example above:<a href="#section-6.3-14" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.3-15">
+<p id="section-6.3.2-6">The following is the CBOR Diagnostic Notation of the example above:<a href="#section-6.3.2-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3.2-7">
 <pre>
 [
   &lt;&lt; {
@@ -2328,7 +2353,9 @@ fe8a1c4cafe
   h'b7c2d4abe85aa5ba814ef95de0385c71c802be8ac33a4a971a85ed800ba7acb
   59cb21035f4a68fc0caa450cbefd3b255aec72f83595f0ae7b7d50fe8a1c4cafe'
 ]
-</pre><a href="#section-6.3-15" class="pilcrow">¶</a>
+</pre><a href="#section-6.3.2-7" class="pilcrow">¶</a>
+</div>
+</section>
 </div>
 </section>
 </div>
@@ -2407,8 +2434,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.FGIoc941JnZ-I-VkxJHL68FznxeNXLpq8ojUuVQgKmouSvi6qdZ5
-HyV0NBYcKcAl5QM3bmIgracl1cge2kEIew
+nR0bCI6NDMyMDB9.qpU3XWdbaL01HPL9X8fcaeFctsTacXSAX22tHQj6aOrt2A3k-ZWb
+x4F54uAur6wf8NBNrJAuKij7AA9GHvjyHw
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2515,8 +2542,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.FGIoc941JnZ-I-VkxJHL68FznxeNXLpq8ojUuVQgKmouSvi6qdZ5
-HyV0NBYcKcAl5QM3bmIgracl1cge2kEIew
+nR0bCI6NDMyMDB9.qpU3XWdbaL01HPL9X8fcaeFctsTacXSAX22tHQj6aOrt2A3k-ZWb
+x4F54uAur6wf8NBNrJAuKij7AA9GHvjyHw
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -4662,7 +4689,10 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
           <p id="appendix-D-2.4.1">renamed section "Status List Aggregation in JSON Format" to "Status List Aggregation Data Structure"<a href="#appendix-D-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-2.5">
-          <p id="appendix-D-2.5.1">Add ASN.1 module<a href="#appendix-D-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-2.5.1">slightly restructure/clarify referenced token cose section<a href="#appendix-D-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-2.6">
+          <p id="appendix-D-2.6.1">Add ASN.1 module<a href="#appendix-D-2.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-3">-13<a href="#appendix-D-3" class="pilcrow">¶</a></p>
