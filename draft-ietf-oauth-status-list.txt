@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 29 May 2026                                     Bundesdruckerei
+Expires: 5 June 2026                                     Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                        25 November 2025
+                                                         2 December 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 May 2026.
+   This Internet-Draft will expire on 5 June 2026.
 
 Copyright Notice
 
@@ -92,6 +92,8 @@ Table of Contents
      6.1.  Status Claim
      6.2.  Referenced Token in JOSE
      6.3.  Referenced Token in COSE
+       6.3.1.  CBOR Web Token (CWT)
+       6.3.2.  ISO mdoc
    7.  Status Types
      7.1.  Status Types Values
    8.  Verification and Processing
@@ -733,9 +735,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d584088d1c35155ed1729f9347f
-   b27be014444deedb969ad81676284c6a9258e497f32a9f004b9f1f118724c9d08ee7
-   629754cc686a334e9a196d3a030b47c9f7b309
+   646269747301636c73744a78dadbb918000217015d5840e14be13b9115ac45e071a2
+   71de0f9c8362a0908ea828f1408e5b99e4965d1e0023a148cba59a8032fcd9a6d1db
+   6545fe7d4b1e926f9f33acecbc79a58a1a7bd9
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -758,12 +760,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      88d1c35155ed1729f9347fb2  #       "\x88ÑÃQUí\x17)ù4\x7f²"
-      7be014444deedb969ad81676  #       "{à\x14DMîÛ\x96\x9aØ\x16v"
-      284c6a9258e497f32a9f004b  #       "(Lj\x92Xä\x97ó*\x9f\x00K"
-      9f1f118724c9d08ee7629754  #       "\x9f\x1f\x11\x87$ÉÐ\x8eçb\x97T"
-      cc686a334e9a196d3a030b47  #       "Ìhj3N\x9a\x19m:\x03\x0bG"
-      c9f7b309                  #       "É÷³\x09"
+      e14be13b9115ac45e071a271  #       "áKá;\x91\x15¬Eàq¢q"
+      de0f9c8362a0908ea828f140  #       "Þ\x0f\x9c\x83b\xa0\x90\x8e¨(ñ@"
+      8e5b99e4965d1e0023a148cb  #       "\x8e[\x99ä\x96]\x1e\x00#¡HË"
+      a59a8032fcd9a6d1db6545fe  #       "¥\x9a\x802üÙ¦ÑÛeEþ"
+      7d4b1e926f9f33acecbc79a5  #       "}K\x1e\x92o\x9f3¬ì¼y¥"
+      8a1a7bd9                  #       "\x8a\x1a{Ù"
 
 6.  Referenced Token
 
@@ -867,18 +869,17 @@ d2                              # tag(18)
 
 6.3.  Referenced Token in COSE
 
-   The Referenced Token MAY be encoded as a "COSE Web Token (CWT)"
+   The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)"
    object according to [RFC8392] or other formats based on COSE.
+   Referenced Tokens in CBOR should share the same core data structure
+   for a status list reference:
 
-   The following content applies to the CWT Claims Set:
-
-   *  65535 (status): REQUIRED.  The status claim is encoded as a Status
-      CBOR structure and MUST include at least one data item that refers
-      to a status mechanism.  Each data item in the Status CBOR
-      structure comprises a key-value pair, where the key must be a CBOR
-      text string (Major Type 3) specifying the identifier of the status
-      mechanism and the corresponding value defines its contents.  This
-      specification defines the following data items:
+   *  The Status CBOR structure is a Map that MUST include at least one
+      data item that refers to a status mechanism.  Each data item in
+      the Status CBOR structure comprises a key-value pair, where the
+      key must be a CBOR text string (Major Type 3) specifying the
+      identifier of the status mechanism and the corresponding value
+      defines its contents.
 
       -  status_list (status list): REQUIRED when the status mechanism
          defined in this specification is used.  It has the same
@@ -897,6 +898,13 @@ d2                              # tag(18)
             Referenced Token.  The value of uri MUST be a URI conforming
             to [RFC3986].
 
+6.3.1.  CBOR Web Token (CWT)
+
+   The following content applies to the CWT Claims Set:
+
+   *  65535 (status): REQUIRED.  The status claim contains the Status
+      CBOR structure as described in Section 6.3.
+
    Application of additional restrictions and policies are at the
    discretion of the Relying Party.
 
@@ -906,9 +914,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840036c357dbc195e275a64f58d42f1a0547ed844
-   5c0daa5f091086a19e06a86bf92d3ba2b1cdaecbe9f252ab9182c7ddf14747b1a960
-   48a6331ab8ada2ee9f30fd
+   7374617475736c697374732f315840773e119a1247415596abbd166c66893a45649b
+   e800ae794f0b50e204344a201be2cec3bd1c7f6672f5019c3a8423f9dcccc6267df5
+   d29fffd23490cbd7b0cba3
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -931,17 +939,19 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         036c357dbc195e275a64f58d  #       "\x03l5}¼\x19^'Zdõ\x8d"
-         42f1a0547ed8445c0daa5f09  #       "Bñ\xa0T~ØD\\x0dª_\x09"
-         1086a19e06a86bf92d3ba2b1  #       "\x10\x86¡\x9e\x06¨kù-;¢±"
-         cdaecbe9f252ab9182c7ddf1  #       "Í®ËéòR«\x91\x82ÇÝñ"
-         4747b1a96048a6331ab8ada2  #       "GG±©`H¦3\x1a¸\xad¢"
-         ee9f30fd                  #       "î\x9f0ý"
+         773e119a1247415596abbd16  #       "w>\x11\x9a\x12GAU\x96«½\x16"
+         6c66893a45649be800ae794f  #       "lf\x89:Ed\x9bè\x00®yO"
+         0b50e204344a201be2cec3bd  #       "\x0bPâ\x044J \x1bâÎÃ½"
+         1c7f6672f5019c3a8423f9dc  #       "\x1c\x7ffrõ\x01\x9c:\x84#ùÜ"
+         ccc6267df5d29fffd23490cb  #       "ÌÆ&}õÒ\x9fÿÒ4\x90Ë"
+         d7b0cba3                  #       "×°Ë£"
+
+6.3.2.  ISO mdoc
 
    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by
    introducing the status parameter in the Mobile Security Object (MSO)
-   as specified in Section 9.1.2.  The status parameter uses the same
-   encoding as a CWT as defined in Section 6.3.
+   as specified in Section 9.1.2 of [ISO.mdoc].  The status parameter
+   contains the Status CBOR structure as described in Section 6.3.
 
    It is RECOMMENDED to use status for the label of the field that
    contains the Status CBOR structure.
@@ -1173,8 +1183,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.2CTrM3qbAdkUiQ-1yxX5sig3GWdSTZijduIF6iPZlYbYER5H87zj
-   IyYhm2dGcSpDAxrRaYv_CqyaGddVbd8VaQ
+   nR0bCI6NDMyMDB9.4xB2JzSD7X9dFypOYuodeiya6o6LFz_PzI7GRPdCnXZG3F6qp50R
+   sJHpWu-2i9Zxz86wFvfnWi6klfXjN951tg
 
 8.2.  Status List Response
 
@@ -1322,8 +1332,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.2CTrM3qbAdkUiQ-1yxX5sig3GWdSTZijduIF6iPZlYbYER5H87zj
-   IyYhm2dGcSpDAxrRaYv_CqyaGddVbd8VaQ
+   nR0bCI6NDMyMDB9.4xB2JzSD7X9dFypOYuodeiya6o6LFz_PzI7GRPdCnXZG3F6qp50R
+   sJHpWu-2i9Zxz86wFvfnWi6klfXjN951tg
 
 9.  Status List Aggregation
 
@@ -3228,6 +3238,8 @@ Test vectors for Status List encoding
 Document History
 
    -14
+
+   *  slightly restructure/clarify referenced token cose section
 
    *  Add ASN.1 module
 
