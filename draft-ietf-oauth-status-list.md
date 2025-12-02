@@ -134,7 +134,7 @@ informative:
 
 --- abstract
 
-This specification defines a mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
+This specification defines a status mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
 
 --- middle
 
@@ -175,7 +175,7 @@ The following diagram depicts the relationship between the involved roles (Relyi
 ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
 │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
 └─┬──────┘            └───┬────┘            └──┬────────────┘
-  ▼ update status         │                    │
+  ▼ provide status        │                    │
 ┌───────────────┐         │                    │
 │ Status Issuer │         │                    │
 └─┬─────────────┘         │                    │
@@ -188,7 +188,7 @@ The following diagram depicts the relationship between the involved roles (Relyi
 
 Status Lists can be used to express a variety of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.
 
-Furthermore, the document defines an extension point that enables other specifications to describe additional status mechanisms and creates an IANA registry.
+Furthermore, the document creates an extension point and an IANA registry that enables other specifications to describe additional status mechanisms.
 
 ## Example Use Cases
 
@@ -200,7 +200,7 @@ Another possible use case for the Status List is to express the status of verifi
 
 Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
 
-This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.
+This specification seeks to find a balance between scalability, security and privacy by representing statuses as individual bits, packing the them into an array, and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.
 
 ## Design Considerations
 
@@ -217,11 +217,11 @@ The decisions taken in this specification aim to achieve the following design go
 
 ## Prior Work
 
-Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
+Representing statuses with bits in an array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
 
 ## Status Mechanisms Registry
 
-This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
+This specification establishes IANA "Status Mechanisms" registries for status mechanisms for JOSE-based tokens and for status mechanisms for COSE-based tokens and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
 
 Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
 
@@ -253,13 +253,13 @@ Status List Token:
 : A token in JWT (as defined in {{RFC7519}}) or CWT (as defined in {{RFC8392}}) representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+: A cryptographically secured data structure that contains a "status" claim that references a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
 
 Client:
 : An application that fetches information, such as a Status List Token, from the Status List Provider on behalf of the Holder or Relying Party.
 
 base64url:
-: Denotes the URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
+: Denotes the URL-safe base64 encoding with all trailing '=' characters omitted as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
 
 # Status List {#status-list}
 
@@ -273,7 +273,7 @@ A compressed byte array containing the status information of the Referenced Toke
 
 2. The Status Issuer creates a byte array of size = amount of Referenced Tokens * `bits` / 8 or greater. Depending on the `bits`, each byte in the array corresponds to 8/(`bits`) statuses (8,4,2 or 1).
 
-3. The Status Issuer sets the status values for all Referenced Tokens within the byte array. The status of each Referenced Token is identified using an index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with amount of Referenced Tokens - 1 (being the last valid entry). The bits within an array are counted from the least significant bit ("0") to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value (see [](#status-types) for more details on the values).
+3. The Status Issuer sets the status values for all Referenced Tokens within the byte array. Each Referenced Token is assigned a distinct index from 0 to one less than the number of Referenced Tokens assigned to the Status List. Each index identifies a contiguous block of bits in the byte array, with the blocks being packed into bytes from the least significant bit ("0") to the most significant bit ("7"). These bits contain the encoded status value of the Referenced Token (see [](#status-types) for more details on the values).
 
 4. The Status Issuer compresses the byte array using DEFLATE {{RFC1951}} with the ZLIB {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.
 
@@ -303,12 +303,12 @@ These bits are concatenated:
 
 ~~~ ascii-art
 
-byte no            0                  1               2
-bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7
-           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
-values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|  |0|...
-           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
-index       7 6 5 4 3 2 1 0   15   ...  10 9 8   23
+byte no            0                  1
+bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
+           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|
+           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+index       7 6 5 4 3 2 1 0   15   ...  10 9 8
            \_______________/  \_______________/
 byte value       0xB9               0xA3
 
@@ -741,15 +741,15 @@ A Status List can not represent multiple statuses per Referenced Token. If the S
 
 ## Status Types Values
 
+The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. In particular, a Referenced Token that is evaluated as being expired (e.g. through the `exp` claim) but also has a status of 0x00 ("VALID"), is considered expired.
+
 This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. Additional values may defined for particular use cases. Status Types described by this document comprise:
 
  - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
  - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
  - 0x02 - "SUSPENDED" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This state is usually temporary.
 
- The Status Type value 0x03 and Status Type values in the range 0x0B until 0x0F are permanently reserved as application specific. The processing of Status Types using these values is application specific. All other Status Type values are reserved for future registration.
-
-The processing rules for Referenced Tokens (such as JWT or CWT) precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired.
+ The Status Type value 0x03 and Status Type values in the range 0x0C until 0x0F are permanently reserved as application specific. The processing of Status Types using these values is application specific. All other Status Type values are reserved for future registration.
 
 See [](#privacy-status-types) for privacy considerations on status types.
 
@@ -901,7 +901,7 @@ The concrete implementation details depend on the specific ecosystem and are out
 
 The URI to the Status List Aggregation MAY be provided as the optional parameter `aggregation_uri` in the Status List itself as explained in [](#status-list-cbor) and [](#status-list-json) respectively. A Relying Party may use this URI to retrieve an up-to-date list of relevant Status Lists.
 
-## Status List Aggregation in JSON Format
+## Status List Aggregation Data Structure
 
 This section defines the structure for a JSON-encoded Status List Aggregation:
 
@@ -1230,16 +1230,16 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-jwt) of this specification
 
-## JWT Status Mechanisms Registry {#iana-registry}
+## JOSE Status Mechanisms Registry {#iana-registry}
 
-This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.
+This specification establishes the IANA "JOSE Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Object Signing and Encryption (JOSE)" registry group at https://www.iana.org/assignments/jose. The registry records the status mechanism member and a reference to the specification that defines it.
 
 JWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
-review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
+review period on the jose-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
 However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
 registration once they are satisfied that such a specification will be published.
 
-Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism: example").
+Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JOSE Status Mechanism: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
 to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
@@ -1309,15 +1309,15 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-cwt) of this specification
 
-## CWT Status Mechanisms Registry {#cwt-iana-registry}
+## COSE Status Mechanisms Registry {#cwt-iana-registry}
 
-This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.
+This specification establishes the IANA "COSE Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Object Signing and Encryption (COSE)" registry group at https://www.iana.org/assignments/cose. The registry records the status mechanism member and a reference to the specification that defines it.
 
-CWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
-review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
+OSE Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
+review period on the cose-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.
 
-Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register CWT Status Mechanism: example").
+Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register COSE Status Mechanism: example").
 
 Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
 to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
@@ -1424,7 +1424,7 @@ Specification Document(s):
 
 * Status Type Name: APPLICATION_SPECIFIC
 * Status Type Description: The status of the Referenced Token is application specific.
-* Status Type value: `0x0B-0xOF`
+* Status Type value: `0x0C-0xOF`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
 
@@ -1978,7 +1978,13 @@ CBOR encoding:
 
 -14
 
+* rename JWT/CWT to JOSE/COSE Status mechanism registry 
+* removed bytes from graphic that were intepreted as padding bytes
+* removed 0x0B from application-specific Status Type
+* reemphasized that expired tokens with status "VALID" are still expired
+* renamed section "Status List Aggregation in JSON Format" to "Status List Aggregation Data Structure"
 * slightly restructure/clarify referenced token cose section
+* nits from genART review
 * Add ASN.1 module
 
 -13
