@@ -134,7 +134,7 @@ informative:
 
 --- abstract
 
-This specification defines a mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
+This specification defines a status mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
 
 --- middle
 
@@ -175,7 +175,7 @@ The following diagram depicts the relationship between the involved roles (Relyi
 ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
 │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
 └─┬──────┘            └───┬────┘            └──┬────────────┘
-  ▼ update status         │                    │
+  ▼ provide status        │                    │
 ┌───────────────┐         │                    │
 │ Status Issuer │         │                    │
 └─┬─────────────┘         │                    │
@@ -188,7 +188,7 @@ The following diagram depicts the relationship between the involved roles (Relyi
 
 Status Lists can be used to express a variety of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.
 
-Furthermore, the document defines an extension point that enables other specifications to describe additional status mechanisms and creates an IANA registry.
+Furthermore, the document creates an extension point and IANA registry that enables other specifications to describe additional status mechanisms.
 
 ## Example Use Cases
 
@@ -200,7 +200,7 @@ Another possible use case for the Status List is to express the status of verifi
 
 Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
 
-This specification seeks to find a balance between scalability, security and privacy by minimizing the status information to mere bits (often a single bit) and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.
+This specification seeks to find a balance between scalability, security and privacy by representing statuses as individual bits, packing the them into an array, and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.
 
 ## Design Considerations
 
@@ -217,11 +217,11 @@ The decisions taken in this specification aim to achieve the following design go
 
 ## Prior Work
 
-Representing a status with bits in array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
+Representing statuses with bits in an array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
 
 ## Status Mechanisms Registry
 
-This specification establishes the IANA "Status Mechanisms" registry for status mechanisms and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
+This specification establishes IANA "Status Mechanisms" registries for status mechanisms for JWT tokens and for status mechanisms for CBOR tokens and registers the members defined by this specification. Other specifications can register other members used for status retrieval.
 
 Other status mechanisms may have different tradeoffs regarding security, privacy, scalability and complexity. The privacy and security considerations in this document only represent the properties of the Status List mechanism.
 
@@ -253,13 +253,13 @@ Status List Token:
 : A token in JWT (as defined in {{RFC7519}}) or CWT (as defined in {{RFC8392}}) representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A cryptographically secured data structure that contains a "status" claim that is referencing a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+: A cryptographically secured data structure that contains a "status" claim that references a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
 
 Client:
 : An application that fetches information, such as a Status List Token, from the Status List Provider on behalf of the Holder or Relying Party.
 
 base64url:
-: Denotes the URL-safe base64 encoding without padding as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
+: Denotes the URL-safe base64 encoding with all trailing '=' characters omitted as defined in Section 2 of {{RFC7515}} as "Base64url Encoding".
 
 # Status List {#status-list}
 
@@ -273,7 +273,7 @@ A compressed byte array containing the status information of the Referenced Toke
 
 2. The Status Issuer creates a byte array of size = amount of Referenced Tokens * `bits` / 8 or greater. Depending on the `bits`, each byte in the array corresponds to 8/(`bits`) statuses (8,4,2 or 1).
 
-3. The Status Issuer sets the status values for all Referenced Tokens within the byte array. The status of each Referenced Token is identified using an index that maps to one or more specific bits within the byte array. The index starts counting at 0 and ends with amount of Referenced Tokens - 1 (being the last valid entry). The bits within an array are counted from the least significant bit ("0") to the most significant bit ("7"). All bits of the byte array at a particular index are set to a status value (see [](#status-types) for more details on the values).
+3. The Status Issuer sets the status values for all Referenced Tokens within the byte array. Each Referenced Token is assigned a distinct index from 0 to one less than the number of Referenced Tokens assigned to the Status List (which may grow over time). Each index identifies a contiguous block of bits in the byte array, with the blocks being packed into bytes from the least significant bit ("0") to the most significant bit ("7"). These bits contain the encoded status value (see Section 7 of the Referenced Token.
 
 4. The Status Issuer compresses the byte array using DEFLATE {{RFC1951}} with the ZLIB {{RFC1950}} data format. Implementations are RECOMMENDED to use the highest compression level available.
 
@@ -1418,7 +1418,7 @@ Specification Document(s):
 
 * Status Type Name: APPLICATION_SPECIFIC
 * Status Type Description: The status of the Referenced Token is application specific.
-* Status Type value: `0x0B-0xOF`
+* Status Type value: `0x0C-0xOF`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
 
