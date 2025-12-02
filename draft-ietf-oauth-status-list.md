@@ -188,7 +188,7 @@ The following diagram depicts the relationship between the involved roles (Relyi
 
 Status Lists can be used to express a variety of Status Types. This document defines basic Status Types for the most common use cases as well as an extensibility mechanism for custom Status Types.
 
-Furthermore, the document creates an extension point and IANA registry that enables other specifications to describe additional status mechanisms.
+Furthermore, the document creates an extension point and an IANA registry that enables other specifications to describe additional status mechanisms.
 
 ## Example Use Cases
 
