@@ -440,22 +440,22 @@ Table of Contents
    that represents the statuses of 16 Referenced Tokens with a bits of
    1, requiring 2 bytes (16 bits) for the uncompressed byte array:
 
-   status[0] = 1
-   status[1] = 0
-   status[2] = 0
-   status[3] = 1
-   status[4] = 1
-   status[5] = 1
-   status[6] = 0
-   status[7] = 1
-   status[8] = 1
-   status[9] = 1
-   status[10] = 0
-   status[11] = 0
-   status[12] = 0
-   status[13] = 1
-   status[14] = 0
-   status[15] = 1
+   status[0] = 0b1
+   status[1] = 0b0
+   status[2] = 0b0
+   status[3] = 0b1
+   status[4] = 0b1
+   status[5] = 0b1
+   status[6] = 0b0
+   status[7] = 0b1
+   status[8] = 0b1
+   status[9] = 0b1
+   status[10] = 0b0
+   status[11] = 0b0
+   status[12] = 0b0
+   status[13] = 0b1
+   status[14] = 0b0
+   status[15] = 0b1
 
    These bits are concatenated:
 
@@ -475,18 +475,18 @@ Table of Contents
    the statuses of 12 Referenced Tokens with a bits of 2, requiring 3
    bytes (24 bits) for the uncompressed byte array:
 
-   status[0] = 1
-   status[1] = 2
-   status[2] = 0
-   status[3] = 3
-   status[4] = 0
-   status[5] = 1
-   status[6] = 0
-   status[7] = 1
-   status[8] = 1
-   status[9] = 2
-   status[10] = 3
-   status[11] = 3
+   status[0] = 0b01
+   status[1] = 0b10
+   status[2] = 0b00
+   status[3] = 0b11
+   status[4] = 0b0
+   status[5] = 0b01
+   status[6] = 0b00
+   status[7] = 0b01
+   status[8] = 0b01
+   status[9] = 0b10
+   status[10] = 0b11
+   status[11] = 0b11
 
    These bits are concatenated:
 
@@ -496,7 +496,7 @@ Table of Contents
    values     |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
               +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
                \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
-   status       3   0   2   1      1   0   1   0      3   3   2   1
+   status      11  00  10  01     01  00  01  00     11  11  10  01
    index        3   2   1   0      7   6   5   4      11  10  9   8
                 \___________/      \___________/      \___________/
    byte value       0xC9               0x44               0xF9
@@ -506,8 +506,8 @@ Table of Contents
    This section defines the data structure for a JSON-encoded Status
    List:
 
-   *  The StatusList structure is a JSON Object and MUST contain at
-      least the following members:
+   *  The StatusList structure is a JSON Object contains the following
+      members:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the compressed byte array (lst).  The
@@ -524,7 +524,7 @@ Table of Contents
          details.
 
    The following example illustrates the JSON representation of the
-   Status List with bits 1 from the example above:
+   Status List with bits=1 from the examples above:
 
    byte_array = [0xb9, 0xa3]
    encoded:
@@ -534,7 +534,7 @@ Table of Contents
    }
 
    The following example illustrates the JSON representation of the
-   Status List with bits 2 from the example above:
+   Status List with bits=2 from the examples above:
 
    byte_array = [0xc9, 0x44, 0xf9]
    encoded:
@@ -551,20 +551,20 @@ Table of Contents
    This section defines the data structure for a CBOR-encoded Status
    List:
 
-   *  The StatusList structure is a CBOR map (Major Type 5) and defines
+   *  The StatusList structure is a CBOR map (major type 5) and defines
       the following entries:
 
-      -  bits: REQUIRED.  CBOR Unsigned integer (Major Type 0) that
+      -  bits: REQUIRED.  CBOR Unsigned integer (major type 0) that
          contains the number of bits per Referenced Token in the
          compressed byte array (lst).  The allowed values for bits are
          1, 2, 4 and 8.
 
-      -  lst: REQUIRED.  CBOR Byte string (Major Type 2) that contains
+      -  lst: REQUIRED.  CBOR Byte string (major type 2) that contains
          the status values for all the Referenced Tokens it conveys
          statuses for.  The value MUST be the compressed byte array as
          specified in Section 4.1.
 
-      -  aggregation_uri: OPTIONAL.  CBOR Text string (Major Type 3)
+      -  aggregation_uri: OPTIONAL.  CBOR Text string (major type 3)
          that contains a URI to retrieve the Status List Aggregation for
          this type of Referenced Token.  See section Section 9 for
          further detail.
@@ -705,7 +705,7 @@ Table of Contents
       the time at which the Status List Token is considered expired by
       its issuer.  Consider the guidance provided in Section 13.7.
 
-   *  65534 (time to live): RECOMMENDED.  Unsigned integer (Major Type
+   *  65534 (time to live): RECOMMENDED.  Unsigned integer (major type
       0).  The time to live claim, if present, MUST specify the maximum
       amount of time, in seconds, that the Status List Token can be
       cached by a consumer before a fresh copy SHOULD be retrieved.  The
@@ -736,9 +736,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840a4ab9e08ecdeb77b4f2c8a
-   42015fb2ff28b4eb5172a7a7530fec11b125777616f9c24f36d058c12efdd3b33217
-   213fb5994deb053b9c496710044d845527ab61
+   646269747301636c73744a78dadbb918000217015d5840f8170f6262e46180f3345f
+   00c0177a35295e381c1e7393df15d5ac889b109734e64914a006c9d896cae0cf6d8d
+   7bf2d9340c8279746565ce8f0ae7f011e3ff09
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -761,12 +761,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      a4ab9e08ecdeb77b4f2c8a42  #       "¤«\x9e\x08ìÞ·{O,\x8aB"
-      015fb2ff28b4eb5172a7a753  #       "\x01_²ÿ(´ëQr§§S"
-      0fec11b125777616f9c24f36  #       "\x0fì\x11±%wv\x16ùÂO6"
-      d058c12efdd3b33217213fb5  #       "ÐXÁ.ýÓ³2\x17!?µ"
-      994deb053b9c496710044d84  #       "\x99Më\x05;\x9cIg\x10\x04M\x84"
-      5527ab61                  #       "U'«a"
+      f8170f6262e46180f3345f00  #       "ø\x17\x0fbbäa\x80ó4_\x00"
+      c0177a35295e381c1e7393df  #       "À\x17z5)^8\x1c\x1es\x93ß"
+      15d5ac889b109734e64914a0  #       "\x15Õ¬\x88\x9b\x10\x974æI\x14\xa0"
+      06c9d896cae0cf6d8d7bf2d9  #       "\x06ÉØ\x96ÊàÏm\x8d{òÙ"
+      340c8279746565ce8f0ae7f0  #       "4\x0c\x82yteeÎ\x8f\x0açð"
+      11e3ff09                  #       "\x11ãÿ\x09"
 
 6.  Referenced Token
 
@@ -878,7 +878,7 @@ d2                              # tag(18)
    *  The Status CBOR structure is a Map that MUST include at least one
       data item that refers to a status mechanism.  Each data item in
       the Status CBOR structure comprises a key-value pair, where the
-      key must be a CBOR text string (Major Type 3) specifying the
+      key must be a CBOR text string (major type 3) specifying the
       identifier of the status mechanism and the corresponding value
       defines its contents.
 
@@ -888,12 +888,12 @@ d2                              # tag(18)
          encoded as a StatusListInfo CBOR structure with the following
          fields:
 
-         o  idx: REQUIRED.  Unsigned integer (Major Type 0) The idx
+         o  idx: REQUIRED.  Unsigned integer (major type 0) The idx
             (index) claim MUST specify a non-negative Integer that
             represents the index to check for status information in the
             Status List for the current Referenced Token.
 
-         o  uri: REQUIRED.  Text string (Major Type 3).  The uri (URI)
+         o  uri: REQUIRED.  Text string (major type 3).  The uri (URI)
             claim MUST specify a String value that identifies the Status
             List Token containing the status information for the
             Referenced Token.  The value of uri MUST be a URI conforming
@@ -915,9 +915,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840f719f60acc52e0b8b6a0b785409907a30debbb
-   0cc3534e4b404ef8349296858ffee66512c0a84284ef25fc97186765cbcc352cb9f9
-   6445bbaa7eee97b002827e
+   7374617475736c697374732f3158402eac01985f45085ca18fa240eba6dd74a5a09a
+   118a20c1f9f0212a2ea260c83ec0e2e866b5d05473d809b023de26f3d0a8a44820ec
+   fce7801b02f4d9dcbf7dcc
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -940,12 +940,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         f719f60acc52e0b8b6a0b785  #       "÷\x19ö\x0aÌRà¸¶\xa0·\x85"
-         409907a30debbb0cc3534e4b  #       "@\x99\x07£\x0dë»\x0cÃSNK"
-         404ef8349296858ffee66512  #       "@Nø4\x92\x96\x85\x8fþæe\x12"
-         c0a84284ef25fc97186765cb  #       "À¨B\x84ï%ü\x97\x18geË"
-         cc352cb9f96445bbaa7eee97  #       "Ì5,¹ùdE»ª~î\x97"
-         b002827e                  #       "°\x02\x82~"
+         2eac01985f45085ca18fa240  #       ".¬\x01\x98_E\x08\¡\x8f¢@"
+         eba6dd74a5a09a118a20c1f9  #       "ë¦Ýt¥\xa0\x9a\x11\x8a Áù"
+         f0212a2ea260c83ec0e2e866  #       "ð!*.¢`È>Àâèf"
+         b5d05473d809b023de26f3d0  #       "µÐTsØ\x09°#Þ&óÐ"
+         a8a44820ecfce7801b02f4d9  #       "¨¤H ìüç\x80\x1b\x02ôÙ"
+         dcbf7dcc                  #       "Ü¿}Ì"
 
 6.3.2.  ISO mdoc
 
@@ -1094,27 +1094,27 @@ d2                              # tag(18)
    Type values.  A status describes the state, mode, condition or stage
    of an entity that is represented by the Referenced Token.
 
-   A Status List can not represent multiple statuses per Referenced
-   Token.  If the Status List contains more than one bit per token (as
-   defined by bits in the Status List), then the whole value of bits
-   MUST describe one value.  Status Types MUST have a numeric value
-   between 0 and 255 for their representation in the Status List.  The
-   issuer of the Status List MUST choose an adequate bits value (bit
-   size) to be able to describe the required Status Types for its
-   application.
+   A Status List represents exactly one status per Referenced Token.  If
+   the Status List contains more than one bit per token (as defined by
+   bits in the Status List), then the whole value of bits MUST describe
+   one value.  Status Types MUST have a numeric value between 0 and 255
+   for their representation in the Status List.  The issuer of the
+   Status List MUST choose an adequate bits value (bit size) to be able
+   to describe the required Status Types for its application.
 
 7.1.  Status Types Values
 
    The processing rules for Referenced Tokens (such as JWT or CWT)
-   precede any evaluation of a Referenced Token's status.  In
-   particular, a Referenced Token that is evaluated as being expired
-   (e.g. through the exp claim) but also has a status of 0x00 ("VALID"),
-   is considered expired.
+   supersede the Referenced Token's status in a TSL.  In particular, a
+   Referenced Token that is evaluated as being expired (e.g. through the
+   exp claim) but in a TSL has a status of 0x00 ("VALID"), is considered
+   expired.
 
    This document creates a registry in Section 14.5 that includes the
-   most common Status Type values.  Additional values may defined for
-   particular use cases.  Status Types described by this document
-   comprise:
+   most common Status Type values.  Applications SHOULD use registered
+   values for statuses if they have the correct semantics.  Additional
+   values may defined for particular use cases.  Status Types described
+   by this document comprise:
 
    *  0x00 - "VALID" - The status of the Referenced Token is valid,
       correct or legal.
@@ -1123,8 +1123,8 @@ d2                              # tag(18)
       annulled, taken back, recalled or cancelled.
 
    *  0x02 - "SUSPENDED" - The status of the Referenced Token is
-      temporarily invalid, hanging, debarred from privilege.  This state
-      is usually temporary.
+      temporarily invalid, hanging, debarred from privilege.  This
+      status is usually temporary.
 
    The Status Type value 0x03 and Status Type values in the range 0x0C
    until 0x0F are permanently reserved as application specific.  The
@@ -1139,12 +1139,14 @@ d2                              # tag(18)
    The fetching, processing and verifying of a Status List Token may be
    done by either the Holder or the Relying Party.  The following
    section is described from the role of the Relying Party, however the
-   same rules would also apply for the Holder.
+   same rules apply for the Holder.
 
 8.1.  Status List Request
 
-   To obtain the Status List Token, the Relying Party MUST send an HTTP
-   GET request to the URI provided in the Referenced Token.
+   The Status Provider SHOULD provide Status List Token on an endpoint
+   serving an HTTP GET request to the URI provided in the Referenced
+   Token, unless the Relying Party and the Status Provider have
+   alternative methods of distribution.
 
    The HTTP endpoint SHOULD support the use of Cross-Origin Resource
    Sharing (CORS) [CORS] and/or other methods as appropriate to enable
@@ -1163,31 +1165,21 @@ d2                              # tag(18)
    If the Relying Party does not send an Accept Header, the response
    type is assumed to be known implicitly or out-of-band.
 
+   The following is a non-normative example of a request for a Status
+   List Token with type application/statuslist+jwt:
+
+   GET /statuslists/1 HTTP/1.1
+   Host: example.com
+   Accept: application/statuslist+jwt
+
+8.2.  Status List Response
+
    A successful response that contains a Status List Token MUST use an
    HTTP status code in the 2xx range.
 
    A response MAY also choose to redirect the client to another URI
    using an HTTP status code in the 3xx range, which clients SHOULD
    follow.  See Section 11.4 for security considerations on redirects.
-
-   The following are non-normative examples of a request and response
-   for a Status List Token with type application/statuslist+jwt:
-
-   GET /statuslists/1 HTTP/1.1
-   Host: example.com
-   Accept: application/statuslist+jwt
-
-   HTTP/1.1 200 OK
-   Content-Type: application/statuslist+jwt
-
-   eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
-   yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
-   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
-   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.AKH3EO2C-SCrN_0Bda2XiagxYxDJG_xYAqpwIqBFkqVg2zbTsvvG
-   sJh-Eo3kNWpA0y6RHYpymRg8-gX_mxVKdQ
-
-8.2.  Status List Response
 
    In the successful response, the Status Provider MUST use the
    following content-type:
@@ -1207,16 +1199,28 @@ d2                              # tag(18)
    Serialization form for a Status List Token in JWT format.  Note that
    while the examples for Status List Tokens in CWT format in this
    document are provided in hex encoding, this is done purely for
-   readability and does not mean that hex encoding is expected for HTTP
-   messages.
+   readability; CWT format response bodies are "in binary".
 
    The HTTP response SHOULD use gzip Content-Encoding as defined in
-   [RFC9110].
+   [RFC9110] for Status List Tokens in JWT format.
 
    If caching-related HTTP headers are present in the HTTP response,
    Relying Parties MUST prioritize the exp and ttl claims within the
    Status List Token over the HTTP headers for determining caching
    behavior.
+
+   The following is a non-normative example of a response with a Status
+   List Token with type application/statuslist+jwt:
+
+   HTTP/1.1 200 OK
+   Content-Type: application/statuslist+jwt
+
+   eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
+   yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
+   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
+   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
+   nR0bCI6NDMyMDB9.KuUNcF4f84ZYX9WrxmvF1TOAGZPADSIHH22N5kbCLZt8-ZR_tP3j
+   EPBgLZmI21PXp_s8oQETDlXPVuu4z-SqjA
 
 8.3.  Validation Rules
 
@@ -1262,7 +1266,7 @@ d2                              # tag(18)
            equal to the uri claim in the status_list object of the
            Referenced Token
 
-       b.  If the Relying Party has custom policies regarding the
+       b.  If the Relying Party has local policies regarding the
            freshness of the Status List Token, it SHOULD check the
            issued at claim (iat or 6)
 
@@ -1278,8 +1282,10 @@ d2                              # tag(18)
        with DEFLATE [RFC1951] and ZLIB [RFC1950]
 
    6.  Retrieve the status value of the index specified in the
-       Referenced Token as described in Section 4.  Fail if the provided
-       index is out of bounds of the Status List
+       Referenced Token as described in Section 4.  If the provided
+       index is out of bounds of the Status List, no statement about the
+       status of the Referenced Token can be made and the Referenced
+       Token SHOULD be rejected.
 
    7.  Check the status value as described in Section 7
 
@@ -1295,9 +1301,9 @@ d2                              # tag(18)
    information, as defined by the issuer, is explicitly stated by the
    iat (issued at) and exp (expiration time) claims for JWT and their
    corresponding ones for the CWT representation.  If support for
-   historical status information is required, this can be achieved by
-   extending the request for the Status List Token as defined in
-   Section 8.1 with a timestamp.  This feature has additional privacy
+   historical status information is desired, this can be achieved by
+   extending with a timestamp the request for the Status List Token as
+   defined in Section 8.1.  This feature has additional privacy
    implications as described in Section 12.7.
 
    To obtain the Status List Token, the Relying Party MUST send an HTTP
@@ -1310,11 +1316,12 @@ d2                              # tag(18)
    SHOULD return a status code of 501 (Not Implemented) or if the
    requested time is not supported it SHOULD return a status code of 406
    (Not Acceptable).  A Status List Token might be served via static
-   file hosting (e.g., leveraging a Content Delivery Network), which
-   would result in the client not being able to retrieve those status
-   codes.  Thus, the client MUST verify support for this feature by
-   verifying that the requested timestamp is within the valid time of
-   the returned token signaled via iat (6 for CWT) and exp (4 for CWT).
+   file hosting (e.g., leveraging a Content Delivery Network) that
+   ignores query parameters, which would result in the client requesting
+   a historical status list but receiving the current status list.
+   Thus, the client MUST reject a response unless the requested
+   timestamp is within the valid time of the returned token signaled via
+   iat (6 for CWT) and exp (4 for CWT).
 
    The following is a non-normative example of a GET request using the
    time query parameter:
@@ -1333,8 +1340,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.AKH3EO2C-SCrN_0Bda2XiagxYxDJG_xYAqpwIqBFkqVg2zbTsvvG
-   sJh-Eo3kNWpA0y6RHYpymRg8-gX_mxVKdQ
+   nR0bCI6NDMyMDB9.KuUNcF4f84ZYX9WrxmvF1TOAGZPADSIHH22N5kbCLZt8-ZR_tP3j
+   EPBgLZmI21PXp_s8oQETDlXPVuu4z-SqjA
 
 9.  Status List Aggregation
 
@@ -1342,8 +1349,8 @@ d2                              # tag(18)
    Issuer to publish a list of one or more Status List Tokens URIs,
    allowing a Relying Party to fetch Status List Tokens provided by this
    Issuer.  This mechanism is intended to support fetching and caching
-   mechanisms and allow offline validation of the status of a reference
-   token for a period of time.
+   mechanisms and allow offline validation of the status of a Reference
+   Token for a period of time.
 
    If a Relying Party encounters an error while validating one of the
    Status List Tokens returned from the Status List Aggregation
@@ -1384,10 +1391,11 @@ d2                              # tag(18)
    is used commonly in OAuth and OpenID Connect, or within Issuer
    certificates or trust lists (such as VICAL as defined in Annex C of
    [ISO.mdoc]).  If the Issuer is an OAuth Authorization Server
-   according to [RFC6749], it is RECOMMENDED to use
-   status_list_aggregation_endpoint for its metadata defined by
-   [RFC8414].  The Issuer MAY limit the Status List Tokens listed by a
-   Status List Aggregation to a particular type of Referenced Token.
+   according to [RFC6749], it is RECOMMENDED to use the
+   status_list_aggregation_endpoint parameter within its metadata
+   defined by [RFC8414].  The Issuer MAY limit the Status List Tokens
+   listed by a Status List Aggregation to a particular type of
+   Referenced Token.
 
    The concrete implementation details depend on the specific ecosystem
    and are out of scope of this specification.
@@ -3253,6 +3261,8 @@ Document History
    *  slightly restructure/clarify referenced token cose section
 
    *  Add ASN.1 module
+
+   *  many nits and improvements from genart review
 
    -13
 
