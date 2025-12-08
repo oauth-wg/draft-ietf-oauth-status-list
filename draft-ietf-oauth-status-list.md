@@ -1968,6 +1968,7 @@ CBOR encoding:
 
 -14
 
+* remove cose_sign1 tag from statuslist in cwt form examples
 * slightly restructure/clarify referenced token cose section
 * Add ASN.1 module
 
