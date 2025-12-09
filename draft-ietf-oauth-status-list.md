@@ -1042,7 +1042,7 @@ This malicious behavior can be detected by Relying Parties that request large am
 
 ## Observability of Relying Parties {#privacy-relying-party}
 
-Once the Relying Party receives the Referenced Token, this enables them to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
+Once the Relying Party receives the Referenced Token, this enables them to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of an employee credential.
 
 This behaviour could be mitigated by:
 
@@ -1093,8 +1093,6 @@ There are strong privacy concerns that have to be carefully taken into considera
 ## Status Types {#privacy-status-types}
 
 As previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports special information about a Referenced Token can leak information to other parties. This document defines one additional Status Type with "SUSPENDED" that conveys such additional information.
-
-A concrete example for "SUSPENDED" would be a driver's license, where the digital driver's license might still be useful to prove other information about its holder, but suspended could signal that it should not be considered valid in the scope of being allowed to drive a car. This case could be solved by either introducing a special status type, or by revoking the Referenced Token and re-issuing with changed attributes. For such a case, the status type suspended might be dangerous as it would leak the information of a suspended driver's license even if the driver's license is used as a mean of identification and not in the context of driving a car. This could also allow for the unwanted collection of statistical data on the status of driver's licenses.
 
 Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might a better fit for their use-case.
 
@@ -1971,6 +1969,7 @@ CBOR encoding:
 * remove cose_sign1 tag from statuslist in cwt form examples
 * slightly restructure/clarify referenced token cose section
 * Add ASN.1 module
+* removed DL suspension example
 
 -13
 
