@@ -2228,6 +2228,7 @@ CBOR encoding:
 
 -14
 
+* use binary value encoding for all test vectors (display purposes only)
 * removed bytes from graphic that were intepreted as padding bytes
 * removed 0x0B from application-specific Status Type
 * reemphasized that expired tokens with status "VALID" are still expired
