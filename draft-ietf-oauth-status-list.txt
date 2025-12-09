@@ -16,8 +16,8 @@ Expires: 12 June 2026                                    Bundesdruckerei
 
 Abstract
 
-   This specification defines a mechanism called Token Status List
-   (abbreviated TSL), data structures and processing rules for
+   This specification defines a status mechanism called Token Status
+   List (abbreviated TSL), data structures and processing rules for
    representing the status of tokens secured by JSON Object Signing and
    Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such
    as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc.  It also defines an
@@ -104,7 +104,7 @@ Table of Contents
    9.  Status List Aggregation
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
-     9.3.  Status List Aggregation in JSON Format
+     9.3.  Status List Aggregation Data Structure
    10. X.509 Certificate Extended Key Usage Extension
    11. Security Considerations
      11.1.  Correct decoding and parsing of the encoded Status List
@@ -233,7 +233,7 @@ Table of Contents
    ┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
    │ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
    └─┬──────┘            └───┬────┘            └──┬────────────┘
-     ▼ update status         │                    │
+     ▼ provide status        │                    │
    ┌───────────────┐         │                    │
    │ Status Issuer │         │                    │
    └─┬─────────────┘         │                    │
@@ -246,9 +246,9 @@ Table of Contents
    document defines basic Status Types for the most common use cases as
    well as an extensibility mechanism for custom Status Types.
 
-   Furthermore, the document defines an extension point that enables
-   other specifications to describe additional status mechanisms and
-   creates an IANA registry.
+   Furthermore, the document creates an extension point and an IANA
+   registry that enables other specifications to describe additional
+   status mechanisms.
 
 1.1.  Example Use Cases
 
@@ -284,10 +284,10 @@ Table of Contents
    burden on the Issuer's infrastructure.
 
    This specification seeks to find a balance between scalability,
-   security and privacy by minimizing the status information to mere
-   bits (often a single bit) and compressing the resulting binary data.
-   Thereby, a Status List may contain statuses of many thousands or
-   millions Referenced Tokens while remaining as small as possible.
+   security and privacy by representing statuses as individual bits,
+   packing the them into an array, and compressing the resulting binary
+   data.  Thereby, a Status List may contain statuses of many thousands
+   or millions Referenced Tokens while remaining as small as possible.
    Placing a large number of Referenced Tokens into the same list also
    offers Holders and Relying Parties herd privacy from the Status
    Provider.
@@ -322,7 +322,7 @@ Table of Contents
 
 1.4.  Prior Work
 
-   Representing a status with bits in array is a rather old and well-
+   Representing statuses with bits in an array is a rather old and well-
    known concept in computer science and there has been prior work to
    use this for revocation and status management such as a paper by
    Smith et al. [smith2020let] that proposed a mechanism called
@@ -332,8 +332,9 @@ Table of Contents
 
 1.5.  Status Mechanisms Registry
 
-   This specification establishes the IANA "Status Mechanisms" registry
-   for status mechanisms and registers the members defined by this
+   This specification establishes IANA "Status Mechanisms" registries
+   for status mechanisms for JOSE-based tokens and for status mechanisms
+   for COSE-based tokens and registers the members defined by this
    specification.  Other specifications can register other members used
    for status retrieval.
 
@@ -378,21 +379,21 @@ Table of Contents
       cryptographically secured Status List.
 
    Referenced Token:  A cryptographically secured data structure that
-      contains a "status" claim that is referencing a mechanism to
-      retrieve status information about this Referenced Token.  This
-      document defines the Status List mechanism in which case the
-      Referenced Token contains a reference to an entry in a Status List
-      Token.  It is RECOMMENDED to use JSON [RFC8259] with JOSE as
-      defined in [RFC7515] or CBOR [RFC8949] with COSE as defined in
-      [RFC9052].  Examples for Referenced Tokens are SD-JWT VC and ISO
-      mdoc.
+      contains a "status" claim that references a mechanism to retrieve
+      status information about this Referenced Token.  This document
+      defines the Status List mechanism in which case the Referenced
+      Token contains a reference to an entry in a Status List Token.  It
+      is RECOMMENDED to use JSON [RFC8259] with JOSE as defined in
+      [RFC7515] or CBOR [RFC8949] with COSE as defined in [RFC9052].
+      Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
 
    Client:  An application that fetches information, such as a Status
       List Token, from the Status List Provider on behalf of the Holder
       or Relying Party.
 
-   base64url:  Denotes the URL-safe base64 encoding without padding as
-      defined in Section 2 of [RFC7515] as "Base64url Encoding".
+   base64url:  Denotes the URL-safe base64 encoding with all trailing
+      '=' characters omitted as defined in Section 2 of [RFC7515] as
+      "Base64url Encoding".
 
 4.  Status List
 
@@ -423,14 +424,14 @@ Table of Contents
        1).
 
    3.  The Status Issuer sets the status values for all Referenced
-       Tokens within the byte array.  The status of each Referenced
-       Token is identified using an index that maps to one or more
-       specific bits within the byte array.  The index starts counting
-       at 0 and ends with amount of Referenced Tokens - 1 (being the
-       last valid entry).  The bits within an array are counted from the
-       least significant bit ("0") to the most significant bit ("7").
-       All bits of the byte array at a particular index are set to a
-       status value (see Section 7 for more details on the values).
+       Tokens within the byte array.  Each Referenced Token is assigned
+       a distinct index from 0 to one less than the number of Referenced
+       Tokens assigned to the Status List.  Each index identifies a
+       contiguous block of bits in the byte array, with the blocks being
+       packed into bytes from the least significant bit ("0") to the
+       most significant bit ("7").  These bits contain the encoded
+       status value of the Referenced Token (see Section 7 for more
+       details on the values).
 
    4.  The Status Issuer compresses the byte array using DEFLATE
        [RFC1951] with the ZLIB [RFC1950] data format.  Implementations
@@ -440,31 +441,31 @@ Table of Contents
    that represents the statuses of 16 Referenced Tokens with a bits of
    1, requiring 2 bytes (16 bits) for the uncompressed byte array:
 
-   status[0] = 1
-   status[1] = 0
-   status[2] = 0
-   status[3] = 1
-   status[4] = 1
-   status[5] = 1
-   status[6] = 0
-   status[7] = 1
-   status[8] = 1
-   status[9] = 1
-   status[10] = 0
-   status[11] = 0
-   status[12] = 0
-   status[13] = 1
-   status[14] = 0
-   status[15] = 1
+   status[0] = 0b1
+   status[1] = 0b0
+   status[2] = 0b0
+   status[3] = 0b1
+   status[4] = 0b1
+   status[5] = 0b1
+   status[6] = 0b0
+   status[7] = 0b1
+   status[8] = 0b1
+   status[9] = 0b1
+   status[10] = 0b0
+   status[11] = 0b0
+   status[12] = 0b0
+   status[13] = 0b1
+   status[14] = 0b0
+   status[15] = 0b1
 
    These bits are concatenated:
 
-   byte no            0                  1               2
-   bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7
-              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
-   values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|  |0|...
-              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+...
-   index       7 6 5 4 3 2 1 0   15   ...  10 9 8   23
+   byte no            0                  1
+   bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
+              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+   values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|
+              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+   index       7 6 5 4 3 2 1 0   15   ...  10 9 8
               \_______________/  \_______________/
    byte value       0xB9               0xA3
 
@@ -475,18 +476,18 @@ Table of Contents
    the statuses of 12 Referenced Tokens with a bits of 2, requiring 3
    bytes (24 bits) for the uncompressed byte array:
 
-   status[0] = 1
-   status[1] = 2
-   status[2] = 0
-   status[3] = 3
-   status[4] = 0
-   status[5] = 1
-   status[6] = 0
-   status[7] = 1
-   status[8] = 1
-   status[9] = 2
-   status[10] = 3
-   status[11] = 3
+   status[0] = 0b01
+   status[1] = 0b10
+   status[2] = 0b00
+   status[3] = 0b11
+   status[4] = 0b0
+   status[5] = 0b01
+   status[6] = 0b00
+   status[7] = 0b01
+   status[8] = 0b01
+   status[9] = 0b10
+   status[10] = 0b11
+   status[11] = 0b11
 
    These bits are concatenated:
 
@@ -496,7 +497,7 @@ Table of Contents
    values     |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
               +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
                \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
-   status       3   0   2   1      1   0   1   0      3   3   2   1
+   status      11  00  10  01     01  00  01  00     11  11  10  01
    index        3   2   1   0      7   6   5   4      11  10  9   8
                 \___________/      \___________/      \___________/
    byte value       0xC9               0x44               0xF9
@@ -506,8 +507,8 @@ Table of Contents
    This section defines the data structure for a JSON-encoded Status
    List:
 
-   *  The StatusList structure is a JSON Object and MUST contain at
-      least the following members:
+   *  The StatusList structure is a JSON Object contains the following
+      members:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the compressed byte array (lst).  The
@@ -524,7 +525,7 @@ Table of Contents
          details.
 
    The following example illustrates the JSON representation of the
-   Status List with bits 1 from the example above:
+   Status List with bits=1 from the examples above:
 
    byte_array = [0xb9, 0xa3]
    encoded:
@@ -534,7 +535,7 @@ Table of Contents
    }
 
    The following example illustrates the JSON representation of the
-   Status List with bits 2 from the example above:
+   Status List with bits=2 from the examples above:
 
    byte_array = [0xc9, 0x44, 0xf9]
    encoded:
@@ -550,20 +551,20 @@ Table of Contents
    This section defines the data structure for a CBOR-encoded Status
    List:
 
-   *  The StatusList structure is a CBOR map (Major Type 5) and defines
+   *  The StatusList structure is a CBOR map (major type 5) and defines
       the following entries:
 
-      -  bits: REQUIRED.  CBOR Unsigned integer (Major Type 0) that
+      -  bits: REQUIRED.  CBOR Unsigned integer (major type 0) that
          contains the number of bits per Referenced Token in the
          compressed byte array (lst).  The allowed values for bits are
          1, 2, 4 and 8.
 
-      -  lst: REQUIRED.  CBOR Byte string (Major Type 2) that contains
+      -  lst: REQUIRED.  CBOR Byte string (major type 2) that contains
          the status values for all the Referenced Tokens it conveys
          statuses for.  The value MUST be the compressed byte array as
          specified in Section 4.1.
 
-      -  aggregation_uri: OPTIONAL.  CBOR Text string (Major Type 3)
+      -  aggregation_uri: OPTIONAL.  CBOR Text string (major type 3)
          that contains a URI to retrieve the Status List Aggregation for
          this type of Referenced Token.  See section Section 9 for
          further detail.
@@ -705,7 +706,7 @@ Table of Contents
       the time at which the Status List Token is considered expired by
       its issuer.  Consider the guidance provided in Section 13.7.
 
-   *  65534 (time to live): RECOMMENDED.  Unsigned integer (Major Type
+   *  65534 (time to live): RECOMMENDED.  Unsigned integer (major type
       0).  The time to live claim, if present, MUST specify the maximum
       amount of time, in seconds, that the Status List Token can be
       cached by a consumer before a fresh copy SHOULD be retrieved.  The
@@ -736,9 +737,9 @@ Table of Contents
    845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b6377
    74a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f7374
    617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda264
-   6269747301636c73744a78dadbb918000217015d5840478b6e05f46ae36b81578c23
-   f646ac46699cf24a5d3e391548bd286e798dcb1b5994c789f3e0e710bceaf7909308
-   9cd740f9602f8f7f28f774c165f8dc60fd38
+   6269747301636c73744a78dadbb918000217015d5840d4a3690f19eb4e5f87fb890c
+   4dc2addeb2159beb7ee6c0240987288289bfed701c9402b13d364ec31d43c546cd41
+   ab29f41a6cf47379985426fe6c738f27385b
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -760,11 +761,11 @@ Table of Contents
      636c73744a78dadbb918000217  #     "clstJxÚÛ¹\x18\x00\x02\x17"
      015d                        #     "\x01]"
    58 40                         #   bytes(64)
-     478b6e05f46ae36b81578c23f6  #     "G\x8bn\x05ôjãk\x81W\x8c#ö"
-     46ac46699cf24a5d3e391548bd  #     "F¬Fi\x9còJ]>9\x15H½"
-     286e798dcb1b5994c789f3e0e7  #     "(ny\x8dË\x1bY\x94Ç\x89óàç"
-     10bceaf79093089cd740f9602f  #     "\x10¼ê÷\x90\x93\x08\x9c×@ù`/"
-     8f7f28f774c165f8dc60fd38    #     "\x8f\x7f(÷tÁeøÜ`ý8"
+     d4a3690f19eb4e5f87fb890c4d  #     "Ô£i\x0f\x19ëN_\x87û\x89\x0cM"
+     c2addeb2159beb7ee6c0240987  #     "Â\xadÞ²\x15\x9bë~æÀ$\x09\x87"
+     288289bfed701c9402b13d364e  #     "(\x82\x89¿íp\x1c\x94\x02±=6N"
+     c31d43c546cd41ab29f41a6cf4  #     "Ã\x1dCÅFÍA«)ô\x1alô"
+     7379985426fe6c738f27385b    #     "sy\x98T&þls\x8f'8["
 
 6.  Referenced Token
 
@@ -876,7 +877,7 @@ Table of Contents
    *  The Status CBOR structure is a Map that MUST include at least one
       data item that refers to a status mechanism.  Each data item in
       the Status CBOR structure comprises a key-value pair, where the
-      key must be a CBOR text string (Major Type 3) specifying the
+      key must be a CBOR text string (major type 3) specifying the
       identifier of the status mechanism and the corresponding value
       defines its contents.
 
@@ -886,12 +887,12 @@ Table of Contents
          encoded as a StatusListInfo CBOR structure with the following
          fields:
 
-         o  idx: REQUIRED.  Unsigned integer (Major Type 0) The idx
+         o  idx: REQUIRED.  Unsigned integer (major type 0) The idx
             (index) claim MUST specify a non-negative Integer that
             represents the index to check for status information in the
             Status List for the current Referenced Token.
 
-         o  uri: REQUIRED.  Text string (Major Type 3).  The uri (URI)
+         o  uri: REQUIRED.  Text string (major type 3).  The uri (URI)
             claim MUST specify a String value that identifies the Status
             List Token containing the status information for the
             Referenced Token.  The value of uri MUST be a URI conforming
@@ -913,37 +914,37 @@ Table of Contents
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840905d9efa45365ee1babb1679b0720573486ac0
-   1f4b05b48e6be76337ff18c15cde562ce6e63294c9426a75ced89f66708473ca5882
-   c961c45f228364891e7baa
+   7374617475736c697374732f31584016c8ccc7146aff9af03d40750afc187fa61bf9
+   37ae054979280d75136bdb3305ad49029b05f65dc96f6eded398ac9834efbdceb341
+   eaa3524b762a51f9e45356
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         905d9efa45365ee1babb1679  #       "\x90]\x9eúE6^áº»\x16y"
-         b0720573486ac01f4b05b48e  #       "°r\x05sHjÀ\x1fK\x05´\x8e"
-         6be76337ff18c15cde562ce6  #       "kçc7ÿ\x18Á\ÞV,æ"
-         e63294c9426a75ced89f6670  #       "æ2\x94ÉBjuÎØ\x9ffp"
-         8473ca5882c961c45f228364  #       "\x84sÊX\x82ÉaÄ_"\x83d"
-         891e7baa                  #       "\x89\x1e{ª"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      16c8ccc7146aff9af03d4075  #       "\x16ÈÌÇ\x14jÿ\x9að=@u"
+      0afc187fa61bf937ae054979  #       "\x0aü\x18\x7f¦\x1bù7®\x05Iy"
+      280d75136bdb3305ad49029b  #       "(\x0du\x13kÛ3\x05\xadI\x02\x9b"
+      05f65dc96f6eded398ac9834  #       "\x05ö]ÉonÞÓ\x98¬\x984"
+      efbdceb341eaa3524b762a51  #       "ï½Î³Aê£RKv*Q"
+      f9e45356                  #       "ùäSV"
 
 6.3.2.  ISO mdoc
 
@@ -1092,21 +1093,27 @@ Table of Contents
    Type values.  A status describes the state, mode, condition or stage
    of an entity that is represented by the Referenced Token.
 
-   A Status List can not represent multiple statuses per Referenced
-   Token.  If the Status List contains more than one bit per token (as
-   defined by bits in the Status List), then the whole value of bits
-   MUST describe one value.  Status Types MUST have a numeric value
-   between 0 and 255 for their representation in the Status List.  The
-   issuer of the Status List MUST choose an adequate bits value (bit
-   size) to be able to describe the required Status Types for its
-   application.
+   A Status List represents exactly one status per Referenced Token.  If
+   the Status List contains more than one bit per token (as defined by
+   bits in the Status List), then the whole value of bits MUST describe
+   one value.  Status Types MUST have a numeric value between 0 and 255
+   for their representation in the Status List.  The issuer of the
+   Status List MUST choose an adequate bits value (bit size) to be able
+   to describe the required Status Types for its application.
 
 7.1.  Status Types Values
 
+   The processing rules for Referenced Tokens (such as JWT or CWT)
+   supersede the Referenced Token's status in a TSL.  In particular, a
+   Referenced Token that is evaluated as being expired (e.g. through the
+   exp claim) but in a TSL has a status of 0x00 ("VALID"), is considered
+   expired.
+
    This document creates a registry in Section 14.5 that includes the
-   most common Status Type values.  Additional values may defined for
-   particular use cases.  Status Types described by this document
-   comprise:
+   most common Status Type values.  Applications SHOULD use registered
+   values for statuses if they have the correct semantics.  Additional
+   values may defined for particular use cases.  Status Types described
+   by this document comprise:
 
    *  0x00 - "VALID" - The status of the Referenced Token is valid,
       correct or legal.
@@ -1115,20 +1122,14 @@ Table of Contents
       annulled, taken back, recalled or cancelled.
 
    *  0x02 - "SUSPENDED" - The status of the Referenced Token is
-      temporarily invalid, hanging, debarred from privilege.  This state
-      is usually temporary.
+      temporarily invalid, hanging, debarred from privilege.  This
+      status is usually temporary.
 
-   The Status Type value 0x03 and Status Type values in the range 0x0B
+   The Status Type value 0x03 and Status Type values in the range 0x0C
    until 0x0F are permanently reserved as application specific.  The
    processing of Status Types using these values is application
    specific.  All other Status Type values are reserved for future
    registration.
-
-   The processing rules for Referenced Tokens (such as JWT or CWT)
-   precede any evaluation of a Referenced Token's status.  For example,
-   if a token is evaluated as being expired through the "exp"
-   (Expiration Time) but also has a status of 0x00 ("VALID"), the token
-   is considered expired.
 
    See Section 12.8 for privacy considerations on status types.
 
@@ -1137,12 +1138,14 @@ Table of Contents
    The fetching, processing and verifying of a Status List Token may be
    done by either the Holder or the Relying Party.  The following
    section is described from the role of the Relying Party, however the
-   same rules would also apply for the Holder.
+   same rules apply for the Holder.
 
 8.1.  Status List Request
 
-   To obtain the Status List Token, the Relying Party MUST send an HTTP
-   GET request to the URI provided in the Referenced Token.
+   The Status Provider SHOULD provide Status List Token on an endpoint
+   serving an HTTP GET request to the URI provided in the Referenced
+   Token, unless the Relying Party and the Status Provider have
+   alternative methods of distribution.
 
    The HTTP endpoint SHOULD support the use of Cross-Origin Resource
    Sharing (CORS) [CORS] and/or other methods as appropriate to enable
@@ -1161,31 +1164,21 @@ Table of Contents
    If the Relying Party does not send an Accept Header, the response
    type is assumed to be known implicitly or out-of-band.
 
+   The following is a non-normative example of a request for a Status
+   List Token with type application/statuslist+jwt:
+
+   GET /statuslists/1 HTTP/1.1
+   Host: example.com
+   Accept: application/statuslist+jwt
+
+8.2.  Status List Response
+
    A successful response that contains a Status List Token MUST use an
    HTTP status code in the 2xx range.
 
    A response MAY also choose to redirect the client to another URI
    using an HTTP status code in the 3xx range, which clients SHOULD
    follow.  See Section 11.4 for security considerations on redirects.
-
-   The following are non-normative examples of a request and response
-   for a Status List Token with type application/statuslist+jwt:
-
-   GET /statuslists/1 HTTP/1.1
-   Host: example.com
-   Accept: application/statuslist+jwt
-
-   HTTP/1.1 200 OK
-   Content-Type: application/statuslist+jwt
-
-   eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
-   yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
-   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
-   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.9pkra85rrH4qtBJji7Y41zw0dpI6-TER_ky6KWzMImzbpvj6N_4G
-   yKY9jm6GWDxiLe3Sy5Rr1AMlzrZzoN1WAw
-
-8.2.  Status List Response
 
    In the successful response, the Status Provider MUST use the
    following content-type:
@@ -1205,16 +1198,28 @@ Table of Contents
    Serialization form for a Status List Token in JWT format.  Note that
    while the examples for Status List Tokens in CWT format in this
    document are provided in hex encoding, this is done purely for
-   readability and does not mean that hex encoding is expected for HTTP
-   messages.
+   readability; CWT format response bodies are "in binary".
 
    The HTTP response SHOULD use gzip Content-Encoding as defined in
-   [RFC9110].
+   [RFC9110] for Status List Tokens in JWT format.
 
    If caching-related HTTP headers are present in the HTTP response,
    Relying Parties MUST prioritize the exp and ttl claims within the
    Status List Token over the HTTP headers for determining caching
    behavior.
+
+   The following is a non-normative example of a response with a Status
+   List Token with type application/statuslist+jwt:
+
+   HTTP/1.1 200 OK
+   Content-Type: application/statuslist+jwt
+
+   eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
+   yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
+   GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
+   WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
+   nR0bCI6NDMyMDB9.y_nwkdat9VDkt05DhK0L4IG0k_I797hEOl4GXYGATR6yu_PMLH6m
+   xaZJ4MEHkLn_jySDog6_ZXwqnQ16_7BUyg
 
 8.3.  Validation Rules
 
@@ -1260,7 +1265,7 @@ Table of Contents
            equal to the uri claim in the status_list object of the
            Referenced Token
 
-       b.  If the Relying Party has custom policies regarding the
+       b.  If the Relying Party has local policies regarding the
            freshness of the Status List Token, it SHOULD check the
            issued at claim (iat or 6)
 
@@ -1276,8 +1281,10 @@ Table of Contents
        with DEFLATE [RFC1951] and ZLIB [RFC1950]
 
    6.  Retrieve the status value of the index specified in the
-       Referenced Token as described in Section 4.  Fail if the provided
-       index is out of bounds of the Status List
+       Referenced Token as described in Section 4.  If the provided
+       index is out of bounds of the Status List, no statement about the
+       status of the Referenced Token can be made and the Referenced
+       Token SHOULD be rejected.
 
    7.  Check the status value as described in Section 7
 
@@ -1293,9 +1300,9 @@ Table of Contents
    information, as defined by the issuer, is explicitly stated by the
    iat (issued at) and exp (expiration time) claims for JWT and their
    corresponding ones for the CWT representation.  If support for
-   historical status information is required, this can be achieved by
-   extending the request for the Status List Token as defined in
-   Section 8.1 with a timestamp.  This feature has additional privacy
+   historical status information is desired, this can be achieved by
+   extending with a timestamp the request for the Status List Token as
+   defined in Section 8.1.  This feature has additional privacy
    implications as described in Section 12.7.
 
    To obtain the Status List Token, the Relying Party MUST send an HTTP
@@ -1308,11 +1315,12 @@ Table of Contents
    SHOULD return a status code of 501 (Not Implemented) or if the
    requested time is not supported it SHOULD return a status code of 406
    (Not Acceptable).  A Status List Token might be served via static
-   file hosting (e.g., leveraging a Content Delivery Network), which
-   would result in the client not being able to retrieve those status
-   codes.  Thus, the client MUST verify support for this feature by
-   verifying that the requested timestamp is within the valid time of
-   the returned token signaled via iat (6 for CWT) and exp (4 for CWT).
+   file hosting (e.g., leveraging a Content Delivery Network) that
+   ignores query parameters, which would result in the client requesting
+   a historical status list but receiving the current status list.
+   Thus, the client MUST reject a response unless the requested
+   timestamp is within the valid time of the returned token signaled via
+   iat (6 for CWT) and exp (4 for CWT).
 
    The following is a non-normative example of a GET request using the
    time query parameter:
@@ -1331,8 +1339,8 @@ Table of Contents
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.9pkra85rrH4qtBJji7Y41zw0dpI6-TER_ky6KWzMImzbpvj6N_4G
-   yKY9jm6GWDxiLe3Sy5Rr1AMlzrZzoN1WAw
+   nR0bCI6NDMyMDB9.y_nwkdat9VDkt05DhK0L4IG0k_I797hEOl4GXYGATR6yu_PMLH6m
+   xaZJ4MEHkLn_jySDog6_ZXwqnQ16_7BUyg
 
 9.  Status List Aggregation
 
@@ -1340,8 +1348,8 @@ Table of Contents
    Issuer to publish a list of one or more Status List Tokens URIs,
    allowing a Relying Party to fetch Status List Tokens provided by this
    Issuer.  This mechanism is intended to support fetching and caching
-   mechanisms and allow offline validation of the status of a reference
-   token for a period of time.
+   mechanisms and allow offline validation of the status of a Reference
+   Token for a period of time.
 
    If a Relying Party encounters an error while validating one of the
    Status List Tokens returned from the Status List Aggregation
@@ -1382,10 +1390,11 @@ Table of Contents
    is used commonly in OAuth and OpenID Connect, or within Issuer
    certificates or trust lists (such as VICAL as defined in Annex C of
    [ISO.mdoc]).  If the Issuer is an OAuth Authorization Server
-   according to [RFC6749], it is RECOMMENDED to use
-   status_list_aggregation_endpoint for its metadata defined by
-   [RFC8414].  The Issuer MAY limit the Status List Tokens listed by a
-   Status List Aggregation to a particular type of Referenced Token.
+   according to [RFC6749], it is RECOMMENDED to use the
+   status_list_aggregation_endpoint parameter within its metadata
+   defined by [RFC8414].  The Issuer MAY limit the Status List Tokens
+   listed by a Status List Aggregation to a particular type of
+   Referenced Token.
 
    The concrete implementation details depend on the specific ecosystem
    and are out of scope of this specification.
@@ -1398,7 +1407,7 @@ Table of Contents
    Party may use this URI to retrieve an up-to-date list of relevant
    Status Lists.
 
-9.3.  Status List Aggregation in JSON Format
+9.3.  Status List Aggregation Data Structure
 
    This section defines the structure for a JSON-encoded Status List
    Aggregation:
@@ -2308,7 +2317,7 @@ Table of Contents
    *  Status Type Description: The status of the Referenced Token is
       application specific.
 
-   *  Status Type value: 0x0B-0xOF
+   *  Status Type value: 0x0C-0xOF
 
    *  Change Controller: IETF
 
@@ -3235,6 +3244,22 @@ Document History
    [[ To be removed from the final specification ]]
 
    -14
+
+   *  removed bytes from graphic that were intepreted as padding bytes
+
+   *  removed 0x0B from application-specific Status Type
+
+   *  reemphasized that expired tokens with status "VALID" are still
+      expired
+
+   *  renamed section "Status List Aggregation in JSON Format" to
+      "Status List Aggregation Data Structure"
+
+   *  slightly restructure/clarify referenced token cose section
+
+   *  Add ASN.1 module
+
+   *  many nits and improvements from genart review
 
    *  remove cose_sign1 tag from statuslist in cwt form examples
 
