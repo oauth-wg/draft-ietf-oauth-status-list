@@ -1569,7 +1569,7 @@ The following tables show a size comparison for a Status List (compressed byte a
 
 If no further metadata is provided in Status List Tokens or CRLs, then the size of Status Lists or arrays of Certificate ids (represented as UUIDs) will be the main factors deciding on the overall size of a Status List Token or CRL respectively.
 
-## Size of status lists for varying sizes and revocation rates
+## Size of Status Lists for varying amount of entries and revocation rates
 {:unnumbered}
 
 | Size | 0.01%   | 0.1%     | 1%       | 2%       | 5%       | 10%      | 25%       | 50%      | 75%       | 100%    |
@@ -1579,7 +1579,7 @@ If no further metadata is provided in Status List Tokens or CRLs, then the size 
 | 100M | 38.3 KB | 213.0 KB | 1.3 MB   | 2.2 MB   | 4.3 MB   | 6.6 MB   | 10.0 MB   | 11.9 MB  | 10.0 MB   | 11.9 KB |
 {: title="Status List Size examples for varying sizes and revocation rates"}
 
-## Size of compressed array of UUIDv4 (128 bit UUIDs) for varying sizes
+## Size of compressed array of UUIDv4 (128 bit UUIDs) for varying amount of entries and revocation rates
 {:unnumbered}
 
 This is a simple approximation of a Certificate Revocation List using an array of UUIDs without any additional metadata (128 bit UUID per revoked entry).
