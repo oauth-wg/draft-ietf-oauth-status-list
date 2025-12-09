@@ -152,20 +152,20 @@ Table of Contents
      14.7.  Media Type Registration
      14.8.  CoAP Content-Format Registrations
      14.9.  X.509 Certificate Extended Key Purpose OID Registration
+   15. Acknowledgments
+   16. References
+     16.1.  Normative References
+     16.2.  Informative References
    Appendix A.  ASN.1 Module
-   References
-     Normative References
-     Informative References
-   Acknowledgments
-   Size comparison
-     Status List size for varying sizes and revocation rates
-     Compressed array of UUIDv4 (128 bit UUIDs) for varying sizes and
-             revocation rates
-   Test vectors for Status List encoding
-     1 bit Status List
-     2 bit Status List
-     4 bit Status List
-     8 bit Status List
+   Appendix B.  Size comparison
+     B.1.  Status List size for varying sizes and revocation rates
+     B.2.  Compressed array of UUIDv4 (128 bit UUIDs) for varying
+           sizes and revocation rates
+   Appendix C.  Test vectors for Status List encoding
+     C.1.  1 bit Status List
+     C.2.  2 bit Status List
+     C.3.  4 bit Status List
+     C.4.  8 bit Status List
    Document History
    Authors' Addresses
 
@@ -542,8 +542,7 @@ Table of Contents
      "lst": "eNo76fITAAPfAgc"
    }
 
-   See section Appendix "Test vectors for Status List encoding" for more
-   test vectors.
+   See section Appendix C for more test vectors.
 
 4.3.  Status List in CBOR Format
 
@@ -594,8 +593,7 @@ Table of Contents
      4a                            #   bytes(10)
        78dadbb918000217015d        #     "xÚÛ¹\x18\x00\x02\x17\x01]"
 
-   See section Appendix "Test vectors for Status List encoding" for more
-   test vectors.
+   See section Appendix C for more test vectors.
 
 5.  Status List Token
 
@@ -679,8 +677,10 @@ Table of Contents
 
 5.2.  Status List Token in CWT Format
 
-   The Status List Token MUST be encoded as an untagged "CBOR Web Token
-   (CWT)" according to [RFC8392].
+   The Status List Token MUST be encoded as a "CBOR Web Token (CWT)"
+   according to [RFC8392].  The Status List Token MUST not be tagged,
+   such as with the tag defined in section 6 of [RFC8392] or the tag
+   defined in section 2 of [RFC9052].
 
    The following content applies to the protected header of the CWT:
 
@@ -735,9 +735,9 @@ Table of Contents
    845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b6377
    74a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f7374
    617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda264
-   6269747301636c73744a78dadbb918000217015d5840877a72cf0481ddb6b080dc25
-   6954e5d8d7595b960fb5b1676ecbd1a3510f050880d72803f2a51f0105c058fa18df
-   23ffa2b6ad763fc1f47781de9819f1a9af4b
+   6269747301636c73744a78dadbb918000217015d584047faf357e81ceadd5c0fa240
+   5bc336f751319b2159e5f68e21ac395397f92c2feeed4aef7cb66c10caa68f2301ef
+   1358e41466f3d7244e99cdbe49e0aebfd01d
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -759,11 +759,11 @@ Table of Contents
      636c73744a78dadbb918000217  #     "clstJxÚÛ¹\x18\x00\x02\x17"
      015d                        #     "\x01]"
    58 40                         #   bytes(64)
-     877a72cf0481ddb6b080dc2569  #     "\x87zrÏ\x04\x81Ý¶°\x80Ü%i"
-     54e5d8d7595b960fb5b1676ecb  #     "TåØ×Y[\x96\x0fµ±gnË"
-     d1a3510f050880d72803f2a51f  #     "Ñ£Q\x0f\x05\x08\x80×(\x03ò¥\x1f"
-     0105c058fa18df23ffa2b6ad76  #     "\x01\x05ÀXú\x18ß#ÿ¢¶\xadv"
-     3fc1f47781de9819f1a9af4b    #     "?Áôw\x81Þ\x98\x19ñ©¯K"
+     47faf357e81ceadd5c0fa2405b  #     "GúóWè\x1cêÝ\\x0f¢@["
+     c336f751319b2159e5f68e21ac  #     "Ã6÷Q1\x9b!Yåö\x8e!¬"
+     395397f92c2feeed4aef7cb66c  #     "9S\x97ù,/îíJï|¶l"
+     10caa68f2301ef1358e41466f3  #     "\x10Ê¦\x8f#\x01ï\x13Xä\x14fó"
+     d7244e99cdbe49e0aebfd01d    #     "×$N\x99Í¾Ià®¿Ð\x1d"
 
 6.  Referenced Token
 
@@ -912,9 +912,9 @@ Table of Contents
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840fd351c40a2a2cf01f775494d2ef85eb4798068
-   836cc492c1af512c1ea63595e263d8a88c5023431c10037c98d449b19d905dee33f9
-   42de1760fbbfdde343c4dd
+   7374617475736c697374732f31584021595d05dd3b390d041c5944a062efde68b779
+   af67e3435b6dc1ac2b00d3ada097bb33337a0d339665fd6cc36cc2221ac3e0e56c74
+   04f453c940d968c295d807
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -937,12 +937,12 @@ Table of Contents
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         fd351c40a2a2cf01f775494d  #       "ý5\x1c@¢¢Ï\x01÷uIM"
-         2ef85eb4798068836cc492c1  #       ".ø^´y\x80h\x83lÄ\x92Á"
-         af512c1ea63595e263d8a88c  #       "¯Q,\x1e¦5\x95âcØ¨\x8c"
-         5023431c10037c98d449b19d  #       "P#C\x1c\x10\x03|\x98ÔI±\x9d"
-         905dee33f942de1760fbbfdd  #       "\x90]î3ùBÞ\x17`û¿Ý"
-         e343c4dd                  #       "ãCÄÝ"
+         21595d05dd3b390d041c5944  #       "!Y]\x05Ý;9\x0d\x04\x1cYD"
+         a062efde68b779af67e3435b  #       "\xa0bïÞh·y¯gãC["
+         6dc1ac2b00d3ada097bb3333  #       "mÁ¬+\x00Ó\xad\xa0\x97»33"
+         7a0d339665fd6cc36cc2221a  #       "z\x0d3\x96eýlÃlÂ"\x1a"
+         c3e0e56c7404f453c940d968  #       "Ãàålt\x04ôSÉ@Ùh"
+         c295d807                  #       "Â\x95Ø\x07"
 
 6.3.2.  ISO mdoc
 
@@ -1181,8 +1181,8 @@ Table of Contents
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.wTL5BCjMnShkA4ksYS0C5C_j2T07vz3SXfjGMl8KoCZR7nwEJo9W
-   qVXv_jBsrR5x5ZChnNI49cLOge8SEZs2lQ
+   nR0bCI6NDMyMDB9.yQZruC_6GMys1LQJsSLGoIeV4Sw1BKOpVv2ujBxvFogLnSLUru-V
+   Knlsvu3A9S9cd5YlhMy4ByK9FXhCzWD1xw
 
 8.2.  Status List Response
 
@@ -1330,8 +1330,8 @@ Table of Contents
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.wTL5BCjMnShkA4ksYS0C5C_j2T07vz3SXfjGMl8KoCZR7nwEJo9W
-   qVXv_jBsrR5x5ZChnNI49cLOge8SEZs2lQ
+   nR0bCI6NDMyMDB9.yQZruC_6GMys1LQJsSLGoIeV4Sw1BKOpVv2ujBxvFogLnSLUru-V
+   Knlsvu3A9S9cd5YlhMy4ByK9FXhCzWD1xw
 
 9.  Status List Aggregation
 
@@ -2443,39 +2443,23 @@ Table of Contents
 
    IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD"
    in the "SMI Security for PKIX Module Identifier" registry
-   (1.3.6.1.5.5.7.0), this OID is defined in section
-   Section "Appendix A.  ASN.1 Module".
+   (1.3.6.1.5.5.7.0), this OID is defined in section Appendix A.
 
-Appendix A.  ASN.1 Module
+15.  Acknowledgments
 
-   The following module adheres to ASN.1 specifications [X.680] and
-   [X.690].
+   We would like to thank Andrii Deinega, Brian Campbell, Dan Moore,
+   Denis Pinkas, Filip Skokan, Francesco Marino, Giuseppe De Marco,
+   Hannes Tschofenig, Kristina Yasuda, Markus Kreusch, Martijn Haring,
+   Michael B.  Jones, Micha Kraus, Michael Schwartz, Mike Prorock, Mirko
+   Mollik, Oliver Terbu, Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy,
+   Timo Glastra and Torsten Lodderstedt
 
-   <CODE BEGINS>
-     OauthStatusSigning-EKU
-       { iso(1) identified-organization(3) dod(6) internet(1)
-         security(5) mechanisms(5) pkix(7) id-mod(0)
-         id-mod-oauth-status-signing-eku (TBD) }
+   for their valuable contributions, discussions and feedback to this
+   specification.
 
-     DEFINITIONS IMPLICIT TAGS ::=
-     BEGIN
+16.  References
 
-     -- OID Arc
-
-     id-kp OBJECT IDENTIFIER ::=
-       { iso(1) identified-organization(3) dod(6) internet(1)
-         security(5) mechanisms(5) pkix(7) kp(3) }
-
-     -- OAuth Extended Key Usage
-
-     id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
-
-     END
-   <CODE ENDS>
-
-References
-
-Normative References
+16.1.  Normative References
 
    [CORS]     WHATWG, "Fetch Living Standard", n.d.,
               <https://fetch.spec.whatwg.org/commit-
@@ -2602,7 +2586,7 @@ Normative References
               Encoding Rules (BER), Canonical Encoding Rules (CER) and
               Distinguished Encoding Rules (DER)", February 2021.
 
-Informative References
+16.2.  Informative References
 
    [ISO.mdoc] ISO/IEC JTC 1/SC 17, "ISO/IEC 18013-5:2021 ISO-compliant
               driving licence", n.d..
@@ -2647,19 +2631,34 @@ Informative References
               Status List v1.0", December 2024,
               <https://www.w3.org/TR/vc-bitstring-status-list/>.
 
-Acknowledgments
+Appendix A.  ASN.1 Module
 
-   We would like to thank Andrii Deinega, Brian Campbell, Dan Moore,
-   Denis Pinkas, Filip Skokan, Francesco Marino, Giuseppe De Marco,
-   Hannes Tschofenig, Kristina Yasuda, Markus Kreusch, Martijn Haring,
-   Michael B.  Jones, Micha Kraus, Michael Schwartz, Mike Prorock, Mirko
-   Mollik, Oliver Terbu, Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy,
-   Timo Glastra and Torsten Lodderstedt
+   The following module adheres to ASN.1 specifications [X.680] and
+   [X.690].
 
-   for their valuable contributions, discussions and feedback to this
-   specification.
+   <CODE BEGINS>
+     OauthStatusSigning-EKU
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) id-mod(0)
+         id-mod-oauth-status-signing-eku (TBD) }
 
-Size comparison
+     DEFINITIONS IMPLICIT TAGS ::=
+     BEGIN
+
+     -- OID Arc
+
+     id-kp OBJECT IDENTIFIER ::=
+       { iso(1) identified-organization(3) dod(6) internet(1)
+         security(5) mechanisms(5) pkix(7) kp(3) }
+
+     -- OAuth Extended Key Usage
+
+     id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
+
+     END
+   <CODE ENDS>
+
+Appendix B.  Size comparison
 
    The following tables show a size comparison for a Status List
    (compressed byte array as defined in Section 4.1 and a compressed
@@ -2668,7 +2667,7 @@ Size comparison
    Status List Tokens in JSON/CBOR nor Certificate Revocation Lists
    (CRLs), as they don't contain metadata, certificates and signatures.
 
-Status List size for varying sizes and revocation rates
+B.1.  Status List size for varying sizes and revocation rates
 
    +====+=====+=====+======+======+=====+=====+======+=====+======+====+
    |Size|0.01%|0.1% |1%    |2%    |5%   |10%  |25%   |50%  |75%   |100%|
@@ -2689,8 +2688,8 @@ Status List size for varying sizes and revocation rates
           Table 1: Status List Size examples for varying sizes and
                               revocation rates
 
-Compressed array of UUIDv4 (128 bit UUIDs) for varying sizes and
-revocation rates
+B.2.  Compressed array of UUIDv4 (128 bit UUIDs) for varying sizes and
+      revocation rates
 
    This is a simple approximation of a Certificate Revocation List using
    an array of UUIDs without any additional metadata (128 bit UUID per
@@ -2715,7 +2714,7 @@ revocation rates
       Table 2: Size examples for 128 bit UUIDs for varying sizes and
                              revocation rates
 
-Test vectors for Status List encoding
+Appendix C.  Test vectors for Status List encoding
 
    All examples here are given in the form of JSON or CBOR payloads.
    The examples are encoded according to Section 4.2 for JSON and
@@ -2725,7 +2724,7 @@ Test vectors for Status List encoding
    assumed to be 0 (VALID).  All examples are initialized with a size of
    2^20 entries.
 
-1 bit Status List
+C.1.  1 bit Status List
 
    The following example uses a 1 bit Status List (2 possible values):
 
@@ -2761,7 +2760,7 @@ Test vectors for Status List encoding
    000000000000000000ecaa4b000000000000000000000000000000009b0b09000000
    00000000000038de9400000000000000002a30cc010000000080642f0bd8011b
 
-2 bit Status List
+C.2.  2 bit Status List
 
    The following example uses a 2 bit Status List (4 possible values):
 
@@ -2803,7 +2802,7 @@ Test vectors for Status List encoding
    01000000000000000000000000000000000000c07d4b020000000000000000000000
    00000000a8614a0000000000000000000000406a1fcd60010c
 
-4 bit Status List
+C.3.  4 bit Status List
 
    The following example uses a 4 bit Status List (16 possible values):
 
@@ -2863,7 +2862,7 @@ Test vectors for Status List encoding
    00000000000000000000000000000071dc0a0080ba55010000000000000000000000
    c0cf3daf03000000000000000008ec03dc4c04c0
 
-8 bit Status List
+C.4.  8 bit Status List
 
    The following example uses a 8 bit Status List (256 possible values):
 
