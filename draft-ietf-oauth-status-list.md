@@ -1577,7 +1577,7 @@ If no further metadata is provided in Status List Tokens or CRLs, then the size 
 | 1M   | 442 B   | 2.2 KB   | 13.7 KB  | 23.0 KB  | 43.9 KB  | 67.6 KB  | 102.2 KB  | 122.1 KB | 102.4 KB  | 144 B   |
 | 10M  | 3.8 KB  | 21.1 KB  | 135.4 KB | 230.0 KB | 437.0 KB | 672.9 KB | 1023.4 KB | 1.2 MB   | 1023.5 KB | 1.2 KB  |
 | 100M | 38.3 KB | 213.0 KB | 1.3 MB   | 2.2 MB   | 4.3 MB   | 6.6 MB   | 10.0 MB   | 11.9 MB  | 10.0 MB   | 11.9 KB |
-{: title="Status List Size examples for varying sizes and revocation rates"}
+{: title="Status List Size examples for varying amount of entries and revocation rates"}
 
 ## Size of compressed array of UUIDv4 (128 bit UUIDs) for varying amount of entries and revocation rates
 {:unnumbered}
@@ -1589,7 +1589,7 @@ This is a simple approximation of a Certificate Revocation List using an array o
 | 1M   | 1.6 KB   | 16.4 KB  | 157.7 KB | 310.4 KB | 781 KB  | 1.5 MB   | 3.8 MB   | 7.6 MB   | 11.4 MB  | 15.3 MB  |
 | 10M  | 15.3 KB  | 155.9 KB | 1.5 MB   | 3.1 MB   | 7.6 MB  | 15.2 MB  | 38.2 MB  | 76.3 MB  | 114.4 MB | 152.6 MB |
 | 100M | 157.6 KB | 1.5 MB   | 15.3 MB  | 30.5 MB  | 76.3 MB | 152.6 MB | 381.4 MB | 762.9 MB | 1.1 GB   | 1.5 GB   |
-{: title="Size examples for 128 bit UUIDs for varying sizes and revocation rates"}
+{: title="Size examples for 128 bit UUIDs for varying amount of entries and revocation rates"}
 
 # Test vectors for Status List encoding {#test-vectors}
 
