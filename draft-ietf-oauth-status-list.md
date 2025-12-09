@@ -1502,8 +1502,38 @@ IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SM
 
 IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0), this OID is defined in section [](#asn1-module).
 
-# Appendix A. ASN.1 Module {#asn1-module}
-{:numbered="false"}
+# Acknowledgments
+
+We would like to thank
+Andrii Deinega,
+Brian Campbell,
+Dan Moore,
+Denis Pinkas,
+Filip Skokan,
+Francesco Marino,
+Giuseppe De Marco,
+Hannes Tschofenig,
+Kristina Yasuda,
+Markus Kreusch,
+Martijn Haring,
+Michael B. Jones,
+Micha Kraus,
+Michael Schwartz,
+Mike Prorock,
+Mirko Mollik,
+Oliver Terbu,
+Orie Steele,
+Rifaat Shekh-Yusef,
+Rohan Mahy,
+Timo Glastra
+and
+Torsten Lodderstedt
+
+for their valuable contributions, discussions and feedback to this specification.
+
+--- back
+
+# ASN.1 Module {#asn1-module}
 
 The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
 
@@ -1533,45 +1563,11 @@ The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
 <CODE ENDS>
 ~~~
 
---- back
-
-# Acknowledgments
-{:numbered="false"}
-
-We would like to thank
-Andrii Deinega,
-Brian Campbell,
-Dan Moore,
-Denis Pinkas,
-Filip Skokan,
-Francesco Marino,
-Giuseppe De Marco,
-Hannes Tschofenig,
-Kristina Yasuda,
-Markus Kreusch,
-Martijn Haring,
-Michael B. Jones,
-Micha Kraus,
-Michael Schwartz,
-Mike Prorock,
-Mirko Mollik,
-Oliver Terbu,
-Orie Steele,
-Rifaat Shekh-Yusef,
-Rohan Mahy,
-Timo Glastra
-and
-Torsten Lodderstedt
-
-for their valuable contributions, discussions and feedback to this specification.
-
 # Size comparison {#size-comparison}
-{:unnumbered}
 
 The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array) and a compressed Byte Array of UUIDs (as an approximation for a Certificate Revocation List). Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.
 
 ## Status List size for varying sizes and revocation rates
-{:unnumbered}
 
 | Size | 0.01%   | 0.1%     | 1%       | 2%       | 5%       | 10%      | 25%       | 50%      | 75%       | 100%    |
 | 100k | 81 B    | 252 B    | 1.4 KB   | 2.3 KB   | 4.5 KB   | 6.9 KB   | 10.2 KB   | 12.2 KB  | 10.2 KB   | 35 B    |
@@ -1581,7 +1577,6 @@ The following tables show a size comparison for a Status List (compressed byte a
 {: title="Status List Size examples for varying sizes and revocation rates"}
 
 ## Compressed array of UUIDv4 (128 bit UUIDs) for varying sizes and revocation rates
-{:unnumbered}
 
 This is a simple approximation of a Certificate Revocation List using an array of UUIDs without any additional metadata (128 bit UUID per revoked entry).
 
@@ -1593,14 +1588,12 @@ This is a simple approximation of a Certificate Revocation List using an array o
 {: title="Size examples for 128 bit UUIDs for varying sizes and revocation rates"}
 
 # Test vectors for Status List encoding {#test-vectors}
-{:unnumbered}
 
 All examples here are given in the form of JSON or CBOR payloads. The examples are encoded according to [](#status-list-json) for JSON and [](#status-list-cbor) for CBOR. The CBOR examples are displayed as hex values.
 
 All values that are not mentioned for the examples below can be assumed to be 0 (VALID). All examples are initialized with a size of 2^20 entries.
 
 ## 1 bit Status List
-{:unnumbered}
 
 The following example uses a 1 bit Status List (2 possible values):
 
@@ -1631,7 +1624,6 @@ CBOR encoding:
 ~~~~~~~~~~
 
 ## 2 bit Status List
-{:unnumbered}
 
 The following example uses a 2 bit Status List (4 possible values):
 
@@ -1662,7 +1654,6 @@ CBOR encoding:
 ~~~~~~~~~~
 
 ## 4 bit Status List
-{:unnumbered}
 
 The following example uses a 4 bit Status List (16 possible values):
 
@@ -1697,7 +1688,6 @@ CBOR encoding:
 ~~~~~~~~~~
 
 ## 8 bit Status List
-{:unnumbered}
 
 The following example uses a 8 bit Status List (256 possible values):
 
