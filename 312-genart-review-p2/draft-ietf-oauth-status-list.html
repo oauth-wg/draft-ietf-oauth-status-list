@@ -1950,7 +1950,7 @@ a2                              # map(2)
         <h3 id="name-status-list-token-in-cwt-fo">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-status-list-token-in-cwt-fo" class="section-name selfRef">Status List Token in CWT Format</a>
         </h3>
-<p id="section-5.2-1">The Status List Token <span class="bcp14">MUST</span> be encoded as a "CBOR Web Token (CWT)" according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">The Status List Token <span class="bcp14">MUST</span> be encoded as a "CBOR Web Token (CWT)" according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The Status List Token <span class="bcp14">MUST</span> not be tagged with the tags defined in section 6 of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> or in section 2 of <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">The following content applies to the protected header of the CWT:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.1">
@@ -1993,42 +1993,40 @@ a2                              # map(2)
 <p id="section-5.2-8">The following is a non-normative example of a Status List Token in CWT format in Hex:<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-9">
 <pre>
-d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
-7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
-74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840a530ad30f333deb22a0552
-928f6283f3c3ac0b8431c353382dd4579faf2b62a8d4ec9b68bdb2fe2e92eb827058
-c5fa91271b0afa53902f57805a5c1a57218357
+845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b6377
+74a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f7374
+617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda264
+6269747301636c73744a78dadbb918000217015d58405c7f6ba7ac3039b18e980e2a
+c3b1391517da73dccb721a074b4395677828150cdf236ac72f039ee9620afcf44b25
+83a12bf3f1fb2d72cb7f4148d29290c64e62
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-11">
 <pre>
-d2                              # tag(18)
-  84                            #   array(4)
-    58 20                       #     bytes(32)
-      a2012610781a6170706c6963  #       "¢\x01&amp;\x10x\x1aapplic"
-      6174696f6e2f737461747573  #       "ation/status"
-      6c6973742b637774          #       "list+cwt"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 50                       #     bytes(80)
-      a502782168747470733a2f2f  #       "¥\x02x!https://"
-      6578616d706c652e636f6d2f  #       "example.com/"
-      7374617475736c697374732f  #       "statuslists/"
-      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
-      ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
-      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
-      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
-    58 40                       #     bytes(64)
-      a530ad30f333deb22a055292  #       "¥0\xad0ó3Þ²*\x05R\x92"
-      8f6283f3c3ac0b8431c35338  #       "\x8fb\x83óÃ¬\x0b\x841ÃS8"
-      2dd4579faf2b62a8d4ec9b68  #       "-ÔW\x9f¯+b¨Ôì\x9bh"
-      bdb2fe2e92eb827058c5fa91  #       "½²þ.\x92ë\x82pXÅú\x91"
-      271b0afa53902f57805a5c1a  #       "'\x1b\x0aúS\x90/W\x80Z\\x1a"
-      57218357                  #       "W!\x83W"
+84                              # array(4)
+  58 20                         #   bytes(32)
+    a2012610781a6170706c696361  #     "¢\x01&amp;\x10x\x1aapplica"
+    74696f6e2f7374617475736c69  #     "tion/statusli"
+    73742b637774                #     "st+cwt"
+  a1                            #   map(1)
+    04                          #     uint(4)
+    42                          #     bytes(2)
+      3132                      #       "12"
+  58 50                         #   bytes(80)
+    a502782168747470733a2f2f65  #     "¥\x02x!https://e"
+    78616d706c652e636f6d2f7374  #     "xample.com/st"
+    617475736c697374732f31061a  #     "atuslists/1\x06\x1a"
+    648c5bea041a8898dfea19fffe  #     "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿþ"
+    19a8c019fffda2646269747301  #     "\x19¨À\x19ÿý¢dbits\x01"
+    636c73744a78dadbb918000217  #     "clstJxÚÛ¹\x18\x00\x02\x17"
+    015d                        #     "\x01]"
+  58 40                         #   bytes(64)
+    5c7f6ba7ac3039b18e980e2ac3  #     "\\x7fk§¬09±\x8e\x98\x0e*Ã"
+    b1391517da73dccb721a074b43  #     "±9\x15\x17ÚsÜËr\x1a\x07KC"
+    95677828150cdf236ac72f039e  #     "\x95gx(\x15\x0cß#jÇ/\x03\x9e"
+    e9620afcf44b2583a12bf3f1fb  #     "éb\x0aüôK%\x83¡+óñû"
+    2d72cb7f4148d29290c64e62    #     "-rË\x7fAHÒ\x92\x90ÆNb"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2179,9 +2177,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f315840663f6bbeb83485db8bb3b57f6e1b784c38b239
-44391057288d70d044e6fa34b77fa43f8a52709c4ac48749bc0e87294abd278a7434
-576ef49df5bffcc72c18c7
+7374617475736c697374732f315840f2f66d27b0ab897d67988cc99fda7f1702980c
+eb8c7187623d6b66016b0a692fe841edb254568fa8d7812ae4b9a3b86952ea746733
+e31dc323bb1b2c9e086627
 </pre><a href="#section-6.3.1-5" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3.1-6">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3.1-6" class="pilcrow">¶</a></p>
@@ -2206,12 +2204,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      663f6bbeb83485db8bb3b57f  #       "f?k¾¸4\x85Û\x8b³µ\x7f"
-      6e1b784c38b2394439105728  #       "n\x1bxL8²9D9\x10W("
-      8d70d044e6fa34b77fa43f8a  #       "\x8dpÐDæú4·\x7f¤?\x8a"
-      52709c4ac48749bc0e87294a  #       "Rp\x9cJÄ\x87I¼\x0e\x87)J"
-      bd278a7434576ef49df5bffc  #       "½'\x8at4Wnô\x9dõ¿ü"
-      c72c18c7                  #       "Ç,\x18Ç"
+      f2f66d27b0ab897d67988cc9  #       "òöm'°«\x89}g\x98\x8cÉ"
+      9fda7f1702980ceb8c718762  #       "\x9fÚ\x7f\x17\x02\x98\x0cë\x8cq\x87b"
+      3d6b66016b0a692fe841edb2  #       "=kf\x01k\x0ai/èAí²"
+      54568fa8d7812ae4b9a3b869  #       "TV\x8f¨×\x81*ä¹£¸i"
+      52ea746733e31dc323bb1b2c  #       "Rêtg3ã\x1dÃ#»\x1b,"
+      9e086627                  #       "\x9e\x08f'"
 </pre><a href="#section-6.3.1-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2434,8 +2432,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.Mdkf1qFeeWwW1WXT8Ftgo4AezNu4-Jn5r9NS2-rss4iXrJSM3wrb
-7bO4vdwQvCBNo8NtY7nZqWHt9syuGmH0-w
+nR0bCI6NDMyMDB9.HYsyejZgF6k3CtBKrMLbvuMRpz7NWBYx-CJD_DF-hi2b4rdnopKu
+ScGmmdai8obP7jWqOW6JhC_EbVx41tK3ow
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2542,8 +2540,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.Mdkf1qFeeWwW1WXT8Ftgo4AezNu4-Jn5r9NS2-rss4iXrJSM3wrb
-7bO4vdwQvCBNo8NtY7nZqWHt9syuGmH0-w
+nR0bCI6NDMyMDB9.HYsyejZgF6k3CtBKrMLbvuMRpz7NWBYx-CJD_DF-hi2b4rdnopKu
+ScGmmdai8obP7jWqOW6JhC_EbVx41tK3ow
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2810,7 +2808,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         <h3 id="name-observability-of-relying-pa">
 <a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-observability-of-relying-pa" class="section-name selfRef">Observability of Relying Parties</a>
         </h3>
-<p id="section-12.3-1">Once the Relying Party receives the Referenced Token, the Relying Party can request the Status List through the provided <code>uri</code> parameter and can validate the Referenced Token's status by looking up the corresponding <code>index</code>. However, the Relying Party may persistently store the <code>uri</code> and <code>index</code> of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.<a href="#section-12.3-1" class="pilcrow">¶</a></p>
+<p id="section-12.3-1">Once the Relying Party receives the Referenced Token, the Relying Party can request the Status List through the provided <code>uri</code> parameter and can validate the Referenced Token's status by looking up the corresponding <code>index</code>. However, the Relying Party may persistently store the <code>uri</code> and <code>index</code> of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of an employee credential.<a href="#section-12.3-1" class="pilcrow">¶</a></p>
 <p id="section-12.3-2">This behaviour could be mitigated by:<a href="#section-12.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12.3-3.1">
@@ -2905,8 +2903,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
 <a href="#section-12.8" class="section-number selfRef">12.8. </a><a href="#name-status-types-2" class="section-name selfRef">Status Types</a>
         </h3>
 <p id="section-12.8-1">As previously explained, there is the potential risk of observability by Relying Parties (see <a href="#privacy-relying-party" class="auto internal xref">Section 12.3</a>) and Outsiders (see <a href="#privacy-outsider" class="auto internal xref">Section 12.4</a>). That means that any Status Type that transports information beyond the routine statuses VALID and INVALID about a Referenced Token can leak information to other parties. This document defines one additional Status Type with "SUSPENDED" that conveys such additional information, but in practice all statuses other than VALID and INVALID are likely to contain information with privacy implications.<a href="#section-12.8-1" class="pilcrow">¶</a></p>
-<p id="section-12.8-2">A concrete example for "SUSPENDED" would be a driver's license, where the digital driver's license might still be useful to prove other information about its holder, but suspended could signal that it should not be considered valid in the scope of being allowed to drive a car. This case could be solved by either introducing a special status type, or by revoking the Referenced Token and re-issuing with changed attributes. For such a case, the status type suspended might be dangerous as it would leak the information of a suspended driver's license even if the driver's license is used as a mean of identification and not in the context of driving a car. This could also allow for the unwanted collection of statistical data on the status of driver's licenses.<a href="#section-12.8-2" class="pilcrow">¶</a></p>
-<p id="section-12.8-3">Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might a better fit for their use-case.<a href="#section-12.8-3" class="pilcrow">¶</a></p>
+<p id="section-12.8-2">Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might a better fit for their use-case.<a href="#section-12.8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4679,10 +4676,16 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <p id="appendix-D-2">-14<a href="#appendix-D-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-3.1">
-          <p id="appendix-D-3.1.1">slightly restructure/clarify referenced token cose section<a href="#appendix-D-3.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.1.1">remove cose_sign1 tag from statuslist in cwt form examples<a href="#appendix-D-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-3.2">
-          <p id="appendix-D-3.2.1">Add ASN.1 module<a href="#appendix-D-3.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.2.1">slightly restructure/clarify referenced token cose section<a href="#appendix-D-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.3">
+          <p id="appendix-D-3.3.1">Add ASN.1 module<a href="#appendix-D-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.4">
+          <p id="appendix-D-3.4.1">removed DL suspension example<a href="#appendix-D-3.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-4">-13<a href="#appendix-D-4" class="pilcrow">¶</a></p>
