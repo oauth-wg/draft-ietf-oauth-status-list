@@ -1048,7 +1048,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 11 June 2026</td>
+<td class="center">Expires 12 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1061,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-08" class="published">8 December 2025</time>
+<time datetime="2025-12-09" class="published">9 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-11">11 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-12">12 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1124,7 +1124,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1950,7 +1950,7 @@ a2                              # map(2)
         <h3 id="name-status-list-token-in-cwt-fo">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-status-list-token-in-cwt-fo" class="section-name selfRef">Status List Token in CWT Format</a>
         </h3>
-<p id="section-5.2-1">The Status List Token <span class="bcp14">MUST</span> be encoded as a "CBOR Web Token (CWT)" according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">The Status List Token <span class="bcp14">MUST</span> be encoded as an untagged "CBOR Web Token (CWT)" according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">The following content applies to the protected header of the CWT:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.1">
@@ -1989,9 +1989,6 @@ a2                              # map(2)
           <li id="section-5.2-7.4">
             <p id="section-5.2-7.4.1">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-5.2-7.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-5.2-7.5">
-            <p id="section-5.2-7.5.1">Implementations <span class="bcp14">MUST</span> be able to support a Status List Token in CWT Format in an untagged form (i.e., no CWT tag and no cose-sign1 tag).<a href="#section-5.2-7.5.1" class="pilcrow">¶</a></p>
-</li>
         </ol>
 <p id="section-5.2-8">The following is a non-normative example of a Status List Token in CWT format in Hex:<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-9">
@@ -1999,9 +1996,9 @@ a2                              # map(2)
 845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b6377
 74a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f7374
 617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda264
-6269747301636c73744a78dadbb918000217015d58400ea47def46cbae7b563a5efc
-6938b16d6cdb8daf1c4023691ee4420f6beac8efcc9185d6f7b6f090c9112e0c7ff1
-754d4e33c9f721693344f21a5248cabd3e58
+6269747301636c73744a78dadbb918000217015d5840877a72cf0481ddb6b080dc25
+6954e5d8d7595b960fb5b1676ecbd1a3510f050880d72803f2a51f0105c058fa18df
+23ffa2b6ad763fc1f47781de9819f1a9af4b
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
@@ -2025,11 +2022,11 @@ a2                              # map(2)
     636c73744a78dadbb918000217  #     "clstJxÚÛ¹\x18\x00\x02\x17"
     015d                        #     "\x01]"
   58 40                         #   bytes(64)
-    0ea47def46cbae7b563a5efc69  #     "\x0e¤}ïFË®{V:^üi"
-    38b16d6cdb8daf1c4023691ee4  #     "8±mlÛ\x8d¯\x1c@#i\x1eä"
-    420f6beac8efcc9185d6f7b6f0  #     "B\x0fkêÈïÌ\x91\x85Ö÷¶ð"
-    90c9112e0c7ff1754d4e33c9f7  #     "\x90É\x11.\x0c\x7fñuMN3É÷"
-    21693344f21a5248cabd3e58    #     "!i3Dò\x1aRHÊ½&gt;X"
+    877a72cf0481ddb6b080dc2569  #     "\x87zrÏ\x04\x81Ý¶°\x80Ü%i"
+    54e5d8d7595b960fb5b1676ecb  #     "TåØ×Y[\x96\x0fµ±gnË"
+    d1a3510f050880d72803f2a51f  #     "Ñ£Q\x0f\x05\x08\x80×(\x03ò¥\x1f"
+    0105c058fa18df23ffa2b6ad76  #     "\x01\x05ÀXú\x18ß#ÿ¢¶\xadv"
+    3fc1f47781de9819f1a9af4b    #     "?Áôw\x81Þ\x98\x19ñ©¯K"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2180,9 +2177,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f3158408465e312154963465d366eb77494d3755748e7
-23bd2774090ee84a33211ae633fac99e28b286abeee42c0a685a466cfc3dda180075
-34cd7e966124b967e7f722
+7374617475736c697374732f315840fd351c40a2a2cf01f775494d2ef85eb4798068
+836cc492c1af512c1ea63595e263d8a88c5023431c10037c98d449b19d905dee33f9
+42de1760fbbfdde343c4dd
 </pre><a href="#section-6.3.1-5" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3.1-6">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3.1-6" class="pilcrow">¶</a></p>
@@ -2207,12 +2204,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      8465e312154963465d366eb7  #       "\x84eã\x12\x15IcF]6n·"
-      7494d3755748e723bd277409  #       "t\x94ÓuWHç#½'t\x09"
-      0ee84a33211ae633fac99e28  #       "\x0eèJ3!\x1aæ3úÉ\x9e("
-      b286abeee42c0a685a466cfc  #       "²\x86«îä,\x0ahZFlü"
-      3dda18007534cd7e966124b9  #       "=Ú\x18\x00u4Í~\x96a$¹"
-      67e7f722                  #       "gç÷""
+      fd351c40a2a2cf01f775494d  #       "ý5\x1c@¢¢Ï\x01÷uIM"
+      2ef85eb4798068836cc492c1  #       ".ø^´y\x80h\x83lÄ\x92Á"
+      af512c1ea63595e263d8a88c  #       "¯Q,\x1e¦5\x95âcØ¨\x8c"
+      5023431c10037c98d449b19d  #       "P#C\x1c\x10\x03|\x98ÔI±\x9d"
+      905dee33f942de1760fbbfdd  #       "\x90]î3ùBÞ\x17`û¿Ý"
+      e343c4dd                  #       "ãCÄÝ"
 </pre><a href="#section-6.3.1-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2435,8 +2432,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.xP1zf6aLOsBjcscOBte2jI0q_y2h6H0DnBf98-Q70i_b3BHxfk4M
-2IsKY7HdFL5xZnIrG3egfZIs8NhpCTMP1w
+nR0bCI6NDMyMDB9.wTL5BCjMnShkA4ksYS0C5C_j2T07vz3SXfjGMl8KoCZR7nwEJo9W
+qVXv_jBsrR5x5ZChnNI49cLOge8SEZs2lQ
 </pre><a href="#section-8.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2543,8 +2540,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.xP1zf6aLOsBjcscOBte2jI0q_y2h6H0DnBf98-Q70i_b3BHxfk4M
-2IsKY7HdFL5xZnIrG3egfZIs8NhpCTMP1w
+nR0bCI6NDMyMDB9.wTL5BCjMnShkA4ksYS0C5C_j2T07vz3SXfjGMl8KoCZR7nwEJo9W
+qVXv_jBsrR5x5ZChnNI49cLOge8SEZs2lQ
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>

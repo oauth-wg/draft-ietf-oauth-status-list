@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 11 June 2026                                    Bundesdruckerei
+Expires: 12 June 2026                                    Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                         8 December 2025
+                                                         9 December 2025
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 June 2026.
+   This Internet-Draft will expire on 12 June 2026.
 
 Copyright Notice
 
@@ -679,8 +679,8 @@ Table of Contents
 
 5.2.  Status List Token in CWT Format
 
-   The Status List Token MUST be encoded as a "CBOR Web Token (CWT)"
-   according to [RFC8392].
+   The Status List Token MUST be encoded as an untagged "CBOR Web Token
+   (CWT)" according to [RFC8392].
 
    The following content applies to the protected header of the CWT:
 
@@ -729,19 +729,15 @@ Table of Contents
    4.  Application of additional restrictions and policies are at the
        discretion of the Relying Party.
 
-   5.  Implementations MUST be able to support a Status List Token in
-       CWT Format in an untagged form (i.e., no CWT tag and no cose-
-       sign1 tag).
-
    The following is a non-normative example of a Status List Token in
    CWT format in Hex:
 
    845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b6377
    74a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f7374
    617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda264
-   6269747301636c73744a78dadbb918000217015d58400ea47def46cbae7b563a5efc
-   6938b16d6cdb8daf1c4023691ee4420f6beac8efcc9185d6f7b6f090c9112e0c7ff1
-   754d4e33c9f721693344f21a5248cabd3e58
+   6269747301636c73744a78dadbb918000217015d5840877a72cf0481ddb6b080dc25
+   6954e5d8d7595b960fb5b1676ecbd1a3510f050880d72803f2a51f0105c058fa18df
+   23ffa2b6ad763fc1f47781de9819f1a9af4b
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -763,11 +759,11 @@ Table of Contents
      636c73744a78dadbb918000217  #     "clstJxÚÛ¹\x18\x00\x02\x17"
      015d                        #     "\x01]"
    58 40                         #   bytes(64)
-     0ea47def46cbae7b563a5efc69  #     "\x0e¤}ïFË®{V:^üi"
-     38b16d6cdb8daf1c4023691ee4  #     "8±mlÛ\x8d¯\x1c@#i\x1eä"
-     420f6beac8efcc9185d6f7b6f0  #     "B\x0fkêÈïÌ\x91\x85Ö÷¶ð"
-     90c9112e0c7ff1754d4e33c9f7  #     "\x90É\x11.\x0c\x7fñuMN3É÷"
-     21693344f21a5248cabd3e58    #     "!i3Dò\x1aRHÊ½>X"
+     877a72cf0481ddb6b080dc2569  #     "\x87zrÏ\x04\x81Ý¶°\x80Ü%i"
+     54e5d8d7595b960fb5b1676ecb  #     "TåØ×Y[\x96\x0fµ±gnË"
+     d1a3510f050880d72803f2a51f  #     "Ñ£Q\x0f\x05\x08\x80×(\x03ò¥\x1f"
+     0105c058fa18df23ffa2b6ad76  #     "\x01\x05ÀXú\x18ß#ÿ¢¶\xadv"
+     3fc1f47781de9819f1a9af4b    #     "?Áôw\x81Þ\x98\x19ñ©¯K"
 
 6.  Referenced Token
 
@@ -916,9 +912,9 @@ Table of Contents
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f3158408465e312154963465d366eb77494d3755748e7
-   23bd2774090ee84a33211ae633fac99e28b286abeee42c0a685a466cfc3dda180075
-   34cd7e966124b967e7f722
+   7374617475736c697374732f315840fd351c40a2a2cf01f775494d2ef85eb4798068
+   836cc492c1af512c1ea63595e263d8a88c5023431c10037c98d449b19d905dee33f9
+   42de1760fbbfdde343c4dd
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -941,12 +937,12 @@ Table of Contents
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         8465e312154963465d366eb7  #       "\x84eã\x12\x15IcF]6n·"
-         7494d3755748e723bd277409  #       "t\x94ÓuWHç#½'t\x09"
-         0ee84a33211ae633fac99e28  #       "\x0eèJ3!\x1aæ3úÉ\x9e("
-         b286abeee42c0a685a466cfc  #       "²\x86«îä,\x0ahZFlü"
-         3dda18007534cd7e966124b9  #       "=Ú\x18\x00u4Í~\x96a$¹"
-         67e7f722                  #       "gç÷""
+         fd351c40a2a2cf01f775494d  #       "ý5\x1c@¢¢Ï\x01÷uIM"
+         2ef85eb4798068836cc492c1  #       ".ø^´y\x80h\x83lÄ\x92Á"
+         af512c1ea63595e263d8a88c  #       "¯Q,\x1e¦5\x95âcØ¨\x8c"
+         5023431c10037c98d449b19d  #       "P#C\x1c\x10\x03|\x98ÔI±\x9d"
+         905dee33f942de1760fbbfdd  #       "\x90]î3ùBÞ\x17`û¿Ý"
+         e343c4dd                  #       "ãCÄÝ"
 
 6.3.2.  ISO mdoc
 
@@ -1185,8 +1181,8 @@ Table of Contents
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.xP1zf6aLOsBjcscOBte2jI0q_y2h6H0DnBf98-Q70i_b3BHxfk4M
-   2IsKY7HdFL5xZnIrG3egfZIs8NhpCTMP1w
+   nR0bCI6NDMyMDB9.wTL5BCjMnShkA4ksYS0C5C_j2T07vz3SXfjGMl8KoCZR7nwEJo9W
+   qVXv_jBsrR5x5ZChnNI49cLOge8SEZs2lQ
 
 8.2.  Status List Response
 
@@ -1334,8 +1330,8 @@ Table of Contents
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.xP1zf6aLOsBjcscOBte2jI0q_y2h6H0DnBf98-Q70i_b3BHxfk4M
-   2IsKY7HdFL5xZnIrG3egfZIs8NhpCTMP1w
+   nR0bCI6NDMyMDB9.wTL5BCjMnShkA4ksYS0C5C_j2T07vz3SXfjGMl8KoCZR7nwEJo9W
+   qVXv_jBsrR5x5ZChnNI49cLOge8SEZs2lQ
 
 9.  Status List Aggregation
 
