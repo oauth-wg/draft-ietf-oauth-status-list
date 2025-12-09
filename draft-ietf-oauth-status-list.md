@@ -939,19 +939,19 @@ The following OID is defined for usage in the EKU extension
 
 # Security Considerations {#Security}
 
-The Status List as defined in [](#status-list) only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other aspects like transport security (e.g., the web PKI).
+Status List Tokens as defined in [](#status-list-token) only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other factors such as transport security or web PKI.
 
 ## Correct decoding and parsing of the encoded Status List
 
 Implementers should be particularly careful for the correct parsing and decoding of the Status List. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to right). Endianness does not apply here because each status value fits within a single byte.
 
-Implementations are RECOMMENDED to verify correctness using the test vectors given by this specification.
+Implementations SHOULD verify correctness using the test vectors given by this specification.
 
 ## Security Guidance for JWT and CWT
 
-A Status List Token in the JWT format should follow the security considerations of {{RFC7519}} and the best current practices of {{RFC8725}}.
+A Status List Token in the JWT format SHOULD follow the security considerations of {{RFC7519}} and the best current practices of {{RFC8725}}.
 
-A Status List Token in the CWT format should follow the security considerations of {{RFC8392}}.
+A Status List Token in the CWT format SHOULD follow the security considerations of {{RFC8392}}.
 
 ## Key Resolution and Trust Management {#key-management}
 
@@ -1002,17 +1002,17 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
 
 ## Redirection 3xx {#redirects}
 
-Clients that follow 3xx (Redirection) class of status codes should be aware of possible dangers of redirects, such as infinite redirection loops since they could be used as an attack vector for possible denial of service attacks on clients. A client SHOULD detect and intervene in cyclical redirections (i.e., "infinite" redirection loops). More guidance for redirects given in Section 15.4 of {{RFC9110}} should be applied.
+HTTP clients that follow 3xx (Redirection) class of status codes SHOULD be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial of service attacks on clients. A client SHOULD detect and intervene in infinite redirections. Clients SHOULD apply the guidance for redirects given in Section 15.4 of {{RFC9110}}.
 
 ## Expiration and Caching {#security-ttl}
 
-Expiration and caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients should check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Issuers could accidentally or maliciously use this mechanism to effectively DDoS the contained URL of the Status Provider.
+Expiration and caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients SHOULD check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Issuers could accidentally or maliciously use this mechanism to effectively DDoS the contained URL of the Status Provider.
 
-Concrete values for both claims highly depend on the use-case requirements and clients should be configured with lower/upper bounds for these values that fit their respective use-cases.
+Reasonable values for both claims highly depend on the use-case requirements and clients SHOULD be configured with lower/upper bounds for these values that fit their respective use-cases.
 
 ## Status List Token Protection {#security-mac}
 
-This specification allows both, digital signatures using asymmetric cryptography, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers should only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. These use-cases typically represent deployments where Status Issuer and Relying Party have a trust relationship and the possibility to securely exchange keys out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the protection of Status List Tokens and implementers should default to digital signatures if they are unsure.
+This specification allows both, digital signatures using asymmetric cryptography, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers SHOULD only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. These use-cases typically represent deployments where Status Issuer and Relying Party have a trust relationship and the possibility to securely exchange keys out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the protection of Status List Tokens and implementers SHOULD default to digital signatures if they are unsure.
 
 # Privacy Considerations {#privacy-considerations}
 
@@ -1042,7 +1042,7 @@ This malicious behavior can be detected by Relying Parties that request large am
 
 ## Observability of Relying Parties {#privacy-relying-party}
 
-Once the Relying Party receives the Referenced Token, this enables them to request the Status List to validate its status through the provided `uri` parameter and look up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of an employee credential.
+Once the Relying Party receives the Referenced Token, the Relying Party can request the Status List through the provided `uri` parameter and can validate the Referenced Token's status by looking up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of an employee credential.
 
 This behaviour could be mitigated by:
 
@@ -1068,7 +1068,7 @@ The tuple of uri and index inside the Referenced Token are unique and therefore 
 
 Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
 
-To avoid privacy risks for colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
+To avoid privacy risks of colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
@@ -1092,7 +1092,7 @@ There are strong privacy concerns that have to be carefully taken into considera
 
 ## Status Types {#privacy-status-types}
 
-As previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports special information about a Referenced Token can leak information to other parties. This document defines one additional Status Type with "SUSPENDED" that conveys such additional information.
+As previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports information beyond the routine statuses VALID and INVALID about a Referenced Token can leak information to other parties. This document defines one additional Status Type with "SUSPENDED" that conveys such additional information, but in practice all statuses other than VALID and INVALID are likely to contain information with privacy implications.
 
 Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might a better fit for their use-case.
 
@@ -1104,9 +1104,9 @@ The lifetime of a Status List Token depends on the lifetime of its Referenced To
 
 ## Linkability Mitigation {#implementation-linkability}
 
-Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent this from becoming a possible source of correlation.
+Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token MUST have a fresh Status List entry in order to prevent the index value from becoming a possible source of correlation.
 
-Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status List Tokens. Revoking batch-issued Referenced Tokens might reveal this correlation later on.
+Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status List Tokens. Batch revocation of a batch of Referenced Tokens might reveal that they are all members of the same batch.
 
 Beware, that this mechanism solves linkability issues between Relying Parties, but does not prevent traceability by Issuers.
 
@@ -1127,7 +1127,7 @@ The storage and transmission size of the Status Issuer's Status List Tokens depe
 
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
-The Status List Issuer may divide its Referenced Tokens up into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for setups where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may organize the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
+The Status List Issuer may divide its Referenced Tokens up into multiple Status Lists to reduce the transmission size of an individual Status List Token. This may be useful for ecosystems where some entities operate in constrained environments, e.g. for mobile internet or embedded devices. The Status List Issuer may organize the Status List Tokens depending on the Referenced Token's expiry date to align their lifecycles and allow for easier retiring of Status List Tokens, however the Status Issuer must be aware of possible privacy risks due to correlations.
 
 ## External Status Issuer
 
@@ -1155,7 +1155,7 @@ When fetching a Status List Token, Relying Parties must carefully evaluate how l
 
 - After time of fetching, the Relying Party caches the Status List for time duration of `ttl` before making checks for updates. This method is RECOMMENDED to distribute the load for the Status Provider.
 - After initial fetching, the Relying Party checks for updates at time of `iat` + `ttl`. This method ensures the most up-to-date information for critical use cases. The Relying Party should account a minimal offset due to the signing and distribution process of the Status Issuer.
-- If no `ttl` is given, then Relying Party SHOULD check for updates latest after time of `exp`.
+- If no `ttl` is given, then Relying Party SHOULD check for updates latest after the time of `exp`.
 
 Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information. Clients should ensure that `exp` and `ttl` are within reasonable bounds before creating requests to get a fresh Status List Token (see [](#security-ttl) for more details).
 
@@ -1183,12 +1183,12 @@ The following diagram illustrates the relationship between these claims and how 
 
 ## Relying Parties avoiding correlatable Information
 
-If the Relying Party does not require the Referenced Token or the Status List Token, e.g. for subsequent status checks or audit trail, it is RECOMMENDED to delete correlatable information, in particular:
+If the Relying Party does not require the Referenced Token or the Status List Token for further processing, it is RECOMMENDED to delete correlatable information, in particular:
 
-- the `status` claim in the Referenced Token (after the presentation)
+- the `status` claim in the Referenced Token (after the validation)
 - the Status List Token itself (after expiration or update)
 
-The Relying Party should instead only keep the relevant payload from the Referenced Token.
+The Relying Party should instead only keep the needed fields from the Referenced Token.
 
 ## Status List Formats
 
@@ -1563,18 +1563,22 @@ The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
 
 # Size comparison {#size-comparison}
 
-The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array) and a compressed Byte Array of UUIDs (as an approximation for a Certificate Revocation List). Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.
+The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array)) and a compressed Byte Array of UUIDs (as an approximation to the list of IDs of Referenced Tokens in a Certificate Revocation List). Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.
 
-## Status List size for varying sizes and revocation rates
+If no further metadata is provided in Status List Tokens or CRLs, then the size of Status Lists or arrays of Certificate ids (represented as UUIDs) will be the main factors deciding on the overall size of a Status List Token or CRL respectively.
+
+## Size of Status Lists for varying amount of entries and revocation rates
+{:unnumbered}
 
 | Size | 0.01%   | 0.1%     | 1%       | 2%       | 5%       | 10%      | 25%       | 50%      | 75%       | 100%    |
 | 100k | 81 B    | 252 B    | 1.4 KB   | 2.3 KB   | 4.5 KB   | 6.9 KB   | 10.2 KB   | 12.2 KB  | 10.2 KB   | 35 B    |
 | 1M   | 442 B   | 2.2 KB   | 13.7 KB  | 23.0 KB  | 43.9 KB  | 67.6 KB  | 102.2 KB  | 122.1 KB | 102.4 KB  | 144 B   |
 | 10M  | 3.8 KB  | 21.1 KB  | 135.4 KB | 230.0 KB | 437.0 KB | 672.9 KB | 1023.4 KB | 1.2 MB   | 1023.5 KB | 1.2 KB  |
 | 100M | 38.3 KB | 213.0 KB | 1.3 MB   | 2.2 MB   | 4.3 MB   | 6.6 MB   | 10.0 MB   | 11.9 MB  | 10.0 MB   | 11.9 KB |
-{: title="Status List Size examples for varying sizes and revocation rates"}
+{: title="Status List Size examples for varying amount of entries and revocation rates"}
 
-## Compressed array of UUIDv4 (128 bit UUIDs) for varying sizes and revocation rates
+## Size of compressed array of UUIDv4 (128 bit UUIDs) for varying amount of entries and revocation rates
+{:unnumbered}
 
 This is a simple approximation of a Certificate Revocation List using an array of UUIDs without any additional metadata (128 bit UUID per revoked entry).
 
@@ -1583,7 +1587,7 @@ This is a simple approximation of a Certificate Revocation List using an array o
 | 1M   | 1.6 KB   | 16.4 KB  | 157.7 KB | 310.4 KB | 781 KB  | 1.5 MB   | 3.8 MB   | 7.6 MB   | 11.4 MB  | 15.3 MB  |
 | 10M  | 15.3 KB  | 155.9 KB | 1.5 MB   | 3.1 MB   | 7.6 MB  | 15.2 MB  | 38.2 MB  | 76.3 MB  | 114.4 MB | 152.6 MB |
 | 100M | 157.6 KB | 1.5 MB   | 15.3 MB  | 30.5 MB  | 76.3 MB | 152.6 MB | 381.4 MB | 762.9 MB | 1.1 GB   | 1.5 GB   |
-{: title="Size examples for 128 bit UUIDs for varying sizes and revocation rates"}
+{: title="Size examples for 128 bit UUIDs for varying amount of entries and revocation rates"}
 
 # Test vectors for Status List encoding {#test-vectors}
 
@@ -1963,6 +1967,8 @@ CBOR encoding:
 
 # Document History
 {:numbered="false"}
+
+\[\[ To be removed from the final specification \]\]
 
 -14
 
