@@ -1978,6 +1978,7 @@ CBOR encoding:
 
 * slightly restructure/clarify referenced token cose section
 * Add ASN.1 module
+* removed DL suspension example
 
 -13
 
