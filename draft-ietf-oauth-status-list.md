@@ -445,7 +445,7 @@ The following is a non-normative example of a Status List Token in JWT format:
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
 
-The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}.
+The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}. The Status List Token MUST not be tagged with the tags defined in section 6 of {{RFC8392}} or in section 2 of {{RFC9052}}.
 
 The following content applies to the protected header of the CWT:
 
@@ -463,11 +463,11 @@ The following additional rules apply:
 
 1. The CWT MAY contain other claims.
 
-2. The CWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject CWTs with an invalid signature.
+1. The CWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject CWTs with an invalid signature.
 
-3. Relying Parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
+1. Relying Parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
 
-4. Application of additional restrictions and policies are at the discretion of the Relying Party.
+1. Application of additional restrictions and policies are at the discretion of the Relying Party.
 
 The following is a non-normative example of a Status List Token in CWT format in Hex:
 
@@ -1968,6 +1968,7 @@ CBOR encoding:
 
 -14
 
+* remove cose_sign1 tag from statuslist in cwt form examples
 * slightly restructure/clarify referenced token cose section
 * Add ASN.1 module
 
