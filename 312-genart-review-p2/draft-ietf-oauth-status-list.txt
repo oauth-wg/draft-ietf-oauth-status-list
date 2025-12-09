@@ -158,9 +158,10 @@ Table of Contents
      16.2.  Informative References
    Appendix A.  ASN.1 Module
    Appendix B.  Size comparison
-     Size of status lists for varying sizes and revocation rates
+     Size of Status Lists for varying amount of entries and revocation
+           rates
      Size of compressed array of UUIDv4 (128 bit UUIDs) for varying
-           sizes
+           amount of entries and revocation rates
    Appendix C.  Test vectors for Status List encoding
      C.1.  1 bit Status List
      C.2.  2 bit Status List
@@ -733,9 +734,9 @@ Table of Contents
    d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
    7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
    74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840c1646c784bfe16f202648b
-   34d07641b39aca81f1c1231b859c61495b5821317291bc8eb75c0680fbce9f1d1c00
-   1ca64d81362c518520b69e6fd3416954dc9237
+   646269747301636c73744a78dadbb918000217015d58401d149d2dfe7bd653a32d89
+   c0bcfedae5f945bb3bdb0092740d3755f3b947e3b81567c39284ab0d6210f02a4e6e
+   927e28c05e024a863404e79b5640ebb533ebca
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -758,12 +759,12 @@ d2                              # tag(18)
       6269747301636c73744a78da  #       "bits\x01clstJxÚ"
       dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
     58 40                       #     bytes(64)
-      c1646c784bfe16f202648b34  #       "ÁdlxKþ\x16ò\x02d\x8b4"
-      d07641b39aca81f1c1231b85  #       "ÐvA³\x9aÊ\x81ñÁ#\x1b\x85"
-      9c61495b5821317291bc8eb7  #       "\x9caI[X!1r\x91¼\x8e·"
-      5c0680fbce9f1d1c001ca64d  #       "\\x06\x80ûÎ\x9f\x1d\x1c\x00\x1c¦M"
-      81362c518520b69e6fd34169  #       "\x816,Q\x85 ¶\x9eoÓAi"
-      54dc9237                  #       "TÜ\x927"
+      1d149d2dfe7bd653a32d89c0  #       "\x1d\x14\x9d-þ{ÖS£-\x89À"
+      bcfedae5f945bb3bdb009274  #       "¼þÚåùE»;Û\x00\x92t"
+      0d3755f3b947e3b81567c392  #       "\x0d7Uó¹Gã¸\x15gÃ\x92"
+      84ab0d6210f02a4e6e927e28  #       "\x84«\x0db\x10ð*Nn\x92~("
+      c05e024a863404e79b5640eb  #       "À^\x02J\x864\x04ç\x9bV@ë"
+      b533ebca                  #       "µ3ëÊ"
 
 6.  Referenced Token
 
@@ -912,37 +913,37 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840f947ef6794af03cdcbd94570a62bb560bc91b4
-   860cf4160db7e2f971ee05522764950755d7ecd98bccb61feeb48ebda6362f2d46bd
-   0f87e796e314b4b1df4468
+   7374617475736c697374732f3158402667d46c9cf547885b347630c9393ec0cad525
+   0dd36234343d09e1375c843ef61a24e1a5ad05da2c8cdd0290cd83dfd23659bb7488
+   e1303c01816876e433ed79
 
    The following is the CBOR Annotated Hex output of the example above:
 
-   d2                              # tag(18)
-     84                            #   array(4)
-       43                          #     bytes(3)
-         a10126                    #       "¡\x01&"
-       a1                          #     map(1)
-         04                        #       uint(4)
-         42                        #       bytes(2)
-           3132                    #         "12"
-       58 66                       #     bytes(102)
-         a50265313233343501736874  #       "¥\x02e12345\x01sht"
-         7470733a2f2f6578616d706c  #       "tps://exampl"
-         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-         617475735f6c697374a26369  #       "atus_list¢ci"
-         647800637572697821687474  #       "dx\x00curix!htt"
-         70733a2f2f6578616d706c65  #       "ps://example"
-         2e636f6d2f7374617475736c  #       ".com/statusl"
-         697374732f31              #       "ists/1"
-       58 40                       #     bytes(64)
-         f947ef6794af03cdcbd94570  #       "ùGïg\x94¯\x03ÍËÙEp"
-         a62bb560bc91b4860cf4160d  #       "¦+µ`¼\x91´\x86\x0cô\x16\x0d"
-         b7e2f971ee05522764950755  #       "·âùqî\x05R'd\x95\x07U"
-         d7ecd98bccb61feeb48ebda6  #       "×ìÙ\x8bÌ¶\x1fî´\x8e½¦"
-         362f2d46bd0f87e796e314b4  #       "6/-F½\x0f\x87ç\x96ã\x14´"
-         b1df4468                  #       "±ßDh"
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      2667d46c9cf547885b347630  #       "&gÔl\x9cõG\x88[4v0"
+      c9393ec0cad5250dd3623434  #       "É9>ÀÊÕ%\x0dÓb44"
+      3d09e1375c843ef61a24e1a5  #       "=\x09á7\\x84>ö\x1a$á¥"
+      ad05da2c8cdd0290cd83dfd2  #       "\xad\x05Ú,\x8cÝ\x02\x90Í\x83ßÒ"
+      3659bb7488e1303c01816876  #       "6Y»t\x88á0<\x01\x81hv"
+      e433ed79                  #       "ä3íy"
 
 6.3.2.  ISO mdoc
 
@@ -1181,8 +1182,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.uyNEctkV5a3N-xYJ4nF8CdamtkIf2IcwRTNGHCFQYtpXPmE2ZmX6
-   J71OZ2Fy_dhmVMfDV3Hs6OTdHdZzEFhAyg
+   nR0bCI6NDMyMDB9.Zwhbn9PNtXB1tS4uy6LRx6YxAipotDRU2N2xe0U062clubSJ8jTw
+   SukU4DJf6VlAceHorDIZAj8R7aJFS7zDBQ
 
 8.2.  Status List Response
 
@@ -1330,8 +1331,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.uyNEctkV5a3N-xYJ4nF8CdamtkIf2IcwRTNGHCFQYtpXPmE2ZmX6
-   J71OZ2Fy_dhmVMfDV3Hs6OTdHdZzEFhAyg
+   nR0bCI6NDMyMDB9.Zwhbn9PNtXB1tS4uy6LRx6YxAipotDRU2N2xe0U062clubSJ8jTw
+   SukU4DJf6VlAceHorDIZAj8R7aJFS7zDBQ
 
 9.  Status List Aggregation
 
@@ -2678,7 +2679,7 @@ Appendix B.  Size comparison
    (represented as UUIDs) will be the main factors deciding on the
    overall size of a Status List Token or CRL respectively.
 
-Size of status lists for varying sizes and revocation rates
+Size of Status Lists for varying amount of entries and revocation rates
 
    +====+=====+=====+======+======+=====+=====+======+=====+======+====+
    |Size|0.01%|0.1% |1%    |2%    |5%   |10%  |25%   |50%  |75%   |100%|
@@ -2699,7 +2700,8 @@ Size of status lists for varying sizes and revocation rates
           Table 1: Status List Size examples for varying sizes and
                               revocation rates
 
-Size of compressed array of UUIDv4 (128 bit UUIDs) for varying sizes
+Size of compressed array of UUIDv4 (128 bit UUIDs) for varying amount of
+entries and revocation rates
 
    This is a simple approximation of a Certificate Revocation List using
    an array of UUIDs without any additional metadata (128 bit UUID per
