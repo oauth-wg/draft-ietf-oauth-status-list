@@ -445,7 +445,7 @@ The following is a non-normative example of a Status List Token in JWT format:
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
 
-The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}.
+The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}. The Status List Token MUST not be tagged with the tags defined in section 6 of {{RFC8392}} or in section 2 of {{RFC9052}}.
 
 The following content applies to the protected header of the CWT:
 
@@ -463,11 +463,11 @@ The following additional rules apply:
 
 1. The CWT MAY contain other claims.
 
-2. The CWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject CWTs with an invalid signature.
+1. The CWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject CWTs with an invalid signature.
 
-3. Relying Parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
+1. Relying Parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
 
-4. Application of additional restrictions and policies are at the discretion of the Relying Party.
+1. Application of additional restrictions and policies are at the discretion of the Relying Party.
 
 The following is a non-normative example of a Status List Token in CWT format in Hex:
 
@@ -1042,7 +1042,7 @@ This malicious behavior can be detected by Relying Parties that request large am
 
 ## Observability of Relying Parties {#privacy-relying-party}
 
-Once the Relying Party receives the Referenced Token, the Relying Party can request the Status List through the provided `uri` parameter and can validate the Referenced Token's status by looking up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of a driving license or checking the employment status of an employee credential.
+Once the Relying Party receives the Referenced Token, the Relying Party can request the Status List through the provided `uri` parameter and can validate the Referenced Token's status by looking up the corresponding `index`. However, the Relying Party may persistently store the `uri` and `index` of the Referenced Token to request the Status List again at a later time. By doing so regularly, the Relying Party may create a profile of the Referenced Token's validity status. This behaviour may be intended as a feature, e.g. for an identity proofing (e.g. Know-Your-Customer process in finance industry) that requires regular validity checks, but might also be abused in cases where this is not intended and unknown to the Holder, e.g. profiling the suspension of an employee credential.
 
 This behaviour could be mitigated by:
 
@@ -1093,8 +1093,6 @@ There are strong privacy concerns that have to be carefully taken into considera
 ## Status Types {#privacy-status-types}
 
 As previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports information beyond the routine statuses VALID and INVALID about a Referenced Token can leak information to other parties. This document defines one additional Status Type with "SUSPENDED" that conveys such additional information, but in practice all statuses other than VALID and INVALID are likely to contain information with privacy implications.
-
-A concrete example for "SUSPENDED" would be a driver's license, where the digital driver's license might still be useful to prove other information about its holder, but suspended could signal that it should not be considered valid in the scope of being allowed to drive a car. This case could be solved by either introducing a special status type, or by revoking the Referenced Token and re-issuing with changed attributes. For such a case, the status type suspended might be dangerous as it would leak the information of a suspended driver's license even if the driver's license is used as a mean of identification and not in the context of driving a car. This could also allow for the unwanted collection of statistical data on the status of driver's licenses.
 
 Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might a better fit for their use-case.
 
@@ -1974,8 +1972,10 @@ CBOR encoding:
 
 -14
 
+* remove cose_sign1 tag from statuslist in cwt form examples
 * slightly restructure/clarify referenced token cose section
 * Add ASN.1 module
+* removed DL suspension example
 
 -13
 
