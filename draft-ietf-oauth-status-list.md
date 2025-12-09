@@ -1567,7 +1567,7 @@ The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
 
 The following tables show a size comparison for a Status List (compressed byte array as defined in [](#status-list-byte-array)) and a compressed Byte Array of UUIDs (as an approximation to the list of IDs of Referenced Tokens in a Certificate Revocation List). Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.
 
-If no further metadata is provided in CRLs, then these entries will be the main factors deciding on the overall size of a Status List Token and CRL respectively.
+If no further metadata is provided in Status List Tokens or CRLs, then the size of Status Lists or arrays of Certificate ids (represented as UUIDs) will be the main factors deciding on the overall size of a Status List Token or CRL respectively.
 
 ## Size of status lists for varying sizes and revocation rates
 {:unnumbered}
