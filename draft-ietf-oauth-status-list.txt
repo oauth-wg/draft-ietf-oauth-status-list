@@ -678,7 +678,9 @@ Table of Contents
 5.2.  Status List Token in CWT Format
 
    The Status List Token MUST be encoded as a "CBOR Web Token (CWT)"
-   according to [RFC8392].
+   according to [RFC8392].  The Status List Token MUST not be tagged
+   with the tags defined in section 6 of [RFC8392] or in section 2 of
+   [RFC9052].
 
    The following content applies to the protected header of the CWT:
 
@@ -730,40 +732,38 @@ Table of Contents
    The following is a non-normative example of a Status List Token in
    CWT format in Hex:
 
-   d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
-   7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
-   74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-   646269747301636c73744a78dadbb918000217015d5840ba681143c72da351752062
-   7210b90ce6e857d16c2252f02288b9f49f367002c23d4dabbf66481408ec83342784
-   dfd2796f82c36d31cb6c2c052ae8957a3009c9
+   845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b6377
+   74a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f7374
+   617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda264
+   6269747301636c73744a78dadbb918000217015d5840ce85ed46c81d50f7a3d7940f
+   e3d1a3d0c6e3b3ea7261f21bee91f25f7c7615ef639babef8eeec4e4e93e6a38939a
+   3cbbb2422dee4ef22392438f7202c8287f6e
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    58 20                       #     bytes(32)
-      a2012610781a6170706c6963  #       "¢\x01&\x10x\x1aapplic"
-      6174696f6e2f737461747573  #       "ation/status"
-      6c6973742b637774          #       "list+cwt"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 50                       #     bytes(80)
-      a502782168747470733a2f2f  #       "¥\x02x!https://"
-      6578616d706c652e636f6d2f  #       "example.com/"
-      7374617475736c697374732f  #       "statuslists/"
-      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
-      ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
-      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
-      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
-    58 40                       #     bytes(64)
-      ba681143c72da35175206272  #       "ºh\x11CÇ-£Qu br"
-      10b90ce6e857d16c2252f022  #       "\x10¹\x0cæèWÑl"Rð""
-      88b9f49f367002c23d4dabbf  #       "\x88¹ô\x9f6p\x02Â=M«¿"
-      66481408ec83342784dfd279  #       "fH\x14\x08ì\x834'\x84ßÒy"
-      6f82c36d31cb6c2c052ae895  #       "o\x82Ãm1Ël,\x05*è\x95"
-      7a3009c9                  #       "z0\x09É"
+ 84                              # array(4)
+   58 20                         #   bytes(32)
+     a2012610781a6170706c696361  #     "¢\x01&\x10x\x1aapplica"
+     74696f6e2f7374617475736c69  #     "tion/statusli"
+     73742b637774                #     "st+cwt"
+   a1                            #   map(1)
+     04                          #     uint(4)
+     42                          #     bytes(2)
+       3132                      #       "12"
+   58 50                         #   bytes(80)
+     a502782168747470733a2f2f65  #     "¥\x02x!https://e"
+     78616d706c652e636f6d2f7374  #     "xample.com/st"
+     617475736c697374732f31061a  #     "atuslists/1\x06\x1a"
+     648c5bea041a8898dfea19fffe  #     "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿþ"
+     19a8c019fffda2646269747301  #     "\x19¨À\x19ÿý¢dbits\x01"
+     636c73744a78dadbb918000217  #     "clstJxÚÛ¹\x18\x00\x02\x17"
+     015d                        #     "\x01]"
+   58 40                         #   bytes(64)
+     ce85ed46c81d50f7a3d7940fe3  #     "Î\x85íFÈ\x1dP÷£×\x94\x0fã"
+     d1a3d0c6e3b3ea7261f21bee91  #     "Ñ£ÐÆã³êraò\x1bî\x91"
+     f25f7c7615ef639babef8eeec4  #     "ò_|v\x15ïc\x9b«ï\x8eîÄ"
+     e4e93e6a38939a3cbbb2422dee  #     "äé>j8\x93\x9a<»²B-î"
+     4ef22392438f7202c8287f6e    #     "Nò#\x92C\x8fr\x02È(\x7fn"
 
 6.  Referenced Token
 
@@ -912,9 +912,9 @@ d2                              # tag(18)
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f315840367b4319e5dbdc1f52c8f24fa3a7dab31a07f6
-   4428a64a60ef6d56441ab81f5ab0fcb62ade48cb74cd911d634d3d69634dde5e69d3
-   47bf361e9d5968bdc4adc0
+   7374617475736c697374732f3158405859f465db4d87c9b290a5afc05f166c31c8f8
+   d68a2fe3fd285b07bf4609560e5b38766139f5868f23a45b59d8a37dc744d15ea32a
+   2f1534efb6afc07dc1fd1e
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -937,12 +937,12 @@ d2                              # tag(18)
          2e636f6d2f7374617475736c  #       ".com/statusl"
          697374732f31              #       "ists/1"
        58 40                       #     bytes(64)
-         367b4319e5dbdc1f52c8f24f  #       "6{C\x19åÛÜ\x1fRÈòO"
-         a3a7dab31a07f64428a64a60  #       "£§Ú³\x1a\x07öD(¦J`"
-         ef6d56441ab81f5ab0fcb62a  #       "ïmVD\x1a¸\x1fZ°ü¶*"
-         de48cb74cd911d634d3d6963  #       "ÞHËtÍ\x91\x1dcM=ic"
-         4dde5e69d347bf361e9d5968  #       "MÞ^iÓG¿6\x1e\x9dYh"
-         bdc4adc0                  #       "½Ä\xadÀ"
+         5859f465db4d87c9b290a5af  #       "XYôeÛM\x87É²\x90¥¯"
+         c05f166c31c8f8d68a2fe3fd  #       "À_\x16l1ÈøÖ\x8a/ãý"
+         285b07bf4609560e5b387661  #       "([\x07¿F\x09V\x0e[8va"
+         39f5868f23a45b59d8a37dc7  #       "9õ\x86\x8f#¤[YØ£}Ç"
+         44d15ea32a2f1534efb6afc0  #       "DÑ^£*/\x154ï¶¯À"
+         7dc1fd1e                  #       "}Áý\x1e"
 
 6.3.2.  ISO mdoc
 
@@ -1181,8 +1181,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.-ZJkKiY5BEVwQSff_s3mEXZAM8RKYwPA5QoH5DsdYH1zbCL5ZfI0
-   FaUwyk53jU8nIgrjBRl3EByfp-nFkTDSIg
+   nR0bCI6NDMyMDB9.t_6HqKZvHpLFTa3J3-iloSaJuULHGHVgMvMGoTD_wTFxQDztlUjm
+   vqvUq3_wm8LQKg-MEDHVmxa0ihXFo4xb7g
 
 8.2.  Status List Response
 
@@ -1330,8 +1330,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.-ZJkKiY5BEVwQSff_s3mEXZAM8RKYwPA5QoH5DsdYH1zbCL5ZfI0
-   FaUwyk53jU8nIgrjBRl3EByfp-nFkTDSIg
+   nR0bCI6NDMyMDB9.t_6HqKZvHpLFTa3J3-iloSaJuULHGHVgMvMGoTD_wTFxQDztlUjm
+   vqvUq3_wm8LQKg-MEDHVmxa0ihXFo4xb7g
 
 9.  Status List Aggregation
 
@@ -3235,6 +3235,8 @@ C.4.  8 bit Status List
 Document History
 
    -14
+
+   *  remove cose_sign1 tag from statuslist in cwt form examples
 
    *  slightly restructure/clarify referenced token cose section
 
