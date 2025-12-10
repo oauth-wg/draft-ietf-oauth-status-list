@@ -463,11 +463,11 @@ The following additional rules apply:
 
 1. The CWT MAY contain other claims.
 
-2. The CWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject CWTs with an invalid signature.
+1. The CWT MUST be secured using a cryptographic signature or MAC algorithm. Relying Parties MUST reject CWTs with an invalid signature.
 
-3. Relying Parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
+1. Relying Parties MUST reject CWTs that are not valid in all other respects per "CBOR Web Token (CWT)" {{RFC8392}}.
 
-4. Application of additional restrictions and policies are at the discretion of the Relying Party.
+1. Application of additional restrictions and policies are at the discretion of the Relying Party.
 
 The following is a non-normative example of a Status List Token in CWT format in Hex:
 
