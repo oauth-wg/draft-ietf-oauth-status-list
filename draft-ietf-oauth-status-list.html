@@ -1993,42 +1993,40 @@ a2                              # map(2)
 <p id="section-5.2-8">The following is a non-normative example of a Status List Token in CWT format in Hex:<a href="#section-5.2-8" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-9">
 <pre>
-d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
-7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
-74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
-646269747301636c73744a78dadbb918000217015d5840cfc5b00375aec3f22fb4a1
-361381a8b2828205e7a6e85cdd3ee86d83fa900a222cce1fd2464283f33cc13f5ade
-09d26a85b05bb36919bd9c8f7e12ac0f5e19cf
+845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b6377
+74a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f7374
+617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda264
+6269747301636c73744a78dadbb918000217015d5840824a1ec9ac38305999917eed
+0db74f701b7cfe14854776e7228f1492b2d81ef21a9918e9a3c73c478579a029d098
+66595d98e5c142b62b1d59d95537cd6d2a5c
 </pre><a href="#section-5.2-9" class="pilcrow">¶</a>
 </div>
 <p id="section-5.2-10">The following is the CBOR Annotated Hex output of the example above:<a href="#section-5.2-10" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5.2-11">
 <pre>
-d2                              # tag(18)
-  84                            #   array(4)
-    58 20                       #     bytes(32)
-      a2012610781a6170706c6963  #       "¢\x01&amp;\x10x\x1aapplic"
-      6174696f6e2f737461747573  #       "ation/status"
-      6c6973742b637774          #       "list+cwt"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 50                       #     bytes(80)
-      a502782168747470733a2f2f  #       "¥\x02x!https://"
-      6578616d706c652e636f6d2f  #       "example.com/"
-      7374617475736c697374732f  #       "statuslists/"
-      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
-      ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
-      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
-      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
-    58 40                       #     bytes(64)
-      cfc5b00375aec3f22fb4a136  #       "ÏÅ°\x03u®Ãò/´¡6"
-      1381a8b2828205e7a6e85cdd  #       "\x13\x81¨²\x82\x82\x05ç¦è\Ý"
-      3ee86d83fa900a222cce1fd2  #       "&gt;èm\x83ú\x90\x0a",Î\x1fÒ"
-      464283f33cc13f5ade09d26a  #       "FB\x83ó&lt;Á?ZÞ\x09Òj"
-      85b05bb36919bd9c8f7e12ac  #       "\x85°[³i\x19½\x9c\x8f~\x12¬"
-      0f5e19cf                  #       "\x0f^\x19Ï"
+84                              # array(4)
+  58 20                         #   bytes(32)
+    a2012610781a6170706c696361  #     "¢\x01&amp;\x10x\x1aapplica"
+    74696f6e2f7374617475736c69  #     "tion/statusli"
+    73742b637774                #     "st+cwt"
+  a1                            #   map(1)
+    04                          #     uint(4)
+    42                          #     bytes(2)
+      3132                      #       "12"
+  58 50                         #   bytes(80)
+    a502782168747470733a2f2f65  #     "¥\x02x!https://e"
+    78616d706c652e636f6d2f7374  #     "xample.com/st"
+    617475736c697374732f31061a  #     "atuslists/1\x06\x1a"
+    648c5bea041a8898dfea19fffe  #     "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿþ"
+    19a8c019fffda2646269747301  #     "\x19¨À\x19ÿý¢dbits\x01"
+    636c73744a78dadbb918000217  #     "clstJxÚÛ¹\x18\x00\x02\x17"
+    015d                        #     "\x01]"
+  58 40                         #   bytes(64)
+    824a1ec9ac38305999917eed0d  #     "\x82J\x1eÉ¬80Y\x99\x91~í\x0d"
+    b74f701b7cfe14854776e7228f  #     "·Op\x1b|þ\x14\x85Gvç"\x8f"
+    1492b2d81ef21a9918e9a3c73c  #     "\x14\x92²Ø\x1eò\x1a\x99\x18é£Ç&lt;"
+    478579a029d09866595d98e5c1  #     "G\x85y\xa0)Ð\x98fY]\x98åÁ"
+    42b62b1d59d95537cd6d2a5c    #     "B¶+\x1dYÙU7Ím*\"
 </pre><a href="#section-5.2-11" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2179,9 +2177,9 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-7374617475736c697374732f31584014d0edc5ead35fa3fe2e428d0a76c94f36b45d
-eceda8bbfc17b9de2a7227df185e25128961fa440cd26589571d23674cb172920a3d
-5be42a5e39bb2ce19bad6b
+7374617475736c697374732f315840609571542036de94fb6bcf503eeb0196a52bf4
+0462f594a3a8b32260283e8e0f8d56375f1dc42ca30e10933efb9ef7745ec3de09c0
+58606c7aff70d0896eb28f
 </pre><a href="#section-6.3.1-5" class="pilcrow">¶</a>
 </div>
 <p id="section-6.3.1-6">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3.1-6" class="pilcrow">¶</a></p>
@@ -2206,12 +2204,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      14d0edc5ead35fa3fe2e428d  #       "\x14ÐíÅêÓ_£þ.B\x8d"
-      0a76c94f36b45deceda8bbfc  #       "\x0avÉO6´]ìí¨»ü"
-      17b9de2a7227df185e251289  #       "\x17¹Þ*r'ß\x18^%\x12\x89"
-      61fa440cd26589571d23674c  #       "aúD\x0cÒe\x89W\x1d#gL"
-      b172920a3d5be42a5e39bb2c  #       "±r\x92\x0a=[ä*^9»,"
-      e19bad6b                  #       "á\x9b\xadk"
+      609571542036de94fb6bcf50  #       "`\x95qT 6Þ\x94ûkÏP"
+      3eeb0196a52bf40462f594a3  #       "&gt;ë\x01\x96¥+ô\x04bõ\x94£"
+      a8b32260283e8e0f8d56375f  #       "¨³"`(&gt;\x8e\x0f\x8dV7_"
+      1dc42ca30e10933efb9ef774  #       "\x1dÄ,£\x0e\x10\x93&gt;û\x9e÷t"
+      5ec3de09c058606c7aff70d0  #       "^ÃÞ\x09ÀX`lzÿpÐ"
+      896eb28f                  #       "\x89n²\x8f"
 </pre><a href="#section-6.3.1-7" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2456,8 +2454,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.xJ8ZWkelSSnKzfOJ5WCyENmNnxZlAAcLMWwWyyalESVRYlP4i1Lh
-haN9egbWFOdsj3xOrzwIQA4dFWbdZFvXgA
+nR0bCI6NDMyMDB9.xXwqloKr8P9VIP41ImzI6b9EZDWfJBJzCC_BnnkUwulm60_Gfvrn
+L4LCuewSj0yB72j4qrTB4Zjk-QJWzWfjdA
 </pre><a href="#section-8.2-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2543,8 +2541,8 @@ eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
 yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
 GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
 WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-nR0bCI6NDMyMDB9.xJ8ZWkelSSnKzfOJ5WCyENmNnxZlAAcLMWwWyyalESVRYlP4i1Lh
-haN9egbWFOdsj3xOrzwIQA4dFWbdZFvXgA
+nR0bCI6NDMyMDB9.xXwqloKr8P9VIP41ImzI6b9EZDWfJBJzCC_BnnkUwulm60_Gfvrn
+L4LCuewSj0yB72j4qrTB4Zjk-QJWzWfjdA
 </pre><a href="#section-8.4-7" class="pilcrow">¶</a>
 </div>
 </section>
