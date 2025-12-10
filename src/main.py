@@ -110,8 +110,8 @@ def exampleStatusList8Bit() -> StatusList:
     random.seed(42)
     for x in range(2**8):
         y = random.randint(0, long_size - 1)
-        # print("status[{}] = {}".format(y,x))
         status_list.set(y, x)
+        # print("status[{}] = 0b{:08b}".format(y,x))
     return status_list
 
 
