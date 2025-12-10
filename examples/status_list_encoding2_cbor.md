@@ -1,0 +1,3 @@
+byte_array = [0xc9, 0x44, 0xf9] 
+encoded:
+a2646269747302636c73744b78da3be9f2130003df0207
