@@ -1,8 +1,8 @@
 import json
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta
 from typing import Dict
 
-from cbor2 import CBORTag, dumps
+from cbor2 import dumps
 from cwt import COSE, COSEHeaders, COSEKey, CWTClaims
 from jwcrypto import jwk, jwt
 
@@ -77,7 +77,7 @@ class StatusListToken:
 
     def buildJWT(
         self,
-        iat: datetime = datetime.now(UTC),
+        iat: datetime = datetime.utcnow(),
         exp: datetime | None = None,
         ttl: timedelta | None = None,
         optional_claims: Dict | None = None,
@@ -115,7 +115,7 @@ class StatusListToken:
 
     def buildCWT(
         self,
-        iat: datetime = datetime.now(UTC),
+        iat: datetime = datetime.utcnow(),
         exp: datetime | None = None,
         ttl: timedelta | None = None,
         optional_claims: Dict | None = None,
@@ -158,12 +158,10 @@ class StatusListToken:
         # The sender side:
         sender = COSE.new()
         encoded = sender.encode(
-            payload=dumps(claims),
-            key=key,
+            dumps(claims),
+            key,
             protected=protected_header,
             unprotected=unprotected_header,
         )
 
-        # removes cose_sign1 tag (only 1 byte long for tag 18)
-        encoded = encoded[1:]
         return encoded
