@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-21T00:22:50.278348+00:00",
+  "timestamp": "2025-12-23T00:21:00.196704+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6179,7 +6179,7 @@
       "labels": [],
       "body": "From the mailing list:\n\n> Dear Authors,\n> \n> https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/13/ clause 5.2 gives requirements and an example of a Status List Token in CWT format.\n> \n> The non-normative example from clause 5.2 clearly uses a tagged structure.\n> \n> When checking RFC8392 clause 7.1 step 6:\n> \n> \u201c   6.  If needed by the application, prepend the COSE object with the\n> \n>        appropriate COSE CBOR tag to indicate the type of the COSE\n> \n>        object.  If needed by the application, prepend the COSE object\n> \n>        with the CWT CBOR tag to indicate that the COSE object is a CWT.\n> \n> \u201d\n> \n> Tagging is optional, could you please indicate in the normative part of clause 5.2 whether tagging is required, and if so which tag to use?",
       "createdAt": "2025-11-18T07:21:56Z",
-      "updatedAt": "2025-12-10T15:37:01Z",
+      "updatedAt": "2025-12-22T23:52:38Z",
       "closedAt": null,
       "comments": [
         {
@@ -6216,6 +6216,13 @@
           "body": "Editors Call: For the sake of improving interoperability by eliminating possible options for implementations we are going to remove the tag because generally tagging is for applications where the processing doesn't know what type the CBOR data structure is and this will always be conveyed via the media type in the HTTP response. This approach also aligns better with ISO 181013-5 in how the MSO, DeviceAuth and ReaderAuth structures are defined which are \"untagged\" CBOR structures.",
           "createdAt": "2025-12-02T07:21:39Z",
           "updatedAt": "2025-12-02T07:33:42Z"
+        },
+        {
+          "author": "TakahikoKawasaki",
+          "authorAssociation": "NONE",
+          "body": "The section \"[5.2. Status List Token in CWT Format](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-14.html#name-status-list-token-in-cwt-fo)\" states, _\"The CWT MUST be secured using a cryptographic signature or MAC algorithm.\"_\n\nIf no CBOR tag is prepended, how can CBOR parsers determine the COSE type &mdash; among `COSE_Sign`, `COSE_Sign1`, `COSE_Mac`, and `COSE_Mac0`? The discussion appears to implicitly assume that the COSE type is `COSE_Sign1`, but does the TSL specification state this explicitly?\n\nIf it is decided that no CBOR tag will be used, I would like the specification to explicitly state that the COSE type is `COSE_Sign1`.",
+          "createdAt": "2025-12-22T23:52:38Z",
+          "updatedAt": "2025-12-22T23:52:38Z"
         }
       ]
     },
