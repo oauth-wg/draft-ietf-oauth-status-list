@@ -200,7 +200,7 @@ Another possible use case for the Status List is to express the status of verifi
 
 Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
 
-This specification seeks to find a balance between scalability, security and privacy by representing statuses as individual bits, packing the them into an array, and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.
+This specification seeks to find a balance between scalability, security and privacy by representing statuses as individual bits, packing them into an array, and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.
 
 ## Design Considerations
 
@@ -381,13 +381,13 @@ This section defines the data structure for a CBOR-encoded Status List:
   * `lst`: REQUIRED. CBOR Byte string (major type 2) that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the compressed byte array as specified in [](#status-list-byte-array).
   * `aggregation_uri`: OPTIONAL. CBOR Text string (major type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section [](#aggregation) for further detail.
 
-The following is the CDDL definition of the StatusList structure:
+The following is the CDDL definition of the `StatusList` structure:
 
 ~~~ cddl
 StatusList = {
     bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token
     lst: bstr, ; Byte string that contains the Status List
-    ? aggregation_uri: tstr, ; link to the Status List Aggregation
+    ? aggregation_uri: tstr ; link to the Status List Aggregation
 }
 ~~~
 
@@ -743,7 +743,7 @@ A Status List represents exactly one status per Referenced Token. If the Status 
 
 The processing rules for Referenced Tokens (such as JWT or CWT) supersede the Referenced Token's status in a TSL. In particular, a Referenced Token that is evaluated as being expired (e.g. through the `exp` claim) but in a TSL has a status of 0x00 ("VALID"), is considered expired.
 
-This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. Applications SHOULD use registered values for statuses if they have the correct semantics. Additional values may defined for particular use cases. Status Types described by this document comprise:
+This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. Applications SHOULD use registered values for statuses if they have the correct semantics. Additional values may be defined for particular use cases. Status Types described by this document comprise:
 
  - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
  - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
@@ -755,7 +755,7 @@ See [](#privacy-status-types) for privacy considerations on status types.
 
 # Verification and Processing
 
-The fetching, processing and verifying of a Status List Token may be done by either the Holder or the Relying Party. The following section is described from the role of the Relying Party, however the same rules apply for the Holder.
+The fetching, processing and verifying of a Status List Token may be done by either the Holder or the Relying Party. The following section is described from the role of the Relying Party, however the same rules apply to the Holder.
 
 ## Status List Request {#status-list-request}
 
@@ -907,7 +907,7 @@ This section defines the structure for a JSON-encoded Status List Aggregation:
 
 * `status_lists`: REQUIRED. JSON array of strings that contains URIs linking to Status List Tokens.
 
-The Status List Aggregation URI provides a list of Status List Token URIs. This aggregation in JSON and the media type return MUST be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
+The Status List Aggregation URI provides a list of Status List Token URIs. This aggregation is in JSON and the returned media type MUST be `application/json`. A Relying Party can iterate through this list and fetch all Status List Tokens before encountering the specific URI in a Referenced Token.
 
 The following is a non-normative example for media type `application/json`:
 
@@ -924,10 +924,10 @@ The following is a non-normative example for media type `application/json`:
 
 # X.509 Certificate Extended Key Usage Extension {#eku}
 
-{{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used. A certificate's issuer explicitly delegates Status List Token signing authority by issuing a X.509 certificate containing the KeyPurposeId defined below in the extended key usage extension.
+{{RFC5280}} specifies the Extended Key Usage (EKU) X.509 certificate extension for use on end entity certificates. The extension indicates one or more purposes for which the certified public key is valid. The EKU extension can be used in conjunction with the Key Usage (KU) extension, which indicates the set of basic cryptographic operations for which the certified key may be used. A certificate's issuer explicitly delegates Status List Token signing authority by issuing an X.509 certificate containing the KeyPurposeId defined below in the extended key usage extension.
 Other specifications MAY choose to re-use this OID for other status mechanisms under the condition that they are registered in the "JWT Status Mechanisms" or "CWT Status Mechanisms" registries.
 
-The following OID is defined for usage in the EKU extension
+The following OID is defined for usage in the EKU extension:
 
 ~~~
   id-kp  OBJECT IDENTIFIER  ::=
@@ -939,7 +939,7 @@ The following OID is defined for usage in the EKU extension
 
 # Security Considerations {#Security}
 
-Status List Tokens as defined in [](#status-list-token) only exists in cryptographically secured containers which allows checking the integrity and origin without relying on other factors such as transport security or web PKI.
+Status List Tokens as defined in [](#status-list-token) only exist in cryptographically secured containers which allow checking the integrity and origin without relying on other factors such as transport security or web PKI.
 
 ## Correct decoding and parsing of the encoded Status List
 
@@ -1068,7 +1068,7 @@ The tuple of uri and index inside the Referenced Token are unique and therefore 
 
 Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
 
-To avoid privacy risks of colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `index`, Status Issuers are RECOMMENDED to:
+To avoid privacy risks of colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `idx`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
@@ -1076,7 +1076,7 @@ To avoid privacy risks of colluding Relying Parties, it is RECOMMENDED that Issu
 
 ### Colluding Status Issuer and Relying Party
 
-A Status Issuer and a Relying Party Issuer may link two transaction involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
+A Status Issuer and a Relying Party Issuer may link two transactions involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
 ## External Status Provider for Privacy {#third-party-hosting}
 
@@ -1115,7 +1115,7 @@ Beware, that this mechanism solves linkability issues between Relying Parties, b
 The Status Issuer is RECOMMENDED to initialize the Status List byte array with a default value provided as
 an initialization parameter by the Issuer of the Referenced Token. The Issuer is RECOMMENDED to use a default value that represents the most common value for its Referenced Tokens to avoid an update during issuance (usually 0x00, VALID). This preserves the benefits from compression and effectively hides the number of managed Referenced Tokens since an unused index value can not be distinguished from a valid Referenced Token.
 
-The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `index` for multiple Referenced Tokens (since `uri` and `index` form a unique identifier that might be used for tracking, see [](#privacy-considerations) for more details). The Status Issuer MUST prevent any unintended double allocation.
+The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the same `uri` and `idx` for multiple Referenced Tokens (since `uri` and `idx` form a unique identifier that might be used for tracking, see [](#privacy-considerations) for more details). The Status Issuer MUST prevent any unintended double allocation.
 
 ## Status List Size
 
@@ -1131,7 +1131,7 @@ The Status List Issuer may divide its Referenced Tokens up into multiple Status 
 
 ## External Status Issuer
 
-If the roles of the Issuer of the Referenced Token and the Status Issuer are performed by different entities, this may allow for use case that require revocations of Referenced Tokens to be managed by a different entities, e.g. for regulatory or privacy reasons. In this scenario both parties must align on:
+If the roles of the Issuer of the Referenced Token and the Status Issuer are performed by different entities, this may allow for use cases that require revocation of Referenced Tokens to be managed by different entities, e.g. for regulatory or privacy reasons. In this scenario both parties must align on:
 
 - the key and trust management as described in [](#key-management)
 - parameters for the Status List
@@ -1523,6 +1523,7 @@ Oliver Terbu,
 Orie Steele,
 Rifaat Shekh-Yusef,
 Rohan Mahy,
+Takahiko Kawasaki,
 Timo Glastra
 and
 Torsten Lodderstedt
@@ -1969,6 +1970,10 @@ CBOR encoding:
 {:numbered="false"}
 
 \[\[ To be removed from the final specification \]\]
+
+-15
+
+* fix typos
 
 -14
 
