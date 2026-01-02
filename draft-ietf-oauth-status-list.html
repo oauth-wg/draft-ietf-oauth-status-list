@@ -1298,7 +1298,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.12.2.1.1"><a href="#section-12.1" class="auto internal xref">12.1</a>.  <a href="#name-observability-of-issuers" class="internal xref">Observability of Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-issuer-tracking-of-referenc" class="internal xref">Issuer Tracking of Reference Tokens</a></p>
+                <p id="section-toc.1-1.12.2.2.1"><a href="#section-12.2" class="auto internal xref">12.2</a>.  <a href="#name-issuer-tracking-of-referenc" class="internal xref">Issuer Tracking of Referenced Tokens</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.3">
                 <p id="section-toc.1-1.12.2.3.1"><a href="#section-12.3" class="auto internal xref">12.3</a>.  <a href="#name-observability-of-relying-pa" class="internal xref">Observability of Relying Parties</a></p>
@@ -2466,7 +2466,7 @@ lWfsLYcnQpgT0Ok9LQpfkX45WNRQydijug
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-validation-rules" class="section-name selfRef">Validation Rules</a>
         </h3>
 <p id="section-8.3-1">Upon receiving a Referenced Token, a Relying Party <span class="bcp14">MUST</span> first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) <span class="bcp14">MUST</span> precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
-<p id="section-8.3-2">If this validation is not successful, the Referenced Token <span class="bcp14">MUST</span> be rejected. If the validation was successful, the Relying Party <span class="bcp14">MUST</span> perform the following validation steps to evaluate the status of the reference token:<a href="#section-8.3-2" class="pilcrow">¶</a></p>
+<p id="section-8.3-2">If this validation is not successful, the Referenced Token <span class="bcp14">MUST</span> be rejected. If the validation was successful, the Relying Party <span class="bcp14">MUST</span> perform the following validation steps to evaluate the status of the Referenced Token:<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-8.3-3">
 <li id="section-8.3-3.1">
             <p id="section-8.3-3.1.1">Check for the existence of a <code>status</code> claim, check for the existence of a <code>status_list</code> claim within the <code>status</code> claim and validate that the content of <code>status_list</code> adheres to the rules defined in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> for JOSE-based Referenced Tokens and <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a> for COSE-based Referenced Tokens. Other formats of Referenced Tokens may define other encoding of the URI and index.<a href="#section-8.3-3.1.1" class="pilcrow">¶</a></p>
@@ -2520,7 +2520,7 @@ lWfsLYcnQpgT0Ok9LQpfkX45WNRQydijug
         <h3 id="name-historical-resolution">
 <a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-historical-resolution" class="section-name selfRef">Historical resolution</a>
         </h3>
-<p id="section-8.4-1">By default, the status mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the <code>iat</code> (issued at) and <code>exp</code> (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is desired, this can be achieved by extending with a timestamp the request for the Status List Token as defined in <a href="#status-list-request" class="auto internal xref">Section 8.1</a>. This feature has additional privacy implications as described in <a href="#privacy-historical" class="auto internal xref">Section 12.7</a>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-1">By default, the status mechanism defined in this specification only conveys information about the state of Referenced Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the <code>iat</code> (issued at) and <code>exp</code> (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is desired, this can be achieved by extending with a timestamp the request for the Status List Token as defined in <a href="#status-list-request" class="auto internal xref">Section 8.1</a>. This feature has additional privacy implications as described in <a href="#privacy-historical" class="auto internal xref">Section 12.7</a>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.4-2">To obtain the Status List Token, the Relying Party <span class="bcp14">MUST</span> send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter <code>time</code> and its value being a unix timestamp. The response for a valid request <span class="bcp14">SHOULD</span> contain a Status List Token that was valid for that specified time or an error.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
 <p id="section-8.4-3">If the Server does not support the additional query parameter, it <span class="bcp14">SHOULD</span> return a status code of 501 (Not Implemented) or if the requested time is not supported it <span class="bcp14">SHOULD</span> return a status code of 406 (Not Acceptable). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network) that ignores query parameters, which would result in the client requesting a historical status list but receiving the current status list. Thus, the client <span class="bcp14">MUST</span> reject a response unless the requested timestamp is within the valid time of the returned token signaled via iat (6 for CWT) and exp (4 for CWT).<a href="#section-8.4-3" class="pilcrow">¶</a></p>
 <p id="section-8.4-4">The following is a non-normative example of a GET request using the <code>time</code> query parameter:<a href="#section-8.4-4" class="pilcrow">¶</a></p>
@@ -2554,7 +2554,7 @@ lWfsLYcnQpgT0Ok9LQpfkX45WNRQydijug
       <h2 id="name-status-list-aggregation">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-status-list-aggregation" class="section-name selfRef">Status List Aggregation</a>
       </h2>
-<p id="section-9-1">Status List Aggregation is an optional mechanism offered by the Issuer to publish a list of one or more Status List Tokens URIs, allowing a Relying Party to fetch Status List Tokens provided by this Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a Reference Token for a period of time.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">Status List Aggregation is an optional mechanism offered by the Issuer to publish a list of one or more Status List Tokens URIs, allowing a Relying Party to fetch Status List Tokens provided by this Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a Referenced Token for a period of time.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <p id="section-9-2">If a Relying Party encounters an error while validating one of the Status List Tokens returned from the Status List Aggregation endpoint, it <span class="bcp14">SHOULD</span> continue processing the other Status List Tokens.<a href="#section-9-2" class="pilcrow">¶</a></p>
 <p id="section-9-3">There are two options for a Relying Party to retrieve the Status List Aggregation.
 An Issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href="#section-9-3" class="pilcrow">¶</a></p>
@@ -2787,10 +2787,10 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         </ul>
 </section>
 </div>
-<div id="issuer-tracking-of-reference-tokens">
+<div id="issuer-tracking-of-referenced-tokens">
 <section id="section-12.2">
         <h3 id="name-issuer-tracking-of-referenc">
-<a href="#section-12.2" class="section-number selfRef">12.2. </a><a href="#name-issuer-tracking-of-referenc" class="section-name selfRef">Issuer Tracking of Reference Tokens</a>
+<a href="#section-12.2" class="section-number selfRef">12.2. </a><a href="#name-issuer-tracking-of-referenc" class="section-name selfRef">Issuer Tracking of Referenced Tokens</a>
         </h3>
 <p id="section-12.2-1">An Issuer could maliciously or accidentally bypass the privacy benefits of the herd privacy by either:<a href="#section-12.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2798,10 +2798,10 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
             <p id="section-12.2-2.1.1">Generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests.<a href="#section-12.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-12.2-2.2">
-            <p id="section-12.2-2.2.1">Encoding a unique URI in each Reference Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.<a href="#section-12.2-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-12.2-2.2.1">Encoding a unique URI in each Referenced Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.<a href="#section-12.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-12.2-3">This malicious behavior can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Reference Tokens being verified.<a href="#section-12.2-3" class="pilcrow">¶</a></p>
+<p id="section-12.2-3">This malicious behavior can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Referenced Tokens being verified.<a href="#section-12.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-relying-party">
@@ -2823,7 +2823,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         <h3 id="name-observability-of-outsiders">
 <a href="#section-12.4" class="section-number selfRef">12.4. </a><a href="#name-observability-of-outsiders" class="section-name selfRef">Observability of Outsiders</a>
         </h3>
-<p id="section-12.4-1">Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and its related business, e.g. number of customers or clients. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
+<p id="section-12.4-1">Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and its related business, e.g. number of customers or clients. This data may allow inferences on the total number of issued Referenced Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.<a href="#section-12.4-1" class="pilcrow">¶</a></p>
 <p id="section-12.4-2">This behaviour could be mitigated by:<a href="#section-12.4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12.4-3.1">
@@ -4678,7 +4678,10 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <p id="appendix-D-2">-15<a href="#appendix-D-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-3.1">
-          <p id="appendix-D-3.1.1">fix typos<a href="#appendix-D-3.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.1.1">fix typos in referenced token<a href="#appendix-D-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.2">
+          <p id="appendix-D-3.2.1">fix typos<a href="#appendix-D-3.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-4">-14<a href="#appendix-D-4" class="pilcrow">¶</a></p>
@@ -4858,7 +4861,7 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
           <p id="appendix-D-19.5.1">editorial changes on terminology and Referenced Tokens<a href="#appendix-D-19.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-19.6">
-          <p id="appendix-D-19.6.1">clarify privacy consideration around one time use reference tokens<a href="#appendix-D-19.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-19.6.1">clarify privacy consideration around one time use referenced tokens<a href="#appendix-D-19.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-19.7">
           <p id="appendix-D-19.7.1">explain the Status List Token size dependencies<a href="#appendix-D-19.7.1" class="pilcrow">¶</a></p>
