@@ -1973,6 +1973,7 @@ CBOR encoding:
 
 -15
 
+* fix typos in referenced token
 * fix typos
 
 -14
