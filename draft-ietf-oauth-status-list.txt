@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 13 June 2026                                    Bundesdruckerei
+Expires: 6 July 2026                                     Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                        10 December 2025
+                                                          2 January 2026
 
 
                         Token Status List (TSL)
@@ -55,11 +55,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 June 2026.
+   This Internet-Draft will expire on 6 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -285,7 +285,7 @@ Table of Contents
 
    This specification seeks to find a balance between scalability,
    security and privacy by representing statuses as individual bits,
-   packing the them into an array, and compressing the resulting binary
+   packing them into an array, and compressing the resulting binary
    data.  Thereby, a Status List may contain statuses of many thousands
    or millions Referenced Tokens while remaining as small as possible.
    Placing a large number of Referenced Tokens into the same list also
@@ -574,7 +574,7 @@ Table of Contents
    StatusList = {
        bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token
        lst: bstr, ; Byte string that contains the Status List
-       ? aggregation_uri: tstr, ; link to the Status List Aggregation
+       ? aggregation_uri: tstr ; link to the Status List Aggregation
    }
 
    The following example illustrates the CBOR representation of the
@@ -1110,8 +1110,8 @@ d2                              # tag(18)
    This document creates a registry in Section 14.5 that includes the
    most common Status Type values.  Applications SHOULD use registered
    values for statuses if they have the correct semantics.  Additional
-   values may defined for particular use cases.  Status Types described
-   by this document comprise:
+   values may be defined for particular use cases.  Status Types
+   described by this document comprise:
 
    *  0x00 - "VALID" - The status of the Referenced Token is valid,
       correct or legal.
@@ -1136,7 +1136,7 @@ d2                              # tag(18)
    The fetching, processing and verifying of a Status List Token may be
    done by either the Holder or the Relying Party.  The following
    section is described from the role of the Relying Party, however the
-   same rules apply for the Holder.
+   same rules apply to the Holder.
 
 8.1.  Status List Request
 
@@ -1414,10 +1414,10 @@ d2                              # tag(18)
       linking to Status List Tokens.
 
    The Status List Aggregation URI provides a list of Status List Token
-   URIs.  This aggregation in JSON and the media type return MUST be
-   application/json.  A Relying Party can iterate through this list and
-   fetch all Status List Tokens before encountering the specific URI in
-   a Referenced Token.
+   URIs.  This aggregation is in JSON and the returned media type MUST
+   be application/json.  A Relying Party can iterate through this list
+   and fetch all Status List Tokens before encountering the specific URI
+   in a Referenced Token.
 
    The following is a non-normative example for media type application/
    json:
@@ -1439,13 +1439,13 @@ d2                              # tag(18)
    Usage (KU) extension, which indicates the set of basic cryptographic
    operations for which the certified key may be used.  A certificate's
    issuer explicitly delegates Status List Token signing authority by
-   issuing a X.509 certificate containing the KeyPurposeId defined below
-   in the extended key usage extension.  Other specifications MAY choose
-   to re-use this OID for other status mechanisms under the condition
-   that they are registered in the "JWT Status Mechanisms" or "CWT
-   Status Mechanisms" registries.
+   issuing an X.509 certificate containing the KeyPurposeId defined
+   below in the extended key usage extension.  Other specifications MAY
+   choose to re-use this OID for other status mechanisms under the
+   condition that they are registered in the "JWT Status Mechanisms" or
+   "CWT Status Mechanisms" registries.
 
-   The following OID is defined for usage in the EKU extension
+   The following OID is defined for usage in the EKU extension:
 
      id-kp  OBJECT IDENTIFIER  ::=
           { iso(1) identified-organization(3) dod(6) internet(1)
@@ -1455,8 +1455,8 @@ d2                              # tag(18)
 
 11.  Security Considerations
 
-   Status List Tokens as defined in Section 5 only exists in
-   cryptographically secured containers which allows checking the
+   Status List Tokens as defined in Section 5 only exist in
+   cryptographically secured containers which allow checking the
    integrity and origin without relying on other factors such as
    transport security or web PKI.
 
@@ -1705,7 +1705,7 @@ d2                              # tag(18)
    time-use Referenced Tokens, enabling Holders to use in a single
    interaction with a Relying Party before discarding.  See Section 13.2
    to avoid further correlatable information by the values of uri and
-   index, Status Issuers are RECOMMENDED to:
+   idx, Status Issuers are RECOMMENDED to:
 
    *  choose non-sequential, pseudo-random or random indices
 
@@ -1716,7 +1716,7 @@ d2                              # tag(18)
 
 12.5.2.  Colluding Status Issuer and Relying Party
 
-   A Status Issuer and a Relying Party Issuer may link two transaction
+   A Status Issuer and a Relying Party Issuer may link two transactions
    involving the same Referenced Tokens by comparing the status claims
    of the Referenced Token and therefore determine that they have
    interacted with the same Holder.  It is therefore recommended to use
@@ -1810,10 +1810,10 @@ d2                              # tag(18)
    value can not be distinguished from a valid Referenced Token.
 
    The Status Issuer is RECOMMENDED to prevent double allocation, i.e.
-   re-using the same uri and index for multiple Referenced Tokens (since
-   uri and index form a unique identifier that might be used for
-   tracking, see Section 12 for more details).  The Status Issuer MUST
-   prevent any unintended double allocation.
+   re-using the same uri and idx for multiple Referenced Tokens (since
+   uri and idx form a unique identifier that might be used for tracking,
+   see Section 12 for more details).  The Status Issuer MUST prevent any
+   unintended double allocation.
 
 13.4.  Status List Size
 
@@ -1849,7 +1849,7 @@ d2                              # tag(18)
 
    If the roles of the Issuer of the Referenced Token and the Status
    Issuer are performed by different entities, this may allow for use
-   case that require revocations of Referenced Tokens to be managed by a
+   cases that require revocation of Referenced Tokens to be managed by
    different entities, e.g. for regulatory or privacy reasons.  In this
    scenario both parties must align on:
 
@@ -2451,7 +2451,7 @@ d2                              # tag(18)
    Hannes Tschofenig, Kristina Yasuda, Markus Kreusch, Martijn Haring,
    Michael B.  Jones, Micha Kraus, Michael Schwartz, Mike Prorock, Mirko
    Mollik, Oliver Terbu, Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy,
-   Timo Glastra and Torsten Lodderstedt
+   Takahiko Kawasaki, Timo Glastra and Torsten Lodderstedt
 
    for their valuable contributions, discussions and feedback to this
    specification.
@@ -3240,6 +3240,10 @@ C.4.  8 bit Status List
 Document History
 
    [[ To be removed from the final specification ]]
+
+   -15
+
+   *  fix typos
 
    -14
 
