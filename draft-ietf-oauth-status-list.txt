@@ -17,11 +17,11 @@ Expires: 6 July 2026                                     Bundesdruckerei
 Abstract
 
    This specification defines a status mechanism called Token Status
-   List (abbreviated TSL), data structures and processing rules for
-   representing the status of tokens secured by JSON Object Signing and
-   Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such
-   as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc.  It also defines an
-   extension point and a registry for future status mechanisms.
+   List (TSL), data structures and processing rules for representing the
+   status of tokens secured by JSON Object Signing and Encryption (JOSE)
+   or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC,
+   CBOR Web Token, and ISO mdoc.  It also defines an extension point and
+   a registry for future status mechanisms.
 
 About This Document
 
@@ -100,7 +100,7 @@ Table of Contents
      8.1.  Status List Request
      8.2.  Status List Response
      8.3.  Validation Rules
-     8.4.  Historical resolution
+     8.4.  Historical Resolution
    9.  Status List Aggregation
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
@@ -124,7 +124,7 @@ Table of Contents
      12.6.  External Status Provider for Privacy
      12.7.  Historical Resolution
      12.8.  Status Types
-   13. Implementation Considerations
+   13. Operational Considerations
      13.1.  Token Lifecycle
      13.2.  Linkability Mitigation
      13.3.  Default Values and Double Allocation
@@ -157,16 +157,16 @@ Table of Contents
      16.1.  Normative References
      16.2.  Informative References
    Appendix A.  ASN.1 Module
-   Appendix B.  Size comparison
+   Appendix B.  Size Comparison
      Size of Status Lists for varying amount of entries and revocation
            rates
-     Size of compressed array of UUIDv4 (128 bit UUIDs) for varying
+     Size of compressed array of UUIDv4 (128-bit UUIDs) for varying
            amount of entries and revocation rates
    Appendix C.  Test vectors for Status List encoding
-     C.1.  1 bit Status List
-     C.2.  2 bit Status List
-     C.3.  4 bit Status List
-     C.4.  8 bit Status List
+     C.1.  1-bit Status List
+     C.2.  2-bit Status List
+     C.3.  4-bit Status List
+     C.4.  8-bit Status List
    Document History
    Authors' Addresses
 
@@ -253,7 +253,7 @@ Table of Contents
 1.1.  Example Use Cases
 
    An example of the usage of a Status List is to manage the statuses of
-   issued access tokens as defined in section 1.4 of [RFC6749].  Token
+   issued access tokens as defined in Section 1.4 of [RFC6749].  Token
    Introspection [RFC7662] provides a method to determine the status of
    an issued access token, but it necessitates the party attempting to
    validate the state of access tokens to directly contact the Issuer of
@@ -398,11 +398,11 @@ Table of Contents
 4.  Status List
 
    A Status List is a data structure that contains the statuses of many
-   Referenced Tokens represented by one or multiple bits.  The first
-   section (Section 4.1) describes how to construct a compressed byte
-   array that is the base component for the Status List data structure.
-   The second and third sections describe how to encode such a Status
-   List in JSON and CBOR representations.
+   Referenced Tokens represented by one or multiple bits.  Section 4.1
+   describes how to construct a compressed byte array that is the base
+   component for the Status List data structure.  The second and third
+   sections describe how to encode such a Status List in JSON and CBOR
+   representations.
 
 4.1.  Compressed Byte Array
 
@@ -412,10 +412,10 @@ Table of Contents
    1.  The Status Issuer MUST define a number of bits (bits) of either
        1,2,4 or 8, that represents the amount of bits used to describe
        the status of each Referenced Token within this Status List.
-       Therefore up to 2,4,16 or 256 statuses for a Referenced Token are
-       possible, depending on the bit size.  This limitation is intended
-       to limit bit manipulation necessary to a single byte for every
-       operation and thus keeping implementations simpler and less
+       Therefore, up to 2,4,16 or 256 statuses for a Referenced Token
+       are possible, depending on the bit size.  This limitation is
+       intended to limit bit manipulation necessary to a single byte for
+       every operation and thus keeping implementations simpler and less
        error-prone.
 
    2.  The Status Issuer creates a byte array of size = amount of
@@ -507,12 +507,12 @@ Table of Contents
    This section defines the data structure for a JSON-encoded Status
    List:
 
-   *  The StatusList structure is a JSON Object contains the following
-      members:
+   *  The StatusList structure is a JSON Object that contains the
+      following members:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the compressed byte array (lst).  The
-         allowed values for bits are 1,2,4 and 8.
+         allowed values for bits are 1, 2, 4, and 8.
 
       -  lst: REQUIRED.  JSON String that contains the status values for
          all the Referenced Tokens it conveys statuses for.  The value
@@ -521,8 +521,7 @@ Table of Contents
 
       -  aggregation_uri: OPTIONAL.  JSON String that contains a URI to
          retrieve the Status List Aggregation for this type of
-         Referenced Token or Issuer.  See section Section 9 for further
-         details.
+         Referenced Token or Issuer.  See Section 9 for further details.
 
    The following example illustrates the JSON representation of the
    Status List with bits=1 from the examples above:
@@ -544,7 +543,7 @@ Table of Contents
      "lst": "eNo76fITAAPfAgc"
    }
 
-   See section Appendix C for more test vectors.
+   See Appendix C for more test vectors.
 
 4.3.  Status List in CBOR Format
 
@@ -557,7 +556,7 @@ Table of Contents
       -  bits: REQUIRED.  CBOR Unsigned integer (major type 0) that
          contains the number of bits per Referenced Token in the
          compressed byte array (lst).  The allowed values for bits are
-         1, 2, 4 and 8.
+         1, 2, 4, and 8.
 
       -  lst: REQUIRED.  CBOR Byte string (major type 2) that contains
          the status values for all the Referenced Tokens it conveys
@@ -566,10 +565,11 @@ Table of Contents
 
       -  aggregation_uri: OPTIONAL.  CBOR Text string (major type 3)
          that contains a URI to retrieve the Status List Aggregation for
-         this type of Referenced Token.  See section Section 9 for
-         further detail.
+         this type of Referenced Token.  See Section 9 for further
+         detail.
 
-   The following is the CDDL definition of the StatusList structure:
+   The following is the CDDL [RFC8610] definition of the StatusList
+   structure:
 
    StatusList = {
        bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token
@@ -595,7 +595,7 @@ Table of Contents
      4a                            #   bytes(10)
        78dadbb918000217015d        #     "xÚÛ¹\x18\x00\x02\x17\x01]"
 
-   See section Appendix C for more test vectors.
+   See Appendix C for more test vectors.
 
 5.  Status List Token
 
@@ -822,7 +822,7 @@ Table of Contents
      }
    }
 
-   SD-JWT-based Verifiable Credentials [SD-JWT.VC] section 3.2.2.2.
+   SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of [SD-JWT.VC])
    introduces the usage of the status mechanism defined in this section.
    Therefore, an SD-JWT VC can be considered a Referenced Token.  The
    following is a non-normative example of a Referenced Token in SD-JWT
@@ -1191,7 +1191,7 @@ d2                              # tag(18)
    follow the rules of Section 5.2.
 
    The body of such an HTTP response contains the raw Status List Token,
-   that means the binary encoding as defined in section 9.2.1 of
+   that means the binary encoding as defined in Section 9.2.1 of
    [RFC8392] for a Status List Token in CWT format and the JWS Compact
    Serialization form for a Status List Token in JWT format.  Note that
    while the examples for Status List Tokens in CWT format in this
@@ -1249,7 +1249,7 @@ d2                              # tag(18)
    3.  Validate the Status List Token:
 
        a.  Validate the Status List Token by following the rules defined
-           in section 7.2 of [RFC7519] for JWTs and section 7.2 of
+           in Section 7.2 of [RFC7519] for JWTs and Section 7.2 of
            [RFC8392] for CWTs.  This step might require the resolution
            of a public key as described in Section 11.3.
 
@@ -1290,7 +1290,7 @@ d2                              # tag(18)
    Referenced Token can be made and the Referenced Token SHOULD be
    rejected.
 
-8.4.  Historical resolution
+8.4.  Historical Resolution
 
    By default, the status mechanism defined in this specification only
    conveys information about the state of Referenced Tokens at the time
@@ -1772,7 +1772,7 @@ d2                              # tag(18)
    possibilities before doing so and evaluate if revocation and re-
    issuance might a better fit for their use-case.
 
-13.  Implementation Considerations
+13.  Operational Considerations
 
 13.1.  Token Lifecycle
 
@@ -1818,7 +1818,7 @@ d2                              # tag(18)
 13.4.  Status List Size
 
    The storage and transmission size of the Status Issuer's Status List
-   Tokens depends on:
+   Tokens depend on:
 
    *  the size of the Status List, i.e. the number of Referenced Tokens
 
@@ -2438,11 +2438,11 @@ d2                              # tag(18)
 
    IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD"
    in the "SMI Security for PKIX Extended Key Purpose" registry
-   (1.3.6.1.5.5.7.3), this OID is defined in section Section 10.
+   (1.3.6.1.5.5.7.3), this OID is defined in Section 10.
 
    IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD"
    in the "SMI Security for PKIX Module Identifier" registry
-   (1.3.6.1.5.5.7.0), this OID is defined in section Appendix A.
+   (1.3.6.1.5.5.7.0), this OID is defined in Appendix A.
 
 15.  Acknowledgments
 
@@ -2608,9 +2608,19 @@ d2                              # tag(18)
               DOI 10.17487/RFC8414, June 2018,
               <https://www.rfc-editor.org/rfc/rfc8414>.
 
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
+
    [RFC9458]  Thomson, M. and C. A. Wood, "Oblivious HTTP", RFC 9458,
               DOI 10.17487/RFC9458, January 2024,
               <https://www.rfc-editor.org/rfc/rfc9458>.
+
+   [RFC9562]  Davis, K., Peabody, B., and P. Leach, "Universally Unique
+              IDentifiers (UUIDs)", RFC 9562, DOI 10.17487/RFC9562, May
+              2024, <https://www.rfc-editor.org/rfc/rfc9562>.
 
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
@@ -2657,20 +2667,20 @@ Appendix A.  ASN.1 Module
      END
    <CODE ENDS>
 
-Appendix B.  Size comparison
+Appendix B.  Size Comparison
 
    The following tables show a size comparison for a Status List
    (compressed byte array as defined in Section 4.1) and a compressed
-   Byte Array of UUIDs (as an approximation to the list of IDs of
-   Referenced Tokens in a Certificate Revocation List).  Readers must be
-   aware that these are not sizes for complete Status List Tokens in
+   Byte Array of UUIDs [RFC9562] (as an approximation to the list of IDs
+   of Referenced Tokens in a Certificate Revocation List).  Readers must
+   be aware that these are not sizes for complete Status List Tokens in
    JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't
-   contain metadata, certificates and signatures.
+   contain metadata, certificates, and signatures.
 
    If no further metadata is provided in Status List Tokens or CRLs,
    then the size of Status Lists or arrays of Certificate ids
    (represented as UUIDs) will be the main factors deciding on the
-   overall size of a Status List Token or CRL respectively.
+   overall size of a Status List Token or CRL, respectively.
 
 Size of Status Lists for varying amount of entries and revocation rates
 
@@ -2693,12 +2703,11 @@ Size of Status Lists for varying amount of entries and revocation rates
     Table 1: Status List Size examples for varying amount of entries and
                               revocation rates
 
-Size of compressed array of UUIDv4 (128 bit UUIDs) for varying amount of
+Size of compressed array of UUIDv4 (128-bit UUIDs) for varying amount of
 entries and revocation rates
 
-   This is a simple approximation of a Certificate Revocation List using
-   an array of UUIDs without any additional metadata (128 bit UUID per
-   revoked entry).
+   This is a simple approximation of a CRL using an array of UUIDs
+   without any additional metadata (128-bit UUID per revoked entry).
 
    +====+=====+======+=====+=====+====+=====+=====+=====+=====+=======+
    |Size|0.01%|0.1%  |1%   |2%   |5%  |10%  |25%  |50%  |75%  | 100%  |
@@ -2716,7 +2725,7 @@ entries and revocation rates
    |    |KB   |      |MB   |MB   |MB  |MB   |MB   |MB   |GB   | GB    |
    +----+-----+------+-----+-----+----+-----+-----+-----+-----+-------+
 
-      Table 2: Size examples for 128 bit UUIDs for varying amount of
+      Table 2: Size examples for 128-bit UUIDs for varying amount of
                        entries and revocation rates
 
 Appendix C.  Test vectors for Status List encoding
@@ -2729,9 +2738,9 @@ Appendix C.  Test vectors for Status List encoding
    assumed to be 0 (VALID).  All examples are initialized with a size of
    2^20 entries.
 
-C.1.  1 bit Status List
+C.1.  1-bit Status List
 
-   The following example uses a 1 bit Status List (2 possible values):
+   The following example uses a 1-bit Status List (2 possible values):
 
    status[0] = 0b1
    status[1993] = 0b1
@@ -2765,9 +2774,9 @@ C.1.  1 bit Status List
    000000000000000000ecaa4b000000000000000000000000000000009b0b09000000
    00000000000038de9400000000000000002a30cc010000000080642f0bd8011b
 
-C.2.  2 bit Status List
+C.2.  2-bit Status List
 
-   The following example uses a 2 bit Status List (4 possible values):
+   The following example uses a 2-bit Status List (4 possible values):
 
    status[0] = 0b01
    status[1993] = 0b10
@@ -2807,9 +2816,9 @@ C.2.  2 bit Status List
    01000000000000000000000000000000000000c07d4b020000000000000000000000
    00000000a8614a0000000000000000000000406a1fcd60010c
 
-C.3.  4 bit Status List
+C.3.  4-bit Status List
 
-   The following example uses a 4 bit Status List (16 possible values):
+   The following example uses a 4-bit Status List (16 possible values):
 
    status[0] = 0b0001
    status[1993] = 0b0010
@@ -2867,9 +2876,9 @@ C.3.  4 bit Status List
    00000000000000000000000000000071dc0a0080ba55010000000000000000000000
    c0cf3daf03000000000000000008ec03dc4c04c0
 
-C.4.  8 bit Status List
+C.4.  8-bit Status List
 
-   The following example uses a 8 bit Status List (256 possible values):
+   The following example uses a 8-bit Status List (256 possible values):
 
    status[233478] = 0b00000000
    status[52451] = 0b00000001

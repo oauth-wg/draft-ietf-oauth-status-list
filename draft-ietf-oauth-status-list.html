@@ -9,7 +9,7 @@
 <meta content="Paul Bastian" name="author">
 <meta content="Christian Bormann" name="author">
 <meta content="
-       This specification defines a status mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
+       This specification defines a status mechanism called Token Status List (TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token, and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
@@ -1087,7 +1087,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Token Status List (TSL)</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This specification defines a status mechanism called Token Status List (abbreviated TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This specification defines a status mechanism called Token Status List (TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token, and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1247,7 +1247,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-validation-rules" class="internal xref">Validation Rules</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
-                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-historical-resolution" class="internal xref">Historical resolution</a></p>
+                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-historical-resolution" class="internal xref">Historical Resolution</a></p>
 </li>
             </ul>
 </li>
@@ -1329,7 +1329,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
                 <p id="section-toc.1-1.13.2.1.1"><a href="#section-13.1" class="auto internal xref">13.1</a>.  <a href="#name-token-lifecycle" class="internal xref">Token Lifecycle</a></p>
@@ -1444,13 +1444,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.17.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-asn1-module" class="internal xref">ASN.1 Module</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18">
-            <p id="section-toc.1-1.18.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-size-comparison" class="internal xref">Size comparison</a></p>
+            <p id="section-toc.1-1.18.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-size-comparison" class="internal xref">Size Comparison</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.1">
                 <p id="section-toc.1-1.18.2.1.1"><a href="#appendix-B.1" class="auto internal xref"></a><a href="#name-size-of-status-lists-for-va" class="internal xref">Size of Status Lists for varying amount of entries and revocation rates</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.18.2.2">
-                <p id="section-toc.1-1.18.2.2.1"><a href="#appendix-B.2" class="auto internal xref"></a><a href="#name-size-of-compressed-array-of" class="internal xref">Size of compressed array of UUIDv4 (128 bit UUIDs) for varying amount of entries and revocation rates</a></p>
+                <p id="section-toc.1-1.18.2.2.1"><a href="#appendix-B.2" class="auto internal xref"></a><a href="#name-size-of-compressed-array-of" class="internal xref">Size of compressed array of UUIDv4 (128-bit UUIDs) for varying amount of entries and revocation rates</a></p>
 </li>
             </ul>
 </li>
@@ -1458,16 +1458,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.19.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-test-vectors-for-status-lis" class="internal xref">Test vectors for Status List encoding</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.19.2.1">
-                <p id="section-toc.1-1.19.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-1-bit-status-list" class="internal xref">1 bit Status List</a></p>
+                <p id="section-toc.1-1.19.2.1.1"><a href="#appendix-C.1" class="auto internal xref">C.1</a>.  <a href="#name-1-bit-status-list" class="internal xref">1-bit Status List</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.19.2.2">
-                <p id="section-toc.1-1.19.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-2-bit-status-list" class="internal xref">2 bit Status List</a></p>
+                <p id="section-toc.1-1.19.2.2.1"><a href="#appendix-C.2" class="auto internal xref">C.2</a>.  <a href="#name-2-bit-status-list" class="internal xref">2-bit Status List</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.19.2.3">
-                <p id="section-toc.1-1.19.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-4-bit-status-list" class="internal xref">4 bit Status List</a></p>
+                <p id="section-toc.1-1.19.2.3.1"><a href="#appendix-C.3" class="auto internal xref">C.3</a>.  <a href="#name-4-bit-status-list" class="internal xref">4-bit Status List</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.19.2.4">
-                <p id="section-toc.1-1.19.2.4.1"><a href="#appendix-C.4" class="auto internal xref">C.4</a>.  <a href="#name-8-bit-status-list" class="internal xref">8 bit Status List</a></p>
+                <p id="section-toc.1-1.19.2.4.1"><a href="#appendix-C.4" class="auto internal xref">C.4</a>.  <a href="#name-8-bit-status-list" class="internal xref">8-bit Status List</a></p>
 </li>
             </ul>
 </li>
@@ -1533,7 +1533,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-example-use-cases">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-example-use-cases" class="section-name selfRef">Example Use Cases</a>
         </h3>
-<p id="section-1.1-1">An example of the usage of a Status List is to manage the statuses of issued access tokens as defined in section 1.4 of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> provides a method to determine the status of an issued access token, but it necessitates the party attempting to validate the state of access tokens to directly contact the Issuer of each token for validation. In contrast, the mechanism defined in this specification allows a party to retrieve the statuses for many tokens, reducing interactions with the Issuer substantially. This not only improves scalability but also enhances privacy by preventing the Issuer from gaining knowledge of access tokens being verified (herd anonymity).<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">An example of the usage of a Status List is to manage the statuses of issued access tokens as defined in <span><a href="https://rfc-editor.org/rfc/rfc6749#section-1.4" class="relref">Section 1.4</a> of [<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. Token Introspection <span>[<a href="#RFC7662" class="cite xref">RFC7662</a>]</span> provides a method to determine the status of an issued access token, but it necessitates the party attempting to validate the state of access tokens to directly contact the Issuer of each token for validation. In contrast, the mechanism defined in this specification allows a party to retrieve the statuses for many tokens, reducing interactions with the Issuer substantially. This not only improves scalability but also enhances privacy by preventing the Issuer from gaining knowledge of access tokens being verified (herd anonymity).<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1663,7 +1663,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 <dt id="section-3-1.19">base64url:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.20">
-          <p id="section-3-1.20.1">Denotes the URL-safe base64 encoding with all trailing '=' characters omitted as defined in Section 2 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.20.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.20.1">Denotes the URL-safe base64 encoding with all trailing '=' characters omitted as defined in <span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.20.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1674,7 +1674,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-status-list">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-status-list" class="section-name selfRef">Status List</a>
       </h2>
-<p id="section-4-1">A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. The <span><a href="#status-list-byte-array" class="internal xref">first section</a> (<a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a>)</span> describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third sections describe how to encode such a Status List in JSON and CBOR representations.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. <a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a> describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third sections describe how to encode such a Status List in JSON and CBOR representations.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="status-list-byte-array">
 <section id="section-4.1">
         <h3 id="name-compressed-byte-array">
@@ -1683,7 +1683,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-4.1-1">A compressed byte array containing the status information of the Referenced Token is composed by the following algorithm:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1-2">
 <li id="section-4.1-2.1">
-            <p id="section-4.1-2.1.1">The Status Issuer <span class="bcp14">MUST</span> define a number of bits (<code>bits</code>) of either 1,2,4 or 8, that represents the amount of bits used to describe the status of each Referenced Token within this Status List. Therefore up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error-prone.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.1.1">The Status Issuer <span class="bcp14">MUST</span> define a number of bits (<code>bits</code>) of either 1,2,4 or 8, that represents the amount of bits used to describe the status of each Referenced Token within this Status List. Therefore, up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error-prone.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-4.1-2.2">
             <p id="section-4.1-2.2.1">The Status Issuer creates a byte array of size = amount of Referenced Tokens * <code>bits</code> / 8 or greater. Depending on the <code>bits</code>, each byte in the array corresponds to 8/(<code>bits</code>) statuses (8,4,2 or 1).<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
@@ -1773,16 +1773,16 @@ byte value       0xC9               0x44               0xF9
 <p id="section-4.2-1">This section defines the data structure for a JSON-encoded Status List:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-2.1">
-            <p id="section-4.2-2.1.1">The <code>StatusList</code> structure is a JSON Object contains the following members:<a href="#section-4.2-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-2.1.1">The <code>StatusList</code> structure is a JSON Object that contains the following members:<a href="#section-4.2-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-2.1.2.1">
-                <p id="section-4.2-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. JSON Integer specifying the number of bits per Referenced Token in the compressed byte array (<code>lst</code>). The allowed values for <code>bits</code> are 1,2,4 and 8.<a href="#section-4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-4.2-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. JSON Integer specifying the number of bits per Referenced Token in the compressed byte array (<code>lst</code>). The allowed values for <code>bits</code> are 1, 2, 4, and 8.<a href="#section-4.2-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.2-2.1.2.2">
                 <p id="section-4.2-2.1.2.2.1"><code>lst</code>: <span class="bcp14">REQUIRED</span>. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value <span class="bcp14">MUST</span> be the base64url-encoded compressed byte array as specified in <a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a>.<a href="#section-4.2-2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.2-2.1.2.3">
-                <p id="section-4.2-2.1.2.3.1"><code>aggregation_uri</code>: <span class="bcp14">OPTIONAL</span>. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer. See section <a href="#aggregation" class="auto internal xref">Section 9</a> for further details.<a href="#section-4.2-2.1.2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-4.2-2.1.2.3.1"><code>aggregation_uri</code>: <span class="bcp14">OPTIONAL</span>. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer. See <a href="#aggregation" class="auto internal xref">Section 9</a> for further details.<a href="#section-4.2-2.1.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
@@ -1809,7 +1809,7 @@ encoded:
 }
 </pre><a href="#section-4.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-4.2-7">See section <a href="#test-vectors" class="auto internal xref">Appendix C</a> for more test vectors.<a href="#section-4.2-7" class="pilcrow">¶</a></p>
+<p id="section-4.2-7">See <a href="#test-vectors" class="auto internal xref">Appendix C</a> for more test vectors.<a href="#section-4.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="status-list-cbor">
@@ -1823,18 +1823,18 @@ encoded:
             <p id="section-4.3-2.1.1">The <code>StatusList</code> structure is a CBOR map (major type 5) and defines the following entries:<a href="#section-4.3-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.3-2.1.2.1">
-                <p id="section-4.3-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. CBOR Unsigned integer (major type 0) that contains the number of bits per Referenced Token in the compressed byte array (<code>lst</code>). The allowed values for <code>bits</code> are 1, 2, 4 and 8.<a href="#section-4.3-2.1.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3-2.1.2.1.1"><code>bits</code>: <span class="bcp14">REQUIRED</span>. CBOR Unsigned integer (major type 0) that contains the number of bits per Referenced Token in the compressed byte array (<code>lst</code>). The allowed values for <code>bits</code> are 1, 2, 4, and 8.<a href="#section-4.3-2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3-2.1.2.2">
                 <p id="section-4.3-2.1.2.2.1"><code>lst</code>: <span class="bcp14">REQUIRED</span>. CBOR Byte string (major type 2) that contains the status values for all the Referenced Tokens it conveys statuses for. The value <span class="bcp14">MUST</span> be the compressed byte array as specified in <a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a>.<a href="#section-4.3-2.1.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3-2.1.2.3">
-                <p id="section-4.3-2.1.2.3.1"><code>aggregation_uri</code>: <span class="bcp14">OPTIONAL</span>. CBOR Text string (major type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See section <a href="#aggregation" class="auto internal xref">Section 9</a> for further detail.<a href="#section-4.3-2.1.2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3-2.1.2.3.1"><code>aggregation_uri</code>: <span class="bcp14">OPTIONAL</span>. CBOR Text string (major type 3) that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token. See <a href="#aggregation" class="auto internal xref">Section 9</a> for further detail.<a href="#section-4.3-2.1.2.3.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </li>
         </ul>
-<p id="section-4.3-3">The following is the CDDL definition of the <code>StatusList</code> structure:<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.3-3">The following is the CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> definition of the <code>StatusList</code> structure:<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <div class="lang-cddl sourcecode" id="section-4.3-4">
 <pre>
 StatusList = {
@@ -1865,7 +1865,7 @@ a2                              # map(2)
     78dadbb918000217015d        #     "xÚÛ¹\x18\x00\x02\x17\x01]"
 </pre><a href="#section-4.3-8" class="pilcrow">¶</a>
 </div>
-<p id="section-4.3-9">See section <a href="#test-vectors" class="auto internal xref">Appendix C</a> for more test vectors.<a href="#section-4.3-9" class="pilcrow">¶</a></p>
+<p id="section-4.3-9">See <a href="#test-vectors" class="auto internal xref">Appendix C</a> for more test vectors.<a href="#section-4.3-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2043,7 +2043,7 @@ cdd3f702543c040f1c6947e6d07b0092948ffb6d33ccff503c6938daecbc57d3de5c
         <h3 id="name-status-claim">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-status-claim" class="section-name selfRef">Status Claim</a>
         </h3>
-<p id="section-6.1-1">By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. This specification defines one possible member of the "status" object, called "status_list". Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in Section 3.1 of <span>[<a href="#RFC7800" class="cite xref">RFC7800</a>]</span> in which different authenticity confirmation methods can be included.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">By including a "status" claim in a Referenced Token, the Issuer is referencing a mechanism to retrieve status information about this Referenced Token. This specification defines one possible member of the "status" object, called "status_list". Other members of the "status" object may be defined by other specifications. This is analogous to "cnf" claim in <span><a href="https://rfc-editor.org/rfc/rfc7800#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC7800" class="cite xref">RFC7800</a>]</span> in which different authenticity confirmation methods can be included.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="referenced-token-jose">
@@ -2073,7 +2073,7 @@ cdd3f702543c040f1c6947e6d07b0092948ffb6d33ccff503c6938daecbc57d3de5c
         </ul>
 <p id="section-6.2-4">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
 <p id="section-6.2-5">The following is a non-normative example of a decoded header and payload of a Referenced Token:<a href="#section-6.2-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-ascii-art art-text artwork" id="section-6.2-6">
+<div class="lang-json sourcecode" id="section-6.2-6">
 <pre>
 {
   "alg": "ES256",
@@ -2090,7 +2090,7 @@ cdd3f702543c040f1c6947e6d07b0092948ffb6d33ccff503c6938daecbc57d3de5c
 }
 </pre><a href="#section-6.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2-7">SD-JWT-based Verifiable Credentials <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span> section 3.2.2.2. introduces the usage of the status mechanism defined in this section. Therefore, an SD-JWT VC can be considered a Referenced Token. The following is a non-normative example of a Referenced Token in SD-JWT VC serialized form as received from an Issuer:<a href="#section-6.2-7" class="pilcrow">¶</a></p>
+<p id="section-6.2-7">SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>)  introduces the usage of the status mechanism defined in this section. Therefore, an SD-JWT VC can be considered a Referenced Token. The following is a non-normative example of a Referenced Token in SD-JWT VC serialized form as received from an Issuer:<a href="#section-6.2-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-6.2-8">
 <pre>
 eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
@@ -2113,7 +2113,7 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 </pre><a href="#section-6.2-8" class="pilcrow">¶</a>
 </div>
 <p id="section-6.2-9">The resulting payload of the example above:<a href="#section-6.2-9" class="pilcrow">¶</a></p>
-<div class="alignLeft art-ascii-art art-text artwork" id="section-6.2-10">
+<div class="lang-json sourcecode" id="section-6.2-10">
 <pre>
 {
   "_sd": [
@@ -2441,7 +2441,7 @@ Accept: application/statuslist+jwt
         </ul>
 <p id="section-8.2-5">In the case of "application/statuslist+jwt", the response <span class="bcp14">MUST</span> be of type JWT and follow the rules of <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.
 In the case of "application/statuslist+cwt", the response <span class="bcp14">MUST</span> be of type CWT and follow the rules of <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a>.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
-<p id="section-8.2-6">The body of such an HTTP response contains the raw Status List Token, that means the binary encoding as defined in section 9.2.1 of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> for a Status List Token in CWT format and the JWS Compact Serialization form for a Status List Token in JWT format. Note that while the examples for Status List Tokens in CWT format in this document are provided in hex encoding, this is done purely for readability; CWT format response bodies are "in binary".<a href="#section-8.2-6" class="pilcrow">¶</a></p>
+<p id="section-8.2-6">The body of such an HTTP response contains the raw Status List Token, that means the binary encoding as defined in <span><a href="https://rfc-editor.org/rfc/rfc8392#section-9.2.1" class="relref">Section 9.2.1</a> of [<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> for a Status List Token in CWT format and the JWS Compact Serialization form for a Status List Token in JWT format. Note that while the examples for Status List Tokens in CWT format in this document are provided in hex encoding, this is done purely for readability; CWT format response bodies are "in binary".<a href="#section-8.2-6" class="pilcrow">¶</a></p>
 <p id="section-8.2-7">The HTTP response <span class="bcp14">SHOULD</span> use gzip Content-Encoding as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> for Status List Tokens in JWT format.<a href="#section-8.2-7" class="pilcrow">¶</a></p>
 <p id="section-8.2-8">If caching-related HTTP headers are present in the HTTP response, Relying Parties <span class="bcp14">MUST</span> prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.<a href="#section-8.2-8" class="pilcrow">¶</a></p>
 <p id="section-8.2-9">The following is a non-normative example of a response with a Status List Token with type <code>application/statuslist+jwt</code>:<a href="#section-8.2-9" class="pilcrow">¶</a></p>
@@ -2478,7 +2478,7 @@ lWfsLYcnQpgT0Ok9LQpfkX45WNRQydijug
             <p id="section-8.3-3.3.1">Validate the Status List Token:<a href="#section-8.3-3.3.1" class="pilcrow">¶</a></p>
 <ol start="1" type="a" class="normal type-a" id="section-8.3-3.3.2">
 <li id="section-8.3-3.3.2.1">
-                <p id="section-8.3-3.3.2.1.1">Validate the Status List Token by following the rules defined in section 7.2 of <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> for JWTs and section 7.2 of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> for CWTs. This step might require the resolution of a public key as described in <a href="#key-management" class="auto internal xref">Section 11.3</a>.<a href="#section-8.3-3.3.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-8.3-3.3.2.1.1">Validate the Status List Token by following the rules defined in <span><a href="https://rfc-editor.org/rfc/rfc7519#section-7.2" class="relref">Section 7.2</a> of [<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> for JWTs and <span><a href="https://rfc-editor.org/rfc/rfc8392#section-7.2" class="relref">Section 7.2</a> of [<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> for CWTs. This step might require the resolution of a public key as described in <a href="#key-management" class="auto internal xref">Section 11.3</a>.<a href="#section-8.3-3.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li id="section-8.3-3.3.2.2">
                 <p id="section-8.3-3.3.2.2.1">Check for the existence of the required claims as defined in <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a> and <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a> depending on the token type<a href="#section-8.3-3.3.2.2.1" class="pilcrow">¶</a></p>
@@ -2518,7 +2518,7 @@ lWfsLYcnQpgT0Ok9LQpfkX45WNRQydijug
 <div id="historical-resolution">
 <section id="section-8.4">
         <h3 id="name-historical-resolution">
-<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-historical-resolution" class="section-name selfRef">Historical resolution</a>
+<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-historical-resolution" class="section-name selfRef">Historical Resolution</a>
         </h3>
 <p id="section-8.4-1">By default, the status mechanism defined in this specification only conveys information about the state of Referenced Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the <code>iat</code> (issued at) and <code>exp</code> (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is desired, this can be achieved by extending with a timestamp the request for the Status List Token as defined in <a href="#status-list-request" class="auto internal xref">Section 8.1</a>. This feature has additional privacy implications as described in <a href="#privacy-historical" class="auto internal xref">Section 12.7</a>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.4-2">To obtain the Status List Token, the Relying Party <span class="bcp14">MUST</span> send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter <code>time</code> and its value being a unix timestamp. The response for a valid request <span class="bcp14">SHOULD</span> contain a Status List Token that was valid for that specified time or an error.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
@@ -2740,7 +2740,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         <h3 id="name-redirection-3xx">
 <a href="#section-11.4" class="section-number selfRef">11.4. </a><a href="#name-redirection-3xx" class="section-name selfRef">Redirection 3xx</a>
         </h3>
-<p id="section-11.4-1">HTTP clients that follow 3xx (Redirection) class of status codes <span class="bcp14">SHOULD</span> be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial of service attacks on clients. A client <span class="bcp14">SHOULD</span> detect and intervene in infinite redirections. Clients <span class="bcp14">SHOULD</span> apply the guidance for redirects given in Section 15.4 of <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-11.4-1" class="pilcrow">¶</a></p>
+<p id="section-11.4-1">HTTP clients that follow 3xx (Redirection) class of status codes <span class="bcp14">SHOULD</span> be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial of service attacks on clients. A client <span class="bcp14">SHOULD</span> detect and intervene in infinite redirections. Clients <span class="bcp14">SHOULD</span> apply the guidance for redirects given in <span><a href="https://rfc-editor.org/rfc/rfc9110#section-15.4" class="relref">Section 15.4</a> of [<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-11.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-ttl">
@@ -2911,8 +2911,8 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
 </div>
 <div id="implementation">
 <section id="section-13">
-      <h2 id="name-implementation-consideratio">
-<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
+      <h2 id="name-operational-considerations">
+<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
 <div id="implementation-lifecycle">
 <section id="section-13.1">
@@ -2947,7 +2947,7 @@ an initialization parameter by the Issuer of the Referenced Token. The Issuer is
         <h3 id="name-status-list-size">
 <a href="#section-13.4" class="section-number selfRef">13.4. </a><a href="#name-status-list-size" class="section-name selfRef">Status List Size</a>
         </h3>
-<p id="section-13.4-1">The storage and transmission size of the Status Issuer's Status List Tokens depends on:<a href="#section-13.4-1" class="pilcrow">¶</a></p>
+<p id="section-13.4-1">The storage and transmission size of the Status Issuer's Status List Tokens depend on:<a href="#section-13.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-13.4-2.1">
             <p id="section-13.4-2.1.1">the size of the Status List, i.e. the number of Referenced Tokens<a href="#section-13.4-2.1.1" class="pilcrow">¶</a></p>
@@ -3692,8 +3692,8 @@ RESTful Environments (CoRE) Parameters" Registry <span>[<a href="#IANA.Core.Para
         <h3 id="name-x509-certificate-extended-ke">
 <a href="#section-14.9" class="section-number selfRef">14.9. </a><a href="#name-x509-certificate-extended-ke" class="section-name selfRef">X.509 Certificate Extended Key Purpose OID Registration</a>
         </h3>
-<p id="section-14.9-1">IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section <a href="#eku" class="auto internal xref">Section 10</a>.<a href="#section-14.9-1" class="pilcrow">¶</a></p>
-<p id="section-14.9-2">IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0), this OID is defined in section <a href="#asn1-module" class="auto internal xref">Appendix A</a>.<a href="#section-14.9-2" class="pilcrow">¶</a></p>
+<p id="section-14.9-1">IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in <a href="#eku" class="auto internal xref">Section 10</a>.<a href="#section-14.9-1" class="pilcrow">¶</a></p>
+<p id="section-14.9-2">IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0), this OID is defined in <a href="#asn1-module" class="auto internal xref">Appendix A</a>.<a href="#section-14.9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3879,9 +3879,17 @@ Torsten Lodderstedt<a href="#section-15-1" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8414">https://www.rfc-editor.org/rfc/rfc8414</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8610">[RFC8610]</dt>
+        <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Vigano, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8610">https://www.rfc-editor.org/rfc/rfc8610</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9458">[RFC9458]</dt>
         <dd>
 <span class="refAuthor">Thomson, M.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Oblivious HTTP"</span>, <span class="seriesInfo">RFC 9458</span>, <span class="seriesInfo">DOI 10.17487/RFC9458</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9458">https://www.rfc-editor.org/rfc/rfc9458</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9562">[RFC9562]</dt>
+        <dd>
+<span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9562">https://www.rfc-editor.org/rfc/rfc9562</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SD-JWT.VC">[SD-JWT.VC]</dt>
         <dd>
@@ -3937,10 +3945,10 @@ Torsten Lodderstedt<a href="#section-15-1" class="pilcrow">¶</a></p>
 <div id="size-comparison">
 <section id="appendix-B">
       <h2 id="name-size-comparison">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-size-comparison" class="section-name selfRef">Size comparison</a>
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-size-comparison" class="section-name selfRef">Size Comparison</a>
       </h2>
-<p id="appendix-B-1">The following tables show a size comparison for a Status List (compressed byte array as defined in <a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a>) and a compressed Byte Array of UUIDs (as an approximation to the list of IDs of Referenced Tokens in a Certificate Revocation List). Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates and signatures.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">If no further metadata is provided in Status List Tokens or CRLs, then the size of Status Lists or arrays of Certificate ids (represented as UUIDs) will be the main factors deciding on the overall size of a Status List Token or CRL respectively.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">The following tables show a size comparison for a Status List (compressed byte array as defined in <a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a>) and a compressed Byte Array of UUIDs <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span> (as an approximation to the list of IDs of Referenced Tokens in a Certificate Revocation List). Readers must be aware that these are not sizes for complete Status List Tokens in JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't contain metadata, certificates, and signatures.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">If no further metadata is provided in Status List Tokens or CRLs, then the size of Status Lists or arrays of Certificate ids (represented as UUIDs) will be the main factors deciding on the overall size of a Status List Token or CRL, respectively.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <div id="size-of-status-lists-for-varying-amount-of-entries-and-revocation-rates">
 <section id="appendix-B.1">
         <h3 id="name-size-of-status-lists-for-va">
@@ -4026,13 +4034,13 @@ Torsten Lodderstedt<a href="#section-15-1" class="pilcrow">¶</a></p>
 <div id="size-of-compressed-array-of-uuidv4-128-bit-uuids-for-varying-amount-of-entries-and-revocation-rates">
 <section id="appendix-B.2">
         <h3 id="name-size-of-compressed-array-of">
-<a href="#name-size-of-compressed-array-of" class="section-name selfRef">Size of compressed array of UUIDv4 (128 bit UUIDs) for varying amount of entries and revocation rates</a>
+<a href="#name-size-of-compressed-array-of" class="section-name selfRef">Size of compressed array of UUIDv4 (128-bit UUIDs) for varying amount of entries and revocation rates</a>
         </h3>
-<p id="appendix-B.2-1">This is a simple approximation of a Certificate Revocation List using an array of UUIDs without any additional metadata (128 bit UUID per revoked entry).<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-B.2-1">This is a simple approximation of a CRL using an array of UUIDs without any additional metadata (128-bit UUID per revoked entry).<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
 <span id="name-size-examples-for-128-bit-u"></span><table class="center" id="table-2">
           <caption>
 <a href="#table-2" class="selfRef">Table 2</a>:
-<a href="#name-size-examples-for-128-bit-u" class="selfRef">Size examples for 128 bit UUIDs for varying amount of entries and revocation rates</a>
+<a href="#name-size-examples-for-128-bit-u" class="selfRef">Size examples for 128-bit UUIDs for varying amount of entries and revocation rates</a>
           </caption>
 <thead>
             <tr>
@@ -4118,9 +4126,9 @@ Torsten Lodderstedt<a href="#section-15-1" class="pilcrow">¶</a></p>
 <div id="bit-status-list">
 <section id="appendix-C.1">
         <h3 id="name-1-bit-status-list">
-<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-1-bit-status-list" class="section-name selfRef">1 bit Status List</a>
+<a href="#appendix-C.1" class="section-number selfRef">C.1. </a><a href="#name-1-bit-status-list" class="section-name selfRef">1-bit Status List</a>
         </h3>
-<p id="appendix-C.1-1">The following example uses a 1 bit Status List (2 possible values):<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.1-1">The following example uses a 1-bit Status List (2 possible values):<a href="#appendix-C.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.1-2">
 <pre>
 status[0] = 0b1
@@ -4165,9 +4173,9 @@ ba00bd93f002beb7a2a2010000a91e09000000000000000000000000000000807296
 <div id="bit-status-list-1">
 <section id="appendix-C.2">
         <h3 id="name-2-bit-status-list">
-<a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-2-bit-status-list" class="section-name selfRef">2 bit Status List</a>
+<a href="#appendix-C.2" class="section-number selfRef">C.2. </a><a href="#name-2-bit-status-list" class="section-name selfRef">2-bit Status List</a>
         </h3>
-<p id="appendix-C.2-1">The following example uses a 2 bit Status List (4 possible values):<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.2-1">The following example uses a 2-bit Status List (4 possible values):<a href="#appendix-C.2-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.2-2">
 <pre>
 status[0] = 0b01
@@ -4218,9 +4226,9 @@ a2646269747302636c737459013d78daeddb310d00211000412ea1a04004fe5520ed
 <div id="bit-status-list-2">
 <section id="appendix-C.3">
         <h3 id="name-4-bit-status-list">
-<a href="#appendix-C.3" class="section-number selfRef">C.3. </a><a href="#name-4-bit-status-list" class="section-name selfRef">4 bit Status List</a>
+<a href="#appendix-C.3" class="section-number selfRef">C.3. </a><a href="#name-4-bit-status-list" class="section-name selfRef">4-bit Status List</a>
         </h3>
-<p id="appendix-C.3-1">The following example uses a 4 bit Status List (16 possible values):<a href="#appendix-C.3-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.3-1">The following example uses a 4-bit Status List (16 possible values):<a href="#appendix-C.3-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.3-2">
 <pre>
 status[0] = 0b0001
@@ -4289,9 +4297,9 @@ c0cf3daf03000000000000000008ec03dc4c04c0
 <div id="bit-status-list-3">
 <section id="appendix-C.4">
         <h3 id="name-8-bit-status-list">
-<a href="#appendix-C.4" class="section-number selfRef">C.4. </a><a href="#name-8-bit-status-list" class="section-name selfRef">8 bit Status List</a>
+<a href="#appendix-C.4" class="section-number selfRef">C.4. </a><a href="#name-8-bit-status-list" class="section-name selfRef">8-bit Status List</a>
         </h3>
-<p id="appendix-C.4-1">The following example uses a 8 bit Status List (256 possible values):<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.4-1">The following example uses a 8-bit Status List (256 possible values):<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.4-2">
 <pre>
 status[233478] = 0b00000000
