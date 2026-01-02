@@ -51,36 +51,6 @@ normative:
   RFC9110: RFC9110
   RFC5280: RFC5280
   RFC9596: RFC9596
-  IANA.MediaTypes:
-    author:
-      org: "IANA"
-    title: "Media Types"
-    target: "https://www.iana.org/assignments/media-types/media-types.xhtml"
-  IANA.JOSE:
-    author:
-      org: "IANA"
-    title: "JSON Object Signing and Encryption (JOSE)"
-    target: "https://www.iana.org/assignments/jose/jose.xhtml"
-  IANA.JWT:
-    author:
-      org: "IANA"
-    title: "JSON Web Token Claims"
-    target: "https://www.iana.org/assignments/jwt/jwt.xhtml"
-  IANA.CWT:
-    author:
-      org: "IANA"
-    title: "CBOR Web Token (CWT) Claims"
-    target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
-  IANA.OAuth.Params:
-    author:
-      org: "IANA"
-    title: "OAuth Authorization Server Metadata"
-    target: "https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#authorization-server-metadata"
-  IANA.Core.Params:
-    author:
-      org: "IANA"
-    title: "Constrained RESTful Environments (CoRE) Parameters"
-    target: "https://www.iana.org/assignments/core-parameters/core-parameters.xhtml"
   CORS:
     author:
       org: "WHATWG"
@@ -104,6 +74,31 @@ informative:
   RFC8414: RFC8414
   RFC9458: RFC9458
   SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
+  IANA.MediaTypes:
+    author:
+      org: "IANA"
+    title: "Media Types"
+    target: "https://www.iana.org/assignments/media-types/media-types.xhtml"
+  IANA.JWT:
+    author:
+      org: "IANA"
+    title: "JSON Web Token Claims"
+    target: "https://www.iana.org/assignments/jwt/jwt.xhtml"
+  IANA.CWT:
+    author:
+      org: "IANA"
+    title: "CBOR Web Token (CWT) Claims"
+    target: "https://www.iana.org/assignments/cwt/cwt.xhtml"
+  IANA.OAuth.Params:
+    author:
+      org: "IANA"
+    title: "OAuth Authorization Server Metadata"
+    target: "https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xhtml#authorization-server-metadata"
+  IANA.Core.Params:
+    author:
+      org: "IANA"
+    title: "Constrained RESTful Environments (CoRE) Parameters"
+    target: "https://www.iana.org/assignments/core-parameters/core-parameters.xhtml"
   ISO.mdoc:
     author:
       org: "ISO/IEC JTC 1/SC 17"
@@ -1976,6 +1971,8 @@ CBOR encoding:
 * add description field to EKU iana registration request
 * fix typos in referenced token
 * fix typos
+* make IANA references informative
+* remove unused iana.jose reference
 
 -14
 
