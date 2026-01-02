@@ -79,11 +79,6 @@ informative:
       org: "IANA"
     title: "Media Types"
     target: "https://www.iana.org/assignments/media-types/media-types.xhtml"
-  IANA.JOSE:
-    author:
-      org: "IANA"
-    title: "JSON Object Signing and Encryption (JOSE)"
-    target: "https://www.iana.org/assignments/jose/jose.xhtml"
   IANA.JWT:
     author:
       org: "IANA"
@@ -1975,6 +1970,7 @@ CBOR encoding:
 
 * fix typos
 * make IANA references informative
+* remove unused iana.jose reference
 
 -14
 
