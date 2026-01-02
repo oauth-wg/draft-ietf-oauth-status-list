@@ -51,6 +51,29 @@ normative:
   RFC9110: RFC9110
   RFC5280: RFC5280
   RFC9596: RFC9596
+  CORS:
+    author:
+      org: "WHATWG"
+    title: "Fetch Living Standard"
+    target: "https://fetch.spec.whatwg.org/commit-snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-cors-protocol"
+  X.680:
+    title: "Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation"
+    author:
+      org: International Telecommunications Union
+    date: "13.02.2021"
+  X.690:
+    title: "Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"
+    author:
+      org: International Telecommunications Union
+    date: "13.02.2021"
+
+informative:
+  RFC6749: RFC6749
+  RFC7662: RFC7662
+  RFC7800: RFC7800
+  RFC8414: RFC8414
+  RFC9458: RFC9458
+  SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
   IANA.MediaTypes:
     author:
       org: "IANA"
@@ -81,29 +104,6 @@ normative:
       org: "IANA"
     title: "Constrained RESTful Environments (CoRE) Parameters"
     target: "https://www.iana.org/assignments/core-parameters/core-parameters.xhtml"
-  CORS:
-    author:
-      org: "WHATWG"
-    title: "Fetch Living Standard"
-    target: "https://fetch.spec.whatwg.org/commit-snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-cors-protocol"
-  X.680:
-    title: "Information Technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation"
-    author:
-      org: International Telecommunications Union
-    date: "13.02.2021"
-  X.690:
-    title: "Information Technology - ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"
-    author:
-      org: International Telecommunications Union
-    date: "13.02.2021"
-
-informative:
-  RFC6749: RFC6749
-  RFC7662: RFC7662
-  RFC7800: RFC7800
-  RFC8414: RFC8414
-  RFC9458: RFC9458
-  SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
   ISO.mdoc:
     author:
       org: "ISO/IEC JTC 1/SC 17"
@@ -1974,6 +1974,7 @@ CBOR encoding:
 -15
 
 * fix typos
+* make IANA references informative
 
 -14
 
