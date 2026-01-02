@@ -1496,9 +1496,9 @@ RESTful Environments (CoRE) Parameters" Registry [IANA.Core.Params]:
 
 ## X.509 Certificate Extended Key Purpose OID Registration
 
-IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3), this OID is defined in section [](#eku).
+IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" with a description of "id-mod-oauth-status-signing-eku" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3). This OID is defined in section [](#eku).
 
-IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0), this OID is defined in section [](#asn1-module).
+IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" with a description of "id-kp-oauthStatusSigning" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0). This OID is defined in section [](#asn1-module).
 
 # Acknowledgments
 
@@ -1534,7 +1534,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 # ASN.1 Module {#asn1-module}
 
-The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
+The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}. It defines the OID used for OAuth Status Mechanism Key Extended Key Usage.
 
 ~~~
 <CODE BEGINS>
@@ -1973,6 +1973,7 @@ CBOR encoding:
 
 -15
 
+* add description field to EKU iana registration request
 * fix typos
 
 -14
