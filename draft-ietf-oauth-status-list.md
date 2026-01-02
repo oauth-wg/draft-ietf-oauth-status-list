@@ -813,7 +813,7 @@ Content-Type: application/statuslist+jwt
 
 Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) MUST precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. As this is out of scope for this document, this validation is not described here, but is expected to be done according to the format of the Referenced Token.
 
-If this validation is not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the reference token:
+If this validation is not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the Referenced Token:
 
 1. Check for the existence of a `status` claim, check for the existence of a `status_list` claim within the `status` claim and validate that the content of `status_list` adheres to the rules defined in [](#referenced-token-jose) for JOSE-based Referenced Tokens and [](#referenced-token-cose) for COSE-based Referenced Tokens. Other formats of Referenced Tokens may define other encoding of the URI and index.
 1. Resolve the Status List Token from the provided URI
@@ -835,7 +835,7 @@ If any of these checks fails, no statement about the status of the Referenced To
 
 ## Historical resolution {#historical-resolution}
 
-By default, the status mechanism defined in this specification only conveys information about the state of Reference Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is desired, this can be achieved by extending with a timestamp the request for the Status List Token as defined in [](#status-list-request). This feature has additional privacy implications as described in [](#privacy-historical).
+By default, the status mechanism defined in this specification only conveys information about the state of Referenced Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is desired, this can be achieved by extending with a timestamp the request for the Status List Token as defined in [](#status-list-request). This feature has additional privacy implications as described in [](#privacy-historical).
 
 To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List Token that was valid for that specified time or an error.
 
@@ -862,7 +862,7 @@ Content-Type: application/statuslist+jwt
 
 # Status List Aggregation {#aggregation}
 
-Status List Aggregation is an optional mechanism offered by the Issuer to publish a list of one or more Status List Tokens URIs, allowing a Relying Party to fetch Status List Tokens provided by this Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a Reference Token for a period of time.
+Status List Aggregation is an optional mechanism offered by the Issuer to publish a list of one or more Status List Tokens URIs, allowing a Relying Party to fetch Status List Tokens provided by this Issuer. This mechanism is intended to support fetching and caching mechanisms and allow offline validation of the status of a Referenced Token for a period of time.
 
 If a Relying Party encounters an error while validating one of the Status List Tokens returned from the Status List Aggregation endpoint, it SHOULD continue processing the other Status List Tokens.
 
@@ -1031,14 +1031,14 @@ This behaviour may be mitigated by:
 - private relay protocols or other mechanisms hiding the original sender like {{RFC9458}}.
 - using trusted Third Party Hosting, see [](#third-party-hosting).
 
-## Issuer Tracking of Reference Tokens
+## Issuer Tracking of Referenced Tokens
 
 An Issuer could maliciously or accidentally bypass the privacy benefits of the herd privacy by either:
 
 - Generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests.
-- Encoding a unique URI in each Reference Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.
+- Encoding a unique URI in each Referenced Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.
 
-This malicious behavior can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Reference Tokens being verified.
+This malicious behavior can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Referenced Tokens being verified.
 
 ## Observability of Relying Parties {#privacy-relying-party}
 
@@ -1050,7 +1050,7 @@ This behaviour could be mitigated by:
 
 ## Observability of Outsiders {#privacy-outsider}
 
-Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and its related business, e.g. number of customers or clients. This data may allow inferences on the total number of issued Reference Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.
+Outside actors may analyse the publicly available Status Lists to get information on the internal processes of the Issuer and its related business, e.g. number of customers or clients. This data may allow inferences on the total number of issued Referenced Tokens and the revocation rate. Additionally, actors may regularly fetch this data or use the historic data functionality to learn how these numbers change over time.
 
 This behaviour could be mitigated by:
 
@@ -2049,7 +2049,7 @@ CBOR encoding:
 * add extended key usage extensions for x509
 * Relying Parties avoiding correlatable Information
 * editorial changes on terminology and Referenced Tokens
-* clarify privacy consideration around one time use reference tokens
+* clarify privacy consideration around one time use referenced tokens
 * explain the Status List Token size dependencies
 * explain possibility to chunk Status List Tokens depending on Referenced Token's expiry date
 * add short-lived tokens in the Rationale
