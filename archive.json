@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-28T00:24:08.031080+00:00",
+  "timestamp": "2026-01-04T00:23:54.548618+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6179,7 +6179,7 @@
       "labels": [],
       "body": "From the mailing list:\n\n> Dear Authors,\n> \n> https://datatracker.ietf.org/doc/draft-ietf-oauth-status-list/13/ clause 5.2 gives requirements and an example of a Status List Token in CWT format.\n> \n> The non-normative example from clause 5.2 clearly uses a tagged structure.\n> \n> When checking RFC8392 clause 7.1 step 6:\n> \n> \u201c   6.  If needed by the application, prepend the COSE object with the\n> \n>        appropriate COSE CBOR tag to indicate the type of the COSE\n> \n>        object.  If needed by the application, prepend the COSE object\n> \n>        with the CWT CBOR tag to indicate that the COSE object is a CWT.\n> \n> \u201d\n> \n> Tagging is optional, could you please indicate in the normative part of clause 5.2 whether tagging is required, and if so which tag to use?",
       "createdAt": "2025-11-18T07:21:56Z",
-      "updatedAt": "2025-12-26T00:56:28Z",
+      "updatedAt": "2026-01-02T11:54:28Z",
       "closedAt": null,
       "comments": [
         {
@@ -6234,9 +6234,9 @@
         {
           "author": "TakahikoKawasaki",
           "authorAssociation": "NONE",
-          "body": "According to [RFC 9052](https://www.rfc-editor.org/rfc/rfc9052.html), `COSE_Sign`, `COSE_Sign1`, `COSE_Mac`, and `COSE_Mac0` have the following structures.\n\n```\nCOSE_Sign = [\n    Headers,\n    payload : bstr / nil,\n    signatures : [+ COSE_Signature]\n]\n```\n\n```\nCOSE_Sign1 = [\n    Headers,\n    payload : bstr / nil,\n    signature : bstr\n]\n```\n\n```\nCOSE_Mac = [\n   Headers,\n   payload : bstr / nil,\n   tag : bstr,\n   recipients : [+COSE_recipient]\n]\n```\n\n```\nCOSE_Mac0 = [\n   Headers,\n   payload : bstr / nil,\n   tag : bstr,\n]\n```\n\nAll of these structures contain `Headers` and a `payload`, but the data that follows differs. For example, in `COSE_Sign`, an array of `COSE_Signature` follows, whereas in `COSE_Sign1`, a `bstr` follows. This difference is evident from the contrast between the code below that constructs a `COSE_Sign` message and the code that constructs a `COSE_Sign1` message\u2014specifically, the different handling of the fourth element.\n\n```java\n    public static COSESign build(CBORItem item) throws COSEException\n    {\n        // Build the protected header, the unprotected header and the content.\n        List<CBORItem> common = COSEObject.buildCommon(item, \"COSE_Sign\", 4);\n\n        // The fourth element of COSE_Sign, which is a list of signatures.\n        CBORItem fourth = common.get(3);\n\n        // If the fourth element is not a CBOR array.\n        if (!(fourth instanceof CBORItemList))\n        {\n            throw new COSEException(\n                    \"The fourth element (signatures) of COSE_Sign must be a CBOR array.\");\n        }\n\n        // Signatures\n        CBORItemList signatures = buildSignatures((CBORItemList)fourth);\n\n        try\n        {\n            return new COSESign(\n                    (COSEProtectedHeader)common.get(0),\n                    (COSEUnprotectedHeader)common.get(1),\n                    common.get(2),\n                    signatures);\n        }\n        catch (Exception cause)\n        {\n            throw new COSEException(cause.getMessage(), cause);\n        }\n    }\n```\n\n```java\n    public static COSESign1 build(CBORItem item) throws COSEException\n    {\n        // Build the protected header, the unprotected header and the content.\n        List<CBORItem> common = COSEObject.buildCommon(item, \"COSE_Sign1\", 4);\n\n        // The fourth element of COSE_Sign1, which is a signature.\n        CBORItem signature = common.get(3);\n\n        // If the fourth element is not a byte string.\n        if (!(signature instanceof CBORByteArray))\n        {\n            throw new COSEException(\n                    \"The fourth element (signature) of COSE_Sign1 must be a byte string.\");\n        }\n\n        try\n        {\n            return new COSESign1(\n                    (COSEProtectedHeader)common.get(0),\n                    (COSEUnprotectedHeader)common.get(1),\n                    common.get(2),\n                    (CBORByteArray)signature);\n        }\n        catch (Exception cause)\n        {\n            throw new COSEException(cause.getMessage(), cause);\n        }\n    }\n```\n\nBecause the way the signature(s) is carried differs between the two, the signature verification procedure also differs. Since `COSE_Sign` can contain multiple signatures, the verification logic would typically involve iterating over them like below:\n\n```java\n    public boolean verify(COSESign sign, byte[] externalData) throws COSEException\n    {\n        // For each signature in the list of signatures.\n        for (CBORItem signature : sign.getSignatures().getItems())\n        {\n            // If the signature of the COSE_Signature is valid.\n            if (verify(sign, (COSESignature)signature, externalData))\n            {\n                // The COSESign object has been verified as valid.\n                return true;\n            }\n        }\n\n        // None of the signatures have passed the verification.\n        return false;\n    }\n```\n\nIn contrast, `COSE_Sign1` contains only a single signature, so the verification process needs to be performed only once.\n\n```java\n    public boolean verify(\n            COSESign sign, COSESignature signature, byte[] externalData) throws COSEException\n    {\n        // 'alg' (1) in the protected header or the unprotected header.\n        int alg = retrieveAlg(signature);\n\n        // 'kid' (4) in the protected header or the unprotected header.\n        byte[] kid = retrieveKid(signature);\n\n        // Get a key for verifying the signature.\n        Key key = getKey(alg, kid);\n\n        // Prepare \"ToBeSigned\" (RFC 9052 Section 4.4), which is the data\n        // for which the signature was generated.\n        SigStructure toBeSigned = new SigStructureBuilder()\n                .sign(sign).signature(signature)\n                .externalData(externalData).build();\n\n        // Verify the signature.\n        return verify(key, alg, toBeSigned.encode(), signature.getSignature().getValue());\n    }\n```\n\nIf a CBOR tag is prepended to a COSE message, a CBOR parser can determine the structure of the following COSE message and thus proceed smoothly with parsing, as shown in the code below.\n\n```java\n    private static COSEMessage buildMessage(int tag, CBORItem item) throws COSEException\n    {\n        switch (tag)\n        {\n            case 16:\n                // COSE_Encrypt0\n                return COSEEncrypt0.build(item);\n\n            case 17:\n                // COSE_Mac0\n                return COSEMac0.build(item);\n\n            case 18:\n                // COSE_Sign1\n                return COSESign1.build(item);\n\n            case 96:\n                // COSE_Encrypt\n                return COSEEncrypt.build(item);\n\n            case 97:\n                // COSE_Mac\n                return COSEMac.build(item);\n\n            case 98:\n                // COSE_Sign\n                return COSESign.build(item);\n\n            default:\n                // This never happens unless this tag processor has been\n                // registered for the wrong tag number.\n                return null;\n        }\n    }\n```\n\nHowever, if no CBOR tag is present, determining whether the message is `COSE_Sign` or `COSE_Sign1` would have to be done either by (1) checking whether the fourth element of the COSE message\u2014whose structure is a CBOR array\u2014is a CBOR array or a CBOR byte string, or by (2) checking whether an algorithm is present in the protected header.\n\nI am somewhat surprised that the presence of a CBOR tag is said to cause interoperability issues. However, if there really are applications that cannot reliably handle even CBOR tags, can those applications accurately process a CWT Status List Token whose COSE type\u2014whether `COSE_Sign` or `COSE_Sign1`\u2014is not fixed? Most likely, such applications are written to parse CWT Status List Tokens under the assumption that they are `COSE_Sign1`.\n\nIf interoperability concerns are serious enough to justify removing the CBOR tag, then it would be better to explicitly specify that the structure of a CWT Status List Token is `COSE_Sign1`.\n\nNOTE: The code shown in this comment is excerpted from the source code of the CBOR Java library that I wrote, [authlete/cbor](https://github.com/authlete/cbor/).\n",
+          "body": "According to [RFC 9052](https://www.rfc-editor.org/rfc/rfc9052.html), `COSE_Sign`, `COSE_Sign1`, `COSE_Mac`, and `COSE_Mac0` have the following structures.\n\n```\nCOSE_Sign = [\n    Headers,\n    payload : bstr / nil,\n    signatures : [+ COSE_Signature]\n]\n```\n\n```\nCOSE_Sign1 = [\n    Headers,\n    payload : bstr / nil,\n    signature : bstr\n]\n```\n\n```\nCOSE_Mac = [\n   Headers,\n   payload : bstr / nil,\n   tag : bstr,\n   recipients : [+COSE_recipient]\n]\n```\n\n```\nCOSE_Mac0 = [\n   Headers,\n   payload : bstr / nil,\n   tag : bstr,\n]\n```\n\nAll of these structures contain `Headers` and a `payload`, but the data that follows differs. For example, in `COSE_Sign`, an array of `COSE_Signature` follows, whereas in `COSE_Sign1`, a `bstr` follows. This difference is evident from the contrast between the code below that constructs a `COSE_Sign` message and the code that constructs a `COSE_Sign1` message\u2014specifically, the different handling of the fourth element.\n\n```java\n    public static COSESign build(CBORItem item) throws COSEException\n    {\n        // Build the protected header, the unprotected header and the content.\n        List<CBORItem> common = COSEObject.buildCommon(item, \"COSE_Sign\", 4);\n\n        // The fourth element of COSE_Sign, which is a list of signatures.\n        CBORItem fourth = common.get(3);\n\n        // If the fourth element is not a CBOR array.\n        if (!(fourth instanceof CBORItemList))\n        {\n            throw new COSEException(\n                    \"The fourth element (signatures) of COSE_Sign must be a CBOR array.\");\n        }\n\n        // Signatures\n        CBORItemList signatures = buildSignatures((CBORItemList)fourth);\n\n        try\n        {\n            return new COSESign(\n                    (COSEProtectedHeader)common.get(0),\n                    (COSEUnprotectedHeader)common.get(1),\n                    common.get(2),\n                    signatures);\n        }\n        catch (Exception cause)\n        {\n            throw new COSEException(cause.getMessage(), cause);\n        }\n    }\n```\n\n```java\n    public static COSESign1 build(CBORItem item) throws COSEException\n    {\n        // Build the protected header, the unprotected header and the content.\n        List<CBORItem> common = COSEObject.buildCommon(item, \"COSE_Sign1\", 4);\n\n        // The fourth element of COSE_Sign1, which is a signature.\n        CBORItem signature = common.get(3);\n\n        // If the fourth element is not a byte string.\n        if (!(signature instanceof CBORByteArray))\n        {\n            throw new COSEException(\n                    \"The fourth element (signature) of COSE_Sign1 must be a byte string.\");\n        }\n\n        try\n        {\n            return new COSESign1(\n                    (COSEProtectedHeader)common.get(0),\n                    (COSEUnprotectedHeader)common.get(1),\n                    common.get(2),\n                    (CBORByteArray)signature);\n        }\n        catch (Exception cause)\n        {\n            throw new COSEException(cause.getMessage(), cause);\n        }\n    }\n```\n\nBecause the way the signature(s) is carried differs between the two, the signature verification procedure also differs. Since `COSE_Sign` can contain multiple signatures, the verification logic would typically involve iterating over them like below:\n\n```java\n    public boolean verify(COSESign sign, byte[] externalData) throws COSEException\n    {\n        // For each signature in the list of signatures.\n        for (CBORItem signature : sign.getSignatures().getItems())\n        {\n            // If the signature of the COSE_Signature is valid.\n            if (verify(sign, (COSESignature)signature, externalData))\n            {\n                // The COSESign object has been verified as valid.\n                return true;\n            }\n        }\n\n        // None of the signatures have passed the verification.\n        return false;\n    }\n```\n\nIn contrast, `COSE_Sign1` contains only a single signature, so the verification process needs to be performed only once.\n\n```java\n    public boolean verify(COSESign1 sign1, byte[] externalData) throws COSEException\n    {\n        // 'alg' (1) in the protected header or the unprotected header.\n        int alg = retrieveAlg(sign1);\n\n        // 'kid' (4) in the protected header or the unprotected header.\n        byte[] kid = retrieveKid(sign1);\n\n        // Get a key for verifying the signature.\n        Key key = getKey(alg, kid);\n\n        // Prepare \"ToBeSigned\" (RFC 9052 Section 4.4), which is the data\n        // for which the signature was generated.\n        SigStructure toBeSigned = new SigStructureBuilder()\n                .sign1(sign1).externalData(externalData).build();\n\n        // Verify the signature.\n        return verify(key, alg, toBeSigned.encode(), sign1.getSignature().getValue());\n    }\n```\n\nIf a CBOR tag is prepended to a COSE message, a CBOR parser can determine the structure of the following COSE message and thus proceed smoothly with parsing, as shown in the code below.\n\n```java\n    private static COSEMessage buildMessage(int tag, CBORItem item) throws COSEException\n    {\n        switch (tag)\n        {\n            case 16:\n                // COSE_Encrypt0\n                return COSEEncrypt0.build(item);\n\n            case 17:\n                // COSE_Mac0\n                return COSEMac0.build(item);\n\n            case 18:\n                // COSE_Sign1\n                return COSESign1.build(item);\n\n            case 96:\n                // COSE_Encrypt\n                return COSEEncrypt.build(item);\n\n            case 97:\n                // COSE_Mac\n                return COSEMac.build(item);\n\n            case 98:\n                // COSE_Sign\n                return COSESign.build(item);\n\n            default:\n                // This never happens unless this tag processor has been\n                // registered for the wrong tag number.\n                return null;\n        }\n    }\n```\n\nHowever, if no CBOR tag is present, determining whether the message is `COSE_Sign` or `COSE_Sign1` would have to be done either by (1) checking whether the fourth element of the COSE message\u2014whose structure is a CBOR array\u2014is a CBOR array or a CBOR byte string, or by (2) checking whether an algorithm is present in the protected header.\n\nI am somewhat surprised that the presence of a CBOR tag is said to cause interoperability issues. However, if there really are applications that cannot reliably handle even CBOR tags, can those applications accurately process a CWT Status List Token whose COSE type\u2014whether `COSE_Sign` or `COSE_Sign1`\u2014is not fixed? Most likely, such applications are written to parse CWT Status List Tokens under the assumption that they are `COSE_Sign1`.\n\nIf interoperability concerns are serious enough to justify removing the CBOR tag, then it would be better to explicitly specify that the structure of a CWT Status List Token is `COSE_Sign1`.\n\nNOTE: The code shown in this comment is excerpted from the source code of the CBOR Java library that I wrote, [authlete/cbor](https://github.com/authlete/cbor/).\n",
           "createdAt": "2025-12-24T17:38:33Z",
-          "updatedAt": "2025-12-24T17:38:33Z"
+          "updatedAt": "2026-01-02T11:54:28Z"
         },
         {
           "author": "TakahikoKawasaki",
@@ -6244,6 +6244,13 @@
           "body": "I had not read the TSL specification carefully enough\u2014my apologies. I have now noticed that Section 11.6 of the specification explicitly states the following:\n\n>This specification allows both, digital signatures using asymmetric cryptography, and Message Authentication Codes (MAC) to be used to protect Status List Tokens.\n\nIf we were to limit the format to `COSE_Sign1` only, that would contradict the statement in Section 11.6. In addition to `COSE_Sign1` (and `COSE_Sign`), `COSE_Mac0` (and `COSE_Mac`) should therefore also be supported.\n\n`COSE_Sign1` and `COSE_Mac0` both place a CBOR byte string signature as the fourth element, so their formats are aligned in that respect. If the format of a CWT Status List Token were limited to just `COSE_Sign1` and `COSE_Mac0`, applications that assume a CBOR byte string signature in the fourth position\u2014without explicitly determining the COSE message type\u2014would still be able to operate. Such applications, however, would not be able to support `COSE_Sign` or `COSE_Mac`.\n\nWith this in mind, a slight modification to my proposal would be: if CBOR tags are removed, it would be better to limit the format to `COSE_Sign1` or `COSE_Mac0`.\n\nThat said, if we consider only the ideal software design\u2014without taking existing implementations into account\u2014then, if a rule must be defined, I believe that requiring a CBOR tag to always be included would be a better choice than deciding not to include one.",
           "createdAt": "2025-12-26T00:56:28Z",
           "updatedAt": "2025-12-26T00:56:28Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Editors Call (Paul+Christian):\n- thanks a lot for your feedback @TakahikoKawasaki \n- the CWT tag is not relevant and MUST NOT be present\n- the COSE tag somewhat make sense, especially if COSE differentiates between Sign and Mac (and we allow both), then both should be used to allow easier parsing of the structure\n  - then COSE tags MUST be present, to limit optionality\n- we think that limiting to Mac0/Sign1 should be a good idea to further limit optionality and we don't see reasons to have multiple signatures/recipients",
+          "createdAt": "2026-01-02T11:24:14Z",
+          "updatedAt": "2026-01-02T11:24:14Z"
         }
       ]
     },
@@ -6441,15 +6448,15 @@
       "id": "I_kwDOJZ2aqs7gREK2",
       "title": "Typos in draft-ietf-oauth-status-list-14",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/325",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "TakahikoKawasaki",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "# 1.2. Rational\n\n## The second paragraph\n\n\u274c packing the them\n\u2705 packing them\n\n# 4.2. Status List in JSON Format\n\n## `aggregation_uri`\n\n\u274c for this type of Referenced Token or Issuer\n\u2705 for this type of Referenced Token\n\n# 4.3. Status List in CBOR Format\n\n## The second paragraph\n\n\u274c the CDDL definition of the StatusList structure:\n\u2705 the CDDL definition of the `StatusList` structure:\n\n## The definition of the `StatusList` structure\n\n\u274c ? aggregation_uri: tstr,\n\u2705 ? aggregation_uri: tstr\n\n# 7.1. Status Types Values\n\n## The second paragraph\n\n\u274c Additional values may defined\n\u2705 Additional values may be defined\n\n# 8. Verification and Processing\n\n\u274c the same rules apply for the Holder\n\u2705 the same rules apply to the Holder\n\n# 9.3. Status List Aggregation Data Structure\n\n## The second paragraph\n\n\u274c This aggregation in JSON and the media type return MUST be `application/json`.\n\u2705 This aggregation is in JSON, and the returned media type MUST be `application/json`.\n\n# 10. X.509 Certificate Extended Key Usage Extension\n\n## The first paragraph\n\n\u274c by issuing a X.509 certificate\n\u2705 by issuing an X.509 certificate\n\n## The second paragraph\n\n\u274c The following OID is defined for usage in the EKU extension\n\u2705 The following OID is defined for usage in the EKU extension:\n\n# 11. Security Considerations\n\n\u274c Status List Tokens as defined in Section 5 only exists\n\u2705 Status List Tokens as defined in Section 5 only exist\n\n\u274c containers which allows\n\u2705 containers which allow\n\n# 12.5.1. Colluding Relying Parties\n\n## The second paragraph\n\n\u274c by the values of `uri` and `index`,\n\u2705 by the values of `uri` and `idx`,\n\n# 12.5.2. Colluding Status Issuer and Relying Party\n\n\u274c link two transaction\n\u2705 link two transactions\n\n# 13.3. Default Values and Double Allocation\n\n## The second paragraph\n\n\u274c the same `uri` and `index` for multiple Referenced Tokens (since `uri` and `index`\n\u2705 the same `uri` and `idx` for multiple Referenced Tokens (since `uri` and `idx`\n\n# 13.5. External Status Issuer\n\n\u274c use case that require revocations of Referenced Tokens to be managed by a different entities\n\u2705 use cases that require revocation of Referenced Tokens to be managed by different entities\n\n\n",
       "createdAt": "2025-12-26T02:34:57Z",
-      "updatedAt": "2025-12-26T19:50:05Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-02T10:15:40Z",
+      "closedAt": "2026-01-02T10:15:40Z",
       "comments": [
         {
           "author": "TakahikoKawasaki",
@@ -6459,6 +6466,78 @@
           "updatedAt": "2025-12-26T19:50:05Z"
         }
       ]
+    },
+    {
+      "number": 327,
+      "id": "I_kwDOJZ2aqs7hETqn",
+      "title": "IANA review",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/327",
+      "state": "CLOSED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> Dear Authors,\n> \n> Could you update Section 14.9 to include the entries for the OID registries' \"Description\" field?\n> \n> Finding the correct description might not be straightforward for a new staff member, and authors have occasionally found that the description included in the module was incorrect.\n\n",
+      "createdAt": "2026-01-02T09:54:05Z",
+      "updatedAt": "2026-01-02T10:46:36Z",
+      "closedAt": "2026-01-02T10:46:36Z",
+      "comments": []
+    },
+    {
+      "number": 328,
+      "id": "I_kwDOJZ2aqs7hEaUo",
+      "title": "Ketan Talaulikar's review",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/328",
+      "state": "CLOSED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> \n> Thanks to the authors and the WG for their work on this document.\n> \n> I have a couple of comments/queries to share:\n> \n> 1) [IANA.JOSE] is cited as a normative reference without any reference to it.\n> \n> 2) I am not sure if the multiple IANA registries listed as references are\n> normative. Please check if they are more suited as informative.",
+      "createdAt": "2026-01-02T10:09:36Z",
+      "updatedAt": "2026-01-02T10:51:29Z",
+      "closedAt": "2026-01-02T10:51:29Z",
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "both points are correct, we will fix it",
+          "createdAt": "2026-01-02T10:21:43Z",
+          "updatedAt": "2026-01-02T10:21:43Z"
+        }
+      ]
+    },
+    {
+      "number": 329,
+      "id": "I_kwDOJZ2aqs7hEc6d",
+      "title": "Typos \"Reference Token\"",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/329",
+      "state": "CLOSED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-02T10:15:08Z",
+      "updatedAt": "2026-01-02T10:31:50Z",
+      "closedAt": "2026-01-02T10:31:50Z",
+      "comments": []
+    },
+    {
+      "number": 333,
+      "id": "I_kwDOJZ2aqs7hEx3s",
+      "title": "Mohamed Boucadair's feedback",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/333",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> Hi Tobias, Paul, and Christian,\n> \n> Thank you for the effort put into this document.\n> \n> # Overall, the document is well-organized and various pieces are adequately\n> grafted together. Some cross referencing would be even better to link some of\n> goals to how these are actually addressed in the current design, especially for\n> the following ones:\n> \n> CURRENT:\n>    *  the specification shall favor a simple and easy-to-understand\n>       concept\n> \n>    *  the specification shall be easy, fast and secure to implement in\n>       all major programming languages\n> \n>    *  the specification shall be optimized to support the most common\n>       use cases and avoid unnecessary complexity of corner cases\n> \n>    *  the Status List shall scale up to millions of tokens to support\n>       large-scale government or enterprise use cases\n> \n>    *  the Status List shall enable caching policies and offline support\n> \n> # The implementation section (which is actually an Operational Consideration\n> section per RFC5706) is really great. Thanks.\n> \n> # The use of SHOULD through the document is worth checking. There are clearly\n> cases where it is not trivial if this is a nice-to-have or why a stronger level\n> isn't used, e.g., loop detection or the following:\n> \n>    *  ttl: RECOMMENDED.  The ttl (time to live) claim, if present, MUST\n>       specify the maximum amount of time, in seconds, that the Status\n>       List Token can be cached by a consumer before a fresh copy SHOULD\n>       be retrieved.\n> \n> There many such occurrences that I\u2019m not listing here, but I\u2019d request you\n> double check through.\n> \n> # I tagged some few nits when reviewing the document that I will send you in a\n> PR.\n> \n> Cheers,\n> Med",
+      "createdAt": "2026-01-02T10:57:50Z",
+      "updatedAt": "2026-01-02T10:57:50Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -21911,24 +21990,26 @@
       "id": "PR_kwDOJZ2aqs65wmUc",
       "title": "nits tagged in Med's IESG Review",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/324",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-12-19T06:34:19Z",
-      "updatedAt": "2025-12-26T09:47:17Z",
+      "updatedAt": "2026-01-02T10:32:06Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "37bda8662daafed30255aa6beec761d0f581fc10",
+      "baseRefOid": "3e9f97623e1f77b14092d36b3accd4ba75558f29",
       "headRepository": "boucadair/draft-ietf-oauth-status-list",
       "headRefName": "patch-1",
-      "headRefOid": "b4652c5623b3d31fbd7a46d101d3173f22ea2ef7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "8c46b32895fb4b3f93ab79e72c32191432562fba",
+      "closedAt": "2026-01-02T10:32:06Z",
+      "mergedAt": "2026-01-02T10:32:06Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "66a0fddcacff506996d14cfb5c2b5aba74f9a680"
+      },
       "comments": [
         {
           "author": "c2bo",
@@ -21951,6 +22032,19 @@
           "createdAt": "2025-12-26T09:46:37Z",
           "updatedAt": "2025-12-26T09:46:37Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7X8E8J",
+          "commit": {
+            "abbreviatedOid": "b4652c5"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-02T10:18:33Z",
+          "updatedAt": "2026-01-02T10:18:33Z",
+          "comments": []
         }
       ]
     },
@@ -21959,24 +22053,26 @@
       "id": "PR_kwDOJZ2aqs66ovST",
       "title": "fix typos",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/326",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "Closes #325 \r\n\r\nI didn't change this part, everything else should be there:\r\n\r\n> \u274c for this type of Referenced Token or Issuer\r\n\u2705 for this type of Referenced Token\r\n\r\nThis formulation was intentional if I recall correctly.\r\n\r\n@TakahikoKawasaki I added your name to the acknowledgements section, I hope that is ok for you?\r\n",
       "createdAt": "2025-12-26T13:47:55Z",
-      "updatedAt": "2025-12-26T19:44:18Z",
+      "updatedAt": "2026-01-02T10:15:42Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "37bda8662daafed30255aa6beec761d0f581fc10",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "325-typos",
       "headRefOid": "b75c516af6c2fb37030ca13afb01195228de1d94",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-01-02T10:15:39Z",
+      "mergedAt": "2026-01-02T10:15:39Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "3e9f97623e1f77b14092d36b3accd4ba75558f29"
+      },
       "comments": [
         {
           "author": "TakahikoKawasaki",
@@ -21984,6 +22080,13 @@
           "body": "@c2bo \r\n>I added your name to the acknowledgements section, I hope that is ok for you?\r\n\r\nThank you for your consideration. This PR looks good to me.",
           "createdAt": "2025-12-26T19:44:18Z",
           "updatedAt": "2025-12-26T19:44:18Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks @TakahikoKawasaki ",
+          "createdAt": "2026-01-02T10:15:33Z",
+          "updatedAt": "2026-01-02T10:15:33Z"
         }
       ],
       "reviews": [
@@ -21998,6 +22101,132 @@
           "body": "",
           "createdAt": "2025-12-26T18:40:59Z",
           "updatedAt": "2025-12-26T18:40:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 330,
+      "id": "PR_kwDOJZ2aqs67RVeE",
+      "title": "typos in referenced token",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/330",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #329 ",
+      "createdAt": "2026-01-02T10:29:18Z",
+      "updatedAt": "2026-01-02T10:31:50Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "3e9f97623e1f77b14092d36b3accd4ba75558f29",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "329-reference-token",
+      "headRefOid": "a3ae493197b8f77fa9b15dac4b666f7944640537",
+      "closedAt": "2026-01-02T10:31:50Z",
+      "mergedAt": "2026-01-02T10:31:49Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "6be29c0117a17c71fc1ae9f0f9a855f0b201f7f6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7X8OCh",
+          "commit": {
+            "abbreviatedOid": "a3ae493"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-02T10:31:40Z",
+          "updatedAt": "2026-01-02T10:31:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 331,
+      "id": "PR_kwDOJZ2aqs67RV0d",
+      "title": "make IANA references informative",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/331",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #328 ",
+      "createdAt": "2026-01-02T10:29:53Z",
+      "updatedAt": "2026-01-02T10:51:28Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "3e9f97623e1f77b14092d36b3accd4ba75558f29",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/iana_informative",
+      "headRefOid": "76dd917eefd52d05b1d9c035f3205b05e14cf231",
+      "closedAt": "2026-01-02T10:51:28Z",
+      "mergedAt": "2026-01-02T10:51:28Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "e02321d3bcab2439767ae62716815fecffd0b29d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7X8Tyd",
+          "commit": {
+            "abbreviatedOid": "04e6720"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-02T10:45:32Z",
+          "updatedAt": "2026-01-02T10:45:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 332,
+      "id": "PR_kwDOJZ2aqs67RZyy",
+      "title": "add description field to oid registrations",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/332",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #327 ",
+      "createdAt": "2026-01-02T10:37:50Z",
+      "updatedAt": "2026-01-02T10:46:35Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "66a0fddcacff506996d14cfb5c2b5aba74f9a680",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "327-description-field",
+      "headRefOid": "356202de86b1d1a67d71c06cb16752f077695105",
+      "closedAt": "2026-01-02T10:46:35Z",
+      "mergedAt": "2026-01-02T10:46:35Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "e780f9f3071c7cec4647e61d02c66c21e3e61a1d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7X8TLc",
+          "commit": {
+            "abbreviatedOid": "356202d"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-02T10:43:45Z",
+          "updatedAt": "2026-01-02T10:43:45Z",
           "comments": []
         }
       ]
