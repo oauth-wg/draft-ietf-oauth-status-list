@@ -62,5 +62,5 @@ def printCBORDiagnostics(input: bytes) -> str:
 
 
 def outputFile(file_name: str, input: str):
-    with open(file_name, "w") as file:
+    with open(file_name+".md", "w") as file:
         file.write(input)
