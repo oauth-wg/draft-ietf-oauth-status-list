@@ -440,7 +440,7 @@ The following is a non-normative example of a Status List Token in JWT format:
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
 
-The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}.
+The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}. The Status List Token MUST NOT be tagged with the CWT tag defined in {{Section 6 of RFC8392}}. The COSE message MUST either be the tagged COSE_Sign1_Tagged (`18`) or COSE_Mac0_Tagged (`17`) as defined in {{Section 2 of RFC9052}}.
 
 The following content applies to the protected header of the CWT:
 
@@ -497,7 +497,7 @@ Application of additional restrictions and policies are at the discretion of the
 
 The following is a non-normative example of a decoded header and payload of a Referenced Token:
 
-~~~ json
+~~~ ascii-art
 
 {
   "alg": "ES256",
@@ -1968,6 +1968,8 @@ CBOR encoding:
 
 -15
 
+* limit Status List Token CWT COSE message to Sign1/Mac0
+* be explicit about tagging and re-add cose_sign1 tag to example
 * add description field to EKU iana registration request
 * fix typos in referenced token
 * fix typos

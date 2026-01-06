@@ -164,6 +164,4 @@ class StatusListToken:
             unprotected=unprotected_header,
         )
 
-        # removes cose_sign1 tag (only 1 byte long for tag 18)
-        encoded = encoded[1:]
         return encoded
