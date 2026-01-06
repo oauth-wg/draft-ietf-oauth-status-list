@@ -497,7 +497,7 @@ Application of additional restrictions and policies are at the discretion of the
 
 The following is a non-normative example of a decoded header and payload of a Referenced Token:
 
-~~~ json
+~~~ ascii-art
 
 {
   "alg": "ES256",
