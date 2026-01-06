@@ -1950,7 +1950,7 @@ a2                              # map(2)
         <h3 id="name-status-list-token-in-cwt-fo">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-status-list-token-in-cwt-fo" class="section-name selfRef">Status List Token in CWT Format</a>
         </h3>
-<p id="section-5.2-1">The Status List Token <span class="bcp14">MUST</span> be encoded as a "CBOR Web Token (CWT)" according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The Status List Token <span class="bcp14">MUST</span> not be tagged with the tags defined in section 6 of <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> or in section 2 of <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">The Status List Token <span class="bcp14">MUST</span> be encoded as a "CBOR Web Token (CWT)" according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>. The Status List Token <span class="bcp14">MUST NOT</span> be tagged with the CWT tag defined in <span><a href="https://rfc-editor.org/rfc/rfc8392#section-6" class="relref">Section 6</a> of [<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>, but <span class="bcp14">MUST</span> be tagged with the COSE tag as defined in <span><a href="https://rfc-editor.org/rfc/rfc9052#section-2" class="relref">Section 2</a> of [<a href="#RFC9052" class="cite xref">RFC9052</a>]</span> (e.g., Tag <code>18</code> for a Status List Token of type <code>COSE_Sign1</code>).<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">The following content applies to the protected header of the CWT:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.1">
@@ -2075,7 +2075,7 @@ d2                              # tag(18)
         </ul>
 <p id="section-6.2-4">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
 <p id="section-6.2-5">The following is a non-normative example of a decoded header and payload of a Referenced Token:<a href="#section-6.2-5" class="pilcrow">¶</a></p>
-<div class="lang-json sourcecode" id="section-6.2-6">
+<div class="alignLeft art-ascii-art art-text artwork" id="section-6.2-6">
 <pre>
 {
   "alg": "ES256",
@@ -4684,19 +4684,22 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <p id="appendix-D-2">-15<a href="#appendix-D-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-3.1">
-          <p id="appendix-D-3.1.1">add description field to EKU iana registration request<a href="#appendix-D-3.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.1.1">be explicit about tagging and re-add cose_sign1 tag to example<a href="#appendix-D-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-3.2">
-          <p id="appendix-D-3.2.1">fix typos in referenced token<a href="#appendix-D-3.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.2.1">add description field to EKU iana registration request<a href="#appendix-D-3.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-3.3">
-          <p id="appendix-D-3.3.1">fix typos<a href="#appendix-D-3.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.3.1">fix typos in referenced token<a href="#appendix-D-3.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-3.4">
-          <p id="appendix-D-3.4.1">make IANA references informative<a href="#appendix-D-3.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.4.1">fix typos<a href="#appendix-D-3.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-3.5">
-          <p id="appendix-D-3.5.1">remove unused iana.jose reference<a href="#appendix-D-3.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.5.1">make IANA references informative<a href="#appendix-D-3.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.6">
+          <p id="appendix-D-3.6.1">remove unused iana.jose reference<a href="#appendix-D-3.6.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-4">-14<a href="#appendix-D-4" class="pilcrow">¶</a></p>
