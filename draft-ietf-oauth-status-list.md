@@ -440,7 +440,7 @@ The following is a non-normative example of a Status List Token in JWT format:
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
 
-The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}. The Status List Token MUST not be tagged with the tags defined in section 6 of {{RFC8392}} or in section 2 of {{RFC9052}}.
+The Status List Token MUST be encoded as a "CBOR Web Token (CWT)" according to {{RFC8392}}. The Status List Token MUST NOT be tagged with the CWT tag defined in {{section 6 of RFC8392}}, but MUST be tagged with the COSE tag as defined in {{section 2 of RFC9052}} (e.g., Tag `18` for a Status List Token of type `COSE_Sign1`).
 
 The following content applies to the protected header of the CWT:
 
