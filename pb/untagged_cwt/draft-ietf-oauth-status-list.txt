@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 13 June 2026                                    Bundesdruckerei
+Expires: 10 July 2026                                    Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                        10 December 2025
+                                                          6 January 2026
 
 
                         Token Status List (TSL)
@@ -17,11 +17,11 @@ Expires: 13 June 2026                                    Bundesdruckerei
 Abstract
 
    This specification defines a status mechanism called Token Status
-   List (abbreviated TSL), data structures and processing rules for
-   representing the status of tokens secured by JSON Object Signing and
-   Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such
-   as JWT, SD-JWT VC, CBOR Web Token and ISO mdoc.  It also defines an
-   extension point and a registry for future status mechanisms.
+   List (TSL), data structures and processing rules for representing the
+   status of tokens secured by JSON Object Signing and Encryption (JOSE)
+   or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC,
+   CBOR Web Token, and ISO mdoc.  It also defines an extension point and
+   a registry for future status mechanisms.
 
 About This Document
 
@@ -55,11 +55,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 June 2026.
+   This Internet-Draft will expire on 10 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -100,7 +100,7 @@ Table of Contents
      8.1.  Status List Request
      8.2.  Status List Response
      8.3.  Validation Rules
-     8.4.  Historical resolution
+     8.4.  Historical Resolution
    9.  Status List Aggregation
      9.1.  Issuer Metadata
      9.2.  Status List Parameter
@@ -115,7 +115,7 @@ Table of Contents
      11.6.  Status List Token Protection
    12. Privacy Considerations
      12.1.  Observability of Issuers
-     12.2.  Issuer Tracking of Reference Tokens
+     12.2.  Issuer Tracking of Referenced Tokens
      12.3.  Observability of Relying Parties
      12.4.  Observability of Outsiders
      12.5.  Unlinkability
@@ -124,7 +124,7 @@ Table of Contents
      12.6.  External Status Provider for Privacy
      12.7.  Historical Resolution
      12.8.  Status Types
-   13. Implementation Considerations
+   13. Operational Considerations
      13.1.  Token Lifecycle
      13.2.  Linkability Mitigation
      13.3.  Default Values and Double Allocation
@@ -157,16 +157,16 @@ Table of Contents
      16.1.  Normative References
      16.2.  Informative References
    Appendix A.  ASN.1 Module
-   Appendix B.  Size comparison
+   Appendix B.  Size Comparison
      Size of Status Lists for varying amount of entries and revocation
            rates
-     Size of compressed array of UUIDv4 (128 bit UUIDs) for varying
+     Size of compressed array of UUIDv4 (128-bit UUIDs) for varying
            amount of entries and revocation rates
    Appendix C.  Test vectors for Status List encoding
-     C.1.  1 bit Status List
-     C.2.  2 bit Status List
-     C.3.  4 bit Status List
-     C.4.  8 bit Status List
+     C.1.  1-bit Status List
+     C.2.  2-bit Status List
+     C.3.  4-bit Status List
+     C.4.  8-bit Status List
    Document History
    Authors' Addresses
 
@@ -253,7 +253,7 @@ Table of Contents
 1.1.  Example Use Cases
 
    An example of the usage of a Status List is to manage the statuses of
-   issued access tokens as defined in section 1.4 of [RFC6749].  Token
+   issued access tokens as defined in Section 1.4 of [RFC6749].  Token
    Introspection [RFC7662] provides a method to determine the status of
    an issued access token, but it necessitates the party attempting to
    validate the state of access tokens to directly contact the Issuer of
@@ -285,7 +285,7 @@ Table of Contents
 
    This specification seeks to find a balance between scalability,
    security and privacy by representing statuses as individual bits,
-   packing the them into an array, and compressing the resulting binary
+   packing them into an array, and compressing the resulting binary
    data.  Thereby, a Status List may contain statuses of many thousands
    or millions Referenced Tokens while remaining as small as possible.
    Placing a large number of Referenced Tokens into the same list also
@@ -398,11 +398,11 @@ Table of Contents
 4.  Status List
 
    A Status List is a data structure that contains the statuses of many
-   Referenced Tokens represented by one or multiple bits.  The first
-   section (Section 4.1) describes how to construct a compressed byte
-   array that is the base component for the Status List data structure.
-   The second and third sections describe how to encode such a Status
-   List in JSON and CBOR representations.
+   Referenced Tokens represented by one or multiple bits.  Section 4.1
+   describes how to construct a compressed byte array that is the base
+   component for the Status List data structure.  The second and third
+   sections describe how to encode such a Status List in JSON and CBOR
+   representations.
 
 4.1.  Compressed Byte Array
 
@@ -412,10 +412,10 @@ Table of Contents
    1.  The Status Issuer MUST define a number of bits (bits) of either
        1,2,4 or 8, that represents the amount of bits used to describe
        the status of each Referenced Token within this Status List.
-       Therefore up to 2,4,16 or 256 statuses for a Referenced Token are
-       possible, depending on the bit size.  This limitation is intended
-       to limit bit manipulation necessary to a single byte for every
-       operation and thus keeping implementations simpler and less
+       Therefore, up to 2,4,16 or 256 statuses for a Referenced Token
+       are possible, depending on the bit size.  This limitation is
+       intended to limit bit manipulation necessary to a single byte for
+       every operation and thus keeping implementations simpler and less
        error-prone.
 
    2.  The Status Issuer creates a byte array of size = amount of
@@ -507,12 +507,12 @@ Table of Contents
    This section defines the data structure for a JSON-encoded Status
    List:
 
-   *  The StatusList structure is a JSON Object contains the following
-      members:
+   *  The StatusList structure is a JSON Object that contains the
+      following members:
 
       -  bits: REQUIRED.  JSON Integer specifying the number of bits per
          Referenced Token in the compressed byte array (lst).  The
-         allowed values for bits are 1,2,4 and 8.
+         allowed values for bits are 1, 2, 4, and 8.
 
       -  lst: REQUIRED.  JSON String that contains the status values for
          all the Referenced Tokens it conveys statuses for.  The value
@@ -521,8 +521,7 @@ Table of Contents
 
       -  aggregation_uri: OPTIONAL.  JSON String that contains a URI to
          retrieve the Status List Aggregation for this type of
-         Referenced Token or Issuer.  See section Section 9 for further
-         details.
+         Referenced Token or Issuer.  See Section 9 for further details.
 
    The following example illustrates the JSON representation of the
    Status List with bits=1 from the examples above:
@@ -544,7 +543,7 @@ Table of Contents
      "lst": "eNo76fITAAPfAgc"
    }
 
-   See section Appendix C for more test vectors.
+   See Appendix C for more test vectors.
 
 4.3.  Status List in CBOR Format
 
@@ -557,7 +556,7 @@ Table of Contents
       -  bits: REQUIRED.  CBOR Unsigned integer (major type 0) that
          contains the number of bits per Referenced Token in the
          compressed byte array (lst).  The allowed values for bits are
-         1, 2, 4 and 8.
+         1, 2, 4, and 8.
 
       -  lst: REQUIRED.  CBOR Byte string (major type 2) that contains
          the status values for all the Referenced Tokens it conveys
@@ -566,15 +565,16 @@ Table of Contents
 
       -  aggregation_uri: OPTIONAL.  CBOR Text string (major type 3)
          that contains a URI to retrieve the Status List Aggregation for
-         this type of Referenced Token.  See section Section 9 for
-         further detail.
+         this type of Referenced Token.  See Section 9 for further
+         detail.
 
-   The following is the CDDL definition of the StatusList structure:
+   The following is the CDDL [RFC8610] definition of the StatusList
+   structure:
 
    StatusList = {
        bits: 1 / 2 / 4 / 8, ; The number of bits used per Referenced Token
        lst: bstr, ; Byte string that contains the Status List
-       ? aggregation_uri: tstr, ; link to the Status List Aggregation
+       ? aggregation_uri: tstr ; link to the Status List Aggregation
    }
 
    The following example illustrates the CBOR representation of the
@@ -595,7 +595,7 @@ Table of Contents
      4a                            #   bytes(10)
        78dadbb918000217015d        #     "xÚÛ¹\x18\x00\x02\x17\x01]"
 
-   See section Appendix C for more test vectors.
+   See Appendix C for more test vectors.
 
 5.  Status List Token
 
@@ -734,38 +734,40 @@ Table of Contents
    The following is a non-normative example of a Status List Token in
    CWT format in Hex:
 
-   845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b6377
-   74a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f7374
-   617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda264
-   6269747301636c73744a78dadbb918000217015d58409d0845394856c4122668559b
-   58f792a89126ba2f39a362b45b949f32e8bdc8e054b0ff6b86e214b06638782c2d59
-   0f979ba379dec655ddfa3e367ad09bb5a9a6
+   d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
+   7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
+   74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
+   646269747301636c73744a78dadbb918000217015d584093fa4d01032b18c35e2fe1
+   101b77fd6cc9440022caa4694450c4e4e9feab4e99d1fa6d9772ce2bf3a12e0323de
+   d7c982c5e101a5e67f0cbc1e2b6f57ce99c279
 
    The following is the CBOR Annotated Hex output of the example above:
 
- 84                              # array(4)
-   58 20                         #   bytes(32)
-     a2012610781a6170706c696361  #     "¢\x01&\x10x\x1aapplica"
-     74696f6e2f7374617475736c69  #     "tion/statusli"
-     73742b637774                #     "st+cwt"
-   a1                            #   map(1)
-     04                          #     uint(4)
-     42                          #     bytes(2)
-       3132                      #       "12"
-   58 50                         #   bytes(80)
-     a502782168747470733a2f2f65  #     "¥\x02x!https://e"
-     78616d706c652e636f6d2f7374  #     "xample.com/st"
-     617475736c697374732f31061a  #     "atuslists/1\x06\x1a"
-     648c5bea041a8898dfea19fffe  #     "d\x8c[ê\x04\x1a\x88\x98ßê\x19ÿþ"
-     19a8c019fffda2646269747301  #     "\x19¨À\x19ÿý¢dbits\x01"
-     636c73744a78dadbb918000217  #     "clstJxÚÛ¹\x18\x00\x02\x17"
-     015d                        #     "\x01]"
-   58 40                         #   bytes(64)
-     9d0845394856c4122668559b58  #     "\x9d\x08E9HVÄ\x12&hU\x9bX"
-     f792a89126ba2f39a362b45b94  #     "÷\x92¨\x91&º/9£b´[\x94"
-     9f32e8bdc8e054b0ff6b86e214  #     "\x9f2è½ÈàT°ÿk\x86â\x14"
-     b06638782c2d590f979ba379de  #     "°f8x,-Y\x0f\x97\x9b£yÞ"
-     c655ddfa3e367ad09bb5a9a6    #     "ÆUÝú>6zÐ\x9bµ©¦"
+d2                              # tag(18)
+  84                            #   array(4)
+    58 20                       #     bytes(32)
+      a2012610781a6170706c6963  #       "¢\x01&\x10x\x1aapplic"
+      6174696f6e2f737461747573  #       "ation/status"
+      6c6973742b637774          #       "list+cwt"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 50                       #     bytes(80)
+      a502782168747470733a2f2f  #       "¥\x02x!https://"
+      6578616d706c652e636f6d2f  #       "example.com/"
+      7374617475736c697374732f  #       "statuslists/"
+      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
+      ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
+      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
+      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
+    58 40                       #     bytes(64)
+      93fa4d01032b18c35e2fe110  #       "\x93úM\x01\x03+\x18Ã^/á\x10"
+      1b77fd6cc9440022caa46944  #       "\x1bwýlÉD\x00"Ê¤iD"
+      50c4e4e9feab4e99d1fa6d97  #       "PÄäéþ«N\x99Ñúm\x97"
+      72ce2bf3a12e0323ded7c982  #       "rÎ+ó¡.\x03#Þ×É\x82"
+      c5e101a5e67f0cbc1e2b6f57  #       "Åá\x01¥æ\x7f\x0c¼\x1e+oW"
+      ce99c279                  #       "Î\x99Ây"
 
 6.  Referenced Token
 
@@ -824,7 +826,7 @@ Table of Contents
      }
    }
 
-   SD-JWT-based Verifiable Credentials [SD-JWT.VC] section 3.2.2.2.
+   SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of [SD-JWT.VC])
    introduces the usage of the status mechanism defined in this section.
    Therefore, an SD-JWT VC can be considered a Referenced Token.  The
    following is a non-normative example of a Referenced Token in SD-JWT
@@ -914,9 +916,9 @@ Table of Contents
    d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
    6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
    7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
-   7374617475736c697374732f31584042fb18bb4cfb71bad81a697aa0219c0f4e6c6e
-   7e1b613792d92a1fed7befbb80471f5cc7359ec66ec28c05498634088d13f9ce70f5
-   7d1af989a96dd6b8e7deaa
+   7374617475736c697374732f315840340f7efea10f1a36dc4797636a17b4dd4848b6
+   8997d1d10e8cceb3a38ff33b3dda72964a83989f6cf98560c2fc97a08bc8977cc6b0
+   f84cfedab93d3e4481e938
 
    The following is the CBOR Annotated Hex output of the example above:
 
@@ -939,12 +941,12 @@ d2                              # tag(18)
       2e636f6d2f7374617475736c  #       ".com/statusl"
       697374732f31              #       "ists/1"
     58 40                       #     bytes(64)
-      42fb18bb4cfb71bad81a697a  #       "Bû\x18»LûqºØ\x1aiz"
-      a0219c0f4e6c6e7e1b613792  #       "\xa0!\x9c\x0fNln~\x1ba7\x92"
-      d92a1fed7befbb80471f5cc7  #       "Ù*\x1fí{ï»\x80G\x1f\Ç"
-      359ec66ec28c05498634088d  #       "5\x9eÆnÂ\x8c\x05I\x864\x08\x8d"
-      13f9ce70f57d1af989a96dd6  #       "\x13ùÎpõ}\x1aù\x89©mÖ"
-      b8e7deaa                  #       "¸çÞª"
+      340f7efea10f1a36dc479763  #       "4\x0f~þ¡\x0f\x1a6ÜG\x97c"
+      6a17b4dd4848b68997d1d10e  #       "j\x17´ÝHH¶\x89\x97ÑÑ\x0e"
+      8cceb3a38ff33b3dda72964a  #       "\x8cÎ³£\x8fó;=Úr\x96J"
+      83989f6cf98560c2fc97a08b  #       "\x83\x98\x9flù\x85`Âü\x97\xa0\x8b"
+      c8977cc6b0f84cfedab93d3e  #       "È\x97|Æ°øLþÚ¹=>"
+      4481e938                  #       "D\x81é8"
 
 6.3.2.  ISO mdoc
 
@@ -1112,8 +1114,8 @@ d2                              # tag(18)
    This document creates a registry in Section 14.5 that includes the
    most common Status Type values.  Applications SHOULD use registered
    values for statuses if they have the correct semantics.  Additional
-   values may defined for particular use cases.  Status Types described
-   by this document comprise:
+   values may be defined for particular use cases.  Status Types
+   described by this document comprise:
 
    *  0x00 - "VALID" - The status of the Referenced Token is valid,
       correct or legal.
@@ -1138,7 +1140,7 @@ d2                              # tag(18)
    The fetching, processing and verifying of a Status List Token may be
    done by either the Holder or the Relying Party.  The following
    section is described from the role of the Relying Party, however the
-   same rules apply for the Holder.
+   same rules apply to the Holder.
 
 8.1.  Status List Request
 
@@ -1193,7 +1195,7 @@ d2                              # tag(18)
    follow the rules of Section 5.2.
 
    The body of such an HTTP response contains the raw Status List Token,
-   that means the binary encoding as defined in section 9.2.1 of
+   that means the binary encoding as defined in Section 9.2.1 of
    [RFC8392] for a Status List Token in CWT format and the JWS Compact
    Serialization form for a Status List Token in JWT format.  Note that
    while the examples for Status List Tokens in CWT format in this
@@ -1218,8 +1220,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.QODWBcaVfPC9ArV6Mla8M8RS9sJCQ_mVcO70Bj1jVUArC44cn3kJ
-   I6FAyohdeO3aFp1MgY6YFaC8lA8wAFMgVg
+   nR0bCI6NDMyMDB9.2lKUUNG503R9htu4aHAYi7vjmr3sgApbfoDvPrl65N3URUO1EYqq
+   Ql45Jfzd-Av4QzlKa3oVALpLwOEUOq-U_g
 
 8.3.  Validation Rules
 
@@ -1237,7 +1239,7 @@ d2                              # tag(18)
    If this validation is not successful, the Referenced Token MUST be
    rejected.  If the validation was successful, the Relying Party MUST
    perform the following validation steps to evaluate the status of the
-   reference token:
+   Referenced Token:
 
    1.  Check for the existence of a status claim, check for the
        existence of a status_list claim within the status claim and
@@ -1251,7 +1253,7 @@ d2                              # tag(18)
    3.  Validate the Status List Token:
 
        a.  Validate the Status List Token by following the rules defined
-           in section 7.2 of [RFC7519] for JWTs and section 7.2 of
+           in Section 7.2 of [RFC7519] for JWTs and Section 7.2 of
            [RFC8392] for CWTs.  This step might require the resolution
            of a public key as described in Section 11.3.
 
@@ -1292,10 +1294,10 @@ d2                              # tag(18)
    Referenced Token can be made and the Referenced Token SHOULD be
    rejected.
 
-8.4.  Historical resolution
+8.4.  Historical Resolution
 
    By default, the status mechanism defined in this specification only
-   conveys information about the state of Reference Tokens at the time
+   conveys information about the state of Referenced Tokens at the time
    the Status List Token was issued.  The validity period for this
    information, as defined by the issuer, is explicitly stated by the
    iat (issued at) and exp (expiration time) claims for JWT and their
@@ -1339,8 +1341,8 @@ d2                              # tag(18)
    yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
    GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
    WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
-   nR0bCI6NDMyMDB9.QODWBcaVfPC9ArV6Mla8M8RS9sJCQ_mVcO70Bj1jVUArC44cn3kJ
-   I6FAyohdeO3aFp1MgY6YFaC8lA8wAFMgVg
+   nR0bCI6NDMyMDB9.2lKUUNG503R9htu4aHAYi7vjmr3sgApbfoDvPrl65N3URUO1EYqq
+   Ql45Jfzd-Av4QzlKa3oVALpLwOEUOq-U_g
 
 9.  Status List Aggregation
 
@@ -1348,7 +1350,7 @@ d2                              # tag(18)
    Issuer to publish a list of one or more Status List Tokens URIs,
    allowing a Relying Party to fetch Status List Tokens provided by this
    Issuer.  This mechanism is intended to support fetching and caching
-   mechanisms and allow offline validation of the status of a Reference
+   mechanisms and allow offline validation of the status of a Referenced
    Token for a period of time.
 
    If a Relying Party encounters an error while validating one of the
@@ -1416,10 +1418,10 @@ d2                              # tag(18)
       linking to Status List Tokens.
 
    The Status List Aggregation URI provides a list of Status List Token
-   URIs.  This aggregation in JSON and the media type return MUST be
-   application/json.  A Relying Party can iterate through this list and
-   fetch all Status List Tokens before encountering the specific URI in
-   a Referenced Token.
+   URIs.  This aggregation is in JSON and the returned media type MUST
+   be application/json.  A Relying Party can iterate through this list
+   and fetch all Status List Tokens before encountering the specific URI
+   in a Referenced Token.
 
    The following is a non-normative example for media type application/
    json:
@@ -1441,13 +1443,13 @@ d2                              # tag(18)
    Usage (KU) extension, which indicates the set of basic cryptographic
    operations for which the certified key may be used.  A certificate's
    issuer explicitly delegates Status List Token signing authority by
-   issuing a X.509 certificate containing the KeyPurposeId defined below
-   in the extended key usage extension.  Other specifications MAY choose
-   to re-use this OID for other status mechanisms under the condition
-   that they are registered in the "JWT Status Mechanisms" or "CWT
-   Status Mechanisms" registries.
+   issuing an X.509 certificate containing the KeyPurposeId defined
+   below in the extended key usage extension.  Other specifications MAY
+   choose to re-use this OID for other status mechanisms under the
+   condition that they are registered in the "JWT Status Mechanisms" or
+   "CWT Status Mechanisms" registries.
 
-   The following OID is defined for usage in the EKU extension
+   The following OID is defined for usage in the EKU extension:
 
      id-kp  OBJECT IDENTIFIER  ::=
           { iso(1) identified-organization(3) dod(6) internet(1)
@@ -1457,8 +1459,8 @@ d2                              # tag(18)
 
 11.  Security Considerations
 
-   Status List Tokens as defined in Section 5 only exists in
-   cryptographically secured containers which allows checking the
+   Status List Tokens as defined in Section 5 only exist in
+   cryptographically secured containers which allow checking the
    integrity and origin without relying on other factors such as
    transport security or web PKI.
 
@@ -1626,7 +1628,7 @@ d2                              # tag(18)
 
    *  using trusted Third Party Hosting, see Section 12.6.
 
-12.2.  Issuer Tracking of Reference Tokens
+12.2.  Issuer Tracking of Referenced Tokens
 
    An Issuer could maliciously or accidentally bypass the privacy
    benefits of the herd privacy by either:
@@ -1637,14 +1639,14 @@ d2                              # tag(18)
       Referenced Tokens by utilizing this mapping for the incoming
       requests.
 
-   *  Encoding a unique URI in each Reference Token which points to the
+   *  Encoding a unique URI in each Referenced Token which points to the
       underlying Status List.  This may involve using URI components
       such as query parameters, unique path segments, or fragments to
       make the URI unique.
 
    This malicious behavior can be detected by Relying Parties that
    request large amounts of Referenced Tokens by comparing the number of
-   different Status Lists and their sizes with the volume of Reference
+   different Status Lists and their sizes with the volume of Referenced
    Tokens being verified.
 
 12.3.  Observability of Relying Parties
@@ -1671,7 +1673,7 @@ d2                              # tag(18)
    Outside actors may analyse the publicly available Status Lists to get
    information on the internal processes of the Issuer and its related
    business, e.g. number of customers or clients.  This data may allow
-   inferences on the total number of issued Reference Tokens and the
+   inferences on the total number of issued Referenced Tokens and the
    revocation rate.  Additionally, actors may regularly fetch this data
    or use the historic data functionality to learn how these numbers
    change over time.
@@ -1707,7 +1709,7 @@ d2                              # tag(18)
    time-use Referenced Tokens, enabling Holders to use in a single
    interaction with a Relying Party before discarding.  See Section 13.2
    to avoid further correlatable information by the values of uri and
-   index, Status Issuers are RECOMMENDED to:
+   idx, Status Issuers are RECOMMENDED to:
 
    *  choose non-sequential, pseudo-random or random indices
 
@@ -1718,7 +1720,7 @@ d2                              # tag(18)
 
 12.5.2.  Colluding Status Issuer and Relying Party
 
-   A Status Issuer and a Relying Party Issuer may link two transaction
+   A Status Issuer and a Relying Party Issuer may link two transactions
    involving the same Referenced Tokens by comparing the status claims
    of the Referenced Token and therefore determine that they have
    interacted with the same Holder.  It is therefore recommended to use
@@ -1774,7 +1776,7 @@ d2                              # tag(18)
    possibilities before doing so and evaluate if revocation and re-
    issuance might a better fit for their use-case.
 
-13.  Implementation Considerations
+13.  Operational Considerations
 
 13.1.  Token Lifecycle
 
@@ -1812,15 +1814,15 @@ d2                              # tag(18)
    value can not be distinguished from a valid Referenced Token.
 
    The Status Issuer is RECOMMENDED to prevent double allocation, i.e.
-   re-using the same uri and index for multiple Referenced Tokens (since
-   uri and index form a unique identifier that might be used for
-   tracking, see Section 12 for more details).  The Status Issuer MUST
-   prevent any unintended double allocation.
+   re-using the same uri and idx for multiple Referenced Tokens (since
+   uri and idx form a unique identifier that might be used for tracking,
+   see Section 12 for more details).  The Status Issuer MUST prevent any
+   unintended double allocation.
 
 13.4.  Status List Size
 
    The storage and transmission size of the Status Issuer's Status List
-   Tokens depends on:
+   Tokens depend on:
 
    *  the size of the Status List, i.e. the number of Referenced Tokens
 
@@ -1851,7 +1853,7 @@ d2                              # tag(18)
 
    If the roles of the Issuer of the Referenced Token and the Status
    Issuer are performed by different entities, this may allow for use
-   case that require revocations of Referenced Tokens to be managed by a
+   cases that require revocation of Referenced Tokens to be managed by
    different entities, e.g. for regulatory or privacy reasons.  In this
    scenario both parties must align on:
 
@@ -2439,12 +2441,14 @@ d2                              # tag(18)
 14.9.  X.509 Certificate Extended Key Purpose OID Registration
 
    IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD"
-   in the "SMI Security for PKIX Extended Key Purpose" registry
-   (1.3.6.1.5.5.7.3), this OID is defined in section Section 10.
+   with a description of "id-kp-oauthStatusSigning" in the "SMI Security
+   for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3).  This OID
+   is defined in section Section 10.
 
    IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD"
-   in the "SMI Security for PKIX Module Identifier" registry
-   (1.3.6.1.5.5.7.0), this OID is defined in section Appendix A.
+   with a description of "id-mod-oauth-status-signing-eku" in the "SMI
+   Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0).
+   This OID is defined in section Appendix A.
 
 15.  Acknowledgments
 
@@ -2453,7 +2457,7 @@ d2                              # tag(18)
    Hannes Tschofenig, Kristina Yasuda, Markus Kreusch, Martijn Haring,
    Michael B.  Jones, Micha Kraus, Michael Schwartz, Mike Prorock, Mirko
    Mollik, Oliver Terbu, Orie Steele, Rifaat Shekh-Yusef, Rohan Mahy,
-   Timo Glastra and Torsten Lodderstedt
+   Takahiko Kawasaki, Timo Glastra and Torsten Lodderstedt
 
    for their valuable contributions, discussions and feedback to this
    specification.
@@ -2466,31 +2470,6 @@ d2                              # tag(18)
               <https://fetch.spec.whatwg.org/commit-
               snapshots/4775fcb48042c8411df497c0b7cf167b4240004f/#http-
               cors-protocol>.
-
-   [IANA.Core.Params]
-              IANA, "Constrained RESTful Environments (CoRE)
-              Parameters", n.d., <https://www.iana.org/assignments/core-
-              parameters/core-parameters.xhtml>.
-
-   [IANA.CWT] IANA, "CBOR Web Token (CWT) Claims", n.d.,
-              <https://www.iana.org/assignments/cwt/cwt.xhtml>.
-
-   [IANA.JOSE]
-              IANA, "JSON Object Signing and Encryption (JOSE)", n.d.,
-              <https://www.iana.org/assignments/jose/jose.xhtml>.
-
-   [IANA.JWT] IANA, "JSON Web Token Claims", n.d.,
-              <https://www.iana.org/assignments/jwt/jwt.xhtml>.
-
-   [IANA.MediaTypes]
-              IANA, "Media Types", n.d.,
-              <https://www.iana.org/assignments/media-types/media-
-              types.xhtml>.
-
-   [IANA.OAuth.Params]
-              IANA, "OAuth Authorization Server Metadata", n.d.,
-              <https://www.iana.org/assignments/oauth-parameters/oauth-
-              parameters.xhtml#authorization-server-metadata>.
 
    [RFC1950]  Deutsch, P. and J. Gailly, "ZLIB Compressed Data Format
               Specification version 3.3", RFC 1950,
@@ -2589,6 +2568,27 @@ d2                              # tag(18)
 
 16.2.  Informative References
 
+   [IANA.Core.Params]
+              IANA, "Constrained RESTful Environments (CoRE)
+              Parameters", n.d., <https://www.iana.org/assignments/core-
+              parameters/core-parameters.xhtml>.
+
+   [IANA.CWT] IANA, "CBOR Web Token (CWT) Claims", n.d.,
+              <https://www.iana.org/assignments/cwt/cwt.xhtml>.
+
+   [IANA.JWT] IANA, "JSON Web Token Claims", n.d.,
+              <https://www.iana.org/assignments/jwt/jwt.xhtml>.
+
+   [IANA.MediaTypes]
+              IANA, "Media Types", n.d.,
+              <https://www.iana.org/assignments/media-types/media-
+              types.xhtml>.
+
+   [IANA.OAuth.Params]
+              IANA, "OAuth Authorization Server Metadata", n.d.,
+              <https://www.iana.org/assignments/oauth-parameters/oauth-
+              parameters.xhtml#authorization-server-metadata>.
+
    [ISO.mdoc] ISO/IEC JTC 1/SC 17, "ISO/IEC 18013-5:2021 ISO-compliant
               driving licence", n.d..
 
@@ -2610,9 +2610,19 @@ d2                              # tag(18)
               DOI 10.17487/RFC8414, June 2018,
               <https://www.rfc-editor.org/rfc/rfc8414>.
 
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
+
    [RFC9458]  Thomson, M. and C. A. Wood, "Oblivious HTTP", RFC 9458,
               DOI 10.17487/RFC9458, January 2024,
               <https://www.rfc-editor.org/rfc/rfc9458>.
+
+   [RFC9562]  Davis, K., Peabody, B., and P. Leach, "Universally Unique
+              IDentifiers (UUIDs)", RFC 9562, DOI 10.17487/RFC9562, May
+              2024, <https://www.rfc-editor.org/rfc/rfc9562>.
 
    [SD-JWT.VC]
               Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
@@ -2635,7 +2645,8 @@ d2                              # tag(18)
 Appendix A.  ASN.1 Module
 
    The following module adheres to ASN.1 specifications [X.680] and
-   [X.690].
+   [X.690].  It defines the OID used for OAuth Status Mechanism Key
+   Extended Key Usage.
 
    <CODE BEGINS>
      OauthStatusSigning-EKU
@@ -2659,20 +2670,20 @@ Appendix A.  ASN.1 Module
      END
    <CODE ENDS>
 
-Appendix B.  Size comparison
+Appendix B.  Size Comparison
 
    The following tables show a size comparison for a Status List
    (compressed byte array as defined in Section 4.1) and a compressed
-   Byte Array of UUIDs (as an approximation to the list of IDs of
-   Referenced Tokens in a Certificate Revocation List).  Readers must be
-   aware that these are not sizes for complete Status List Tokens in
+   Byte Array of UUIDs [RFC9562] (as an approximation to the list of IDs
+   of Referenced Tokens in a Certificate Revocation List).  Readers must
+   be aware that these are not sizes for complete Status List Tokens in
    JSON/CBOR nor Certificate Revocation Lists (CRLs), as they don't
-   contain metadata, certificates and signatures.
+   contain metadata, certificates, and signatures.
 
    If no further metadata is provided in Status List Tokens or CRLs,
    then the size of Status Lists or arrays of Certificate ids
    (represented as UUIDs) will be the main factors deciding on the
-   overall size of a Status List Token or CRL respectively.
+   overall size of a Status List Token or CRL, respectively.
 
 Size of Status Lists for varying amount of entries and revocation rates
 
@@ -2695,12 +2706,11 @@ Size of Status Lists for varying amount of entries and revocation rates
     Table 1: Status List Size examples for varying amount of entries and
                               revocation rates
 
-Size of compressed array of UUIDv4 (128 bit UUIDs) for varying amount of
+Size of compressed array of UUIDv4 (128-bit UUIDs) for varying amount of
 entries and revocation rates
 
-   This is a simple approximation of a Certificate Revocation List using
-   an array of UUIDs without any additional metadata (128 bit UUID per
-   revoked entry).
+   This is a simple approximation of a CRL using an array of UUIDs
+   without any additional metadata (128-bit UUID per revoked entry).
 
    +====+=====+======+=====+=====+====+=====+=====+=====+=====+=======+
    |Size|0.01%|0.1%  |1%   |2%   |5%  |10%  |25%  |50%  |75%  | 100%  |
@@ -2718,7 +2728,7 @@ entries and revocation rates
    |    |KB   |      |MB   |MB   |MB  |MB   |MB   |MB   |GB   | GB    |
    +----+-----+------+-----+-----+----+-----+-----+-----+-----+-------+
 
-      Table 2: Size examples for 128 bit UUIDs for varying amount of
+      Table 2: Size examples for 128-bit UUIDs for varying amount of
                        entries and revocation rates
 
 Appendix C.  Test vectors for Status List encoding
@@ -2731,9 +2741,9 @@ Appendix C.  Test vectors for Status List encoding
    assumed to be 0 (VALID).  All examples are initialized with a size of
    2^20 entries.
 
-C.1.  1 bit Status List
+C.1.  1-bit Status List
 
-   The following example uses a 1 bit Status List (2 possible values):
+   The following example uses a 1-bit Status List (2 possible values):
 
    status[0] = 0b1
    status[1993] = 0b1
@@ -2767,9 +2777,9 @@ C.1.  1 bit Status List
    000000000000000000ecaa4b000000000000000000000000000000009b0b09000000
    00000000000038de9400000000000000002a30cc010000000080642f0bd8011b
 
-C.2.  2 bit Status List
+C.2.  2-bit Status List
 
-   The following example uses a 2 bit Status List (4 possible values):
+   The following example uses a 2-bit Status List (4 possible values):
 
    status[0] = 0b01
    status[1993] = 0b10
@@ -2809,9 +2819,9 @@ C.2.  2 bit Status List
    01000000000000000000000000000000000000c07d4b020000000000000000000000
    00000000a8614a0000000000000000000000406a1fcd60010c
 
-C.3.  4 bit Status List
+C.3.  4-bit Status List
 
-   The following example uses a 4 bit Status List (16 possible values):
+   The following example uses a 4-bit Status List (16 possible values):
 
    status[0] = 0b0001
    status[1993] = 0b0010
@@ -2869,9 +2879,9 @@ C.3.  4 bit Status List
    00000000000000000000000000000071dc0a0080ba55010000000000000000000000
    c0cf3daf03000000000000000008ec03dc4c04c0
 
-C.4.  8 bit Status List
+C.4.  8-bit Status List
 
-   The following example uses a 8 bit Status List (256 possible values):
+   The following example uses a 8-bit Status List (256 possible values):
 
    status[233478] = 0b00000000
    status[52451] = 0b00000001
@@ -3243,6 +3253,18 @@ Document History
 
    [[ To be removed from the final specification ]]
 
+   -15
+
+   *  add description field to EKU iana registration request
+
+   *  fix typos in referenced token
+
+   *  fix typos
+
+   *  make IANA references informative
+
+   *  remove unused iana.jose reference
+
    -14
 
    *  use binary value encoding for all test vectors (display purposes
@@ -3372,7 +3394,8 @@ Document History
 
    *  editorial changes on terminology and Referenced Tokens
 
-   *  clarify privacy consideration around one time use reference tokens
+   *  clarify privacy consideration around one time use referenced
+      tokens
 
    *  explain the Status List Token size dependencies
 
