@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-04T00:23:54.548618+00:00",
+  "timestamp": "2026-01-06T00:21:38.545780+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -21943,7 +21943,7 @@
       "labels": [],
       "body": "Closes #311",
       "createdAt": "2025-12-10T15:36:33Z",
-      "updatedAt": "2025-12-15T18:04:34Z",
+      "updatedAt": "2026-01-05T11:48:43Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "579bf5de1aebb5b08c5edc60088749f8349c1326",
@@ -21954,8 +21954,57 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "we should add a document history entry for this",
+          "createdAt": "2026-01-05T09:28:20Z",
+          "updatedAt": "2026-01-05T09:28:20Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7YIJv3",
+          "commit": {
+            "abbreviatedOid": "66d8dde"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-05T09:08:44Z",
+          "updatedAt": "2026-01-05T09:08:44Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nThe Status List Token MUST be encoded as a \"CBOR Web Token (CWT)\" according to {{RFC8392}}. The Status List Token MUST NOT be tagged with the CWT tag defined in {{section 6 of RFC8392}}, but MUST be tagged with the COSE tag as defined in {{section 2 of RFC9052}} (e.g., Tag `18` for a Status List Token of type `COSE_Sign1`).\r\n```",
+              "createdAt": "2026-01-05T09:08:44Z",
+              "updatedAt": "2026-01-05T09:16:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7YKKRu",
+          "commit": {
+            "abbreviatedOid": "66d8dde"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-05T11:48:43Z",
+          "updatedAt": "2026-01-05T11:48:43Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I think we should mandate either tag for Sign1 or Mac0",
+              "createdAt": "2026-01-05T11:48:43Z",
+              "updatedAt": "2026-01-05T11:48:55Z"
+            }
+          ]
+        }
+      ]
     },
     {
       "number": 323,
