@@ -1968,6 +1968,7 @@ CBOR encoding:
 
 -15
 
+* be explicit about tagging and re-add cose_sign1 tag to example
 * add description field to EKU iana registration request
 * fix typos in referenced token
 * fix typos
