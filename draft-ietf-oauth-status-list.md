@@ -1573,7 +1573,7 @@ If no further metadata is provided in Status List Tokens or CRLs, then the size 
 | 100k | 81 B    | 252 B    | 1.4 KB   | 2.3 KB   | 4.5 KB   | 6.9 KB   | 10.2 KB   | 12.2 KB  | 10.2 KB   | 35 B    |
 | 1M   | 442 B   | 2.2 KB   | 13.7 KB  | 23.0 KB  | 43.9 KB  | 67.6 KB  | 102.2 KB  | 122.1 KB | 102.4 KB  | 144 B   |
 | 10M  | 3.8 KB  | 21.1 KB  | 135.4 KB | 230.0 KB | 437.0 KB | 672.9 KB | 1023.4 KB | 1.2 MB   | 1023.5 KB | 1.2 KB  |
-| 100M | 38.3 KB | 213.0 KB | 1.3 MB   | 2.2 MB   | 4.3 MB   | 6.6 MB   | 10.0 MB   | 11.9 MB  | 10.0 MB   | 11.9 KB |
+| 100M | 38.3 KB | 213.0 KB | 1.3 MB   | 2.2 MB   | 4.3 MB   | 6.6 MB   | 10.0 MB   | 11.9 MB  | 10.0 MB   | 11.9 MB |
 {: title="Status List Size examples for varying amount of entries and revocation rates"}
 
 ## Size of compressed array of UUIDv4 (128-bit UUIDs) for varying amount of entries and revocation rates
