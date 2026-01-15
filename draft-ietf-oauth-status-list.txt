@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 10 July 2026                                    Bundesdruckerei
+Expires: 19 July 2026                                    Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                          6 January 2026
+                                                         15 January 2026
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 July 2026.
+   This Internet-Draft will expire on 19 July 2026.
 
 Copyright Notice
 
@@ -276,12 +276,12 @@ Table of Contents
    (CRLs) have limited scalability; Online Certificate Status Protocol
    (OCSP) has additional privacy risks, since the client is leaking the
    requested website to a third party.  OCSP stapling is addressing some
-   of these problems at the cost of less up-to-date data.  Modern
-   approaches use accumulator-based revocation registries and Zero-
-   Knowledge-Proofs to accommodate for this privacy gap, but face
-   scalability issues again.  Another alternative is short-lived
-   Referenced Tokens with regular re-issuance, but this puts additional
-   burden on the Issuer's infrastructure.
+   of these problems at the cost of less up-to-date data.  Approaches
+   based on cryptographic accumulators and Zero-Knowledge-Proofs try to
+   accommodate for this privacy gap, but are currently (in 2026) facing
+   scalability issues and are not yet standardized.  Another alternative
+   is short-lived Referenced Tokens with regular re-issuance, but this
+   puts additional burden on the Issuer's infrastructure.
 
    This specification seeks to find a balance between scalability,
    security and privacy by representing statuses as individual bits,
@@ -297,14 +297,13 @@ Table of Contents
    The decisions taken in this specification aim to achieve the
    following design goals:
 
-   *  the specification shall favor a simple and easy-to-understand
-      concept
-
    *  the specification shall be easy, fast and secure to implement in
       all major programming languages
 
    *  the specification shall be optimized to support the most common
-      use cases and avoid unnecessary complexity of corner cases
+      use cases, such as revocation, and avoid unnecessary complexity of
+      corner cases, such as providing multiple statuses for a single
+      token
 
    *  the Status List shall scale up to millions of tokens to support
       large-scale government or enterprise use cases
@@ -956,7 +955,7 @@ d2                              # tag(18)
    as specified in Section 9.1.2 of [ISO.mdoc].  The status parameter
    contains the Status CBOR structure as described in Section 6.3.
 
-   It is RECOMMENDED to use status for the label of the field that
+   It is recommended to use status for the label of the field that
    contains the Status CBOR structure.
 
    Application of additional restrictions and policies are at the
@@ -1483,11 +1482,11 @@ d2                              # tag(18)
 
 11.2.  Security Guidance for JWT and CWT
 
-   A Status List Token in the JWT format SHOULD follow the security
+   A Status List Token in the JWT format MUST follow the security
    considerations of [RFC7519] and the best current practices of
    [RFC8725].
 
-   A Status List Token in the CWT format SHOULD follow the security
+   A Status List Token in the CWT format MUST follow the security
    considerations of [RFC8392].
 
 11.3.  Key Resolution and Trust Management
@@ -1576,14 +1575,14 @@ d2                              # tag(18)
    DDoS the contained URL of the Status Provider.
 
    Reasonable values for both claims highly depend on the use-case
-   requirements and clients SHOULD be configured with lower/upper bounds
+   requirements and clients should be configured with lower/upper bounds
    for these values that fit their respective use-cases.
 
 11.6.  Status List Token Protection
 
    This specification allows both, digital signatures using asymmetric
    cryptography, and Message Authentication Codes (MAC) to be used to
-   protect Status List Tokens.  Implementers SHOULD only use MACs to
+   protect Status List Tokens.  Implementers should only use MACs to
    secure the integrity of Status List Tokens if they fully understand
    the risks of MACs when compared to digital signatures and especially
    the requirements of their use-case scenarios.  These use-cases
@@ -3253,6 +3252,12 @@ C.4.  8-bit Status List
 Document History
 
    [[ To be removed from the final specification ]]
+
+   -16
+
+   *  making several SHOULDs non-normative
+
+   *  small corrections in the introduction
 
    -15
 
