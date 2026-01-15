@@ -1582,7 +1582,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-prior-work">
 <a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-prior-work" class="section-name selfRef">Prior Work</a>
         </h3>
-<p id="section-1.4-1">Representing statuses with bits in an array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. <span>[<a href="#smith2020let" class="cite xref">smith2020let</a>]</span> that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List <span>[<a href="#W3C.SL" class="cite xref">W3C.SL</a>]</span> that similarly uses a compressed bit representation.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.4-1">Representing statuses with bits in an array is a rather old and well-known concept in computer science. There has been prior work to use this for revocation and status management. For example, a paper by Smith et al. <span>[<a href="#smith2020let" class="cite xref">smith2020let</a>]</span> proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day. The W3C bit Status List <span>[<a href="#W3C.SL" class="cite xref">W3C.SL</a>]</span> similarly uses a compressed bit representation.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="status-mechanisms-registry">
@@ -1638,29 +1638,34 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <p id="section-3-1.10.1">An entity that relies on the Referenced Token and fetches the corresponding Status List Token to validate the status of that Referenced Token. Also known as a Verifier.<a href="#section-3-1.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-1.11">Status List:</dt>
+<dt id="section-3-1.11">Status:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.12">
-          <p id="section-3-1.12.1">An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.<a href="#section-3-1.12.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.12.1">A Status describes the current state, mode, condition or stage of an entity that is represented by the Referenced Token as determined by the Status Issuer.<a href="#section-3-1.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-1.13">Status List Token:</dt>
+<dt id="section-3-1.13">Status List:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.14">
-          <p id="section-3-1.14.1">A token in JWT (as defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>) or CWT (as defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>) representation that contains a cryptographically secured Status List.<a href="#section-3-1.14.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.14.1">An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.<a href="#section-3-1.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-1.15">Referenced Token:</dt>
+<dt id="section-3-1.15">Status List Token:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.16">
-          <p id="section-3-1.16.1">A cryptographically secured data structure that contains a "status" claim that references a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> with JOSE as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> with COSE as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.<a href="#section-3-1.16.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.16.1">A token in JWT (as defined in <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>) or CWT (as defined in <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>) representation that contains a cryptographically secured Status List.<a href="#section-3-1.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-1.17">Client:</dt>
+<dt id="section-3-1.17">Referenced Token:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.18">
-          <p id="section-3-1.18.1">An application that fetches information, such as a Status List Token, from the Status List Provider on behalf of the Holder or Relying Party.<a href="#section-3-1.18.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.18.1">A cryptographically secured data structure that contains a "status" claim that references a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is <span class="bcp14">RECOMMENDED</span> to use JSON <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> with JOSE as defined in <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> or CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> with COSE as defined in <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span>. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.<a href="#section-3-1.18.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-1.19">base64url:</dt>
+<dt id="section-3-1.19">Client:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.20">
-          <p id="section-3-1.20.1">Denotes the URL-safe base64 encoding with all trailing '=' characters omitted as defined in <span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.20.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.20.1">An application that fetches information, such as a Status List Token, from the Status List Provider on behalf of the Holder or Relying Party.<a href="#section-3-1.20.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-1.21">base64url:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-1.22">
+          <p id="section-3-1.22.1">Denotes the URL-safe base64 encoding with all trailing '=' characters omitted as defined in <span><a href="https://rfc-editor.org/rfc/rfc7515#section-2" class="relref">Section 2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> as "Base64url Encoding".<a href="#section-3-1.22.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1671,7 +1676,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-status-list">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-status-list" class="section-name selfRef">Status List</a>
       </h2>
-<p id="section-4-1">A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. <a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a> describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third sections describe how to encode such a Status List in JSON and CBOR representations.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. <a href="#status-list-byte-array" class="auto internal xref">Section 4.1</a> describes how to construct a compressed byte array that is the base component for the Status List data structure. <a href="#status-list-json" class="auto internal xref">Section 4.2</a> and <a href="#status-list-cbor" class="auto internal xref">Section 4.3</a> describe how to encode such a Status List in JSON and CBOR representations.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="status-list-byte-array">
 <section id="section-4.1">
         <h3 id="name-compressed-byte-array">
@@ -1680,7 +1685,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-4.1-1">A compressed byte array containing the status information of the Referenced Token is composed by the following algorithm:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1-2">
 <li id="section-4.1-2.1">
-            <p id="section-4.1-2.1.1">The Status Issuer <span class="bcp14">MUST</span> define a number of bits (<code>bits</code>) of either 1,2,4 or 8, that represents the amount of bits used to describe the status of each Referenced Token within this Status List. Therefore, up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error-prone.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.1.1">The Status Issuer <span class="bcp14">MUST</span> define a number of bits (<code>bits</code>) of either 1,2,4 or 8, that represents the amount of bits used to describe the status of each Referenced Token within this Status List. Therefore, up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation, thus keeping implementations simpler and less error-prone.<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-4.1-2.2">
             <p id="section-4.1-2.2.1">The Status Issuer creates a byte array of size = amount of Referenced Tokens * <code>bits</code> / 8 or greater. Depending on the <code>bits</code>, each byte in the array corresponds to 8/(<code>bits</code>) statuses (8,4,2 or 1).<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
@@ -1725,6 +1730,7 @@ index       7 6 5 4 3 2 1 0   15   ...  10 9 8
            \_______________/  \_______________/
 byte value       0xB9               0xA3
 
+compressed array (hex): 78dadbb918000217015d
 </pre><a href="#section-4.1-6" class="pilcrow">¶</a>
 </div>
 <p id="section-4.1-7">In the following example, the Status List additionally includes the Status Type "SUSPENDED". As the Status Type value for "SUSPENDED" is 0x02 and does not fit into 1 bit, the <code>bits</code> is required to be 2. This example illustrates the byte array of a Status List that represents the statuses of 12 Referenced Tokens with a <code>bits</code> of 2, requiring 3 bytes (24 bits) for the uncompressed byte array:<a href="#section-4.1-7" class="pilcrow">¶</a></p>
@@ -1758,6 +1764,7 @@ index        3   2   1   0      7   6   5   4      11  10  9   8
              \___________/      \___________/      \___________/
 byte value       0xC9               0x44               0xF9
 
+compressed array (hex): 78da3be9f2130003df0207
 </pre><a href="#section-4.1-10" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2148,7 +2155,7 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
                 <p id="section-6.3-2.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-2.1.2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-2.1.2.1.2.1">
-                    <p id="section-6.3-2.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (major type 0) The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.<a href="#section-6.3-2.1.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-6.3-2.1.2.1.2.1.1"><code>idx</code>: <span class="bcp14">REQUIRED</span>. Unsigned integer (major type 0). The <code>idx</code> (index) claim <span class="bcp14">MUST</span> specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.<a href="#section-6.3-2.1.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                   <li class="normal" id="section-6.3-2.1.2.1.2.2">
                     <p id="section-6.3-2.1.2.1.2.2.1"><code>uri</code>: <span class="bcp14">REQUIRED</span>. Text string (major type 3). The <code>uri</code> (URI) claim <span class="bcp14">MUST</span> specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of <code>uri</code> <span class="bcp14">MUST</span> be a URI conforming to <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-6.3-2.1.2.1.2.2.1" class="pilcrow">¶</a></p>
@@ -2363,8 +2370,8 @@ fe8a1c4cafe
       <h2 id="name-status-types">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-status-types" class="section-name selfRef">Status Types</a>
       </h2>
-<p id="section-7-1">This document defines the statuses of Referenced Tokens as Status Type values. A status describes the state, mode, condition or stage of an entity that is represented by the Referenced Token.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<p id="section-7-2">A Status List represents exactly one status per Referenced Token. If the Status List contains more than one bit per token (as defined by <code>bits</code> in the Status List), then the whole value of bits <span class="bcp14">MUST</span> describe one value. Status Types <span class="bcp14">MUST</span> have a numeric value between 0 and 255 for their representation in the Status List. The issuer of the Status List <span class="bcp14">MUST</span> choose an adequate <code>bits</code> value (bit size) to be able to describe the required Status Types for its application.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-1">This document defines the statuses of Referenced Tokens as Status Type values.
+A Status List represents exactly one status per Referenced Token. If the Status List contains more than one bit per token (as defined by <code>bits</code> in the Status List), then the whole value of bits <span class="bcp14">MUST</span> describe one value. Status Types <span class="bcp14">MUST</span> have a numeric value between 0 and 255 for their representation in the Status List. The issuer of the Status List <span class="bcp14">MUST</span> choose an adequate <code>bits</code> value (bit size) to be able to describe the required Status Types for its application.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <div id="status-types-values">
 <section id="section-7.1">
         <h3 id="name-status-types-values">
@@ -2400,25 +2407,26 @@ fe8a1c4cafe
         <h3 id="name-status-list-request">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-status-list-request" class="section-name selfRef">Status List Request</a>
         </h3>
-<p id="section-8.1-1">The Status Provider <span class="bcp14">SHOULD</span> provide Status List Token on an endpoint serving an HTTP GET request to the URI provided in the Referenced Token, unless the Relying Party and the Status Provider have alternative methods of distribution.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
-<p id="section-8.1-2">The HTTP endpoint <span class="bcp14">SHOULD</span> support the use of Cross-Origin Resource Sharing (CORS) <span>[<a href="#CORS" class="cite xref">CORS</a>]</span> and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
-<p id="section-8.1-3">The Relying Party <span class="bcp14">SHOULD</span> send the following Accept HTTP Header to indicate the requested response type unless the Content-Type of Status List Tokens in the respective ecosystem is known or the Relying Party supports both formats:<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">The default Status List request and response mechanism uses HTTP semantics and Content negotiation as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">The Status Provider <span class="bcp14">SHOULD</span> return the Status List Token in response to an HTTP GET request to the URI provided in the Referenced Token, unless the Relying Party and the Status Provider have alternative methods of distribution.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-3">The HTTP endpoint <span class="bcp14">SHOULD</span> support the use of Cross-Origin Resource Sharing (CORS) <span>[<a href="#CORS" class="cite xref">CORS</a>]</span> and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1-4">The Relying Party <span class="bcp14">SHOULD</span> send the following Accept HTTP Header to indicate the requested response type unless the Content-Type of Status List Tokens in the respective ecosystem is known or the Relying Party supports both formats:<a href="#section-8.1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-8.1-4.1">
-            <p id="section-8.1-4.1.1">"application/statuslist+jwt" for Status List Token in JWT format<a href="#section-8.1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-8.1-5.1">
+            <p id="section-8.1-5.1.1">"application/statuslist+jwt" for Status List Token in JWT format<a href="#section-8.1-5.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-8.1-4.2">
-            <p id="section-8.1-4.2.1">"application/statuslist+cwt" for Status List Token in CWT format<a href="#section-8.1-4.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-8.1-5.2">
+            <p id="section-8.1-5.2.1">"application/statuslist+cwt" for Status List Token in CWT format<a href="#section-8.1-5.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-8.1-5">If the Relying Party does not send an Accept Header, the response type is assumed to be known implicitly or out-of-band.<a href="#section-8.1-5" class="pilcrow">¶</a></p>
-<p id="section-8.1-6">The following is a non-normative example of a request for a Status List Token with type <code>application/statuslist+jwt</code>:<a href="#section-8.1-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-ascii-art art-text artwork" id="section-8.1-7">
+<p id="section-8.1-6">If the Relying Party does not send an Accept Header, the response type is assumed to be known implicitly or out-of-band.<a href="#section-8.1-6" class="pilcrow">¶</a></p>
+<p id="section-8.1-7">The following is a non-normative example of a request for a Status List Token with type <code>application/statuslist+jwt</code>:<a href="#section-8.1-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-ascii-art art-text artwork" id="section-8.1-8">
 <pre>
 GET /statuslists/1 HTTP/1.1
 Host: example.com
 Accept: application/statuslist+jwt
-</pre><a href="#section-8.1-7" class="pilcrow">¶</a>
+</pre><a href="#section-8.1-8" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2441,7 +2449,7 @@ Accept: application/statuslist+jwt
 <p id="section-8.2-5">In the case of "application/statuslist+jwt", the response <span class="bcp14">MUST</span> be of type JWT and follow the rules of <a href="#status-list-token-jwt" class="auto internal xref">Section 5.1</a>.
 In the case of "application/statuslist+cwt", the response <span class="bcp14">MUST</span> be of type CWT and follow the rules of <a href="#status-list-token-cwt" class="auto internal xref">Section 5.2</a>.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
 <p id="section-8.2-6">The body of such an HTTP response contains the raw Status List Token, that means the binary encoding as defined in <span><a href="https://rfc-editor.org/rfc/rfc8392#section-9.2.1" class="relref">Section 9.2.1</a> of [<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> for a Status List Token in CWT format and the JWS Compact Serialization form for a Status List Token in JWT format. Note that while the examples for Status List Tokens in CWT format in this document are provided in hex encoding, this is done purely for readability; CWT format response bodies are "in binary".<a href="#section-8.2-6" class="pilcrow">¶</a></p>
-<p id="section-8.2-7">The HTTP response <span class="bcp14">SHOULD</span> use gzip Content-Encoding as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> for Status List Tokens in JWT format.<a href="#section-8.2-7" class="pilcrow">¶</a></p>
+<p id="section-8.2-7">The HTTP response <span class="bcp14">SHOULD</span> use Content-Encoding (such as gzip) using the content negotiation and encoding mechanisms as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span> for Status List Tokens in JWT format.<a href="#section-8.2-7" class="pilcrow">¶</a></p>
 <p id="section-8.2-8">If caching-related HTTP headers are present in the HTTP response, Relying Parties <span class="bcp14">MUST</span> prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.<a href="#section-8.2-8" class="pilcrow">¶</a></p>
 <p id="section-8.2-9">The following is a non-normative example of a response with a Status List Token with type <code>application/statuslist+jwt</code>:<a href="#section-8.2-9" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-8.2-10">
@@ -2520,8 +2528,8 @@ Ql45Jfzd-Av4QzlKa3oVALpLwOEUOq-U_g
 <a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-historical-resolution" class="section-name selfRef">Historical Resolution</a>
         </h3>
 <p id="section-8.4-1">By default, the status mechanism defined in this specification only conveys information about the state of Referenced Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the <code>iat</code> (issued at) and <code>exp</code> (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is desired, this can be achieved by extending with a timestamp the request for the Status List Token as defined in <a href="#status-list-request" class="auto internal xref">Section 8.1</a>. This feature has additional privacy implications as described in <a href="#privacy-historical" class="auto internal xref">Section 12.7</a>.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
-<p id="section-8.4-2">To obtain the Status List Token, the Relying Party <span class="bcp14">MUST</span> send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter <code>time</code> and its value being a unix timestamp. The response for a valid request <span class="bcp14">SHOULD</span> contain a Status List Token that was valid for that specified time or an error.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
-<p id="section-8.4-3">If the Server does not support the additional query parameter, it <span class="bcp14">SHOULD</span> return a status code of 501 (Not Implemented) or if the requested time is not supported it <span class="bcp14">SHOULD</span> return a status code of 406 (Not Acceptable). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network) that ignores query parameters, which would result in the client requesting a historical status list but receiving the current status list. Thus, the client <span class="bcp14">MUST</span> reject a response unless the requested timestamp is within the valid time of the returned token signaled via iat (6 for CWT) and exp (4 for CWT).<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-2">To obtain the Status List Token, the Relying Party <span class="bcp14">MUST</span> send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter <code>time</code> and its value being a unix timestamp, forming the query component <code>time=&lt;timestamp&gt;</code> (see below for a non-normative example of a request using such a query). The response for a valid request <span class="bcp14">SHOULD</span> contain a Status List Token that was valid for that specified time or an error.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">If the Server does not support the additional query parameter, it <span class="bcp14">SHOULD</span> return a status code of 501 (Not Implemented) or if the requested time is not supported it <span class="bcp14">SHOULD</span> return a status code of 404 (Not Found). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network) that ignores query parameters, which would result in the client requesting a historical status list but receiving the current status list. Thus, the client <span class="bcp14">MUST</span> reject a response unless the requested timestamp is within the valid time of the returned token signaled via iat (6 for CWT) and exp (4 for CWT).<a href="#section-8.4-3" class="pilcrow">¶</a></p>
 <p id="section-8.4-4">The following is a non-normative example of a GET request using the <code>time</code> query parameter:<a href="#section-8.4-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-8.4-5">
 <pre>
@@ -2660,7 +2668,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         <h3 id="name-correct-decoding-and-parsin">
 <a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-correct-decoding-and-parsin" class="section-name selfRef">Correct decoding and parsing of the encoded Status List</a>
         </h3>
-<p id="section-11.1-1">Implementers should be particularly careful for the correct parsing and decoding of the Status List. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to right). Endianness does not apply here because each status value fits within a single byte.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
+<p id="section-11.1-1">Implementers should be particularly careful with the correct parsing and decoding of the Status List. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to right). Endianness does not apply here because each status value fits within a single byte.<a href="#section-11.1-1" class="pilcrow">¶</a></p>
 <p id="section-11.1-2">Implementations <span class="bcp14">SHOULD</span> verify correctness using the test vectors given by this specification.<a href="#section-11.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2739,7 +2747,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         <h3 id="name-redirection-3xx">
 <a href="#section-11.4" class="section-number selfRef">11.4. </a><a href="#name-redirection-3xx" class="section-name selfRef">Redirection 3xx</a>
         </h3>
-<p id="section-11.4-1">HTTP clients that follow 3xx (Redirection) class of status codes <span class="bcp14">SHOULD</span> be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial of service attacks on clients. A client <span class="bcp14">SHOULD</span> detect and intervene in infinite redirections. Clients <span class="bcp14">SHOULD</span> apply the guidance for redirects given in <span><a href="https://rfc-editor.org/rfc/rfc9110#section-15.4" class="relref">Section 15.4</a> of [<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-11.4-1" class="pilcrow">¶</a></p>
+<p id="section-11.4-1">HTTP clients that follow 3xx (Redirection) status codes <span class="bcp14">SHOULD</span> be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial-of-service attacks on clients. A client <span class="bcp14">SHOULD</span> detect and intervene in infinite redirections. Clients <span class="bcp14">SHOULD</span> apply the guidance for redirects given in <span><a href="https://rfc-editor.org/rfc/rfc9110#section-15.4" class="relref">Section 15.4</a> of [<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-11.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-ttl">
@@ -2893,7 +2901,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         <h3 id="name-historical-resolution-2">
 <a href="#section-12.7" class="section-number selfRef">12.7. </a><a href="#name-historical-resolution-2" class="section-name selfRef">Historical Resolution</a>
         </h3>
-<p id="section-12.7-1">By default, this specification only supports providing Status List information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in <a href="#historical-resolution" class="auto internal xref">Section 8.4</a>. There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.<a href="#section-12.7-1" class="pilcrow">¶</a></p>
+<p id="section-12.7-1">By default, this specification only supports providing Status List information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows this kind of historic lookup as described in <a href="#historical-resolution" class="auto internal xref">Section 8.4</a>. There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.<a href="#section-12.7-1" class="pilcrow">¶</a></p>
 <p id="section-12.7-2">There are strong privacy concerns that have to be carefully taken into consideration when providing a mechanism that allows historic requests for status information - see <a href="#privacy-relying-party" class="auto internal xref">Section 12.3</a> for more details. Support for this functionality is optional and Implementers are <span class="bcp14">RECOMMENDED</span> to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.<a href="#section-12.7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2928,7 +2936,7 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
         </h3>
 <p id="section-13.2-1">Referenced Tokens may be regularly re-issued to mitigate the linkability of presentations to Relying Parties. In this case, every re-issued Referenced Token <span class="bcp14">MUST</span> have a fresh Status List entry in order to prevent the index value from becoming a possible source of correlation.<a href="#section-13.2-1" class="pilcrow">¶</a></p>
 <p id="section-13.2-2">Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token <span class="bcp14">MUST</span> have a dedicated Status List entry and <span class="bcp14">MAY</span> be spread across multiple Status List Tokens. Batch revocation of a batch of Referenced Tokens might reveal that they are all members of the same batch.<a href="#section-13.2-2" class="pilcrow">¶</a></p>
-<p id="section-13.2-3">Beware, that this mechanism solves linkability issues between Relying Parties, but does not prevent traceability by Issuers.<a href="#section-13.2-3" class="pilcrow">¶</a></p>
+<p id="section-13.2-3">Beware that this mechanism solves linkability issues between Relying Parties but does not prevent traceability by Issuers.<a href="#section-13.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="default-values-and-double-allocation">
@@ -2952,7 +2960,7 @@ an initialization parameter by the Issuer of the Referenced Token. The Issuer is
             <p id="section-13.4-2.1.1">the size of the Status List, i.e. the number of Referenced Tokens<a href="#section-13.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-13.4-2.2">
-            <p id="section-13.4-2.2.1">the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% create lowest sizes while revocation rates closer to 50% and random distribution create highest sizes)<a href="#section-13.4-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-13.4-2.2.1">the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% lead to the lowest sizes while revocation rates closer to 50% and random distribution lead to the highest sizes)<a href="#section-13.4-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-13.4-2.3">
             <p id="section-13.4-2.3.1">the lifetime of Referenced Tokens (shorter lifetimes allows for earlier retirement of Status List Tokens)<a href="#section-13.4-2.3.1" class="pilcrow">¶</a></p>
@@ -3154,9 +3162,7 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
         </h3>
 <p id="section-14.2-1">This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.<a href="#section-14.2-1" class="pilcrow">¶</a></p>
 <p id="section-14.2-2">JWT Status Mechanisms are registered by Specification Required <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span> after a three-week
-review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
-However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
-registration once they are satisfied that such a specification will be published.<a href="#section-14.2-2" class="pilcrow">¶</a></p>
+review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.<a href="#section-14.2-2" class="pilcrow">¶</a></p>
 <p id="section-14.2-3">Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism: example").<a href="#section-14.2-3" class="pilcrow">¶</a></p>
 <p id="section-14.2-4">Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
 to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
@@ -3170,7 +3176,7 @@ successful.<a href="#section-14.2-4" class="pilcrow">¶</a></p>
 <p id="section-14.2.1-1">Status Mechanism Value:<a href="#section-14.2.1-1" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-14.2.1-2.1">
-              <p id="section-14.2.1-2.1.1">The name requested (e.g., "status_list"). The name is case sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.<a href="#section-14.2.1-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-14.2.1-2.1.1">The name requested (e.g., "status_list"). The name is case-sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.<a href="#section-14.2.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-14.2.1-3">Status Mechanism Description:<a href="#section-14.2.1-3" class="pilcrow">¶</a></p>
@@ -3326,7 +3332,7 @@ successful.<a href="#section-14.4-4" class="pilcrow">¶</a></p>
 <p id="section-14.4.1-1">Status Mechanism Value:<a href="#section-14.4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-14.4.1-2.1">
-              <p id="section-14.4.1-2.1.1">The name requested (e.g., "status_list"). The name is case sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.<a href="#section-14.4.1-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-14.4.1-2.1.1">The name requested (e.g., "status_list"). The name is case-sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.<a href="#section-14.4.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-14.4.1-3">Status Mechanism Description:<a href="#section-14.4.1-3" class="pilcrow">¶</a></p>
@@ -3377,7 +3383,7 @@ successful.<a href="#section-14.4-4" class="pilcrow">¶</a></p>
         <h3 id="name-oauth-status-types-registry">
 <a href="#section-14.5" class="section-number selfRef">14.5. </a><a href="#name-oauth-status-types-registry" class="section-name selfRef">OAuth Status Types Registry</a>
         </h3>
-<p id="section-14.5-1">This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human readable label, the bit representation and a common description for it.<a href="#section-14.5-1" class="pilcrow">¶</a></p>
+<p id="section-14.5-1">This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human-readable label, the bit representation and a common description for it.<a href="#section-14.5-1" class="pilcrow">¶</a></p>
 <p id="section-14.5-2">Status Types are registered by Specification Required <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span> after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
 specification will be published.<a href="#section-14.5-2" class="pilcrow">¶</a></p>
@@ -3394,7 +3400,7 @@ successful.<a href="#section-14.5-4" class="pilcrow">¶</a></p>
 <p id="section-14.5.1-1">Status Type Name:<a href="#section-14.5.1-1" class="pilcrow">¶</a></p>
 <ul class="normal ulEmpty">
 <li class="normal ulEmpty" id="section-14.5.1-2.1">
-              <p id="section-14.5.1-2.1.1">The name is a human-readable case insensitive label for the Status Type that helps to talk about the status of Referenced Token in common language.<a href="#section-14.5.1-2.1.1" class="pilcrow">¶</a></p>
+              <p id="section-14.5.1-2.1.1">The name is a human-readable case-insensitive label for the Status Type that helps to talk about the status of Referenced Token in common language.<a href="#section-14.5.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-14.5.1-3">Status Type Description:<a href="#section-14.5.1-3" class="pilcrow">¶</a></p>
@@ -3691,8 +3697,8 @@ RESTful Environments (CoRE) Parameters" Registry <span>[<a href="#IANA.Core.Para
         <h3 id="name-x509-certificate-extended-ke">
 <a href="#section-14.9" class="section-number selfRef">14.9. </a><a href="#name-x509-certificate-extended-ke" class="section-name selfRef">X.509 Certificate Extended Key Purpose OID Registration</a>
         </h3>
-<p id="section-14.9-1">IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" with a description of "id-kp-oauthStatusSigning" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3). This OID is defined in section <a href="#eku" class="auto internal xref">Section 10</a>.<a href="#section-14.9-1" class="pilcrow">¶</a></p>
-<p id="section-14.9-2">IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" with a description of "id-mod-oauth-status-signing-eku" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0). This OID is defined in section <a href="#asn1-module" class="auto internal xref">Appendix A</a>.<a href="#section-14.9-2" class="pilcrow">¶</a></p>
+<p id="section-14.9-1">IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" with a description of "id-kp-oauthStatusSigning" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3). This OID is defined in <a href="#eku" class="auto internal xref">Section 10</a>.<a href="#section-14.9-1" class="pilcrow">¶</a></p>
+<p id="section-14.9-2">IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" with a description of "id-mod-oauth-status-signing-eku" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0). This OID is defined in <a href="#asn1-module" class="auto internal xref">Appendix A</a>.<a href="#section-14.9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4294,7 +4300,7 @@ c0cf3daf03000000000000000008ec03dc4c04c0
         <h3 id="name-8-bit-status-list">
 <a href="#appendix-C.4" class="section-number selfRef">C.4. </a><a href="#name-8-bit-status-list" class="section-name selfRef">8-bit Status List</a>
         </h3>
-<p id="appendix-C.4-1">The following example uses a 8-bit Status List (256 possible values):<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
+<p id="appendix-C.4-1">The following example uses an 8-bit Status List (256 possible values):<a href="#appendix-C.4-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-C.4-2">
 <pre>
 status[233478] = 0b00000000
@@ -4681,10 +4687,16 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 <p id="appendix-D-2">-16<a href="#appendix-D-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D-3.1">
-          <p id="appendix-D-3.1.1">making several SHOULDs non-normative<a href="#appendix-D-3.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.1.1">change http status codes &amp; query parameter wording for the historical resolution<a href="#appendix-D-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-3.2">
-          <p id="appendix-D-3.2.1">small corrections in the introduction<a href="#appendix-D-3.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-3.2.1">grammatical/style fixes<a href="#appendix-D-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.3">
+          <p id="appendix-D-3.3.1">making several SHOULDs non-normative<a href="#appendix-D-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.4">
+          <p id="appendix-D-3.4.1">small corrections in the introduction<a href="#appendix-D-3.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-4">-15<a href="#appendix-D-4" class="pilcrow">¶</a></p>
@@ -5056,7 +5068,7 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
           <p id="appendix-D-29.8.1">remove http caching in favor of the new ttl claim<a href="#appendix-D-29.8.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-29.9">
-          <p id="appendix-D-29.9.1">clarify the sub claim of Status List Token<a href="#appendix-D-29.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-29.9.1">clarify the <code>sub</code> claim of Status List Token<a href="#appendix-D-29.9.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-29.10">
           <p id="appendix-D-29.10.1">relax status_list iss requirements for CWT<a href="#appendix-D-29.10.1" class="pilcrow">¶</a></p>
@@ -5107,7 +5119,7 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
           <p id="appendix-D-33.7.1">Changing compression from gzip to zlib<a href="#appendix-D-33.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-33.8">
-          <p id="appendix-D-33.8.1">Change typo in Status List Token sub claim description<a href="#appendix-D-33.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-D-33.8.1">Change typo in Status List Token <code>sub</code> claim description<a href="#appendix-D-33.8.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-D-33.9">
           <p id="appendix-D-33.9.1">Add access token as an example use-case<a href="#appendix-D-33.9.1" class="pilcrow">¶</a></p>
