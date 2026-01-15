@@ -212,7 +212,7 @@ The decisions taken in this specification aim to achieve the following design go
 
 ## Prior Work
 
-Representing statuses with bits in an array is a rather old and well-known concept in computer science. There has been prior work to use this for revocation and status management. For example, a paper by Smith et al. [smith2020let] proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day. The W3C bit Status List {{W3C.SL}} similarly uses a compressed bit representation.
+Representing statuses with bits in an array is a rather old and well-known concept in computer science. There has been prior work to use this for revocation and status management. For example, a paper by Smith et al. {{smith2020let}} proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day. The W3C bit Status List {{W3C.SL}} similarly uses a compressed bit representation.
 
 ## Status Mechanisms Registry
 
