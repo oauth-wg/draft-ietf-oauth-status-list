@@ -370,8 +370,9 @@ Table of Contents
       fetches the corresponding Status List Token to validate the status
       of that Referenced Token.  Also known as a Verifier.
 
-   Status:  The validity state of a Referenced Token as determined by
-      the Issuer of said Token.
+   Status:  A Status describes the current state, mode, condition or
+      stage of an entity that is represented by the Referenced Token as
+      determined by the Status Issuer.
 
    Status List:  An object in JSON or CBOR representation containing a
       compressed byte array that represents the statuses of many
@@ -1152,8 +1153,8 @@ d2                              # tag(18)
 
 8.1.  Status List Request
 
-   The default Status List request and response mechanism uses normal
-   HTTP semantics and Content negotiation etc. as defined in [RFC9110].
+   The default Status List request and response mechanism uses HTTP
+   semantics and Content negotiation as defined in [RFC9110].
 
    The Status Provider SHOULD return the Status List Token in response
    to an HTTP GET request to the URI provided in the Referenced Token,

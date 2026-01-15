@@ -1643,7 +1643,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 <dt id="section-3-1.11">Status:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.12">
-          <p id="section-3-1.12.1">The validity state of a Referenced Token as determined by the Issuer of said Token.<a href="#section-3-1.12.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.12.1">A Status describes the current state, mode, condition or stage of an entity that is represented by the Referenced Token as determined by the Status Issuer.<a href="#section-3-1.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-1.13">Status List:</dt>
@@ -2410,7 +2410,7 @@ fe8a1c4cafe
         <h3 id="name-status-list-request">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-status-list-request" class="section-name selfRef">Status List Request</a>
         </h3>
-<p id="section-8.1-1">The default Status List request and response mechanism uses normal HTTP semantics and Content negotiation etc. as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">The default Status List request and response mechanism uses HTTP semantics and Content negotiation as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>]</span>.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.1-2">The Status Provider <span class="bcp14">SHOULD</span> return the Status List Token in response to an HTTP GET request to the URI provided in the Referenced Token, unless the Relying Party and the Status Provider have alternative methods of distribution.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
 <p id="section-8.1-3">The HTTP endpoint <span class="bcp14">SHOULD</span> support the use of Cross-Origin Resource Sharing (CORS) <span>[<a href="#CORS" class="cite xref">CORS</a>]</span> and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
 <p id="section-8.1-4">The Relying Party <span class="bcp14">SHOULD</span> send the following Accept HTTP Header to indicate the requested response type unless the Content-Type of Status List Tokens in the respective ecosystem is known or the Relying Party supports both formats:<a href="#section-8.1-4" class="pilcrow">¶</a></p>
