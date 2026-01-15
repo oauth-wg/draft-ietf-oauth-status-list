@@ -193,7 +193,7 @@ Another possible use case for the Status List is to express the status of verifi
 
 ## Rationale
 
-Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Modern approaches use accumulator-based revocation registries and Zero-Knowledge-Proofs to accommodate for this privacy gap, but face scalability issues again. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
+Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Approaches based on cryptographic accumulators and Zero-Knowledge-Proofs try to accommodate for this privacy gap, but are currently (in 2026) facing scalability issues and are not yet standardized. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
 
 This specification seeks to find a balance between scalability, security and privacy by representing statuses as individual bits, packing them into an array, and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.
 
@@ -201,9 +201,8 @@ This specification seeks to find a balance between scalability, security and pri
 
 The decisions taken in this specification aim to achieve the following design goals:
 
-* the specification shall favor a simple and easy-to-understand concept
 * the specification shall be easy, fast and secure to implement in all major programming languages
-* the specification shall be optimized to support the most common use cases and avoid unnecessary complexity of corner cases
+* the specification shall be optimized to support the most common use cases, such as revocation, and avoid unnecessary complexity of corner cases, such as providing multiple statuses for a single token
 * the Status List shall scale up to millions of tokens to support large-scale government or enterprise use cases
 * the Status List shall enable caching policies and offline support
 * the specification shall support JSON and CBOR based tokens
@@ -597,7 +596,7 @@ The following is the CBOR Annotated Hex output of the example above:
 
 ISO mdoc {{ISO.mdoc}} may utilize the Status List mechanism by introducing the `status` parameter in the Mobile Security Object (MSO) as specified in Section 9.1.2 of {{ISO.mdoc}}. The `status` parameter contains the `Status` CBOR structure as described in [](#referenced-token-cose).
 
-It is RECOMMENDED to use `status` for the label of the field that contains the `Status` CBOR structure.
+It is recommended to use `status` for the label of the field that contains the `Status` CBOR structure.
 
 Application of additional restrictions and policies are at the discretion of the Relying Party.
 
@@ -950,9 +949,9 @@ Implementations SHOULD verify correctness using the test vectors given by this s
 
 ## Security Guidance for JWT and CWT
 
-A Status List Token in the JWT format SHOULD follow the security considerations of {{RFC7519}} and the best current practices of {{RFC8725}}.
+A Status List Token in the JWT format MUST follow the security considerations of {{RFC7519}} and the best current practices of {{RFC8725}}.
 
-A Status List Token in the CWT format SHOULD follow the security considerations of {{RFC8392}}.
+A Status List Token in the CWT format MUST follow the security considerations of {{RFC8392}}.
 
 ## Key Resolution and Trust Management {#key-management}
 
@@ -1009,11 +1008,11 @@ HTTP clients that follow 3xx (Redirection) status codes SHOULD be aware of the p
 
 Expiration and caching information is conveyed via the `exp` and `ttl` claims as explained in [](#expiry-and-caching). Clients SHOULD check that both values are within reasonable ranges before requesting new Status List Tokens based on these values to prevent accidentally creating unreasonable amounts of requests for a specific URL. Status Issuers could accidentally or maliciously use this mechanism to effectively DDoS the contained URL of the Status Provider.
 
-Reasonable values for both claims highly depend on the use-case requirements and clients SHOULD be configured with lower/upper bounds for these values that fit their respective use-cases.
+Reasonable values for both claims highly depend on the use-case requirements and clients should be configured with lower/upper bounds for these values that fit their respective use-cases.
 
 ## Status List Token Protection {#security-mac}
 
-This specification allows both, digital signatures using asymmetric cryptography, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers SHOULD only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. These use-cases typically represent deployments where Status Issuer and Relying Party have a trust relationship and the possibility to securely exchange keys out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the protection of Status List Tokens and implementers SHOULD default to digital signatures if they are unsure.
+This specification allows both, digital signatures using asymmetric cryptography, and Message Authentication Codes (MAC) to be used to protect Status List Tokens. Implementers should only use MACs to secure the integrity of Status List Tokens if they fully understand the risks of MACs when compared to digital signatures and especially the requirements of their use-case scenarios. These use-cases typically represent deployments where Status Issuer and Relying Party have a trust relationship and the possibility to securely exchange keys out of band or are the same entity and no other entity needs to verify the Status List Token. We expect most deployments to use digital signatures for the protection of Status List Tokens and implementers SHOULD default to digital signatures if they are unsure.
 
 # Privacy Considerations {#privacy-considerations}
 
@@ -1974,6 +1973,8 @@ CBOR encoding:
 
 * change http status codes & query parameter wording for the historical resolution
 * grammatical/style fixes
+* making several SHOULDs non-normative
+* small corrections in the introduction
 
 -15
 
