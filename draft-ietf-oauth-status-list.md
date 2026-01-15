@@ -212,7 +212,7 @@ The decisions taken in this specification aim to achieve the following design go
 
 ## Prior Work
 
-Representing statuses with bits in an array is a rather old and well-known concept in computer science and there has been prior work to use this for revocation and status management such as a paper by Smith et al. {{smith2020let}} that proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day and the W3C bit Status List {{W3C.SL}} that similarly uses a compressed bit representation.
+Representing statuses with bits in an array is a rather old and well-known concept in computer science. There has been prior work to use this for revocation and status management. For example, a paper by Smith et al. [smith2020let] proposed a mechanism called Certificate Revocation Vectors based on xz compressed bit vectors for each expiration day. The W3C bit Status List {{W3C.SL}} similarly uses a compressed bit representation.
 
 ## Status Mechanisms Registry
 
@@ -241,6 +241,9 @@ Holder:
 Relying Party:
 : An entity that relies on the Referenced Token and fetches the corresponding Status List Token to validate the status of that Referenced Token. Also known as a Verifier.
 
+Status:
+: The validity state of a Referenced Token as determined by the Issuer of said Token.
+
 Status List:
 : An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.
 
@@ -258,13 +261,13 @@ base64url:
 
 # Status List {#status-list}
 
-A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. [](#status-list-byte-array) describes how to construct a compressed byte array that is the base component for the Status List data structure. The second and third sections describe how to encode such a Status List in JSON and CBOR representations.
+A Status List is a data structure that contains the statuses of many Referenced Tokens represented by one or multiple bits. [](#status-list-byte-array) describes how to construct a compressed byte array that is the base component for the Status List data structure. [](#status-list-json) and [](#status-list-cbor) describe how to encode such a Status List in JSON and CBOR representations.
 
 ## Compressed Byte Array {#status-list-byte-array}
 
 A compressed byte array containing the status information of the Referenced Token is composed by the following algorithm:
 
-1. The Status Issuer MUST define a number of bits (`bits`) of either 1,2,4 or 8, that represents the amount of bits used to describe the status of each Referenced Token within this Status List. Therefore, up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation and thus keeping implementations simpler and less error-prone.
+1. The Status Issuer MUST define a number of bits (`bits`) of either 1,2,4 or 8, that represents the amount of bits used to describe the status of each Referenced Token within this Status List. Therefore, up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation, thus keeping implementations simpler and less error-prone.
 
 2. The Status Issuer creates a byte array of size = amount of Referenced Tokens * `bits` / 8 or greater. Depending on the `bits`, each byte in the array corresponds to 8/(`bits`) statuses (8,4,2 or 1).
 
@@ -307,6 +310,7 @@ index       7 6 5 4 3 2 1 0   15   ...  10 9 8
            \_______________/  \_______________/
 byte value       0xB9               0xA3
 
+compressed array (hex): 78dadbb918000217015d
 ~~~
 
 In the following example, the Status List additionally includes the Status Type "SUSPENDED". As the Status Type value for "SUSPENDED" is 0x02 and does not fit into 1 bit, the `bits` is required to be 2. This example illustrates the byte array of a Status List that represents the statuses of 12 Referenced Tokens with a `bits` of 2, requiring 3 bytes (24 bits) for the uncompressed byte array:
@@ -342,6 +346,7 @@ index        3   2   1   0      7   6   5   4      11  10  9   8
              \___________/      \___________/      \___________/
 byte value       0xC9               0x44               0xF9
 
+compressed array (hex): 78da3be9f2130003df0207
 ~~~
 
 ## Status List in JSON Format {#status-list-json}
@@ -565,7 +570,7 @@ The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according
 
 * The `Status` CBOR structure is a Map that MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.
   * `status_list` (status list): REQUIRED when the status mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
-    * `idx`: REQUIRED. Unsigned integer (major type 0) The `idx` (index) claim MUST specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.
+    * `idx`: REQUIRED. Unsigned integer (major type 0). The `idx` (index) claim MUST specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.
     * `uri`: REQUIRED. Text string (major type 3). The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
 ### CBOR Web Token (CWT) {#referenced-token-cwt}
@@ -754,7 +759,9 @@ The fetching, processing and verifying of a Status List Token may be done by eit
 
 ## Status List Request {#status-list-request}
 
-The Status Provider SHOULD provide Status List Token on an endpoint serving an HTTP GET request to the URI provided in the Referenced Token, unless the Relying Party and the Status Provider have alternative methods of distribution.
+The default Status List request and response mechanism uses normal HTTP semantics and Content negotiation etc. as defined in {{RFC9110}}.
+
+The Status Provider SHOULD return the Status List Token in response to an HTTP GET request to the URI provided in the Referenced Token, unless the Relying Party and the Status Provider have alternative methods of distribution.
 
 The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.
 
@@ -790,7 +797,7 @@ In the case of "application/statuslist+cwt", the response MUST be of type CWT an
 
 The body of such an HTTP response contains the raw Status List Token, that means the binary encoding as defined in {{Section 9.2.1 of RFC8392}} for a Status List Token in CWT format and the JWS Compact Serialization form for a Status List Token in JWT format. Note that while the examples for Status List Tokens in CWT format in this document are provided in hex encoding, this is done purely for readability; CWT format response bodies are "in binary".
 
-The HTTP response SHOULD use gzip Content-Encoding as defined in {{RFC9110}} for Status List Tokens in JWT format.
+The HTTP response SHOULD use Content-Encoding  such as gzip  using the content negotiation and encoding mechanisms as defined in {{RFC9110}} for Status List Tokens in JWT format.
 
 If caching-related HTTP headers are present in the HTTP response, Relying Parties MUST prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.
 
@@ -832,9 +839,9 @@ If any of these checks fails, no statement about the status of the Referenced To
 
 By default, the status mechanism defined in this specification only conveys information about the state of Referenced Tokens at the time the Status List Token was issued. The validity period for this information, as defined by the issuer, is explicitly stated by the `iat` (issued at) and `exp` (expiration time) claims for JWT and their corresponding ones for the CWT representation. If support for historical status information is desired, this can be achieved by extending with a timestamp the request for the Status List Token as defined in [](#status-list-request). This feature has additional privacy implications as described in [](#privacy-historical).
 
-To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp. The response for a valid request SHOULD contain a Status List Token that was valid for that specified time or an error.
+To obtain the Status List Token, the Relying Party MUST send an HTTP GET request to the URI provided in the Referenced Token with the additional query parameter `time` and its value being a unix timestamp, forming the query component `time=<timestamp>` (see below for a non-normative example of a request using such a query). The response for a valid request SHOULD contain a Status List Token that was valid for that specified time or an error.
 
-If the Server does not support the additional query parameter, it SHOULD return a status code of 501 (Not Implemented) or if the requested time is not supported it SHOULD return a status code of 406 (Not Acceptable). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network) that ignores query parameters, which would result in the client requesting a historical status list but receiving the current status list. Thus, the client MUST reject a response unless the requested timestamp is within the valid time of the returned token signaled via iat (6 for CWT) and exp (4 for CWT).
+If the Server does not support the additional query parameter, it SHOULD return a status code of 501 (Not Implemented) or if the requested time is not supported it SHOULD return a status code of 404 (Not Found). A Status List Token might be served via static file hosting (e.g., leveraging a Content Delivery Network) that ignores query parameters, which would result in the client requesting a historical status list but receiving the current status list. Thus, the client MUST reject a response unless the requested timestamp is within the valid time of the returned token signaled via iat (6 for CWT) and exp (4 for CWT).
 
 The following is a non-normative example of a GET request using the `time` query parameter:
 
@@ -938,7 +945,7 @@ Status List Tokens as defined in [](#status-list-token) only exist in cryptograp
 
 ## Correct decoding and parsing of the encoded Status List
 
-Implementers should be particularly careful for the correct parsing and decoding of the Status List. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to right). Endianness does not apply here because each status value fits within a single byte.
+Implementers should be particularly careful with the correct parsing and decoding of the Status List. Incorrect implementations might check the index on the wrong data or miscalculate the bit and byte index leading to an erroneous status of the Referenced Token. Beware, that bits are indexed (bit order) from least significant bit to most significant bit (also called "right to left") while bytes are indexed (byte order) in their natural incrementing byte order (usually written for display purpose from left to right). Endianness does not apply here because each status value fits within a single byte.
 
 Implementations SHOULD verify correctness using the test vectors given by this specification.
 
@@ -997,7 +1004,7 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
 
 ## Redirection 3xx {#redirects}
 
-HTTP clients that follow 3xx (Redirection) class of status codes SHOULD be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial of service attacks on clients. A client SHOULD detect and intervene in infinite redirections. Clients SHOULD apply the guidance for redirects given in {{Section 15.4 of RFC9110}}.
+HTTP clients that follow 3xx (Redirection) status codes SHOULD be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial-of-service attacks on clients. A client SHOULD detect and intervene in infinite redirections. Clients SHOULD apply the guidance for redirects given in {{Section 15.4 of RFC9110}}.
 
 ## Expiration and Caching {#security-ttl}
 
@@ -1081,7 +1088,7 @@ Third-Party hosting may also allow for greater scalability, as the Status List T
 
 ## Historical Resolution {#privacy-historical}
 
-By default, this specification only supports providing Status List information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows these kind of historic lookups as described in [](#historical-resolution). There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.
+By default, this specification only supports providing Status List information for the most recent status information and does not allow the lookup of historical information like a validity state at a specific point in time. There exists optional support for a query parameter that allows this kind of historic lookup as described in [](#historical-resolution). There are scenarios where such a functionality is necessary, but this feature should only be implemented when the scenario and the consequences of enabling historical resolution are fully understood.
 
 There are strong privacy concerns that have to be carefully taken into consideration when providing a mechanism that allows historic requests for status information - see [](#privacy-relying-party) for more details. Support for this functionality is optional and Implementers are RECOMMENDED to not support historic requests unless there are strong reasons to do so and after carefully considering the privacy implications.
 
@@ -1103,7 +1110,7 @@ Referenced Tokens may be regularly re-issued to mitigate the linkability of pres
 
 Referenced Tokens may also be issued in batches and be presented by Holders in a one-time-use policy to avoid linkability. In this case, every Referenced Token MUST have a dedicated Status List entry and MAY be spread across multiple Status List Tokens. Batch revocation of a batch of Referenced Tokens might reveal that they are all members of the same batch.
 
-Beware, that this mechanism solves linkability issues between Relying Parties, but does not prevent traceability by Issuers.
+Beware that this mechanism solves linkability issues between Relying Parties but does not prevent traceability by Issuers.
 
 ## Default Values and Double Allocation
 
@@ -1117,7 +1124,7 @@ The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the
 The storage and transmission size of the Status Issuer's Status List Tokens depend on:
 
 - the size of the Status List, i.e. the number of Referenced Tokens
-- the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% create lowest sizes while revocation rates closer to 50% and random distribution create highest sizes)
+- the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% lead to the lowest sizes while revocation rates closer to 50% and random distribution lead to the highest sizes)
 - the lifetime of Referenced Tokens (shorter lifetimes allows for earlier retirement of Status List Tokens)
 
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
@@ -1229,8 +1236,6 @@ This specification establishes the IANA "JWT Status Mechanisms" registry for JWT
 
 JWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
-However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve
-registration once they are satisfied that such a specification will be published.
 
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism: example").
 
@@ -1244,7 +1249,7 @@ IANA must only accept registry updates from the Designated Expert(s) and should 
 
 Status Mechanism Value:
 
-  > The name requested (e.g., "status_list"). The name is case sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.
+  > The name requested (e.g., "status_list"). The name is case-sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.
 
 Status Mechanism Description:
 
@@ -1322,7 +1327,7 @@ IANA must only accept registry updates from the Designated Expert(s) and should 
 
 Status Mechanism Value:
 
-  > The name requested (e.g., "status_list"). The name is case sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.
+  > The name requested (e.g., "status_list"). The name is case-sensitive. Names may not match other registered names in a case-insensitive manner unless the Designated Experts state that there is a compelling reason to allow an exception.
 
 Status Mechanism Description:
 
@@ -1345,7 +1350,7 @@ Specification Document(s):
 
 ## OAuth Status Types Registry {#iana-status-types}
 
-This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human readable label, the bit representation and a common description for it.
+This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human-readable label, the bit representation and a common description for it.
 
 Status Types are registered by Specification Required {{RFC8126}} after a two-week
 review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
@@ -1363,7 +1368,7 @@ IANA must only accept registry updates from the Designated Expert(s) and should 
 
 Status Type Name:
 
-  > The name is a human-readable case insensitive label for the Status Type that helps to talk about the status of Referenced Token in common language.
+  > The name is a human-readable case-insensitive label for the Status Type that helps to talk about the status of Referenced Token in common language.
 
 Status Type Description:
 
@@ -1491,9 +1496,9 @@ RESTful Environments (CoRE) Parameters" Registry [IANA.Core.Params]:
 
 ## X.509 Certificate Extended Key Purpose OID Registration
 
-IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" with a description of "id-kp-oauthStatusSigning" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3). This OID is defined in section [](#eku).
+IANA is requested to register the following OID "1.3.6.1.5.5.7.3.TBD" with a description of "id-kp-oauthStatusSigning" in the "SMI Security for PKIX Extended Key Purpose" registry (1.3.6.1.5.5.7.3). This OID is defined in [](#eku).
 
-IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" with a description of "id-mod-oauth-status-signing-eku" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0). This OID is defined in section [](#asn1-module).
+IANA is requested to register the following OID "1.3.6.1.5.5.7.0.TBD" with a description of "id-mod-oauth-status-signing-eku" in the "SMI Security for PKIX Module Identifier" registry (1.3.6.1.5.5.7.0). This OID is defined in [](#asn1-module).
 
 # Acknowledgments
 
@@ -1687,7 +1692,7 @@ CBOR encoding:
 
 ## 8-bit Status List
 
-The following example uses a 8-bit Status List (256 possible values):
+The following example uses an 8-bit Status List (256 possible values):
 
 ~~~~~~~~~~
 status[233478] = 0b00000000
@@ -1966,6 +1971,11 @@ CBOR encoding:
 
 \[\[ To be removed from the final specification \]\]
 
+-16
+
+* change http status codes & query parameter wording for the historical resolution
+* grammatical/style fixes
+
 -15
 
 * limit Status List Token CWT COSE message to Sign1/Mac0
@@ -2114,7 +2124,7 @@ CBOR encoding:
 * require TLS only for fetching Status List, not for Status List Token
 * remove the undefined phrase Status List endpoint
 * remove http caching in favor of the new ttl claim
-* clarify the sub claim of Status List Token
+* clarify the `sub` claim of Status List Token
 * relax status_list iss requirements for CWT
 * Fixes missing parts & iana ttl registration in CWT examples
 
@@ -2135,7 +2145,7 @@ CBOR encoding:
 * restructure the sections of this document
 * add option to return an unsigned Status List
 * Changing compression from gzip to zlib
-* Change typo in Status List Token sub claim description
+* Change typo in Status List Token `sub` claim description
 * Add access token as an example use-case
 
 -00
