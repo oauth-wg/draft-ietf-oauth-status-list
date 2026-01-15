@@ -242,7 +242,7 @@ Relying Party:
 : An entity that relies on the Referenced Token and fetches the corresponding Status List Token to validate the status of that Referenced Token. Also known as a Verifier.
 
 Status:
-: The validity state of a Referenced Token as determined by the Issuer of said Token.
+: A Status describes the current state, mode, condition or stage of an entity that is represented by the Referenced Token as determined by the Status Issuer.
 
 Status List:
 : An object in JSON or CBOR representation containing a compressed byte array that represents the statuses of many Referenced Tokens.
@@ -759,7 +759,7 @@ The fetching, processing and verifying of a Status List Token may be done by eit
 
 ## Status List Request {#status-list-request}
 
-The default Status List request and response mechanism uses normal HTTP semantics and Content negotiation etc. as defined in {{RFC9110}}.
+The default Status List request and response mechanism uses HTTP semantics and Content negotiation as defined in {{RFC9110}}.
 
 The Status Provider SHOULD return the Status List Token in response to an HTTP GET request to the URI provided in the Referenced Token, unless the Relying Party and the Status Provider have alternative methods of distribution.
 
