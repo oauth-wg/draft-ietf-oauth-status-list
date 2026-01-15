@@ -797,7 +797,7 @@ In the case of "application/statuslist+cwt", the response MUST be of type CWT an
 
 The body of such an HTTP response contains the raw Status List Token, that means the binary encoding as defined in {{Section 9.2.1 of RFC8392}} for a Status List Token in CWT format and the JWS Compact Serialization form for a Status List Token in JWT format. Note that while the examples for Status List Tokens in CWT format in this document are provided in hex encoding, this is done purely for readability; CWT format response bodies are "in binary".
 
-The HTTP response SHOULD use Content-Encoding  such as gzip  using the content negotiation and encoding mechanisms as defined in {{RFC9110}} for Status List Tokens in JWT format.
+The HTTP response SHOULD use Content-Encoding (such as gzip) using the content negotiation and encoding mechanisms as defined in {{RFC9110}} for Status List Tokens in JWT format.
 
 If caching-related HTTP headers are present in the HTTP response, Relying Parties MUST prioritize the exp and ttl claims within the Status List Token over the HTTP headers for determining caching behavior.
 
