@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-15T00:20:34.477409+00:00",
+  "timestamp": "2026-01-18T00:23:36.312981+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6528,16 +6528,24 @@
       "id": "I_kwDOJZ2aqs7hEx3s",
       "title": "Mohamed Boucadair's feedback",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/333",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "> Hi Tobias, Paul, and Christian,\n> \n> Thank you for the effort put into this document.\n> \n> # Overall, the document is well-organized and various pieces are adequately\n> grafted together. Some cross referencing would be even better to link some of\n> goals to how these are actually addressed in the current design, especially for\n> the following ones:\n> \n> CURRENT:\n>    *  the specification shall favor a simple and easy-to-understand\n>       concept\n> \n>    *  the specification shall be easy, fast and secure to implement in\n>       all major programming languages\n> \n>    *  the specification shall be optimized to support the most common\n>       use cases and avoid unnecessary complexity of corner cases\n> \n>    *  the Status List shall scale up to millions of tokens to support\n>       large-scale government or enterprise use cases\n> \n>    *  the Status List shall enable caching policies and offline support\n> \n> # The implementation section (which is actually an Operational Consideration\n> section per RFC5706) is really great. Thanks.\n> \n> # The use of SHOULD through the document is worth checking. There are clearly\n> cases where it is not trivial if this is a nice-to-have or why a stronger level\n> isn't used, e.g., loop detection or the following:\n> \n>    *  ttl: RECOMMENDED.  The ttl (time to live) claim, if present, MUST\n>       specify the maximum amount of time, in seconds, that the Status\n>       List Token can be cached by a consumer before a fresh copy SHOULD\n>       be retrieved.\n> \n> There many such occurrences that I\u2019m not listing here, but I\u2019d request you\n> double check through.\n> \n> # I tagged some few nits when reviewing the document that I will send you in a\n> PR.\n> \n> Cheers,\n> Med",
       "createdAt": "2026-01-02T10:57:50Z",
-      "updatedAt": "2026-01-02T10:57:50Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-01-15T18:31:18Z",
+      "closedAt": "2026-01-15T18:31:18Z",
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "All of the remaining points have been addressed by other reviews.",
+          "createdAt": "2026-01-15T18:31:18Z",
+          "updatedAt": "2026-01-15T18:31:18Z"
+        }
+      ]
     },
     {
       "number": 334,
@@ -6584,7 +6592,7 @@
       "id": "I_kwDOJZ2aqs7h10t9",
       "title": "Mike Bishop's Review",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/335",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -6593,8 +6601,8 @@
       "labels": [],
       "body": "> ### Section 8.4, paragraph 3\n> ```\n>      To obtain the Status List Token, the Relying Party MUST send an HTTP\n>      GET request to the URI provided in the Referenced Token with the\n>      additional query parameter time and its value being a unix timestamp.\n>      The response for a valid request SHOULD contain a Status List Token\n>      that was valid for that specified time or an error.\n> \n>      If the Server does not support the additional query parameter, it\n>      SHOULD return a status code of 501 (Not Implemented) or if the\n>      requested time is not supported it SHOULD return a status code of 406\n>      (Not Acceptable).  A Status List Token might be served via static\n> ```\n> 406 (Not Acceptable) indicates that a server was unable to satisfy a client's\n> preferences as expressed through Proactive Negotiation (RFC 9110, Section 12.1),\n> but a query parameter isn't that. In fact, HTTP itself has no notion of \"query\n> parameters\" -- the optional query component is merely a part of identifying the\n> target resource, and the `key=value` structure is a convention applications can\n> use or not (albeit a very common one).\n> \n> I would suggest normatively spelling out how you want the query portion of the\n> URI constructed and choosing a different status code for the requested resource\n> not existing. 404 or 410 might be the most appropriate for a server that can\n> provide historical data, but not for the requested timestamp. 501 (Not\n> Implemented) seems reasonable for a server that understands the request for a\n> historical status list, but does not support such a request, though 404 might be\n> equally appropriate as the requested resource does not exist on the server.\n> \n> \n> ----------------------------------------------------------------------\n> COMMENT:\n> ----------------------------------------------------------------------\n> \n> ## Comments\n> \n> ### Section 3\n> \n> Thanks for a good Terminology section. For a crucial word that occurs\n> over 1k times in this document, I'm surprised not to see a definition of\n> \"Status\" either in the introduction or here.\n> \n> It does finally show up in Section 7!\n> \n> ### Section 4, paragraph 1\n> \n> Please update the last sentence to also use section numbers.\n> \n> ### Section 4.1, paragraph 13\n> \n> Step 4 above says these byte arrays will be compressed, but there's no\n> mention of that here at the end. While it may not be terribly illustrative,\n> it might be worth a sentence confirming that these are run through DEFLATE/ZLIB\n> before being used as input to 4.2 or 4.3.\n> \n> ### Section 8.1, paragraph 1\n> ```\n>      The Status Provider SHOULD provide Status List Token on an endpoint\n>      serving an HTTP GET request to the URI provided in the Referenced\n> ```\n> Consider instead:\n>    The Status Provider SHOULD return the Status List Token\n>    in response to an HTTP GET request to the URI provided in the Referenced\n> \n> ### Section 8.1, paragraph 0\n> \n> Consider a reference to RFC 9110 for HTTP semantics, Accept, etc.\n> \n> ### Section 8.2, paragraph 8\n> ```\n>      The HTTP response SHOULD use gzip Content-Encoding as defined in\n>      [RFC9110] for Status List Tokens in JWT format.\n> ```\n> Given the variety of content codings which are in use with HTTP, it seems\n> strange to call out gzip in particular in this spec. That's not an\n> interoperability issue. Consider simply indicating that a content coding *such\n> as* gzip could reduce the size of the payload, and reference 9110 for negotiation\n> of such codings.\n> \n> ### Section 14.2, paragraph 2\n> ```\n>      Experts.  However, to allow for the allocation of names prior to\n>      publication, the Designated Expert(s) may approve registration once\n>      they are satisfied that such a specification will be published.\n> ```\n> Given that Specification Required only requires that the doc exist, not be\n> published as an RFC, is this really needed? Does the allocation need\n> to happen even before publication as an -00 draft?\n> \n> ## Nits\n> \n> All comments below are about very minor potential issues that you may choose to\n> address in some way - or ignore - as you see fit. Some were flagged by\n> automated tools (via https://github.com/larseggert/ietf-reviewtool) so there\n> will likely be some false positives. There is no need to let me know what you\n> did with these suggestions.\n> \n> ### Typos\n> \n> #### Section 4.1, paragraph 2\n> ```\n> -        every operation and thus keeping implementations simpler and less\n> -                       ^^^^\n> +        every operation, thus keeping implementations simpler and less\n> +                       ^\n> ```\n> \n> #### Section 6.3, paragraph 4\n> ```\n> -          o  idx: REQUIRED.  Unsigned integer (major type 0) The idx\n> +          o  idx: REQUIRED.  Unsigned integer (major type 0). The idx\n> +                                                            +\n> ```\n> \n> #### Section 11.4, paragraph 1\n> ```\n> -    HTTP clients that follow 3xx (Redirection) class of status codes\n> -                                               ---------\n> ```\n> \n> #### Section 13.2, paragraph 3\n> ```\n> -    Beware, that this mechanism solves linkability issues between Relying\n> -          -\n> -    Parties, but does not prevent traceability by Issuers.\n> -           -\n> ```\n> \n> ### Section 1.4, paragraph 1\n> ```\n>      Representing statuses with bits in an array is a rather old and well-\n>      known concept in computer science and there has been prior work to\n>      use this for revocation and status management such as a paper by\n>      Smith et al. [smith2020let] that proposed a mechanism called\n>      Certificate Revocation Vectors based on xz compressed bit vectors for\n>      each expiration day and the W3C bit Status List [W3C.SL] that\n>      similarly uses a compressed bit representation.\n> ```\n> This section-as-sentence could be chunked for easier parsing:\n> \n> >   Representing statuses with bits in an array is a rather old and well-\n> >   known concept in computer science. There has been prior work to\n> >   use this for revocation and status management. For example, a paper by\n> >   Smith et al. [smith2020let] proposed a mechanism called\n> >   Certificate Revocation Vectors based on xz compressed bit vectors for\n> >   each expiration day. The W3C bit Status List [W3C.SL]\n> >   similarly uses a compressed bit representation.\n> \n> ### Grammar/style\n> \n> #### \"URI\", paragraph 6\n> ```\n> ementers should be particularly careful for the correct parsing and decoding\n>                                 ^^^^^^^^^^^\n> ```\n> The usual collocation for \"careful\" is \"with\", not \"for\". Did you mean \"careful\n> with\"?\n> \n> #### Section 9.2, paragraph 1\n> ```\n> s, since they can be used for denial of service attacks on clients. A client\n>                               ^^^^^^^^^^^^^^^^^\n> ```\n> It appears that hyphens are missing.\n> \n> #### Section 12.1, paragraph 1\n> ```\n> or a query parameter that allows these kind of historic lookups as described\n>                                  ^^^^^^^^^^\n> ```\n> The plural determiner \"these\" does not agree with the singular noun \"kind\".\n> \n> #### Section 12.4, paragraph 1\n> ```\n> n rates close to 0% or 100% create lowest sizes while revocation rates close\n>                                    ^^^^^^\n> ```\n> A determiner may be missing.\n> \n> #### Section 12.4, paragraph 2\n> ```\n> 50% and random distribution create highest sizes) * the lifetime of Referenc\n>                                    ^^^^^^^\n> ```\n> A determiner may be missing.\n> \n> #### Section 13.5, paragraph 5\n> ```\n> ., \"status_list\"). The name is case sensitive. Names may not match other reg\n>                                ^^^^^^^^^^^^^^\n> ```\n> This word is normally spelled with a hyphen.\n> \n> #### Section 13.7, paragraph 13\n> ```\n> ., \"status_list\"). The name is case sensitive. Names may not match other reg\n>                                ^^^^^^^^^^^^^^\n> ```\n> This word is normally spelled with a hyphen.\n> \n> #### Section 14.1.1, paragraph 1\n> ```\n> meters. The registry records a human readable label, the bit representation a\n>                                ^^^^^^^^^^^^^^\n> ```\n> This word is normally spelled with a hyphen.\n> \n> #### Section 14.2, paragraph 2\n> ```\n>  The name is a human-readable case insensitive label for the Status Type that\n>                               ^^^^^^^^^^^^^^^^\n> ```\n> This word is normally spelled with a hyphen.\n> \n> #### Section 14.4.1, paragraph 2\n> ```\n> 5.7.3). This OID is defined in section Section 10. IANA is requested to regis\n>                                ^^^^^^^^^^^^^^^\n> ```\n> Possible typo: you repeated a word.\n> \n> #### Section 16.2, paragraph 15\n> ```\n> atus List The following example uses a 8-bit Status List (256 possible value\n>                                      ^\n> ```\n> Use \"an\" instead of \"a\" if the following word starts with a vowel sound, e.g.\n> \"an article\", \"an hour\".\n> \n> #### \"C.4.\", paragraph 4\n> ```\n>  the new ttl claim * clarify the sub claim of Status List Token * relax stat\n>                                  ^^^^^^^^^\n> ```\n> This word is normally spelled as one.\n> \n> #### \"C.4.\", paragraph 4\n> ```\n>  Change typo in Status List Token sub claim description * Add access token as\n>                                   ^^^^^^^^^\n> ```\n> This word is normally spelled as one.",
       "createdAt": "2026-01-07T14:24:52Z",
-      "updatedAt": "2026-01-13T18:25:14Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-15T18:43:45Z",
+      "closedAt": "2026-01-15T18:43:45Z",
       "comments": [
         {
           "author": "c2bo",
@@ -6624,7 +6632,7 @@
       "id": "I_kwDOJZ2aqs7h11Ns",
       "title": "Roman Danyliw's Review",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/336",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -6633,8 +6641,8 @@
       "labels": [],
       "body": "> ** Section 6.3.2\n>    ISO mdoc [ISO.mdoc] may utilize the Status List mechanism by\n>    introducing the status parameter in the Mobile Security Object (MSO)\n>    as specified in Section 9.1.2 of [ISO.mdoc].  The status parameter\n>    contains the Status CBOR structure as described in Section 6.3.\n>    It is RECOMMENDED to use status for the label of the field that\n>    contains the Status CBOR structure.\n> \n> Interpretting and implementing this text seems to require understanding the\n> [ISO.mdoc] specification.  Please make this a normative reference.\n> \n> ** Section 11.5\n>    Reasonable values for both claims highly depend on the use-case\n>    requirements and clients SHOULD be configured with lower/upper bounds\n>    for these values that fit their respective use-cases.\n> \n> What is the interoperable way to access the \u201clower/upper bound \u2026 that fit their\n> respective use-cases\u201d.  Perhaps s/SHOULD/should/\n> \n> ** Section 11.6\n>    Implementers SHOULD only use MACs to\n>    secure the integrity of Status List Tokens if they fully understand\n>    the risks of MACs when compared to digital signatures and especially\n>    the requirements of their use-case scenarios.\n> \n> What is the interoperable way to assess if an implementor \u201cfully understand[s]\n> the risks of MACs\u201d?  Perhaps s/SHOULD/should/\n> \n> ** Sections 14.2, 14.4, and 14.5 establish new registries with a\n> Specification-Required allocation policy.  This policy includes a\n> review/approval by a Designated Expert (DE).  The current text is clear on\n> where and when to send such requests, but it doesn\u2019t provide any guidance to\n> the DE on deciding how to process it.  Could this please be added.\n> \n> \n> ----------------------------------------------------------------------\n> COMMENT:\n> ----------------------------------------------------------------------\n> \n> I support Andy Newton and Mike Bishop\u2019s DISCUSS positions.\n> \n> ** Section 1.2\n>    Modern\n>    approaches use accumulator-based revocation registries and Zero-\n>    Knowledge-Proofs to accommodate for this privacy gap, but face\n>    scalability issues again.\n> \n> -- Consider how this text might age in a long-lived document.\n> \n> -- Consider if \u201cmodern approaches\u201d is the right characterization (if so, what\n> does this mean?).  Are these schemes (e.g., accumulator-based schemes) widely\n> deployed?\n> \n> ** Section 1.3\n>    *  the specification shall favor a simple and easy-to-understand\n>       concept\n> \u2026\n>    *  the specification shall be optimized to support the most common\n>       use cases and avoid unnecessary complexity of corner cases\n> \n> -- How is \u201ceasy-to-understand\u201d being judged?\n> -- What are these use cases?\n> -- Consider if this text is needed\n> \n> ** Section 11.2\n>    A Status List Token in the JWT format SHOULD follow the security\n>    considerations of [RFC7519] and the best current practices of\n>    [RFC8725].\n>    A Status List Token in the CWT format SHOULD follow the security\n>    considerations of [RFC8392].\n> \n> Is there any further guidance that can be given on when it is appropriate to\n> ignore these security considerations or best practices?",
       "createdAt": "2026-01-07T14:25:27Z",
-      "updatedAt": "2026-01-13T18:25:21Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-15T18:13:26Z",
+      "closedAt": "2026-01-15T18:13:26Z",
       "comments": [
         {
           "author": "c2bo",
@@ -6671,7 +6679,55 @@
       "labels": [],
       "body": "> \n> ## Discuss\n> \n> ### Not really out of scope....\n> \n> ```\n> 1233       As this is out of scope for this document, this validation is not\n> 1234       described here, but is expected to be done according to the format of\n> 1235       the Referenced Token.\n> ```\n> \n> This is not as clear as it could be.\n> \n> Is it acceptable to perform any HTTP dereferencing in the case the referenced\n> token is invalid?\n> \n> Perhaps something to the effect of \"regardless of the validation procedures for\n> the referenced token, if validation fails, no http operations must be\n> performed\".\n> \n> The current framing feels like its inviting implementers to make network\n> requests which leak metadata, for tokens that are already considered invalid.\n> \n> ```\n> 1285           index is out of bounds of the Status List, no statement about the\n> 1286           status of the Referenced Token can be made and the Referenced\n> 1287           Token SHOULD be rejected.\n> ```\n> \n> This makes validation of the referenced token in scope... also... this SHOULD\n> seems like a bad idea. Why not MUST?... What does it mean to accept a token\n> about which not statement of status can be made?\n> \n> \n> ----------------------------------------------------------------------\n> COMMENT:\n> ----------------------------------------------------------------------\n> \n> \n> ## Comments\n> \n> ### Public?\n> \n> ```\n> 216        Status Provider, who serves the Status List Token on a public,\n> 217        resolvable endpoint.  The Relying Party or the Holder may fetch the\n> ```\n> \n> Perhaps you mean simply accessible to the verifier?\n> I'm not sure if public precludes .internal, or other non public internet\n> resources.\n> \n> ### SD-JWT\n> \n> ```\n> 827        SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of [SD-JWT.VC])\n> ```\n> \n> Is there a reason that SD-JWT VC is mentioned throughout this document instead\n> of SD-JWT by itself?\n> \n> ### Why not MUST?\n> \n> ```\n> 1113       most common Status Type values.  Applications SHOULD use registered\n> 1114       values for statuses if they have the correct semantics.  Additional\n> ```\n> \n> Under which circumstances, can this SHOULD be ignored?\n> Which use cases would encourage a different value from one in the registry to\n> be used with the exact same semantics?\n> \n> ### Which .well-known\n> \n> ```\n> 1387       The Issuer MAY link to the Status List Aggregation URI in metadata\n> 1388       that can be provided by different means like .well-known metadata as\n> 1389       is used commonly in OAuth and OpenID Connect, or within Issuer\n> 1390       certificates or trust lists (such as VICAL as defined in Annex C of\n> ```\n> \n> It would be better to explicitly name the .well-known URIs than to refer to\n> them like this. The current normative requirement is ambiguous.\n> \n> ### One time use reference tokens\n> \n> ```\n> 1704       To avoid privacy risks of colluding Relying Parties, it is\n> 1705       RECOMMENDED that Issuers provide the ability to issue batches of one-\n> 1706       time-use Referenced Tokens, enabling Holders to use in a single\n> 1707       interaction with a Relying Party before discarding.  See Section 13.2\n> ```\n> \n> Is the index of and URL of the status information allowed to be the same for\n> these single use tokens?\n> \n> ```\n> 1723       interacted with the same Holder.  It is therefore recommended to use\n> 1724       Status Lists for Referenced Token formats that have similar\n> 1725       unlinkability properties.\n> ```\n> \n> I don't undertand what \"similar unlinkability properties\" means.\n> \n> ### APPLICATION_SPECIFIC\n> \n> Are there really 0 references to provide for these application specific\n> registrations? Are they in use today? or anticipated to be be used ever? Are\n> the reserved for experimentation, or reservered because of existing deployments?\n> \n> ## Nits\n> \n> ### Media type point of contact\n> \n> ```\n> 2349       *  Person & email address to contact for further information: Paul\n> 2350          Bastian, [paul.bastian@posteo.de](mailto:paul.bastian@posteo.de)\n> ```\n> \n> While this has been common, I think it is better to direct the point of contact\n> for media types reserved by a working group to the working group list itself.",
       "createdAt": "2026-01-08T09:07:22Z",
-      "updatedAt": "2026-01-08T09:07:22Z",
+      "updatedAt": "2026-01-15T21:21:22Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> Discuss\n> Not really out of scope....\n> \n> 1233       As this is out of scope for this document, this validation is not\n> 1234       described here, but is expected to be done according to the format of\n> 1235       the Referenced Token.\n> \n> This is not as clear as it could be.\n> \n> Is it acceptable to perform any HTTP dereferencing in the case the referenced\n> token is invalid?\n> \n> Perhaps something to the effect of \"regardless of the validation procedures for\n> the referenced token, if validation fails, no http operations must be\n> performed\".\n> \n> The current framing feels like its inviting implementers to make network\n> requests which leak metadata, for tokens that are already considered invalid.\n\nGenerally agreed although the language we prefer is:\n\nIf the validation procedures for the Referenced Token determine it is invalid, no further procedures regarding Status List MUST be performed, e.g. fetching a Status List Token.",
+          "createdAt": "2026-01-15T21:21:22Z",
+          "updatedAt": "2026-01-15T21:21:22Z"
+        }
+      ]
+    },
+    {
+      "number": 341,
+      "id": "I_kwDOJZ2aqs7jqTfm",
+      "title": "Fix typo in Size comparison table",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/341",
+      "state": "OPEN",
+      "author": "thomasdarimont",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "<img width=\"892\" height=\"735\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/10c040bb-c869-46b4-852a-b8388bce2207\" />\n\n11.9 KB -> 11.9 MB",
+      "createdAt": "2026-01-15T22:47:02Z",
+      "updatedAt": "2026-01-16T08:54:16Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "I re-ran the benchmark and 11.9KB is correct for status list - for 100% revocation, we get the full benefit of compression",
+          "createdAt": "2026-01-16T08:54:16Z",
+          "updatedAt": "2026-01-16T08:54:16Z"
+        }
+      ]
+    },
+    {
+      "number": 343,
+      "id": "I_kwDOJZ2aqs7jxnCa",
+      "title": "re-work mdoc section",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/343",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "We should clearly point to 18013-5 v2 for the definiton and rework the text a bit accordingly.",
+      "createdAt": "2026-01-16T10:36:19Z",
+      "updatedAt": "2026-01-16T10:36:19Z",
       "closedAt": null,
       "comments": []
     }
@@ -22470,6 +22526,297 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 338,
+      "id": "PR_kwDOJZ2aqs69b12Y",
+      "title": "review by Roman Danyliw",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/338",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #336 ",
+      "createdAt": "2026-01-15T17:44:13Z",
+      "updatedAt": "2026-01-15T18:13:26Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "22d57f6cf12434aab3390c5a389f913eeec55024",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/review_roman",
+      "headRefOid": "9eae2cb16e7e44498ef395691ea3faf581dd3ca7",
+      "closedAt": "2026-01-15T18:13:25Z",
+      "mergedAt": "2026-01-15T18:13:25Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "095af2560818fbb7ac11124e4e8049f1cd556c2d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7akOM3",
+          "commit": {
+            "abbreviatedOid": "390ccbb"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-15T18:09:25Z",
+          "updatedAt": "2026-01-15T18:09:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7akPq8",
+          "commit": {
+            "abbreviatedOid": "390ccbb"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-15T18:10:48Z",
+          "updatedAt": "2026-01-15T18:10:48Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\r\nRevocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Approaches based on cryptographic accumulators and Zero-Knowledge-Proofs try to accommodate for this privacy gap, but are currently (in 2026) facing scalability issues and are not yet standardized. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.\r\n```",
+              "createdAt": "2026-01-15T18:10:48Z",
+              "updatedAt": "2026-01-15T18:11:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7akRZO",
+          "commit": {
+            "abbreviatedOid": "390ccbb"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-15T18:12:11Z",
+          "updatedAt": "2026-01-15T18:12:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 339,
+      "id": "PR_kwDOJZ2aqs69cFol",
+      "title": "fixes for mike bishops' review",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/339",
+      "state": "MERGED",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #335 ",
+      "createdAt": "2026-01-15T18:07:08Z",
+      "updatedAt": "2026-01-15T18:43:43Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "095af2560818fbb7ac11124e4e8049f1cd556c2d",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "335-mikes-review",
+      "headRefOid": "ee92cf2e85b305e2f5d0a9b19aa63d9e11004ce3",
+      "closedAt": "2026-01-15T18:43:43Z",
+      "mergedAt": "2026-01-15T18:43:43Z",
+      "mergedBy": "c2bo",
+      "mergeCommit": {
+        "oid": "f6c1f4a0b0ef6fb42ec7f6ef6f041c6a8c6c9e85"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7akT8l",
+          "commit": {
+            "abbreviatedOid": "05cc9eb"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-15T18:14:09Z",
+          "updatedAt": "2026-01-15T18:14:10Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "```suggestion\r\nThe HTTP response SHOULD use Content-Encoding (such as gzip) using the content negotiation and encoding mechanisms as defined in {{RFC9110}} for Status List Tokens in JWT format.\r\n```",
+              "createdAt": "2026-01-15T18:14:09Z",
+              "updatedAt": "2026-01-15T18:14:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7akW9J",
+          "commit": {
+            "abbreviatedOid": "05cc9eb"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-15T18:16:38Z",
+          "updatedAt": "2026-01-15T18:16:38Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\n: A Status describes the current state, mode, condition or stage of an entity that is represented by the Referenced Token as determined by the Status Issuer.\r\n```",
+              "createdAt": "2026-01-15T18:16:38Z",
+              "updatedAt": "2026-01-15T18:17:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7akbO3",
+          "commit": {
+            "abbreviatedOid": "05cc9eb"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-15T18:20:27Z",
+          "updatedAt": "2026-01-15T18:20:27Z",
+          "comments": [
+            {
+              "originalPosition": 65,
+              "body": "```suggestion\r\nThe default Status List request and response mechanism uses HTTP semantics and Content negotiation as defined in {{RFC9110}}.\r\n```",
+              "createdAt": "2026-01-15T18:20:27Z",
+              "updatedAt": "2026-01-15T18:20:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7akg7y",
+          "commit": {
+            "abbreviatedOid": "05cc9eb"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-15T18:26:56Z",
+          "updatedAt": "2026-01-15T18:26:56Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7akkFB",
+          "commit": {
+            "abbreviatedOid": "6e6b482"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-15T18:30:21Z",
+          "updatedAt": "2026-01-15T18:30:21Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 340,
+      "id": "PR_kwDOJZ2aqs69dLnh",
+      "title": "Address Andy's review",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/340",
+      "state": "OPEN",
+      "author": "tplooker",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #334",
+      "createdAt": "2026-01-15T19:45:44Z",
+      "updatedAt": "2026-01-16T11:55:52Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f6c1f4a0b0ef6fb42ec7f6ef6f041c6a8c6c9e85",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "issue-334",
+      "headRefOid": "3f1b6618ca1e8a471f02b1709f757ade6d77aa9a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Missing the small adjustments to the mdoc part I believe?",
+          "createdAt": "2026-01-16T10:37:27Z",
+          "updatedAt": "2026-01-16T10:37:27Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7aueyF",
+          "commit": {
+            "abbreviatedOid": "3f1b661"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-16T08:54:56Z",
+          "updatedAt": "2026-01-16T08:55:30Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nThe following media types are defined by this specification for HTTP based Content negotiation:\r\n```",
+              "createdAt": "2026-01-16T08:54:57Z",
+              "updatedAt": "2026-01-16T08:55:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7ax_3K",
+          "commit": {
+            "abbreviatedOid": "3f1b661"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2026-01-16T11:55:42Z",
+          "updatedAt": "2026-01-16T11:55:52Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "I would fear that not all http libraries implement this, so I would go with a should",
+              "createdAt": "2026-01-16T11:55:42Z",
+              "updatedAt": "2026-01-16T11:55:52Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 342,
+      "id": "PR_kwDOJZ2aqs69fRju",
+      "title": "Fix typo in appendix b comparison table",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/342",
+      "state": "OPEN",
+      "author": "thomasdarimont",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Entry for Size:100M and 100% should be MB: 11.9 KB -> 11.9 MB\r\n\r\nFixes #341",
+      "createdAt": "2026-01-15T22:49:09Z",
+      "updatedAt": "2026-01-15T22:49:10Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "f6c1f4a0b0ef6fb42ec7f6ef6f041c6a8c6c9e85",
+      "headRepository": "thomasdarimont/draft-ietf-oauth-status-list",
+      "headRefName": "fix-comparison-table",
+      "headRefOid": "f07268a2457333b80c89bd1968f59f920772c03a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
