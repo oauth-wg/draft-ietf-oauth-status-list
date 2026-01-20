@@ -763,7 +763,7 @@ The Status Provider MUST return the Status List Token in response to an HTTP GET
 
 The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.
 
-The following media types are defined by this specification for HTTP based Content negotiation 
+The following media types are defined by this specification for HTTP based Content negotiation:
 
 - "application/statuslist+jwt" for Status List Token in JWT format
 - "application/statuslist+cwt" for Status List Token in CWT format
