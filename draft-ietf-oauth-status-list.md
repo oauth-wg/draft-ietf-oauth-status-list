@@ -1000,7 +1000,7 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
 
 ## Redirection 3xx {#redirects}
 
-HTTP clients that follow 3xx (Redirection) status codes MUST be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial-of-service attacks on clients. A client MUST detect and intervene in infinite redirections. Clients SHOULD apply the guidance for redirects given in {{Section 15.4 of RFC9110}}.
+HTTP clients that follow 3xx (Redirection) status codes MUST be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial-of-service attacks on clients. HTTP clients MUST follow the guidance provided in {{Section 15.4 of RFC9110}} for handling redirects.
 
 ## Expiration and Caching {#security-ttl}
 
