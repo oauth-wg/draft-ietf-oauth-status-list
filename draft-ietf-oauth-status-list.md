@@ -759,16 +759,14 @@ The fetching, processing and verifying of a Status List Token may be done by eit
 
 The default Status List request and response mechanism uses HTTP semantics and Content negotiation as defined in {{RFC9110}}.
 
-The Status Provider SHOULD return the Status List Token in response to an HTTP GET request to the URI provided in the Referenced Token, unless the Relying Party and the Status Provider have alternative methods of distribution.
+The Status Provider MUST return the Status List Token in response to an HTTP GET request to the URI provided in the Referenced Token, unless the Relying Party and the Status Provider have alternative methods of distribution for the Status List Token.
 
 The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS) {{CORS}} and/or other methods as appropriate to enable Browser-based clients to access it, unless ecosystems using this specification choose not to support Browser-based clients.
 
-The Relying Party SHOULD send the following Accept HTTP Header to indicate the requested response type unless the Content-Type of Status List Tokens in the respective ecosystem is known or the Relying Party supports both formats:
+The following media types are defined by this specification for HTTP based Content negotiation:
 
 - "application/statuslist+jwt" for Status List Token in JWT format
 - "application/statuslist+cwt" for Status List Token in CWT format
-
-If the Relying Party does not send an Accept Header, the response type is assumed to be known implicitly or out-of-band.
 
 The following is a non-normative example of a request for a Status List Token with type `application/statuslist+jwt`:
 
@@ -1002,7 +1000,7 @@ If the Issuer of the Referenced Token is a different entity than the Status Issu
 
 ## Redirection 3xx {#redirects}
 
-HTTP clients that follow 3xx (Redirection) status codes SHOULD be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial-of-service attacks on clients. A client SHOULD detect and intervene in infinite redirections. Clients SHOULD apply the guidance for redirects given in {{Section 15.4 of RFC9110}}.
+HTTP clients that follow 3xx (Redirection) status codes MUST be aware of the possible dangers of redirects, such as infinite redirection loops, since they can be used for denial-of-service attacks on clients. HTTP clients MUST follow the guidance provided in {{Section 15.4 of RFC9110}} for handling redirects.
 
 ## Expiration and Caching {#security-ttl}
 
@@ -1975,6 +1973,8 @@ CBOR encoding:
 * grammatical/style fixes
 * making several SHOULDs non-normative
 * small corrections in the introduction
+* change guidance around HTTP content negotiation to refer to RFC 9110
+* strengthen normative guidance around handling cases or redirection
 
 -15
 
