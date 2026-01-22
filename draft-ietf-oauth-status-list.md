@@ -157,7 +157,7 @@ The following diagram depicts the relationship between the artifacts:
 
 ~~~
 
-An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who issues a Status List Token. The Status Issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint. The Relying Party or the Holder may fetch the Status List Token to retrieve the status of the Referenced Token.
+An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who issues a Status List Token. The Status Issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on an accessible endpoint. The Relying Party or the Holder may fetch the Status List Token to retrieve the status of the Referenced Token.
 
 The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles. This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.
 
@@ -232,7 +232,7 @@ Status Issuer:
 : An entity that issues the Status List Token about the status information of the Referenced Token. This role may be fulfilled by the Issuer.
 
 Status Provider:
-: An entity that provides the Status List Token on a public endpoint. This role may be fulfilled by the Status Issuer.
+: An entity that provides the Status List Token on an accessible endpoint. This role may be fulfilled by the Status Issuer.
 
 Holder:
 : An entity that receives Referenced Tokens from the Issuer and presents them to Relying Parties.
@@ -741,7 +741,7 @@ A Status List represents exactly one status per Referenced Token. If the Status 
 
 The processing rules for Referenced Tokens (such as JWT or CWT) supersede the Referenced Token's status in a TSL. In particular, a Referenced Token that is evaluated as being expired (e.g. through the `exp` claim) but in a TSL has a status of 0x00 ("VALID"), is considered expired.
 
-This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. Applications SHOULD use registered values for statuses if they have the correct semantics. Additional values may be defined for particular use cases. Status Types described by this document comprise:
+This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. To improve interoperability, applications MUST use registered values for statuses if they have the same or compatiable semantics of the use-case. Additional values may be defined for particular use cases. Status Types described by this document comprise:
 
  - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
  - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
@@ -826,7 +826,7 @@ If this validation is not successful, the Referenced Token MUST be rejected. If 
     1. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
     {: type="a"}
 1. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
-1. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). If the provided index is out of bounds of the Status List, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
+1. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). If the provided index is out of bounds of the Status List, no statement about the status of the Referenced Token can be made and the Referenced Token MUST be rejected.
 1. Check the status value as described in [](#status-types)
 
 If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
@@ -891,7 +891,7 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID Connect, or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use the `status_list_aggregation_endpoint` parameter within its metadata defined by {{RFC8414}}. The Issuer MAY limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth as defined in {{RFC8414}}, or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use the `status_list_aggregation_endpoint` parameter within its metadata defined by {{RFC8414}}. The Issuer MAY limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.
 
 The concrete implementation details depend on the specific ecosystem and are out of scope of this specification.
 
