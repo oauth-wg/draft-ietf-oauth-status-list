@@ -572,11 +572,9 @@ The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according
     * `idx`: REQUIRED. Unsigned integer (major type 0). The `idx` (index) claim MUST specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.
     * `uri`: REQUIRED. Text string (major type 3). The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
 
-### CBOR Web Token (CWT) {#referenced-token-cwt}
+If the Referenced Token is a CWT, the following content applies to the CWT Claims Set:
 
-The following content applies to the CWT Claims Set:
-
-* `65535` (status): REQUIRED. The status claim contains the `Status` CBOR structure as described in [](#referenced-token-cose).
+* `65535` (status): REQUIRED. The status claim contains the `Status` CBOR structure as described in this section.
 
 Application of additional restrictions and policies are at the discretion of the Relying Party.
 
