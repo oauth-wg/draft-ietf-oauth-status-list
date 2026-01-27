@@ -566,6 +566,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -636,7 +637,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1048,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 26 July 2026</td>
+<td class="center">Expires 31 July 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-01-22" class="published">22 January 2026</time>
+<time datetime="2026-01-27" class="published">27 January 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-07-26">26 July 2026</time></dd>
+<dd class="expires"><time datetime="2026-07-31">31 July 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1124,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1310,10 +1311,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5.2.1">
-                    <p id="section-toc.1-1.12.2.5.2.1.1"><a href="#section-12.5.1" class="auto internal xref">12.5.1</a>.  <a href="#name-colluding-relying-parties" class="internal xref">Colluding Relying Parties</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5.2.2">
-                    <p id="section-toc.1-1.12.2.5.2.2.1"><a href="#section-12.5.2" class="auto internal xref">12.5.2</a>.  <a href="#name-colluding-status-issuer-and" class="internal xref">Colluding Status Issuer and Relying Party</a></p>
+                    <p id="section-toc.1-1.12.2.5.2.1.1"><a href="#section-12.5.1" class="auto internal xref">12.5.1</a>.  <a href="#name-cross-party-collusion" class="internal xref">Cross-party Collusion</a></p>
 </li>
                 </ul>
 </li>
@@ -1505,7 +1503,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 
 </pre><a href="#section-1-4" class="pilcrow">¶</a>
 </div>
-<p id="section-1-5">An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who issues a Status List Token. The Status Issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint. The Relying Party or the Holder may fetch the Status List Token to retrieve the status of the Referenced Token.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-5">An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who issues a Status List Token. The Status Issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on an accessible endpoint. The Relying Party or the Holder may fetch the Status List Token to retrieve the status of the Referenced Token.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles. This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of <span>[<a href="#SD-JWT.VC" class="cite xref">SD-JWT.VC</a>]</span>):<a href="#section-1-7" class="pilcrow">¶</a></p>
 <div class="alignLeft art-ascii-art art-text artwork" id="section-1-8">
@@ -1625,7 +1623,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <dd class="break"></dd>
 <dt id="section-3-1.5">Status Provider:</dt>
         <dd style="margin-left: 1.5em" id="section-3-1.6">
-          <p id="section-3-1.6.1">An entity that provides the Status List Token on a public endpoint. This role may be fulfilled by the Status Issuer.<a href="#section-3-1.6.1" class="pilcrow">¶</a></p>
+          <p id="section-3-1.6.1">An entity that provides the Status List Token on an accessible endpoint. This role may be fulfilled by the Status Issuer.<a href="#section-3-1.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-1.7">Holder:</dt>
@@ -2378,7 +2376,7 @@ A Status List represents exactly one status per Referenced Token. If the Status 
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-status-types-values" class="section-name selfRef">Status Types Values</a>
         </h3>
 <p id="section-7.1-1">The processing rules for Referenced Tokens (such as JWT or CWT) supersede the Referenced Token's status in a TSL. In particular, a Referenced Token that is evaluated as being expired (e.g. through the <code>exp</code> claim) but in a TSL has a status of 0x00 ("VALID"), is considered expired.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1-2">This document creates a registry in <a href="#iana-status-types" class="auto internal xref">Section 14.5</a> that includes the most common Status Type values. Applications <span class="bcp14">SHOULD</span> use registered values for statuses if they have the correct semantics. Additional values may be defined for particular use cases. Status Types described by this document comprise:<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">This document creates a registry in <a href="#iana-status-types" class="auto internal xref">Section 14.5</a> that includes the most common Status Type values. To improve interoperability, applications <span class="bcp14">MUST</span> use registered values for statuses if they have the same or compatiable semantics of the use-case. Additional values may be defined for particular use cases. Status Types described by this document comprise:<a href="#section-7.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.1-3.1">
             <p id="section-7.1-3.1.1">0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.<a href="#section-7.1-3.1.1" class="pilcrow">¶</a></p>
@@ -2512,7 +2510,7 @@ Ql45Jfzd-Av4QzlKa3oVALpLwOEUOq-U_g
             <p id="section-8.3-3.5.1">Decompress the Status List with a decompressor that is compatible with DEFLATE <span>[<a href="#RFC1951" class="cite xref">RFC1951</a>]</span> and ZLIB <span>[<a href="#RFC1950" class="cite xref">RFC1950</a>]</span><a href="#section-8.3-3.5.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-8.3-3.6">
-            <p id="section-8.3-3.6.1">Retrieve the status value of the index specified in the Referenced Token as described in <a href="#status-list" class="auto internal xref">Section 4</a>. If the provided index is out of bounds of the Status List, no statement about the status of the Referenced Token can be made and the Referenced Token <span class="bcp14">SHOULD</span> be rejected.<a href="#section-8.3-3.6.1" class="pilcrow">¶</a></p>
+            <p id="section-8.3-3.6.1">Retrieve the status value of the index specified in the Referenced Token as described in <a href="#status-list" class="auto internal xref">Section 4</a>. If the provided index is out of bounds of the Status List, no statement about the status of the Referenced Token can be made and the Referenced Token <span class="bcp14">MUST</span> be rejected.<a href="#section-8.3-3.6.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-8.3-3.7">
             <p id="section-8.3-3.7.1">Check the status value as described in <a href="#status-types" class="auto internal xref">Section 7</a><a href="#section-8.3-3.7.1" class="pilcrow">¶</a></p>
@@ -2597,7 +2595,7 @@ An Issuer <span class="bcp14">MAY</span> support any of these mechanisms:<a href
         <h3 id="name-issuer-metadata">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-issuer-metadata" class="section-name selfRef">Issuer Metadata</a>
         </h3>
-<p id="section-9.1-1">The Issuer <span class="bcp14">MAY</span> link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID Connect, or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>). If the Issuer is an OAuth Authorization Server according to <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> to use the <code>status_list_aggregation_endpoint</code> parameter within its metadata defined by <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>. The Issuer <span class="bcp14">MAY</span> limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">The Issuer <span class="bcp14">MAY</span> link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth as defined in <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>, or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span>). If the Issuer is an OAuth Authorization Server according to <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> to use the <code>status_list_aggregation_endpoint</code> parameter within its metadata defined by <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>. The Issuer <span class="bcp14">MAY</span> limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">The concrete implementation details depend on the specific ecosystem and are out of scope of this specification.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2856,13 +2854,13 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
 <a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
         </h3>
 <p id="section-12.5-1">The tuple of uri and index inside the Referenced Token are unique and therefore is traceable data.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
-<div id="colluding-relying-parties">
+<div id="cross-party-collusion">
 <section id="section-12.5.1">
-          <h4 id="name-colluding-relying-parties">
-<a href="#section-12.5.1" class="section-number selfRef">12.5.1. </a><a href="#name-colluding-relying-parties" class="section-name selfRef">Colluding Relying Parties</a>
+          <h4 id="name-cross-party-collusion">
+<a href="#section-12.5.1" class="section-number selfRef">12.5.1. </a><a href="#name-cross-party-collusion" class="section-name selfRef">Cross-party Collusion</a>
           </h4>
-<p id="section-12.5.1-1">Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.<a href="#section-12.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-12.5.1-2">To avoid privacy risks of colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See <a href="#implementation-linkability" class="auto internal xref">Section 13.2</a> to avoid further correlatable information by the values of <code>uri</code> and <code>idx</code>, Status Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-12.5.1-1">Two or more colluding parties (e.g Relying Parties and or the Status Issuer) may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.<a href="#section-12.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-12.5.1-2">To avoid privacy risks of this possible collusion, it is <span class="bcp14">RECOMMENDED</span> that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See <a href="#implementation-linkability" class="auto internal xref">Section 13.2</a> to avoid further correlatable information by the values of <code>uri</code> and <code>idx</code>, Status Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12.5.1-3.1">
               <p id="section-12.5.1-3.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.5.1-3.1.1" class="pilcrow">¶</a></p>
@@ -2874,14 +2872,6 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
               <p id="section-12.5.1-3.3.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.5.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-</section>
-</div>
-<div id="colluding-status-issuer-and-relying-party">
-<section id="section-12.5.2">
-          <h4 id="name-colluding-status-issuer-and">
-<a href="#section-12.5.2" class="section-number selfRef">12.5.2. </a><a href="#name-colluding-status-issuer-and" class="section-name selfRef">Colluding Status Issuer and Relying Party</a>
-          </h4>
-<p id="section-12.5.2-1">A Status Issuer and a Relying Party Issuer may link two transactions involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4702,6 +4692,12 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 </li>
         <li class="normal" id="appendix-D-3.6">
           <p id="appendix-D-3.6.1">strengthen normative guidance around handling cases or redirection<a href="#appendix-D-3.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.7">
+          <p id="appendix-D-3.7.1">update discussion around collusion risk in unlinkability section<a href="#appendix-D-3.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.8">
+          <p id="appendix-D-3.8.1">strength guidance to <span class="bcp14">MUST</span> about rejecting reference tokens with an index which is out of bounds of the resolved list<a href="#appendix-D-3.8.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-4">-15<a href="#appendix-D-4" class="pilcrow">¶</a></p>
