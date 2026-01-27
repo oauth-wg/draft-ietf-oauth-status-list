@@ -1452,7 +1452,7 @@ To indicate that the content is an JWT-based Status List:
   * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
   * Additional information: n/a
-  * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
+  * Person &amp; email address to contact for further information: OAuth WG mailing list, oauth@ietf.org
   * Intended usage: COMMON
   * Restrictions on usage: none
   * Author: OAuth WG mailing list, oauth@ietf.org
@@ -1472,7 +1472,7 @@ To indicate that the content is an CWT-based Status List:
   * Applications that use this media type: Applications using this specification for updated status information of tokens
   * Fragment identifier considerations: n/a
   * Additional information: n/a
-  * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
+  * Person &amp; email address to contact for further information: OAuth WG mailing list, oauth@ietf.org
   * Intended usage: COMMON
   * Restrictions on usage: none
   * Author: OAuth WG mailing list, oauth@ietf.org
