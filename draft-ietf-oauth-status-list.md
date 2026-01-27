@@ -1835,6 +1835,9 @@ CBOR encoding:
 * small corrections in the introduction
 * change guidance around HTTP content negotiation to refer to RFC 9110
 * strengthen normative guidance around handling cases or redirection
+* update discussion around collusion risk in unlinkability section
+* strength guidance to MUST about rejecting reference tokens with an index which is out of bounds of the resolved list
+* remove non-normative ISO mdoc examples
 
 -15
 
