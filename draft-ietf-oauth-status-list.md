@@ -157,7 +157,7 @@ The following diagram depicts the relationship between the artifacts:
 
 ~~~
 
-An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who issues a Status List Token. The Status Issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on a public, resolvable endpoint. The Relying Party or the Holder may fetch the Status List Token to retrieve the status of the Referenced Token.
+An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents those Referenced Tokens to a Relying Party. The Issuer gives updated status information to the Status Issuer, who issues a Status List Token. The Status Issuer can be either the Issuer or an entity that has been authorized by the Issuer to issue Status List Tokens. The Status Issuer provides the Status List Token to the Status Provider, who serves the Status List Token on an accessible endpoint. The Relying Party or the Holder may fetch the Status List Token to retrieve the status of the Referenced Token.
 
 The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles. This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.
 
@@ -232,7 +232,7 @@ Status Issuer:
 : An entity that issues the Status List Token about the status information of the Referenced Token. This role may be fulfilled by the Issuer.
 
 Status Provider:
-: An entity that provides the Status List Token on a public endpoint. This role may be fulfilled by the Status Issuer.
+: An entity that provides the Status List Token on an accessible endpoint. This role may be fulfilled by the Status Issuer.
 
 Holder:
 : An entity that receives Referenced Tokens from the Issuer and presents them to Relying Parties.
@@ -741,7 +741,7 @@ A Status List represents exactly one status per Referenced Token. If the Status 
 
 The processing rules for Referenced Tokens (such as JWT or CWT) supersede the Referenced Token's status in a TSL. In particular, a Referenced Token that is evaluated as being expired (e.g. through the `exp` claim) but in a TSL has a status of 0x00 ("VALID"), is considered expired.
 
-This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. Applications SHOULD use registered values for statuses if they have the correct semantics. Additional values may be defined for particular use cases. Status Types described by this document comprise:
+This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. To improve interoperability, applications MUST use registered values for statuses if they have the same or compatiable semantics of the use-case. Additional values may be defined for particular use cases. Status Types described by this document comprise:
 
  - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
  - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
@@ -826,7 +826,7 @@ If this validation is not successful, the Referenced Token MUST be rejected. If 
     1. If the Relying Party is using a system for caching the Status List Token, it SHOULD check the `ttl` claim of the Status List Token and retrieve a fresh copy if (time status was resolved + ttl < current time)
     {: type="a"}
 1. Decompress the Status List with a decompressor that is compatible with DEFLATE {{RFC1951}} and ZLIB {{RFC1950}}
-1. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). If the provided index is out of bounds of the Status List, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
+1. Retrieve the status value of the index specified in the Referenced Token as described in [](#status-list). If the provided index is out of bounds of the Status List, no statement about the status of the Referenced Token can be made and the Referenced Token MUST be rejected.
 1. Check the status value as described in [](#status-types)
 
 If any of these checks fails, no statement about the status of the Referenced Token can be made and the Referenced Token SHOULD be rejected.
@@ -891,7 +891,7 @@ An Issuer MAY support any of these mechanisms:
 
 ## Issuer Metadata
 
-The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth and OpenID Connect, or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use the `status_list_aggregation_endpoint` parameter within its metadata defined by {{RFC8414}}. The Issuer MAY limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.
+The Issuer MAY link to the Status List Aggregation URI in metadata that can be provided by different means like .well-known metadata as is used commonly in OAuth as defined in {{RFC8414}}, or within Issuer certificates or trust lists (such as VICAL as defined in Annex C of {{ISO.mdoc}}). If the Issuer is an OAuth Authorization Server according to {{RFC6749}}, it is RECOMMENDED to use the `status_list_aggregation_endpoint` parameter within its metadata defined by {{RFC8414}}. The Issuer MAY limit the Status List Tokens listed by a Status List Aggregation to a particular type of Referenced Token.
 
 The concrete implementation details depend on the specific ecosystem and are out of scope of this specification.
 
@@ -1062,19 +1062,15 @@ This behaviour could be mitigated by:
 
 The tuple of uri and index inside the Referenced Token are unique and therefore is traceable data.
 
-### Colluding Relying Parties
+### Cross-party Collusion
 
-Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
+Two or more colluding parties (e.g Relying Parties and or the Status Issuer) may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
 
-To avoid privacy risks of colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `idx`, Status Issuers are RECOMMENDED to:
+To avoid privacy risks of this possible collusion, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `idx`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
 - choose to deploy and utilize multiple Status Lists simultaneously
-
-### Colluding Status Issuer and Relying Party
-
-A Status Issuer and a Relying Party Issuer may link two transactions involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
 ## External Status Provider for Privacy {#third-party-hosting}
 
@@ -1976,6 +1972,8 @@ CBOR encoding:
 * change guidance around HTTP content negotiation to refer to RFC 9110
 * strengthen normative guidance around handling cases or redirection
 * changing media type contact to oauth WG mailing list
+* update discussion around collusion risk in unlinkability section
+* strength guidance to MUST about rejecting reference tokens with an index which is out of bounds of the resolved list
 
 -15
 
