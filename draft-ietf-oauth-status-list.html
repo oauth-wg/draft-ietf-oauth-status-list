@@ -1216,11 +1216,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
                 <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-referenced-token-in-cose" class="internal xref">Referenced Token in COSE</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.1">
-                    <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="auto internal xref">6.3.1</a>.  <a href="#name-cbor-web-token-cwt" class="internal xref">CBOR Web Token (CWT)</a></p>
-</li>
-                </ul>
 </li>
             </ul>
 </li>
@@ -2141,7 +2136,7 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
         <h3 id="name-referenced-token-in-cose">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-referenced-token-in-cose" class="section-name selfRef">Referenced Token in COSE</a>
         </h3>
-<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "CBOR Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span> or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "CBOR Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>, as an ISO mdoc according to <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-2.1">
             <p id="section-6.3-2.1.1">The <code>Status</code> CBOR structure is a Map that <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.<a href="#section-6.3-2.1.1" class="pilcrow">¶</a></p>
@@ -2160,20 +2155,15 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
             </ul>
 </li>
         </ul>
-<div id="referenced-token-cwt">
-<section id="section-6.3.1">
-          <h4 id="name-cbor-web-token-cwt">
-<a href="#section-6.3.1" class="section-number selfRef">6.3.1. </a><a href="#name-cbor-web-token-cwt" class="section-name selfRef">CBOR Web Token (CWT)</a>
-          </h4>
-<p id="section-6.3.1-1">The following content applies to the CWT Claims Set:<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-3">If the Referenced Token is a CWT, the following content applies to the CWT Claims Set:<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.3.1-2.1">
-              <p id="section-6.3.1-2.1.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim contains the <code>Status</code> CBOR structure as described in <a href="#referenced-token-cose" class="auto internal xref">Section 6.3</a>.<a href="#section-6.3.1-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.3-4.1">
+            <p id="section-6.3-4.1.1"><code>65535</code> (status): <span class="bcp14">REQUIRED</span>. The status claim contains the <code>Status</code> CBOR structure as described in this section.<a href="#section-6.3-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          </ul>
-<p id="section-6.3.1-3">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-6.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.3.1-4">The following is a non-normative example of a Referenced Token in CWT format in Hex:<a href="#section-6.3.1-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.3.1-5">
+        </ul>
+<p id="section-6.3-5">Application of additional restrictions and policies are at the discretion of the Relying Party.<a href="#section-6.3-5" class="pilcrow">¶</a></p>
+<p id="section-6.3-6">The following is a non-normative example of a Referenced Token in CWT format in Hex:<a href="#section-6.3-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-7">
 <pre>
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
@@ -2181,10 +2171,10 @@ d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 7374617475736c697374732f315840340f7efea10f1a36dc4797636a17b4dd4848b6
 8997d1d10e8cceb3a38ff33b3dda72964a83989f6cf98560c2fc97a08bc8977cc6b0
 f84cfedab93d3e4481e938
-</pre><a href="#section-6.3.1-5" class="pilcrow">¶</a>
+</pre><a href="#section-6.3-7" class="pilcrow">¶</a>
 </div>
-<p id="section-6.3.1-6">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3.1-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.3.1-7">
+<p id="section-6.3-8">The following is the CBOR Annotated Hex output of the example above:<a href="#section-6.3-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-9">
 <pre>
 d2                              # tag(18)
   84                            #   array(4)
@@ -2211,9 +2201,7 @@ d2                              # tag(18)
       83989f6cf98560c2fc97a08b  #       "\x83\x98\x9flù\x85`Âü\x97\xa0\x8b"
       c8977cc6b0f84cfedab93d3e  #       "È\x97|Æ°øLþÚ¹=&gt;"
       4481e938                  #       "D\x81é8"
-</pre><a href="#section-6.3.1-7" class="pilcrow">¶</a>
-</div>
-</section>
+</pre><a href="#section-6.3-9" class="pilcrow">¶</a>
 </div>
 </section>
 </div>

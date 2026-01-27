@@ -92,7 +92,6 @@ Table of Contents
      6.1.  Status Claim
      6.2.  Referenced Token in JOSE
      6.3.  Referenced Token in COSE
-       6.3.1.  CBOR Web Token (CWT)
    7.  Status Types
      7.1.  Status Types Values
    8.  Verification and Processing
@@ -879,9 +878,9 @@ d2                              # tag(18)
 6.3.  Referenced Token in COSE
 
    The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)"
-   object according to [RFC8392] or other formats based on COSE.
-   Referenced Tokens in CBOR should share the same core data structure
-   for a status list reference:
+   object according to [RFC8392], as an ISO mdoc according to [ISO.mdoc]
+   or other formats based on COSE.  Referenced Tokens in CBOR should
+   share the same core data structure for a status list reference:
 
    *  The Status CBOR structure is a Map that MUST include at least one
       data item that refers to a status mechanism.  Each data item in
@@ -907,12 +906,11 @@ d2                              # tag(18)
             Referenced Token.  The value of uri MUST be a URI conforming
             to [RFC3986].
 
-6.3.1.  CBOR Web Token (CWT)
-
-   The following content applies to the CWT Claims Set:
+   If the Referenced Token is a CWT, the following content applies to
+   the CWT Claims Set:
 
    *  65535 (status): REQUIRED.  The status claim contains the Status
-      CBOR structure as described in Section 6.3.
+      CBOR structure as described in this section.
 
    Application of additional restrictions and policies are at the
    discretion of the Relying Party.
