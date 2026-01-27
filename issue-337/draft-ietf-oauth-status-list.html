@@ -566,6 +566,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -636,7 +637,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1048,7 +1049,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 26 July 2026</td>
+<td class="center">Expires 31 July 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-01-22" class="published">22 January 2026</time>
+<time datetime="2026-01-27" class="published">27 January 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-07-26">26 July 2026</time></dd>
+<dd class="expires"><time datetime="2026-07-31">31 July 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1124,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 31 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1310,10 +1311,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.12.2.5.1"><a href="#section-12.5" class="auto internal xref">12.5</a>.  <a href="#name-unlinkability" class="internal xref">Unlinkability</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5.2.1">
-                    <p id="section-toc.1-1.12.2.5.2.1.1"><a href="#section-12.5.1" class="auto internal xref">12.5.1</a>.  <a href="#name-colluding-relying-parties" class="internal xref">Colluding Relying Parties</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.5.2.2">
-                    <p id="section-toc.1-1.12.2.5.2.2.1"><a href="#section-12.5.2" class="auto internal xref">12.5.2</a>.  <a href="#name-colluding-status-issuer-and" class="internal xref">Colluding Status Issuer and Relying Party</a></p>
+                    <p id="section-toc.1-1.12.2.5.2.1.1"><a href="#section-12.5.1" class="auto internal xref">12.5.1</a>.  <a href="#name-cross-party-collusion" class="internal xref">Cross-party Collusion</a></p>
 </li>
                 </ul>
 </li>
@@ -2856,13 +2854,13 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
 <a href="#section-12.5" class="section-number selfRef">12.5. </a><a href="#name-unlinkability" class="section-name selfRef">Unlinkability</a>
         </h3>
 <p id="section-12.5-1">The tuple of uri and index inside the Referenced Token are unique and therefore is traceable data.<a href="#section-12.5-1" class="pilcrow">¶</a></p>
-<div id="colluding-relying-parties">
+<div id="cross-party-collusion">
 <section id="section-12.5.1">
-          <h4 id="name-colluding-relying-parties">
-<a href="#section-12.5.1" class="section-number selfRef">12.5.1. </a><a href="#name-colluding-relying-parties" class="section-name selfRef">Colluding Relying Parties</a>
+          <h4 id="name-cross-party-collusion">
+<a href="#section-12.5.1" class="section-number selfRef">12.5.1. </a><a href="#name-cross-party-collusion" class="section-name selfRef">Cross-party Collusion</a>
           </h4>
-<p id="section-12.5.1-1">Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.<a href="#section-12.5.1-1" class="pilcrow">¶</a></p>
-<p id="section-12.5.1-2">To avoid privacy risks of colluding Relying Parties, it is <span class="bcp14">RECOMMENDED</span> that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See <a href="#implementation-linkability" class="auto internal xref">Section 13.2</a> to avoid further correlatable information by the values of <code>uri</code> and <code>idx</code>, Status Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-12.5.1-1">Two or more colluding parties (e.g Relying Parties and or the Status Issuer) may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.<a href="#section-12.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-12.5.1-2">To avoid privacy risks of this possible collusion, it is <span class="bcp14">RECOMMENDED</span> that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See <a href="#implementation-linkability" class="auto internal xref">Section 13.2</a> to avoid further correlatable information by the values of <code>uri</code> and <code>idx</code>, Status Issuers are <span class="bcp14">RECOMMENDED</span> to:<a href="#section-12.5.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-12.5.1-3.1">
               <p id="section-12.5.1-3.1.1">choose non-sequential, pseudo-random or random indices<a href="#section-12.5.1-3.1.1" class="pilcrow">¶</a></p>
@@ -2874,14 +2872,6 @@ Other specifications <span class="bcp14">MAY</span> choose to re-use this OID fo
               <p id="section-12.5.1-3.3.1">choose to deploy and utilize multiple Status Lists simultaneously<a href="#section-12.5.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-</section>
-</div>
-<div id="colluding-status-issuer-and-relying-party">
-<section id="section-12.5.2">
-          <h4 id="name-colluding-status-issuer-and">
-<a href="#section-12.5.2" class="section-number selfRef">12.5.2. </a><a href="#name-colluding-status-issuer-and" class="section-name selfRef">Colluding Status Issuer and Relying Party</a>
-          </h4>
-<p id="section-12.5.2-1">A Status Issuer and a Relying Party Issuer may link two transactions involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.<a href="#section-12.5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -4702,6 +4692,9 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 </li>
         <li class="normal" id="appendix-D-3.6">
           <p id="appendix-D-3.6.1">strengthen normative guidance around handling cases or redirection<a href="#appendix-D-3.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-D-3.7">
+          <p id="appendix-D-3.7.1">update discussion around collusion risk in unlinkability section<a href="#appendix-D-3.7.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-D-4">-15<a href="#appendix-D-4" class="pilcrow">¶</a></p>

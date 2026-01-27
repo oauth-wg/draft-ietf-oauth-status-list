@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 26 July 2026                                    Bundesdruckerei
+Expires: 31 July 2026                                    Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                         22 January 2026
+                                                         27 January 2026
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 July 2026.
+   This Internet-Draft will expire on 31 July 2026.
 
 Copyright Notice
 
@@ -119,8 +119,7 @@ Table of Contents
      12.3.  Observability of Relying Parties
      12.4.  Observability of Outsiders
      12.5.  Unlinkability
-       12.5.1.  Colluding Relying Parties
-       12.5.2.  Colluding Status Issuer and Relying Party
+       12.5.1.  Cross-party Collusion
      12.6.  External Status Provider for Privacy
      12.7.  Historical Resolution
      12.8.  Status Types
@@ -1705,19 +1704,19 @@ d2                              # tag(18)
    The tuple of uri and index inside the Referenced Token are unique and
    therefore is traceable data.
 
-12.5.1.  Colluding Relying Parties
+12.5.1.  Cross-party Collusion
 
-   Two or more colluding Relying Parties may link two transactions
-   involving the same Referenced Token by comparing the status claims of
-   received Referenced Tokens and therefore determine that they have
-   interacted with the same Holder.
+   Two or more colluding parties (e.g Relying Parties and or the Status
+   Issuer) may link two transactions involving the same Referenced Token
+   by comparing the status claims of received Referenced Tokens and
+   therefore determine that they have interacted with the same Holder.
 
-   To avoid privacy risks of colluding Relying Parties, it is
-   RECOMMENDED that Issuers provide the ability to issue batches of one-
-   time-use Referenced Tokens, enabling Holders to use in a single
-   interaction with a Relying Party before discarding.  See Section 13.2
-   to avoid further correlatable information by the values of uri and
-   idx, Status Issuers are RECOMMENDED to:
+   To avoid privacy risks of this possible collusion, it is RECOMMENDED
+   that Issuers provide the ability to issue batches of one-time-use
+   Referenced Tokens, enabling Holders to use in a single interaction
+   with a Relying Party before discarding.  See Section 13.2 to avoid
+   further correlatable information by the values of uri and idx, Status
+   Issuers are RECOMMENDED to:
 
    *  choose non-sequential, pseudo-random or random indices
 
@@ -1725,15 +1724,6 @@ d2                              # tag(18)
       Tokens within a Status List
 
    *  choose to deploy and utilize multiple Status Lists simultaneously
-
-12.5.2.  Colluding Status Issuer and Relying Party
-
-   A Status Issuer and a Relying Party Issuer may link two transactions
-   involving the same Referenced Tokens by comparing the status claims
-   of the Referenced Token and therefore determine that they have
-   interacted with the same Holder.  It is therefore recommended to use
-   Status Lists for Referenced Token formats that have similar
-   unlinkability properties.
 
 12.6.  External Status Provider for Privacy
 
@@ -3275,6 +3265,8 @@ Document History
       9110
 
    *  strengthen normative guidance around handling cases or redirection
+
+   *  update discussion around collusion risk in unlinkability section
 
    -15
 
