@@ -1062,19 +1062,15 @@ This behaviour could be mitigated by:
 
 The tuple of uri and index inside the Referenced Token are unique and therefore is traceable data.
 
-### Colluding Relying Parties
+### Cross-party Collusion
 
-Two or more colluding Relying Parties may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
+Two or more colluding parties (e.g Relying Parties and or the Status Issuer) may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
 
-To avoid privacy risks of colluding Relying Parties, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `idx`, Status Issuers are RECOMMENDED to:
+To avoid privacy risks of this possible collusion, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `idx`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
 - choose to deploy and utilize multiple Status Lists simultaneously
-
-### Colluding Status Issuer and Relying Party
-
-A Status Issuer and a Relying Party Issuer may link two transactions involving the same Referenced Tokens by comparing the status claims of the Referenced Token and therefore determine that they have interacted with the same Holder. It is therefore recommended to use Status Lists for Referenced Token formats that have similar unlinkability properties.
 
 ## External Status Provider for Privacy {#third-party-hosting}
 
@@ -1975,6 +1971,7 @@ CBOR encoding:
 * small corrections in the introduction
 * change guidance around HTTP content negotiation to refer to RFC 9110
 * strengthen normative guidance around handling cases or redirection
+* update discussion around collusion risk in unlinkability section
 
 -15
 
