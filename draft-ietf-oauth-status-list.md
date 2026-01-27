@@ -565,7 +565,7 @@ The resulting payload of the example above:
 
 ## Referenced Token in COSE {#referenced-token-cose}
 
-The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}} or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:
+The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}}, as an ISO mdoc according to {{ISO.mdoc}} or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:
 
 * The `Status` CBOR structure is a Map that MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.
   * `status_list` (status list): REQUIRED when the status mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
