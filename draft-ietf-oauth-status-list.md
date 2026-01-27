@@ -1455,7 +1455,7 @@ To indicate that the content is an JWT-based Status List:
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
-  * Author: Paul Bastian, paul.bastian@posteo.de
+  * Author: OAuth WG mailing list, oauth@ietf.org
   * Change controller: IETF
   * Provisional registration? No
 
@@ -1475,7 +1475,7 @@ To indicate that the content is an CWT-based Status List:
   * Person &amp; email address to contact for further information: Paul Bastian, paul.bastian@posteo.de
   * Intended usage: COMMON
   * Restrictions on usage: none
-  * Author: Paul Bastian, paul.bastian@posteo.de
+  * Author: OAuth WG mailing list, oauth@ietf.org
   * Change controller: IETF
   * Provisional registration? No
 
@@ -1975,6 +1975,7 @@ CBOR encoding:
 * small corrections in the introduction
 * change guidance around HTTP content negotiation to refer to RFC 9110
 * strengthen normative guidance around handling cases or redirection
+* changing media type contact to oauth WG mailing list
 
 -15
 
