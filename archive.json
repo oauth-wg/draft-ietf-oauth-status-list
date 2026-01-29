@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-25T00:24:25.066800+00:00",
+  "timestamp": "2026-01-29T00:24:59.267009+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6672,15 +6672,15 @@
       "id": "I_kwDOJZ2aqs7iBdoO",
       "title": "Orie Steele's review",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/337",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "> \n> ## Discuss\n> \n> ### Not really out of scope....\n> \n> ```\n> 1233       As this is out of scope for this document, this validation is not\n> 1234       described here, but is expected to be done according to the format of\n> 1235       the Referenced Token.\n> ```\n> \n> This is not as clear as it could be.\n> \n> Is it acceptable to perform any HTTP dereferencing in the case the referenced\n> token is invalid?\n> \n> Perhaps something to the effect of \"regardless of the validation procedures for\n> the referenced token, if validation fails, no http operations must be\n> performed\".\n> \n> The current framing feels like its inviting implementers to make network\n> requests which leak metadata, for tokens that are already considered invalid.\n> \n> ```\n> 1285           index is out of bounds of the Status List, no statement about the\n> 1286           status of the Referenced Token can be made and the Referenced\n> 1287           Token SHOULD be rejected.\n> ```\n> \n> This makes validation of the referenced token in scope... also... this SHOULD\n> seems like a bad idea. Why not MUST?... What does it mean to accept a token\n> about which not statement of status can be made?\n> \n> \n> ----------------------------------------------------------------------\n> COMMENT:\n> ----------------------------------------------------------------------\n> \n> \n> ## Comments\n> \n> ### Public?\n> \n> ```\n> 216        Status Provider, who serves the Status List Token on a public,\n> 217        resolvable endpoint.  The Relying Party or the Holder may fetch the\n> ```\n> \n> Perhaps you mean simply accessible to the verifier?\n> I'm not sure if public precludes .internal, or other non public internet\n> resources.\n> \n> ### SD-JWT\n> \n> ```\n> 827        SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of [SD-JWT.VC])\n> ```\n> \n> Is there a reason that SD-JWT VC is mentioned throughout this document instead\n> of SD-JWT by itself?\n> \n> ### Why not MUST?\n> \n> ```\n> 1113       most common Status Type values.  Applications SHOULD use registered\n> 1114       values for statuses if they have the correct semantics.  Additional\n> ```\n> \n> Under which circumstances, can this SHOULD be ignored?\n> Which use cases would encourage a different value from one in the registry to\n> be used with the exact same semantics?\n> \n> ### Which .well-known\n> \n> ```\n> 1387       The Issuer MAY link to the Status List Aggregation URI in metadata\n> 1388       that can be provided by different means like .well-known metadata as\n> 1389       is used commonly in OAuth and OpenID Connect, or within Issuer\n> 1390       certificates or trust lists (such as VICAL as defined in Annex C of\n> ```\n> \n> It would be better to explicitly name the .well-known URIs than to refer to\n> them like this. The current normative requirement is ambiguous.\n> \n> ### One time use reference tokens\n> \n> ```\n> 1704       To avoid privacy risks of colluding Relying Parties, it is\n> 1705       RECOMMENDED that Issuers provide the ability to issue batches of one-\n> 1706       time-use Referenced Tokens, enabling Holders to use in a single\n> 1707       interaction with a Relying Party before discarding.  See Section 13.2\n> ```\n> \n> Is the index of and URL of the status information allowed to be the same for\n> these single use tokens?\n> \n> ```\n> 1723       interacted with the same Holder.  It is therefore recommended to use\n> 1724       Status Lists for Referenced Token formats that have similar\n> 1725       unlinkability properties.\n> ```\n> \n> I don't undertand what \"similar unlinkability properties\" means.\n> \n> ### APPLICATION_SPECIFIC\n> \n> Are there really 0 references to provide for these application specific\n> registrations? Are they in use today? or anticipated to be be used ever? Are\n> the reserved for experimentation, or reservered because of existing deployments?\n> \n> ## Nits\n> \n> ### Media type point of contact\n> \n> ```\n> 2349       *  Person & email address to contact for further information: Paul\n> 2350          Bastian, [paul.bastian@posteo.de](mailto:paul.bastian@posteo.de)\n> ```\n> \n> While this has been common, I think it is better to direct the point of contact\n> for media types reserved by a working group to the working group list itself.",
       "createdAt": "2026-01-08T09:07:22Z",
-      "updatedAt": "2026-01-22T08:59:34Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-27T07:47:04Z",
+      "closedAt": "2026-01-27T07:47:04Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -6692,9 +6692,16 @@
         {
           "author": "c2bo",
           "authorAssociation": "MEMBER",
-          "body": "> 1285           index is out of bounds of the Status List, no statement about the\n> 1286           status of the Referenced Token can be made and the Referenced\n> 1287           Token SHOULD be rejected.\n> ```\n> \n> This makes validation of the referenced token in scope... also... this SHOULD\n> seems like a bad idea. Why not MUST?... What does it mean to accept a token\n> about which not statement of status can be made?\n\nWe discussed and agree that this can become a MUST\n\n\n> ```\n> 216        Status Provider, who serves the Status List Token on a public,\n> 217        resolvable endpoint.  The Relying Party or the Holder may fetch the\n> ```\n> \n> Perhaps you mean simply accessible to the verifier?\n> I'm not sure if public precludes .internal, or other non public internet\n> resources.\n\nAgreed, accessible to the verifiers or holders is better wording than public.\n\n> ```\n> 827        SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of [SD-JWT.VC])\n> ```\n> \n> Is there a reason that SD-JWT VC is mentioned throughout this document instead\n> of SD-JWT by itself?\n\nOur understanding would be that SD-JWT is more on the level of the container format whereas SD-JWT VC is a concrete credential format with additional/pre-defined semantics. I was under the impression that SD-JWT (or JWT for that matter) would not be the best level to introduce a status mechanism since status is usually bound to the semantics of a concrete use-cases / instantiation (like a credential or for example an access token). \n\nOur intention is definitely that everyone that wants to use this mechanism can use it and our definition is not bound to SD-JWT VC but rather on the JWT (or CWT for that matter) payload level. We used SD-JWT VC and mDoc (18013-5 v2) as examples since those are two drafts that are describing in their respective documents how to use status list as a status mechanism in their context. We tried to always make clear that mDoc and SD-JWT VC are examples and not normative in the draft.\n\nWe will do another pass to make sure that this intention is properly reflected in the text.\n\n> \n> ```\n> 1113       most common Status Type values.  Applications SHOULD use registered\n> 1114       values for statuses if they have the correct semantics.  Additional\n> ```\n> \n> Under which circumstances, can this SHOULD be ignored?\n> Which use cases would encourage a different value from one in the registry to\n> be used with the exact same semantics?\n\nProposal to change to: Applications MUST use registered values for statuses if they have the same or compatiable semantics of the use-case.\n\n> ```\n> 1387       The Issuer MAY link to the Status List Aggregation URI in metadata\n> 1388       that can be provided by different means like .well-known metadata as\n> 1389       is used commonly in OAuth and OpenID Connect, or within Issuer\n> 1390       certificates or trust lists (such as VICAL as defined in Annex C of\n> ```\n> \n> It would be better to explicitly name the .well-known URIs than to refer to\n> them like this. The current normative requirement is ambiguous.\n\nPorposal to link to 14.6 (which defines a .well-known entry for the AS)\n\n> ```\n> 1704       To avoid privacy risks of colluding Relying Parties, it is\n> 1705       RECOMMENDED that Issuers provide the ability to issue batches of one-\n> 1706       time-use Referenced Tokens, enabling Holders to use in a single\n> 1707       interaction with a Relying Party before discarding.  See Section 13.2\n> ```\n> \n> Is the index of and URL of the status information allowed to be the same for\n> these single use tokens?\n\nThat is described in the referenced section 13.2 which mandates individual status entries for batch issued Referenced Tokens.\n\n> ```\n> 1723       interacted with the same Holder.  It is therefore recommended to use\n> 1724       Status Lists for Referenced Token formats that have similar\n> 1725       unlinkability properties.\n> ```\n> \n> I don't undertand what \"similar unlinkability properties\" means.\n\nTODO\n\n> Are there really 0 references to provide for these application specific\n> registrations? Are they in use today? or anticipated to be be used ever? Are\n> the reserved for experimentation, or reservered because of existing deployments?\n\nTODO\n\n> ```\n> 2349       *  Person & email address to contact for further information: Paul\n> 2350          Bastian, [paul.bastian@posteo.de](mailto:paul.bastian@posteo.de)\n> ```\n> \n> While this has been common, I think it is better to direct the point of contact\n> for media types reserved by a working group to the working group list itself.\n\nTODO",
+          "body": "> 1285           index is out of bounds of the Status List, no statement about the\n> 1286           status of the Referenced Token can be made and the Referenced\n> 1287           Token SHOULD be rejected.\n> ```\n> \n> This makes validation of the referenced token in scope... also... this SHOULD\n> seems like a bad idea. Why not MUST?... What does it mean to accept a token\n> about which not statement of status can be made?\n\nWe discussed and agree that this can become a MUST\n\n\n> ```\n> 216        Status Provider, who serves the Status List Token on a public,\n> 217        resolvable endpoint.  The Relying Party or the Holder may fetch the\n> ```\n> \n> Perhaps you mean simply accessible to the verifier?\n> I'm not sure if public precludes .internal, or other non public internet\n> resources.\n\nAgreed, accessible to the verifiers or holders is better wording than public.\n\n> ```\n> 827        SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of [SD-JWT.VC])\n> ```\n> \n> Is there a reason that SD-JWT VC is mentioned throughout this document instead\n> of SD-JWT by itself?\n\nOur understanding would be that SD-JWT is more on the level of the container format whereas SD-JWT VC is a concrete credential format with additional/pre-defined semantics. I was under the impression that SD-JWT (or JWT for that matter) would not be the best level to introduce a status mechanism since status is usually bound to the semantics of a concrete use-cases / instantiation (like a credential or for example an access token). \n\nOur intention is definitely that everyone that wants to use this mechanism can use it and our definition is not bound to SD-JWT VC but rather on the JWT (or CWT for that matter) payload level. We used SD-JWT VC and mDoc (18013-5 v2) as examples since those are two drafts that are describing in their respective documents how to use status list as a status mechanism in their context. We tried to always make clear that mDoc and SD-JWT VC are examples and not normative in the draft.\n\nWe will do another pass to make sure that this intention is properly reflected in the text.\n\n> \n> ```\n> 1113       most common Status Type values.  Applications SHOULD use registered\n> 1114       values for statuses if they have the correct semantics.  Additional\n> ```\n> \n> Under which circumstances, can this SHOULD be ignored?\n> Which use cases would encourage a different value from one in the registry to\n> be used with the exact same semantics?\n\nProposal to change to: Applications MUST use registered values for statuses if they have the same or compatiable semantics of the use-case.\n\n> ```\n> 1387       The Issuer MAY link to the Status List Aggregation URI in metadata\n> 1388       that can be provided by different means like .well-known metadata as\n> 1389       is used commonly in OAuth and OpenID Connect, or within Issuer\n> 1390       certificates or trust lists (such as VICAL as defined in Annex C of\n> ```\n> \n> It would be better to explicitly name the .well-known URIs than to refer to\n> them like this. The current normative requirement is ambiguous.\n\nPorposal to link to 14.6 (which defines a .well-known entry for the AS)\n\n> ```\n> 1704       To avoid privacy risks of colluding Relying Parties, it is\n> 1705       RECOMMENDED that Issuers provide the ability to issue batches of one-\n> 1706       time-use Referenced Tokens, enabling Holders to use in a single\n> 1707       interaction with a Relying Party before discarding.  See Section 13.2\n> ```\n> \n> Is the index of and URL of the status information allowed to be the same for\n> these single use tokens?\n\nThat is described in the referenced section 13.2 which mandates individual status entries for batch issued Referenced Tokens.\n\n> ```\n> 1723       interacted with the same Holder.  It is therefore recommended to use\n> 1724       Status Lists for Referenced Token formats that have similar\n> 1725       unlinkability properties.\n> ```\n> \n> I don't undertand what \"similar unlinkability properties\" means.\n\nFair point, we propose to change the previous section to include the issuer collusion part and remove this section.\n\n> Are there really 0 references to provide for these application specific\n> registrations? Are they in use today? or anticipated to be be used ever? Are\n> the reserved for experimentation, or reservered because of existing deployments?\n\nAFAIK they are not in use right now, but generally speaking we believe it is good to provide reserved entries that are more or less equivalent to private claims in JWTs.\n\n> ```\n> 2349       *  Person & email address to contact for further information: Paul\n> 2350          Bastian, [paul.bastian@posteo.de](mailto:paul.bastian@posteo.de)\n> ```\n> \n> While this has been common, I think it is better to direct the point of contact\n> for media types reserved by a working group to the working group list itself.\n\nAgreed",
           "createdAt": "2026-01-22T08:59:34Z",
-          "updatedAt": "2026-01-22T08:59:34Z"
+          "updatedAt": "2026-01-27T07:29:24Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closed by #345 and #346 ",
+          "createdAt": "2026-01-27T07:47:04Z",
+          "updatedAt": "2026-01-27T07:47:04Z"
         }
       ]
     },
@@ -6729,15 +6736,15 @@
       "id": "I_kwDOJZ2aqs7jxnCa",
       "title": "re-work mdoc section",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/343",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "We should clearly point to 18013-5 v2 for the definiton and rework the text a bit accordingly.",
       "createdAt": "2026-01-16T10:36:19Z",
-      "updatedAt": "2026-01-16T10:36:19Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-27T07:50:45Z",
+      "closedAt": "2026-01-27T07:50:45Z",
       "comments": []
     }
   ],
@@ -22902,24 +22909,26 @@
       "id": "PR_kwDOJZ2aqs6-o8E9",
       "title": "Remove ISO mDoc non-normative examples",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/344",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #343 \r\n\r\nThe second edition of the ISO 18103-5 already defines the usage of this draft with mDL, so removing from this draft simplifies for readers which draft is responsible for what part of the definition. Also technically the second edition of the mDL standard is not published yet so there is no clean reference this draft could use.",
       "createdAt": "2026-01-22T08:30:27Z",
-      "updatedAt": "2026-01-22T10:49:06Z",
+      "updatedAt": "2026-01-27T07:50:48Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "58e166e126da6f5dd371fdf857b032ab266b98bd",
+      "baseRefOid": "62eba521fca3ae01ba9001f89bb89aec8d0b5a1c",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "issue-343",
-      "headRefOid": "30eea100fee618decf724e014e3ffb4012c312bd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "b9d6c2d3d7aff461ee3cfeaafd6688d1e28b3ef0",
+      "closedAt": "2026-01-27T07:50:44Z",
+      "mergedAt": "2026-01-27T07:50:44Z",
+      "mergedBy": "tplooker",
+      "mergeCommit": {
+        "oid": "6541ce918d1c5c11a50f0e672ca26be19de58cdd"
+      },
       "comments": [],
       "reviews": [
         {
@@ -22955,20 +22964,185 @@
       "id": "PR_kwDOJZ2aqs6-zmYb",
       "title": "Orie's review changes",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/345",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tplooker",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes issue #337 ",
       "createdAt": "2026-01-22T22:40:00Z",
-      "updatedAt": "2026-01-22T22:40:01Z",
+      "updatedAt": "2026-01-27T07:40:53Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "58e166e126da6f5dd371fdf857b032ab266b98bd",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "issue-337",
-      "headRefOid": "8fb450037f5088fe1e1b455229008db9bed04d4a",
+      "headRefOid": "2dc342faf98e4002ac1c9ae1d31f6d9ef359d9d4",
+      "closedAt": "2026-01-27T07:40:53Z",
+      "mergedAt": "2026-01-27T07:40:53Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "014a0a9bed05b1513b5db3df8e64a8da98fcfc21"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7dG7I_",
+          "commit": {
+            "abbreviatedOid": "2dc342f"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-27T07:40:05Z",
+          "updatedAt": "2026-01-27T07:40:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7dG7vK",
+          "commit": {
+            "abbreviatedOid": "2dc342f"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-27T07:40:44Z",
+          "updatedAt": "2026-01-27T07:40:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 346,
+      "id": "PR_kwDOJZ2aqs6_iM3V",
+      "title": "changing media type contact to oauth WG mailing list",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/346",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-27T07:37:34Z",
+      "updatedAt": "2026-01-27T07:44:27Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "014a0a9bed05b1513b5db3df8e64a8da98fcfc21",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/mail_address",
+      "headRefOid": "0439f513d48db44bcde6cb53dfc84f4b3325c846",
+      "closedAt": "2026-01-27T07:44:23Z",
+      "mergedAt": "2026-01-27T07:44:23Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "62eba521fca3ae01ba9001f89bb89aec8d0b5a1c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7dG9O3",
+          "commit": {
+            "abbreviatedOid": "3009bb7"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-27T07:42:27Z",
+          "updatedAt": "2026-01-27T07:42:27Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7dG-jN",
+          "commit": {
+            "abbreviatedOid": "0439f51"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-27T07:44:16Z",
+          "updatedAt": "2026-01-27T07:44:16Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 347,
+      "id": "PR_kwDOJZ2aqs6_rI-P",
+      "title": "add mdoc as example for COSE-based Referenced Token",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/347",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-27T18:39:52Z",
+      "updatedAt": "2026-01-27T21:33:24Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "6541ce918d1c5c11a50f0e672ca26be19de58cdd",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/mdoc_example",
+      "headRefOid": "f97754ccb52b53cd6e176a721559d62480737c61",
+      "closedAt": "2026-01-27T21:33:21Z",
+      "mergedAt": "2026-01-27T21:33:21Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "515fa8626583b8f113b3003594b0b8469f467ebb"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7dTya4",
+          "commit": {
+            "abbreviatedOid": "f97754c"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-27T19:00:12Z",
+          "updatedAt": "2026-01-27T19:00:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7dWEK4",
+          "commit": {
+            "abbreviatedOid": "f97754c"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-27T21:29:02Z",
+          "updatedAt": "2026-01-27T21:29:02Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 348,
+      "id": "PR_kwDOJZ2aqs6_9YYG",
+      "title": "clarify that Status List validation SHOULD not be performed if Refere\u2026",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/348",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026nced Token validation is deemed invalid already",
+      "createdAt": "2026-01-28T21:02:37Z",
+      "updatedAt": "2026-01-28T21:02:38Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "515fa8626583b8f113b3003594b0b8469f467ebb",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/orie_review",
+      "headRefOid": "198bac165ae7d763f3b93e6d780cd7e65c03e684",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
