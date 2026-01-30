@@ -73,7 +73,7 @@ informative:
   RFC7800: RFC7800
   RFC8414: RFC8414
   RFC9458: RFC9458
-  SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
+  RFC9901: RFC9901
   IANA.MediaTypes:
     author:
       org: "IANA"
@@ -135,7 +135,7 @@ This specification defines a status mechanism called Token Status List (TSL), da
 
 # Introduction
 
-Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
+Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWT VCs {{RFC9901}, CWTs {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
 
 This document defines a Status List data structure that describes the individual statuses of multiple Referenced Tokens. A Referenced Token may be of any format, but is most commonly a data structure secured by JOSE or COSE. The Referenced Token is referenced by the Status List, which describes the status of the Referenced Token. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index corresponds to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format.
 
@@ -161,7 +161,7 @@ An Issuer issues Referenced Tokens to a Holder, the Holder uses and presents tho
 
 The roles of the Issuer (of the Referenced Token), the Status Issuer and the Status Provider may be fulfilled by the same entity. If not further specified, the term Issuer may refer to an entity acting for all three roles. This document describes how an Issuer references a Status List Token and how a Relying Party fetches and validates Status Lists.
 
-The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of {{SD-JWT.VC}}):
+The following diagram depicts the relationship between the involved roles (Relying Party is equivalent to Verifier of {{RFC9901}}):
 
 ~~~ ascii-art
 
@@ -189,7 +189,7 @@ Furthermore, the document creates an extension point and an IANA registry that e
 
 An example of the usage of a Status List is to manage the statuses of issued access tokens as defined in {{Section 1.4 of RFC6749}}. Token Introspection {{RFC7662}} provides a method to determine the status of an issued access token, but it necessitates the party attempting to validate the state of access tokens to directly contact the Issuer of each token for validation. In contrast, the mechanism defined in this specification allows a party to retrieve the statuses for many tokens, reducing interactions with the Issuer substantially. This not only improves scalability but also enhances privacy by preventing the Issuer from gaining knowledge of access tokens being verified (herd anonymity).
 
-Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{SD-JWT.VC}}.
+Another possible use case for the Status List is to express the status of verifiable credentials (Referenced Tokens) issued by an Issuer in the Issuer-Holder-Verifier model {{RFC9901}}.
 
 ## Rationale
 
@@ -518,7 +518,7 @@ The following is a non-normative example of a decoded header and payload of a Re
 }
 ~~~
 
-SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of {{SD-JWT.VC}})  introduces the usage of the status mechanism defined in this section. Therefore, an SD-JWT VC can be considered a Referenced Token. The following is a non-normative example of a Referenced Token in SD-JWT VC serialized form as received from an Issuer:
+Also SD-JWTs defined in {{RFC9901}} may utilize the status mechanism defined in this section and can be considered a Referenced Token. The following is a non-normative example of a Referenced Token in SD-JWT serialized form as received from an Issuer:
 
 ~~~ ascii-art
 
@@ -874,7 +874,7 @@ This specification allows both, digital signatures using asymmetric cryptography
 
 ## Observability of Issuers {#privacy-issuer}
 
-The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{SD-JWT.VC}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable the Issuer to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
+The main privacy consideration for a Status List, especially in the context of the Issuer-Holder-Verifier model {{RFC9901}}, is to prevent the Issuer from tracking the usage of the Referenced Token when the status is being checked. If an Issuer offers status information by referencing a specific token, this would enable the Issuer to create a profile for the issued token by correlating the date and identity of Relying Parties, that are requesting the status.
 
 The Status List approaches these privacy implications by integrating the status information of many Referenced Tokens into the same list. Therefore, the Issuer does not learn for which Referenced Token the Relying Party is requesting the Status List. The privacy of the Holder is protected by the anonymity within the set of Referenced Tokens in the Status List, also called herd privacy. This limits the possibilities of tracking by the Issuer.
 
@@ -1820,6 +1820,10 @@ CBOR encoding:
 {:numbered="false"}
 
 \[\[ To be removed from the final specification \]\]
+
+-17
+
+* change SD-JWT VC reference to SD-JWT
 
 -16
 
