@@ -129,7 +129,7 @@ informative:
 
 --- abstract
 
-This specification defines a status mechanism called Token Status List (TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC, CBOR Web Token, and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
+This specification defines a status mechanism called Token Status List (TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT, CBOR Web Token, and ISO mdoc. It also defines an extension point and a registry for future status mechanisms.
 
 --- middle
 
@@ -250,7 +250,7 @@ Status List Token:
 : A token in JWT (as defined in {{RFC7519}}) or CWT (as defined in {{RFC8392}}) representation that contains a cryptographically secured Status List.
 
 Referenced Token:
-: A cryptographically secured data structure that contains a "status" claim that references a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+: A cryptographically secured data structure that contains a "status" claim that references a mechanism to retrieve status information about this Referenced Token. This document defines the Status List mechanism in which case the Referenced Token contains a reference to an entry in a Status List Token. It is RECOMMENDED to use JSON {{RFC8259}} with JOSE as defined in {{RFC7515}} or CBOR {{RFC8949}} with COSE as defined in {{RFC9052}}. Examples for Referenced Tokens are SD-JWT and ISO mdoc.
 
 Client:
 : An application that fetches information, such as a Status List Token, from the Status List Provider on behalf of the Holder or Relying Party.
