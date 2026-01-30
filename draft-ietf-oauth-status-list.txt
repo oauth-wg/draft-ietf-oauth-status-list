@@ -19,7 +19,7 @@ Abstract
    This specification defines a status mechanism called Token Status
    List (TSL), data structures and processing rules for representing the
    status of tokens secured by JSON Object Signing and Encryption (JOSE)
-   or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT VC,
+   or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT,
    CBOR Web Token, and ISO mdoc.  It also defines an extension point and
    a registry for future status mechanisms.
 
@@ -170,7 +170,7 @@ Table of Contents
 1.  Introduction
 
    Token formats secured by JOSE [RFC7515] or COSE [RFC9052], such as
-   JWTs [RFC7519], SD-JWT VCs [SD-JWT.VC], CWTs [RFC8392] and ISO mdoc
+   JWTs [RFC7519], SD-JWTs [RFC9901], CWTs [RFC8392] and ISO mdoc
    [ISO.mdoc], have vast possible applications.  Some of these
    applications can involve issuing a token whereby certain semantics
    about the token or its validity may change over time.  Communicating
@@ -223,7 +223,7 @@ Table of Contents
    Status Lists.
 
    The following diagram depicts the relationship between the involved
-   roles (Relying Party is equivalent to Verifier of [SD-JWT.VC]):
+   roles (Relying Party is equivalent to Verifier of [RFC9901]):
 
               issue                 present
               Referenced            Referenced
@@ -263,7 +263,7 @@ Table of Contents
 
    Another possible use case for the Status List is to express the
    status of verifiable credentials (Referenced Tokens) issued by an
-   Issuer in the Issuer-Holder-Verifier model [SD-JWT.VC].
+   Issuer in the Issuer-Holder-Verifier model [RFC9901].
 
 1.2.  Rationale
 
@@ -386,7 +386,7 @@ Table of Contents
       Token contains a reference to an entry in a Status List Token.  It
       is RECOMMENDED to use JSON [RFC8259] with JOSE as defined in
       [RFC7515] or CBOR [RFC8949] with COSE as defined in [RFC9052].
-      Examples for Referenced Tokens are SD-JWT VC and ISO mdoc.
+      Examples for Referenced Tokens are SD-JWT and ISO mdoc.
 
    Client:  An application that fetches information, such as a Status
       List Token, from the Status List Provider on behalf of the Holder
@@ -832,11 +832,10 @@ d2                              # tag(18)
      }
    }
 
-   SD-JWT-based Verifiable Credentials (Section 3.2.2.2 of [SD-JWT.VC])
-   introduces the usage of the status mechanism defined in this section.
-   Therefore, an SD-JWT VC can be considered a Referenced Token.  The
-   following is a non-normative example of a Referenced Token in SD-JWT
-   VC serialized form as received from an Issuer:
+   Also SD-JWTs defined in [RFC9901] may utilize the status mechanism
+   defined in this section and can be considered a Referenced Token.
+   The following is a non-normative example of a Referenced Token in SD-
+   JWT serialized form as received from an Issuer:
 
    eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
    Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
@@ -1462,12 +1461,12 @@ d2                              # tag(18)
 12.1.  Observability of Issuers
 
    The main privacy consideration for a Status List, especially in the
-   context of the Issuer-Holder-Verifier model [SD-JWT.VC], is to
-   prevent the Issuer from tracking the usage of the Referenced Token
-   when the status is being checked.  If an Issuer offers status
-   information by referencing a specific token, this would enable the
-   Issuer to create a profile for the issued token by correlating the
-   date and identity of Relying Parties, that are requesting the status.
+   context of the Issuer-Holder-Verifier model [RFC9901], is to prevent
+   the Issuer from tracking the usage of the Referenced Token when the
+   status is being checked.  If an Issuer offers status information by
+   referencing a specific token, this would enable the Issuer to create
+   a profile for the issued token by correlating the date and identity
+   of Relying Parties, that are requesting the status.
 
    The Status List approaches these privacy implications by integrating
    the status information of many Referenced Tokens into the same list.
@@ -2477,12 +2476,10 @@ d2                              # tag(18)
               IDentifiers (UUIDs)", RFC 9562, DOI 10.17487/RFC9562, May
               2024, <https://www.rfc-editor.org/rfc/rfc9562>.
 
-   [SD-JWT.VC]
-              Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
-              Verifiable Credentials (SD-JWT VC)", Work in Progress,
-              Internet-Draft, draft-ietf-oauth-sd-jwt-vc-13, 6 November
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              oauth-sd-jwt-vc-13>.
+   [RFC9901]  Fett, D., Yasuda, K., and B. Campbell, "Selective
+              Disclosure for JSON Web Tokens", RFC 9901,
+              DOI 10.17487/RFC9901, November 2025,
+              <https://www.rfc-editor.org/rfc/rfc9901>.
 
    [smith2020let]
               Smith, T., Dickinson, L., and K. Seamons, "Let's revoke:
@@ -3108,6 +3105,8 @@ Document History
    [[ To be removed from the final specification ]]
 
    -17
+
+   *  change SD-JWT VC reference to SD-JWT
 
    *  clarify that Status List validation MUST not be performed if
       Referenced Token validation is deemed invalid already
