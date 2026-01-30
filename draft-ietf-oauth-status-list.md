@@ -1823,7 +1823,7 @@ CBOR encoding:
 
 -17
 
-* clarify that Status List validation SHOULD not be performed if Referenced Token validation is deemed invalid already
+* clarify that Status List validation MUST not be performed if Referenced Token validation is deemed invalid already
 
 -16
 
