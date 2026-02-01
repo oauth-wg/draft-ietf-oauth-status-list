@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-29T00:24:59.267009+00:00",
+  "timestamp": "2026-02-01T00:30:18.109084+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -23129,26 +23129,187 @@
       "id": "PR_kwDOJZ2aqs6_9YYG",
       "title": "clarify that Status List validation SHOULD not be performed if Refere\u2026",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/348",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "\u2026nced Token validation is deemed invalid already",
       "createdAt": "2026-01-28T21:02:37Z",
-      "updatedAt": "2026-01-28T21:02:38Z",
+      "updatedAt": "2026-01-30T13:54:11Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "515fa8626583b8f113b3003594b0b8469f467ebb",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/orie_review",
-      "headRefOid": "198bac165ae7d763f3b93e6d780cd7e65c03e684",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "headRefOid": "3de0b104ccb50c1f94ee9f3ae1187352ed6b8575",
+      "closedAt": "2026-01-30T13:54:10Z",
+      "mergedAt": "2026-01-30T13:54:10Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "57a13e83f7caef8b59bcf829a7e02ccbf4495b84"
+      },
+      "comments": [
+        {
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "body": "Would this work for you as well @OR13 ?",
+          "createdAt": "2026-01-30T08:35:50Z",
+          "updatedAt": "2026-01-30T08:35:50Z"
+        },
+        {
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "body": "I think this is much better. It puts the responsibility for any weird behavior regarding network requests for invalid tokens, on the spec that defines those tokens.\n\nI will clear my discuss, when the new revision is published.",
+          "createdAt": "2026-01-30T13:32:06Z",
+          "updatedAt": "2026-01-30T13:32:06Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7d5DTA",
+          "commit": {
+            "abbreviatedOid": "198bac1"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-29T13:28:29Z",
+          "updatedAt": "2026-01-29T13:28:30Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Why is this SHOULD not a MUST? Its always good to describe when SHOULDs are expected to be ignored.\r\n\r\nThe only reason I  can see for the SHOULD is that sometimes \"tracking / telemetry is useful\"...\r\n\r\n\"To ensure tracking is NOT RECOMMENDED, an invalid Referenced Token SHOULD halt all subsequent Status List procedures, including token fetching, unless further evaluation is explicitly required by the use case.\"\r\n\r\n... If you have another use case in mind, I would recommend sharing it... for personal credentials... this reads uncomfortably.",
+              "createdAt": "2026-01-29T13:28:29Z",
+              "updatedAt": "2026-01-29T13:28:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7eJEL6",
+          "commit": {
+            "abbreviatedOid": "198bac1"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-30T08:12:28Z",
+          "updatedAt": "2026-01-30T08:12:29Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Hi @OR13 ,\r\n\r\ngiven that we have the \"unless\" condition in there, we are fine to make this a MUST.\r\n\r\n```suggestion\r\nUpon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) MUST precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the \"exp\" (Expiration Time) but also has a status of 0x00 (\"VALID\"), the token is considered expired. If the validation procedures for the Referenced Token determine it is invalid, no further procedures regarding Status List MUST be performed, e.g. fetching a Status List Token, unless the Referenced Token procedures or the use case require further evaluation.\r\n```",
+              "createdAt": "2026-01-30T08:12:28Z",
+              "updatedAt": "2026-01-30T08:12:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7eJFf5",
+          "commit": {
+            "abbreviatedOid": "46ba821"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-30T08:14:13Z",
+          "updatedAt": "2026-01-30T08:14:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7eJcbf",
+          "commit": {
+            "abbreviatedOid": "3de0b10"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-30T08:35:33Z",
+          "updatedAt": "2026-01-30T08:35:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7eOZHu",
+          "commit": {
+            "abbreviatedOid": "3de0b10"
+          },
+          "author": "OR13",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-30T13:29:35Z",
+          "updatedAt": "2026-01-30T13:29:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 349,
+      "id": "PR_kwDOJZ2aqs7AVqJH",
+      "title": "change SD-JWT VC reference to SD-JWT",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/349",
+      "state": "MERGED",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-30T08:33:09Z",
+      "updatedAt": "2026-01-30T13:55:17Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "57a13e83f7caef8b59bcf829a7e02ccbf4495b84",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/ref_sd_jwt_instead_of_vc",
+      "headRefOid": "660506d6ff2f5f4998eecc0c0207d065bf811840",
+      "closedAt": "2026-01-30T13:55:14Z",
+      "mergedAt": "2026-01-30T13:55:14Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "8fd32b79b62533640866e20a1803ea2411abcbb6"
+      },
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> we still have some mention of sd-jwt vc i the abstract / terminology, but I guess that would be fine\r\n\r\nI removed the other mentions of SD-JWT VC, so it fits better.",
+          "createdAt": "2026-01-30T08:54:13Z",
+          "updatedAt": "2026-01-30T08:54:13Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@OR13",
+          "createdAt": "2026-01-30T08:55:05Z",
+          "updatedAt": "2026-01-30T08:55:05Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7eJeLk",
+          "commit": {
+            "abbreviatedOid": "2ebffcb"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "we still have some mention of sd-jwt vc i the abstract / terminology, but I guess that would be fine",
+          "createdAt": "2026-01-30T08:37:11Z",
+          "updatedAt": "2026-01-30T08:40:02Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nToken formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}, CWTs {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.\r\n```",
+              "createdAt": "2026-01-30T08:37:11Z",
+              "updatedAt": "2026-01-30T08:40:02Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
