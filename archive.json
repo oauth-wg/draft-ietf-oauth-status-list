@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-01T00:30:18.109084+00:00",
+  "timestamp": "2026-02-10T00:32:26.570873+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6746,6 +6746,37 @@
       "updatedAt": "2026-01-27T07:50:45Z",
       "closedAt": "2026-01-27T07:50:45Z",
       "comments": []
+    },
+    {
+      "number": 351,
+      "id": "I_kwDOJZ2aqs7pRoJF",
+      "title": "ASCII Art rendering issues",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/351",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "<img width=\"720\" height=\"295\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/214ead3b-1fd8-40be-8bf1-a9a32209e545\" />\n\nThis is due to a lack of certain box-drawing glyphs in widely-used font packages.  On Windows, the system compensates for this by substituting from non-monospace fonts.\n\nThere are workarounds for this, which look less obviously busted, but end up using multiple different fonts, which will have different metrics.  The following shows which glyphs are rendered using the chosen \"Roboto Mono\" in [this](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-17.html) rendering (the other glyphs are substituted from \"Courier New\"):\n\n<img width=\"905\" height=\"258\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/5e34f74b-d956-4e2f-9ca5-28db197140fc\" />",
+      "createdAt": "2026-02-08T22:33:51Z",
+      "updatedAt": "2026-02-09T00:15:48Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks for looking into this. Is there anything that we can do to enforce correct fonts or should we revert back to ASCII?",
+          "createdAt": "2026-02-08T22:48:40Z",
+          "updatedAt": "2026-02-08T22:48:40Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "NONE",
+          "body": "That's more difficult for me to say.  These problems exist as an interaction between the content and the stylesheet, which is two steps removed from you.\n\nOn the plus side, I think that I managed to find a fix at the stylesheet level for the stuff I was working on.  (I've also filed bugs on browsers, but that's a tough proposition.  If the `monospace` font lacks a glyph, you are out of luck; and the font metrics issue doesn't go away.)\n\nI generally point people at [aasvg](https://github.com/martinthomson/aasvg).  It doesn't do box drawing recognition (it should, but it's a moderately big lift) so you end up making the plaintext rendering look a bit worse by going back to ASCII. The benefit is that the SVG is much nicer ...and who cares about text-only output?",
+          "createdAt": "2026-02-09T00:15:48Z",
+          "updatedAt": "2026-02-09T00:15:48Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -23308,6 +23339,59 @@
               "updatedAt": "2026-01-30T08:40:02Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 350,
+      "id": "PR_kwDOJZ2aqs7CVy4q",
+      "title": "Pb/all examples",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/350",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-08T21:33:46Z",
+      "updatedAt": "2026-02-09T17:30:45Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "8fd32b79b62533640866e20a1803ea2411abcbb6",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/all_examples",
+      "headRefOid": "fda503e5083750e8834a32b1c9da4f2501d16c50",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7gvW6j",
+          "commit": {
+            "abbreviatedOid": "fda503e"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-08T22:31:00Z",
+          "updatedAt": "2026-02-08T22:31:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7g-Zdt",
+          "commit": {
+            "abbreviatedOid": "fda503e"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-09T17:30:45Z",
+          "updatedAt": "2026-02-09T17:30:45Z",
+          "comments": []
         }
       ]
     }
