@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-10T00:32:26.570873+00:00",
+  "timestamp": "2026-02-12T00:26:46.051178+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6759,7 +6759,7 @@
       "labels": [],
       "body": "<img width=\"720\" height=\"295\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/214ead3b-1fd8-40be-8bf1-a9a32209e545\" />\n\nThis is due to a lack of certain box-drawing glyphs in widely-used font packages.  On Windows, the system compensates for this by substituting from non-monospace fonts.\n\nThere are workarounds for this, which look less obviously busted, but end up using multiple different fonts, which will have different metrics.  The following shows which glyphs are rendered using the chosen \"Roboto Mono\" in [this](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-17.html) rendering (the other glyphs are substituted from \"Courier New\"):\n\n<img width=\"905\" height=\"258\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/5e34f74b-d956-4e2f-9ca5-28db197140fc\" />",
       "createdAt": "2026-02-08T22:33:51Z",
-      "updatedAt": "2026-02-09T00:15:48Z",
+      "updatedAt": "2026-02-11T02:51:03Z",
       "closedAt": null,
       "comments": [
         {
@@ -6775,6 +6775,20 @@
           "body": "That's more difficult for me to say.  These problems exist as an interaction between the content and the stylesheet, which is two steps removed from you.\n\nOn the plus side, I think that I managed to find a fix at the stylesheet level for the stuff I was working on.  (I've also filed bugs on browsers, but that's a tough proposition.  If the `monospace` font lacks a glyph, you are out of luck; and the font metrics issue doesn't go away.)\n\nI generally point people at [aasvg](https://github.com/martinthomson/aasvg).  It doesn't do box drawing recognition (it should, but it's a moderately big lift) so you end up making the plaintext rendering look a bit worse by going back to ASCII. The benefit is that the SVG is much nicer ...and who cares about text-only output?",
           "createdAt": "2026-02-09T00:15:48Z",
           "updatedAt": "2026-02-09T00:15:48Z"
+        },
+        {
+          "author": "mcr",
+          "authorAssociation": "NONE",
+          "body": "> This is due to a lack of certain box-drawing glyphs in widely-used font packages. On Windows, the system compensates for this by substituting from non-monospace fonts.\n\nthat's stupid.\nI think though, you are referring to UTF-8 box drawing characters, and that aasvg doesn't deal that well with them.\nI start from asciio, and the box drawing sure look nice, until it doesn't.\n",
+          "createdAt": "2026-02-10T17:06:01Z",
+          "updatedAt": "2026-02-10T17:06:01Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "NONE",
+          "body": "Stupid or not, I had a really hard time finding a font that had glyphs for those arrowheads.  The same is also true for the utftex math characters, by the way.  They end up looking awful.  (As a bonus, different software looks differently bad.  Chromium browsers try to correct for the width of substitute glyphs, which leads to cases where narrow substitutes get massive height that bleeds over adjacent lines.  Most others just draw the glyphs at their native size, which messes with the careful placement of subsequent characters.)\n\naasvg could be taught (by Claude, perhaps) to recognize box drawing characters, at which point you have no issue if you do the translation to SVG.  It's on my list of things to look into now that I have access to a supply of tokens, but it isn't high priority.\n\nThe problem still exists in the text versions though.  Because so few fonts have the necessary glyphs, a lot of applications will produce bad results with the text version.",
+          "createdAt": "2026-02-11T02:51:03Z",
+          "updatedAt": "2026-02-11T02:51:03Z"
         }
       ]
     }
@@ -23354,7 +23368,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-02-08T21:33:46Z",
-      "updatedAt": "2026-02-09T17:30:45Z",
+      "updatedAt": "2026-02-11T16:39:02Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "8fd32b79b62533640866e20a1803ea2411abcbb6",
@@ -23392,6 +23406,50 @@
           "createdAt": "2026-02-09T17:30:45Z",
           "updatedAt": "2026-02-09T17:30:45Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7hEscs",
+          "commit": {
+            "abbreviatedOid": "fda503e"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2026-02-10T00:25:00Z",
+          "updatedAt": "2026-02-11T16:39:02Z",
+          "comments": [
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\nThe Referenced Token MAY be encoded as a \"CBOR Web Token (CWT)\" object according to {{RFC8392}}, as an SD-CWTs {{SD-CWT}} or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:\n```",
+              "createdAt": "2026-02-10T21:16:32Z",
+              "updatedAt": "2026-02-11T16:39:02Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\nToken formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}}, SD-CWTs {{SD-CWT}} have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.\n```",
+              "createdAt": "2026-02-11T01:02:11Z",
+              "updatedAt": "2026-02-11T16:39:02Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\nToken formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}}, and SD-CWTs {{SD-CWT}} have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.\n```",
+              "createdAt": "2026-02-11T12:43:37Z",
+              "updatedAt": "2026-02-11T16:39:02Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "```suggestion\n```",
+              "createdAt": "2026-02-11T13:25:44Z",
+              "updatedAt": "2026-02-11T16:39:02Z"
+            },
+            {
+              "originalPosition": 51,
+              "body": "```suggestion\n* add references to SD-JWT VC and SD-CWT\n* remove references to \"ISO/IEC 18013-5:2021 ISO-compliant driving licence\"\n```",
+              "createdAt": "2026-02-11T14:20:32Z",
+              "updatedAt": "2026-02-11T16:39:02Z"
+            }
+          ]
         }
       ]
     }
