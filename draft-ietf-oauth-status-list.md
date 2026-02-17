@@ -74,6 +74,8 @@ informative:
   RFC8414: RFC8414
   RFC9458: RFC9458
   RFC9901: RFC9901
+  SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
+  SD-CWT: I-D.ietf-spice-sd-cwt
   IANA.MediaTypes:
     author:
       org: "IANA"
@@ -135,7 +137,7 @@ This specification defines a status mechanism called Token Status List (TSL), da
 
 # Introduction
 
-Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}, CWTs {{RFC8392}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
+Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}}, SD-CWTs {{SD-CWT}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
 
 This document defines a Status List data structure that describes the individual statuses of multiple Referenced Tokens. A Referenced Token may be of any format, but is most commonly a data structure secured by JOSE or COSE. The Referenced Token is referenced by the Status List, which describes the status of the Referenced Token. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index corresponds to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format.
 
@@ -488,7 +490,7 @@ By including a "status" claim in a Referenced Token, the Issuer is referencing a
 
 ## Referenced Token in JOSE {#referenced-token-jose}
 
-The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}} or other formats based on JOSE.
+The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}, as an SD-JWTs {{RFC9901}, as an SD-JWT VCs {{SD-JWT.VC}} or other formats based on JOSE.
 
 The following content applies to the JWT Claims Set:
 
@@ -518,7 +520,7 @@ The following is a non-normative example of a decoded header and payload of a Re
 }
 ~~~
 
-Also SD-JWTs defined in {{RFC9901}} may utilize the status mechanism defined in this section and can be considered a Referenced Token. The following is a non-normative example of a Referenced Token in SD-JWT serialized form as received from an Issuer:
+The following is a non-normative example of a Referenced Token in SD-JWT serialized form as received from an Issuer:
 
 ~~~ ascii-art
 
@@ -565,7 +567,7 @@ The resulting payload of the example above:
 
 ## Referenced Token in COSE {#referenced-token-cose}
 
-The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}}, as an ISO mdoc according to {{ISO.mdoc}} or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:
+The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}}, as an SD-CWTs {{SD-CWT}} or as an ISO mdoc according to {{ISO.mdoc}} or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:
 
 * The `Status` CBOR structure is a Map that MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.
   * `status_list` (status list): REQUIRED when the status mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
@@ -1820,6 +1822,10 @@ CBOR encoding:
 {:numbered="false"}
 
 \[\[ To be removed from the final specification \]\]
+
+-18
+
+* add references to SD-JWT VC and SD-CWT
 
 -17
 
