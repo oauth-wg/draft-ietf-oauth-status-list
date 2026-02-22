@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-19T00:28:24.020322+00:00",
+  "timestamp": "2026-02-22T00:27:11.825843+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6804,9 +6804,17 @@
       "labels": [],
       "body": "As posted on the mailing list by @bc-pi \n\n> My perspective on non-transparent, access-restricted standards development and fee-gated publication models has not changed since last week https://mailarchive.ietf.org/arch/msg/spice/nYhBMowGdrKeW6BgWqf1t9svRjI/, and I again suggest that there be no references to such specifications at all.\n> I am well aware, by the way, that some work with which I'm closely involved has reference to ISO/IEC 18013-5:2021. RFC9901/SD-JWT mentions it here [https://datatracker.ietf.org/doc/html/rfc9901#section-10.1-10 ](https://datatracker.ietf.org/doc/html/rfc9901#section-10.1-10)but basically just says \"this also exists and has the same limitations\" while SD-JWT VC mentions it here https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-14#section-11 but as just one of a list of many credential formats. The context of both feels less like any endorsement of the paywalled ISO document. Although this conversation has me reconsidering some and thinking the mention in SD-JWT VC could be further contextualized as such or even removed.",
       "createdAt": "2026-02-17T07:43:27Z",
-      "updatedAt": "2026-02-17T07:43:27Z",
+      "updatedAt": "2026-02-20T20:14:58Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "also: \n\n> That's a fair question, Pierce, and it's certainly possible that my reasoning is perfectly clear in my own mind but I've not articulated it well or at all outwardly. If my wife was asked, she'd probably say that it is, in fact, highly likely that I've not been clear about something that's in my head. I'll try and explain my thinking a bit more. \n> \n> Yes, it's highly annoying when standards are unavailable without paying for them. But it's more than that. There's an entire process of non-transparent and access-restricted development of those standards that precedes the pay-to-view publication model. Do we really want to provide tacit endorsement of that model through what is effectively a link to a publisher's product page? Obviously, I do not. \n> \n> I'd further suggest that it is not the job of Token Status List (TSL) to help a reader gain a broader understanding of the technology and standards landscape. Readers that find their way to TSL without knowledge of ISO/IEC 18013-5:2021 will be just fine without learning of the opportunity to pay to see ISO/IEC 18013-5:2021 from TSL. And readers that already know about ISO/IEC 18013-5:2021 have no need for TSL to inform them of it. \n\nand before that: \n\n> As a proponent of and advocate for free and open standards, I would prefer that there be no references to fee-gated specifications at all. Even if I have to assume that's what it is based on the top and sponsored search results I get for \"ISO/IEC 18013-5:2021 ISO-compliant driving licence\" pointing to paywalled content. And searching is all I could figure out to do with the reference that has no link:\n> \n> [ISO.mdoc]  ISO/IEC JTC 1/SC 17, \"ISO/IEC 18013-5:2021 ISO-compliant driving licence\", n.d.. \n> \n> I would propose removal. \n\nall on the thread here https://mailarchive.ietf.org/arch/msg/spice/SMgovRcQ3LicZG2YXlTlA_BYGj8/ ",
+          "createdAt": "2026-02-20T20:14:58Z",
+          "updatedAt": "2026-02-20T20:14:58Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -23474,6 +23482,61 @@
               "body": "```suggestion\n* add references to SD-JWT VC and SD-CWT\n* remove references to \"ISO/IEC 18013-5:2021 ISO-compliant driving licence\"\n```",
               "createdAt": "2026-02-11T14:20:32Z",
               "updatedAt": "2026-02-11T16:39:02Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 353,
+      "id": "PR_kwDOJZ2aqs7FP6Wo",
+      "title": "add target with github ISO 18013 to ISO.mdoc informative reference",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/353",
+      "state": "OPEN",
+      "author": "bc-pi",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "kinda per https://mailarchive.ietf.org/arch/msg/spice/U9Mhnl0Yv3IZrpmgOaqs5yVkogo/ \r\n\r\nand the current ref has no URL at all https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-18#ISO.mdoc",
+      "createdAt": "2026-02-20T19:57:38Z",
+      "updatedAt": "2026-02-20T20:15:57Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "7cd58bb2dc5811d7d408a2277be86af965686010",
+      "headRepository": "bc-pi/draft-looker-oauth-jwt-cwt-status-list",
+      "headRefName": "patch-2",
+      "headRefOid": "516a0c9b4fed140749cdf0504e997db796854468",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "for #352 more or less ",
+          "createdAt": "2026-02-20T20:15:56Z",
+          "updatedAt": "2026-02-20T20:15:56Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7khj47",
+          "commit": {
+            "abbreviatedOid": "293011b"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-20T20:05:03Z",
+          "updatedAt": "2026-02-20T20:05:04Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\n    date: \"09.12.2024\"\n```",
+              "createdAt": "2026-02-20T20:05:04Z",
+              "updatedAt": "2026-02-20T20:05:04Z"
             }
           ]
         }
