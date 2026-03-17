@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T00:24:46.725707+00:00",
+  "timestamp": "2026-03-17T00:26:35.131821+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6759,7 +6759,7 @@
       "labels": [],
       "body": "<img width=\"720\" height=\"295\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/214ead3b-1fd8-40be-8bf1-a9a32209e545\" />\n\nThis is due to a lack of certain box-drawing glyphs in widely-used font packages.  On Windows, the system compensates for this by substituting from non-monospace fonts.\n\nThere are workarounds for this, which look less obviously busted, but end up using multiple different fonts, which will have different metrics.  The following shows which glyphs are rendered using the chosen \"Roboto Mono\" in [this](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-17.html) rendering (the other glyphs are substituted from \"Courier New\"):\n\n<img width=\"905\" height=\"258\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/5e34f74b-d956-4e2f-9ca5-28db197140fc\" />",
       "createdAt": "2026-02-08T22:33:51Z",
-      "updatedAt": "2026-02-11T02:51:03Z",
+      "updatedAt": "2026-03-16T22:29:30Z",
       "closedAt": null,
       "comments": [
         {
@@ -6789,6 +6789,27 @@
           "body": "Stupid or not, I had a really hard time finding a font that had glyphs for those arrowheads.  The same is also true for the utftex math characters, by the way.  They end up looking awful.  (As a bonus, different software looks differently bad.  Chromium browsers try to correct for the width of substitute glyphs, which leads to cases where narrow substitutes get massive height that bleeds over adjacent lines.  Most others just draw the glyphs at their native size, which messes with the careful placement of subsequent characters.)\n\naasvg could be taught (by Claude, perhaps) to recognize box drawing characters, at which point you have no issue if you do the translation to SVG.  It's on my list of things to look into now that I have access to a supply of tokens, but it isn't high priority.\n\nThe problem still exists in the text versions though.  Because so few fonts have the necessary glyphs, a lot of applications will produce bad results with the text version.",
           "createdAt": "2026-02-11T02:51:03Z",
           "updatedAt": "2026-02-11T02:51:03Z"
+        },
+        {
+          "author": "bkmgit",
+          "authorAssociation": "NONE",
+          "body": "Rendering as text is also helpful.  [Markdeep](https://casual-effects.com/markdeep/) seems to have this.  [Mermaid](https://github.com/mermaid-js/mermaid) is also nice and there is software to generate ascii diagrams, [mermaid-ascii](https://github.com/AlexanderGrooff/mermaid-ascii) and [mermaid-ascii-diagrams](https://github.com/Th3S3cr3tAg3nt/mermaid-ascii-diagrams) but no standard.\n\nSome people advocate specialized tools to help generate ascii diagrams\nhttps://pg.ucsd.edu/publications/how-programmers-ASCII-diagram-code_CHI-2024.pdf\nfor example  https://github.com/ArthurSonzogni/Diagon",
+          "createdAt": "2026-03-16T08:34:07Z",
+          "updatedAt": "2026-03-16T08:34:07Z"
+        },
+        {
+          "author": "bkmgit",
+          "authorAssociation": "NONE",
+          "body": "Example Diagram for mermaid.js rendered on GitHub\n\n```\ngraph\n   A[Issuer] -- issue Referenced Token --> B[Holder] -- present Referenced Token --> C[Relying Party]\n   A -- provide status --> D[Status Issuer] -- provide Status List --> E[Status Provider]\n   C -- fetch Status List Token --> E\n   B --> E\n```\n\n```mermaid\ngraph\n    A[Issuer] -- issue Referenced Token --> B[Holder] -- present Referenced Token --> C[Relying Party]\n   A -- provide status --> D[Status Issuer] -- provide Status List --> E[Status Provider]\n   C -- fetch Status List Token --> E\n   B --> E\n```\n\nExample ASCII diagram\n```\ngraph TB\n    Issuer -->|issue Referenced Token| Holder -->|present Referenced Token| Relying Party\n   Issuer -->|provide status| Status Issuer -->|provide Status List| Status Provider\n   Relying Party -->|fetch Status List Token| Status Provider\n   Holder --> Status Provider\n```\n\nRendering using the web interface https://mermaid-ascii.art/\n\n\n```\n+--------------------------+                                                \n|                          |                                                \n|          Issuer          |----------provide-status------------+           \n|                          |                                    |           \n+--------------------------+                                    |           \n              |                                                 |           \n   issue Referenced Token                                       |           \n              v                                                 v           \n+--------------------------+                         +---------------------+\n|                          |                         |                     |\n|          Holder          |------------+            |    Status Issuer    |\n|                          |            |            |                     |\n+--------------------------+            |            +---------------------+\n              |                         |                       |           \n  present Referenced Token              +--------------provide-Status List  \n              v                                                 v           \n+--------------------------+                         +---------------------+\n|                          |                         |                     |\n|      Relying Party       |-fetch-Status-List-Token>|   Status Provider   |\n|                          |                         |                     |\n+--------------------------+                         +---------------------+\n\n```\n\n",
+          "createdAt": "2026-03-16T12:01:53Z",
+          "updatedAt": "2026-03-16T12:01:53Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "So your recommendation is to revert back to ASCII, correct?",
+          "createdAt": "2026-03-16T22:29:29Z",
+          "updatedAt": "2026-03-16T22:29:29Z"
         }
       ]
     },
