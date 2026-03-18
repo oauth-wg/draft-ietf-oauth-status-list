@@ -831,12 +831,12 @@ Alternatively, the Status Issuer may use the same web-based key resolution that 
 
 ~~~ ascii-art
 +--------+    host keys    +----------------------+
-| Issuer +----------+----->| .well-known metadata |
+| Issuer |----------+----->| .well-known metadata |
 +---+----+          |      +----------------------+
     |               |
     v update status |
 +---------------+   |
-| Status Issuer +---+
+| Status Issuer |---+
 +---+-----------+
     |
     v provide Status List
