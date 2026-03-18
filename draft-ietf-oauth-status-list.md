@@ -322,7 +322,7 @@ status[0] = 0b01
 status[1] = 0b10
 status[2] = 0b00
 status[3] = 0b11
-status[4] = 0b0
+status[4] = 0b00
 status[5] = 0b01
 status[6] = 0b00
 status[7] = 0b01
@@ -567,9 +567,9 @@ The resulting payload of the example above:
 
 ## Referenced Token in COSE {#referenced-token-cose}
 
-The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}}, as an SD-CWTs {{SD-CWT}} or as an ISO mdoc according to {{ISO.mdoc}} or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:
+The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}}, as an SD-CWTs {{SD-CWT}} or as an ISO mdoc according to {{ISO.mdoc}} or other formats based on COSE. Referenced Tokens in CBOR SHOULD share the same core data structure for a status list reference:
 
-* The `Status` CBOR structure is a Map that MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key must be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.
+* The `Status` CBOR structure is a Map that MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key MUST be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.
   * `status_list` (status list): REQUIRED when the status mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
     * `idx`: REQUIRED. Unsigned integer (major type 0). The `idx` (index) claim MUST specify a non-negative Integer that represents the index to check for status information in the Status List for the current Referenced Token.
     * `uri`: REQUIRED. Text string (major type 3). The `uri` (URI) claim MUST specify a String value that identifies the Status List Token containing the status information for the Referenced Token. The value of `uri` MUST be a URI conforming to {{RFC3986}}.
@@ -669,7 +669,7 @@ Content-Type: application/statuslist+jwt
 
 ## Validation Rules
 
-Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) MUST precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. If the validation procedures for the Referenced Token determine it is invalid, no further procedures regarding Status List MUST be performed, e.g. fetching a Status List Token, unless the Referenced Token procedures or the use case require further evaluation.
+Upon receiving a Referenced Token, a Relying Party MUST first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) MUST precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. If the validation procedures for the Referenced Token determine it is invalid, further procedures regarding Status List MUST NOT be performed, e.g. fetching a Status List Token, unless the Referenced Token procedures or the use case require further evaluation.
 
 If this validation is not successful, the Referenced Token MUST be rejected. If the validation was successful, the Relying Party MUST perform the following validation steps to evaluate the status of the Referenced Token:
 
@@ -1274,7 +1274,7 @@ Specification Document(s):
 
 * Status Type Name: APPLICATION_SPECIFIC
 * Status Type Description: The status of the Referenced Token is application specific.
-* Status Type value: `0x0C-0xOF`
+* Status Type value: `0x0C-0x0F`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
 
