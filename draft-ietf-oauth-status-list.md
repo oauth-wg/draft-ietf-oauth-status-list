@@ -137,7 +137,7 @@ This specification defines a status mechanism called Token Status List (TSL), da
 
 # Introduction
 
-Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}}, SD-CWTs {{SD-CWT}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
+Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}}, SD-CWTs {{SD-CWT}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
 
 This document defines a Status List data structure that describes the individual statuses of multiple Referenced Tokens. A Referenced Token may be of any format, but is most commonly a data structure secured by JOSE or COSE. The Referenced Token is referenced by the Status List, which describes the status of the Referenced Token. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index corresponds to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format.
 
@@ -195,7 +195,7 @@ Another possible use case for the Status List is to express the status of verifi
 
 ## Rationale
 
-Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling is addressing some of these problems at the cost of less up-to-date data. Approaches based on cryptographic accumulators and Zero-Knowledge-Proofs try to accommodate for this privacy gap, but are currently (in 2026) facing scalability issues and are not yet standardized. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
+Revocation mechanisms are an essential part of most identity ecosystems. In the past, revocation of X.509 TLS certificates has been proven difficult. Traditional certificate revocation lists (CRLs) have limited scalability; Online Certificate Status Protocol (OCSP) has additional privacy risks, since the client is leaking the requested website to a third party. OCSP stapling addresses some of these problems at the cost of less up-to-date data. Approaches based on cryptographic accumulators and Zero-Knowledge-Proofs try to accommodate for this privacy gap, but are currently (in 2026) facing scalability issues and are not yet standardized. Another alternative is short-lived Referenced Tokens with regular re-issuance, but this puts additional burden on the Issuer's infrastructure.
 
 This specification seeks to find a balance between scalability, security and privacy by representing statuses as individual bits, packing them into an array, and compressing the resulting binary data. Thereby, a Status List may contain statuses of many thousands or millions Referenced Tokens while remaining as small as possible. Placing a large number of Referenced Tokens into the same list also offers Holders and Relying Parties herd privacy from the Status Provider.
 
@@ -268,9 +268,9 @@ A Status List is a data structure that contains the statuses of many Referenced 
 
 A compressed byte array containing the status information of the Referenced Token is composed by the following algorithm:
 
-1. The Status Issuer MUST define a number of bits (`bits`) of either 1,2,4 or 8, that represents the amount of bits used to describe the status of each Referenced Token within this Status List. Therefore, up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation, thus keeping implementations simpler and less error-prone.
+1. The Status Issuer MUST define a number of bits (`bits`) of either 1,2,4 or 8, that represents the number of bits used to describe the status of each Referenced Token within this Status List. Therefore, up to 2,4,16 or 256 statuses for a Referenced Token are possible, depending on the bit size. This limitation is intended to limit bit manipulation necessary to a single byte for every operation, thus keeping implementations simpler and less error-prone.
 
-2. The Status Issuer creates a byte array of size = amount of Referenced Tokens * `bits` / 8 or greater. Depending on the `bits`, each byte in the array corresponds to 8/(`bits`) statuses (8,4,2 or 1).
+2. The Status Issuer creates a byte array of size = number of Referenced Tokens * `bits` / 8 or greater. Depending on the `bits`, each byte in the array corresponds to 8/(`bits`) statuses (8,4,2 or 1).
 
 3. The Status Issuer sets the status values for all Referenced Tokens within the byte array. Each Referenced Token is assigned a distinct index from 0 to one less than the number of Referenced Tokens assigned to the Status List. Each index identifies a contiguous block of bits in the byte array, with the blocks being packed into bytes from the least significant bit ("0") to the most significant bit ("7"). These bits contain the encoded status value of the Referenced Token (see [](#status-types) for more details on the values).
 
@@ -490,7 +490,7 @@ By including a "status" claim in a Referenced Token, the Issuer is referencing a
 
 ## Referenced Token in JOSE {#referenced-token-jose}
 
-The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}, as an SD-JWTs {{RFC9901}, as an SD-JWT VCs {{SD-JWT.VC}} or other formats based on JOSE.
+The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}, as an SD-JWTs {{RFC9901}}, as an SD-JWT VCs {{SD-JWT.VC}} or other formats based on JOSE.
 
 The following content applies to the JWT Claims Set:
 
