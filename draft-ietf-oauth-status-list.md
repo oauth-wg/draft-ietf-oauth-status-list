@@ -1832,6 +1832,10 @@ CBOR encoding:
 
 \[\[ To be removed from the final specification \]\]
 
+-19
+
+* revert grapahics to ASCII
+
 -18
 
 * add references to SD-JWT VC and SD-CWT
