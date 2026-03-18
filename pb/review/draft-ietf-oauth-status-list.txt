@@ -484,7 +484,7 @@ Table of Contents
    status[1] = 0b10
    status[2] = 0b00
    status[3] = 0b11
-   status[4] = 0b0
+   status[4] = 0b00
    status[5] = 0b01
    status[6] = 0b00
    status[7] = 0b01
@@ -879,13 +879,13 @@ d2                              # tag(18)
    The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)"
    object according to [RFC8392], as an SD-CWTs [SD-CWT] or as an ISO
    mdoc according to [ISO.mdoc] or other formats based on COSE.
-   Referenced Tokens in CBOR should share the same core data structure
+   Referenced Tokens in CBOR SHOULD share the same core data structure
    for a status list reference:
 
    *  The Status CBOR structure is a Map that MUST include at least one
       data item that refers to a status mechanism.  Each data item in
       the Status CBOR structure comprises a key-value pair, where the
-      key must be a CBOR text string (major type 3) specifying the
+      key MUST be a CBOR text string (major type 3) specifying the
       identifier of the status mechanism and the corresponding value
       defines its contents.
 
@@ -1095,7 +1095,7 @@ d2                              # tag(18)
    is evaluated as being expired through the "exp" (Expiration Time) but
    also has a status of 0x00 ("VALID"), the token is considered expired.
    If the validation procedures for the Referenced Token determine it is
-   invalid, no further procedures regarding Status List MUST be
+   invalid, further procedures regarding Status List MUST NOT be
    performed, e.g. fetching a Status List Token, unless the Referenced
    Token procedures or the use case require further evaluation.
 
@@ -2172,7 +2172,7 @@ d2                              # tag(18)
    *  Status Type Description: The status of the Referenced Token is
       application specific.
 
-   *  Status Type value: 0x0C-0xOF
+   *  Status Type value: 0x0C-0x0F
 
    *  Change Controller: IETF
 

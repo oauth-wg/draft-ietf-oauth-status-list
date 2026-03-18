@@ -1731,7 +1731,7 @@ status[0] = 0b01
 status[1] = 0b10
 status[2] = 0b00
 status[3] = 0b11
-status[4] = 0b0
+status[4] = 0b00
 status[5] = 0b01
 status[6] = 0b00
 status[7] = 0b01
@@ -2137,10 +2137,10 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
         <h3 id="name-referenced-token-in-cose">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-referenced-token-in-cose" class="section-name selfRef">Referenced Token in COSE</a>
         </h3>
-<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "CBOR Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>, as an SD-CWTs <span>[<a href="#SD-CWT" class="cite xref">SD-CWT</a>]</span> or as an ISO mdoc according to <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> or other formats based on COSE. Referenced Tokens in CBOR should share the same core data structure for a status list reference:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">The Referenced Token <span class="bcp14">MAY</span> be encoded as a "CBOR Web Token (CWT)" object according to <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>, as an SD-CWTs <span>[<a href="#SD-CWT" class="cite xref">SD-CWT</a>]</span> or as an ISO mdoc according to <span>[<a href="#ISO.mdoc" class="cite xref">ISO.mdoc</a>]</span> or other formats based on COSE. Referenced Tokens in CBOR <span class="bcp14">SHOULD</span> share the same core data structure for a status list reference:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-2.1">
-            <p id="section-6.3-2.1.1">The <code>Status</code> CBOR structure is a Map that <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key must be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.<a href="#section-6.3-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.3-2.1.1">The <code>Status</code> CBOR structure is a Map that <span class="bcp14">MUST</span> include at least one data item that refers to a status mechanism. Each data item in the <code>Status</code> CBOR structure comprises a key-value pair, where the key <span class="bcp14">MUST</span> be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.<a href="#section-6.3-2.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-2.1.2.1">
                 <p id="section-6.3-2.1.2.1.1"><code>status_list</code> (status list): <span class="bcp14">REQUIRED</span> when the status mechanism defined in this specification is used. It has the same definition as the <code>status_list</code> claim in <a href="#referenced-token-jose" class="auto internal xref">Section 6.2</a> but <span class="bcp14">MUST</span> be encoded as a <code>StatusListInfo</code> CBOR structure with the following fields:<a href="#section-6.3-2.1.2.1.1" class="pilcrow">¶</a></p>
@@ -2314,7 +2314,7 @@ Ql45Jfzd-Av4QzlKa3oVALpLwOEUOq-U_g
         <h3 id="name-validation-rules">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-validation-rules" class="section-name selfRef">Validation Rules</a>
         </h3>
-<p id="section-8.3-1">Upon receiving a Referenced Token, a Relying Party <span class="bcp14">MUST</span> first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) <span class="bcp14">MUST</span> precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. If the validation procedures for the Referenced Token determine it is invalid, no further procedures regarding Status List <span class="bcp14">MUST</span> be performed, e.g. fetching a Status List Token, unless the Referenced Token procedures or the use case require further evaluation.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+<p id="section-8.3-1">Upon receiving a Referenced Token, a Relying Party <span class="bcp14">MUST</span> first perform the validation of the Referenced Token - e.g., checking for expected attributes, valid signature and expiration time. The processing rules for Referenced Tokens (such as JWT or CWT) <span class="bcp14">MUST</span> precede any evaluation of a Referenced Token's status. For example, if a token is evaluated as being expired through the "exp" (Expiration Time) but also has a status of 0x00 ("VALID"), the token is considered expired. If the validation procedures for the Referenced Token determine it is invalid, further procedures regarding Status List <span class="bcp14">MUST NOT</span> be performed, e.g. fetching a Status List Token, unless the Referenced Token procedures or the use case require further evaluation.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <p id="section-8.3-2">If this validation is not successful, the Referenced Token <span class="bcp14">MUST</span> be rejected. If the validation was successful, the Relying Party <span class="bcp14">MUST</span> perform the following validation steps to evaluate the status of the Referenced Token:<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-8.3-3">
 <li id="section-8.3-3.1">
@@ -3348,7 +3348,7 @@ successful.<a href="#section-14.5-4" class="pilcrow">¶</a></p>
               <p id="section-14.5.2-9.2.1">Status Type Description: The status of the Referenced Token is application specific.<a href="#section-14.5.2-9.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.5.2-9.3">
-              <p id="section-14.5.2-9.3.1">Status Type value: <code>0x0C-0xOF</code><a href="#section-14.5.2-9.3.1" class="pilcrow">¶</a></p>
+              <p id="section-14.5.2-9.3.1">Status Type value: <code>0x0C-0x0F</code><a href="#section-14.5.2-9.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-14.5.2-9.4">
               <p id="section-14.5.2-9.4.1">Change Controller: IETF<a href="#section-14.5.2-9.4.1" class="pilcrow">¶</a></p>
