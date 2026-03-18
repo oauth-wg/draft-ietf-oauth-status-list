@@ -490,7 +490,7 @@ By including a "status" claim in a Referenced Token, the Issuer is referencing a
 
 ## Referenced Token in JOSE {#referenced-token-jose}
 
-The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}, as an SD-JWTs {{RFC9901}}, as an SD-JWT VCs {{SD-JWT.VC}} or other formats based on JOSE.
+The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}, as an SD-JWT {{RFC9901}}, as an SD-JWT VC {{SD-JWT.VC}} or other formats based on JOSE.
 
 The following content applies to the JWT Claims Set:
 
@@ -727,7 +727,7 @@ If a Relying Party encounters an error while validating one of the Status List T
 There are two options for a Relying Party to retrieve the Status List Aggregation.
 An Issuer MAY support any of these mechanisms:
 
-- Issuer metadata: The Issuer of the Referenced Token publishes an URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
+- Issuer metadata: The Issuer of the Referenced Token publishes a URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
 - Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.
 
 ~~~ ascii-art
@@ -926,7 +926,7 @@ The tuple of uri and index inside the Referenced Token are unique and therefore 
 
 Two or more colluding parties (e.g Relying Parties and or the Status Issuer) may link two transactions involving the same Referenced Token by comparing the status claims of received Referenced Tokens and therefore determine that they have interacted with the same Holder.
 
-To avoid privacy risks of this possible collusion, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `idx`, Status Issuers are RECOMMENDED to:
+To avoid privacy risks of this possible collusion, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use them in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `idx`, Status Issuers are RECOMMENDED to:
 
 - choose non-sequential, pseudo-random or random indices
 - use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
@@ -948,7 +948,7 @@ There are strong privacy concerns that have to be carefully taken into considera
 
 As previously explained, there is the potential risk of observability by Relying Parties (see [](#privacy-relying-party)) and Outsiders (see [](#privacy-outsider)). That means that any Status Type that transports information beyond the routine statuses VALID and INVALID about a Referenced Token can leak information to other parties. This document defines one additional Status Type with "SUSPENDED" that conveys such additional information, but in practice all statuses other than VALID and INVALID are likely to contain information with privacy implications.
 
-Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might a better fit for their use-case.
+Ecosystems that want to use other Status Types than "VALID" and "INVALID" should consider the possible leakage of data and profiling possibilities before doing so and evaluate if revocation and re-issuance might be a better fit for their use-case.
 
 # Operational Considerations {#implementation}
 
@@ -1295,7 +1295,7 @@ This section requests registration of the following media types {{RFC2046}} in
 the "Media Types" registry {{IANA.MediaTypes}} in the manner described
 in {{RFC6838}}.
 
-To indicate that the content is an JWT-based Status List:
+To indicate that the content is a JWT-based Status List:
 
   * Type name: application
   * Subtype name: statuslist+jwt
@@ -1315,7 +1315,7 @@ To indicate that the content is an JWT-based Status List:
   * Change controller: IETF
   * Provisional registration? No
 
-To indicate that the content is an CWT-based Status List:
+To indicate that the content is a CWT-based Status List:
 
   * Type name: application
   * Subtype name: statuslist+cwt
@@ -1822,6 +1822,10 @@ CBOR encoding:
 {:numbered="false"}
 
 \[\[ To be removed from the final specification \]\]
+
+-19
+
+* grammar, spelling, nits
 
 -18
 
