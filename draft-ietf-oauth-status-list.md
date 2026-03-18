@@ -145,17 +145,18 @@ The following diagram depicts the relationship between the artifacts:
 
 ~~~ ascii-art
 
-┌────────────────┐  describes status ┌──────────────────┐
-│  Status List   ├──────────────────►│ Referenced Token │
-│ (JSON or CBOR) │◄──────────────────┤ (JOSE, COSE, ..) │
-└─────┬──────────┘    references     └──────────────────┘
-      │
-      │ embedded in
-      ▼
-┌───────────────────┐
-│ Status List Token │
-│  (JWT or CWT)     │
-└───────────────────┘
++----------------+  describes status  +------------------+
+|  Status List   |------------------->| Referenced Token |
+| (JSON or CBOR) |<-------------------| (JOSE, COSE, ..) |
++-------+--------+     references     +------------------+
+        |
+        |
+        | embedded in
+        v
++-------------------+
+| Status List Token |
+|   (JWT or CWT)    |
++-------------------+
 
 ~~~
 
@@ -169,17 +170,19 @@ The following diagram depicts the relationship between the involved roles (Relyi
 
            issue                 present
            Referenced            Referenced
-┌────────┐ Token      ┌────────┐ Token      ┌───────────────┐
-│ Issuer ├───────────►│ Holder ├───────────►│ Relying Party │
-└─┬──────┘            └───┬────┘            └──┬────────────┘
-  ▼ provide status        │                    │
-┌───────────────┐         │                    │
-│ Status Issuer │         │                    │
-└─┬─────────────┘         │                    │
-  ▼ provide Status List   │                    │
-┌─────────────────┐       │                    │
-│ Status Provider │◄──────┴────────────────────┘
-└─────────────────┘     fetch Status List Token
++--------+ Token      +--------+ Token      +---------------+
+| Issuer |----------->| Holder |----------->| Relying Party |
++---+----+            +---+----+            +-------+-------+
+    |                     |                         |
+    v provide status      |                         |
++---------------+         |                         |
+| Status Issuer |         |                         |
++---+-----------+         |                         |
+    |                     |                         |
+    v provide Status List |                         |
++-----------------+       |                         |
+| Status Provider |<------+-------------------------+
++-----------------+     fetch Status List Token
 
 ~~~
 
@@ -302,14 +305,14 @@ These bits are concatenated:
 
 ~~~ ascii-art
 
-byte no            0                  1
-bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
-           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-values     |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|
-           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-index       7 6 5 4 3 2 1 0   15   ...  10 9 8
-           \_______________/  \_______________/
-byte value       0xB9               0xA3
+Byte Index            0                  1
+Bit Position   7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
+              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+Bit Values    |1|0|1|1|1|0|0|1|  |1|0|1|0|0|0|1|1|
+              +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+List Index     7 6 5 4 3 2 1 0   15   ...  10 9 8
+              \_______________/  \_______________/
+Hex Value           0xB9               0xA3
 
 compressed array (hex): 78dadbb918000217015d
 ~~~
@@ -336,16 +339,16 @@ These bits are concatenated:
 
 ~~~ ascii-art
 
-byte no            0                  1                  2
-bit no      7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
-           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-values     |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
-           +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
-            \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
-status      11  00  10  01     01  00  01  00     11  11  10  01
-index        3   2   1   0      7   6   5   4      11  10  9   8
-             \___________/      \___________/      \___________/
-byte value       0xC9               0x44               0xF9
+Byte Index             0                  1                  2
+Bit Position    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0    7 6 5 4 3 2 1 0
+               +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+Bit Values     |1|1|0|0|1|0|0|1|  |0|1|0|0|0|1|0|0|  |1|1|1|1|1|0|0|1|
+               +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+-+
+                \ / \ / \ / \ /    \ / \ / \ / \ /    \ / \ / \ / \ /
+Status Value     11  00  10  01     01  00  01  00     11  11  10  01
+List Index        3   2   1   0      7   6   5   4      11  10  9   8
+                  \___________/      \___________/      \___________/
+Hex Value              0xC9               0x44               0xF9
 
 compressed array (hex): 78da3be9f2130003df0207
 ~~~
@@ -731,22 +734,23 @@ An Issuer MAY support any of these mechanisms:
 - Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.
 
 ~~~ ascii-art
-                                      ┌─────────────────┐
-                                      │                 │
-                                      │ Issuer Metadata │
-                                      │                 │
-                                      └───┬─────────────┘
-                                          │
-  ┌───────────────────┐                   │ link within metadata
- ┌───────────────────┐│  link all         ▼
-┌───────────────────┐││◄───────┐  ┌─────────────────────────┐
-│                   ││◄────────┤  │                         │
-│ Status List Token │◄┴────────┴──┤ Status List Aggregation │
-│                   │┘            │                         │
-└───────┬───────────┘             └─────────────────────────┘
-        │                                 ▲
-        │   link by aggregation_uri       │
-        └─────────────────────────────────┘
+                                      +-----------------+
+                                      |                 |
+                                      | Issuer Metadata |
+                                      |                 |
+                                      +---------+-------+
+        batch of                                |
+  +-------------------+                         | link within metadata
+ +-------------------+|  link all               v
++-------------------+||<-------+  +-------------------------+
+|                   ||<--------+  |                         |
+| Status List Token |<---------+--| Status List Aggregation |
+|                   |+            |                         |
++-------+-----------+             +-------------------------+
+        |                                     ^
+        |                                     |
+        |   link by aggregation_uri           |
+        +-------------------------------------+
 ~~~
 
 ## Issuer Metadata
@@ -826,36 +830,42 @@ Alternatively, the Status Issuer may use the same web-based key resolution that 
 - an `x5u` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for COSE.
 
 ~~~ ascii-art
-┌────────┐  host keys  ┌──────────────────────┐
-│ Issuer ├────────┬───►│ .well-known metadata │
-└─┬──────┘        │    └──────────────────────┘
-  ▼ update status │
-┌───────────────┐ │
-│ Status Issuer ├─┘
-└─┬─────────────┘
-  ▼ provide Status List
-┌─────────────────┐
-│ Status Provider │
-└─────────────────┘
++--------+    host keys    +----------------------+
+| Issuer +----------+----->| .well-known metadata |
++---+----+          |      +----------------------+
+    |               |
+    v update status |
++---------------+   |
+| Status Issuer +---+
++---+-----------+
+    |
+    v provide Status List
++-----------------+
+| Status Provider |
++-----------------+
 ~~~
 If the Issuer of the Referenced Token is a different entity than the Status Issuer, then the keys used for the Status List Token may be cryptographically linked, e.g. by a Certificate Authority through an x.509 PKI. The certificate of the Issuer for the Referenced Token and the Status Issuer should be issued by the same Certificate Authority and the Status Issuer's certificate should utilize [extended key usage](#eku).
 
 ~~~ ascii-art
-┌───────────────────────┐
-│ Certificate Authority │
-└─┬─────────────────────┘
-  │ authorize
-  │  ┌────────┐
-  ├─►│ Issuer │
-  │  └─┬──────┘
-  │    ▼ update status
-  │  ┌───────────────┐
-  └─►│ Status Issuer │
-     └─┬─────────────┘
-       ▼ provide Status List
-     ┌─────────────────┐
-     │ Status Provider │
-     └─────────────────┘
++-----------------------+
+| Certificate Authority |
++---+-------------------+
+    |
+    | authorize
+    |
+    |    +--------+
+    +--->| Issuer |
+    |    +-+------+
+    |      |
+    |      v update status
+    |    +---------------+
+    +--->| Status Issuer |
+         +-+-------------+
+           |
+           v provide Status List
+         +-----------------+
+         | Status Provider |
+         +-----------------+
 ~~~
 
 ## Redirection 3xx {#redirects}
@@ -1016,23 +1026,22 @@ Ultimately, it's the Relying Parties decision how often to check for updates, ec
 The following diagram illustrates the relationship between these claims and how they are designed to influence caching:
 
 ~~~ ascii-art
-
        Time of        Check for        Check for        Check for
        Fetching        updates          updates          updates
 
- iat     │                │                │                │    exp
-         │                │                │                │
-  │      │                │                │                │     │
-  │      │                │                │                │     │
-  │      │                │                │                │     │
-  │      │                │                │                │     │
-  │      │      ttl       │      ttl       │      ttl       │     │
-  │      │ ─────────────► │ ─────────────► │ ─────────────► │ ──► │
-  │      │                │                │                │     │
-  │      │                │                │                │     │
-  │                                                               │
-──┼───────────────────────────────────────────────────────────────┼─►
-  │                                                               │
+ iat     |                |                |                |    exp
+         |                |                |                |
+  |      |                |                |                |     |
+  |      |                |                |                |     |
+  |      |                |                |                |     |
+  |      |                |                |                |     |
+  |      |      ttl       |      ttl       |      ttl       |     |
+  |      | -------------> | -------------> | -------------> | --> |
+  |      |                |                |                |     |
+  |      |                |                |                |     |
+  |                                                               |
+--+---------------------------------------------------------------+-->
+  |                                                               |
 ~~~
 
 ## Relying Parties avoiding correlatable Information
