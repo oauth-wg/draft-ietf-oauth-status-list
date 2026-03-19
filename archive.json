@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-17T00:26:35.131821+00:00",
+  "timestamp": "2026-03-19T00:28:46.128692+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6759,7 +6759,7 @@
       "labels": [],
       "body": "<img width=\"720\" height=\"295\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/214ead3b-1fd8-40be-8bf1-a9a32209e545\" />\n\nThis is due to a lack of certain box-drawing glyphs in widely-used font packages.  On Windows, the system compensates for this by substituting from non-monospace fonts.\n\nThere are workarounds for this, which look less obviously busted, but end up using multiple different fonts, which will have different metrics.  The following shows which glyphs are rendered using the chosen \"Roboto Mono\" in [this](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-17.html) rendering (the other glyphs are substituted from \"Courier New\"):\n\n<img width=\"905\" height=\"258\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/5e34f74b-d956-4e2f-9ca5-28db197140fc\" />",
       "createdAt": "2026-02-08T22:33:51Z",
-      "updatedAt": "2026-03-16T22:29:30Z",
+      "updatedAt": "2026-03-18T07:04:13Z",
       "closedAt": null,
       "comments": [
         {
@@ -6810,6 +6810,34 @@
           "body": "So your recommendation is to revert back to ASCII, correct?",
           "createdAt": "2026-03-16T22:29:29Z",
           "updatedAt": "2026-03-16T22:29:29Z"
+        },
+        {
+          "author": "bkmgit",
+          "authorAssociation": "NONE",
+          "body": "The recommendation is to provide both ascii art and svg diagrams at publication time or when submitting an XML file:\nhttps://authors.ietf.org/en/diagrams\n\n\nYou may consider replacing the arrow heads by `->`, `<-`, `/ \\` and `\\ /` in the current ascii art diagrams.\n\nOne would  like to reduce work required to make diagrams, so using a program that can generate ascii art and svg diagrams from a single specification is helpful, but need not be used for this draft. Am examining output from [graphviz](https://graphviz.org) which can output to both ascii and svg https://graphviz.org/docs/outputs/\n",
+          "createdAt": "2026-03-17T10:09:40Z",
+          "updatedAt": "2026-03-17T10:09:40Z"
+        },
+        {
+          "author": "bkmgit",
+          "authorAssociation": "NONE",
+          "body": "Graphviz ascii art plugin is not suitable for the current purpose.  It uses aalib which fills entire area with symbols https://aa-project.sourceforge.net/tune/",
+          "createdAt": "2026-03-17T14:41:12Z",
+          "updatedAt": "2026-03-17T14:41:12Z"
+        },
+        {
+          "author": "berniefyfe",
+          "authorAssociation": "NONE",
+          "body": "What do i have to do now to fix these issues?",
+          "createdAt": "2026-03-18T06:10:53Z",
+          "updatedAt": "2026-03-18T06:10:53Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "NONE",
+          "body": "@bkmgit This isn't my repo, but you seem to be taking this conversation in a different direction.  I suggest that you take this discussion elsewhere.",
+          "createdAt": "2026-03-18T07:04:13Z",
+          "updatedAt": "2026-03-18T07:04:13Z"
         }
       ]
     },
@@ -23600,6 +23628,93 @@
               "updatedAt": "2026-02-24T21:03:48Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 354,
+      "id": "PR_kwDOJZ2aqs7Llh0a",
+      "title": "revert graphics to ASCII",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/354",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #351 ",
+      "createdAt": "2026-03-18T15:44:34Z",
+      "updatedAt": "2026-03-18T17:51:12Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "7cd58bb2dc5811d7d408a2277be86af965686010",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/revert_to_ascii_graphics",
+      "headRefOid": "be4398252c7bd04d8424f0243d10989c06e4c5ad",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7slhNj",
+          "commit": {
+            "abbreviatedOid": "85c3f9d"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-18T16:36:59Z",
+          "updatedAt": "2026-03-18T16:58:45Z",
+          "comments": [
+            {
+              "originalPosition": 178,
+              "body": "```suggestion\n+--------+    host keys    +----------------------+\n| Issuer |----------+----->| .well-known metadata |\n+---+----+          |      +----------------------+\n    |               |\n    v update status |\n+---------------+   |\n| Status Issuer |---+\n+---+-----------+\n    |\n    v provide Status List\n+-----------------+\n| Status Provider |\n+-----------------+\n```",
+              "createdAt": "2026-03-18T16:37:00Z",
+              "updatedAt": "2026-03-18T16:58:45Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 355,
+      "id": "PR_kwDOJZ2aqs7LmV73",
+      "title": "some nits",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/355",
+      "state": "OPEN",
+      "author": "paulbastian",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-18T16:28:26Z",
+      "updatedAt": "2026-03-18T17:50:06Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "7cd58bb2dc5811d7d408a2277be86af965686010",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "pb/review",
+      "headRefOid": "027cdf3f0a31d97ae7086cfcc6088f132b3df230",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs7snAA0",
+          "commit": {
+            "abbreviatedOid": "66a0b50"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-18T17:32:34Z",
+          "updatedAt": "2026-03-18T17:32:34Z",
+          "comments": []
         }
       ]
     }
