@@ -276,9 +276,9 @@ Table of Contents
    been proven difficult.  Traditional certificate revocation lists
    (CRLs) have limited scalability; Online Certificate Status Protocol
    (OCSP) has additional privacy risks, since the client is leaking the
-   requested website to a third party.  OCSP stapling is addressing some
-   of these problems at the cost of less up-to-date data.  Approaches
-   based on cryptographic accumulators and Zero-Knowledge-Proofs try to
+   requested website to a third party.  OCSP stapling addresses some of
+   these problems at the cost of less up-to-date data.  Approaches based
+   on cryptographic accumulators and Zero-Knowledge-Proofs try to
    accommodate for this privacy gap, but are currently (in 2026) facing
    scalability issues and are not yet standardized.  Another alternative
    is short-lived Referenced Tokens with regular re-issuance, but this
@@ -415,7 +415,7 @@ Table of Contents
    Referenced Token is composed by the following algorithm:
 
    1.  The Status Issuer MUST define a number of bits (bits) of either
-       1,2,4 or 8, that represents the amount of bits used to describe
+       1,2,4 or 8, that represents the number of bits used to describe
        the status of each Referenced Token within this Status List.
        Therefore, up to 2,4,16 or 256 statuses for a Referenced Token
        are possible, depending on the bit size.  This limitation is
@@ -423,7 +423,7 @@ Table of Contents
        every operation, thus keeping implementations simpler and less
        error-prone.
 
-   2.  The Status Issuer creates a byte array of size = amount of
+   2.  The Status Issuer creates a byte array of size = number of
        Referenced Tokens * bits / 8 or greater.  Depending on the bits,
        each byte in the array corresponds to 8/(bits) statuses (8,4,2 or
        1).
@@ -487,7 +487,7 @@ Table of Contents
    status[1] = 0b10
    status[2] = 0b00
    status[3] = 0b11
-   status[4] = 0b0
+   status[4] = 0b00
    status[5] = 0b01
    status[6] = 0b00
    status[7] = 0b01
@@ -794,7 +794,7 @@ d2                              # tag(18)
 6.2.  Referenced Token in JOSE
 
    The Referenced Token MAY be encoded as a "JSON Web Token (JWT)"
-   according to [RFC7519], as an SD-JWTs [RFC9901], as an SD-JWT VCs
+   according to [RFC7519], as an SD-JWT [RFC9901], as an SD-JWT VC
    [SD-JWT.VC] or other formats based on JOSE.
 
    The following content applies to the JWT Claims Set:
@@ -882,13 +882,13 @@ d2                              # tag(18)
    The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)"
    object according to [RFC8392], as an SD-CWTs [SD-CWT] or as an ISO
    mdoc according to [ISO.mdoc] or other formats based on COSE.
-   Referenced Tokens in CBOR should share the same core data structure
+   Referenced Tokens in CBOR SHOULD share the same core data structure
    for a status list reference:
 
    *  The Status CBOR structure is a Map that MUST include at least one
       data item that refers to a status mechanism.  Each data item in
       the Status CBOR structure comprises a key-value pair, where the
-      key must be a CBOR text string (major type 3) specifying the
+      key MUST be a CBOR text string (major type 3) specifying the
       identifier of the status mechanism and the corresponding value
       defines its contents.
 
@@ -1098,7 +1098,7 @@ d2                              # tag(18)
    is evaluated as being expired through the "exp" (Expiration Time) but
    also has a status of 0x00 ("VALID"), the token is considered expired.
    If the validation procedures for the Referenced Token determine it is
-   invalid, no further procedures regarding Status List MUST be
+   invalid, further procedures regarding Status List MUST NOT be
    performed, e.g. fetching a Status List Token, unless the Referenced
    Token procedures or the use case require further evaluation.
 
@@ -1228,7 +1228,7 @@ d2                              # tag(18)
    There are two options for a Relying Party to retrieve the Status List
    Aggregation.  An Issuer MAY support any of these mechanisms:
 
-   *  Issuer metadata: The Issuer of the Referenced Token publishes an
+   *  Issuer metadata: The Issuer of the Referenced Token publishes a
       URI which links to Status List Aggregation, e.g. in publicly
       available metadata of an issuance protocol
 
@@ -1580,10 +1580,10 @@ d2                              # tag(18)
 
    To avoid privacy risks of this possible collusion, it is RECOMMENDED
    that Issuers provide the ability to issue batches of one-time-use
-   Referenced Tokens, enabling Holders to use in a single interaction
-   with a Relying Party before discarding.  See Section 13.2 to avoid
-   further correlatable information by the values of uri and idx, Status
-   Issuers are RECOMMENDED to:
+   Referenced Tokens, enabling Holders to use them in a single
+   interaction with a Relying Party before discarding.  See Section 13.2
+   to avoid further correlatable information by the values of uri and
+   idx, Status Issuers are RECOMMENDED to:
 
    *  choose non-sequential, pseudo-random or random indices
 
@@ -1639,7 +1639,7 @@ d2                              # tag(18)
    Ecosystems that want to use other Status Types than "VALID" and
    "INVALID" should consider the possible leakage of data and profiling
    possibilities before doing so and evaluate if revocation and re-
-   issuance might a better fit for their use-case.
+   issuance might be a better fit for their use-case.
 
 13.  Operational Considerations
 
@@ -2182,7 +2182,7 @@ d2                              # tag(18)
    *  Status Type Description: The status of the Referenced Token is
       application specific.
 
-   *  Status Type value: 0x0C-0xOF
+   *  Status Type value: 0x0C-0x0F
 
    *  Change Controller: IETF
 
@@ -2211,7 +2211,7 @@ d2                              # tag(18)
    [RFC2046] in the "Media Types" registry [IANA.MediaTypes] in the
    manner described in [RFC6838].
 
-   To indicate that the content is an JWT-based Status List:
+   To indicate that the content is a JWT-based Status List:
 
    *  Type name: application
 
@@ -2249,7 +2249,7 @@ d2                              # tag(18)
 
    *  Provisional registration?  No
 
-   To indicate that the content is an CWT-based Status List:
+   To indicate that the content is a CWT-based Status List:
 
    *  Type name: application
 
@@ -3131,6 +3131,8 @@ Document History
    -19
 
    *  revert grapahics to ASCII
+
+   *  grammar, spelling, nits
 
    -18
 
