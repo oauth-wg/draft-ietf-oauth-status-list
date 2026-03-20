@@ -1837,6 +1837,7 @@ CBOR encoding:
 
 * revert grapahics to ASCII
 * grammar, spelling, nits
+* add official link to ISO 18013-5 specification
 
 -18
 
