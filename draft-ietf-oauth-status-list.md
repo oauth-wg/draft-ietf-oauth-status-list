@@ -104,8 +104,8 @@ informative:
   ISO.mdoc:
     author:
       org: "ISO/IEC JTC 1/SC 17"
-    title: "ISO/IEC 18013-5:xxxx ISO-compliant driving licence"
-    target: "https://github.com/lSOWG10/ISO-18013"
+    title: "ISO/IEC 18013-5:2021 ISO-compliant driving licence"
+    target: "target: "https://www.iso.org/standard/69084.html""
     date: "09.12.2024"
   smith2020let:
     author:
