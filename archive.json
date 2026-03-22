@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-19T00:28:46.128692+00:00",
+  "timestamp": "2026-03-22T00:28:56.394949+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -6752,15 +6752,15 @@
       "id": "I_kwDOJZ2aqs7pRoJF",
       "title": "ASCII Art rendering issues",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/351",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "martinthomson",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "<img width=\"720\" height=\"295\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/214ead3b-1fd8-40be-8bf1-a9a32209e545\" />\n\nThis is due to a lack of certain box-drawing glyphs in widely-used font packages.  On Windows, the system compensates for this by substituting from non-monospace fonts.\n\nThere are workarounds for this, which look less obviously busted, but end up using multiple different fonts, which will have different metrics.  The following shows which glyphs are rendered using the chosen \"Roboto Mono\" in [this](https://www.ietf.org/archive/id/draft-ietf-oauth-status-list-17.html) rendering (the other glyphs are substituted from \"Courier New\"):\n\n<img width=\"905\" height=\"258\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/5e34f74b-d956-4e2f-9ca5-28db197140fc\" />",
       "createdAt": "2026-02-08T22:33:51Z",
-      "updatedAt": "2026-03-18T07:04:13Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-20T08:07:18Z",
+      "closedAt": "2026-03-20T08:07:18Z",
       "comments": [
         {
           "author": "paulbastian",
@@ -6846,22 +6846,29 @@
       "id": "I_kwDOJZ2aqs7rhI5F",
       "title": "ISO Reference",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/issues/352",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "c2bo",
       "authorAssociation": "MEMBER",
       "assignees": [],
       "labels": [],
       "body": "As posted on the mailing list by @bc-pi \n\n> My perspective on non-transparent, access-restricted standards development and fee-gated publication models has not changed since last week https://mailarchive.ietf.org/arch/msg/spice/nYhBMowGdrKeW6BgWqf1t9svRjI/, and I again suggest that there be no references to such specifications at all.\n> I am well aware, by the way, that some work with which I'm closely involved has reference to ISO/IEC 18013-5:2021. RFC9901/SD-JWT mentions it here [https://datatracker.ietf.org/doc/html/rfc9901#section-10.1-10 ](https://datatracker.ietf.org/doc/html/rfc9901#section-10.1-10)but basically just says \"this also exists and has the same limitations\" while SD-JWT VC mentions it here https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-14#section-11 but as just one of a list of many credential formats. The context of both feels less like any endorsement of the paywalled ISO document. Although this conversation has me reconsidering some and thinking the mention in SD-JWT VC could be further contextualized as such or even removed.",
       "createdAt": "2026-02-17T07:43:27Z",
-      "updatedAt": "2026-02-20T20:14:58Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-20T08:23:23Z",
+      "closedAt": "2026-03-20T08:23:23Z",
       "comments": [
         {
           "author": "bc-pi",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "also: \n\n> That's a fair question, Pierce, and it's certainly possible that my reasoning is perfectly clear in my own mind but I've not articulated it well or at all outwardly. If my wife was asked, she'd probably say that it is, in fact, highly likely that I've not been clear about something that's in my head. I'll try and explain my thinking a bit more. \n> \n> Yes, it's highly annoying when standards are unavailable without paying for them. But it's more than that. There's an entire process of non-transparent and access-restricted development of those standards that precedes the pay-to-view publication model. Do we really want to provide tacit endorsement of that model through what is effectively a link to a publisher's product page? Obviously, I do not. \n> \n> I'd further suggest that it is not the job of Token Status List (TSL) to help a reader gain a broader understanding of the technology and standards landscape. Readers that find their way to TSL without knowledge of ISO/IEC 18013-5:2021 will be just fine without learning of the opportunity to pay to see ISO/IEC 18013-5:2021 from TSL. And readers that already know about ISO/IEC 18013-5:2021 have no need for TSL to inform them of it. \n\nand before that: \n\n> As a proponent of and advocate for free and open standards, I would prefer that there be no references to fee-gated specifications at all. Even if I have to assume that's what it is based on the top and sponsored search results I get for \"ISO/IEC 18013-5:2021 ISO-compliant driving licence\" pointing to paywalled content. And searching is all I could figure out to do with the reference that has no link:\n> \n> [ISO.mdoc]  ISO/IEC JTC 1/SC 17, \"ISO/IEC 18013-5:2021 ISO-compliant driving licence\", n.d.. \n> \n> I would propose removal. \n\nall on the thread here https://mailarchive.ietf.org/arch/msg/spice/SMgovRcQ3LicZG2YXlTlA_BYGj8/ ",
           "createdAt": "2026-02-20T20:14:58Z",
           "updatedAt": "2026-02-20T20:14:58Z"
+        },
+        {
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Closed by #353 ",
+          "createdAt": "2026-03-20T08:23:23Z",
+          "updatedAt": "2026-03-20T08:23:23Z"
         }
       ]
     }
@@ -23541,28 +23548,30 @@
       "id": "PR_kwDOJZ2aqs7FP6Wo",
       "title": "add target with github ISO 18013 to ISO.mdoc informative reference",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/353",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bc-pi",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "kinda per https://mailarchive.ietf.org/arch/msg/spice/U9Mhnl0Yv3IZrpmgOaqs5yVkogo/ \r\n\r\nand the current ref has no URL at all https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-18#ISO.mdoc",
       "createdAt": "2026-02-20T19:57:38Z",
-      "updatedAt": "2026-02-24T21:03:47Z",
+      "updatedAt": "2026-03-20T08:22:37Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7cd58bb2dc5811d7d408a2277be86af965686010",
       "headRepository": "bc-pi/draft-looker-oauth-jwt-cwt-status-list",
       "headRefName": "patch-2",
-      "headRefOid": "516a0c9b4fed140749cdf0504e997db796854468",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "63fd9fa5805aaeb21b70d397cd2d7e02033792be",
+      "closedAt": "2026-03-20T08:22:37Z",
+      "mergedAt": "2026-03-20T08:22:37Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "8710f20620f0f9ae36f1169bbfb0f8953058dfad"
+      },
       "comments": [
         {
           "author": "bc-pi",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "for #352 more or less ",
           "createdAt": "2026-02-20T20:15:56Z",
           "updatedAt": "2026-02-20T20:15:56Z"
@@ -23575,7 +23584,7 @@
             "abbreviatedOid": "293011b"
           },
           "author": "bc-pi",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-20T20:05:03Z",
@@ -23615,7 +23624,7 @@
             "abbreviatedOid": "516a0c9"
           },
           "author": "bc-pi",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-24T21:03:47Z",
@@ -23628,6 +23637,72 @@
               "updatedAt": "2026-02-24T21:03:48Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7tO4BL",
+          "commit": {
+            "abbreviatedOid": "d8dbedf"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-20T08:10:53Z",
+          "updatedAt": "2026-03-20T08:10:53Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\n```",
+              "createdAt": "2026-03-20T08:10:53Z",
+              "updatedAt": "2026-03-20T08:10:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7tO4SQ",
+          "commit": {
+            "abbreviatedOid": "499f414"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-20T08:11:07Z",
+          "updatedAt": "2026-03-20T08:11:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7tO7uz",
+          "commit": {
+            "abbreviatedOid": "499f414"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-20T08:14:20Z",
+          "updatedAt": "2026-03-20T08:14:20Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\n    target: \"https://www.iso.org/standard/69084.html\"\n```",
+              "createdAt": "2026-03-20T08:14:20Z",
+              "updatedAt": "2026-03-20T08:14:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7tO_kE",
+          "commit": {
+            "abbreviatedOid": "63fd9fa"
+          },
+          "author": "c2bo",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-20T08:17:43Z",
+          "updatedAt": "2026-03-20T08:17:43Z",
+          "comments": []
         }
       ]
     },
@@ -23636,24 +23711,26 @@
       "id": "PR_kwDOJZ2aqs7Llh0a",
       "title": "revert graphics to ASCII",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/354",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #351 ",
       "createdAt": "2026-03-18T15:44:34Z",
-      "updatedAt": "2026-03-18T17:51:12Z",
+      "updatedAt": "2026-03-20T08:07:19Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
       "baseRefOid": "7cd58bb2dc5811d7d408a2277be86af965686010",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/revert_to_ascii_graphics",
       "headRefOid": "be4398252c7bd04d8424f0243d10989c06e4c5ad",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-20T08:07:15Z",
+      "mergedAt": "2026-03-20T08:07:15Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "beadcf8920c136e26e24b85ac9279e961710832a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -23675,6 +23752,19 @@
               "updatedAt": "2026-03-18T16:58:45Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7tFyUP",
+          "commit": {
+            "abbreviatedOid": "be43982"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-19T20:13:27Z",
+          "updatedAt": "2026-03-19T20:13:27Z",
+          "comments": []
         }
       ]
     },
@@ -23683,24 +23773,26 @@
       "id": "PR_kwDOJZ2aqs7LmV73",
       "title": "some nits",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/355",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "paulbastian",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-03-18T16:28:26Z",
-      "updatedAt": "2026-03-18T17:50:06Z",
+      "updatedAt": "2026-03-20T08:08:59Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "baseRefName": "main",
-      "baseRefOid": "7cd58bb2dc5811d7d408a2277be86af965686010",
+      "baseRefOid": "beadcf8920c136e26e24b85ac9279e961710832a",
       "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
       "headRefName": "pb/review",
-      "headRefOid": "027cdf3f0a31d97ae7086cfcc6088f132b3df230",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "3ec4da260c90177f272ebe0c806407f56fa2a184",
+      "closedAt": "2026-03-20T08:08:55Z",
+      "mergedAt": "2026-03-20T08:08:55Z",
+      "mergedBy": "paulbastian",
+      "mergeCommit": {
+        "oid": "f9748cf032633ce7405be19635ff8b41fbeef6d3"
+      },
       "comments": [],
       "reviews": [
         {
@@ -23714,6 +23806,19 @@
           "body": "",
           "createdAt": "2026-03-18T17:32:34Z",
           "updatedAt": "2026-03-18T17:32:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs7tFyx8",
+          "commit": {
+            "abbreviatedOid": "027cdf3"
+          },
+          "author": "tplooker",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-19T20:13:53Z",
+          "updatedAt": "2026-03-19T20:13:53Z",
           "comments": []
         }
       ]
