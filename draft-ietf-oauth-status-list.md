@@ -1103,12 +1103,12 @@ Registration requests sent to the mailing list for review should use an appropri
 
 Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful. If the designated experts are not responsive, the registration requesters should contact IANA to escalate the process.
 
-Designated experts should apply the following criteria when reviewing proposed registrations:
+Designated experts should at least apply the following criteria when reviewing proposed registrations:
 
 * they should not duplicate existing functionality
 * they are likely generally applicable, as opposed to being used for a single application
 * they are clear and fit the purpose of the registry
-* they use and extend the base terminology of this draft to describe the mechanism
+* they use and extend the terminology of this draft to describe the mechanism
 
 IANA must only accept registry updates from the designated experts and should direct all requests for registration to the review mailing list.
 
@@ -1189,12 +1189,12 @@ Registration requests sent to the mailing list for review should use an appropri
 
 Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful. If the designated experts are not responsive, the registration requesters should contact IANA to escalate the process.
 
-Designated experts should apply the following criteria when reviewing proposed registrations:
+Designated experts should at least apply the following criteria when reviewing proposed registrations:
 
 * they should not duplicate existing functionality
 * they are likely generally applicable, as opposed to being used for a single application
 * they are clear and fit the purpose of the registry
-* they use and extend the base terminology of this draft to describe the mechanism
+* they use and extend the terminology of this draft to describe the mechanism
 
 IANA must only accept registry updates from the designated experts and should direct all requests for registration to the review mailing list.
 
@@ -1238,7 +1238,7 @@ Registration requests sent to the mailing list for review should use an appropri
 
 Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful. If the designated experts are not responsive, the registration requesters should contact IANA to escalate the process.
 
-Designated experts should apply the following criteria when reviewing proposed registrations:
+Designated experts should apply at least the following criteria when reviewing proposed registrations:
 
 * they should not duplicate existing functionality
 * they are likely generally applicable, as opposed to being used for a single application
