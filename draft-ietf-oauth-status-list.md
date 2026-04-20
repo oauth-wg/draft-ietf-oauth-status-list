@@ -1097,15 +1097,24 @@ IANA "JSON Web Token Claims" registry {{IANA.JWT}} established by {{RFC7519}}.
 This specification establishes the IANA "JWT Status Mechanisms" registry for JWT "status" member values and adds it to the "JSON Web Token (JWT)" registry group at https://www.iana.org/assignments/jwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
 JWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
-review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts.
+review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. To allow for the allocation of values prior to publication of the final version of a specification, the designated experts may approve registration once they are satisfied that the specification will be completed and published. However, if the specification is not completed and published in a timely manner, as determined by the designated experts, the designated experts may request that IANA withdraw the registration.
 
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism: example").
 
-Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
-successful.
+Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful. If the designated experts are not responsive, the registration requesters should contact IANA to escalate the process.
 
-IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
+Designated experts should apply at least the following criteria when reviewing proposed registrations:
+
+* they should not duplicate existing functionality
+* they are likely generally applicable, as opposed to being used for a single application
+* they are clear and fit the purpose of the registry
+* they use and extend the terminology of this document to describe the mechanism
+
+IANA must only accept registry updates from the designated experts and should direct all requests for registration to the review mailing list.
+
+In order to enable broadly informed review of registration decisions, there should be multiple designated experts to represent the perspectives of different applications using this specification. In cases where registration may be perceived as a conflict of interest for a particular expert, that expert should defer to the judgment of the other experts.
+
+The mailing list is used to enable public review of registration requests, which enables both designated experts and other interested parties to provide feedback on proposed registrations. Designated experts may allocate values prior to publication of the final specification. This allows authors to receive guidance from the designated experts early, so any identified issues can be fixed before the final specification is published.
 
 ### Registration Template
 
@@ -1174,16 +1183,24 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 This specification establishes the IANA "CWT Status Mechanisms" registry for CWT "status" member values and adds it to the "CBOR Web Token (CWT) Claims" registry group at https://www.iana.org/assignments/cwt. The registry records the status mechanism member and a reference to the specification that defines it.
 
 CWT Status Mechanisms are registered by Specification Required {{RFC8126}} after a three-week
-review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
-specification will be published.
+review period on the cwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. To allow for the allocation of values prior to publication of the final version of a specification, the designated experts may approve registration once they are satisfied that the specification will be completed and published. However, if the specification is not completed and published in a timely manner, as determined by the designated experts, the designated experts may request that IANA withdraw the registration.
 
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register CWT Status Mechanism: example").
 
-Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
-successful.
+Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful. If the designated experts are not responsive, the registration requesters should contact IANA to escalate the process.
 
-IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
+Designated experts should at least apply the following criteria when reviewing proposed registrations:
+
+* they should not duplicate existing functionality
+* they are likely generally applicable, as opposed to being used for a single application
+* they are clear and fit the purpose of the registry
+* they use and extend the terminology of this document to describe the mechanism
+
+IANA must only accept registry updates from the designated experts and should direct all requests for registration to the review mailing list.
+
+In order to enable broadly informed review of registration decisions, there should be multiple designated experts to represent the perspectives of different applications using this specification. In cases where registration may be perceived as a conflict of interest for a particular expert, that expert should defer to the judgment of the other experts.
+
+The mailing list is used to enable public review of registration requests, which enables both designated experts and other interested parties to provide feedback on proposed registrations. Designated experts may allocate values prior to publication of the final specification. This allows authors to receive guidance from the designated experts early, so any identified issues can be fixed before the final specification is published.
 
 ### Registration Template
 
@@ -1215,16 +1232,25 @@ Specification Document(s):
 This specification establishes the IANA "OAuth Status Types" registry for Status List values and adds it to the "OAuth Parameters" registry group at https://www.iana.org/assignments/oauth-parameters. The registry records a human-readable label, the bit representation and a common description for it.
 
 Status Types are registered by Specification Required {{RFC8126}} after a two-week
-review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. However, to allow for the allocation of names prior to publication, the Designated Expert(s) may approve registration once they are satisfied that such a
-specification will be published.
+review period on the oauth-ext-review@ietf.org mailing list, on the advice of one or more Designated Experts. To allow for the allocation of values prior to publication of the final version of a specification, the designated experts may approve registration once they are satisfied that the specification will be completed and published. However, if the specification is not completed and published in a timely manner, as determined by the designated experts, the designated experts may request that IANA withdraw the registration.
 
 Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register Status Type name: example").
 
-Within the review period, the Designated Expert(s) will either approve or deny the registration request, communicating this decision
-to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request
-successful.
+Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful. If the designated experts are not responsive, the registration requesters should contact IANA to escalate the process.
 
-IANA must only accept registry updates from the Designated Expert(s) and should direct all requests for registration to the review mailing list.
+Designated experts should apply at least the following criteria when reviewing proposed registrations:
+
+* they should not duplicate existing functionality
+* they are likely generally applicable, as opposed to being used for a single application
+* the Status Type Name is short, clear and using well-known terms
+* the Status Type Description gives a good explanation for the intended use
+* the Status Type value does not collide with existing values
+
+IANA must only accept registry updates from the designated experts and should direct all requests for registration to the review mailing list.
+
+In order to enable broadly informed review of registration decisions, there should be multiple designated experts to represent the perspectives of different applications using this specification. In cases where registration may be perceived as a conflict of interest for a particular expert, that expert should defer to the judgment of the other experts.
+
+The mailing list is used to enable public review of registration requests, which enables both designated experts and other interested parties to provide feedback on proposed registrations. Designated experts may allocate values prior to publication of the final specification. This allows authors to receive guidance from the designated experts early, so any identified issues can be fixed before the final specification is published.
 
 ### Registration Template
 
@@ -1832,6 +1858,10 @@ CBOR encoding:
 {:numbered="false"}
 
 \[\[ To be removed from the final specification \]\]
+
+-20
+
+* extend requirements for IANA registries
 
 -19
 
