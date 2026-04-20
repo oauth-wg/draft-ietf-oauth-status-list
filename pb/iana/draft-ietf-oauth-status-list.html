@@ -11,17 +11,17 @@
 <meta content="
        This specification defines a status mechanism called Token Status List (TSL), data structures and processing rules for representing the status of tokens secured by JSON Object Signing and Encryption (JOSE) or CBOR Object Signing and Encryption (COSE), such as JWT, SD-JWT, CBOR Web Token, and ISO mdoc. It also defines an extension point and a registry for future status mechanisms. 
     " name="description">
-<meta content="xml2rfc 3.32.0" name="generator">
+<meta content="xml2rfc 3.33.0" name="generator">
 <meta content="draft-ietf-oauth-status-list-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.32.0
-    Python 3.12.12
+  xml2rfc 3.33.0
+    Python 3.12.13
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.9.4
+    platformdirs 4.9.6
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
@@ -1050,7 +1050,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Looker, et al.</td>
-<td class="center">Expires 15 October 2026</td>
+<td class="center">Expires 22 October 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1063,12 +1063,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-oauth-status-list-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-13" class="published">13 April 2026</time>
+<time datetime="2026-04-20" class="published">20 April 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-10-15">15 October 2026</time></dd>
+<dd class="expires"><time datetime="2026-10-22">22 October 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1126,7 +1126,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -3009,7 +3009,7 @@ IANA "JSON Web Token Claims" registry <span>[<a href="#IANA.JWT" class="cite xre
 review period on the jwt-reg-review@ietf.org mailing list, on the advice of one or more Designated Experts. To allow for the allocation of values prior to publication of the final version of a specification, the designated experts may approve registration once they are satisfied that the specification will be completed and published. However, if the specification is not completed and published in a timely manner, as determined by the designated experts, the designated experts may request that IANA withdraw the registration.<a href="#section-14.2-2" class="pilcrow">¶</a></p>
 <p id="section-14.2-3">Registration requests sent to the mailing list for review should use an appropriate subject (e.g., "Request to register JWT Status Mechanism: example").<a href="#section-14.2-3" class="pilcrow">¶</a></p>
 <p id="section-14.2-4">Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the review list and IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful. If the designated experts are not responsive, the registration requesters should contact IANA to escalate the process.<a href="#section-14.2-4" class="pilcrow">¶</a></p>
-<p id="section-14.2-5">Designated experts should at least apply the following criteria when reviewing proposed registrations:<a href="#section-14.2-5" class="pilcrow">¶</a></p>
+<p id="section-14.2-5">Designated experts should apply at least the following criteria when reviewing proposed registrations:<a href="#section-14.2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-14.2-6.1">
             <p id="section-14.2-6.1.1">they should not duplicate existing functionality<a href="#section-14.2-6.1.1" class="pilcrow">¶</a></p>
@@ -3021,7 +3021,7 @@ review period on the jwt-reg-review@ietf.org mailing list, on the advice of one 
             <p id="section-14.2-6.3.1">they are clear and fit the purpose of the registry<a href="#section-14.2-6.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.2-6.4">
-            <p id="section-14.2-6.4.1">they use and extend the terminology of this draft to describe the mechanism<a href="#section-14.2-6.4.1" class="pilcrow">¶</a></p>
+            <p id="section-14.2-6.4.1">they use and extend the terminology of this document to describe the mechanism<a href="#section-14.2-6.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-14.2-7">IANA must only accept registry updates from the designated experts and should direct all requests for registration to the review mailing list.<a href="#section-14.2-7" class="pilcrow">¶</a></p>
@@ -3191,7 +3191,7 @@ review period on the cwt-reg-review@ietf.org mailing list, on the advice of one 
             <p id="section-14.4-6.3.1">they are clear and fit the purpose of the registry<a href="#section-14.4-6.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-14.4-6.4">
-            <p id="section-14.4-6.4.1">they use and extend the terminology of this draft to describe the mechanism<a href="#section-14.4-6.4.1" class="pilcrow">¶</a></p>
+            <p id="section-14.4-6.4.1">they use and extend the terminology of this document to describe the mechanism<a href="#section-14.4-6.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-14.4-7">IANA must only accept registry updates from the designated experts and should direct all requests for registration to the review mailing list.<a href="#section-14.4-7" class="pilcrow">¶</a></p>
