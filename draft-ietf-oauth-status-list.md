@@ -359,9 +359,9 @@ compressed array (hex): 78da3be9f2130003df0207
 This section defines the data structure for a JSON-encoded Status List:
 
 * The `StatusList` structure is a JSON Object that contains the following members:
-   * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the compressed byte array (`lst`). The allowed values for `bits` are 1, 2, 4, and 8.
-   * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded compressed byte array as specified in [](#status-list-byte-array).
-   * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer. See [](#aggregation) for further details.
+  * `bits`: REQUIRED. JSON Integer specifying the number of bits per Referenced Token in the compressed byte array (`lst`). The allowed values for `bits` are 1, 2, 4, and 8.
+  * `lst`: REQUIRED. JSON String that contains the status values for all the Referenced Tokens it conveys statuses for. The value MUST be the base64url-encoded compressed byte array as specified in [](#status-list-byte-array).
+  * `aggregation_uri`: OPTIONAL. JSON String that contains a URI to retrieve the Status List Aggregation for this type of Referenced Token or Issuer. See [](#aggregation) for further details.
 
 The following example illustrates the JSON representation of the Status List with `bits`=1 from the examples above:
 
@@ -607,11 +607,11 @@ The processing rules for Referenced Tokens (such as JWT or CWT) supersede the Re
 
 This document creates a registry in [](#iana-status-types) that includes the most common Status Type values. To improve interoperability, applications MUST use registered values for statuses if they have the same or compatiable semantics of the use-case. Additional values may be defined for particular use cases. Status Types described by this document comprise:
 
- - 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
- - 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
- - 0x02 - "SUSPENDED" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This status is usually temporary.
+* 0x00 - "VALID" - The status of the Referenced Token is valid, correct or legal.
+* 0x01 - "INVALID" - The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
+* 0x02 - "SUSPENDED" - The status of the Referenced Token is temporarily invalid, hanging, debarred from privilege. This status is usually temporary.
 
- The Status Type value 0x03 and Status Type values in the range 0x0C until 0x0F are permanently reserved as application specific. The processing of Status Types using these values is application specific. All other Status Type values are reserved for future registration.
+The Status Type value 0x03 and Status Type values in the range 0x0C until 0x0F are permanently reserved as application specific. The processing of Status Types using these values is application specific. All other Status Type values are reserved for future registration.
 
 See [](#privacy-status-types) for privacy considerations on status types.
 
@@ -629,8 +629,8 @@ The HTTP endpoint SHOULD support the use of Cross-Origin Resource Sharing (CORS)
 
 The following media types are defined by this specification for HTTP based Content negotiation:
 
-- "application/statuslist+jwt" for Status List Token in JWT format
-- "application/statuslist+cwt" for Status List Token in CWT format
+* "application/statuslist+jwt" for Status List Token in JWT format
+* "application/statuslist+cwt" for Status List Token in CWT format
 
 The following is a non-normative example of a request for a Status List Token with type `application/statuslist+jwt`:
 
@@ -649,8 +649,8 @@ A response MAY also choose to redirect the client to another URI using an HTTP s
 
 In the successful response, the Status Provider MUST use the following content-type:
 
-- "application/statuslist+jwt" for Status List Token in JWT format
-- "application/statuslist+cwt" for Status List Token in CWT format
+* "application/statuslist+jwt" for Status List Token in JWT format
+* "application/statuslist+cwt" for Status List Token in CWT format
 
 In the case of "application/statuslist+jwt", the response MUST be of type JWT and follow the rules of [](#status-list-token-jwt).
 In the case of "application/statuslist+cwt", the response MUST be of type CWT and follow the rules of [](#status-list-token-cwt).
@@ -731,8 +731,8 @@ If a Relying Party encounters an error while validating one of the Status List T
 There are two options for a Relying Party to retrieve the Status List Aggregation.
 An Issuer MAY support any of these mechanisms:
 
-- Issuer metadata: The Issuer of the Referenced Token publishes a URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
-- Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.
+* Issuer metadata: The Issuer of the Referenced Token publishes a URI which links to Status List Aggregation, e.g. in publicly available metadata of an issuance protocol
+* Status List Parameter: The Status Issuer includes an additional claim in the Status List Token that contains the Status List Aggregation URI.
 
 ~~~ ascii-art
                                       +-----------------+
@@ -822,13 +822,13 @@ This specification does not mandate specific methods for key resolution and trus
 
 If the Issuer of the Referenced Token is the same entity as the Status Issuer, then the same key that is embedded into the Referenced Token may be used for the Status List Token. In this case the Status List Token may use:
 
-- the same `x5c` value or an `x5t`, `x5t#S256` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
-- the same `x5chain` value or an `x5t` or `kid` parameter referencing to the same key as used in the Referenced Token for COSE.
+* the same `x5c` value or an `x5t`, `x5t#S256` or `kid` parameter referencing to the same key as used in the Referenced Token for JOSE.
+* the same `x5chain` value or an `x5t` or `kid` parameter referencing to the same key as used in the Referenced Token for COSE.
 
 Alternatively, the Status Issuer may use the same web-based key resolution that is used for the Referenced Token. In this case the Status List Token may use:
 
-- an `x5u`, `jwks`, `jwks_uri` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for JOSE.
-- an `x5u` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for COSE.
+* an `x5u`, `jwks`, `jwks_uri` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for JOSE.
+* an `x5u` or `kid` parameter referencing to a key using the same web-based resolution as used in the Referenced Token for COSE.
 
 ~~~ ascii-art
 +--------+    host keys    +----------------------+
@@ -897,15 +897,15 @@ Additionally, the Issuer may analyse data from the HTTP request to identify the 
 
 This behaviour may be mitigated by:
 
-- private relay protocols or other mechanisms hiding the original sender like {{RFC9458}}.
-- using trusted Third Party Hosting, see [](#third-party-hosting).
+* private relay protocols or other mechanisms hiding the original sender like {{RFC9458}}.
+* using trusted Third Party Hosting, see [](#third-party-hosting).
 
 ## Issuer Tracking of Referenced Tokens
 
 An Issuer could maliciously or accidentally bypass the privacy benefits of the herd privacy by either:
 
-- Generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests.
-- Encoding a unique URI in each Referenced Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.
+* Generating a unique Status List for every Referenced Token. By these means, the Issuer could maintain a mapping between Referenced Tokens and Status Lists and thus track the usage of Referenced Tokens by utilizing this mapping for the incoming requests.
+* Encoding a unique URI in each Referenced Token which points to the underlying Status List. This may involve using URI components such as query parameters, unique path segments, or fragments to make the URI unique.
 
 This malicious behavior can be detected by Relying Parties that request large amounts of Referenced Tokens by comparing the number of different Status Lists and their sizes with the volume of Referenced Tokens being verified.
 
@@ -915,7 +915,7 @@ Once the Relying Party receives the Referenced Token, the Relying Party can requ
 
 This behaviour could be mitigated by:
 
-- regular re-issuance of the Referenced Token, see [](#implementation-linkability).
+* regular re-issuance of the Referenced Token, see [](#implementation-linkability).
 
 ## Observability of Outsiders {#privacy-outsider}
 
@@ -923,11 +923,11 @@ Outside actors may analyse the publicly available Status Lists to get informatio
 
 This behaviour could be mitigated by:
 
-- disabling the historical data feature [](#historical-resolution)
-- disabling the Status List Aggregation [](#aggregation)
-- choosing non-sequential, pseudo-random or random indices
-- using decoy entries to obfuscate the real number of Referenced Tokens within a Status List
-- choosing to deploy and utilize multiple Status Lists simultaneously
+* disabling the historical data feature [](#historical-resolution)
+* disabling the Status List Aggregation [](#aggregation)
+* choosing non-sequential, pseudo-random or random indices
+* using decoy entries to obfuscate the real number of Referenced Tokens within a Status List
+* choosing to deploy and utilize multiple Status Lists simultaneously
 
 ## Unlinkability
 
@@ -939,9 +939,9 @@ Two or more colluding parties (e.g Relying Parties and or the Status Issuer) may
 
 To avoid privacy risks of this possible collusion, it is RECOMMENDED that Issuers provide the ability to issue batches of one-time-use Referenced Tokens, enabling Holders to use them in a single interaction with a Relying Party before discarding. See [](#implementation-linkability) to avoid further correlatable information by the values of `uri` and `idx`, Status Issuers are RECOMMENDED to:
 
-- choose non-sequential, pseudo-random or random indices
-- use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
-- choose to deploy and utilize multiple Status Lists simultaneously
+* choose non-sequential, pseudo-random or random indices
+* use decoy entries to obfuscate the real number of Referenced Tokens within a Status List
+* choose to deploy and utilize multiple Status Lists simultaneously
 
 ## External Status Provider for Privacy {#third-party-hosting}
 
@@ -986,9 +986,9 @@ The Status Issuer is RECOMMENDED to prevent double allocation, i.e. re-using the
 
 The storage and transmission size of the Status Issuer's Status List Tokens depend on:
 
-- the size of the Status List, i.e. the number of Referenced Tokens
-- the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% lead to the lowest sizes while revocation rates closer to 50% and random distribution lead to the highest sizes)
-- the lifetime of Referenced Tokens (shorter lifetimes allows for earlier retirement of Status List Tokens)
+* the size of the Status List, i.e. the number of Referenced Tokens
+* the revocation rate and distribution of the Status List data (due to compression, revocation rates close to 0% or 100% lead to the lowest sizes while revocation rates closer to 50% and random distribution lead to the highest sizes)
+* the lifetime of Referenced Tokens (shorter lifetimes allows for earlier retirement of Status List Tokens)
 
 The Status List Issuer may increase the size of a Status List if it requires indices for additional Referenced Tokens. It is RECOMMENDED that the size of a Status List in bits is divisible in bytes (8 bits) without a remainder, i.e. `size-in-bits` % 8 = 0.
 
@@ -998,10 +998,10 @@ The Status List Issuer may divide its Referenced Tokens up into multiple Status 
 
 If the roles of the Issuer of the Referenced Token and the Status Issuer are performed by different entities, this may allow for use cases that require revocation of Referenced Tokens to be managed by different entities, e.g. for regulatory or privacy reasons. In this scenario both parties must align on:
 
-- the key and trust management as described in [](#key-management)
-- parameters for the Status List
-  - number of `bits` for the Status Type as described in [](#status-list)
-  - update cycle of the Issuer used for `ttl` in the Status List Token as described in [](#status-list-token)
+* the key and trust management as described in [](#key-management)
+* parameters for the Status List
+  * number of `bits` for the Status Type as described in [](#status-list)
+  * update cycle of the Issuer used for `ttl` in the Status List Token as described in [](#status-list-token)
 
 ## External Status Provider for Scalability
 
@@ -1011,16 +1011,16 @@ If the roles of the Status Issuer and the Status Provider are performed by diffe
 
 Status Issuers have two options to communicate their update interval policy for the status of their Referenced Tokens:
 
-- the `exp` claim specifies an absolute timestamp, marking the point in time when the Status List expires and MUST NOT be relied upon any longer
-- the `ttl` claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available
+* the `exp` claim specifies an absolute timestamp, marking the point in time when the Status List expires and MUST NOT be relied upon any longer
+* the `ttl` claim represents a duration to be interpreted relative to the time the Status List is fetched, indicating when a new version of the Status List may be available
 
 Both `ttl` and `exp` are RECOMMENDED to be used by the Status Issuer.
 
 When fetching a Status List Token, Relying Parties must carefully evaluate how long a Status List is cached for. Collectively the `iat`, `exp` and `ttl` claims when present in a Status List Token communicate how long a Status List should be cached and should be considered valid for. Relying Parties have different options for caching the Status List:
 
-- After time of fetching, the Relying Party caches the Status List for time duration of `ttl` before making checks for updates. This method is RECOMMENDED to distribute the load for the Status Provider.
-- After initial fetching, the Relying Party checks for updates at time of `iat` + `ttl`. This method ensures the most up-to-date information for critical use cases. The Relying Party should account a minimal offset due to the signing and distribution process of the Status Issuer.
-- If no `ttl` is given, then Relying Party SHOULD check for updates latest after the time of `exp`.
+* After time of fetching, the Relying Party caches the Status List for time duration of `ttl` before making checks for updates. This method is RECOMMENDED to distribute the load for the Status Provider.
+* After initial fetching, the Relying Party checks for updates at time of `iat` + `ttl`. This method ensures the most up-to-date information for critical use cases. The Relying Party should account a minimal offset due to the signing and distribution process of the Status Issuer.
+* If no `ttl` is given, then Relying Party SHOULD check for updates latest after the time of `exp`.
 
 Ultimately, it's the Relying Parties decision how often to check for updates, ecosystems may define their own guidelines and policies for updating the Status List information. Clients should ensure that `exp` and `ttl` are within reasonable bounds before creating requests to get a fresh Status List Token (see [](#security-ttl) for more details).
 
@@ -1049,8 +1049,8 @@ The following diagram illustrates the relationship between these claims and how 
 
 If the Relying Party does not require the Referenced Token or the Status List Token for further processing, it is RECOMMENDED to delete correlatable information, in particular:
 
-- the `status` claim in the Referenced Token (after the validation)
-- the Status List Token itself (after expiration or update)
+* the `status` claim in the Referenced Token (after the validation)
+* the Status List Token itself (after expiration or update)
 
 The Relying Party should instead only keep the needed fields from the Referenced Token.
 
@@ -1058,8 +1058,8 @@ The Relying Party should instead only keep the needed fields from the Referenced
 
  This specification defines 2 different token formats of the Status List:
 
- - JWT
- - CWT
+* JWT
+* CWT
 
 This specification states no requirements to not mix different formats like a CBOR based Referenced Token using a JWT for the Status List, but the expectation is that within an ecosystem, a choice for specific formats is made.
 Within such an ecosystem, only support for those selected variants is required and implementations should know what to expect via a profile.
@@ -1147,8 +1147,6 @@ This specification requests registration of the following Claims in the
 IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC8392}}.
 
 ### Registry Contents
-
-<br/>
 
 * Claim Name: `status`
 * Claim Description: A CBOR structure containing a reference to a status mechanism from the CWT Status Mechanisms Registry.
@@ -1333,43 +1331,43 @@ in {{RFC6838}}.
 
 To indicate that the content is a JWT-based Status List:
 
-  * Type name: application
-  * Subtype name: statuslist+jwt
-  * Required parameters: n/a
-  * Optional parameters: n/a
-  * Encoding considerations: See [](#status-list-token-jwt) of this specification
-  * Security considerations: See [](#Security) of this specification
-  * Interoperability considerations: n/a
-  * Published specification: this specification
-  * Applications that use this media type: Applications using this specification for updated status information of tokens
-  * Fragment identifier considerations: n/a
-  * Additional information: n/a
-  * Person &amp; email address to contact for further information: OAuth WG mailing list, oauth@ietf.org
-  * Intended usage: COMMON
-  * Restrictions on usage: none
-  * Author: OAuth WG mailing list, oauth@ietf.org
-  * Change controller: IETF
-  * Provisional registration? No
+* Type name: application
+* Subtype name: statuslist+jwt
+* Required parameters: n/a
+* Optional parameters: n/a
+* Encoding considerations: See [](#status-list-token-jwt) of this specification
+* Security considerations: See [](#Security) of this specification
+* Interoperability considerations: n/a
+* Published specification: this specification
+* Applications that use this media type: Applications using this specification for updated status information of tokens
+* Fragment identifier considerations: n/a
+* Additional information: n/a
+* Person &amp; email address to contact for further information: OAuth WG mailing list, oauth@ietf.org
+* Intended usage: COMMON
+* Restrictions on usage: none
+* Author: OAuth WG mailing list, oauth@ietf.org
+* Change controller: IETF
+* Provisional registration? No
 
 To indicate that the content is a CWT-based Status List:
 
-  * Type name: application
-  * Subtype name: statuslist+cwt
-  * Required parameters: n/a
-  * Optional parameters: n/a
-  * Encoding considerations: See [](#status-list-token-cwt) of this specification
-  * Security considerations: See [](#Security) of this specification
-  * Interoperability considerations: n/a
-  * Published specification: this specification
-  * Applications that use this media type: Applications using this specification for updated status information of tokens
-  * Fragment identifier considerations: n/a
-  * Additional information: n/a
-  * Person &amp; email address to contact for further information: OAuth WG mailing list, oauth@ietf.org
-  * Intended usage: COMMON
-  * Restrictions on usage: none
-  * Author: OAuth WG mailing list, oauth@ietf.org
-  * Change controller: IETF
-  * Provisional registration? No
+* Type name: application
+* Subtype name: statuslist+cwt
+* Required parameters: n/a
+* Optional parameters: n/a
+* Encoding considerations: See [](#status-list-token-cwt) of this specification
+* Security considerations: See [](#Security) of this specification
+* Interoperability considerations: n/a
+* Published specification: this specification
+* Applications that use this media type: Applications using this specification for updated status information of tokens
+* Fragment identifier considerations: n/a
+* Additional information: n/a
+* Person &amp; email address to contact for further information: OAuth WG mailing list, oauth@ietf.org
+* Intended usage: COMMON
+* Restrictions on usage: none
+* Author: OAuth WG mailing list, oauth@ietf.org
+* Change controller: IETF
+* Provisional registration? No
 
 ## CoAP Content-Format Registrations {#coap-content-type}
 
@@ -1377,10 +1375,10 @@ IANA is requested to register the following Content-Format numbers in
 the "CoAP Content-Formats" sub-registry, within the "Constrained
 RESTful Environments (CoRE) Parameters" Registry [IANA.Core.Params]:
 
-  * Content Type: application/statuslist+cwt
-  * Content Coding: -
-  * ID: TBD
-  * Reference: this specification
+* Content Type: application/statuslist+cwt
+* Content Coding: -
+* ID: TBD
+* Reference: this specification
 
 ## X.509 Certificate Extended Key Purpose OID Registration
 
@@ -1460,6 +1458,7 @@ If no further metadata is provided in Status List Tokens or CRLs, then the size 
 {:unnumbered}
 
 | Size | 0.01%   | 0.1%     | 1%       | 2%       | 5%       | 10%      | 25%       | 50%      | 75%       | 100%    |
+|------|---------|----------|----------|----------|----------|----------|-----------|----------|-----------|---------|
 | 100k | 81 B    | 252 B    | 1.4 KB   | 2.3 KB   | 4.5 KB   | 6.9 KB   | 10.2 KB   | 12.2 KB  | 10.2 KB   | 35 B    |
 | 1M   | 442 B   | 2.2 KB   | 13.7 KB  | 23.0 KB  | 43.9 KB  | 67.6 KB  | 102.2 KB  | 122.1 KB | 102.4 KB  | 144 B   |
 | 10M  | 3.8 KB  | 21.1 KB  | 135.4 KB | 230.0 KB | 437.0 KB | 672.9 KB | 1023.4 KB | 1.2 MB   | 1023.5 KB | 1.2 KB  |
@@ -1472,6 +1471,7 @@ If no further metadata is provided in Status List Tokens or CRLs, then the size 
 This is a simple approximation of a CRL using an array of UUIDs without any additional metadata (128-bit UUID per revoked entry).
 
 | Size | 0.01%    | 0.1%     | 1%       | 2%       | 5%      | 10%      | 25%      | 50%      | 75%      | 100%     |
+|------|----------|----------|----------|----------|---------|----------|----------|----------|----------|----------|
 | 100k | 219 B    | 1.6 KB   | 15.4 KB  | 29.7 KB  | 78.1 KB | 154.9 KB | 392.9 KB | 783.1 KB | 1.1 MB   | 1.5 MB   |
 | 1M   | 1.6 KB   | 16.4 KB  | 157.7 KB | 310.4 KB | 781 KB  | 1.5 MB   | 3.8 MB   | 7.6 MB   | 11.4 MB  | 15.3 MB  |
 | 10M  | 15.3 KB  | 155.9 KB | 1.5 MB   | 3.1 MB   | 7.6 MB  | 15.2 MB  | 38.2 MB  | 76.3 MB  | 114.4 MB | 152.6 MB |
