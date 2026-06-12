@@ -365,15 +365,37 @@ This section defines the data structure for a JSON-encoded Status List:
 
 The following example illustrates the JSON representation of the Status List with `bits`=1 from the examples above:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding_json.md}
-~~~~~~~~~~
+byte array:
+
+~~~
+[0xb9, 0xa3]
+~~~
+
+encoded:
+
+~~~json
+{
+  "bits": 1,
+  "lst": "eNrbuRgAAhcBXQ"
+}
+~~~
 
 The following example illustrates the JSON representation of the Status List with `bits`=2 from the examples above:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding2_json.md}
-~~~~~~~~~~
+byte array:
+
+~~~
+[0xc9, 0x44, 0xf9]
+~~~
+
+encoded:
+
+~~~json
+{
+  "bits": 2,
+  "lst": "eNo76fITAAPfAgc"
+}
+~~~
 
 See [](#test-vectors) for more test vectors.
 
@@ -398,15 +420,30 @@ StatusList = {
 
 The following example illustrates the CBOR representation of the Status List in Hex:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding_cbor.md}
-~~~~~~~~~~
+byte array:
+
+~~~
+[0xb9, 0xa3]
+~~~
+
+encoded (hex):
+
+~~~hex
+a2646269747301636c73744a78dadbb918000217015d
+~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding_cbor_diag.md}
-~~~~~~~~~~
+~~~
+a2                              # map(2)
+  64                            #   string(4)
+    62697473                    #     "bits"
+  01                            #   uint(1)
+  63                            #   string(3)
+    6c7374                      #     "lst"
+  4a                            #   bytes(10)
+    78dadbb918000217015d        #     "xÚÛ¹\x18\x00\x02\x17\x01]"
+~~~
 
 See [](#test-vectors) for more test vectors.
 
@@ -442,11 +479,26 @@ The following additional rules apply:
 
 4. Application of additional restrictions and policies are at the discretion of the Relying Party.
 
-The following is a non-normative example of a Status List Token in JWT format:
+The following is a non-normative example of a Status List Token in JWT format (in the form header.payload):
 
-~~~~~~~~~~
-{::include examples/status_list_jwt.md}
-~~~~~~~~~~
+~~~
+{
+  "alg": "ES256",
+  "kid": "12",
+  "typ": "statuslist+jwt"
+}
+.
+{
+  "exp": 2291720170,
+  "iat": 1686920170,
+  "status_list": {
+    "bits": 1,
+    "lst": "eNrbuRgAAhcBXQ"
+  },
+  "sub": "https://example.com/statuslists/1",
+  "ttl": 43200
+}
+~~~
 
 ## Status List Token in CWT Format {#status-list-token-cwt}
 
@@ -476,15 +528,44 @@ The following additional rules apply:
 
 The following is a non-normative example of a Status List Token in CWT format in Hex:
 
-~~~~~~~~~~
-{::include examples/status_list_cwt.md}
-~~~~~~~~~~
+~~~hex
+d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
+7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
+74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
+646269747301636c73744a78dadbb918000217015d584093fa4d01032b18c35e2fe1
+101b77fd6cc9440022caa4694450c4e4e9feab4e99d1fa6d9772ce2bf3a12e0323de
+d7c982c5e101a5e67f0cbc1e2b6f57ce99c279
+~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
-~~~~~~~~~~
-{::include examples/status_list_cwt_diag.md}
-~~~~~~~~~~
+~~~
+d2                              # tag(18)
+  84                            #   array(4)
+    58 20                       #     bytes(32)
+      a2012610781a6170706c6963  #       "¢\x01&\x10x\x1aapplic"
+      6174696f6e2f737461747573  #       "ation/status"
+      6c6973742b637774          #       "list+cwt"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 50                       #     bytes(80)
+      a502782168747470733a2f2f  #       "¥\x02x!https://"
+      6578616d706c652e636f6d2f  #       "example.com/"
+      7374617475736c697374732f  #       "statuslists/"
+      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
+      ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
+      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
+      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
+    58 40                       #     bytes(64)
+      93fa4d01032b18c35e2fe110  #       "\x93úM\x01\x03+\x18Ã^/á\x10"
+      1b77fd6cc9440022caa46944  #       "\x1bwýlÉD\x00"Ê¤iD"
+      50c4e4e9feab4e99d1fa6d97  #       "PÄäéþ«N\x99Ñúm\x97"
+      72ce2bf3a12e0323ded7c982  #       "rÎ+ó¡.\x03#Þ×É\x82"
+      c5e101a5e67f0cbc1e2b6f57  #       "Åá\x01¥æ\x7f\x0c¼\x1e+oW"
+      ce99c279                  #       "Î\x99Ây"
+~~~
 
 # Referenced Token {#referenced-token}
 
@@ -507,8 +588,7 @@ Application of additional restrictions and policies are at the discretion of the
 
 The following is a non-normative example of a decoded header and payload of a Referenced Token:
 
-~~~ ascii-art
-
+~~~
 {
   "alg": "ES256",
   "kid": "11"
@@ -526,8 +606,7 @@ The following is a non-normative example of a decoded header and payload of a Re
 
 The following is a non-normative example of a Referenced Token in SD-JWT serialized form as received from an Issuer:
 
-~~~ ascii-art
-
+~~~
 eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
 Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
 cyI6ICJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsICJpYXQiOiAxNjgzMDAwMDAw
@@ -549,7 +628,7 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 
 The resulting payload of the example above:
 
-~~~ json
+~~~json
 
 {
   "_sd": [
@@ -586,15 +665,45 @@ Application of additional restrictions and policies are at the discretion of the
 
 The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
-~~~~~~~~~~
-{::include examples/referenced_token_cwt.md}
-~~~~~~~~~~
+~~~hex
+d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
+6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
+7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
+7374617475736c697374732f315840340f7efea10f1a36dc4797636a17b4dd4848b6
+8997d1d10e8cceb3a38ff33b3dda72964a83989f6cf98560c2fc97a08bc8977cc6b0
+f84cfedab93d3e4481e938
+~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
-~~~~~~~~~~
-{::include examples/referenced_token_cwt_diag.md}
-~~~~~~~~~~
+~~~
+d2                              # tag(18)
+  84                            #   array(4)
+    43                          #     bytes(3)
+      a10126                    #       "¡\x01&"
+    a1                          #     map(1)
+      04                        #       uint(4)
+      42                        #       bytes(2)
+        3132                    #         "12"
+    58 66                       #     bytes(102)
+      a50265313233343501736874  #       "¥\x02e12345\x01sht"
+      7470733a2f2f6578616d706c  #       "tps://exampl"
+      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+      617475735f6c697374a26369  #       "atus_list¢ci"
+      647800637572697821687474  #       "dx\x00curix!htt"
+      70733a2f2f6578616d706c65  #       "ps://example"
+      2e636f6d2f7374617475736c  #       ".com/statusl"
+      697374732f31              #       "ists/1"
+    58 40                       #     bytes(64)
+      340f7efea10f1a36dc479763  #       "4\x0f~þ¡\x0f\x1a6ÜG\x97c"
+      6a17b4dd4848b68997d1d10e  #       "j\x17´ÝHH¶\x89\x97ÑÑ\x0e"
+      8cceb3a38ff33b3dda72964a  #       "\x8cÎ³£\x8fó;=Úr\x96J"
+      83989f6cf98560c2fc97a08b  #       "\x83\x98\x9flù\x85`Âü\x97\xa0\x8b"
+      c8977cc6b0f84cfedab93d3e  #       "È\x97|Æ°øLþÚ¹=>"
+      4481e938                  #       "D\x81é8"
+
+~~~
 
 # Status Types {#status-types}
 
@@ -668,7 +777,12 @@ The following is a non-normative example of a response with a Status List Token 
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
 
-{::include examples/status_list_jwt_raw.md}
+eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
+yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
+GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
+WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
+nR0bCI6NDMyMDB9.2lKUUNG503R9htu4aHAYi7vjmr3sgApbfoDvPrl65N3URUO1EYqq
+Ql45Jfzd-Av4QzlKa3oVALpLwOEUOq-U_g
 ~~~
 
 ## Validation Rules
@@ -719,7 +833,12 @@ The following is a non-normative example of a response for the above Request:
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
 
-{::include examples/status_list_jwt_raw.md}
+eyJhbGciOiJFUzI1NiIsImtpZCI6IjEyIiwidHlwIjoic3RhdHVzbGlzdCtqd3QifQ.e
+yJleHAiOjIyOTE3MjAxNzAsImlhdCI6MTY4NjkyMDE3MCwiaXNzIjoiaHR0cHM6Ly9le
+GFtcGxlLmNvbSIsInN0YXR1c19saXN0Ijp7ImJpdHMiOjEsImxzdCI6ImVOcmJ1UmdBQ
+WhjQlhRIn0sInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5jb20vc3RhdHVzbGlzdHMvMSIsI
+nR0bCI6NDMyMDB9.2lKUUNG503R9htu4aHAYi7vjmr3sgApbfoDvPrl65N3URUO1EYqq
+Ql45Jfzd-Av4QzlKa3oVALpLwOEUOq-U_g
 ~~~
 
 # Status List Aggregation {#aggregation}
@@ -1148,6 +1267,8 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 
 ### Registry Contents
 
+status:
+
 * Claim Name: `status`
 * Claim Description: A CBOR structure containing a reference to a status mechanism from the CWT Status Mechanisms Registry.
 * JWT Claim Name: `status`
@@ -1156,7 +1277,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 * Change Controller: IETF
 * Reference: [](#status-claim) of this specification
 
-<br/>
+status_list:
 
 * Claim Name: `status_list`
 * Claim Description: A CBOR structure containing up-to-date status information on multiple tokens using the Token Status List mechanism.
@@ -1166,7 +1287,7 @@ IANA "CBOR Web Token (CWT) Claims" registry {{IANA.CWT}} established by {{RFC839
 * Change Controller: IETF
 * Specification Document(s): [](#status-list-token-cwt) of this specification
 
-<br/>
+ttl:
 
 * Claim Name: `ttl`
 * Claim Description: Time to Live
@@ -1274,13 +1395,15 @@ Specification Document(s):
 
 ### Initial Registry Contents
 
+VALID:
+
 * Status Type Name: VALID
 * Status Type Description: The status of the Referenced Token is valid, correct or legal.
 * Status Type value: `0x00`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
 
-<br/>
+INVALID:
 
 * Status Type Name: INVALID
 * Status Type Description: The status of the Referenced Token is revoked, annulled, taken back, recalled or cancelled.
@@ -1288,7 +1411,7 @@ Specification Document(s):
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
 
-<br/>
+SUSPENDED:
 
 * Status Type Name: SUSPENDED
 * Status Type Description: The status of the Referenced Token is temporarily invalid, hanging or debarred from privilege. This state is usually temporary.
@@ -1296,7 +1419,7 @@ Specification Document(s):
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
 
-<br/>
+APPLICATION_SPECIFIC:
 
 * Status Type Name: APPLICATION_SPECIFIC
 * Status Type Description: The status of the Referenced Token is application specific.
@@ -1304,15 +1427,13 @@ Specification Document(s):
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
 
-<br/>
+APPLICATION_SPECIFIC:
 
 * Status Type Name: APPLICATION_SPECIFIC
 * Status Type Description: The status of the Referenced Token is application specific.
 * Status Type value: `0x0C-0x0F`
 * Change Controller: IETF
 * Specification Document(s): [](#status-types) of this specification
-
-<br/>
 
 ## OAuth Parameters Registration
 
@@ -1504,21 +1625,33 @@ status[1000345] = 0b1
 
 JSON encoding:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding1_long_json.md}
-~~~~~~~~~~
+~~~
+{
+  "bits": 1,
+  "lst": "eNrt3AENwCAMAEGogklACtKQPg9LugC9k_ACvreiogE
+  AAKkeCQAAAAAAAAAAAAAAAAAAAIBylgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAXG9IAAAAAAAAAPwsJAAAAAAAAAAAAAAAvhsSAAAAAAAAAAA
+  A7KpLAAAAAAAAAAAAAAAAAAAAAJsLCQAAAAAAAAAAADjelAAAAAAAAAAAKjDMAQAAA
+  ACAZC8L2AEb"
+}
+~~~
 
 CBOR encoding:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding1_long_cbor.md}
-~~~~~~~~~~
+~~~hex
+a2646269747301636c737458bd78daeddc010dc0200c0041a88249400ad2903e0f4b
+ba00bd93f002beb7a2a2010000a91e09000000000000000000000000000000807296
+04000000000000000000000000000000000000000000000000000000000000000000
+000000000000005c6f4800000000000000fc2c240000000000000000000000be1b12
+000000000000000000ecaa4b000000000000000000000000000000009b0b09000000
+00000000000038de9400000000000000002a30cc010000000080642f0bd8011b
+~~~
 
 ## 2-bit Status List
 
 The following example uses a 2-bit Status List (4 possible values):
 
-~~~~~~~~~~
+~~~
 status[0] = 0b01
 status[1993] = 0b10
 status[25460]= 0b01
@@ -1530,25 +1663,43 @@ status[723232] = 0b01
 status[854545] = 0b01
 status[934534] = 0b10
 status[1000345] = 0b11
-~~~~~~~~~~
+~~~
 
 JSON encoding:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding2_long_json.md}
-~~~~~~~~~~
+~~~
+{
+  "bits": 2,
+  "lst": "eNrt2zENACEQAEEuoaBABP5VIO01fCjIHTMStt9ovGV
+  IAAAAAABAbiEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEB5WwIAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAID0ugQAAAAAAAAAAAAAAAAAQG12SgAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAOCSIQEAAAAAAAAAAAAAAAAAAAAAAAD8ExIAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwJEuAQAAAAAAAAAAAAAAAAAAAAAAAMB9S
+  wIAAAAAAAAAAAAAAAAAAACoYUoAAAAAAAAAAAAAAEBqH81gAQw"
+}
+~~~
 
 CBOR encoding:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding2_long_cbor.md}
-~~~~~~~~~~
+~~~hex
+a2646269747302636c737459013d78daeddb310d00211000412ea1a04004fe5520ed
+357c28c81d3312b6df68bc65480000000000406e2101000000000000000000000000
+0000000000000000000000000000000000000040795b020000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+0080f4ba0400000000000000000000000000406d764a000000000000000000000000
+000000000000000000e0922101000000000000000000000000000000000000fc1312
+00000000000000000000000000000000000000000000000000000000000000c0912e
+01000000000000000000000000000000000000c07d4b020000000000000000000000
+00000000a8614a0000000000000000000000406a1fcd60010c
+~~~
 
 ## 4-bit Status List
 
 The following example uses a 4-bit Status List (16 possible values):
 
-~~~~~~~~~~
+~~~
 status[0] = 0b0001
 status[1993] = 0b0010
 status[35460] = 0b0011
@@ -1564,25 +1715,57 @@ status[1000345] = 0b1100
 status[1030203] = 0b1101
 status[1030204] = 0b1110
 status[1030205] = 0b1111
-~~~~~~~~~~
+~~~
 
 JSON encoding:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding4_json.md}
-~~~~~~~~~~
+~~~
+{
+  "bits": 4,
+  "lst": "eNrt0EENgDAQADAIHwImkIIEJEwCUpCEBBQRHOy35Li
+  1EjoOQGabAgAAAAAAAAAAAAAAAAAAACC1SQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABADrsCAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAADoxaEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIIoCgAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACArpwKAAAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAAAAAAAGhqVkAzlwIAAAAAiGVRAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAAAAAAAAAAAAAAABx3AoAgLpVAQAAAAAAAAAAAAAAwM89rwMAAAAAAAAAA
+  AjsA9xMBMA"
+}
+~~~
 
 CBOR encoding:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding4_cbor.md}
-~~~~~~~~~~
+~~~hex
+a2646269747304636c737459024878daedd0410d8030100030081f0226908204244c
+025290840414111cecb7e4b8b5123a0e40669b020000000000000000000000000000
+0020b549010000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+0000000000400ebb0200000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+000000000000e8c5a100000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000082280a00000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000080ae9c0a
+00000000000000000000000000000000000000000000000000000000000000000000
+000000686a5640339702000000008865510000000000000000000000000000000000
+00000000000000000000000000000071dc0a0080ba55010000000000000000000000
+c0cf3daf03000000000000000008ec03dc4c04c0
+~~~
 
 ## 8-bit Status List
 
 The following example uses an 8-bit Status List (256 possible values):
 
-~~~~~~~~~~
+~~~
 status[233478] = 0b00000000
 status[52451] = 0b00000001
 status[576778] = 0b00000010
@@ -1839,20 +2022,120 @@ status[958869] = 0b11111100
 status[663071] = 0b11111101
 status[152133] = 0b11111110
 status[19535] = 0b11111111
-~~~~~~~~~~
+~~~
 
 JSON encoding:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding8_json.md}
-~~~~~~~~~~
+~~~
+{
+  "bits": 8,
+  "lst": "eNrt0WOQM2kYhtGsbdu2bdu2bdu2bdu2bdu2jVnU1my
+  -SWYm6U5enFPVf7ue97orFYAo7CQBAACQuuckAABStqUEAAAAAAAAtN6wEgAE71QJA
+  AAAAIrwhwQAAAAAAdtAAgAAAAAAACLwkAQAAAAAAAAAAACUaFcJAACAeJwkAQAAAAA
+  AAABQvL4kAAAAWmJwCQAAAAAAAAjAwBIAAAB06ywJoDKQBARpfgkAAAAAAAAAAAAAA
+  AAAAACo50sJAAAAAAAAAOiRcSQAAAAAgAJNKgEAAG23mgQAAAAAAECw3pUAQvegBAA
+  AAAAAAADduE4CAAAAyjSvBAAQiw8koHjvSABAb-wlARCONyVoxtMSZOd0CQAAAOjWD
+  RKQmLckAAAAAACysLYEQGcnSAAAAAAQooUlAABI15kSAIH5RAIgLB9LABC4_SUgGZN
+  IAABAmM6RoLbTJIASzCIBAEAhfpcAAAAAAABquk8CAAAAAAAAaJl9SvvzBOICAFWmk
+  IBgfSgBAAAANOgrCQAAAAAAAADStK8EAAC03gASAAAAAAAAAADFWFUCAAAAMjOaBEA
+  DHpYAQjCIBADduFwCAAAAAGitMSSI3BUSAECOHpAA6IHrJQAAAAAAsjeVBAAAKRpVA
+  orWvwQAAAAAAAAAkKRtJAAAAAAAgCbcLAF0bXUJAAAAoF02kYDg7CYBAAAAAEB6NpQ
+  AAAAAAAAAAAAAAEr1uQQAAF06VgIAAAAAAAAAqDaeBAAQqgMkAAAAAABogQMlAAAAA
+  AAa87MEAAAQiwslAAAAAAAAAAAAAAAAMrOyBAAAiekv-hcsY0Sgne6QAAAAAAAgaUt
+  JAAAAAAAAAAAAAAAAAAAAAAAAAADwt-07vjVkAAAAgDy8KgFAUEaSAAAAAJL3vgQAW
+  dhcAgAAoBHDSUDo1pQAAACI2o4SAABZm14CALoyuwQAAPznGQkgZwdLAAAQukclAAA
+  AAAAAAAAAgKbMKgEAAAAAAAAAAAAAAAAAAECftpYAAAAAAAAAAAAACnaXBAAAAADk7
+  iMJAAAAAAAAAABqe00CAnGbBBG4TAIAgFDdKgFAXCaWAAAAAAAAAAAAAAAAAKAJQwR
+  72XbGAQAAAKAhh0sAAAAAAABQgO8kAAAAAAAAAAAAACAaM0kAAAC5W0QCAIJ3mAQAx
+  GwxCQAA6nhSAsjZBRIAANEbWQIAAAAAaJE3JACAwA0qAUBIVpKAlphbAiAPp0iQnKE
+  kAAAAAAAgBP1KAAAAdOl4CQAAAAAAAPjLZBIAAG10RtrPm8_CAEBMTpYAAAAAAIjQY
+  BL8z5QSAAAAAEDYPpUAACAsj0gAAADQkHMlAAjHDxIA0Lg9JQAAgHDsLQEAAABAQS6
+  WAAAAgLjNFs2l_RgLAIAEfCEBlGZZCQAAaIHjJACgtlskAAAozb0SAAAAVFtfAgAAA
+  AAAAAAAAAAAAAAAAAAAAKDDtxIAAAAAVZaTAKB5W0kAANCAsSUgJ0tL0GqHSNBbL0g
+  AZflRAgCARG0kQXNmlgCABiwkAQAAAEB25pIAAAAAAAAAAAAAoFh9SwAAAAAAADWNm
+  OSrpjFsEoaRgDKcF9Q1dxsEAAAAAAAAAAAAAAAAgPZ6SQIAAAAAAAAAgChMLgEAAAA
+  AAAAAqZlQAsK2qQQAAAAAAAD06XUJAAAAqG9bCQAAgLD9IgEAAAAAAAAAAAAAAAAAA
+  EBNe0gAAAAAAAAAAEBPHSEBAAAAlOZtCYA4fS8B0GFRCQAo0gISAOTgNwmC840EAAA
+  AAAAAAAAAAAAAAAAAUJydJfjXPBIAAAAAAAAAAAAAAABk6WwJAAAAAAAAAAAAAAAAq
+  G8UCQAAgPpOlAAAIA83SQAANWwc9HUjGAgAAAAAAACAusaSAAAAAAAAAAAAAAAAAAA
+  AAAAAAAAAqHKVBACQjxklAAAAAAAAAKBHxpQAAAAAACBME0lAdlaUAACyt7sEAAAA0
+  Nl0EgAAAAAAAAAAAABA-8wgAQAAAAAAAKU4SgKgUtlBAgAAAAAAAAAAgMCMLwEE51k
+  JICdzSgCJGl2CsE0tAQAA0L11JQAAAAAAAAjUOhIAAAAAAAAAAAAAAGTqeQkAAAAAA
+  AAAAAAAKM8SEjTrJwkAAAAAAACocqQEULgVJAAAACjDUxJUKgtKAAAAqbpRAgCA0n0
+  mAQAAAABAGzwmAUCTLpUAAAAAAAAAAEjZNRIAAAAAAAAAAAAAAAAAAAAA8I-vJaAlh
+  pQAAAAAAHrvzjJ-OqCuuVlLAojP8BJAr70sQZVDJYAgXS0BAAAAAAAAAAAAtMnyEgA
+  AAAAAFONKCQAAAAAAAADorc0kAAAAAAAAgDqOlgAAAAAAAAAAAADIwv0SAAAAAAAAA
+  AAAAADBuV0CIFVDSwAAAABAAI6RAAAAAGIwrQSEZAsJAABouRclAAAAAKDDrxIAAAA
+  0bkkJgFiMKwEAAAAAAHQyhwRk7h4JAAAAAAAAAAAgatdKAACUYj0JAAAAAAAAAAAAQ
+  nORBLTFJRIAAAAAkIaDJAAAAJryngQAAAAAAAAAAAA98oQEAAAAAAAAAEC2zpcgWY9
+  LQKL2kwAgGK9IAAAAAPHaRQIAAAAAAAAAAADIxyoSAAAAAAAAAAAAAADQFotLAECz_
+  gQ1PX-B"
+}
+~~~
 
 CBOR encoding:
 
-~~~~~~~~~~
-{::include examples/status_list_encoding8_cbor.md}
-~~~~~~~~~~
-
+~~~
+a2646269747308636c73745907b078daedd1639033691886d1ac6ddbb66ddbb66ddb
+b66ddbb66ddbb68d59d4d66cbe496626e94e5e9c53d57fbb9ef7ba2b158028ec2401
+000090bae724000052b6a504000000000000b4deb0120004ef5409000000008af087
+040000000001db400200000000000022f09004000000000000000000946857090000
+80789c24010000000000000050bcbe240000005a62700900000000000008c0c01200
+000074eb2c09a032900404697e09000000000000000000000000000000a8e74b0900
+000000000000e89171240000000080024d2a0100006db79a04000000000040b0de95
+0042f7a00400000000000000ddb84e02000000ca34af0400108b0f24a078ef480040
+6fec2501108e372568c6d31264e77409000000e8d60d129098b7240000000000b2b0
+b604406727480000000010a28525000048d799120081f94402202c1f4b0010b8fd25
+2019934800004098ce91a0b6d3248012cc22010040217e970000000000006aba4f02
+00000000000068997d4afbf304e2020055a69080607d280100000034e82b09000000
+00000000d2b4af040000b4de00120000000000000000c558550200000032339a0440
+031e96004230880400ddb85c020000000068ad312488dc151200408e1e9000e881eb
+250000000000b23795040000291a55028ad6bf040000000000000090a46d24000000
+00008026dc2c01746d7509000000a05d369180e0ec260100000000407a3694000000
+00000000000000004af5b90400005d3a560200000000000000a8369e040010aa0324
+00000000006881032500000000001af3b3040000108b0b2500000000000000000000
+000032b3b204000089e92ffa172c6344a09dee90000000000020694b490000000000
+000000000000000000000000000000f0b7ed3bbe3564000000803cbc2a0140504692
+0000000092f7be040059d85c020000a011c34940e8d69400000088da8e120000599b
+5e0200ba32bb040000fce719092067074b000010ba472500000000000000000080a6
+cc2a010000000000000000000000000000409fb696000000000000000000000a7697
+0400000000e4ee230900000000000000006a7b4d0202719b0411b84c02008050dd2a
+01405c269600000000000000000000000000a00943047bd976c601000000a021874b
+0000000000005080ef2400000000000000000000201a3349000000b95b4402008277
+980400c46c31090000ea785202c8d905120000d11b590200000000689137240080c0
+0d2a01404856928096985b02200fa748909ca12400000000002004fd4a00000074e9
+7809000000000000f8cb641200006d7446dacf9bcfc200404c4e96000000000088d0
+6012fccf94120000000040d83e950000202c8f48000000d09073250008c70f1200d0
+b83d2500008070ec2d0100000040412e9600000080b8cd16cda5fd180b0080047c21
+019466590900006881e32400a0b65b24000028cdbd12000000545b5f020000000000
+00000000000000000000000000a0c3b7120000000055969300a0795b490000d080b1
+2520274b4bd06a8748d05b2f480065f951020080446d24417366960080062c240100
+00004076e69200000000000000000000a0587d4b000000000000358d98e4aba6316c
+12869180329c17d435771b0400000000000000000000000080f67a49020000000000
+000080284c2e0100000000000000a9995002c2b6a904000000000000f4e975090000
+00a86f5b09000080b0fd22010000000000000000000000000000404d7b4800000000
+00000000404f1d210100000094e66d0980387d2f01d06151090028d2021200e4e037
+0982f38d04000000000000000000000000000000509c9d25f8d73c12000000000000
+00000000000064e96c09000000000000000000000000a86f1409000080fa4e940000
+200f37490000356c1cf47523180800000000000080bac69200000000000000000000
+0000000000000000000000a872950400908f192500000000000000a047c694000000
+0000204c1349407656940000b2b7bb04000000d0d974120000000000000000000040
+fbcc2001000000000000a5384a02a052d94102000000000000000080c08c2f0104e7
+59092027734a00891a5d82b04d2d010000d0bd752500000000000008d43a12000000
+000000000000000064ea79090000000000000000000028cf121234eb270900000000
+0000a872a40450b8152400000028c35312542a0b4a000000a9ba51020080d27d2601
+00000000401b3c260140932e95000000000000000048d93512000000000000000000
+00000000000000f08faf25a025869400000000007aefce327e3aa0aeb9594b0288cf
+f01240afbd2c4195432580205d2d01000000000000000000b4c9f212000000000014
+e34a0900000000000000e8adcd24000000000000803a8e9600000000000000000000
+c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
+006230ad0484640b09000068b9172500000000a0c3af12000000346e490980588c2b
+0100000000007432870464ee1e090000000000000000206ad74a000094623d090000
+0000000000000042739104b4c5251200000000908683240000009af29e0400000000
+00000000003df284040000000000000040b6ce9720598f4b40a2f693002018af4800
+000000f1da4502000000000000000000c8c72a120000000000000000000000d0168b
+4b0040b3fe04353d7f81
+~~~
 
 # Document History
 {:numbered="false"}
