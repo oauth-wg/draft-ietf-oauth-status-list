@@ -21,18 +21,16 @@ venue:
   latest: "https://oauth-wg.github.io/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.html"
 
 author:
- -
-    fullname: Tobias Looker
-    organization: MATTR
-    email: tobias.looker@mattr.global
- -
-    fullname: Paul Bastian
-    organization: Bundesdruckerei
-    email: paul.bastian@posteo.de
- -
-    fullname: Christian Bormann
-    organization: SPRIND
-    email: chris.bormann@gmx.de
+
+- fullname: Tobias Looker
+  organization: MATTR
+  email: tobias.looker@mattr.global
+- fullname: Paul Bastian
+  organization: Bundesdruckerei
+  email: paul.bastian@posteo.de
+- fullname: Christian Bormann
+  organization: SPRIND
+  email: chris.bormann@gmx.de
 
 normative:
   RFC1950: RFC1950
@@ -320,8 +318,7 @@ compressed array (hex): 78dadbb918000217015d
 
 In the following example, the Status List additionally includes the Status Type "SUSPENDED". As the Status Type value for "SUSPENDED" is 0x02 and does not fit into 1 bit, the `bits` is required to be 2. This example illustrates the byte array of a Status List that represents the statuses of 12 Referenced Tokens with a `bits` of 2, requiring 3 bytes (24 bits) for the uncompressed byte array:
 
-~~~ ascii-art
-
+~~~ python
 status[0] = 0b01
 status[1] = 0b10
 status[2] = 0b00
@@ -367,13 +364,13 @@ The following example illustrates the JSON representation of the Status List wit
 
 byte array:
 
-~~~
+~~~ python
 [0xb9, 0xa3]
 ~~~
 
 encoded:
 
-~~~json
+~~~ json
 {
   "bits": 1,
   "lst": "eNrbuRgAAhcBXQ"
@@ -384,13 +381,13 @@ The following example illustrates the JSON representation of the Status List wit
 
 byte array:
 
-~~~
+~~~ python
 [0xc9, 0x44, 0xf9]
 ~~~
 
 encoded:
 
-~~~json
+~~~ json
 {
   "bits": 2,
   "lst": "eNo76fITAAPfAgc"
@@ -422,19 +419,19 @@ The following example illustrates the CBOR representation of the Status List in 
 
 byte array:
 
-~~~
+~~~ python
 [0xb9, 0xa3]
 ~~~
 
 encoded (hex):
 
-~~~hex
+~~~ hex
 a2646269747301636c73744a78dadbb918000217015d
 ~~~
 
 The following is the CBOR Annotated Hex output of the example above:
 
-~~~
+~~~ cbor-pretty
 a2                              # map(2)
   64                            #   string(4)
     62697473                    #     "bits"
@@ -481,7 +478,7 @@ The following additional rules apply:
 
 The following is a non-normative example of a Status List Token in JWT format (in the form header.payload):
 
-~~~
+~~~ jwt
 {
   "alg": "ES256",
   "kid": "12",
@@ -528,7 +525,7 @@ The following additional rules apply:
 
 The following is a non-normative example of a Status List Token in CWT format in Hex:
 
-~~~hex
+~~~ hex
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
@@ -539,7 +536,7 @@ d7c982c5e101a5e67f0cbc1e2b6f57ce99c279
 
 The following is the CBOR Annotated Hex output of the example above:
 
-~~~
+~~~ cbor-pretty
 d2                              # tag(18)
   84                            #   array(4)
     58 20                       #     bytes(32)
@@ -588,7 +585,7 @@ Application of additional restrictions and policies are at the discretion of the
 
 The following is a non-normative example of a decoded header and payload of a Referenced Token:
 
-~~~
+~~~ jwt
 {
   "alg": "ES256",
   "kid": "11"
@@ -606,7 +603,7 @@ The following is a non-normative example of a decoded header and payload of a Re
 
 The following is a non-normative example of a Referenced Token in SD-JWT serialized form as received from an Issuer:
 
-~~~
+~~~ compact-jwt
 eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
 Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
 cyI6ICJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsICJpYXQiOiAxNjgzMDAwMDAw
@@ -628,7 +625,7 @@ GpFeVc1bTV4NjVfWl8ycm8yamZYTSJdfV0~
 
 The resulting payload of the example above:
 
-~~~json
+~~~ json
 
 {
   "_sd": [
@@ -665,7 +662,7 @@ Application of additional restrictions and policies are at the discretion of the
 
 The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
-~~~hex
+~~~ hex
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
@@ -676,7 +673,7 @@ f84cfedab93d3e4481e938
 
 The following is the CBOR Annotated Hex output of the example above:
 
-~~~
+~~~ cbor-pretty
 d2                              # tag(18)
   84                            #   array(4)
     43                          #     bytes(3)
@@ -743,7 +740,7 @@ The following media types are defined by this specification for HTTP based Conte
 
 The following is a non-normative example of a request for a Status List Token with type `application/statuslist+jwt`:
 
-~~~ ascii-art
+~~~ http
 
 GET /statuslists/1 HTTP/1.1
 Host: example.com
@@ -772,7 +769,7 @@ If caching-related HTTP headers are present in the HTTP response, Relying Partie
 
 The following is a non-normative example of a response with a Status List Token with type `application/statuslist+jwt`:
 
-~~~ ascii-art
+~~~ http
 
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
@@ -819,7 +816,7 @@ If the Server does not support the additional query parameter, it SHOULD return 
 
 The following is a non-normative example of a GET request using the `time` query parameter:
 
-~~~ ascii-art
+~~~ http
 
 GET /statuslists/1?time=1686925000 HTTP/1.1
 Host: example.com
@@ -828,7 +825,7 @@ Accept: application/statuslist+jwt
 
 The following is a non-normative example of a response for the above Request:
 
-~~~ ascii-art
+~~~ http
 
 HTTP/1.1 200 OK
 Content-Type: application/statuslist+jwt
@@ -894,7 +891,6 @@ The Status List Aggregation URI provides a list of Status List Token URIs. This 
 The following is a non-normative example for media type `application/json`:
 
 ~~~ json
-
 {
    "status_lists" : [
       "https://example.com/statuslists/1",
@@ -911,7 +907,7 @@ Other specifications MAY choose to re-use this OID for other status mechanisms u
 
 The following OID is defined for usage in the EKU extension:
 
-~~~
+~~~ ASN.1
   id-kp  OBJECT IDENTIFIER  ::=
        { iso(1) identified-organization(3) dod(6) internet(1)
          security(5) mechanisms(5) pkix(7) kp(3) }
@@ -964,6 +960,7 @@ Alternatively, the Status Issuer may use the same web-based key resolution that 
 | Status Provider |
 +-----------------+
 ~~~
+
 If the Issuer of the Referenced Token is a different entity than the Status Issuer, then the keys used for the Status List Token may be cryptographically linked, e.g. by a Certificate Authority through an x.509 PKI. The certificate of the Issuer for the Referenced Token and the Status Issuer should be issued by the same Certificate Authority and the Status Issuer's certificate should utilize [extended key usage](#eku).
 
 ~~~ ascii-art
@@ -1543,7 +1540,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}. It defines the OID used for OAuth Status Mechanism Key Extended Key Usage.
 
-~~~
+~~~ ASN.1
 <CODE BEGINS>
 
   OauthStatusSigning-EKU
@@ -1609,7 +1606,7 @@ All values that are not mentioned for the examples below can be assumed to be 0 
 
 The following example uses a 1-bit Status List (2 possible values):
 
-~~~~~~~~~~
+~~~ python
 status[0] = 0b1
 status[1993] = 0b1
 status[25460] = 0b1
@@ -1621,11 +1618,11 @@ status[723232] = 0b1
 status[854545] = 0b1
 status[934534] = 0b1
 status[1000345] = 0b1
-~~~~~~~~~~
+~~~
 
 JSON encoding:
 
-~~~
+~~~ json
 {
   "bits": 1,
   "lst": "eNrt3AENwCAMAEGogklACtKQPg9LugC9k_ACvreiogE
@@ -1638,7 +1635,7 @@ JSON encoding:
 
 CBOR encoding:
 
-~~~hex
+~~~ hex
 a2646269747301636c737458bd78daeddc010dc0200c0041a88249400ad2903e0f4b
 ba00bd93f002beb7a2a2010000a91e09000000000000000000000000000000807296
 04000000000000000000000000000000000000000000000000000000000000000000
@@ -1651,7 +1648,7 @@ ba00bd93f002beb7a2a2010000a91e09000000000000000000000000000000807296
 
 The following example uses a 2-bit Status List (4 possible values):
 
-~~~
+~~~ python
 status[0] = 0b01
 status[1993] = 0b10
 status[25460]= 0b01
@@ -1667,7 +1664,7 @@ status[1000345] = 0b11
 
 JSON encoding:
 
-~~~
+~~~ json
 {
   "bits": 2,
   "lst": "eNrt2zENACEQAEEuoaBABP5VIO01fCjIHTMStt9ovGV
@@ -1682,7 +1679,7 @@ JSON encoding:
 
 CBOR encoding:
 
-~~~hex
+~~~ hex
 a2646269747302636c737459013d78daeddb310d00211000412ea1a04004fe5520ed
 357c28c81d3312b6df68bc65480000000000406e2101000000000000000000000000
 0000000000000000000000000000000000000040795b020000000000000000000000
@@ -1699,7 +1696,7 @@ a2646269747302636c737459013d78daeddb310d00211000412ea1a04004fe5520ed
 
 The following example uses a 4-bit Status List (16 possible values):
 
-~~~
+~~~ python
 status[0] = 0b0001
 status[1993] = 0b0010
 status[35460] = 0b0011
@@ -1719,7 +1716,7 @@ status[1030205] = 0b1111
 
 JSON encoding:
 
-~~~
+~~~ json
 {
   "bits": 4,
   "lst": "eNrt0EENgDAQADAIHwImkIIEJEwCUpCEBBQRHOy35Li
@@ -1740,7 +1737,7 @@ JSON encoding:
 
 CBOR encoding:
 
-~~~hex
+~~~ hex
 a2646269747304636c737459024878daedd0410d8030100030081f0226908204244c
 025290840414111cecb7e4b8b5123a0e40669b020000000000000000000000000000
 0020b549010000000000000000000000000000000000000000000000000000000000
@@ -1765,7 +1762,7 @@ c0cf3daf03000000000000000008ec03dc4c04c0
 
 The following example uses an 8-bit Status List (256 possible values):
 
-~~~
+~~~ python
 status[233478] = 0b00000000
 status[52451] = 0b00000001
 status[576778] = 0b00000010
@@ -2026,7 +2023,7 @@ status[19535] = 0b11111111
 
 JSON encoding:
 
-~~~
+~~~ json
 {
   "bits": 8,
   "lst": "eNrt0WOQM2kYhtGsbdu2bdu2bdu2bdu2bdu2jVnU1my
@@ -2075,7 +2072,7 @@ JSON encoding:
 
 CBOR encoding:
 
-~~~
+~~~ hex
 a2646269747308636c73745907b078daedd1639033691886d1ac6ddbb66ddbb66ddb
 b66ddbb66ddbb68d59d4d66cbe496626e94e5e9c53d57fbb9ef7ba2b158028ec2401
 000090bae724000052b6a504000000000000b4deb0120004ef5409000000008af087
