@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-21T00:36:17.744304+00:00",
+  "timestamp": "2026-06-16T01:01:02.915957+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-status-list",
   "labels": [
     {
@@ -23994,6 +23994,134 @@
           "createdAt": "2026-04-20T01:04:06Z",
           "updatedAt": "2026-04-20T01:04:06Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 357,
+      "id": "PR_kwDOJZ2aqs7miaTM",
+      "title": "Editorial fixes for kramdown etc.",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-status-list/pull/357",
+      "state": "OPEN",
+      "author": "c2bo",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Diff: https://author-tools.ietf.org/api/iddiff?url_1=https://oauth-wg.github.io/draft-ietf-oauth-status-list/draft-ietf-oauth-status-list.txt&url_2=https://oauth-wg.github.io/draft-ietf-oauth-status-list/editorial-fixes-kramdown/draft-ietf-oauth-status-list.txt",
+      "createdAt": "2026-06-15T12:38:44Z",
+      "updatedAt": "2026-06-15T20:55:55Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "baseRefName": "main",
+      "baseRefOid": "2fb61cd535a82ec77fe43d604e31b7012cab4adc",
+      "headRepository": "oauth-wg/draft-ietf-oauth-status-list",
+      "headRefName": "editorial-fixes-kramdown",
+      "headRefOid": "7c5ba410fc702c4434fd643ae12069d879637fb2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOJZ2aqs8AAAABDCcfxw",
+          "commit": {
+            "abbreviatedOid": "cb41772"
+          },
+          "author": "paulbastian",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-15T15:36:46Z",
+          "updatedAt": "2026-06-15T15:36:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs8AAAABDEE4Dg",
+          "commit": {
+            "abbreviatedOid": "cb41772"
+          },
+          "author": "starrant-rpc",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "I've added some comments that might help with idnits -- \"might\" meaning that I hope it will.",
+          "createdAt": "2026-06-15T19:42:03Z",
+          "updatedAt": "2026-06-15T20:10:57Z",
+          "comments": [
+            {
+              "originalPosition": 28,
+              "body": "Note that \"RFC1950: RFC1950\" can be just \"RFC1950\".",
+              "createdAt": "2026-06-15T19:42:03Z",
+              "updatedAt": "2026-06-15T20:10:57Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "These two references should be formatted like this instead:\n\nFrom:\nSD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc\nSD-CWT: I-D.ietf-spice-sd-cwt\n\nTo\nI-D.ietf-oauth-sd-jwt-vc: SD-JWT.VC\nI-D.ietf-spice-sd-cwt: SD-CWT\n\nAfter this change, the body of the source should also be updated so that the \"I-D.ietf-xxx\" is in place instead of the \"SD-xx\" tags.",
+              "createdAt": "2026-06-15T19:44:52Z",
+              "updatedAt": "2026-06-15T20:10:57Z"
+            },
+            {
+              "originalPosition": 107,
+              "body": "Since \"hex\" does not appear on the short (https://rpc-wiki.rfc-editor.org/rpc/wiki/doku.php?id=sourcecode-types) or long (https://www.iana.org/assignments/media-types/media-types.xhtml) list, I'd advise to simply leave the code blocks marked \"hex\" blank.",
+              "createdAt": "2026-06-15T19:46:20Z",
+              "updatedAt": "2026-06-15T20:10:57Z"
+            },
+            {
+              "originalPosition": 399,
+              "body": "Update \"ASN.1\" (capitalized) to \"asn.1\" (lowercase). ",
+              "createdAt": "2026-06-15T19:47:32Z",
+              "updatedAt": "2026-06-15T20:10:57Z"
+            },
+            {
+              "originalPosition": 399,
+              "body": "And throughout in the other code blocks :)",
+              "createdAt": "2026-06-15T19:47:59Z",
+              "updatedAt": "2026-06-15T20:10:57Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "This line appears to be longer than 72 characters (maybe 2 characters too long?). ",
+              "createdAt": "2026-06-15T20:03:52Z",
+              "updatedAt": "2026-06-15T20:10:57Z"
+            },
+            {
+              "originalPosition": 196,
+              "body": "This line appears to be longer than 72 characters (maybe 6 characters?).",
+              "createdAt": "2026-06-15T20:04:30Z",
+              "updatedAt": "2026-06-15T20:10:57Z"
+            },
+            {
+              "originalPosition": 275,
+              "body": "This line appears to be longer than 72 characters (maybe 6?).",
+              "createdAt": "2026-06-15T20:04:57Z",
+              "updatedAt": "2026-06-15T20:10:57Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "Some errors in idnits might be related to the \"\\\" back slashes -- even in ascii artwork and code blocks. But I think we can work around it.",
+              "createdAt": "2026-06-15T20:08:46Z",
+              "updatedAt": "2026-06-15T20:12:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOJZ2aqs8AAAABDEUdvA",
+          "commit": {
+            "abbreviatedOid": "cb41772"
+          },
+          "author": "starrant-rpc",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-15T20:16:11Z",
+          "updatedAt": "2026-06-15T20:16:12Z",
+          "comments": [
+            {
+              "originalPosition": 107,
+              "body": "I'd advise the same for \"compact-jwt\".",
+              "createdAt": "2026-06-15T20:16:12Z",
+              "updatedAt": "2026-06-15T20:16:12Z"
+            }
+          ]
         }
       ]
     }
