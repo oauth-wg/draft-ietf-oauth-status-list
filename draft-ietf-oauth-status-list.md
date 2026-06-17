@@ -33,22 +33,22 @@ author:
   email: chris.bormann@gmx.de
 
 normative:
-  RFC1950: RFC1950
-  RFC1951: RFC1951
-  RFC2046: RFC2046
-  RFC3986: RFC3986
-  RFC8126: RFC8126
-  RFC6838: RFC6838
-  RFC7515: RFC7515
-  RFC7519: RFC7519
-  RFC8259: RFC8259
-  RFC8392: RFC8392
-  RFC8725: RFC8725
-  RFC8949: RFC8949
-  RFC9052: RFC9052
-  RFC9110: RFC9110
-  RFC5280: RFC5280
-  RFC9596: RFC9596
+  RFC1950:
+  RFC1951:
+  RFC2046:
+  RFC3986:
+  RFC8126:
+  RFC6838:
+  RFC7515:
+  RFC7519:
+  RFC8259:
+  RFC8392:
+  RFC8725:
+  RFC8949:
+  RFC9052:
+  RFC9110:
+  RFC5280:
+  RFC9596:
   CORS:
     author:
       org: "WHATWG"
@@ -66,14 +66,14 @@ normative:
     date: "13.02.2021"
 
 informative:
-  RFC6749: RFC6749
-  RFC7662: RFC7662
-  RFC7800: RFC7800
-  RFC8414: RFC8414
-  RFC9458: RFC9458
-  RFC9901: RFC9901
-  SD-JWT.VC: I-D.ietf-oauth-sd-jwt-vc
-  SD-CWT: I-D.ietf-spice-sd-cwt
+  RFC6749:
+  RFC7662:
+  RFC7800:
+  RFC8414:
+  RFC9458:
+  RFC9901:
+  I-D.ietf-oauth-sd-jwt-vc:
+  I-D.ietf-spice-sd-cwt:
   IANA.MediaTypes:
     author:
       org: "IANA"
@@ -136,7 +136,7 @@ This specification defines a status mechanism called Token Status List (TSL), da
 
 # Introduction
 
-Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}}, SD-JWT VCs {{SD-JWT.VC}}, CWTs {{RFC8392}}, SD-CWTs {{SD-CWT}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
+Token formats secured by JOSE {{RFC7515}} or COSE {{RFC9052}}, such as JWTs {{RFC7519}}, SD-JWTs {{RFC9901}}, SD-JWT VCs {{I-D.ietf-oauth-sd-jwt-vc}}, CWTs {{RFC8392}}, SD-CWTs {{ I-D.ietf-spice-sd-cwt}} and ISO mdoc {{ISO.mdoc}}, have vast possible applications. Some of these applications can involve issuing a token whereby certain semantics about the token or its validity may change over time. Communicating these changes to relying parties in an interoperable manner, such as whether the token is considered invalidated or suspended by its issuer is important for many of these applications.
 
 This document defines a Status List data structure that describes the individual statuses of multiple Referenced Tokens. A Referenced Token may be of any format, but is most commonly a data structure secured by JOSE or COSE. The Referenced Token is referenced by the Status List, which describes the status of the Referenced Token. The statuses of all Referenced Tokens are conveyed via a bit array in the Status List. Each Referenced Token is allocated an index during issuance that represents its position within this bit array. The value of the bit(s) at this index corresponds to the Referenced Token's status. A Status List is provided within a Status List Token protected by cryptographic signature or MAC and this document defines its representations in JWT and CWT format.
 
@@ -425,7 +425,7 @@ byte array:
 
 encoded (hex):
 
-~~~ hex
+~~~
 a2646269747301636c73744a78dadbb918000217015d
 ~~~
 
@@ -478,7 +478,7 @@ The following additional rules apply:
 
 The following is a non-normative example of a Status List Token in JWT format (in the form header.payload):
 
-~~~ jwt
+~~~
 {
   "alg": "ES256",
   "kid": "12",
@@ -525,7 +525,7 @@ The following additional rules apply:
 
 The following is a non-normative example of a Status List Token in CWT format in Hex:
 
-~~~ hex
+~~~
 d2845820a2012610781a6170706c69636174696f6e2f7374617475736c6973742b63
 7774a1044231325850a502782168747470733a2f2f6578616d706c652e636f6d2f73
 74617475736c697374732f31061a648c5bea041a8898dfea19fffe19a8c019fffda2
@@ -572,7 +572,7 @@ By including a "status" claim in a Referenced Token, the Issuer is referencing a
 
 ## Referenced Token in JOSE {#referenced-token-jose}
 
-The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}, as an SD-JWT {{RFC9901}}, as an SD-JWT VC {{SD-JWT.VC}} or other formats based on JOSE.
+The Referenced Token MAY be encoded as a "JSON Web Token (JWT)" according to {{RFC7519}}, as an SD-JWT {{RFC9901}}, as an SD-JWT VC {{I-D.ietf-oauth-sd-jwt-vc}} or other formats based on JOSE.
 
 The following content applies to the JWT Claims Set:
 
@@ -585,7 +585,7 @@ Application of additional restrictions and policies are at the discretion of the
 
 The following is a non-normative example of a decoded header and payload of a Referenced Token:
 
-~~~ jwt
+~~~
 {
   "alg": "ES256",
   "kid": "11"
@@ -603,7 +603,7 @@ The following is a non-normative example of a decoded header and payload of a Re
 
 The following is a non-normative example of a Referenced Token in SD-JWT serialized form as received from an Issuer:
 
-~~~ compact-jwt
+~~~ sd-jwt
 eyJhbGciOiAiRVMyNTYiLCAidHlwIjogImV4YW1wbGUrc2Qtand0In0.eyJfc2QiOiBb
 Ikh2cktYNmZQVjB2OUtfeUNWRkJpTEZIc01heGNEXzExNEVtNlZUOHgxbGciXSwgImlz
 cyI6ICJodHRwczovL2V4YW1wbGUuY29tL2lzc3VlciIsICJpYXQiOiAxNjgzMDAwMDAw
@@ -647,7 +647,7 @@ The resulting payload of the example above:
 
 ## Referenced Token in COSE {#referenced-token-cose}
 
-The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}}, as an SD-CWTs {{SD-CWT}} or as an ISO mdoc according to {{ISO.mdoc}} or other formats based on COSE. Referenced Tokens in CBOR SHOULD share the same core data structure for a status list reference:
+The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)" object according to {{RFC8392}}, as an SD-CWTs {{ I-D.ietf-spice-sd-cwt}} or as an ISO mdoc according to {{ISO.mdoc}} or other formats based on COSE. Referenced Tokens in CBOR SHOULD share the same core data structure for a status list reference:
 
 * The `Status` CBOR structure is a Map that MUST include at least one data item that refers to a status mechanism. Each data item in the `Status` CBOR structure comprises a key-value pair, where the key MUST be a CBOR text string (major type 3) specifying the identifier of the status mechanism and the corresponding value defines its contents.
   * `status_list` (status list): REQUIRED when the status mechanism defined in this specification is used. It has the same definition as the `status_list` claim in [](#referenced-token-jose) but MUST be encoded as a `StatusListInfo` CBOR structure with the following fields:
@@ -662,7 +662,7 @@ Application of additional restrictions and policies are at the discretion of the
 
 The following is a non-normative example of a Referenced Token in CWT format in Hex:
 
-~~~ hex
+~~~
 d28443a10126a1044231325866a502653132333435017368747470733a2f2f657861
 6d706c652e636f6d061a648c5bea041a8898dfea19ffffa16b7374617475735f6c69
 7374a2636964780063757269782168747470733a2f2f6578616d706c652e636f6d2f
@@ -907,7 +907,7 @@ Other specifications MAY choose to re-use this OID for other status mechanisms u
 
 The following OID is defined for usage in the EKU extension:
 
-~~~ ASN.1
+~~~ asn.1
   id-kp  OBJECT IDENTIFIER  ::=
        { iso(1) identified-organization(3) dod(6) internet(1)
          security(5) mechanisms(5) pkix(7) kp(3) }
@@ -1540,7 +1540,7 @@ for their valuable contributions, discussions and feedback to this specification
 
 The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}. It defines the OID used for OAuth Status Mechanism Key Extended Key Usage.
 
-~~~ ASN.1
+~~~ asn.1
 <CODE BEGINS>
 
   OauthStatusSigning-EKU
@@ -1635,7 +1635,7 @@ JSON encoding:
 
 CBOR encoding:
 
-~~~ hex
+~~~
 a2646269747301636c737458bd78daeddc010dc0200c0041a88249400ad2903e0f4b
 ba00bd93f002beb7a2a2010000a91e09000000000000000000000000000000807296
 04000000000000000000000000000000000000000000000000000000000000000000
@@ -1679,7 +1679,7 @@ JSON encoding:
 
 CBOR encoding:
 
-~~~ hex
+~~~
 a2646269747302636c737459013d78daeddb310d00211000412ea1a04004fe5520ed
 357c28c81d3312b6df68bc65480000000000406e2101000000000000000000000000
 0000000000000000000000000000000000000040795b020000000000000000000000
@@ -1737,7 +1737,7 @@ JSON encoding:
 
 CBOR encoding:
 
-~~~ hex
+~~~
 a2646269747304636c737459024878daedd0410d8030100030081f0226908204244c
 025290840414111cecb7e4b8b5123a0e40669b020000000000000000000000000000
 0020b549010000000000000000000000000000000000000000000000000000000000
@@ -2072,7 +2072,7 @@ JSON encoding:
 
 CBOR encoding:
 
-~~~ hex
+~~~
 a2646269747308636c73745907b078daedd1639033691886d1ac6ddbb66ddbb66ddb
 b66ddbb66ddbb68d59d4d66cbe496626e94e5e9c53d57fbb9ef7ba2b158028ec2401
 000090bae724000052b6a504000000000000b4deb0120004ef5409000000008af087
