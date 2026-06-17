@@ -2139,6 +2139,10 @@ c8c2fd120000000000000000000000c1b95d022055434b0000000040008e91000000
 
 \[\[ To be removed from the final specification \]\]
 
+-21
+
+* editorial fixes - line width of examples, types of code blocks etc.
+
 -20
 
 * extend requirements for IANA registries
