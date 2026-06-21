@@ -5,10 +5,10 @@
 Web Authorization Protocol                                     T. Looker
 Internet-Draft                                                     MATTR
 Intended status: Standards Track                              P. Bastian
-Expires: 22 October 2026                                 Bundesdruckerei
+Expires: 23 December 2026                                Bundesdruckerei
                                                               C. Bormann
                                                                   SPRIND
-                                                           20 April 2026
+                                                            21 June 2026
 
 
                         Token Status List (TSL)
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 October 2026.
+   This Internet-Draft will expire on 23 December 2026.
 
 Copyright Notice
 
@@ -170,14 +170,15 @@ Table of Contents
 1.  Introduction
 
    Token formats secured by JOSE [RFC7515] or COSE [RFC9052], such as
-   JWTs [RFC7519], SD-JWTs [RFC9901], SD-JWT VCs [SD-JWT.VC], CWTs
-   [RFC8392], SD-CWTs [SD-CWT] and ISO mdoc [ISO.mdoc], have vast
-   possible applications.  Some of these applications can involve
-   issuing a token whereby certain semantics about the token or its
-   validity may change over time.  Communicating these changes to
-   relying parties in an interoperable manner, such as whether the token
-   is considered invalidated or suspended by its issuer is important for
-   many of these applications.
+   JWTs [RFC7519], SD-JWTs [RFC9901], SD-JWT VCs
+   [I-D.ietf-oauth-sd-jwt-vc], CWTs [RFC8392], SD-CWTs
+   [I-D.ietf-spice-sd-cwt] and ISO mdoc [ISO.mdoc], have vast possible
+   applications.  Some of these applications can involve issuing a token
+   whereby certain semantics about the token or its validity may change
+   over time.  Communicating these changes to relying parties in an
+   interoperable manner, such as whether the token is considered
+   invalidated or suspended by its issuer is important for many of these
+   applications.
 
    This document defines a Status List data structure that describes the
    individual statuses of multiple Referenced Tokens.  A Referenced
@@ -535,8 +536,12 @@ Table of Contents
    The following example illustrates the JSON representation of the
    Status List with bits=1 from the examples above:
 
-   byte_array = [0xb9, 0xa3]
+   byte array:
+
+   [0xb9, 0xa3]
+
    encoded:
+
    {
      "bits": 1,
      "lst": "eNrbuRgAAhcBXQ"
@@ -545,8 +550,12 @@ Table of Contents
    The following example illustrates the JSON representation of the
    Status List with bits=2 from the examples above:
 
-   byte_array = [0xc9, 0x44, 0xf9]
+   byte array:
+
+   [0xc9, 0x44, 0xf9]
+
    encoded:
+
    {
      "bits": 2,
      "lst": "eNo76fITAAPfAgc"
@@ -589,8 +598,12 @@ Table of Contents
    The following example illustrates the CBOR representation of the
    Status List in Hex:
 
-   byte_array = [0xb9, 0xa3]
-   encoded:
+   byte array:
+
+   [0xb9, 0xa3]
+
+   encoded (hex):
+
    a2646269747301636c73744a78dadbb918000217015d
 
    The following is the CBOR Annotated Hex output of the example above:
@@ -667,7 +680,7 @@ Table of Contents
        discretion of the Relying Party.
 
    The following is a non-normative example of a Status List Token in
-   JWT format:
+   JWT format (in the form header.payload):
 
    {
      "alg": "ES256",
@@ -753,31 +766,31 @@ Table of Contents
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    58 20                       #     bytes(32)
-      a2012610781a6170706c6963  #       "¢\x01&\x10x\x1aapplic"
-      6174696f6e2f737461747573  #       "ation/status"
-      6c6973742b637774          #       "list+cwt"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 50                       #     bytes(80)
-      a502782168747470733a2f2f  #       "¥\x02x!https://"
-      6578616d706c652e636f6d2f  #       "example.com/"
-      7374617475736c697374732f  #       "statuslists/"
-      31061a648c5bea041a8898df  #       "1\x06\x1ad\x8c[ê\x04\x1a\x88\x98ß"
-      ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
-      6269747301636c73744a78da  #       "bits\x01clstJxÚ"
-      dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
-    58 40                       #     bytes(64)
-      93fa4d01032b18c35e2fe110  #       "\x93úM\x01\x03+\x18Ã^/á\x10"
-      1b77fd6cc9440022caa46944  #       "\x1bwýlÉD\x00"Ê¤iD"
-      50c4e4e9feab4e99d1fa6d97  #       "PÄäéþ«N\x99Ñúm\x97"
-      72ce2bf3a12e0323ded7c982  #       "rÎ+ó¡.\x03#Þ×É\x82"
-      c5e101a5e67f0cbc1e2b6f57  #       "Åá\x01¥æ\x7f\x0c¼\x1e+oW"
-      ce99c279                  #       "Î\x99Ây"
+   d2                              # tag(18)
+     84                            #   array(4)
+       58 20                       #     bytes(32)
+         a2012610781a6170706c6963  #       "¢\x01&\x10x\x1aapplic"
+         6174696f6e2f737461747573  #       "ation/status"
+         6c6973742b637774          #       "list+cwt"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 50                       #     bytes(80)
+         a502782168747470733a2f2f  #       "¥\x02x!https://"
+         6578616d706c652e636f6d2f  #       "example.com/"
+         7374617475736c697374732f  #       "statuslists/"
+         31061a648c5bea041a8898df  #       ...
+         ea19fffe19a8c019fffda264  #       "ê\x19ÿþ\x19¨À\x19ÿý¢d"
+         6269747301636c73744a78da  #       "bits\x01clstJxÚ"
+         dbb918000217015d          #       "Û¹\x18\x00\x02\x17\x01]"
+       58 40                       #     bytes(64)
+         93fa4d01032b18c35e2fe110  #       "\x93úM\x01\x03+\x18Ã^/á\x10"
+         1b77fd6cc9440022caa46944  #       "\x1bwýlÉD\x00"Ê¤iD"
+         50c4e4e9feab4e99d1fa6d97  #       "PÄäéþ«N\x99Ñúm\x97"
+         72ce2bf3a12e0323ded7c982  #       "rÎ+ó¡.\x03#Þ×É\x82"
+         c5e101a5e67f0cbc1e2b6f57  #       "Åá\x01¥æ\x7f\x0c¼\x1e+oW"
+         ce99c279                  #       "Î\x99Ây"
 
 6.  Referenced Token
 
@@ -795,7 +808,7 @@ d2                              # tag(18)
 
    The Referenced Token MAY be encoded as a "JSON Web Token (JWT)"
    according to [RFC7519], as an SD-JWT [RFC9901], as an SD-JWT VC
-   [SD-JWT.VC] or other formats based on JOSE.
+   [I-D.ietf-oauth-sd-jwt-vc] or other formats based on JOSE.
 
    The following content applies to the JWT Claims Set:
 
@@ -880,10 +893,10 @@ d2                              # tag(18)
 6.3.  Referenced Token in COSE
 
    The Referenced Token MAY be encoded as a "CBOR Web Token (CWT)"
-   object according to [RFC8392], as an SD-CWTs [SD-CWT] or as an ISO
-   mdoc according to [ISO.mdoc] or other formats based on COSE.
-   Referenced Tokens in CBOR SHOULD share the same core data structure
-   for a status list reference:
+   object according to [RFC8392], as an SD-CWTs [I-D.ietf-spice-sd-cwt]
+   or as an ISO mdoc according to [ISO.mdoc] or other formats based on
+   COSE.  Referenced Tokens in CBOR SHOULD share the same core data
+   structure for a status list reference:
 
    *  The Status CBOR structure is a Map that MUST include at least one
       data item that refers to a status mechanism.  Each data item in
@@ -930,31 +943,31 @@ d2                              # tag(18)
 
    The following is the CBOR Annotated Hex output of the example above:
 
-d2                              # tag(18)
-  84                            #   array(4)
-    43                          #     bytes(3)
-      a10126                    #       "¡\x01&"
-    a1                          #     map(1)
-      04                        #       uint(4)
-      42                        #       bytes(2)
-        3132                    #         "12"
-    58 66                       #     bytes(102)
-      a50265313233343501736874  #       "¥\x02e12345\x01sht"
-      7470733a2f2f6578616d706c  #       "tps://exampl"
-      652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
-      1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
-      617475735f6c697374a26369  #       "atus_list¢ci"
-      647800637572697821687474  #       "dx\x00curix!htt"
-      70733a2f2f6578616d706c65  #       "ps://example"
-      2e636f6d2f7374617475736c  #       ".com/statusl"
-      697374732f31              #       "ists/1"
-    58 40                       #     bytes(64)
-      340f7efea10f1a36dc479763  #       "4\x0f~þ¡\x0f\x1a6ÜG\x97c"
-      6a17b4dd4848b68997d1d10e  #       "j\x17´ÝHH¶\x89\x97ÑÑ\x0e"
-      8cceb3a38ff33b3dda72964a  #       "\x8cÎ³£\x8fó;=Úr\x96J"
-      83989f6cf98560c2fc97a08b  #       "\x83\x98\x9flù\x85`Âü\x97\xa0\x8b"
-      c8977cc6b0f84cfedab93d3e  #       "È\x97|Æ°øLþÚ¹=>"
-      4481e938                  #       "D\x81é8"
+   d2                              # tag(18)
+     84                            #   array(4)
+       43                          #     bytes(3)
+         a10126                    #       "¡\x01&"
+       a1                          #     map(1)
+         04                        #       uint(4)
+         42                        #       bytes(2)
+           3132                    #         "12"
+       58 66                       #     bytes(102)
+         a50265313233343501736874  #       "¥\x02e12345\x01sht"
+         7470733a2f2f6578616d706c  #       "tps://exampl"
+         652e636f6d061a648c5bea04  #       "e.com\x06\x1ad\x8c[ê\x04"
+         1a8898dfea19ffffa16b7374  #       "\x1a\x88\x98ßê\x19ÿÿ¡kst"
+         617475735f6c697374a26369  #       "atus_list¢ci"
+         647800637572697821687474  #       "dx\x00curix!htt"
+         70733a2f2f6578616d706c65  #       "ps://example"
+         2e636f6d2f7374617475736c  #       ".com/statusl"
+         697374732f31              #       "ists/1"
+       58 40                       #     bytes(64)
+         340f7efea10f1a36dc479763  #       "4\x0f~þ¡\x0f\x1a6ÜG\x97c"
+         6a17b4dd4848b68997d1d10e  #       "j\x17´ÝHH¶\x89\x97ÑÑ\x0e"
+         8cceb3a38ff33b3dda72964a  #       "\x8cÎ³£\x8fó;=Úr\x96J"
+         83989f6cf98560c2fc97a08b  #       ...
+         c8977cc6b0f84cfedab93d3e  #       "È\x97|Æ°øLþÚ¹=>"
+         4481e938                  #       "D\x81é8"
 
 7.  Status Types
 
@@ -1979,7 +1992,7 @@ d2                              # tag(18)
 
 14.3.1.  Registry Contents
 
-
+   status:
 
    *  Claim Name: status
 
@@ -1996,7 +2009,7 @@ d2                              # tag(18)
 
    *  Reference: Section 6.1 of this specification
 
-
+   status_list:
 
    *  Claim Name: status_list
 
@@ -2014,7 +2027,7 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 5.2 of this specification
 
-
+   ttl:
 
    *  Claim Name: ttl
 
@@ -2227,6 +2240,8 @@ d2                              # tag(18)
 
 14.5.2.  Initial Registry Contents
 
+   VALID:
+
    *  Status Type Name: VALID
 
    *  Status Type Description: The status of the Referenced Token is
@@ -2238,7 +2253,7 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 7 of this specification
 
-
+   INVALID:
 
    *  Status Type Name: INVALID
 
@@ -2251,7 +2266,7 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 7 of this specification
 
-
+   SUSPENDED:
 
    *  Status Type Name: SUSPENDED
 
@@ -2265,7 +2280,7 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 7 of this specification
 
-
+   APPLICATION_SPECIFIC:
 
    *  Status Type Name: APPLICATION_SPECIFIC
 
@@ -2278,7 +2293,7 @@ d2                              # tag(18)
 
    *  Specification Document(s): Section 7 of this specification
 
-
+   APPLICATION_SPECIFIC:
 
    *  Status Type Name: APPLICATION_SPECIFIC
 
@@ -2290,8 +2305,6 @@ d2                              # tag(18)
    *  Change Controller: IETF
 
    *  Specification Document(s): Section 7 of this specification
-
-
 
 14.6.  OAuth Parameters Registration
 
@@ -2534,6 +2547,20 @@ d2                              # tag(18)
 
 16.2.  Informative References
 
+   [I-D.ietf-oauth-sd-jwt-vc]
+              Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
+              Verifiable Digital Credentials (SD-JWT VC)", Work in
+              Progress, Internet-Draft, draft-ietf-oauth-sd-jwt-vc-16,
+              24 April 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-oauth-sd-jwt-vc-16>.
+
+   [I-D.ietf-spice-sd-cwt]
+              Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
+              "Selective Disclosure CBOR Web Tokens (SD-CWT)", Work in
+              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-08, 1
+              June 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-spice-sd-cwt-08>.
+
    [IANA.Core.Params]
               IANA, "Constrained RESTful Environments (CoRE)
               Parameters", n.d., <https://www.iana.org/assignments/core-
@@ -2596,19 +2623,6 @@ d2                              # tag(18)
               DOI 10.17487/RFC9901, November 2025,
               <https://www.rfc-editor.org/rfc/rfc9901>.
 
-   [SD-CWT]   Prorock, M., Steele, O., Birkholz, H., and R. Mahy,
-              "Selective Disclosure CBOR Web Tokens (SD-CWT)", Work in
-              Progress, Internet-Draft, draft-ietf-spice-sd-cwt-07, 2
-              March 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-spice-sd-cwt-07>.
-
-   [SD-JWT.VC]
-              Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
-              Verifiable Digital Credentials (SD-JWT VC)", Work in
-              Progress, Internet-Draft, draft-ietf-oauth-sd-jwt-vc-15,
-              26 February 2026, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-oauth-sd-jwt-vc-15>.
-
    [smith2020let]
               Smith, T., Dickinson, L., and K. Seamons, "Let's revoke:
               Scalable global certificate revocation", Network and
@@ -2627,6 +2641,7 @@ Appendix A.  ASN.1 Module
    Extended Key Usage.
 
    <CODE BEGINS>
+
      OauthStatusSigning-EKU
        { iso(1) identified-organization(3) dod(6) internet(1)
          security(5) mechanisms(5) pkix(7) id-mod(0)
@@ -2646,6 +2661,7 @@ Appendix A.  ASN.1 Module
      id-kp-oauthStatusSigning OBJECT IDENTIFIER ::= { id-kp TBD }
 
      END
+
    <CODE ENDS>
 
 Appendix B.  Size Comparison
@@ -3231,6 +3247,11 @@ C.4.  8-bit Status List
 Document History
 
    [[ To be removed from the final specification ]]
+
+   -21
+
+   *  editorial fixes - line width of examples, types of code blocks
+      etc.
 
    -20
 
