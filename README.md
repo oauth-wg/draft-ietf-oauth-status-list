@@ -36,6 +36,7 @@ Command line usage requires that you have the necessary software installed.  See
 | [Adorsys status-list-server](https://github.com/adorsys/status-list-server)                                       | Rust       | yes    | no     | no            |
 | [Bundesdruckerei issuer](https://github.com/Bundesdruckerei-GmbH/pid-issuer/tree/main/status-list-service-0.1.11) | Kotlin     | yes    | yes    | yes           |
 | [eudi-wallet-it-python](https://github.com/italia/eudi-wallet-it-python/blob/main/pyeudiw/status_list)            | Python     | yes     | no    | yes            |
+| [polaris-oid4vp](https://github.com/EgorKhaklin/polaris-id/tree/main/packages/polaris-oid4vp)                     | Python     | no      | no    | yes            |
 
 
 ## Testing
